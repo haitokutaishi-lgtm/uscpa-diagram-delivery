@@ -13,9 +13,11 @@ on:
 jobs:
   post:
     runs-on: ubuntu-latest
+    # actions/checkout v4 は Node 20 前提の警告が出るため、Node 24 対応の v5 以降を使う
+    # 参考: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Post today entry to Discord
         env:
