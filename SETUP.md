@@ -1,12 +1,15 @@
 # 図解 × Discord 定期配信 — セットアップ
 
-## 1. スプレッドシート
+## 1. 正データ（何をいつ流すか）
+
+- **正は `schedule/posts.json`**。ここに書いた日付・タイトル・URL だけが Discord に飛ぶ。
+- スプレッドシートは **補助台帳**（コピー用）でよい。シートを正にすると二重管理なので、慣れるまでは **JSON だけ**で十分。
+
+## 1b. スプレッドシート（任意）
 
 1. Google スプレッドシートを新規作成
-2. **ファイル → インポート → アップロード** で `ops/content-registry-template.csv` を取り込む
-3. 1行目を固定行にし、以降のテーマを追記（版管理の正はここ）
-
-`posts.json` は **その週に Discord で流す分だけ**、日付キーで同期してもよい（運用は好みで）。
+2. **ファイル → インポート** で `ops/content-registry-template.csv` を取り込む
+3. 承認・メモ用。最終的に Discord に反映するのは **`posts.json` の push**。
 
 ## 2. Webhook（必ず秘密情報として扱う）
 
@@ -40,6 +43,11 @@ gh repo create uscpa-diagram-delivery --public --source=. --remote=origin --push
 
 Actions のタブから該当ワークフローを **Re-run failed jobs**、または **workflow_dispatch** で手動再実行。
 
-## 6. GitHub Pages
+## 6. 図解 HTML の置き場（専用リポジトリ）
 
-図解 HTML のホスト先は従来どおり別リポジトリでもよい。`posts.json` の `url` に **公開済みのフル URL** を書く。
+- リポジトリ: [diagram-site](https://github.com/haitokutaishi-lgtm/diagram-site)（`~/diagram-site`）
+- 規約: `topics/<テーマID>/index.html`（新規は `topics/_template` をコピー）
+- 公開 URL の形: `https://haitokutaishi-lgtm.github.io/diagram-site/topics/<テーマID>/index.html`
+- `posts.json` の `url` には、上記の **フル URL**（図解が表示できたあと）を書く。
+
+初回はリポジトリ **Settings → Pages** で `main` / `/(root)` を有効化（既に有効なら不要）。
