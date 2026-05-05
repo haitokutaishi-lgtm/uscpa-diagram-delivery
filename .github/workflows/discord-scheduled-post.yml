@@ -1,0 +1,62 @@
+# 日・水・土 9:00 JST (= UTC 日・水・土 0:00) に実行
+# 秘密情報: Repository secrets に DISCORD_WEBHOOK_URL を設定（プレーンテキストでコミットしない）
+
+name: Discord 図解配信
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # 日曜 09:00 JST
+    - cron: "0 0 * * 3" # 水曜 09:00 JST
+    - cron: "0 0 * * 6" # 土曜 09:00 JST
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Post today entry to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TZ: Asia/Tokyo
+        run: |
+          set -euo pipefail
+          TODAY=$(date +%Y-%m-%d)
+          FILE="schedule/posts.json"
+          if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
+            echo "::error::DISCORD_WEBHOOK_URL secret is not set"
+            exit 1
+          fi
+          PAYLOAD=$(jq -c --arg d "$TODAY" '
+            . as $root | $root[$d]
+            | if . == null then
+                empty
+              else
+                {
+                  embeds: [{
+                    title: .title,
+                    description: .description,
+                    url: .url,
+                    color: 3447003
+                  }]
+                }
+              end
+          ' "$FILE")
+
+          if [ -z "$PAYLOAD" ] || [ "$PAYLOAD" = "null" ]; then
+            echo "No post for $TODAY — skipping (this is normal on non-schedule days if you only use Sun/Wed/Sat keys)."
+            exit 0
+          fi
+
+          HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
+            -X POST "$DISCORD_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+          if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
+            echo "::error::Discord API HTTP $HTTP"
+            cat /tmp/discord.out
+            exit 1
+          fi
+          echo "Posted for $TODAY (HTTP $HTTP)"

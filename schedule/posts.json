@@ -1,0 +1,8 @@
+{
+  "_comment": "キーは Asia/Tokyo の日付（YYYY-MM-DD）。配信日が日・水・土 9:00 JST のスロットにだけエントリを置く。workflow が当日の1件を Discord に投稿します。",
+  "2026-05-11": {
+    "title": "【図解】低価法（LCM）と時価の決め方",
+    "description": "FIFOとLIFOで「時価」の取り方が変わる話を、受講生向け1枚HTMLにまとめました。天井・床・中央値の型を固定します。",
+    "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
+  }
+}
