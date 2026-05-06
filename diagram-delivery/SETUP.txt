@@ -1,0 +1,61 @@
+# 図解定期配信 — 使い方（このフォルダ）
+
+1. schedule.config.json … 配信の粒（3日に1回・起動時刻の目安）とプロンプトの型を編集
+2. curriculum.json … アビタスFARのユニット一覧（スクリーンショット由来）
+3. delivery-state.json … 「次は何番目か」を記録（手動またはスクリプトで更新）
+
+## 運用の流れ
+
+- 図解を1本出し終えたあとで次だけ: python3 pick_next_unit.py --advance
+  （--advance で delivery-state.json の last_index が1つ進みます）
+- 事前にプロンプトだけ確認したいとき: python3 pick_next_unit.py（進みません）
+- 表示された文を diagram-exam-coach スキルに渡して HTML 図解を生成し、受講生へ配信。
+
+## 特定範囲だけ回す
+
+- schedule.config.json の delivery.filter を例えば
+  "volume": "FAR1-3", "chapter_from": 7, "chapter_to": 8
+ のように設定すると、その章だけがキューになります。
+
+## 未収録の追記
+
+- curriculum.json の units 配列に JSON オブジェクトを追加するか、同梱の build_curriculum.py を編集して再生成。
+
+---
+
+## Discord 定期配信（GitHub Pages の図解 URL）
+
+例: https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/ のような HTML を **3日に1回** Discord へ。
+
+- 間隔は schedule.config.json の `discord.min_days_between_posts`（既定 3）。
+- 最後に投稿した日は `delivery-state.json` の `discord_last_post_at`（自動更新）。
+- 手動で続けて打ちたいときだけ `python3 post_discord.py --force`（間隔を無視）。
+
+1. Discord のサーバー設定 → 連携サービス → ウェブフック → URL をコピー
+2. diagram-delivery/.env を作り DISCORD_WEBHOOK_URL=... を記入（.env.example を参照）
+3. diagram_urls.json に `"ボリューム|ユニットID": "https://..."` を追加（サンプルで 3-22 に LCM 図解を紐付け済み）
+4. 最初の投稿を 1-0 ではなく特定ユニットから始める場合:
+   python3 post_discord.py --prepare-next-key 'FAR1-3|3-22'
+5. 動作確認: python3 post_discord.py --dry-run（間隔チェックなしで次のペイロードを表示）
+6. 本番投稿: python3 post_discord.py（成功すると discord_last_announced_index と discord_last_post_at が更新）
+
+### 自動配信（推奨: GitHub Actions）
+
+Mac を常時起動しなくてよい。**リポジトリを GitHub に push** し、次を実施:
+
+1. GitHub リポジトリ → **Settings → Secrets and variables → Actions**  
+   **New repository secret** 名前: `DISCORD_WEBHOOK_URL` 値: Webhook URL
+2. **Settings → Actions → General → Workflow permissions**  
+   **Read and write permissions** を選び保存（`delivery-state.json` を push 戻しするため）
+3. 既定ブランチ（main 等）に `.github/workflows/far-discord-post.yml` があることを確認
+4. **Actions** タブ → **FAR Discord post** → **Run workflow** で手動テスト可
+
+動き: 毎日 **日本時間 9:00 相当**（UTC 0:00）に起動。`min_days_between_posts` により **実際の投稿は 3 日に 1 回**。
+`diagram_urls.json` に URL が無いユニットは **スキップ**し、次に URL があるユニットを投稿（配信枠を空けにくくする）。
+失敗時は Discord へ **最大 3 回リトライ**。
+
+### Mac のみ（launchd）
+
+**毎日 09:00** に `post_discord.py` を起動する例: `launchd-far-diagram-discord.example.plist`。実効も 3 日に 1 回。
+
+注意: 後から URL を足した「飛ばされた」ユニットを投稿したい場合は `--prepare-next-key` で開始位置を調整する。

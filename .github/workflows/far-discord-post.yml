@@ -1,0 +1,54 @@
+# FAR 図解を Discord に定期投稿（3日に1回・日本時間 9:00 相当）
+#
+# 事前準備:
+# 1. このリポジトリを GitHub に push する
+# 2. Settings → Secrets and variables → Actions → New repository secret
+#    名前: DISCORD_WEBHOOK_URL  値: Discord の Webhook URL
+# 3. Settings → Actions → General → Workflow permissions で
+#    「Read and write permissions」を有効化（delivery-state.json をコミット戻しするため）
+#
+# 手動テスト: Actions タブ → FAR Discord post → Run workflow
+
+name: FAR Discord post
+
+on:
+  schedule:
+    # 09:00 JST = 00:00 UTC（日本は夏時間なし）
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: far-discord-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Tokyo
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Post to Discord (if due)
+        working-directory: diagram-delivery
+        run: python post_discord.py
+
+      - name: Commit delivery state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diagram-delivery/delivery-state.json
+          if git diff --staged --quiet; then
+            echo "No state changes."
+          else
+            git commit -m "chore(delivery): update discord delivery state"
+            git push
+          fi
