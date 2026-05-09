@@ -19,8 +19,6 @@ on:
 jobs:
   post:
     runs-on: ubuntu-latest
-    # actions/checkout v4 は Node 20 前提の警告が出るため、Node 24 対応の v5 以降を使う
-    # 参考: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -32,27 +30,41 @@ jobs:
         run: |
           set -euo pipefail
           FILE="schedule/posts.json"
-          MANUAL="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.post_date || '' }}"
+          echo "Git SHA: $(git rev-parse HEAD)"
+          echo "GitHub event: ${GITHUB_EVENT_NAME:-}"
+
+          # 手動実行の日付はイベント JSON から読む（YAML の式より確実）
+          MANUAL=""
+          if [ "${GITHUB_EVENT_NAME:-}" = "workflow_dispatch" ] && [ -f "${GITHUB_EVENT_PATH:-}" ]; then
+            MANUAL=$(jq -r '.inputs.post_date // empty | if . == null or . == "" then empty else . end' "$GITHUB_EVENT_PATH" || true)
+          fi
           if [ -n "${MANUAL}" ]; then
-            TODAY="${MANUAL}"
-            echo "Using manual date from workflow input: $TODAY"
+            TODAY=$(echo -n "$MANUAL" | tr -d ' \t\r\n')
+            echo "Using workflow input post_date: $TODAY"
           else
             TODAY=$(date +%Y-%m-%d)
             echo "Today (Asia/Tokyo): $TODAY"
           fi
+
           echo "Keys in $FILE (except _comment):"
           jq -r 'keys[] | select(. != "_comment")' "$FILE" || true
-          echo "— posting only if one of the keys above equals: $TODAY"
+          echo "— need an exact key match for: $TODAY"
+
           if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
             echo "::error::DISCORD_WEBHOOK_URL secret is not set"
             exit 1
           fi
+          WH_HOST=$(echo "$DISCORD_WEBHOOK_URL" | sed -n 's|https://\([^/]*\).*|\1|p')
+          echo "Webhook host (no secret): ${WH_HOST:-unknown}"
+
+          # content も付ける → チャンネルに必ず1行は出る（embed 非表示トラブル回避）
           PAYLOAD=$(jq -c --arg d "$TODAY" '
             . as $root | $root[$d]
             | if . == null then
                 empty
               else
                 {
+                  content: ("【図解配信】 " + .title),
                   embeds: [{
                     title: .title,
                     description: .description,
@@ -64,17 +76,23 @@ jobs:
           ' "$FILE")
 
           if [ -z "$PAYLOAD" ] || [ "$PAYLOAD" = "null" ]; then
-            echo "No post for $TODAY — skipping. Add a key \"$TODAY\" to $FILE to post today, then re-run the workflow."
+            echo "No post for $TODAY — skipping. Add key \"$TODAY\" to $FILE on branch main, push, then run workflow again."
             exit 0
           fi
 
+          echo "Payload bytes: ${#PAYLOAD}"
+
           HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
             -X POST "$DISCORD_WEBHOOK_URL" \
-            -H "Content-Type: application/json" \
+            -H "Content-Type: application/json; charset=utf-8" \
             -d "$PAYLOAD")
+
+          echo "Discord response body:"
+          cat /tmp/discord.out || true
+          echo ""
+
           if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
             echo "::error::Discord API HTTP $HTTP"
-            cat /tmp/discord.out
             exit 1
           fi
-          echo "Posted for $TODAY (HTTP $HTTP)"
+          echo "OK Posted for $TODAY (HTTP $HTTP)"
