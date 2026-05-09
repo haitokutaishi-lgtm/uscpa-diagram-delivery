@@ -43,6 +43,17 @@ gh repo create uscpa-diagram-delivery --public --source=. --remote=origin --push
 
 Actions のタブから該当ワークフローを **Re-run failed jobs**、または **workflow_dispatch** で手動再実行。
 
+### 「緑チェックなのに Discord に何も来ない」とき
+
+**Discord 図解配信** は、`schedule/posts.json` に **その実行日のキー（日本時間の今日と一致する `YYYY-MM-DD`）** が無いと **投稿せず成功で終了**します。
+
+**確認:** Actions の実行ログを開き、`Post today entry to Discord` に  
+`Today (Asia/Tokyo): …` と `Keys in schedule/posts.json` が出るので、**今日の日付がキー一覧に含まれているか**見る。
+
+**対処 A:** `posts.json` に今日のキーを追加して push してから、再度 Run workflow。
+
+**対処 B（テスト用）:** Actions → **Discord 図解配信** → **Run workflow** を開き、**post_date** に `posts.json` に既にある日付（例: `2026-05-11`）を入力して実行 → そのキーの投稿が飛ぶか確認できる。
+
 ## 6. 図解 HTML の置き場（専用リポジトリ）
 
 - リポジトリ: [diagram-site](https://github.com/haitokutaishi-lgtm/diagram-site)（`~/diagram-site`）
