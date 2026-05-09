@@ -1,0 +1,13 @@
+{
+  "_comment": "キーは Asia/Tokyo の日付（YYYY-MM-DD）。workflow が当日の1件を Discord に投稿。テスト後、不要な日付キーは削除してよい。",
+  "2026-05-05": {
+    "title": "【図解】低価法（LCM）と時価の決め方（テスト配信）",
+    "description": "FIFO・平均・個別と LIFO・売価還元で「時価」の決め方がどう違うか、受講生向けに1枚HTMLで整理しました。",
+    "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
+  },
+  "2026-05-11": {
+    "title": "【図解】低価法（LCM）と時価の決め方",
+    "description": "FIFOとLIFOで「時価」の取り方が変わる話を、受講生向け1枚HTMLにまとめました。天井・床・中央値の型を固定します。",
+    "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
+  }
+}

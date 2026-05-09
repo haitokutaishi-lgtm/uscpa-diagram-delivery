@@ -1,2 +1,6 @@
 diagram-delivery/.env
 .env
+.env.*
+*.pem
+.webhook
+secrets.local.*
