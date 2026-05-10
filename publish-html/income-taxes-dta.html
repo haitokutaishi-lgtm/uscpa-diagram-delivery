@@ -112,6 +112,14 @@
       font-weight: 600;
       font-size: 0.85rem;
     }
+    .mc-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #fafafa;
+    }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
   </style>
 </head>
 <body class="bg-slate-50">
@@ -125,6 +133,7 @@
     <a href="#group-b">DTAの式</a>
     <a href="#patterns">3パターン</a>
     <a href="#exam">演習の見方</a>
+    <a href="#mc">理解確認MC</a>
     <a href="#summary">まとめ</a>
   </nav>
 
@@ -416,6 +425,62 @@
         <p>「帳簿で費用が立っている／税務では払うまで控除が動かない／期末のズレのドルを決める／それに税率を掛けて DTA」——この<strong>型</strong>が頭に入っていると、長文から迷子になりにくいです。</p>
       </div>
       <p class="text-xs text-slate-500 mt-4">公開・配信前に <strong>ASC 740</strong> に照らしたファクトチェックを別コンテキストで実施してください。本ページは第三者問題の転載ではありません。</p>
+    </div>
+
+    <div id="mc" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="clipboard-check" class="w-6 h-6 text-teal-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">理解確認（オリジナルMC）</h2>
+          <p class="text-slate-500">ストップ・選択肢は試験英語／解説は日本語。配信前は別コンテキストで ASC 740 を照合してください。</p>
+        </div>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          On December 31, Year 1, <strong>Nova LLC</strong> reported <strong>$360,000</strong> of <strong>accrued wages expense</strong> for book purposes. For tax purposes, wage amounts are <strong>deductible only when paid</strong>. Nova paid <strong>$0</strong> related to this accrual during Year 1. The <strong>enacted tax rate</strong> is <strong>25%</strong> for Year 1 and later years. There were <strong>no beginning deferred tax balances</strong> related to wages. What <strong>deferred tax asset</strong> should Nova recognize at December 31, Year 1 for this item?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $0</li>
+          <li><strong>B.</strong> $90,000</li>
+          <li><strong>C.</strong> $270,000</li>
+          <li><strong>D.</strong> $360,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p>典型パターンでは、期首繰延なし・当期支払なしなら<strong>一時差異の土台 ＝ $360,000</strong>。</p>
+            <p><strong>DTA ＝ $360,000 × 25% ＝ $90,000</strong>。</p>
+            <p><strong>A</strong> はズレなしと誤読。<strong>D</strong> は費用額と DTA の混同。<strong>C</strong> は別計算のイメージ。</p>
+            <p>正解 <strong>B</strong>。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          Which situation is <strong>most consistent</strong> with recognizing a <strong>deferred tax asset</strong> in a typical introductory FAR question?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Tax depreciation exceeds book depreciation this year (no other facts).</li>
+          <li><strong>B.</strong> An expense is recorded for book now, but it is <strong>deductible for tax only when paid</strong> in a future period.</li>
+          <li><strong>C.</strong> Rental income is recognized for book and taxed in the same period with no timing difference.</li>
+          <li><strong>D.</strong> A gain is always excluded from taxable income in every period.</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p><strong>B</strong> が本ページの<strong>帳簿先行・支払時控除</strong>のストレートな英語表現。入門ドリルでは DTA とセットで語られやすい。</p>
+            <p><strong>A</strong> は多くの対比問題で <strong>DTL</strong> のイメージ。<strong>C</strong> はタイミング差がない。<strong>D</strong> は英文次第で成立しない。</p>
+            <p>正解 <strong>B</strong>。</p>
+            <p class="text-slate-500 text-xs">※追加事実で結論が変わり得る問題では英文優先。</p>
+          </div>
+        </details>
+      </div>
     </div>
 
     <div id="summary" class="section-card">

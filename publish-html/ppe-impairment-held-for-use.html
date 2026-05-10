@@ -112,6 +112,14 @@
       font-weight: 600;
       font-size: 0.85rem;
     }
+    .mc-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #fafafa;
+    }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
   </style>
 </head>
 <body class="bg-slate-50">
@@ -125,6 +133,7 @@
     <a href="#group-b">ステップ2 測定</a>
     <a href="#patterns">3パターン</a>
     <a href="#exam">演習の見方</a>
+    <a href="#mc">理解確認MC</a>
     <a href="#summary">まとめ</a>
   </nav>
 
@@ -425,6 +434,61 @@
         <p>「保有継続の長期資産／まず CV と undiscounted CF 合計／ダメなら CV − FV」——この<strong>型</strong>が頭に入っていると、長文から迷子になりにくいです。</p>
       </div>
       <p class="text-xs text-slate-500 mt-4">公開・配信前に <strong>ASC 360-10</strong> に照らしたファクトチェックを別コンテキストで実施してください。本ページは第三者問題の転載ではありません。</p>
+    </div>
+
+    <div id="mc" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="clipboard-check" class="w-6 h-6 text-teal-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">理解確認（オリジナルMC）</h2>
+          <p class="text-slate-500">ストップ・選択肢は試験英語／解説は日本語。配信前は別コンテキストで ASC 360-10 を照合してください。</p>
+        </div>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          Cove Co. tests a <strong>long-lived asset</strong> that is <strong>held for use</strong>. The asset’s <strong>carrying amount</strong> is <strong>$650,000</strong>. The <strong>total undiscounted expected future cash flows</strong> are estimated at <strong>$580,000</strong>. The asset’s <strong>fair value</strong> is <strong>$500,000</strong>. What <strong>impairment loss</strong> should Cove recognize under U.S. GAAP?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $0</li>
+          <li><strong>B.</strong> $70,000</li>
+          <li><strong>C.</strong> $150,000</li>
+          <li><strong>D.</strong> $650,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p><strong>ステップ1：</strong>CV $650,000 と undiscounted 合計 $580,000。<strong>650,000 &gt; 580,000</strong> なので回収可能性テスト<strong>不合格</strong>。</p>
+            <p><strong>ステップ2：</strong>Impairment loss ＝ $650,000 − $500,000 ＝ <strong>$150,000</strong>。</p>
+            <p><strong>A</strong> はステップ1見落とし。<strong>B</strong> は $650,000 − $580,000 のような<strong>別比較</strong>のイメージ。<strong>D</strong> は帳簿価額そのもの。</p>
+            <p>正解 <strong>C</strong>。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          For a long-lived asset <strong>held for use</strong>, the <strong>recoverability test</strong> under U.S. GAAP compares the carrying amount to which amount?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Fair value</li>
+          <li><strong>B.</strong> Present value of expected future cash flows discounted at a market rate</li>
+          <li><strong>C.</strong> Sum of undiscounted expected future cash flows</li>
+          <li><strong>D.</strong> Replacement cost</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p><strong>C</strong> が回収可能性テストの比較対象。<strong>割引しない</strong>期待キャッシュフローの<strong>合計</strong>。</p>
+            <p><strong>A</strong> はステップ2側。<strong>B</strong> は割引が入り<strong>ステップ1のレールと別物</strong>になりやすい。<strong>D</strong> は標準の比較相手ではない。</p>
+            <p>正解 <strong>C</strong>。</p>
+          </div>
+        </details>
+      </div>
     </div>
 
     <div id="summary" class="section-card">
