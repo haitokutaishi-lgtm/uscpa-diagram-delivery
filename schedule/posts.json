@@ -11,8 +11,8 @@
     "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
   },
   "2026-05-11": {
-    "title": "【図解】低価法（LCM）と時価の決め方",
-    "description": "FIFOとLIFOで「時価」の取り方が変わる話を、受講生向け1枚HTMLにまとめました。天井・床・中央値の型を固定します。",
-    "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
+    "title": "【図解】繰延税金資産（DTA）— 未払費用が「支払ってから損金」のとき",
+    "description": "帳簿では費用済み・税務では支払時まで損金にならない典型パターンを、受講生向け1枚HTMLで整理しました。ズレの額×税率でDTAを出す型を固定します。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/"
   }
 }

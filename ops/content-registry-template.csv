@@ -1,2 +1,3 @@
-テーマID,タイトル_配信用,概要_配信用_短文,HTML相対パス,ステータス,公開予定日_YYYY-MM-DD,公開URL_フル,最終レビュー日,レビュー者,改訂元テーマID,備考
-lcm-teikahou,【図解】低価法（LCM）と時価の決め方,FIFOとLIFOで「時価」の取り方が変わる。天井・床と中央値を図で固定。,/topics/lcm-teikahou/,公開済み,2026-05-04,https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/,2026-05-04,矢橋,,USCPA出題に合わせたオリジナル図解
+テーマID,タイトル_配信用,概要_配信用_短文,HTML相対パス,ステータス,公開予定日_YYYY-MM-DD,公開URL_フル,最終レビュー日,レビュー者,改訂元テーマID,備考,ファクトチェック完了日_YYYY-MM-DD,ファクトチェック方法_Codification等,理解確認MC数,主要ASCサブトピック_ファクトチェック用,参照教材メモ_内部用のみ
+lcm-teikahou,【図解】低価法（LCM）と時価の決め方,FIFOとLIFOで「時価」の取り方が変わる。天井・床と中央値を図で固定。,/topics/lcm-teikahou/,公開済み,2026-05-04,https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/,2026-05-04,矢橋,,USCPA出題に合わせたオリジナル図解,2026-05-04,別コンテキストでASC 330照合・MC再計算,2,ASC 330 Inventory,
+deferred-tax-asset-dta,【図解】繰延税金資産（DTA）— 未払費用が「支払ってから損金」のとき,帳簿先行・支払時損金の典型で、ズレ×税率＝DTAを型で固定。,/topics/deferred-tax-asset-dta/,公開予定,2026-05-11,https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/,,矢橋,,オリジナルMC付き・diagram-site掲載,,別コンテキストでASC 740照合・MC再計算推奨,2,ASC 740 Income Taxes,aki教材・税効果会計を参照

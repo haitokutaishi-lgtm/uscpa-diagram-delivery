@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】繰延税金資産（DTA）の求め方 — 未払費用が「支払ってから損金」のとき</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .term-explain {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-left: 4px solid #16a34a;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .student-bubble {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 2px solid #ea580c;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .coach-bubble {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #2563eb;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .mc-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #fafafa;
+    }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .worries-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 2px solid #d97706;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .persona-strip {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem;
+      padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem;
+    }
+    .persona-strip strong { color: #0f172a; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .dlg-row .avatar-col { text-align: center; }
+    .dlg-row .avatar-col span { display: block; font-size: 0.65rem; font-weight: 700; margin-top: 0.35rem; color: #64748b; }
+    .avatar-frame { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid rgba(0,0,0,.06); margin: 0 auto; width: 56px; height: 56px; }
+    .sample-stem {
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.75rem;
+      padding: 1rem 1.15rem;
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: #1e293b;
+      margin: 1rem 0;
+    }
+    .sample-stem .lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; margin-bottom: 0.5rem; }
+    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+    .role-line { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
+    .book-tax-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 640px) { .book-tax-grid { grid-template-columns: 1fr; } }
+    .viz-card {
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #cbd5e1;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    .viz-card svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+    .viz-caption { font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 0.75rem; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">テーマ：Income Taxes（ASC 740）— <span class="font-bold normal-case">帳簿の未払費用が、税務上は「払うまで損金にならない」ときの DTA</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Income Taxes（ASC 740）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">図で整理する：繰延税金資産（DTA）の金額の出し方</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl"><strong>FAR の Income Taxes</strong>では、帳簿と税務で費用や収益のタイミングがずれると、バランスシートに<strong>繰延税金</strong>が載る。<strong>ここでは一つの典型だけ</strong>に集中する——<strong>帳簿ではもう費用にした未払費用があるのに、税務上（tax purposes）は現金を払うまで損金（deduction）に認められない</strong>。そのとき、期末に<strong>いくらの DTA を認識するか</strong>を、下の型どおりに落とし込めるようにする。問題文・選択肢・数値は<strong>このHTML向けオリジナル</strong>（第三者教材・リリース問題の転載なし）。</p>
+
+      <!-- イラスト：テーマの一枚絵 -->
+      <div class="viz-card mt-6 bg-white/95 border-white/30">
+        <svg viewBox="0 0 640 200" width="640" height="200" role="img" aria-label="帳簿では費用420、税務上はまだ0、将来払ったとき損金、今のズレに税率を掛けてDTA">
+          <defs>
+            <linearGradient id="gBook" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffedd5"/><stop offset="1" stop-color="#fdba74"/></linearGradient>
+            <linearGradient id="gTax" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2e8f0"/><stop offset="1" stop-color="#cbd5e1"/></linearGradient>
+          </defs>
+          <rect x="8" y="8" width="624" height="184" rx="16" fill="#fff" stroke="#e2e8f0"/>
+          <!-- 帳簿側 -->
+          <rect x="32" y="40" width="200" height="120" rx="12" fill="url(#gBook)" stroke="#ea580c" stroke-width="2"/>
+          <text x="132" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#9a3412">会社の帳簿</text>
+          <rect x="52" y="82" width="160" height="36" rx="6" fill="#fff" stroke="#fdba74"/>
+          <text x="132" y="105" text-anchor="middle" font-size="12" fill="#431407">Year 1：費用 $420,000</text>
+          <text x="132" y="138" text-anchor="middle" font-size="11" fill="#78350f">もう費用として計上済み</text>
+          <!-- 税金側 -->
+          <rect x="408" y="40" width="200" height="120" rx="12" fill="url(#gTax)" stroke="#64748b" stroke-width="2"/>
+          <text x="508" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">税務上（tax）</text>
+          <text x="508" y="100" text-anchor="middle" font-size="12" fill="#475569">Year 1：損金 $0</text>
+          <text x="508" y="125" text-anchor="middle" font-size="11" fill="#64748b">払うまで認められない</text>
+          <!-- 中央 ずれ -->
+          <path d="M268 100 L372 100" stroke="#0d9488" stroke-width="3" marker-end="url(#arr)"/>
+          <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#0d9488"/></marker></defs>
+          <rect x="285" y="72" width="70" height="56" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+          <text x="320" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#115e59">ズレ</text>
+          <text x="320" y="112" text-anchor="middle" font-size="10" fill="#134e4a">$420,000</text>
+          <!-- 下：DTA -->
+          <rect x="220" y="152" width="200" height="32" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+          <text x="320" y="173" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">DTA ＝ ズレ × 税率（例：×22%）</text>
+        </svg>
+        <p class="viz-caption">Year 1 時点：帳簿には費用があるのに、税務上はまだ「ゼロ」。その差が「ズレ」です。</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <p class="font-semibold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="list-tree" class="w-4 h-4"></i> 目次</p>
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#overview" class="text-blue-700 hover:underline">まず押さえる（俯瞰と要点）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
+        <li><a href="#timeline-viz" class="text-blue-700 hover:underline">タイムライン図（いつ費用になるか）</a></li>
+        <li><a href="#picture" class="text-blue-700 hover:underline">Year 1 を絵で追う</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">回答の型 → 英文の当てはめ</a></li>
+        <li><a href="#flow-visual" class="text-blue-700 hover:underline">回答フォーマット全体図</a></li>
+        <li><a href="#why-rate" class="text-blue-700 hover:underline">なぜ税率を掛ける？（図つき）</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解ける道筋（たいしくん×コーチ）</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC（オリジナル）</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
+      </ul>
+    </nav>
+
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border-2 border-amber-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2"><i data-lucide="compass" class="w-6 h-6 text-amber-600"></i> まず押さえる（俯瞰）</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">Income Taxes の計算問題は、いきなり数字をいじらず<strong>設問が最後に何を聞いているか</strong>（多くは <strong>deferred tax asset の金額</strong>）を決めてから入るのが安全だ。次に<strong>一時差異の筋</strong>を特定する——このページでは、<strong>帳簿で費用は既に計上されているのに、税務上は支払いがあった期にだけ損金になる</strong>というパターンに限る。そこまで分かったら、期末の<strong>課税所得を将来いくら減らせるかの土台（deductible temporary difference のドル額）</strong>を拾い、問題で与えられた<strong>税率</strong>を掛けて <strong>DTA</strong> に落とす。評価引当・NOL・レート変更・DTL との複合などは、別のストップで足場を分ける。</p>
+      <div class="worries-inner border-amber-200">
+        <p class="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2"><i data-lucide="layout-list" class="w-4 h-4"></i> 要点（この図解の芯だけ）</p>
+        <ul class="text-sm text-slate-800 space-y-1.5 list-disc list-inside leading-relaxed">
+          <li><strong>何を答えるか：</strong>期末日時点の <strong>DTA のバランスシート金額</strong>（ドル）。費用の総額そのものではない。</li>
+          <li><strong>ズレの中身：</strong>帳簿先行・<strong>支払時損金</strong>なら、典型は期末の<strong>未払費用の額</strong>が一時差異の額になる（期首繰延・当期支払など本文の条件で調整）。</li>
+          <li><strong>締めの式：</strong><strong>DTA ＝（②の差額）×（③問題文の税率）</strong>。英文では語順が入れ替わるので、頭の中では必ず <strong>①タイミング → ②ドル額 → ③税率 → ④DTA</strong> に並べ直す。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="worries" class="worries-box">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5 text-amber-700"></i> よくある悩み（まず共感から）</h2>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <span>たいしくん</span>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たいしくん（受講生）</p>
+          <p class="text-sm leading-relaxed"><strong>繰延税金資産（DTA）</strong>って、問題だと<strong>いくらと答えればいいの</strong>？ 費用の額そのままじゃないの？ <strong>いつ税率を掛けるの</strong>かも曖昧……。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">うん、そこで止まりやすい。<strong>帳簿では費用を計上したのに、税務上はまだ損金にできない</strong>——この<strong>期末時点のズレのドル額</strong>をまず決める。設問が DTA を聞いているなら、典型は<strong>そのズレに、問題文で指定された税率を掛けた金額</strong>が答え。費用の額そのもの（例：420,000ドル）がそのまま DTA になるわけじゃない。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/></svg>
+          </div>
+          <span>たいしくん</span>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たいしくん（受講生）</p>
+          <p class="text-sm leading-relaxed">英文だと、<strong>税率が先に出てきたり未払額が後だったり</strong>してバラバラで……。<strong>頭の中では毎回同じチェック順</strong>に並べ直したい。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">それでいい。英文は語順が入れ替わるから、<strong>紙面に並んでいる順で追うんじゃなくて、自分で並べ替える</strong>。<strong>①支払時損金かどうか → ②期末のズレのドル → ③問題の税率 → ④掛け算で DTA</strong>。下の表とフローは、そのメモ用だよ。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>上の「回答の型」のうち、<strong>このパターンに該当したあと</strong>に頭で回す3段に圧縮する。暗記というより、<strong>①②③の順で抜けがないか確認する</strong>ためのチェックリスト。</p>
+      <ol class="space-y-4">
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+          <div>
+            <p class="font-bold text-slate-900">「帳簿」と「税務上（for tax purposes）」で、費用が動く<strong>タイミング</strong>が違うか確認する</p>
+            <p class="text-slate-600 text-sm mt-1">英文に <strong>deductible only when paid</strong>（払ったときに初めて損金）などとあれば、<strong>帳簿だけ先に費用</strong>になっている期間に<strong>ズレ</strong>が生まれる、と考えてよいです。</p>
+            <p class="text-slate-600 text-sm mt-1">たとえ話：家計簿には「修理費」と書いたが、税のルールでは「お金を払うまで経費にしない」——<strong>いま税の計算上はまだゼロ</strong>、という状態。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+          <div>
+            <p class="font-bold text-slate-900"><strong>期末時点</strong>で「まだ税では引けていない費用」がいくらか＝<strong>一時差異の額</strong></p>
+            <p class="text-slate-600 text-sm mt-1">問題が「当期に帳簿で計上した未払いの費用は◯◯ドル」と言っていて、<strong>当期は支払ゼロ</strong>なら、典型は<strong>その金額まるごとがズレ</strong>です（期首からの繰越など別条件がなければ）。</p>
+            <p class="text-slate-600 text-sm mt-1"><strong>費用の額</strong>と<strong>DTA の額</strong>を混同しない。DTA は次のステップで税率を掛けたあと。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+          <div>
+            <p class="font-bold text-slate-900">問題文で指定された<strong>税率</strong>を掛けて DTA の金額にする</p>
+            <p class="text-slate-600 text-sm mt-1">シンプルな計算問題では <strong>DTA ＝（手順2で出した差額）× 問題に書いてある税率</strong>。英文で <em>enacted tax rate</em> と出てきたら「この率を使え」と読んでよい典型だ。</p>
+            <p class="text-slate-600 text-sm mt-1"><strong>評価引当（valuation allowance）</strong>や<strong>複数年の税率変更</strong>が本文に出たら、別の読み方に切り替えてください。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="timeline-viz" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calendar-days" class="w-6 h-6 text-violet-600"></i> タイムライン図：いつ「費用／損金」になるか</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>帳簿と税務で<strong>同じドルが「いつ効くか」だけがずれる</strong>ことを、横棒で一度見ます。数字は例として <strong>$420,000</strong> です。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mb-3">図の<strong>上段（オレンジ）</strong>は<strong>GAAP の帳簿</strong>。保証費用などを見積もって、Year 1 のうちに<strong>費用として既に計上</strong>している。だから Year 1 の時点で、帳簿側のバーは<strong>左（当期）にまるごと載っている</strong>。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mb-3">図の<strong>下段（グレー）</strong>は<strong>税務上の損金（deduction）</strong>。ルールが「<strong>払ったときだけ</strong>損金」なら、Year 1 では現金支出がないので<strong>損金はゼロ</strong>——だから左側は点線の小さな箱で <strong>$0</strong>。一方、将来、実際に払った年になって初めて、同じ <strong>$420,000</strong> が<strong>税務上の損金として認められる</strong>。だから右側に太いバーが伸びている。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4"><strong>Year 1 の期末で見るポイント：</strong>帳簿にはもう費用があるのに、税務上の損金はまだ動いていない。この<strong>「認識のタイミングの差」</strong>が一時差異の芯。DTA は、このズレが<strong>将来いくら課税所得を減らせるか</strong>に税率を掛けた形で表す、と下のセクションにつながる。</p>
+      <div class="viz-card">
+        <svg viewBox="0 0 720 220" width="720" height="220" role="img" aria-label="Year1で帳簿は費用420、税務上は損金0。将来支払年に税務側で損金420">
+          <rect width="720" height="220" fill="#fafafa" rx="12"/>
+          <text x="360" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">費用が「認められる」タイミングのちがい</text>
+          <!-- 軸 -->
+          <line x1="40" y1="180" x2="680" y2="180" stroke="#94a3b8" stroke-width="2"/>
+          <text x="120" y="205" text-anchor="middle" font-size="11" fill="#64748b">Year 1（当期）</text>
+          <text x="560" y="205" text-anchor="middle" font-size="11" fill="#64748b">将来・支払った年</text>
+          <polygon points="675,180 680,175 680,185" fill="#94a3b8"/>
+          <!-- 帳簿トラック -->
+          <text x="36" y="78" font-size="12" font-weight="700" fill="#c2410c">帳簿</text>
+          <rect x="120" y="58" width="200" height="36" rx="6" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
+          <text x="220" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">費用 $420,000</text>
+          <text x="340" y="80" font-size="10" fill="#78716c">← もうここで計上</text>
+          <!-- 税金トラック -->
+          <text x="36" y="138" font-size="12" font-weight="700" fill="#475569">税務</text>
+          <rect x="120" y="118" width="80" height="36" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-dasharray="4 3"/>
+          <text x="160" y="140" text-anchor="middle" font-size="10" fill="#64748b">$0</text>
+          <rect x="480" y="118" width="200" height="36" rx="6" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+          <text x="580" y="140" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">損金 $420,000</text>
+          <text x="400" y="140" font-size="10" fill="#64748b">払ってからここで認識 →</text>
+        </svg>
+        <p class="viz-caption">Year 1 の終わり：帳簿の費用バーは左いっぱい。税務の損金バーは右にずれて立ち上がる。真ん中の空白が「いま期末に溜まっているズレ」のイメージ。</p>
+      </div>
+    </section>
+
+    <section id="picture" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="image" class="w-6 h-6 text-violet-600"></i> Year 1 をイラストで追う（保証費用の例）</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>言葉の補助として、<strong>帳簿用のノート</strong>と<strong>税務用のレシート</strong>のイメージで並べます。金額はサンプルと同じ <strong>$420,000</strong>・支払 <strong>$0</strong> です。</p>
+
+      <div class="viz-card mb-4">
+        <svg viewBox="0 0 640 260" width="640" height="260" role="img" aria-label="左に帳簿ノートとレンチの保証、右に税務フォルダと未払の札束、中央にズレ">
+          <defs>
+            <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffbeb"/><stop offset="1" stop-color="#fde68a"/></linearGradient>
+            <linearGradient id="folder" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#cbd5e1"/></linearGradient>
+          </defs>
+          <rect width="640" height="260" rx="14" fill="#f8fafc"/>
+          <!-- 左：帳簿 -->
+          <rect x="24" y="32" width="260" height="196" rx="14" fill="url(#paper)" stroke="#d97706" stroke-width="2"/>
+          <text x="154" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">会社の帳簿</text>
+          <rect x="48" y="72" width="212" height="100" rx="8" fill="#fff" stroke="#fbbf24"/>
+          <line x1="60" y1="92" x2="248" y2="92" stroke="#e7e5e4"/>
+          <line x1="60" y1="112" x2="200" y2="112" stroke="#e7e5e4"/>
+          <text x="68" y="108" font-size="11" fill="#44403c">保証費用（見積）</text>
+          <text x="180" y="108" font-size="11" font-weight="700" fill="#b45309">$420,000</text>
+          <text x="68" y="132" font-size="10" fill="#78716c">費用として計上済み</text>
+          <!-- レンチアイコン簡易 -->
+          <circle cx="154" cy="188" r="22" fill="#fef3c7" stroke="#d97706"/>
+          <path d="M142 188 L154 176 L166 188 M154 176 L154 200" stroke="#92400e" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- 右：税金 -->
+          <rect x="356" y="32" width="260" height="196" rx="14" fill="url(#folder)" stroke="#64748b" stroke-width="2"/>
+          <text x="486" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">税務上のメモ</text>
+          <rect x="380" y="78" width="212" height="88" rx="8" fill="#fff" stroke="#94a3b8"/>
+          <text x="486" y="108" text-anchor="middle" font-size="11" fill="#475569">まだ現金を払っていない</text>
+          <text x="486" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">損金：$0</text>
+          <rect x="420" y="178" width="132" height="36" rx="6" fill="#e2e8f0"/>
+          <text x="486" y="200" text-anchor="middle" font-size="10" fill="#475569">払った年に損金</text>
+          <!-- 中央矢印 -->
+          <text x="320" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">ズレ</text>
+          <path d="M300 138 L340 138" stroke="#0d9488" stroke-width="3" marker-end="url(#ar2)"/>
+          <defs><marker id="ar2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#0d9488"/></marker></defs>
+          <rect x="270" y="145" width="100" height="28" rx="6" fill="#ccfbf1" stroke="#0d9488"/>
+          <text x="320" y="163" text-anchor="middle" font-size="11" font-weight="700" fill="#115e59">$420,000</text>
+        </svg>
+        <p class="viz-caption">左は「もう費用として書いた」世界。右は「まだ税務上は損金として認められない」世界。その差が真ん中のズレです。</p>
+      </div>
+
+      <div class="rounded-xl border border-dashed border-slate-300 bg-white p-4">
+        <p class="text-sm font-semibold text-slate-800 mb-2 flex items-center gap-2"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-emerald-600"></i> このあと何が起きるか</p>
+        <p class="text-sm text-slate-700 leading-relaxed">将来、現金を払った年には<strong>税務上やっと損金（deduction）</strong>が入る。つまり<strong>将来、課税所得を減らせる見込み</strong>がいま生まれている。それを金額にしたのが<strong>繰延税金資産（DTA）</strong>の考え方。BS に載せるドルは<strong>いまのズレ × 問題の税率</strong>、とつなげておく。</p>
+      </div>
+    </section>
+
+    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="glasses" class="w-6 h-6 text-violet-600"></i> 回答の型 → 英文の当てはめ（4ブロック）</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>試験では次の<strong>型</strong>で答えを組み立てる。まず<strong>A. 設問の最後</strong>で「BS の DTA か／expense か／JE か」を確定 → <strong>B. 一時差異の筋</strong>（ここでは支払時損金の未払費用）→ <strong>C. 期末の deductible temporary difference のドル</strong> → <strong>D. DTA ＝ C × 問題の税率</strong>。英文は A〜D の順に並んでいないので、<strong>拾った事実をこの四ブロックに並べ替える</strong>。下の表は、そのうち B〜D をサンプル英文で埋めた例。</p>
+
+      <div class="sample-stem">
+        <p class="lbl">Sample problem stem（イメージ用・下の表専用／MCのストップとは別）</p>
+        <p class="m-0">For the year ended December 31, Year 1, <strong>Relay Co.</strong> recorded <strong>$420,000</strong> of <strong>warranty expense</strong> on its books. For income tax purposes, warranty costs are <strong>deductible only when paid</strong>, and Relay made <strong>no warranty-related payments</strong> during Year 1. The <strong>enacted tax rate</strong> is <strong>22%</strong> for Year 1 and future years. Relay had <strong>no beginning deferred tax balances</strong> related to warranties. What amount of <strong>deferred tax asset</strong> should Relay recognize at December 31, Year 1 for this item?</p>
+        <p class="mt-3 text-sm text-slate-600 border-t border-slate-200 pt-3 m-0"><strong>日本語でいうと：</strong>Relay は Year 1 の帳簿に保証費用 <strong>$420,000</strong>。税務上は<strong>払ってから損金</strong>で、Year 1 は<strong>支払ゼロ</strong>。適用税率 <strong>22%</strong>（問題文で明示）。保証に関する繰延税金の期首残高はなし。<strong>期末の DTA はいくら？</strong></p>
+      </div>
+
+      <div class="overflow-x-auto rounded-lg border border-slate-200">
+        <table class="min-w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left p-3 font-semibold">順番</th>
+              <th class="text-left p-3 font-semibold">やること（日本語）</th>
+              <th class="text-left p-3 font-semibold">サンプル英文での当てはめ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-3 font-medium">①</td><td class="p-3">「帳簿では費用」「税法ではいつ損金か」を拾う。<strong>払ってから損金</strong>なら、この説明のパターンに当てはまる。</td><td class="p-3 text-slate-700"><em>deductible only when paid</em>、かつ Year 1 は <strong>no payments</strong>。</td></tr>
+            <tr><td class="p-3 font-medium">②</td><td class="p-3">期末の<strong>一時差異の額</strong>（まだ税で引けていない費用はいくらか）</td><td class="p-3 text-slate-700">未払い前提で <strong>$420,000</strong>（練習用の整理）。</td></tr>
+            <tr><td class="p-3 font-medium">③</td><td class="p-3">問題が指定する<strong>税率</strong>を確認</td><td class="p-3 text-slate-700"><strong>22%</strong>（英文なら <em>enacted tax rate</em> などの表現で与えられることが多い）</td></tr>
+            <tr><td class="p-3 font-medium">④</td><td class="p-3"><strong>DTA ＝ ② × ③</strong>（よくあるシンプルな出題）</td><td class="p-3 text-slate-700">$420,000 × 22% ＝ <strong>$92,400</strong>（※サンプル計算）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 mt-3">※サンプルは<strong>表の読み方のための短いストップ</strong>です。ページ下部の MC の数値・正解とは揃えていません（取り違え防止）。</p>
+
+      <div class="term-explain mt-6">
+        <p class="font-semibold text-green-900 mb-2 flex items-center gap-2"><i data-lucide="help-circle" class="w-5 h-5"></i> 用語ボックス（試験英語 → ひとこと日本語）</p>
+        <ul class="text-sm text-slate-700 space-y-2">
+          <li><strong>Deferred tax asset（DTA）</strong>：将来、税金計算上うれしい調整（ここでは減算）に紐づく<strong>資産</strong>のイメージ。金額は<strong>ズレ × 税率</strong>で出すことが多い。</li>
+          <li><strong>Deductible only when paid</strong>：現金を払うまで、税務上はその費用を損金にしない、というルール。</li>
+          <li><strong>Enacted tax rate</strong>（試験英文でよく出る）：問題文に書かれた率をそのまま使う、という意味合いで読んでよい典型。口頭では「問題の税率」で十分。</li>
+          <li><strong>Deductible temporary difference</strong>：将来、課税所得を<strong>減らす</strong>方向の一時差異（このパターンではここに乗る）。細かい定義は設問・ASCに従う。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="flow-visual" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="workflow" class="w-6 h-6 text-indigo-600"></i> 回答フォーマット全体図（このパターン専用）</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>上の「回答の型」のうち、<strong>未払費用 × 支払時損金</strong>に当てはまったあとを、上から一気にたどる用。減価償却のずれや DTL などは<strong>別パターン</strong>として枝を切る（ここでは分岐なし）。</p>
+      <div class="viz-card">
+        <svg viewBox="0 0 520 400" width="520" height="400" role="img" aria-label="フロー：英文で支払時損金を確認、未払ならズレは費用額、税率、DTAは掛け算">
+          <rect width="520" height="400" rx="14" fill="#fff" stroke="#e2e8f0"/>
+          <rect x="110" y="20" width="300" height="52" rx="10" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+          <text x="260" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#312e81">スタート：問題文を手に取る</text>
+          <text x="260" y="58" text-anchor="middle" font-size="10" fill="#4338ca">帳簿に費用がある？ 税務上いつ損金？</text>
+          <line x1="260" y1="72" x2="260" y2="88" stroke="#64748b" stroke-width="2"/>
+          <polygon points="260,96 252,88 268,88" fill="#64748b"/>
+          <rect x="90" y="96" width="340" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="260" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#78350f">① 英文で「払ったときに損金」を確認</text>
+          <text x="260" y="136" text-anchor="middle" font-size="10" fill="#92400e">when paid / deductible only when paid</text>
+          <line x1="260" y1="152" x2="260" y2="168" stroke="#64748b" stroke-width="2"/>
+          <polygon points="260,176 252,168 268,168" fill="#64748b"/>
+          <rect x="90" y="176" width="340" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="260" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">② 期末までに支払った？ 未払ならズレの額は典型は費用額</text>
+          <text x="260" y="216" text-anchor="middle" font-size="10" fill="#1d4ed8">（期首繰延・当期支払があれば本文で組み直し）</text>
+          <line x1="260" y1="232" x2="260" y2="248" stroke="#64748b" stroke-width="2"/>
+          <polygon points="260,256 252,248 268,248" fill="#64748b"/>
+          <rect x="90" y="256" width="340" height="44" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+          <text x="260" y="278" text-anchor="middle" font-size="11" font-weight="700" fill="#064e3b">③ 問題文の税率を確認</text>
+          <text x="260" y="292" text-anchor="middle" font-size="10" fill="#047857">（英文では enacted tax rate 等の語で与えられることが多い）</text>
+          <line x1="260" y1="300" x2="260" y2="316" stroke="#64748b" stroke-width="2"/>
+          <polygon points="260,324 252,316 268,316" fill="#64748b"/>
+          <rect x="110" y="324" width="300" height="56" rx="10" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+          <text x="260" y="346" text-anchor="middle" font-size="11" font-weight="700" fill="#831843">④ DTA ＝ ズレの額 × 税率</text>
+          <text x="260" y="364" text-anchor="middle" font-size="10" fill="#9d174d">バランスシートに載せる金額のよくある形</text>
+        </svg>
+        <p class="viz-caption">試験ではこの流れを頭の中でなぞり、英文の数字を当てはめていきます。</p>
+      </div>
+      <div class="term-explain mt-4">
+        <p class="font-semibold text-green-900 mb-2">注意だけひとこと</p>
+        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+          <li>設問の最後が <strong>deferred tax asset の金額</strong>か、<strong>income tax expense</strong> か、仕訳かで、必要な計算の続きが変わる。この図解は<strong>前者（DTA のドル）</strong>だけ。</li>
+          <li><strong>Beginning deferred tax balance</strong> や<strong>当期に一部支払った</strong>などが出たら、ズレの額を本文に合わせて足し引きする。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="why-rate" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="percent" class="w-6 h-6 text-teal-600"></i> なぜ税率を掛けるの？</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>「ズレは $420,000 だから答えも $420,000 でしょ？」という読み違いを防ぎます。</p>
+      <div class="viz-card">
+        <svg viewBox="0 0 560 160" width="560" height="160" role="img" aria-label="420000の箱、掛ける22パーセント、矢印、92400の箱">
+          <rect width="560" height="160" rx="12" fill="#f0fdfa"/>
+          <rect x="32" y="40" width="140" height="80" rx="10" fill="#fff" stroke="#14b8a6" stroke-width="2"/>
+          <text x="102" y="72" text-anchor="middle" font-size="11" fill="#0f766e">いまのズレ</text>
+          <text x="102" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#115e59">$420,000</text>
+          <text x="102" y="112" text-anchor="middle" font-size="9" fill="#5eead4">（税前の話）</text>
+          <text x="200" y="88" font-size="28" font-weight="700" fill="#0d9488">×</text>
+          <rect x="240" y="40" width="100" height="80" rx="10" fill="#fff" stroke="#0ea5e9" stroke-width="2"/>
+          <text x="290" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">22%</text>
+          <text x="290" y="98" text-anchor="middle" font-size="10" fill="#0284c7">税率</text>
+          <text x="360" y="88" font-size="28" font-weight="700" fill="#64748b">＝</text>
+          <rect x="400" y="32" width="128" height="96" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="464" y="64" text-anchor="middle" font-size="11" fill="#1e40af">繰延税金資産</text>
+          <text x="464" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">$92,400</text>
+          <text x="464" y="112" text-anchor="middle" font-size="9" fill="#3b82f6">税の効果の金額</text>
+        </svg>
+        <p class="viz-caption">ズレは「課税所得を将来いくら減らせるか」の土台。BS に載せる繰延税金のドル額に直すには税率を掛ける。</p>
+      </div>
+      <ul class="text-sm text-slate-700 space-y-3 leading-relaxed list-disc list-inside mt-4">
+        <li><strong>一時差異 $420,000</strong>は「将来、課税所得を<strong>いくら減らせるか</strong>」の<strong>土台の金額</strong>（税前の話）。</li>
+        <li>将来支払う税金（cash tax のイメージ）は、ざっくり<strong>課税所得 × 税率</strong>に比例するので、将来<strong>税負担がいくら軽くなる見込みか</strong>を BS に載せるには<strong>税率を掛ける</strong>のが対応関係になる。</li>
+        <li>だからシンプルな問題では <strong>DTA ＝ $420,000 × 22% ＝ $92,400</strong> のように、<strong>資産の金額は「税の効果」分</strong>として出す、と整理してください。</li>
+      </ul>
+    </section>
+
+    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまでの道筋（たいしくん × コーチ）</h2>
+      <div class="persona-strip">
+        <span><strong>たいしくん</strong>：若手ビジネスマン。手順をメモに落とす派。</span>
+        <span><strong>コーチ</strong>：会計士風のベテラン。手順を大事にする。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <span>たいしくん</span>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たいしくん（受講生）</p>
+          <p class="text-sm leading-relaxed">Relay のサンプル、<strong>①で「払ってから損金」と分かったら</strong>、あとは表の<strong>②③④</strong>を下に降りるだけでいい？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">そう。<strong>フローチャートの上から順に</strong>進めばいい。②でズレの金額、③で税率、④で掛け算。頭の中では<strong>タイムライン図</strong>と<strong>ズレのイラスト</strong>を思い出して。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/></svg>
+          </div>
+          <span>たいしくん</span>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たいしくん（受講生）</p>
+          <p class="text-sm leading-relaxed"><strong>DTL</strong>の話までいまは追わなくていいの？ 試験、混ざりそうで怖い……。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">このページでは<strong>DTL は扱わない</strong>でおく。まず<strong>このパターンの DTA の出し方</strong>を固めてから、別のストップで DTL に広げよう。概念問題は<strong>どれが「帳簿先行・支払時損金」か</strong>を見分ける練習に使って。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認（オリジナルMC）</h2>
+      <p class="text-sm text-slate-600 mb-4">ストップと選択肢は<strong>試験で使う英語</strong>。解説は<strong>日本語でフル</strong>。<strong>配信前は毎回サブエージェント（別スレッド）を立ち上げ、ASC 740（Income Taxes）に照らして正解・計算・用語をファクトチェック</strong>する。本ページはその基準で内容を精査した版です。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          On December 31, Year 1, <strong>Vela Corp.</strong> reported <strong>$350,000</strong> of <strong>accrued warranty expense</strong> for book purposes. For tax purposes, warranty costs are <strong>deductible only when paid</strong>, and Vela made <strong>no related payments</strong> in Year 1. The <strong>enacted tax rate</strong> is <strong>28%</strong> for Year 1 and future years. There were <strong>no beginning deferred tax balances</strong> related to warranties. What is the <strong>deferred tax asset</strong> that Vela should recognize at December 31, Year 1 for this item?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $0</li>
+          <li><strong>B.</strong> $98,000</li>
+          <li><strong>C.</strong> $252,000</li>
+          <li><strong>D.</strong> $350,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p class="font-semibold text-slate-800">ステップ1：このパターンに当てはまるか</p>
+            <p>帳簿に<strong>未払いの保証費用 $350,000</strong>。税法では<strong>支払時にしか損金にならない</strong>。Year 1 は<strong>支払ゼロ</strong>。→ 本文どおりなら、この説明どおりの読み方でよいです。</p>
+            <p class="font-semibold text-slate-800 mt-3">ステップ2：期末の「ズレ」の金額</p>
+            <p>期首の繰延残高なし・当期支払なしの典型では、<strong>一時差異の額 ＝ $350,000</strong>（税前のズレ）。</p>
+            <p class="font-semibold text-slate-800 mt-3">ステップ3：税率を掛けて DTA</p>
+            <p><strong>DTA ＝ $350,000 × 28% ＝ $98,000</strong>。</p>
+            <p class="font-semibold text-slate-800 mt-3">選択肢の落とし穴</p>
+            <p><strong>A</strong>：ズレがないと誤読。<strong>D</strong>：費用額と DTA を混同。<strong>C</strong>：計算ミスや <strong>1 − 税率</strong>の取り違えのイメージ。</p>
+            <p>正解 <strong>B</strong>。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          Which temporary difference most likely gives rise to a <strong>deferred tax asset</strong> in a typical CPA Exam fact pattern?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Tax depreciation exceeds book depreciation in the current year (with no other facts)</li>
+          <li><strong>B.</strong> Rent received in advance is taxed when received, while revenue is deferred for book purposes</li>
+          <li><strong>C.</strong> An accrued expense is recorded for book now but is deductible for tax only when paid</li>
+          <li><strong>D.</strong> A gain is recognized for book on an installment sale, while the tax rules defer the gain</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p class="font-semibold text-slate-800">この図解とのつながり</p>
+            <p>このページで練習したのは<strong>「帳簿で費用先行・税法は支払時損金」</strong>。選択肢 <strong>C</strong> がそのストレートな英語表現です。典型問題では <strong>deductible temporary difference</strong> として <strong>DTA</strong> に結びつきやすい、という整理で足ります。</p>
+            <p class="font-semibold text-slate-800 mt-3">ほかの選択肢</p>
+            <p><strong>A</strong>：税法償却が速い典型は、多くの基本問題では <strong>DTL</strong> のイメージ（対比用）。<strong>B</strong>・<strong>D</strong>：事実関係の細部で符号が変わり得るので、試験では英文の動詞とタイミングを必ず確認。</p>
+            <p>正解 <strong>C</strong>。</p>
+            <p class="text-slate-500 text-xs">※厳密な分類は追加条件が必要です。設問の英文を優先してください。</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ（締め）</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li><strong>テーマ：</strong>帳簿に費用があるのに、税務上はまだ損金にできない（<strong>払ってから損金</strong>）ときの<strong>DTA の金額</strong>を、<strong>決まった順番</strong>で出す。</li>
+        <li><strong>手順：</strong>タイミングのズレを拾う → 期末のズレの額 → 問題の税率 → <strong>DTA ＝ ズレ × 税率</strong>。</li>
+        <li><strong>つまずきポイント：</strong>費用の額と DTA を混同しない。<strong>税率を掛ける理由</strong>は「税の効果の金額」に直すため。</li>
+        <li><strong>次の一歩：</strong>DTL・評価引当・NOL・複合税率は<strong>別の教材</strong>で足場を分ける（このパターンと混ぜない）。</li>
+      </ol>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12">
+      <p>図解テンプレ（Lucide / Tailwind）。予備校・問題集の転載なし。</p>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
