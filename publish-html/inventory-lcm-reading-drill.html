@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】在庫・低価法を「読む順番」で固定する — オリジナルMC付き</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .term-explain {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-left: 4px solid #16a34a;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .student-bubble {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 2px solid #ea580c;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .coach-bubble {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #2563eb;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .mc-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #fafafa;
+    }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .worries-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 2px solid #d97706;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .persona-strip {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem;
+      padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem;
+    }
+    .persona-strip strong { color: #0f172a; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .dlg-row .avatar-col { text-align: center; }
+    .dlg-row .avatar-col span { display: block; font-size: 0.65rem; font-weight: 700; margin-top: 0.35rem; color: #64748b; }
+    .avatar-frame { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid rgba(0,0,0,.06); margin: 0 auto; width: 56px; height: 56px; }
+    .sample-stem {
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.75rem;
+      padding: 1rem 1.15rem;
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: #1e293b;
+      margin: 1rem 0;
+    }
+    .sample-stem .lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; margin-bottom: 0.5rem; }
+    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+    .role-line { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：在庫の期末評価 — <span class="font-bold normal-case">LCM（LIFO／Retail）と LCNRV（FIFO等）の読み分け</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Inventory（ASC 330）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">低価法を「読む順番」で固定する</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl">評価方法（FIFO・LIFO・売価還元など）で<strong>「時価」の組み立て方が変わる</strong>論点を、英文長文でも迷わない<strong>読む順のチェックリスト</strong>に落とし込んだ図解です。問題文・選択肢・数値は<strong>このHTML向けオリジナル</strong>（予備校転載なし）。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <p class="font-semibold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="list-tree" class="w-4 h-4"></i> 目次</p>
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">問題を読む順番の型</a></li>
+        <li><a href="#fork" class="text-blue-700 hover:underline">FIFO と LIFO／売価還元の分岐</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解ける道筋（受講生×コーチ）</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC（オリジナル）</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
+      </ul>
+    </nav>
+
+    <section id="worries" class="worries-box">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5 text-amber-700"></i> よくある悩み（まず共感から）</h2>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">在庫の問題、<strong>NRV とか replacement とか用語は覚えた</strong>のに、英文が長いと頭が真っ白になる……。<strong>最初の一文から読んじゃダメ</strong>なの？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">うん、<strong>それいつも思ってるよね</strong>。多くの人が「上から訳す」と詰まる。在庫期末は<strong>評価方法（FIFO か LIFO か）</strong>が決まるまで、数字の扱いが決まらないから。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">あと、<strong>FIFO と LIFO で「時価」の作り方が違う</strong>のは知ってる。でも問題文の<strong>どの単語で切り替わるか</strong>がまだ曖昧で……。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">そこ、試験では <em>first-in, first-out</em>／<em>LIFO</em>／<em>retail method</em> の<strong>決め台詞</strong>を拾うのが近道。数字が並んでも、<strong>先にレール（LCNRV か LCM）を選ぶ</strong>と計算順が固定できるよ。</p>
+        </div>
+      </div>
+
+      <div class="worries-inner">
+        <p class="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2"><i data-lucide="layout-list" class="w-4 h-4"></i> この図解で整理すること（要点ボックス）</p>
+        <ul class="text-sm text-slate-800 space-y-1.5 list-disc list-inside leading-relaxed">
+          <li><strong>読む順番</strong>：評価方法 → 数値のラベル付け →（LIFO なら median／FIFO なら NRV）→ cost との比較。</li>
+          <li><strong>分岐の見取り図</strong>：FIFO 系は NRV 一発、LIFO／retail は ceiling・floor・replacement の世界。</li>
+          <li><strong>実際の問題文イメージ</strong>：次のセクションで<strong>オリジナルの英文ストップ</strong>に手順を当てはめる。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>英文の細部に入る前に、在庫期末の思考を<strong>3つのコマ</strong>に圧縮します。試験では「定義は知っているのに、長文で迷子」になりやすいので、<strong>ここは暗記ではなく“処理の順番”の暗記</strong>にしてください。</p>
+      <ol class="space-y-4">
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+          <div>
+            <p class="font-bold text-slate-900">最初に「評価方法」を特定する</p>
+            <p class="text-slate-600 text-sm mt-1">在庫の期末評価は、<strong>FIFO・平均・個別</strong>のレールと、<strong>LIFO・売価還元（retail）</strong>のレールで、<strong>「時価」をどう組み立てるかが根本から違います</strong>。ここを飛ばすと、NRV だけ見ればいいのか、median を取るのかがごちゃ混ぜになります。</p>
+            <p class="text-slate-600 text-sm mt-1">英文では <em>cost flow assumption</em>、<em>LIFO</em>、<em>retail inventory method</em> などが<strong>スイッチの言葉</strong>になります。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+          <div>
+            <p class="font-bold text-slate-900">数字にラベルを貼る（replacement／NRV の材料／normal profit）</p>
+            <p class="text-slate-600 text-sm mt-1">与えられた数値は、すぐに足し算しないでください。まず <strong>replacement cost</strong>、<strong>selling price／costs to complete／selling costs（→NRV の材料）</strong>、<strong>normal profit（floor の材料）</strong>のどれに当たるかを<strong>ラベルで固定</strong>します。</p>
+            <p class="text-slate-600 text-sm mt-1">ラベルが付くと、次に「FIFO なら NRV だけ」「LIFO なら ceiling／floor／median」へ進めるので、<strong>計算順の迷いが激減</strong>します。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+          <div>
+            <p class="font-bold text-slate-900">二段構え：まず Market（または NRV）→ 次に Cost と比較</p>
+            <p class="text-slate-600 text-sm mt-1">LIFO／retail の lower-of-cost-or-<em>market</em> では、<strong>まず market を決める</strong>（典型は replacement・NRV・floor の <strong>median</strong>）。そのあとで <strong>期末の取得原価 cost</strong> と比べ、<strong>低い方</strong>が期末在庫の測定に使われます。</p>
+            <p class="text-slate-600 text-sm mt-1">FIFO 系の <strong>LCNRV</strong> は「比較対象が NRV」に寄せて整理すると、試験の選択肢と噛み合いやすいです。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="glasses" class="w-6 h-6 text-violet-600"></i> 問題文を読む順番の型</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>長文を「上から順に訳す」のではなく、<strong>①評価方法 → ②数値のラベル → ③LIFOなら中央値／FIFOならNRV → ④cost と比較</strong>という<strong>手順のレール</strong>に乗せます。下に<strong>オリジナルの短い英文ストップ</strong>を置いたうえで、同じ手順を当てはめます。</p>
+
+      <div class="sample-stem">
+        <p class="lbl">Sample problem stem（イメージ用・オリジナル／MCとは別ストップ）</p>
+        <p class="m-0">On December 31, Year 1, <strong>Nimbus Co.</strong> reports ending inventory at cost of <strong>$95,000</strong>. Nimbus accounts for inventory using the <strong>last-in, first-out (LIFO)</strong> cost flow assumption. The following information relates to the same inventory item: <strong>replacement cost $78,000</strong>; <strong>estimated selling price $118,000</strong>; <strong>estimated costs to complete and sell $16,000</strong> in total; and a <strong>normal profit margin equal to 10% of selling price</strong>. For LIFO lower-of-cost-or-market purposes, what is the amount that should be used as <strong>market</strong> before comparing to cost?</p>
+      </div>
+
+      <div class="overflow-x-auto rounded-lg border border-slate-200">
+        <table class="min-w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left p-3 font-semibold">順番</th>
+              <th class="text-left p-3 font-semibold">やること</th>
+              <th class="text-left p-3 font-semibold">サンプル英文での当てはめ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-3 font-medium">①</td><td class="p-3">一文目・脚注・見出しから<strong>評価方法</strong>を拾う</td><td class="p-3 text-slate-700">「<strong>LIFO</strong>」→ lower-of-cost-or-<em>market</em> 側（median の世界）へ。</td></tr>
+            <tr><td class="p-3 font-medium">②</td><td class="p-3">数値を<strong>replacement／NRV 材料／normal profit</strong>に仕分け</td><td class="p-3 text-slate-700">replacement <strong>$78k</strong>／NRV材料 <strong>$118k−$16k</strong>／normal profit <strong>10%×$118k</strong>。</td></tr>
+            <tr><td class="p-3 font-medium">③</td><td class="p-3">LIFO 等なら <strong>NRV（ceiling）・floor・replacement</strong>をそろえて <strong>median</strong></td><td class="p-3 text-slate-700">NRV＝<strong>$102,000</strong>、floor＝102k−11.8k＝<strong>$90,200</strong>、replacement <strong>$78k</strong> → 並べて中央値は <strong>$90,200</strong>（※計算練習用）。</td></tr>
+            <tr><td class="p-3 font-medium">④</td><td class="p-3"><strong>market（または NRV）</strong>と<strong>cost</strong>を比べ、低い方へ（本問は market まで）</td><td class="p-3 text-slate-700">設問が続くなら cost <strong>$95,000</strong> と比較して期末在庫を決める、までがワンセット。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 mt-3">※サンプルは<strong>理解のための別ストップ</strong>です。下のMCの数値・正解とは一致させていません（取り違え防止）。</p>
+      <div class="term-explain mt-6">
+        <p class="font-semibold text-green-900 mb-2 flex items-center gap-2"><i data-lucide="help-circle" class="w-5 h-5"></i> 用語ボックス（試験英語 → 日本語で把握）</p>
+        <ul class="text-sm text-slate-700 space-y-2">
+          <li><strong>NRV（net realizable value）</strong>：売却見込みから完成・販売に要するコストを差し引いた正味額。試験では「時価」の一部としてどう使うかが論点。</li>
+          <li><strong>Replacement cost（再調達原価）</strong>：同種の在庫を現在取得するときの目安。LIFO retail の market の材料になる。</li>
+          <li><strong>Ceiling / Floor（天井・床）</strong>：LIFO／retail の lower-of-cost-or-<em>market</em> で、replacement を NRV と（NRV − normal profit）の間に収める枠組み。</li>
+          <li><strong>Median（中央値）</strong>：replacement・NRV・floor の三つを並べたときの真ん中。ここが「market」として採用されることが多い（設問条件に従う）。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="fork" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="git-branch" class="w-6 h-6 text-indigo-600"></i> 分岐の見え方（本題の図解）</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>US GAAP の在庫は、大きく言って<strong>「LCNRV レール」</strong>と<strong>「LCM（LIFO／retail）レール」</strong>に分かれます。左側はシンプルに <strong>cost vs NRV</strong>。右側は <strong>market</strong> を先に組み立てるので、<strong>ceiling（=NRV）と floor（=NRV−normal profit）</strong>が登場し、replacement をその間に挟んで <strong>median</strong> を取る、という<strong>別ゲーム</strong>になります。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">試験でつまずくのは「用語は知ってるのに、<strong>今どっちのゲームをしているか</strong>が頭にない」パターンです。だから概念図は<strong>左か右か</strong>だけ先に決めるための地図にしています。</p>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 font-mono text-xs md:text-sm leading-relaxed">
+        <pre class="whitespace-pre-wrap text-slate-700">在庫の期末評価（試験で効く分岐）
+        │
+        ├─ FIFO・平均・個別（LIFO/retail 以外の典型） ──→ LCNRV
+        │       「比較の相手」＝ NRV（戻入れなしの整理でOKなことが多い）
+        │
+        └─ LIFO・売価還元（retail） ──→ lower-of-cost-or-MARKET
+                market ＝ median( replacement, ceiling=NRV, floor=NRV−normal profit )
+                                   │
+                                   └→ その market と cost を比べて低い方</pre>
+      </div>
+      <div class="term-explain mt-4">
+        <p class="font-semibold text-green-900 mb-2">読み取りのコツ（日本語で押さえる）</p>
+        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+          <li><strong>左（LCNRV）</strong>：「replacement をそのまま時価にする」系の話に寄りにくい。まず <strong>NRV を作って cost と比較</strong>の二段が主役。</li>
+          <li><strong>右（LCM）</strong>：replacement がそのまま採用されるとは限らず、<strong>NRV を上限、NRV−利益を下限</strong>として <strong>中央値</strong>で落ち着くことが多い。</li>
+          <li><strong>設問の最後の一文</strong>が「market はいくらか」「期末在庫はいくらか」かで、<strong>③で止まるか④まで行くか</strong>が変わるので注意。</li>
+        </ul>
+      </div>
+      <p class="text-sm text-slate-600 mt-4">この図は試験対策用の<strong>概念整理</strong>です。監査・実務の細部・例外は設問条件に従ってください。</p>
+    </section>
+
+    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまでの道筋（受講生 × コーチ）</h2>
+      <div class="persona-strip">
+        <span><strong>受講生</strong>：手順をメモに落とす派。</span>
+        <span><strong>コーチ</strong>：会計士風のベテラン。型で解くことを重視。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">さっきのサンプル英文、<strong>①で LIFO と分かった瞬間に</strong>、もう計算の型が決まる感じ？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">そう。<strong>LIFO と分かった時点で右側のレール</strong>（market＝median）に乗る。次は②で数字にラベル、③で NRV／floor／replacement を並べるだけ。サンプル表の「当てはめ列」がまさにその動き。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">概念図、左と右で<strong>“別ゲーム”</strong>って言われたのがしっくりきた。迷ったら左に戻って確認する。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">それが一番の使いどころ。下のMCは<strong>型の検算</strong>だと思って、左（LCNRV）の問題と右（LCM）の問題で<strong>脳内の回路を分ける</strong>と安定します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認（オリジナルMC）</h2>
+      <p class="text-sm text-slate-600 mb-4">ストップと選択肢は<strong>試験で使う英語</strong>。解説は<strong>日本語でフル</strong>。<strong>配信前は毎回サブエージェントを立ち上げ、ASC 330（Inventory）に照らして正解・計算・用語をファクトチェック</strong>する（diagram-delivery/SETUP.txt に手順あり）。本ページはその基準で内容を精査した版です。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          Ridge Co. accounts for inventory using <strong>LIFO</strong>. Ending inventory cost is <strong>$92</strong>. Additional information: replacement cost <strong>$84</strong>; estimated selling price <strong>$110</strong>; costs to complete <strong>$14</strong>; selling costs <strong>$10</strong>; normal profit margin is <strong>12% of selling price</strong>. After computing <strong>NRV</strong> and the <strong>floor</strong>, what amount should be used as <strong>market</strong> for LIFO lower-of-cost-or-market purposes?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $72</li>
+          <li><strong>B.</strong> $76</li>
+          <li><strong>C.</strong> $84</li>
+          <li><strong>D.</strong> $86</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p class="font-semibold text-slate-800">まず NRV（試験では net realizable value）</p>
+            <p>売価から「売るまでにかかるコスト」を引くイメージで、<strong>NRV = $110 − $14 − $10 = $86</strong>。</p>
+            <p class="font-semibold text-slate-800 mt-3">次に floor（NRV − normal profit）</p>
+            <p>設問どおり normal profit は selling price の 12% なので、<strong>$110 × 12% = $13.20</strong>。</p>
+            <p><strong>Floor = $86 − $13.20 = $72.80</strong>。</p>
+            <p class="font-semibold text-slate-800 mt-3">LIFO の market：replacement cost・NRV・floor の中央値（median）</p>
+            <p>三つ並べると <strong>$84</strong>（replacement）、<strong>$86</strong>（NRV）、<strong>$72.80</strong>（floor）。昇順に並べると 72.8 → 84 → 86 なので、<strong>median は $84</strong>。これが market として採用する金額です。</p>
+            <p>その後のステップとして、この market と cost $92 を比べて低い方を期末在庫に……と続く問題も試験ではよく出ますが、本問は market の金額だけを聞いています。</p>
+            <p>正解 <strong>C</strong>。</p>
+            <p class="text-slate-500 text-xs">※ normal profit の計算基数が「selling price」と明示されているかは必ず英文で確認。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          Vale Co. uses <strong>FIFO</strong>. For year-end inventory, under the <strong>lower-of-cost-or-net-realizable-value (LCNRV)</strong> model (ASC 330 for methods other than LIFO and retail), the amount compared to cost is most appropriately described as which of the following?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> The median of replacement cost, NRV, and NRV minus a normal profit margin</li>
+          <li><strong>B.</strong> Net realizable value (NRV) compared to cost under LCNRV</li>
+          <li><strong>C.</strong> The retail method cost ratio only</li>
+          <li><strong>D.</strong> Normal profit margin only</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p>US GAAP では、<strong>LIFO または売価還元法（retail）</strong>以外の在庫（典型的に <strong>FIFO・平均法</strong>）は、取得原価と<strong>正味実現可能価額（NRV）</strong>の<strong>低い方（LCNRV）</strong>で測定する整理です（ASC 330）。</p>
+            <p><strong>Ceiling／floor／replacement の median</strong> で「market」を組み立てるのは、<strong>lower-of-cost-or-market</strong> が適用される <strong>LIFO／retail</strong> 側の話です。設問が FIFO と言っているなら中央値ルールは当てはまりません。</p>
+            <p>正解 <strong>B</strong>。</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ（締め）</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li><strong>テーマ：</strong>在庫の期末評価で、<strong>評価方法</strong>によって「時価」の作り方が <strong>LCNRV（NRV）</strong> か <strong>LCM（ceiling／floor／median）</strong> かに分かれる点を、<strong>読む順番</strong>で固定する。</li>
+        <li><strong>英文のコツ：</strong>最初に FIFO／LIFO／retail を拾い、数値を replacement・NRV の材料・normal profit にラベルしてから計算する。</li>
+        <li><strong>試験英語：</strong>NRV、replacement cost、market、LCNRV、LIFO／retail の lower-of-cost-or-market をセットで押さえる。</li>
+        <li><strong>次の一歩：</strong>別問題では「market まで求めたあと、cost と比較して期末在庫額はいくらか」まで続くので、<strong>二段目の比較</strong>まで頭の中でつなげておく。</li>
+      </ol>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12">
+      <p>オリジナル教材・図解テンプレ（Lucide / Tailwind）。予備校・問題集の転載なし。</p>
+    </footer>
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

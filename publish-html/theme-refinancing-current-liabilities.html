@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】短期債務の借換えと financing agreement の上限 — オリジナルMC付き</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .term-explain {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-left: 4px solid #16a34a;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .student-bubble {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 2px solid #ea580c;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .coach-bubble {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #2563eb;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .mc-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #fafafa;
+    }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .en-stem {
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      border-left: 3px solid #64748b;
+      padding-left: 1rem;
+      margin: 0.75rem 0;
+      color: #334155;
+    }
+    .worries-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 2px solid #d97706;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .persona-strip {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem;
+      padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem;
+    }
+    .persona-strip strong { color: #0f172a; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .dlg-row .avatar-col { text-align: center; }
+    .dlg-row .avatar-col span { display: block; font-size: 0.65rem; font-weight: 700; margin-top: 0.35rem; color: #64748b; }
+    .avatar-frame { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid rgba(0,0,0,.06); margin: 0 auto; width: 56px; height: 56px; }
+    .sample-stem {
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.75rem;
+      padding: 1rem 1.15rem;
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: #1e293b;
+      margin: 1rem 0;
+    }
+    .sample-stem .lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; margin-bottom: 0.5rem; }
+    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+    .role-line { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：流動・非流動の区分 — <span class="font-bold normal-case">短期債務の長期借換え（intent / ability）と financing 上限</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Liabilities（ASC 470-10）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">短期債務の借換え：<strong class="font-semibold">intent and ability</strong> と「借りられる上限」</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl">
+        決算日時点で<strong>長期借換の意思・能力</strong>を示せるか、さらに<strong>融資枠・担保比率などの数的上限</strong>があるかで、貸借対照表の <strong>current / noncurrent</strong> の切り分けが変わる論点を整理しています。問題・解説は<strong>オリジナル</strong>です。
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <p class="font-semibold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="list-tree" class="w-4 h-4"></i> 目次</p>
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ（英語ラベル付き）</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">問題を読む順番の型</a></li>
+        <li><a href="#fork" class="text-blue-700 hover:underline">区分の見え方（概念図）</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解ける道筋（受講生×コーチ）</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC（オリジナル）</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
+      </ul>
+    </nav>
+
+    <section id="worries" class="worries-box">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5 text-amber-700"></i> よくある悩み（まず共感から）</h2>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">英文で <em>long-term financing agreement</em> って出てくると、<strong>もう流動負債じゃないんでしょ？</strong>って安心しちゃう。でも選択肢を見ると <strong>current がゼロじゃない</strong>ことがあって、毎回ひっくり返る。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">わかる、<strong>それ一番つらいパターン</strong>。一文だけ見るとそう見えるけど、試験は<strong>「借り換えられる上限」</strong>をセットで置いて、<strong>残りは current に尾を引かせる</strong>型を好む。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">あと <strong>intent と ability</strong>、どっちの話か一瞬よくわからなくなる。<strong>語彙は知ってるのに選択肢で迷う</strong>。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">概念MCでは <strong>ability＝長期資金を確保できる具体的裏付け</strong>を直接聞くことが多い。英文の主語（何を evidence として認めるか）に<strong>必ず戻る</strong>癖をつけよう。</p>
+        </div>
+      </div>
+
+      <div class="worries-inner">
+        <p class="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2"><i data-lucide="layout-list" class="w-4 h-4"></i> この図解で整理すること（要点ボックス）</p>
+        <ul class="text-sm text-slate-800 space-y-1.5 list-disc list-inside leading-relaxed">
+          <li><strong>読む順番</strong>：残高・満期 → financing の条件 → <strong>cap を数値化</strong> → <strong>min(残高, cap)</strong> を noncurrent、残り current。</li>
+          <li><strong>intent / ability</strong>：特に ability は <em>financing agreement</em> 等の「型」を英文で拾う。</li>
+          <li><strong>サンプル英文</strong>：次セクションでオリジナルストップを置き、表の各行に対応づける。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>「長期に借り換えるつもり」一文だけ見て<strong>全部 noncurrent</strong>と決め打ちしないための<strong>3つのチェック</strong>です。BS 区分の問題は、英文が丁寧に見えるほど<strong>逆に罠（上限・時点・証拠の種類）</strong>が混ざりやすいので、ここは<strong>処理の型</strong>として固定します。</p>
+      <ol class="space-y-4">
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+          <div>
+            <p class="font-bold text-slate-900">期末日時点で <span class="text-indigo-700">intent</span> と <span class="text-indigo-700">ability</span> を示せるか</p>
+            <p class="text-slate-600 text-sm mt-1">
+              <strong>Intent：</strong>長期の借換えに関する意思。<strong>Ability：</strong>実際に長期資金を調達できる能力。
+              設問は <em>financing agreement</em>、<em>committed line of credit</em>、実際の <em>refinancing</em> など、どの証拠を認めるかを指定します。その<strong>英文の条件に忠実に</strong>読むのが先です。
+            </p>
+            <p class="text-slate-600 text-sm mt-1">迷いやすいのは「単語は知ってるのに、<strong>この選択肢は intent？ability？</strong>」という局面。概念問では <strong>ability の証拠</strong>を直接聞かれることが多いので、<strong>“資金が本当に確保できるか”</strong>に引きずられているかを見ると切り分けやすいです。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+          <div>
+            <p class="font-bold text-slate-900"><span class="text-indigo-700">Borrowing capacity</span> に数的上限があるか</p>
+            <p class="text-slate-600 text-sm mt-1">
+              担保の <strong>fair value × covenant で決まるパーセント</strong>などが書かれていたら、
+              「長期に振り替えてよい金額」の<strong>天井（cap）</strong>が先に決まります。ここを飛ばすと後の分割が全部ズレます。
+            </p>
+            <p class="text-slate-600 text-sm mt-1">つまり <em>long-term financing</em> があっても、<strong>“無限に借り換えられる”とは限らない</strong>。試験はその<strong>不足分を current に残す</strong>計算で仕上げさせることがあります。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+          <div>
+            <p class="font-bold text-slate-900">元の short-term obligation の残高を「上限まで noncurrent／残り current」に割る</p>
+            <p class="text-slate-600 text-sm mt-1">
+              試験の計算問では、しばしば <strong>Current liabilities（流動負債）</strong>と <strong>Noncurrent liabilities（非流動負債）</strong>の<strong>内訳金額</strong>を直接聞かれます。
+              日本語の「固定負債」は、ここでは <strong>noncurrent</strong> と対応させて覚えると英語問題に繋がります。
+            </p>
+            <p class="text-slate-600 text-sm mt-1">機械的には <strong>noncurrent 側 ＝ min(元の残高, cap)</strong>、<strong>current 側 ＝ 残高 − それ</strong>が典型形です（設問条件に従う）。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="glasses" class="w-6 h-6 text-violet-600"></i> 問題文を読む順番の型</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>英文を上から訳すのではなく、<strong>①残高・満期 → ②financing の条件 → ③cap を先に数値化 → ④min(残高, cap) を noncurrent、残り current</strong>の順に<strong>レールに乗せる</strong>手順表です。下の<strong>オリジナル英文ストップ</strong>に、各行を対応づけます。</p>
+
+      <div class="sample-stem">
+        <p class="lbl">Sample problem stem（イメージ用・オリジナル／下のMCとは別ストップ）</p>
+        <p class="m-0">On December 31, Year 1, <strong>Harbor Corp.</strong> has a <strong>$610,000</strong> note payable that is due on <strong>September 15, Year 2</strong> (within one year after the balance sheet date). Before the financial statements are issued, Harbor enters into a <strong>long-term financing agreement</strong> that permits refinancing the note on a long-term basis. The agreement provides that refinancing is available for amounts up to <strong>70% of the appraised fair value</strong> of pledged collateral. At December 31, Year 1, the collateral is appraised at <strong>$800,000</strong>, and Harbor expects to utilize the available capacity. For presentation on the December 31, Year 1 balance sheet, what amounts should be classified as <strong>current</strong> and <strong>noncurrent</strong> for this obligation under these facts?</p>
+      </div>
+
+      <div class="overflow-x-auto rounded-lg border border-slate-200">
+        <table class="min-w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left p-3 font-semibold">順番</th>
+              <th class="text-left p-3 font-semibold">やること</th>
+              <th class="text-left p-3 font-semibold">サンプル英文での当てはめ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-3 font-medium">①</td><td class="p-3">一文目で<strong>short-term obligation</strong>の金額・満期・決算日を拾う</td><td class="p-3 text-slate-700">残高 <strong>$610,000</strong>、満期が決算後1年以内（流動の素地）。</td></tr>
+            <tr><td class="p-3 font-medium">②</td><td class="p-3"><strong>financing agreement</strong>の条件（担保・上限比率等）を線引き</td><td class="p-3 text-slate-700"><strong>70% of appraised fair value</strong> までが refinancing の対象、と明記。</td></tr>
+            <tr><td class="p-3 font-medium">③</td><td class="p-3"><strong>cap</strong>＝担保ベース等の上限額を<strong>先に計算</strong></td><td class="p-3 text-slate-700">cap ＝ $800,000 × 70% ＝ <strong>$560,000</strong>。</td></tr>
+            <tr><td class="p-3 font-medium">④</td><td class="p-3"><strong>min(残高, cap)</strong> を noncurrent、残りを current</td><td class="p-3 text-slate-700">noncurrent <strong>$560,000</strong>／current <strong>$50,000</strong>（610k−560k）という整理（練習用）。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 mt-3">※サンプルは理解用です。下のMCの金額・正解とは一致させていません。</p>
+      <div class="term-explain mt-6">
+        <p class="font-semibold text-green-900 mb-2 flex items-center gap-2"><i data-lucide="help-circle" class="w-5 h-5"></i> 用語ボックス（試験英語）</p>
+        <ul class="text-sm text-slate-700 space-y-2">
+          <li><strong>Refinance on a long-term basis</strong>：満期後に長期の負債へ載せ替えるイメージ（設問の定義に従う）。</li>
+          <li><strong>Financing agreement</strong>：長期資金の確保を裏付ける契約・枠・実際の借換えなど、問題が認める証拠。</li>
+          <li><strong>Borrowing capacity / covenant</strong>：借りられる上限。担保評価額×○%などが典型的な<strong>数値トラップ</strong>。</li>
+          <li><strong>Current vs. noncurrent presentation</strong>：BS 上の区分。英語選択肢では <em>current liabilities</em> と <em>noncurrent liabilities</em> が並ぶことが多い。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="fork" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="git-branch" class="w-6 h-6 text-indigo-600"></i> 区分の見え方（本題の図解）</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>読者がつまずくのは「financing がある＝心配無用」ではなく、<strong>financing が“どこまで効くか”</strong>です。図は2つの典型を並べ、<strong>なぜ current に尾が残るか</strong>を説明するための地図です。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">上の表の④は、右の枝（cap あり）で起きる現象の計算版です。<strong>noncurrent に載せられるのは“借換の枠が許す範囲”まで</strong>で、元の残高がそれを超えるなら、超えた分は<strong>決算日時点ではまだ短期性が残る</strong>、という整理が試験では出やすいです。</p>
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 font-mono text-xs md:text-sm leading-relaxed">
+        <pre class="whitespace-pre-wrap text-slate-700">Short-term obligation を refinancing で長期表示に寄せるとき（設問イメージ）
+        │
+        ├─ intent / ability の証拠が「設問どおり」取れる
+        │       │
+        │       └─ 数的上限なし（単純）
+        │               → 典型：該当する全額を noncurrent に寄せられる（※設問条件あり）
+        │
+        └─ collateral × % などで cap が決まる（試験で多い）
+                │
+                ├─ noncurrent ＝ min(元の残高, cap)
+                │
+                └─ current ＝ 残高 − noncurrent（尾が残る）</pre>
+      </div>
+      <div class="term-explain mt-4">
+        <p class="font-semibold text-green-900 mb-2">読み取りのコツ（日本語で押さえる）</p>
+        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+          <li><strong>一文目の安心感</strong>：長期借換の話が出ても、必ず<strong>②③で条件と cap</strong>を探す。</li>
+          <li><strong>計算の最後</strong>：「全部 noncurrent？」ではなく <strong>610 と 560 みたいに二段になる</strong>パターンを疑う。</li>
+          <li><strong>概念問</strong>：ability の evidence は、広告計画や無関係な議事録より <strong>financing の裏付け</strong>側へ寄せる。</li>
+        </ul>
+      </div>
+      <p class="text-sm text-slate-600 mt-4">実務・監査の細部より、<strong>試験で数字と区分が結びつくパターン</strong>を優先した図です。</p>
+    </section>
+
+    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまでの道筋（受講生 × コーチ）</h2>
+      <div class="persona-strip">
+        <span><strong>受講生</strong>：キーワードは拾えるが、一文に安心しがち。</span>
+        <span><strong>コーチ</strong>：会計士風。cap・ability を「型」に落とす。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">Harbor のサンプル、<strong>610 と 560 が並ぶ</strong>のが腑に落ちた。つまり「長期に載せられるのは cap まで」ってこと？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">その理解でOK。設問が<strong>尾を残させる意図</strong>で cap を置いているなら、<strong>50k が current</strong> みたいに二段になる。下のMCは別の数値だけど、同じ型かどうかを見にいこう。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">受講生</p>
+          <p class="text-sm leading-relaxed">ability の概念問は、やっぱり <strong>financing の裏付け</strong>を選びにいけばいい？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">典型はそこ。英文が <strong>demonstrate / available / agreement</strong> みたいに“能力”を言いにくるかどうかも確認。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認（オリジナルMC）</h2>
+      <p class="text-sm text-slate-600 mb-6">設問と選択肢は<strong>試験英語</strong>。解説は<strong>日本語でフル</strong>。<strong>配信前は毎回サブエージェントを立ち上げ、ASC 470-10（Debt）に照らしてファクトチェック</strong>する（SETUP.txt に手順あり）。本ページはその基準で内容を精査した版です。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算・区分）</p>
+        <div class="en-stem text-sm leading-relaxed mb-4">
+          Ridgehill Corp. has a <strong>$520,000</strong> note payable due August 31 of the following year. Before year-end, it enters into a <strong>long-term financing agreement</strong> that permits refinancing the obligation. The agreement states that <strong>refinancing is permitted up to 75% of the appraised fair value</strong> of the pledged collateral. At the balance sheet date, the collateral is appraised at <strong>$640,000</strong>, and the company expects no issues utilizing the available capacity. What is the most appropriate split between <strong>current liabilities</strong> and <strong>noncurrent liabilities</strong> for this obligation on the year-end balance sheet under these facts?
+        </div>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Current $520,000 / Noncurrent $0</li>
+          <li><strong>B.</strong> Current $0 / Noncurrent $520,000</li>
+          <li><strong>C.</strong> Current $40,000 / Noncurrent $480,000</li>
+          <li><strong>D.</strong> Current $120,000 / Noncurrent $400,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く（図で整理）</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-3">
+            <p class="font-semibold text-slate-900">ステップ1：設問が決めている「長期借換として認められる上限」</p>
+            <p>
+              担保の評価額（fair value）<strong>$640,000</strong> に、契約で許される比率 <strong>75%</strong> をかけます。
+              <br>
+              <strong>$640,000 × 75% = $480,000</strong>
+              <br>
+              これが、この設問の条件のもとでの<strong>refinancing 側に振れる金額の天井（cap）</strong>です。ここより上をすべて noncurrent にできる、とは<strong>限らない</strong>点がポイントです。
+            </p>
+            <p class="font-semibold text-slate-900">ステップ2：元の負債残高との関係</p>
+            <p>
+              元の短期系の負債残高は <strong>$520,000</strong>。長期側に「載せてよい」のは設問ロジック上 <strong>$480,000 まで</strong>なので、
+              <strong>$520,000 − $480,000 = $40,000</strong> は、決算日時点では<strong>まだ current に残る尾</strong>として整理される、という典型パターンです。
+            </p>
+            <div class="rounded-lg bg-slate-50 border border-slate-200 p-4 font-mono text-xs text-slate-600">
+<pre class="whitespace-pre-wrap">Obligation $520,000  |████████████████████████████████████|
+                     |&lt;──── noncurrent up to cap ────►|
+                     $480,000              remainder $40k → current</pre>
+            </div>
+            <p class="font-semibold text-slate-900">ステップ3：選択肢との対応</p>
+            <p>
+              Current <strong>$40,000</strong> / Noncurrent <strong>$480,000</strong> がこの整理に一致します。
+              <strong>B</strong> は「上限無視で全部 noncurrent」と読んでしまう誤答、<strong>D</strong> は cap の計算が別パターンのときに出やすいダミーです。
+            </p>
+            <p>正解 <strong>C</strong>。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <div class="en-stem text-sm leading-relaxed mb-4">
+          Which item best represents evidence of an entity’s <strong>ability</strong> to refinance a short-term obligation <strong>on a long-term basis</strong> as commonly tested on the CPA Exam?
+        </div>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> A marketing plan for an advertising campaign scheduled only in the next fiscal year</li>
+          <li><strong>B.</strong> A financing agreement (or similar arrangement) that demonstrates available long-term financing under the facts specified in the question</li>
+          <li><strong>C.</strong> Shareholders’ meeting minutes unrelated to financing</li>
+          <li><strong>D.</strong> A copy of the income tax return only</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p>
+              <strong>Ability</strong> は「本当に長期の資金を確保できるか」の話です。試験では、問題文が認める形で
+              <strong>financing agreement</strong>、<strong>committed line of credit</strong>、実際の <strong>refinancing</strong> などが提示されるのが典型で、
+              それに<strong>合致する選択肢</strong>を選びます。
+            </p>
+            <p>
+              広告計画（A）や無関係な議事録（C）、税務書類だけ（D）は、長期借換の<strong>能力の証拠</strong>としては一般的な「型」に合いません。
+            </p>
+            <p>正解 <strong>B</strong>。</p>
+            <p class="text-slate-500 text-xs">※本番では問題文の動詞（demonstrate / obtain / exists など）と時点（year-end）を必ず確認してください。</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ（締め）</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li><strong>テーマ：</strong>短期債務を<strong>長期で借り換える</strong>ストーリーでも、決算日時点で <strong>current に残る尾</strong>が出るのは、<strong>financing の borrowing cap</strong> など<strong>数的上限</strong>がある典型パターンだから。</li>
+        <li><strong>読む順：</strong>残高・満期 → financing agreement の条件 → cap を先に数字化 → <strong>min(残高, cap)</strong> を noncurrent、残りを current と割る。</li>
+        <li><strong>試験英語：</strong><em>intent</em>、<em>ability</em>、<em>refinance on a long-term basis</em>、<em>financing agreement</em>、<em>committed line of credit</em> をセットで。</li>
+        <li><strong>注意：</strong>実務・条文の細部は設問条件次第。本ページは<strong>試験で問われる型</strong>に寄せた整理です。</li>
+      </ol>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12">
+      <p>オリジナル教材・図解テンプレ（Lucide / Tailwind）。予備校・問題集の転載なし。</p>
+    </footer>
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
