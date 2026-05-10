@@ -3,310 +3,456 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【図解】Income Taxes — 繰延税金資産（DTA）を「ズレ×税率」で出す（全面新作）</title>
+  <title>【図解】Income Taxes — 繰延税金資産（DTA）の出し方 - 資格コーチング</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --coach-primary: hsl(200, 70%, 38%);
+      --coach-accent: hsl(38, 92%, 45%);
+      --coach-gradient: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%));
+    }
     body { font-family: 'Noto Sans JP', sans-serif; }
-    .header-gradient { background: linear-gradient(90deg, hsl(215, 65%, 38%), hsl(168, 48%, 36%)); }
+    .header-gradient { background: var(--coach-gradient); }
+    .section-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
     .term-explain {
       background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
       border-left: 4px solid #16a34a;
-      padding: 1.25rem 1.5rem;
+      padding: 1.5rem;
       border-radius: 0.75rem;
-      margin: 1.25rem 0;
+      margin: 1.5rem 0;
+    }
+    .char-bubble {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin-left: 0.5rem;
+    }
+    .char-bubble::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 20px;
+      border-width: 10px;
+      border-style: solid;
     }
     .student-bubble {
       background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
       border: 2px solid #ea580c;
-      border-radius: 1rem;
-      padding: 1.25rem 1.5rem;
-      margin: 1rem 0;
     }
+    .student-bubble::before { border-color: transparent #ea580c transparent transparent; }
     .coach-bubble {
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
       border: 2px solid #2563eb;
-      border-radius: 1rem;
-      padding: 1.25rem 1.5rem;
-      margin: 1rem 0;
     }
-    .mc-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
-      background: #fafafa;
+    .coach-bubble::before { border-color: transparent #2563eb transparent transparent; }
+    .badge-essential {
+      background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
     }
-    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
-    .worries-box {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      border: 2px solid #d97706;
-      border-radius: 1rem;
-      padding: 1.25rem 1.5rem;
-      margin: 1rem 0;
+    .badge-recommended {
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
     }
-    .persona-strip {
-      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
-      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem;
-      padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem;
+    .badge-optional {
+      background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
     }
-    .persona-strip strong { color: #0f172a; }
-    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
-    .dlg-row .avatar-col { text-align: center; }
-    .dlg-row .avatar-col span { display: block; font-size: 0.65rem; font-weight: 700; margin-top: 0.35rem; color: #64748b; }
-    .avatar-frame { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid rgba(0,0,0,.06); margin: 0 auto; width: 56px; height: 56px; }
-    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem; }
-    .role-line { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.35rem; }
-    .student-bubble .role-line { color: #c2410c; }
-    .coach-bubble .role-line { color: #1d4ed8; }
-    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
-    .viz-card {
-      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-      border: 1px solid #cbd5e1;
-      border-radius: 1rem;
+    .quote-block {
+      background: #f8fafc;
+      border-left: 4px solid #64748b;
+      padding: 1rem 1.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+    .toc {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
       padding: 1rem;
-      margin: 1rem 0;
-      overflow-x: auto;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 50;
+      font-size: 0.8rem;
     }
-    .viz-card svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
-    .viz-caption { font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 0.75rem; }
+    .toc a { display: block; color: #475569; margin: 0.35rem 0; }
+    .toc a:hover { color: #2563eb; }
+    @media (max-width: 1280px) { .toc { display: none; } }
+    .pattern-bar {
+      height: 2.5rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-  <header class="header-gradient text-white py-10 px-4">
-    <div class="max-w-3xl mx-auto">
-      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">テーマ：Income Taxes（ASC 740）— <span class="font-bold normal-case">支払ってから損金になる未払費用 × DTA</span></p>
-      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Income Taxes（このページは<strong>全面新作</strong>）</p>
-      <h1 class="text-2xl md:text-3xl font-bold leading-snug">税効果の入口：なぜ「ズレ」に税率を掛けると DTA になる？</h1>
-      <p class="mt-3 text-sm opacity-95 max-w-2xl">FAR でつまずきやすいのは、用語暗記の次の段階——<strong>設問が最後に何ドルを聞いているか</strong>と、<strong>帳簿と税務でタイミングがズレたドル額</strong>をつなぐことです。ここでは<strong>レールを1本だけ</strong>敷きます：<strong>帳簿では費用は計上済みだが、税務上は現金を払うまで損金にできない</strong>ときの<strong>繰延税金資産（DTA）</strong>。問題文・選択肢・数値は<strong>オリジナル</strong>です。</p>
+<body class="bg-slate-50">
+  <nav class="toc" aria-label="目次">
+    <div class="font-bold text-slate-800 mb-2 border-b pb-2">目次</div>
+    <a href="#intro">はじめに</a>
+    <a href="#three">まず覚える3つ</a>
+    <a href="#terms">用語</a>
+    <a href="#fork">帳簿と税務の分岐</a>
+    <a href="#group-a">ズレのドル</a>
+    <a href="#group-b">DTAの式</a>
+    <a href="#patterns">3パターン</a>
+    <a href="#exam">演習の見方</a>
+    <a href="#summary">まとめ</a>
+  </nav>
+
+  <header class="header-gradient text-white py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <p class="text-sm opacity-90 mb-2">USCPA FAR / Income Taxes（ASC 740）— レイアウトは<a href="https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/" class="underline decoration-white/80 hover:text-white">低価法図解</a>と同型</p>
+      <h1 class="text-3xl md:text-4xl font-bold">繰延税金資産（DTA）を「タイミングのズレ × 税率」で押さえる</h1>
+      <p class="mt-2 text-lg opacity-90">帳簿では<strong class="text-white">もう費用になっているのに</strong>、税務上は<strong class="text-white">現金を払うまで損金にできない</strong>——そのギャップが期末に<strong class="text-white">将来の控除の土台（ドル）</strong>になり、そこに<strong class="text-white">法定税率</strong>を掛けたものが <strong class="text-white">DTA</strong> です（典型パターンに限定）。</p>
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
-
-    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
-      <p class="font-semibold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="list-tree" class="w-4 h-4"></i> 目次</p>
-      <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
-        <li><a href="#terms" class="text-blue-700 hover:underline">用語を一口で</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
-        <li><a href="#viz" class="text-blue-700 hover:underline">図：Year 1 の「ズレ」がどこで生まれるか</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">英文を読む順番</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解ける道筋（たいしくん×コーチ）</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC（オリジナル）</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
-      </ul>
-    </nav>
-
-    <section id="worries" class="worries-box">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5 text-amber-700"></i> よくある悩み</h2>
-
-      <div class="dlg-row">
-        <div class="avatar-col">
-          <div class="avatar-frame bg-sky-50">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
-          <span>たいしくん</span>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <div id="intro" class="section-card">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 border-2 border-orange-300">
+          <i data-lucide="user" class="w-7 h-7 text-orange-700"></i>
         </div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たいしくん（受講生）</p>
-          <p class="text-sm leading-relaxed"><strong>temporary difference</strong> と<strong> enacted tax rate</strong> は単語としては追える。でも試験だと<strong>費用の総額をそのまま答えに書いてしまう</strong>……。</p>
+        <div class="char-bubble student-bubble flex-1">
+          <p class="text-sm font-bold text-orange-800 mb-1">受講生</p>
+          <p><strong>temporary difference</strong> って聞くと頭がいっぱいになる……。<strong>費用の総額</strong>をそのまま答えに書いちゃダメなんだっけ？</p>
         </div>
       </div>
-      <div class="dlg-row">
-        <div class="avatar-col">
-          <div class="avatar-frame bg-slate-100">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
-          </div>
-          <span>コーチ</span>
+      <div class="flex items-start gap-4 mb-2">
+        <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 border-2 border-blue-300">
+          <i data-lucide="graduation-cap" class="w-7 h-7 text-blue-800"></i>
         </div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">コーチ</p>
-          <p class="text-sm leading-relaxed">そこが一番の落とし穴。<strong>設問が deferred tax asset を聞いているか</strong>を先に決める。次に<strong>期末時点で「将来、課税所得を減らせる原材料（ドル）」がいくらか</strong>——それが一時差異のストーリー次第で決まる。このパターンでは、そのドルに<strong>法定税率を掛けたものが DTA</strong>。</p>
+        <div class="char-bubble coach-bubble flex-1">
+          <p class="text-sm font-bold text-blue-800 mb-1">コーチ</p>
+          <p>だめというより、<strong>設問が何をドルで聞いているか</strong>が先。DTA を聞かれているなら、まず<strong>期末のズレのドル</strong>を決めてから<strong>税率を掛ける</strong>。今日のゴールは、その<strong>2段のレール</strong>を即答できることです。</p>
         </div>
       </div>
+    </div>
 
-      <div class="worries-inner">
-        <p class="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2"><i data-lucide="layout-list" class="w-4 h-4"></i> この図解でやること／やらないこと</p>
-        <ul class="text-sm text-slate-800 space-y-1.5 list-disc list-inside leading-relaxed">
-          <li><strong>やる：</strong>「帳簿先行・支払時損金」の<strong>型</strong>と、<strong>DTA ＝ ズレ × enacted rate</strong> の計算順。</li>
-          <li><strong>やらない：</strong>valuation allowance、NOL、複合差異、DTL との同時計上——別ストップで切る。</li>
-        </ul>
+    <div id="three" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center">
+          <i data-lucide="star" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">まず覚える3つ</h2>
+          <p class="text-slate-500">ここまで押さえれば、英文の細部は後から足せます</p>
+        </div>
       </div>
-    </section>
-
-    <section id="terms" class="term-explain">
-      <h2 class="text-lg font-bold text-emerald-950 mb-2 flex items-center gap-2"><i data-lucide="languages" class="w-5 h-5 text-emerald-700"></i> 用語を一口で</h2>
-      <dl class="text-sm text-slate-800 space-y-2">
-        <dt class="font-bold">一時差異（temporary difference）</dt>
-        <dd class="ml-0 md:ml-4">資産・負債の<strong>帳簿価額と税務上の基礎</strong>の差で、将来に<strong>課税所得へ影響が残る</strong>もの。</dd>
-        <dt class="font-bold mt-2">将来控除しうる一時差異 → DTA の土台</dt>
-        <dd class="ml-0 md:ml-4">将来、税務上で<strong>控除（deduction）が増える見込み</strong>なら、簡単な説明として<strong>将来の税金を先に「資産」として認識するニュアンス</strong>で DTA に結びつける（厳密な例外は試験の追加条件で見る）。</dd>
-        <dt class="font-bold mt-2">Enacted tax rate</dt>
-        <dd class="ml-0 md:ml-4">問題で与えられた<strong>成立済み税率</strong>。ノートでは<strong>そのまま掛ける</strong>。</dd>
-      </dl>
-    </section>
-
-    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
-      <p class="part-lead"><strong>このパートの役割：</strong>長文を<strong>3手順のチェックリスト</strong>に落とす。暗記というより<strong>処理順の固定</strong>。</p>
-      <ol class="space-y-4">
-        <li class="flex gap-3">
-          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+      <div class="grid gap-4">
+        <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-red-50 to-red-100 rounded-xl border-l-4 border-red-500">
+          <div class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
           <div>
-            <p class="font-bold text-slate-900">最後に何ドルを聞かれているか言語化する</p>
-            <p class="text-slate-600 text-sm mt-1"><strong>deferred tax asset</strong>、<strong>deferred tax liability</strong>、所得税費用など、<strong>答えの科目が違うと式も変わる</strong>。最初に一行メモ。</p>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold text-lg text-slate-800">答える科目を決める</span>
+              <span class="badge-essential">必須</span>
+            </div>
+            <p class="text-slate-600"><strong>deferred tax asset</strong> なのか、所得税費用なのか、<strong>負債の残高</strong>なのか。<strong>同じストーリーでも最後の一文で式が変わる</strong>ので、最初に一行メモ。</p>
           </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border-l-4 border-blue-500">
+          <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
           <div>
-            <p class="font-bold text-slate-900">期末の「税前ベースのズレ」のドルを決める</p>
-            <p class="text-slate-600 text-sm mt-1">このページのパターンでは、典型的に<strong>未払費用が帳簿に立っているが税務ではまだゼロ</strong>——追加条件が無ければ<strong>ズレの額＝その負債の期末残高（ドル）</strong>から入る。</p>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold text-lg text-slate-800">期末の「税前のズレ」のドルを決める</span>
+              <span class="badge-recommended">推奨</span>
+            </div>
+            <p class="text-slate-600">このページのパターンでは、<strong>帳簿に未払費用があるが税務ではまだ控除ゼロ</strong>など、設問が示す<strong>タイミング差のドル</strong>が本体。期首繰延・当期支払など<strong>追加条件があればノートに書き込んで調整</strong>。</p>
           </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-xl border-l-4 border-emerald-500">
+          <div class="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
           <div>
-            <p class="font-bold text-slate-900">DTA ＝ ズレ × enacted tax rate</p>
-            <p class="text-slate-600 text-sm mt-1">税率を掛ける理由は、バランスシートに載せるのは<strong>税の効果のドル額</strong>だから。費用総額そのものではない。</p>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold text-lg text-slate-800">DTA ＝ ズレのドル × enacted tax rate</span>
+              <span class="badge-essential">必須</span>
+            </div>
+            <p class="text-slate-600">バランスシートに載せるのは<strong>税効果のドル</strong>。<strong>費用総額そのものではない</strong>——ここを混ぜない。</p>
           </div>
-        </li>
-      </ol>
-    </section>
-
-    <section id="viz" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="git-branch" class="w-6 h-6 text-indigo-600"></i> 図：Year 1 の「ズレ」がどこで生まれるか</h2>
-      <p class="text-sm text-slate-600 mb-4">左が<strong>帳簿（book）</strong>、右が<strong>税務（tax）</strong>のイメージ。<strong>同じキャッシュが動く前</strong>に、費用認識のタイミングだけがずれると<strong>赤い矢印のギャップ（ズレ）</strong>が期末に残る。</p>
-      <div class="viz-card">
-        <svg viewBox="0 0 560 200" width="560" height="200" aria-label="Book と Tax のタイミングのずれ">
-          <rect width="560" height="200" fill="#f8fafc"/>
-          <text x="24" y="36" font-size="13" font-weight="700" fill="#0f172a">Book（発生主義イメージ）</text>
-          <rect x="24" y="48" width="240" height="36" rx="8" fill="#dbeafe" stroke="#2563eb"/>
-          <text x="144" y="71" text-anchor="middle" font-size="11" fill="#1e3a8a">Year 1：費用として認識（未払い）</text>
-          <text x="320" y="36" font-size="13" font-weight="700" fill="#0f172a">Tax（支払時損金）</text>
-          <rect x="320" y="48" width="216" height="36" rx="8" fill="#e2e8f0" stroke="#64748b"/>
-          <text x="428" y="71" text-anchor="middle" font-size="11" fill="#334155">Year 1：支払が無いので deduction ゼロ</text>
-          <path d="M144 120 L428 120" stroke="#94a3b8" stroke-width="2"/>
-          <text x="280" y="112" text-anchor="middle" font-size="11" fill="#475569">期末スナップショット</text>
-          <rect x="96" y="132" width="160" height="44" rx="10" fill="#fee2e2" stroke="#dc2626"/>
-          <text x="176" y="159" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">ズレ＝将来控除のドル土台</text>
-          <text x="280" y="188" text-anchor="middle" font-size="11" fill="#64748b">このドル × enacted rate → DTA（設問による）</text>
-        </svg>
-        <p class="viz-caption">図は概念スケッチ。実際は設問の条件（期首残高・当期支払・他の差異）で<strong>ズレのドルは調整</strong>されます。</p>
-      </div>
-    </section>
-
-    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="list-ordered" class="w-6 h-6 text-slate-700"></i> 英文を読む順番（この型だけ）</h2>
-      <ol class="list-decimal list-inside space-y-2 text-sm text-slate-700 leading-relaxed">
-        <li><strong>誰の、いつの期末か</strong>（December 31, Year 1 など）。</li>
-        <li><strong>book で何を計上したか</strong>（accrued … expense / liability の語）。</li>
-        <li><strong>tax purposes のルール</strong>（<em>deductible only when paid</em> など）。</li>
-        <li><strong>当期に支払ったか</strong>（often “no payments”）。</li>
-        <li><strong>enacted tax rate</strong> と <strong>beginning deferred tax balances</strong> の有無。</li>
-        <li>最後に<strong>質問文の動詞</strong>——<em>deferred tax asset</em> を求めるかどうか。</li>
-      </ol>
-    </section>
-
-    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解ける道筋（たいしくん × コーチ）</h2>
-      <div class="persona-strip">
-        <span><strong>たいしくん</strong>：ビジネスパーソン受験生。手順メモ派。</span>
-        <span><strong>コーチ</strong>：型で解くことを優先する講師。</span>
-      </div>
-
-      <div class="dlg-row">
-        <div class="avatar-col">
-          <div class="avatar-frame bg-sky-50">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
-          <span>たいしくん</span>
-        </div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たいしくん（受講生）</p>
-          <p class="text-sm leading-relaxed"><strong>Deductible temporary difference</strong> って単語を見たら、もう<strong>DTA 側</strong>だと決め打ちしていい？</p>
         </div>
       </div>
-      <div class="dlg-row">
-        <div class="avatar-col">
-          <div class="avatar-frame bg-slate-100">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
-          </div>
-          <span>コーチ</span>
+    </div>
+
+    <div id="terms" class="section-card">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="book-open" class="w-6 h-6 text-emerald-700"></i>
         </div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">コーチ</p>
-          <p class="text-sm leading-relaxed"><strong>早見としてはアリ</strong>。ただし試験は<strong>一文で符号がひっくり返る</strong>ことがあるので、必ず<strong>「将来、控除が増える／減る」</strong>に直してから DTA／DTL を決める癖をつけよう。</p>
-        </div>
+        <h2 class="text-2xl font-bold text-slate-800">用語を口語に直す</h2>
       </div>
-    </section>
-
-    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認（オリジナルMC）</h2>
-      <p class="text-sm text-slate-600 mb-4">ストップと選択肢は<strong>試験で使う英語</strong>。解説は<strong>日本語でフル</strong>。<strong>配信前は毎回別コンテキストで ASC 740（Income Taxes）に照らし、正解・計算・用語をファクトチェック</strong>してください。</p>
-
-      <div class="mc-card">
-        <p class="font-bold text-slate-900 mb-2">問題 1（計算）</p>
-        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
-          On December 31, Year 1, <strong>Arbor Inc.</strong> reported <strong>$420,000</strong> of <strong>accrued bonus expense</strong> for book purposes. For tax purposes, bonuses are <strong>deductible only when paid</strong>. Arbor paid <strong>$0</strong> of related amounts during Year 1. The <strong>enacted tax rate</strong> is <strong>30%</strong> for Year 1 and future years. There were <strong>no beginning deferred tax balances</strong> related to bonuses. What <strong>deferred tax asset</strong> should Arbor recognize at December 31, Year 1 for this item?
+      <div class="term-explain">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2">
+          <i data-lucide="info" class="w-5 h-5"></i>
+          用語ボックス
         </p>
-        <ul class="text-sm space-y-2 mb-4">
-          <li><strong>A.</strong> $0</li>
-          <li><strong>B.</strong> $126,000</li>
-          <li><strong>C.</strong> $294,000</li>
-          <li><strong>D.</strong> $420,000</li>
+        <ul class="space-y-3 text-slate-700">
+          <li><strong>一時差異（temporary difference）</strong>：帳簿と税務で<strong>いつ利益や控除が動くかがずれる</strong>ものの、将来に<strong>課税所得へ効いてくる</strong>タイプのズレ。</li>
+          <li><strong>Enacted tax rate</strong>：問題で与えられる<strong>成立済み税率</strong>。ノートでは<strong>そのまま掛ける</strong>。</li>
+          <li><strong>DTA（繰延税金資産）</strong>：イメージとしては<strong>将来の税金を先に「資産」側で表す片</strong>。厳密には例外や評価がありますが、基本問題では<strong>ズレ × 税率</strong>で固定しよう。</li>
         </ul>
-        <details>
-          <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
-            <p><strong>ズレのドル：</strong>帳簿に $420,000 の未払費用、税務では支払ゼロなので Year 1 の deduction はゼロ。期首繰延なし・他の調整なしの典型では、<strong>将来控除の土台となる一時差異 ＝ $420,000</strong>。</p>
-            <p><strong>DTA：</strong>$420,000 × 30% ＝ <strong>$126,000</strong>。</p>
-            <p><strong>誤答：</strong>A はズレなしと読み違え。D は費用額と DTA の取り違え。C は (1−0.3) など別計算のイメージ。</p>
-            <p>正解 <strong>B</strong>。</p>
-          </div>
-        </details>
       </div>
 
-      <div class="mc-card">
-        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
-        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
-          In a basic FAR fact pattern, a <strong>deferred tax asset</strong> is <strong>most consistent</strong> with which description?
+      <div class="grid md:grid-cols-3 gap-4 my-6">
+        <div class="bg-gradient-to-br from-sky-50 to-indigo-50 p-5 rounded-xl border border-sky-200">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="wallet" class="w-5 h-5 text-sky-700"></i>
+            <span class="font-bold text-sky-900">たとえ①</span>
+          </div>
+          <p class="text-slate-700 text-sm"><strong>税務は現金主義っぽく動く</strong>場面があり、帳簿は<strong>もう費用を認識済み</strong>——まるで<strong>「確定申告の控除はレシート提出後」</strong>みたいな<strong>タイムラグ</strong>です。</p>
+        </div>
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-5 rounded-xl border border-amber-200">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="layers" class="w-5 h-5 text-amber-800"></i>
+            <span class="font-bold text-amber-900">たとえ②</span>
+          </div>
+          <p class="text-slate-700 text-sm"><strong>ズレのドル</strong>は「将来どれだけ<strong>課税所得を減らせる材料</strong>が手元にあるか」の<strong>ベース金額</strong>。税率は<strong>そのベースに税金のレバーを掛ける係数</strong>。</p>
+        </div>
+        <div class="bg-gradient-to-br from-violet-50 to-purple-50 p-5 rounded-xl border border-violet-200">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="align-vertical-space-around" class="w-5 h-5 text-violet-800"></i>
+            <span class="font-bold text-violet-900">たとえ③</span>
+          </div>
+          <p class="text-slate-700 text-sm">低価法で <strong>FIFO か LIFO かでレールが変わる</strong>ように、Income Taxes でも<strong>「何を最後にドルで答えるか」でレールが変わる</strong>。今日は <strong>DTA 専用レール</strong>だけ載せます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card" id="fork">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="git-branch" class="w-6 h-6 text-slate-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">分岐：同じ年度でも「帳簿」と「税務」で認識タイミングが違う</h2>
+          <p class="text-slate-500">ここが試験の読み分けポイントです</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-stretch justify-center gap-4 my-4">
+        <div class="flex-1 bg-sky-50 border-2 border-sky-200 rounded-xl p-5 text-center">
+          <i data-lucide="notebook-pen" class="w-9 h-9 text-sky-700 mx-auto mb-2"></i>
+          <div class="font-bold text-sky-900 mb-1">帳簿（book）</div>
+          <p class="text-sm text-slate-700">発生主義で<strong>費用・負債を認識</strong>済み、というストーリーが多い</p>
+        </div>
+        <div class="flex items-center justify-center">
+          <i data-lucide="split" class="w-8 h-8 text-slate-400"></i>
+        </div>
+        <div class="flex-1 bg-violet-50 border-2 border-violet-200 rounded-xl p-5 text-center">
+          <i data-lucide="landmark" class="w-9 h-9 text-violet-700 mx-auto mb-2"></i>
+          <div class="font-bold text-violet-900 mb-1">税務（tax）</div>
+          <p class="text-sm text-slate-700"><strong>deductible only when paid</strong> など、<strong>支払い後に控除</strong>が動く</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 mt-6">
+        <div class="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 border-2 border-orange-300">
+          <i data-lucide="user" class="w-7 h-7 text-orange-700"></i>
+        </div>
+        <div class="char-bubble student-bubble flex-1">
+          <p class="text-sm font-bold text-orange-800 mb-1">受講生</p>
+          <p>英文が長いと、<strong>rates</strong> と <strong>accrued</strong> と <strong>paid</strong> がごちゃごちゃします……。</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 border-2 border-blue-300">
+          <i data-lucide="graduation-cap" class="w-7 h-7 text-blue-800"></i>
+        </div>
+        <div class="char-bubble coach-bubble flex-1">
+          <p class="text-sm font-bold text-blue-800 mb-1">コーチ</p>
+          <p><strong>paid の有無</strong>と<strong>accrued の金額</strong>を線でつなぐ。<strong>次のセクション</strong>で「ズレのドル」を一言で言語化してから、税率に進もう。</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="group-a" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="arrow-left-right" class="w-6 h-6 text-sky-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ズレのドルはどこから拾うか</h2>
+          <p class="text-slate-500">典型：未払費用が残っているが、税務ではまだ控除ゼロ</p>
+        </div>
+      </div>
+      <div class="bg-sky-50 rounded-xl p-6 border border-sky-200 mb-4">
+        <p class="font-bold text-sky-900 mb-2 flex items-center gap-2">
+          <i data-lucide="highlighter" class="w-5 h-5"></i>
+          読み取りの芯
         </p>
-        <ul class="text-sm space-y-2 mb-4">
-          <li><strong>A.</strong> Current tax depreciation exceeds current book depreciation (no other facts).</li>
-          <li><strong>B.</strong> An expense is recognized for book in the current period, but the related amount is <strong>deductible for tax only in a future period when paid</strong>.</li>
-          <li><strong>C.</strong> Rent revenue is recognized for book now and taxed in the same period with no timing difference.</li>
-          <li><strong>D.</strong> A gain is included in book income and excluded from taxable income in all periods.</li>
-        </ul>
-        <details>
-          <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
-            <p><strong>B</strong> が、このページで練習した<strong>帳簿先行・支払時控除</strong>のストレートな言い換え。典型教材では <strong>deductible temporary difference</strong> と DTA がセットで説明されやすい。</p>
-            <p><strong>A</strong> は多くの入門ドリルで <strong>DTL</strong> の対比用。<strong>C</strong> はタイミング差がない。<strong>D</strong> は英文次第で成り立たないことが多い。</p>
-            <p>正解 <strong>B</strong>。</p>
-            <p class="text-slate-500 text-xs">※追加の事実がある問題では符号が変わり得るので、常に英文優先。</p>
-          </div>
-        </details>
+        <p class="text-slate-700">設問が<strong>期首繰延なし・関連する支払なし</strong>などシンプルなら、しばしば<strong>ズレのドル ＝ 期末の未払費用などの残高</strong>からスタートしてよい、という<strong>練習用の型</strong>です（条件が増えたら必ず調整）。</p>
       </div>
-    </section>
+      <p class="text-slate-600">ここでのミスは<strong>「費用を認識した総額」と「ズレのドル」</strong>を同一視すること。数字が同じに見えても、<strong>設問が渡す前提（期首・支払・他差異）</strong>でズレの定義は変わります。</p>
+    </div>
 
-    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ（締め）</h2>
-      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li><strong>テーマ：</strong>支払ってから損金になる未払費用で、期末の <strong>DTA</strong> を<strong>ズレのドル × enacted rate</strong>で出す。</li>
-        <li><strong>手順：</strong>答える科目を決める → 期末のズレのドル → 税率を掛ける。</li>
-        <li><strong>次の一歩：</strong>valuation allowance・複数一時差異・税率変更は<strong>別ページ</strong>でレールを分ける。</li>
-      </ol>
-    </section>
+    <div id="group-b" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="percent" class="w-6 h-6 text-violet-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">DTA の式（ノートにそのまま）</h2>
+          <p class="text-slate-500">最後に税率を掛ける</p>
+        </div>
+      </div>
+      <div class="bg-violet-50 rounded-xl p-6 border border-violet-200 mb-6">
+        <p class="text-slate-800 text-lg font-medium text-center py-3 bg-white rounded-lg border border-violet-100">
+          DTA ＝（期末時点の対象となる一時差異のドル）× enacted tax rate
+        </p>
+        <p class="mt-3 text-sm text-slate-600 text-center">試験では<strong>小数・端数の指示</strong>に従う。ここでは<strong>式の順番</strong>だけ固定する。</p>
+      </div>
+      <div class="flex flex-col items-center gap-2 max-w-md mx-auto mb-4">
+        <div class="w-full pattern-bar bg-slate-200 text-slate-700 border-2 border-dashed border-slate-400">① ズレのドルを決める</div>
+        <i data-lucide="arrow-down" class="w-6 h-6 text-slate-400"></i>
+        <div class="w-full pattern-bar bg-violet-500 text-white border-2 border-violet-700 shadow-md">② × enacted tax rate</div>
+        <i data-lucide="arrow-down" class="w-6 h-6 text-slate-400"></i>
+        <div class="w-full pattern-bar bg-slate-200 text-slate-700 border-2 border-dashed border-slate-400">③ DTA（設問がそれを聞いているとき）</div>
+      </div>
+    </div>
 
-    <footer class="text-center text-xs text-slate-500 pb-12">
-      <p>全面新作のオリジナル図解（Lucide / Tailwind）。第三者教材・リリース問題の転載なし。</p>
-    </footer>
+    <div id="patterns" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="layout-grid" class="w-6 h-6 text-amber-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">3パターン：数字が変わっても「順番」は同じ</h2>
+          <p class="text-slate-500">オリジナルのミニ例です</p>
+        </div>
+      </div>
+      <p class="text-slate-600 mb-6">追加条件が無い簡単な型だけ並べます。<strong>実問題では一文ごとチェック</strong>してください。</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="border-2 border-slate-200 rounded-xl p-4 bg-white">
+          <div class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+            <span class="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+            パターン1
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="pattern-bar bg-slate-100 text-slate-600">ズレ $400,000</div>
+            <div class="pattern-bar bg-slate-100 text-slate-600">税率 25%</div>
+            <div class="pattern-bar bg-emerald-500 text-white ring-2 ring-emerald-700">DTA $100,000</div>
+          </div>
+        </div>
+        <div class="border-2 border-slate-200 rounded-xl p-4 bg-white">
+          <div class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+            <span class="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+            パターン2
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="pattern-bar bg-slate-100 text-slate-600">ズレ $250,000</div>
+            <div class="pattern-bar bg-slate-100 text-slate-600">税率 28%</div>
+            <div class="pattern-bar bg-emerald-500 text-white ring-2 ring-emerald-700">DTA $70,000</div>
+          </div>
+        </div>
+        <div class="border-2 border-slate-200 rounded-xl p-4 bg-white">
+          <div class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+            <span class="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
+            パターン3
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="pattern-bar bg-slate-100 text-slate-600">ズレ $180,000</div>
+            <div class="pattern-bar bg-slate-100 text-slate-600">税率 30%</div>
+            <div class="pattern-bar bg-emerald-500 text-white ring-2 ring-emerald-700">DTA $54,000</div>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-slate-500 mt-4 flex items-start gap-2">
+        <i data-lucide="lightbulb" class="w-4 h-4 mt-0.5 flex-shrink-0"></i>
+        <span>緑は<strong>最後に計算機を叩く場所</strong>のイメージ。手を動かす前に<strong>ズレのドルが何を指すか</strong>を言語化する。</span>
+      </p>
+    </div>
+
+    <div id="exam" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="file-text" class="w-6 h-6 text-rose-700"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">演習で見るポイント</h2>
+          <p class="text-slate-500">問題文を読む順番の型</p>
+        </div>
+      </div>
+      <div class="mb-4">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="target" class="w-5 h-5 text-blue-600"></i>
+          <span class="font-bold text-slate-700">ここで見るポイント</span>
+        </div>
+        <ul class="list-disc list-inside text-slate-600 ml-1 space-y-1">
+          <li><strong>book</strong> で認識しているもの（<strong>accrued … expense</strong> など）と、<strong>tax purposes</strong> のルール（<strong>deductible only when paid</strong> 等）</li>
+          <li><strong>当期に支払ったか</strong>（often zero payments）</li>
+          <li><strong>enacted tax rate</strong> と <strong>beginning deferred tax balances</strong></li>
+          <li>最後の一文が <strong>deferred tax asset</strong> を求めるかどうか</li>
+        </ul>
+      </div>
+      <div class="quote-block text-slate-700">
+        <p class="font-bold text-slate-800 mb-2">（疑似）問題文の読み方</p>
+        <p>「帳簿で費用が立っている／税務では払うまで控除が動かない／期末のズレのドルを決める／それに税率を掛けて DTA」——この<strong>型</strong>が頭に入っていると、長文から迷子になりにくいです。</p>
+      </div>
+      <p class="text-xs text-slate-500 mt-4">公開・配信前に <strong>ASC 740</strong> に照らしたファクトチェックを別コンテキストで実施してください。本ページは第三者問題の転載ではありません。</p>
+    </div>
+
+    <div id="summary" class="section-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+          <i data-lucide="award" class="w-6 h-6 text-blue-700"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-slate-800">まとめ：受講生チェック</h2>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 border-2 border-blue-300">
+          <i data-lucide="graduation-cap" class="w-7 h-7 text-blue-800"></i>
+        </div>
+        <div class="char-bubble coach-bubble flex-1">
+          <p class="text-sm font-bold text-blue-800 mb-1">コーチ</p>
+          <p class="mb-2">今日の3点要約です。</p>
+          <ul class="list-decimal list-inside space-y-1 text-slate-700">
+            <li><strong>DTA を聞かれたら</strong>、まず<strong>ズレのドル</strong>を決める。</li>
+            <li><strong>Enacted tax rate</strong> は<strong>そのあとで掛ける</strong>。</li>
+            <li><strong>valuation allowance や複合差異</strong>は別レールで切る。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 border-2 border-orange-300">
+          <i data-lucide="user" class="w-7 h-7 text-orange-700"></i>
+        </div>
+        <div class="char-bubble student-bubble flex-1">
+          <p class="text-sm font-bold text-orange-800 mb-1">受講生</p>
+          <p>自分の言葉だと、<strong>「paid が動いてないなら、まず accrued の残高がズレの本体か確認 → × rate が DTA」</strong>ですね。<strong>低価法と同じく、紙にレールを書いてから数字</strong>に入ります。</p>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <script>lucide.createIcons();</script>
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>

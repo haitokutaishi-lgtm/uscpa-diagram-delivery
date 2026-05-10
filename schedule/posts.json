@@ -11,13 +11,13 @@
     "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
   },
   "2026-05-11": {
-    "title": "【図解】Income Taxes — DTAを「ズレ×税率」で出す（全面新作）",
-    "description": "支払ってから損金になる未払費用パターンを一から組み直しました。設問の聞き方→期末のズレ→法定税率の順で固定します（オリジナルMC付き）。",
+    "title": "【図解】Income Taxes — DTA（低価法サイトと同型レイアウト）",
+    "description": "固定目次・まず覚える3つ・用語・分岐・3パターン・演習の見方・まとめの型で整理し直しました（低価法公開ページと同じ設計）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/"
   },
   "2026-05-14": {
-    "title": "【図解】固定資産の減損 — 保有継続・2段階（ASC 360-10）",
-    "description": "回収可能性は割引なしCFの合計、測定は時価との差——ステップが混ざらないよう図で整理しました（オリジナルMC付き）。",
+    "title": "【図解】固定資産の減損・保有継続（低価法サイトと同型レイアウト）",
+    "description": "回収可能性と測定の二段を、低価法図解と同じカード設計で整理。undiscounted と fair value の切り替えを固定します。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-impairment-held-for-use/"
   }
 }
