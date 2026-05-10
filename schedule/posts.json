@@ -11,8 +11,13 @@
     "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
   },
   "2026-05-11": {
-    "title": "【図解】繰延税金資産（DTA）— 未払費用が「支払ってから損金」のとき",
-    "description": "帳簿では費用済み・税務では支払時まで損金にならない典型パターンを、受講生向け1枚HTMLで整理しました。ズレの額×税率でDTAを出す型を固定します。",
+    "title": "【図解】Income Taxes — DTAを「ズレ×税率」で出す（全面新作）",
+    "description": "支払ってから損金になる未払費用パターンを一から組み直しました。設問の聞き方→期末のズレ→法定税率の順で固定します（オリジナルMC付き）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/"
+  },
+  "2026-05-14": {
+    "title": "【図解】固定資産の減損 — 保有継続・2段階（ASC 360-10）",
+    "description": "回収可能性は割引なしCFの合計、測定は時価との差——ステップが混ざらないよう図で整理しました（オリジナルMC付き）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-impairment-held-for-use/"
   }
 }

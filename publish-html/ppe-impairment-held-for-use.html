@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】固定資産の減損 — 保有継続・2段階テスト（ASC 360-10）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(262, 42%, 42%), hsl(200, 55%, 38%)); }
+    .term-explain {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-left: 4px solid #16a34a;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .student-bubble {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 2px solid #ea580c;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .coach-bubble {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #2563eb;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .mc-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #fafafa;
+    }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .worries-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 2px solid #d97706;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .persona-strip {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem;
+      padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem;
+    }
+    .persona-strip strong { color: #0f172a; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .dlg-row .avatar-col { text-align: center; }
+    .dlg-row .avatar-col span { display: block; font-size: 0.65rem; font-weight: 700; margin-top: 0.35rem; color: #64748b; }
+    .avatar-frame { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid rgba(0,0,0,.06); margin: 0 auto; width: 56px; height: 56px; }
+    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+    .role-line { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
+    .viz-card {
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #cbd5e1;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    .viz-card svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+    .viz-caption { font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 0.75rem; }
+    .step-box { border: 2px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem; margin: 0.75rem 0; background: #fff; }
+    .step-box h3 { font-weight: 700; color: #0f172a; font-size: 0.95rem; margin-bottom: 0.35rem; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">テーマ：PP&amp;E — <span class="font-bold normal-case">保有継続（held-for-use）の減損を2段で切る</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Long-lived assets（ASC 360-10）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">固定資産減損：回収可能性テストと計上額を「別々の基準」で覚える</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl">FAR で混乱しやすいのは、<strong>ステップ1では割引しないのに、ステップ2では時価（fair value）が出てくる</strong>という<strong>基準の切り替え</strong>です。ここでは<strong>売却以外で保有継続する資産グループ</strong>に限定して、英文を読む順番まで固定します。問題文・選択肢・数値は<strong>オリジナル</strong>です。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <p class="font-semibold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="list-tree" class="w-4 h-4"></i> 目次</p>
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
+        <li><a href="#scope" class="text-blue-700 hover:underline">このページのスコープ</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
+        <li><a href="#steps" class="text-blue-700 hover:underline">2段階の中身</a></li>
+        <li><a href="#viz" class="text-blue-700 hover:underline">図：どこで割引しないか</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">英文のキーワード</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解ける道筋</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC（オリジナル）</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
+      </ul>
+    </nav>
+
+    <section id="worries" class="worries-box">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5 text-amber-700"></i> よくある悩み</h2>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <span>たいしくん</span>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たいしくん（受講生）</p>
+          <p class="text-sm leading-relaxed">減損って<strong>割引キャッシュフロー</strong>の計算だと思ってた……。<strong>ステップ1</strong>って<strong>割引しない</strong>んだよね？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">その理解でOK。<strong>回収可能性（recoverability）</strong>は<strong>帳簿価額と「割引せずに足し合わせた将来キャッシュフロー」</strong>の比較。ここで割引を混ぜると<strong>別テスト</strong>とすり替わる。</p>
+        </div>
+      </div>
+
+      <div class="worries-inner">
+        <p class="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2"><i data-lucide="layout-list" class="w-4 h-4"></i> 要点ボックス</p>
+        <ul class="text-sm text-slate-800 space-y-1.5 list-disc list-inside leading-relaxed">
+          <li><strong>ステップ1不合格</strong> → 減損あり → <strong>ステップ2</strong>で<strong>時価ベース</strong>に切り替えて損失額を測定。</li>
+          <li><strong>ステップ1合格</strong> → 減損なし（ステップ2に進まない）。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="scope" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="crosshair" class="w-6 h-6 text-violet-600"></i> このページのスコープ</h2>
+      <ul class="text-sm text-slate-700 list-disc list-inside space-y-2 leading-relaxed">
+        <li><strong>対象：</strong>有形固定資産などの<strong>長期資産</strong>で、<strong>売却以外で保有継続（held-for-use）</strong>する単位の話（ASC 360-10 のイメージ）。</li>
+        <li><strong>やらない：</strong>販売目的で保有する資産の分類、のれん単体のテスト、IFRS 論点。</li>
+      </ul>
+    </section>
+
+    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
+      <p class="part-lead"><strong>このパートの役割：</strong>計算の前に<strong>どの比較がどのステップか</strong>を固定する。</p>
+      <ol class="space-y-4">
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+          <div>
+            <p class="font-bold text-slate-900">ステップ1：Carrying amount vs. 割引しない将来CFの合計</p>
+            <p class="text-slate-600 text-sm mt-1"><strong>Carrying amount</strong> が大きい → 回収不能サイン → <strong>ステップ2へ</strong>。<strong>等しいか小さい</strong> → 減損認識せず終了。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+          <div>
+            <p class="font-bold text-slate-900">ステップ2：Impairment loss ＝ Carrying amount − Fair value</p>
+            <p class="text-slate-600 text-sm mt-1">ここで<strong>fair value</strong>（時価の考え方）が登場。試験では数値が<strong>与えられる</strong>ことが多い。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+          <div>
+            <p class="font-bold text-slate-900">英文では “undiscounted” がステップ1の合図</p>
+            <p class="text-slate-600 text-sm mt-1"><em>Undiscounted expected future cash flows</em> などの語を見たら<strong>ステップ1のレール</strong>だと決め打ちする。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="steps" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="layers" class="w-6 h-6 text-sky-600"></i> 2段階の中身（ノート用）</h2>
+
+      <div class="step-box border-violet-200 bg-violet-50/50">
+        <h3 class="flex items-center gap-2"><i data-lucide="shield-question" class="w-5 h-5 text-violet-700"></i> ステップ1 — 回収可能性（Recoverability）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">資産（または<strong>資産グループ</strong>）の<strong>帳簿価額</strong>が、<strong>割引しない</strong>将来期待キャッシュフローの<strong>合計</strong>を<strong>上回る</strong>場合、帳簿価額は<strong>回収不能</strong>。→ ステップ2へ。</p>
+      </div>
+
+      <div class="step-box border-teal-200 bg-teal-50/50">
+        <h3 class="flex items-center gap-2"><i data-lucide="scale" class="w-5 h-5 text-teal-700"></i> ステップ2 — 測定（Measurement）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed"><strong>減損損失</strong>は、<strong>帳簿価額が時価（fair value）を上回る額</strong>。試験では <strong>Impairment loss = Carrying amount − Fair value</strong> の形で与えられることが多い。</p>
+      </div>
+    </section>
+
+    <section id="viz" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="git-branch" class="w-6 h-6 text-indigo-600"></i> 図：ステップ1と2で「比較相手」が変わる</h2>
+      <div class="viz-card">
+        <svg viewBox="0 0 520 220" width="520" height="220" aria-label="Impairment two-step overview">
+          <rect width="520" height="220" fill="#fafafa"/>
+          <rect x="20" y="24" width="220" height="72" rx="10" fill="#ede9fe" stroke="#7c3aed"/>
+          <text x="130" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">Step 1（割引しない）</text>
+          <text x="130" y="72" text-anchor="middle" font-size="11" fill="#5b21b6">CV vs. sum of undiscounted CF</text>
+          <text x="130" y="92" text-anchor="middle" font-size="11" fill="#5b21b6">CV が大きい → Step 2 へ</text>
+          <path d="M130 104 L130 128" stroke="#64748b" marker-end="url(#arr)"/>
+          <rect x="20" y="132" width="220" height="72" rx="10" fill="#ccfbf1" stroke="#0d9488"/>
+          <text x="130" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#134e4a">Step 2（時価）</text>
+          <text x="130" y="180" text-anchor="middle" font-size="11" fill="#115e59">Loss = CV − Fair value</text>
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/></marker>
+          </defs>
+          <text x="280" y="56" font-size="12" font-weight="700" fill="#0f172a">ここで覚えること</text>
+          <text x="280" y="82" font-size="11" fill="#334155">・Step 1 は「割引しない合計」</text>
+          <text x="280" y="102" font-size="11" fill="#334155">・Step 2 で fair value が登場</text>
+          <text x="280" y="132" font-size="11" fill="#334155">・Step 1 をパスしたら減損なし</text>
+        </svg>
+        <p class="viz-caption">概念図。資産グループの単位や開示は設問で確認。</p>
+      </div>
+    </section>
+
+    <section id="reading" class="term-explain">
+      <h2 class="text-lg font-bold text-emerald-950 mb-2 flex items-center gap-2"><i data-lucide="scan-text" class="w-5 h-5 text-emerald-700"></i> 英文のキーワード（ここで見る）</h2>
+      <ul class="text-sm text-slate-800 list-disc list-inside space-y-1.5 leading-relaxed">
+        <li><strong>held for use</strong>／<strong>long-lived asset</strong>／<strong>asset group</strong></li>
+        <li><strong>undiscounted</strong> future cash flows（ステップ1）</li>
+        <li><strong>fair value</strong>、<strong>impairment loss</strong>（ステップ2）</li>
+      </ul>
+    </section>
+
+    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解ける道筋（たいしくん × コーチ）</h2>
+      <div class="persona-strip">
+        <span><strong>たいしくん</strong>：型で点を取りにいく受講生。</span>
+        <span><strong>コーチ</strong>：ステップの境界を先に言語化させる。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-sky-50">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <span>たいしくん</span>
+        </div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たいしくん（受講生）</p>
+          <p class="text-sm leading-relaxed">問題が<strong>impairment loss のドル</strong>を聞いてるとき、いきなり fair value から計算していい？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col">
+          <div class="avatar-frame bg-slate-100">
+            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
+          </div>
+          <span>コーチ</span>
+        </div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">コーチ</p>
+          <p class="text-sm leading-relaxed">だめ。<strong>まずステップ1で「減損あり」と決める</strong>。ステップ1で<strong>回収可能</strong>なら減損ゼロで終わり。<strong>減損あり</strong>が確定してから、<strong>CV − FV</strong> を計算する。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認（オリジナルMC）</h2>
+      <p class="text-sm text-slate-600 mb-4">ストップと選択肢は<strong>試験で使う英語</strong>。解説は<strong>日本語でフル</strong>。<strong>配信前は別コンテキストで ASC 360-10 に照らしてファクトチェック</strong>してください。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          Brynn Corp. tests a <strong>long-lived asset</strong> that is <strong>held for use</strong>. The asset’s <strong>carrying amount</strong> is <strong>$800,000</strong>. The <strong>total undiscounted expected future cash flows</strong> associated with the asset are estimated at <strong>$720,000</strong>. The asset’s <strong>fair value</strong> is <strong>$610,000</strong>. What is the <strong>impairment loss</strong> Brynn should recognize under U.S. GAAP?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $0</li>
+          <li><strong>B.</strong> $90,000</li>
+          <li><strong>C.</strong> $190,000</li>
+          <li><strong>D.</strong> $800,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p><strong>ステップ1：</strong>CV $800,000 と undiscounted CF 合計 $720,000 を比較。<strong>800,000 &gt; 720,000</strong> なので回収可能性テストを<strong>不合格</strong>。減損の認識へ進む。</p>
+            <p><strong>ステップ2：</strong>Impairment loss ＝ CV − Fair value ＝ $800,000 − $610,000 ＝ <strong>$190,000</strong>。</p>
+            <p><strong>誤答：</strong>A はステップ1を見落とし。B は $720,000 − $610,000 のような<strong>別の比較</strong>のイメージ。D は帳簿価額そのもの。</p>
+            <p>正解 <strong>C</strong>。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <p class="text-slate-700 text-sm leading-relaxed mb-4 border-l-4 border-slate-300 pl-4">
+          For a long-lived asset <strong>held for use</strong>, the <strong>recoverability test</strong> compares the asset’s carrying amount to which amount?
+        </p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Fair value</li>
+          <li><strong>B.</strong> The present value of expected future cash flows discounted at the risk-free rate</li>
+          <li><strong>C.</strong> The sum of undiscounted expected future cash flows</li>
+          <li><strong>D.</strong> Replacement cost</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t border-slate-200 pt-3 space-y-2">
+            <p><strong>C</strong> が回収可能性テストの比較対象。<strong>割引しない</strong>期待キャッシュフローの<strong>合計</strong>という整理でよい。</p>
+            <p><strong>A</strong> はステップ2側。<strong>B</strong> は割引が入り<strong>別の試験</strong>になりやすい。<strong>D</strong> は回収可能性の標準比較ではない。</p>
+            <p>正解 <strong>C</strong>。</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ（締め）</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li><strong>ステップ1</strong>は<strong>割引しない将来CFの合計</strong>との比較。</li>
+        <li><strong>不合格</strong>のときだけステップ2へ進み、<strong>CV − FV</strong> で損失。</li>
+        <li><strong>合格</strong>なら減損なし（ステップ2なし）。</li>
+      </ol>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12">
+      <p>オリジナル図解（Lucide / Tailwind）。第三者教材・リリース問題の転載なし。</p>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
