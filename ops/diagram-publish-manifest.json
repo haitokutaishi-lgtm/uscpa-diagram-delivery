@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "refinancing-current-liabilities",
+    "source": "publish-html/theme-refinancing-current-liabilities.html"
+  },
+  {
+    "slug": "current-liabilities-classification",
+    "source": "publish-html/current-liabilities-classification.html"
+  },
+  {
+    "slug": "treasury-stock-par-value",
+    "source": "publish-html/treasury-stock-par-value.html"
+  },
+  {
+    "slug": "notes-payable-accrued-interest",
+    "source": "publish-html/notes-payable-accrued-interest.html"
+  },
+  {
+    "slug": "warranty-liability",
+    "source": "publish-html/warranty-liability.html"
+  },
+  {
+    "slug": "asset-group-relative-sales-value",
+    "source": "publish-html/asset-group-relative-sales-value.html"
+  },
+  {
+    "slug": "involuntary-conversion-gain",
+    "source": "publish-html/involuntary-conversion-gain.html"
+  },
+  {
+    "slug": "deferred-tax-asset-dta",
+    "source": "publish-html/income-taxes-dta.html"
+  },
+  {
+    "slug": "inventory-lcm-reading-drill",
+    "source": "publish-html/inventory-lcm-reading-drill.html"
+  },
+  {
+    "slug": "ppe-impairment-held-for-use",
+    "source": "publish-html/ppe-impairment-held-for-use.html"
+  }
+]

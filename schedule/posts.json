@@ -1,23 +1,63 @@
 {
-  "_comment": "キーは Asia/Tokyo の日付。workflow が当日の1件を Discord に投稿。同じ図解の重複日より、テーマを変えて key を足すのが推奨。",
-  "2026-05-05": {
-    "title": "【図解】低価法（LCM）と時価の決め方（テスト配信）",
-    "description": "FIFO・平均・個別と LIFO・売価還元で「時価」の決め方がどう違うか、受講生向けに1枚HTMLで整理しました。",
-    "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
-  },
-  "2026-05-09": {
-    "title": "【図解】低価法（LCM）と時価の決め方",
-    "description": "FIFOとLIFOで「時価」の取り方が変わる話を、受講生向け1枚HTMLにまとめました。天井・床・中央値の型を固定します。",
-    "url": "https://haitokutaishi-lgtm.github.io/lcm-teikahou-diagram/"
-  },
-  "2026-05-11": {
-    "title": "【図解】Income Taxes — DTA（低価法サイトと同型レイアウト）",
-    "description": "固定目次・まず覚える3つ・用語・分岐・3パターン・演習の見方・まとめの型で整理し直しました（低価法公開ページと同じ設計）。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/"
-  },
+  "_comment": "約1か月は税効果（ASC740／DTA）・低価法(LCM)本体・在庫『読む順』のキーを置かない方針。テーマはアビタスFAR MC由来（Liabilities／Equity／Interest／Warranty／PP&E取得・収用など）。diagram-site の slug は manifest とソース HTML が無い日は Discord がスキップ。低価法公開サイト・DTAページは配信に使わない。",
   "2026-05-14": {
-    "title": "【図解】固定資産の減損・保有継続（低価法サイトと同型レイアウト）",
-    "description": "回収可能性と測定の二段を、低価法図解と同じカード設計で整理。undiscounted と fair value の切り替えを固定します。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-impairment-held-for-use/"
+    "title": "【図解】短期債務の借換えと financing agreement の上限（MC付き）",
+    "description": "長期借換の intent・ability と、融資枠・担保比率などの数的上限が current／noncurrent にどう効くかを整理（ASC 470-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/refinancing-current-liabilities/"
+  },
+  "2026-05-17": {
+    "title": "【図解】流動負債の区分—社債・割引・配当を含む合計",
+    "description": "試算表から流動負債セクションに含める項目を積み上げる型（社債割引の控除、配当の期限など）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/current-liabilities-classification/"
+  },
+  "2026-05-18": {
+    "title": "【図解】自己株式—額面法での取得・消却と APIC の動き（MC付き）",
+    "description": "発行→取得→消却までの仕訳の流れと、どの勘定が増減するかを一本のレールで固定（ASC 505）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/treasury-stock-par-value/"
+  },
+  "2026-05-21": {
+    "title": "【図解】Notes Payable と未払利息—元本返済後の残高で期間按分（MC付き）",
+    "description": "分割返済後の残元本に対し、直近の支払日から決算日までの経過月数で未払利息を切る型（提示金利を使用）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/notes-payable-accrued-interest/"
+  },
+  "2026-05-24": {
+    "title": "【図解】製品保証引当—売上ベースの見積りと実際支出（MC付き）",
+    "description": "保証費用の見積パターンと実支出から、期末の estimated warranty liability を組み立てる（ASC 460）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/"
+  },
+  "2026-05-25": {
+    "title": "【図解】資産グループの購入—売価按分（相対公正価値）で土地・建物に配分（MC付き）",
+    "description": "一括購入価額を、各資産の appraised value の比率で按分する型。売主簿価では割らない（ASC 360）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/"
+  },
+  "2026-05-28": {
+    "title": "【図解】強制転換・収用—補償金と帳簿価額から除却益を認識（MC付き）",
+    "description": "収用補償と資産の帳簿価額の差額が当期 gain。再投資額は当期益の計算に使わない論点を整理（ASC 360）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/"
+  },
+  "2026-05-31": {
+    "title": "【図解・フォロー】短期債務の借換え — agreement と上限のセットで読む",
+    "description": "intent／ability と financing の数的上限をセットで見にいく読み方を短く再掲。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/refinancing-current-liabilities/"
+  },
+  "2026-06-01": {
+    "title": "【図解・見直し】流動負債—current に落ちる／落ちないの見極め",
+    "description": "賞消・社債（一年内期限）・割引・配当などを一枚に載せた見取り図で再確認。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/current-liabilities-classification/"
+  },
+  "2026-06-04": {
+    "title": "【図解・見直し】自己株式—額面法の仕訳レール",
+    "description": "APIC と treasury の動きを、取得時・消却時で追い直す用の再掲。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/treasury-stock-par-value/"
+  },
+  "2026-06-07": {
+    "title": "【図解・見直し】Notes Payable—返済後残元本×経過月数で未払利息",
+    "description": "分割返済後の「いつの元本に対する利息か」をタイムラインで追い直す再掲。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/notes-payable-accrued-interest/"
+  },
+  "2026-06-10": {
+    "title": "【図解・見直し】強制転換・収用—補償金と帳簿価額の差が gain",
+    "description": "再取得コストを挟む問題でも、財務会計では差額を当期認識する型を再確認。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/"
   }
 }

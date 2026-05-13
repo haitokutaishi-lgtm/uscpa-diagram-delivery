@@ -1,5 +1,8 @@
-# 日・水・土 9:00 JST (= UTC 日・水・土 0:00) に実行
-# 秘密情報: Repository secrets に DISCORD_WEBHOOK_URL を設定（プレーンテキストでコミットしない）
+# 日・水・土 9:00 JST: diagram-site に topics を同期 → GitHub Pages の反映待ち → Discord 投稿
+#
+# シークレット:
+#   DISCORD_WEBHOOK_URL       … 必須（投稿用）
+#   DIAGRAM_SITE_PUSH_TOKEN   … diagram-site への自動デプロイに必須（contents:write の PAT）
 
 name: Discord 図解配信
 
@@ -16,24 +19,91 @@ on:
         default: ""
         type: string
 
+permissions:
+  contents: read
+
 jobs:
+  sync-diagram-site:
+    runs-on: ubuntu-latest
+    outputs:
+      pushed: ${{ steps.final-push-flag.outputs.pushed }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          path: far
+
+      - name: Check PAT
+        id: pat
+        env:
+          PAT: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+        run: |
+          if [ -n "${PAT}" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::DIAGRAM_SITE_PUSH_TOKEN がありません。diagram-site への同期をスキップします（Pages が古いと URL が 404 のままになります）。"
+          fi
+
+      - uses: actions/checkout@v5
+        if: steps.pat.outputs.ok == 'true'
+        with:
+          repository: haitokutaishi-lgtm/diagram-site
+          token: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          ref: main
+          path: diagram-site
+
+      - name: Sync topics
+        if: steps.pat.outputs.ok == 'true'
+        run: bash far/ops/sync_diagram_site.sh far diagram-site
+
+      - name: Push diagram-site
+        id: push-out
+        if: steps.pat.outputs.ok == 'true'
+        working-directory: diagram-site
+        env:
+          FAR_SHA: ${{ github.sha }}
+          FAR_REPO: ${{ github.repository }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add topics
+          if git diff --cached --quiet; then
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            echo "No topic changes to push."
+          else
+            git commit -m "chore(topics): sync from ${FAR_REPO}@${FAR_SHA:0:7}"
+            git push origin HEAD:main
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Job output — pushed
+        id: final-push-flag
+        if: always()
+        run: |
+          if [ "${{ steps.pat.outputs.ok }}" != "true" ]; then
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.push-out.outputs.pushed }}" = "true" ]; then
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+          fi
+
   post:
+    needs: sync-diagram-site
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
       - name: Post today entry to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           TZ: Asia/Tokyo
+          JOB_PUSHED: ${{ needs.sync-diagram-site.outputs.pushed }}
         run: |
           set -euo pipefail
           FILE="schedule/posts.json"
-          echo "Git SHA: $(git rev-parse HEAD)"
-          echo "GitHub event: ${GITHUB_EVENT_NAME:-}"
+          MANIFEST="ops/diagram-publish-manifest.json"
 
-          # 手動実行の日付はイベント JSON から読む（YAML の式より確実）
           MANUAL=""
           if [ "${GITHUB_EVENT_NAME:-}" = "workflow_dispatch" ] && [ -f "${GITHUB_EVENT_PATH:-}" ]; then
             MANUAL=$(jq -r '.inputs.post_date // empty | if . == null or . == "" then empty else . end' "$GITHUB_EVENT_PATH" || true)
@@ -48,14 +118,11 @@ jobs:
 
           echo "Keys in $FILE (except _comment):"
           jq -r 'keys[] | select(. != "_comment")' "$FILE" || true
-          echo "— need an exact key match for: $TODAY"
 
           if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
             echo "::error::DISCORD_WEBHOOK_URL secret is not set"
             exit 1
           fi
-          WH_HOST=$(echo "$DISCORD_WEBHOOK_URL" | sed -n 's|https://\([^/]*\).*|\1|p')
-          echo "Webhook host (no secret): ${WH_HOST:-unknown}"
 
           # content も付ける → チャンネルに必ず1行は出る（embed 非表示トラブル回避）
           PAYLOAD=$(jq -c --arg d "$TODAY" '
@@ -64,7 +131,7 @@ jobs:
                 empty
               else
                 {
-                  content: ("【図解配信】 " + .title),
+                  content: ("【図解配信】 " + .title + "\n\n参考になった場合はいいね👍でリアクションください！"),
                   embeds: [{
                     title: .title,
                     description: .description,
@@ -76,10 +143,58 @@ jobs:
           ' "$FILE")
 
           if [ -z "$PAYLOAD" ] || [ "$PAYLOAD" = "null" ]; then
-            echo "No post for $TODAY — skipping. Add key \"$TODAY\" to $FILE on branch main, push, then run workflow again."
+            echo "No post for $TODAY — skipping."
             exit 0
           fi
 
+          URL=$(jq -r --arg d "$TODAY" '.[$d].url' "$FILE")
+
+          # diagram-site/topics/<slug>/ のときだけ manifest とソース HTML を必須にする（低価法本体サイトなど外部 URL は smoke のみ）
+          if echo "$URL" | grep -qE 'github\.io/diagram-site/topics/[^/?#]+'; then
+            SLUG=$(echo "$URL" | sed -n 's|.*/topics/\([^/?#]*\).*|\1|p')
+            if [ -z "$SLUG" ]; then
+              echo "::error::diagram-site URL から slug を取れません: $URL"
+              exit 1
+            fi
+            SRC=$(jq -r --arg s "$SLUG" '.[] | select(.slug == $s) | .source' "$MANIFEST" | head -1)
+            if [ -z "$SRC" ] || [ "$SRC" = "null" ]; then
+              echo "::warning::manifest に slug \"$SLUG\" がありません — Discord をスキップ（ops/diagram-publish-manifest.json に追加してください）"
+              exit 0
+            fi
+            if [ ! -f "$SRC" ]; then
+              echo "::warning::ソース HTML がありません: $SRC — Discord をスキップ"
+              exit 0
+            fi
+          else
+            echo "diagram-site 外の公開 URL — manifest チェックをスキップ（HTTP 200 の smoke のみ）"
+          fi
+
+          # 同期ジョブで push した場合は Pages ビルド待ち
+          if [ "${JOB_PUSHED:-false}" = "true" ]; then
+            echo "Waiting for GitHub Pages (sync just pushed)..."
+            sleep 90
+          else
+            sleep 15
+          fi
+
+          ok=""
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            code=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 25 "$URL" || echo "000")
+            if [ "$code" = "200" ]; then
+              ok=1
+              echo "Smoke OK: HTTP $code ($URL)"
+              break
+            fi
+            echo "Smoke retry $i ... HTTP $code"
+            sleep 30
+          done
+          if [ -z "$ok" ]; then
+            echo "::error::Topic URL が 200 になりませんでした: $URL（Pages または PAT 同期を確認）"
+            exit 1
+          fi
+
+          WH_HOST=$(echo "$DISCORD_WEBHOOK_URL" | sed -n 's|https://\([^/]*\).*|\1|p')
+          echo "Webhook host (no secret): ${WH_HOST:-unknown}"
           echo "Payload bytes: ${#PAYLOAD}"
 
           HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \

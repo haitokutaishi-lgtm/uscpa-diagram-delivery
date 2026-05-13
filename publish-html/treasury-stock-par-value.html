@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】自己株式—額面法の取得・消却と APIC — オリジナルMC付き</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .student-bubble { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 2px solid #ea580c; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .coach-bubble { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .mc-card { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem; background: #fafafa; }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: 1rem; margin: 0.75rem 0; color: #334155; font-size: 0.875rem; line-height: 1.65; }
+    .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .avatar-frame svg { flex-shrink: 0; }
+    .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem; }
+    .persona-strip strong { color: #0f172a; }
+    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Equity — <span class="font-bold normal-case">Treasury Stock（額面法）と APIC</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Equity（ASC 505）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">自己株式：<strong>取得時</strong>に <strong>APIC がどう動くか</strong></h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl">発行 → 再取得 → 消却の<strong>仕訳レール</strong>を固定します。試験で典型なのは<strong>額面法で取得したときに元々の溢価（APIC-CS）を剥がす</strong>パターンです。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <p class="font-semibold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="list-tree" class="w-4 h-4"></i> 目次</p>
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">仕訳の流れ</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解けるまで（対話）</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
+      </ul>
+    </nav>
+
+    <section id="worries" class="worries-box">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> よくある悩み</h2>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">treasury を<strong>Dr.</strong> するとき、<strong>APIC とキャッシュ</strong>のどちらが主役か毎回迷う。</p></div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm"><strong>額面法</strong>では取得時に<strong>発行時に計上した APIC（その株に対応する分）</strong>をまず削るイメージ。残りで treasury と現金を調整。</p></div>
+      </div>
+      <div class="worries-inner">
+        <p class="text-sm font-bold mb-2">要点</p>
+        <ul class="text-sm list-disc list-inside space-y-1">
+          <li>消却時：<strong>Common stock は額面×株数</strong>で落とす。</li>
+          <li>取得時：<strong>APIC の減少</strong>が選択肢に出やすい。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
+      <p class="part-lead">額面法の<strong>3ステップ</strong>。</p>
+      <ol class="space-y-4 text-sm">
+        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span><div><p class="font-bold">発行</p><p class="text-slate-600 mt-1">Dr. Cash / Cr. Common Stock（par） / Cr. APIC-CS（溢価）</p></div></li>
+        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span><div><p class="font-bold">再取得（par value method）</p><p class="text-slate-600 mt-1">Dr. Treasury Stock（取得料×株数ではなく設問の型に従う）／Dr. APIC-CS／Cr. Cash 等</p></div></li>
+        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span><div><p class="font-bold">消却</p><p class="text-slate-600 mt-1">Dr. Common Stock（par）／Cr. Treasury Stock — APIC 不足分は設問に応じて RE など（本図解では典型パターンに限定）</p></div></li>
+      </ol>
+    </section>
+
+    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="route" class="w-6 h-6 text-violet-600"></i> 仕訳の流れ（読む順）</h2>
+      <ol class="list-decimal list-inside text-sm text-slate-700 space-y-2">
+        <li>発行時の<strong>par と APIC</strong>をメモ。</li>
+        <li>取得単価と株数から<strong>どの勘定をDr.</strong>するか問題の指示に従う。</li>
+        <li>「APIC がどうなるか」の選択肢なら<strong>取得時</strong>を見る。</li>
+      </ol>
+    </section>
+
+    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまで（対話）</h2>
+      <p class="text-sm text-slate-600 mb-3">先の「<strong>treasury を Dr. するとき、APIC と現金のどちらが主役か迷う</strong>」という悩みに、会話で当てはめます。</p>
+      <div class="persona-strip">
+        <span><strong>受講生</strong>：仕訳の型は暗記したつもりでも、選択肢の言い回しで手が止まる。</span>
+        <span><strong>コーチ</strong>：<strong>発行 → 再取得 → 消却</strong>の順に戻り、いま聞かれているのがどの時点かを決める。</span>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">選択肢に「additional paid-in capital が<strong>減った</strong>」とあったら、どの取引を指していることが多い？</p></div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">多くは<strong>自己株の取得（額面法）</strong>。発行のときは APIC が<strong>増える</strong>ので、「減った」と書いてあるなら<strong>取得か消却のどちらか</strong>を原文で切り分ける。額面法では取得時に発行時の溢価（APIC）を<strong>取り崩す</strong>形が典型だと覚えておく。</p></div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">Dr. が treasury と現金のどちらか、だけ見て決め打ちしそうになる。</p></div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">額面法では<strong>現金で払った額</strong>と<strong>額面ベースの treasury</strong>の差を、まず APIC で吸収するイメージが多い。迷ったら<strong>発行時の仕訳を紙の端に書き直して</strong>、その次の行に取得を足すと整理しやすい。</p></div>
+      </div>
+    </section>
+
+    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6">公開前は <strong>ASC 505</strong> でファクトチェックを。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（仕訳の型）</p>
+        <div class="en-stem mb-4">
+          Fogg, Inc. issued $10 par common stock for <strong>$25</strong> per share (cash). Later it <strong>acquired and retired</strong> some of those shares for <strong>$20</strong> per share using the <strong>par value method</strong>. Which statement is most accurate regarding the <strong>acquisition</strong> entry?
+        </div>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Additional paid-in capital increases.</li>
+          <li><strong>B.</strong> Retained earnings always increases.</li>
+          <li><strong>C.</strong> Additional paid-in capital decreases.</li>
+          <li><strong>D.</strong> Common stock increases.</li>
+        </ul>
+        <details><summary>解説</summary>
+          <div class="mt-3 text-sm border-t pt-3">額面法では取得時に<strong>元の APIC を一部取り崩す</strong>典型があるため <strong>APIC decreases（C）</strong> が妥当。設問の数字・指示に合わせて仕訳を組むこと。</div>
+        </details>
+      </div>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念）</p>
+        <div class="en-stem mb-4">
+          Under the <strong>par value method</strong>, treasury stock is typically recorded at:
+        </div>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> Cost of acquisition without reference to par</li>
+          <li><strong>B.</strong> Par value of the shares (with other accounts adjusting for the difference vs. cash paid)</li>
+          <li><strong>C.</strong> Fair value of the company’s net assets</li>
+          <li><strong>D.</strong> Zero</li>
+        </ul>
+        <details><summary>解説</summary>
+          <div class="mt-3 text-sm border-t pt-3">Par value method の名前どおり<strong>par を基点</strong>に仕訳を組み立て、差額を APIC 等で調整するのが型。<strong>B</strong>。</div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ</h2>
+      <ol class="list-decimal list-inside text-sm text-slate-700 space-y-2">
+        <li>発行・取得・消却を<strong>時間順</strong>で並べる。</li>
+        <li>「APIC decreased」は<strong>取得</strong>を疑う。</li>
+        <li>設問が指定する<strong>method</strong>（par vs cost）を最優先。</li>
+      </ol>
+    </section>
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。</p></footer>
+  </main>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
