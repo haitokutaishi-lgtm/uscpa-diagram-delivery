@@ -74,7 +74,7 @@
     .student-bubble .role-line { color: #c2410c; }
     .coach-bubble .role-line { color: #1d4ed8; }
     .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
-  </style>
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800">
   <header class="header-gradient text-white py-10 px-4">
@@ -95,7 +95,7 @@
         <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
         <li><a href="#reading" class="text-blue-700 hover:underline">問題を読む順番の型</a></li>
         <li><a href="#fork" class="text-blue-700 hover:underline">FIFO と LIFO／売価還元の分岐</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解ける道筋（受講生×コーチ）</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解けるまで（対話）</a></li>
         <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC（オリジナル）</a></li>
         <li><a href="#summary" class="text-blue-700 hover:underline">この図解のまとめ</a></li>
       </ul>
@@ -106,47 +106,39 @@
 
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-sky-50">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
+          <div class="avatar-frame bg-sky-50 overflow-hidden p-0"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
         </div>
         <div class="student-bubble mb-0">
-          <p class="role-line">受講生</p>
+          <p class="role-line">たくま（受講生）</p>
           <p class="text-sm leading-relaxed">在庫の問題、<strong>NRV とか replacement とか用語は覚えた</strong>のに、英文が長いと頭が真っ白になる……。<strong>最初の一文から読んじゃダメ</strong>なの？</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-slate-100">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
-          </div>
-          <span>コーチ</span>
+          <div class="avatar-frame bg-slate-100 overflow-hidden p-0"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
+          <span>あおい先生</span>
         </div>
         <div class="coach-bubble mb-0">
-          <p class="role-line">コーチ</p>
+          <p class="role-line">あおい先生（コーチ）</p>
           <p class="text-sm leading-relaxed">うん、<strong>それいつも思ってるよね</strong>。多くの人が「上から訳す」と詰まる。在庫期末は<strong>評価方法（FIFO か LIFO か）</strong>が決まるまで、数字の扱いが決まらないから。</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-sky-50">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
+          <div class="avatar-frame bg-sky-50 overflow-hidden p-0"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
         </div>
         <div class="student-bubble mb-0">
-          <p class="role-line">受講生</p>
+          <p class="role-line">たくま（受講生）</p>
           <p class="text-sm leading-relaxed">あと、<strong>FIFO と LIFO で「時価」の作り方が違う</strong>のは知ってる。でも問題文の<strong>どの単語で切り替わるか</strong>がまだ曖昧で……。</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-slate-100">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
-          </div>
-          <span>コーチ</span>
+          <div class="avatar-frame bg-slate-100 overflow-hidden p-0"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
+          <span>あおい先生</span>
         </div>
         <div class="coach-bubble mb-0">
-          <p class="role-line">コーチ</p>
+          <p class="role-line">あおい先生（コーチ）</p>
           <p class="text-sm leading-relaxed">そこ、試験では <em>first-in, first-out</em>／<em>LIFO</em>／<em>retail method</em> の<strong>決め台詞</strong>を拾うのが近道。数字が並んでも、<strong>先にレール（LCNRV か LCM）を選ぶ</strong>と計算順が固定できるよ。</p>
         </div>
       </div>
@@ -257,57 +249,50 @@
     </section>
 
     <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまでの道筋（受講生 × コーチ）</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまで（対話）</h2>
+      <p class="text-sm text-slate-600 mb-3">先の「<strong>英文が長いと頭が真っ白</strong>」「<strong>FIFO と LIFO で切り替えが曖昧</strong>」という悩みに、会話で読み方を当てはめます。</p>
       <div class="persona-strip">
-        <span><strong>受講生</strong>：手順をメモに落とす派。</span>
-        <span><strong>コーチ</strong>：会計士風のベテラン。型で解くことを重視。</span>
+        <span><strong>受講生</strong>：用語は覚えたが、長文だとどこから数字を拾うか迷う。</span>
+        <span><strong>コーチ</strong>：先に<strong>FIFO か LIFO か</strong>を決めると、使う式の系統がほぼ決まる。</span>
       </div>
 
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-sky-50">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
+          <div class="avatar-frame bg-sky-50 overflow-hidden p-0"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
         </div>
         <div class="student-bubble mb-0">
-          <p class="role-line">受講生</p>
-          <p class="text-sm leading-relaxed">さっきのサンプル英文、<strong>①で LIFO と分かった瞬間に</strong>、もう計算の型が決まる感じ？</p>
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">サンプル英文の<strong>最初の方で LIFO と分かったら</strong>、あとは表のどの列に数字を並べればいい？</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-slate-100">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
-          </div>
-          <span>コーチ</span>
+          <div class="avatar-frame bg-slate-100 overflow-hidden p-0"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
+          <span>あおい先生</span>
         </div>
         <div class="coach-bubble mb-0">
-          <p class="role-line">コーチ</p>
-          <p class="text-sm leading-relaxed">そう。<strong>LIFO と分かった時点で右側のレール</strong>（market＝median）に乗る。次は②で数字にラベル、③で NRV／floor／replacement を並べるだけ。サンプル表の「当てはめ列」がまさにその動き。</p>
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">LIFO なら多くの問題は<strong>低価法の右側の流れ</strong>（replacement と NRV・floor の関係で market を決める）に乗る。次に、設問が出した数字に<strong>NRV・floor・replacement</strong>のラベルを付けて並べればよい。上の表の「当てはめ」列は、その順番の見本だと思ってほしい。</p>
         </div>
       </div>
 
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-sky-50">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f0f9ff"/><path d="M8 52h40l-4-14H12z" fill="#1e3a8a"/><path d="M24 38l4 6 4-6" fill="#f8fafc"/><rect x="27" y="38" width="2" height="9" fill="#b91c1c"/><rect x="24" y="33" width="8" height="7" rx="1" fill="#fdba74"/><ellipse cx="28" cy="24" rx="11" ry="12" fill="#ffdcb8"/><path d="M17 22c0-10 22-10 22 0v2c-4-6-18-6-22 0z" fill="#18181b"/><circle cx="24" cy="24" r="1.8" fill="#292524"/><circle cx="32" cy="24" r="1.8" fill="#292524"/><path d="M24 29q4 3 8 0" fill="none" stroke="#9a3412" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
+          <div class="avatar-frame bg-sky-50 overflow-hidden p-0"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
         </div>
         <div class="student-bubble mb-0">
-          <p class="role-line">受講生</p>
-          <p class="text-sm leading-relaxed">概念図、左と右で<strong>“別ゲーム”</strong>って言われたのがしっくりきた。迷ったら左に戻って確認する。</p>
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">図の<strong>左（FIFO まわり）と右（LIFO まわり）</strong>が別ルールだと分かると迷いが減った。途中で迷ったらどうする？</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col">
-          <div class="avatar-frame bg-slate-100">
-            <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><rect width="56" height="56" rx="12" fill="#f8fafc"/><path d="M10 52h36l-4-12H14z" fill="#57534e"/><rect x="24" y="40" width="8" height="10" fill="#e7e5e4"/><ellipse cx="28" cy="26" rx="12" ry="13" fill="#deb896"/><path d="M15 26c2-14 26-14 28 0l-2 6c-4-8-20-8-24 0z" fill="#9ca3af"/><rect x="17" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><rect x="31" y="21" width="8" height="6" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/><line x1="25" y1="24" x2="31" y2="24" stroke="#1f2937" stroke-width="1.2"/><path d="M22 31h12" stroke="#57534e" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="24" r="1.3" fill="#292524"/><circle cx="35" cy="24" r="1.3" fill="#292524"/></svg>
-          </div>
-          <span>コーチ</span>
+          <div class="avatar-frame bg-slate-100 overflow-hidden p-0"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div>
+          <span>あおい先生</span>
         </div>
         <div class="coach-bubble mb-0">
-          <p class="role-line">コーチ</p>
-          <p class="text-sm leading-relaxed">それが一番の使いどころ。下のMCは<strong>型の検算</strong>だと思って、左（LCNRV）の問題と右（LCM）の問題で<strong>脳内の回路を分ける</strong>と安定します。</p>
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">いったん<strong>今の問題が FIFO 側か LIFO 側か</strong>に戻る。下の MC も同じで、<strong>同じ系の型かどうか</strong>だけ確認してから計算すると安定する。</p>
         </div>
       </div>
     </section>
