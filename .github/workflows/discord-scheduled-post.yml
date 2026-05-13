@@ -1,4 +1,6 @@
 # 日・水・土 9:00 JST: diagram-site に topics を同期 → GitHub Pages の反映待ち → Discord 投稿
+# diagram-site/topics/… のときは Playwright で本文ブロックを最大4枚キャプチャし、
+# 会話（.dlg-row / .char-bubble 等）を除いた 2x2 コラージュを embed に添付する。
 #
 # シークレット:
 #   DISCORD_WEBHOOK_URL       … 必須（投稿用）
@@ -93,6 +95,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Playwright (diagram collage)
+        run: |
+          pip install -q -r ops/requirements-discord-screenshot.txt
+          playwright install --with-deps chromium
 
       - name: Post today entry to Discord
         env:
@@ -197,10 +208,39 @@ jobs:
           echo "Webhook host (no secret): ${WH_HOST:-unknown}"
           echo "Payload bytes: ${#PAYLOAD}"
 
-          HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
-            -X POST "$DISCORD_WEBHOOK_URL" \
-            -H "Content-Type: application/json; charset=utf-8" \
-            -d "$PAYLOAD")
+          COLLAGE="/tmp/diagram-preview.png"
+          rm -f "$COLLAGE"
+          IS_DIAGRAM=0
+          if echo "$URL" | grep -qE 'github\.io/diagram-site/topics/[^/?#]+'; then
+            IS_DIAGRAM=1
+          fi
+
+          if [ "$IS_DIAGRAM" = "1" ]; then
+            if python ops/screenshot_discord_collage.py --url "$URL" --output "$COLLAGE"; then
+              echo "Collage bytes: $(wc -c < "$COLLAGE" | tr -d ' ')"
+            else
+              echo "::notice::Collage build failed — posting text/embed only"
+              rm -f "$COLLAGE"
+            fi
+          fi
+
+          FN="diagram-preview.png"
+          if [ -f "$COLLAGE" ] && [ "$(wc -c < "$COLLAGE" | tr -d ' ')" -gt 2000 ]; then
+            echo "$PAYLOAD" | jq -c --arg fn "$FN" '
+              .attachments = [{id: 0, filename: $fn}]
+              | .embeds[0] = (.embeds[0] + {image: {url: ("attachment://" + $fn)}})
+            ' > /tmp/discord_payload_att.json
+            HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
+              -X POST "$DISCORD_WEBHOOK_URL" \
+              -H "User-Agent: GitHub-Actions-DiagramPost/1.0" \
+              -F "payload_json=@/tmp/discord_payload_att.json;type=application/json" \
+              -F "files[0]=@${COLLAGE};type=image/png;filename=${FN}")
+          else
+            HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
+              -X POST "$DISCORD_WEBHOOK_URL" \
+              -H "Content-Type: application/json; charset=utf-8" \
+              -d "$PAYLOAD")
+          fi
 
           echo "Discord response body:"
           cat /tmp/discord.out || true
