@@ -28,10 +28,12 @@ except ImportError as e:
 # 会話・導入の対話ブロックをレイアウトから外す（図・MC・用語など本文だけ残す）
 HIDE_DIALOGUE_JS = r"""
 () => {
-  document.querySelectorAll('#intro').forEach((e) => {
-    e.style.setProperty('display', 'none', 'important');
+  ['#intro', '#process'].forEach((sel) => {
+    document.querySelectorAll(sel).forEach((e) => {
+      e.style.setProperty('display', 'none', 'important');
+    });
   });
-  document.querySelectorAll('main .dlg-row').forEach((e) => {
+  document.querySelectorAll('main .dlg-row, main .persona-strip').forEach((e) => {
     e.style.setProperty('display', 'none', 'important');
   });
   document.querySelectorAll('main .flex.items-start.gap-4').forEach((row) => {
@@ -41,6 +43,22 @@ HIDE_DIALOGUE_JS = r"""
   });
 }
 """
+
+SKIP_IDS = frozenset({"intro", "process", "summary"})
+SKIP_HEADING = ("対話", "悩みが解ける")
+# この順で最大4枚（会話セクションは上記で除外）
+PREFERRED_IDS = (
+    "worries",
+    "three",
+    "fork",
+    "reading",
+    "patterns",
+    "group-a",
+    "group-b",
+    "terms",
+    "exam",
+    "mc",
+)
 
 CELL_W = 560
 GAP = 14
@@ -101,33 +119,58 @@ async def capture(url: str, out: Path) -> None:
 
             cards = page.locator("main > div.section-card, main > section")
             n = await cards.count()
-            tmp_paths: list[Path] = []
+            captured: dict[str, Path] = {}
+
+            async def heading_text(el) -> str:
+                h = el.locator("h2").first
+                if await h.count():
+                    return (await h.inner_text()).strip()
+                return ""
+
+            async def should_skip(el, eid: str) -> bool:
+                if eid in SKIP_IDS:
+                    return True
+                ht = await heading_text(el)
+                return any(s in ht for s in SKIP_HEADING)
+
             for i in range(n):
                 el = cards.nth(i)
                 if not await el.is_visible():
                     continue
                 eid = await el.evaluate("el => el.id || ''")
-                if eid == "intro":
+                if await should_skip(el, eid):
                     continue
                 box = await el.bounding_box()
-                if not box or box["height"] < 100:
+                if not box or box["height"] < 120:
                     continue
-                pth = Path(f"/tmp/_discord_cap_{i}.png")
+                key = eid or f"_idx{i}"
+                if key in captured:
+                    continue
+                pth = Path(f"/tmp/_discord_cap_{key}.png")
                 await el.screenshot(path=str(pth), type="png")
                 if pth.stat().st_size < 800:
                     pth.unlink(missing_ok=True)
                     continue
-                tmp_paths.append(pth)
-                if len(tmp_paths) >= 4:
-                    break
+                captured[key] = pth
 
-            if not tmp_paths:
+            if not captured:
                 raise RuntimeError("no sections captured")
 
-            while len(tmp_paths) < 4:
-                tmp_paths.append(tmp_paths[-1])
+            ordered: list[Path] = []
+            for pid in PREFERRED_IDS:
+                if pid in captured:
+                    ordered.append(captured.pop(pid))
+                if len(ordered) >= 4:
+                    break
+            for key in sorted(captured.keys()):
+                ordered.append(captured[key])
+                if len(ordered) >= 4:
+                    break
+            ordered = ordered[:4]
+            while len(ordered) < 4:
+                ordered.append(ordered[-1])
 
-            compose_grid(tmp_paths[:4], out)
+            compose_grid(ordered, out)
         finally:
             await browser.close()
 

@@ -224,30 +224,14 @@ jobs:
             fi
           fi
 
-          FN="diagram-preview.png"
+          echo "$PAYLOAD" > /tmp/discord_payload.json
+          IMG_ARG=""
           if [ -f "$COLLAGE" ] && [ "$(wc -c < "$COLLAGE" | tr -d ' ')" -gt 2000 ]; then
-            echo "$PAYLOAD" | jq -c --arg fn "$FN" '
-              .attachments = [{id: 0, filename: $fn}]
-              | .embeds[0] = (.embeds[0] + {image: {url: ("attachment://" + $fn)}})
-            ' > /tmp/discord_payload_att.json
-            HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
-              -X POST "$DISCORD_WEBHOOK_URL" \
-              -H "User-Agent: GitHub-Actions-DiagramPost/1.0" \
-              -F "payload_json=@/tmp/discord_payload_att.json;type=application/json" \
-              -F "files[0]=@${COLLAGE};type=image/png;filename=${FN}")
-          else
-            HTTP=$(curl -sS -o /tmp/discord.out -w "%{http_code}" \
-              -X POST "$DISCORD_WEBHOOK_URL" \
-              -H "Content-Type: application/json; charset=utf-8" \
-              -d "$PAYLOAD")
+            IMG_ARG="--image $COLLAGE"
+            echo "Collage attached via requests (file= field, not files[0])"
           fi
-
-          echo "Discord response body:"
-          cat /tmp/discord.out || true
-          echo ""
-
-          if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
-            echo "::error::Discord API HTTP $HTTP"
-            exit 1
-          fi
-          echo "OK Posted for $TODAY (HTTP $HTTP)"
+          python ops/discord_webhook_post.py \
+            --webhook-url "$DISCORD_WEBHOOK_URL" \
+            --payload-json /tmp/discord_payload.json \
+            $IMG_ARG
+          echo "OK Posted for $TODAY"
