@@ -53,12 +53,11 @@ BUILD_VISUAL_PREVIEW_JS = r"""
   root.id = 'discord-stitch-preview';
   root.style.cssText =
     'position:absolute;left:0;top:0;z-index:99999;background:#fff;' +
-    'padding:16px 20px;max-width:780px;box-sizing:border-box;' +
+    'padding:6px 8px;max-width:720px;box-sizing:border-box;' +
     'font-family:\"Noto Sans JP\",sans-serif';
 
   const visualSel = [
     '.diagram-visual',
-    'svg[viewBox]',
     '.reflow-root',
     '.bar-split',
     '.cl-bar-split',
@@ -66,30 +65,39 @@ BUILD_VISUAL_PREVIEW_JS = r"""
     '.grid.md\\:grid-cols-3',
     '.flex.flex-col.items-center.gap-1',
     '.flex.flex-col.items-center.gap-2',
-    '.flex.flex-col.md\\:flex-row',
   ].join(',');
 
   for (const spec of specs) {
     const sec = document.getElementById(spec.id);
     if (!sec) continue;
     const wrap = document.createElement('div');
-    wrap.style.marginBottom = '18px';
+    wrap.style.marginBottom = '10px';
     const h = sec.querySelector('h2');
-    if (h) {
+    if (h && spec.id !== 'fork') {
       const ht = document.createElement('div');
-      ht.style.cssText = 'font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:10px;display:flex;align-items:center;gap:8px';
+      ht.style.cssText = 'font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:6px';
       ht.textContent = h.textContent.trim();
       wrap.appendChild(ht);
     }
-  let nodes = sec.querySelectorAll(visualSel);
-  if (!nodes.length && spec.fallbackWhole) {
+    let nodes = sec.querySelectorAll(visualSel);
+    if (spec.id === 'fork') {
+      nodes = sec.querySelectorAll('.diagram-visual--flow');
+    }
+    if (!nodes.length && spec.fallbackWhole) {
       const clone = sec.cloneNode(true);
       clone.querySelectorAll('.dlg-row,.persona-strip,.part-lead,p.text-sm.text-slate-600').forEach((e) => e.remove());
       wrap.appendChild(clone);
     } else {
       nodes.forEach((n) => {
         if (n.closest('.dlg-row')) return;
-        wrap.appendChild(n.cloneNode(true));
+        const c = n.cloneNode(true);
+        c.querySelectorAll('.diagram-visual--flow, .diagram-visual').forEach((dv) => {
+          dv.style.padding = '4px 6px';
+          dv.style.margin = '0';
+          const cap = dv.querySelector(':scope > p');
+          if (cap && cap.classList.contains('text-center')) cap.style.marginBottom = '2px';
+        });
+        wrap.appendChild(c);
       });
       if (spec.includePatternBars) {
         sec.querySelectorAll('.pattern-bar').forEach((n) => {
@@ -102,7 +110,8 @@ BUILD_VISUAL_PREVIEW_JS = r"""
         });
       }
     }
-    if (wrap.childNodes.length > (h ? 1 : 0)) root.appendChild(wrap);
+    const hasTitle = h && spec.id !== 'fork';
+    if (wrap.childNodes.length > (hasTitle ? 1 : 0)) root.appendChild(wrap);
   }
   document.body.appendChild(root);
   return root.scrollHeight;
@@ -132,6 +141,42 @@ CELL_W = 680
 GAP = 16
 MAX_CELL_H = 920
 MIN_PANEL_H = 120
+TRIM_THRESHOLD = 248
+TRIM_MARGIN = 2
+
+
+def _trim_whitespace(im: Image.Image) -> Image.Image:
+    """白〜近白の余白を四辺から切り落とす（フローチャートのキャプチャ用）。"""
+    im = im.convert("RGB")
+    w, h = im.size
+    if w < 2 or h < 2:
+        return im
+    pix = im.load()
+
+    def content(px: int, py: int) -> bool:
+        r, g, b = pix[px, py]
+        return r < TRIM_THRESHOLD or g < TRIM_THRESHOLD or b < TRIM_THRESHOLD
+
+    top = 0
+    while top < h and not any(content(x, top) for x in range(w)):
+        top += 1
+    bottom = h - 1
+    while bottom >= top and not any(content(x, bottom) for x in range(w)):
+        bottom -= 1
+    left = 0
+    while left < w and not any(content(left, y) for y in range(top, bottom + 1)):
+        left += 1
+    right = w - 1
+    while right >= left and not any(content(right, y) for y in range(top, bottom + 1)):
+        right -= 1
+    if left >= right or top >= bottom:
+        return im
+    m = TRIM_MARGIN
+    left = max(0, left - m)
+    top = max(0, top - m)
+    right = min(w - 1, right + m)
+    bottom = min(h - 1, bottom + m)
+    return im.crop((left, top, right + 1, bottom + 1))
 
 
 def _resize_cell(im: Image.Image) -> Image.Image:
@@ -149,7 +194,7 @@ def _resize_cell(im: Image.Image) -> Image.Image:
 def compose_grid(paths: list[Path], out: Path) -> None:
     if len(paths) < 1:
         raise ValueError("no shots")
-    imgs = [_resize_cell(Image.open(p).convert("RGB")) for p in paths]
+    imgs = [_resize_cell(_trim_whitespace(Image.open(p))) for p in paths]
     while len(imgs) < 4:
         imgs.append(imgs[-1].copy())
     imgs = imgs[:4]
