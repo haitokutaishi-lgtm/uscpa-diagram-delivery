@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-図解ページ（GitHub Pages）を開き、会話パートを除いた本文を最大4枚キャプチャして
+図解ページ（GitHub Pages）を開き、会話を除いた**ビジュアル中心**のブロックを最大4枚キャプチャし
 2x2 の 1枚 PNG に合成する。Discord Webhook 用。
 
-会話（.dlg-row / .char-bubble）は非表示。薄い「読む順」だけのセクションは
-「まず覚える3つ」と縦に結合して1コマにする。
+優先: SVGフロー / pattern-bar / 分岐図 / 3パターン格子 など。
+テキストだけのセクション（悩み・まとめ）はビジュアルが無いページでのみフォールバック。
 """
 from __future__ import annotations
 
@@ -45,25 +45,67 @@ PREPARE_PAGE_JS = r"""
 }
 """
 
-STITCH_IDS_JS = r"""
-(ids) => {
+# セクション内の「図」だけを抜き出してプレビュー用 DOM に載せる
+BUILD_VISUAL_PREVIEW_JS = r"""
+(specs) => {
   document.getElementById('discord-stitch-preview')?.remove();
-  const box = document.createElement('div');
-  box.id = 'discord-stitch-preview';
-  box.style.cssText =
+  const root = document.createElement('div');
+  root.id = 'discord-stitch-preview';
+  root.style.cssText =
     'position:absolute;left:0;top:0;z-index:99999;background:#fff;' +
-    'padding:20px 24px;max-width:760px;box-sizing:border-box;' +
+    'padding:16px 20px;max-width:780px;box-sizing:border-box;' +
     'font-family:\"Noto Sans JP\",sans-serif';
-  ids.forEach((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+
+  const visualSel = [
+    '.diagram-visual',
+    'svg[viewBox]',
+    '.reflow-root',
+    '.bar-split',
+    '.cl-bar-split',
+    '.grid.md\\:grid-cols-2',
+    '.grid.md\\:grid-cols-3',
+    '.flex.flex-col.items-center.gap-1',
+    '.flex.flex-col.items-center.gap-2',
+    '.flex.flex-col.md\\:flex-row',
+  ].join(',');
+
+  for (const spec of specs) {
+    const sec = document.getElementById(spec.id);
+    if (!sec) continue;
     const wrap = document.createElement('div');
-    wrap.style.marginBottom = '20px';
-    wrap.appendChild(el.cloneNode(true));
-    box.appendChild(wrap);
-  });
-  document.body.appendChild(box);
-  return box.scrollHeight;
+    wrap.style.marginBottom = '18px';
+    const h = sec.querySelector('h2');
+    if (h) {
+      const ht = document.createElement('div');
+      ht.style.cssText = 'font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:10px;display:flex;align-items:center;gap:8px';
+      ht.textContent = h.textContent.trim();
+      wrap.appendChild(ht);
+    }
+  let nodes = sec.querySelectorAll(visualSel);
+  if (!nodes.length && spec.fallbackWhole) {
+      const clone = sec.cloneNode(true);
+      clone.querySelectorAll('.dlg-row,.persona-strip,.part-lead,p.text-sm.text-slate-600').forEach((e) => e.remove());
+      wrap.appendChild(clone);
+    } else {
+      nodes.forEach((n) => {
+        if (n.closest('.dlg-row')) return;
+        wrap.appendChild(n.cloneNode(true));
+      });
+      if (spec.includePatternBars) {
+        sec.querySelectorAll('.pattern-bar').forEach((n) => {
+          if (!wrap.contains(n) && !Array.from(wrap.querySelectorAll('.pattern-bar')).some((x) => x.textContent === n.textContent)) {
+            const p = n.parentElement?.classList?.contains('space-y-2')
+              ? n.parentElement.cloneNode(true)
+              : n.cloneNode(true);
+            if (p.classList?.contains('space-y-2')) wrap.appendChild(p);
+          }
+        });
+      }
+    }
+    if (wrap.childNodes.length > (h ? 1 : 0)) root.appendChild(wrap);
+  }
+  document.body.appendChild(root);
+  return root.scrollHeight;
 }
 """
 
@@ -71,28 +113,25 @@ REMOVE_STITCH_JS = r"""
 () => { document.getElementById('discord-stitch-preview')?.remove(); }
 """
 
+# ビジュアルキャプチャの優先順（図解セクション）
+VISUAL_PANEL_SPECS = [
+    {"id": "fork", "fallbackWhole": False, "includePatternBars": False},
+    {"id": "patterns", "fallbackWhole": False, "includePatternBars": True},
+    {"id": "group-b", "fallbackWhole": False, "includePatternBars": True},
+    {"id": "group-a", "fallbackWhole": False, "includePatternBars": False},
+    {"id": "terms", "fallbackWhole": True, "includePatternBars": False},
+]
+
+# 図が無いページ用フォールバック
+TEXT_FALLBACK_IDS = ("worries", "three", "reading", "mc", "summary")
+
 SKIP_IDS = frozenset({"intro", "process"})
 SKIP_HEADING = ("対話", "悩みが解ける")
-# 単体キャプチャの優先順（厚いブロックを先に）
-SOLO_PRIORITY = (
-    "worries",
-    "three",
-    "fork",
-    "patterns",
-    "group-a",
-    "group-b",
-    "terms",
-    "exam",
-    "mc",
-    "summary",
-    "reading",
-)
 
 CELL_W = 680
 GAP = 16
 MAX_CELL_H = 920
-MIN_PANEL_H = 140
-READING_STITCH_MAX_H = 420
+MIN_PANEL_H = 120
 
 
 def _resize_cell(im: Image.Image) -> Image.Image:
@@ -103,8 +142,7 @@ def _resize_cell(im: Image.Image) -> Image.Image:
     if h > MAX_CELL_H:
         scale2 = MAX_CELL_H / im.height
         w2 = max(1, int(im.width * scale2))
-        h2 = MAX_CELL_H
-        return im.resize((w2, h2), Image.Resampling.LANCZOS)
+        return im.resize((w2, MAX_CELL_H), Image.Resampling.LANCZOS)
     return im.resize((CELL_W, h), Image.Resampling.LANCZOS)
 
 
@@ -134,6 +172,27 @@ def compose_grid(paths: list[Path], out: Path) -> None:
     canvas.save(out, "PNG", optimize=True)
 
 
+SCORE_VISUAL_JS = r"""
+() => {
+  const ids = ['fork','patterns','group-a','group-b','terms','exam','three','worries','mc','summary'];
+  const score = (el) => {
+    if (!el) return 0;
+    let s = 0;
+    if (el.querySelector('svg[viewBox]')) s += 50;
+    if (el.querySelectorAll('.pattern-bar').length) s += 30 + el.querySelectorAll('.pattern-bar').length * 4;
+    if (el.querySelector('.reflow-root, .bar-split, .cl-bar-split, .diagram-visual')) s += 25;
+    if (el.querySelector('.grid.md\\:grid-cols-2, .grid.md\\:grid-cols-3')) s += 15;
+    if (el.dataset.diagram) s += 20;
+    return s;
+  };
+  return Object.fromEntries(ids.map((id) => {
+    const el = document.getElementById(id);
+    return [id, score(el)];
+  }));
+}
+"""
+
+
 async def capture(url: str, out: Path) -> None:
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -145,109 +204,90 @@ async def capture(url: str, out: Path) -> None:
             await page.goto(url, wait_until="networkidle", timeout=120_000)
             await page.wait_for_timeout(2800)
             await page.evaluate(PREPARE_PAGE_JS)
-            await page.wait_for_timeout(500)
+            await page.wait_for_timeout(600)
 
-            cards = page.locator("main > div.section-card, main > section")
-            n = await cards.count()
-            meta: dict[str, dict] = {}
-
-            async def heading_text(el) -> str:
-                h = el.locator("h2").first
-                if await h.count():
-                    return (await h.inner_text()).strip()
-                return ""
-
-            for i in range(n):
-                el = cards.nth(i)
-                if not await el.is_visible():
-                    continue
-                eid = await el.evaluate("el => el.id || ''")
-                if eid in SKIP_IDS:
-                    continue
-                ht = await heading_text(el)
-                if any(s in ht for s in SKIP_HEADING):
-                    continue
-                box = await el.bounding_box()
-                if not box or box["height"] < MIN_PANEL_H:
-                    continue
-                meta[eid or f"_idx{i}"] = {"el": el, "height": box["height"]}
-
+            scores: dict[str, int] = await page.evaluate(SCORE_VISUAL_JS)
             shots: dict[str, Path] = {}
-            tmp_i = 0
 
-            async def shot_element(el, key: str) -> None:
-                nonlocal tmp_i
-                pth = Path(f"/tmp/_discord_cap_{key}.png")
-                await el.screenshot(path=str(pth), type="png")
-                if pth.stat().st_size >= 1200:
-                    shots[key] = pth
-                    tmp_i += 1
-
-            async def shot_stitch(ids: list[str], key: str) -> None:
-                h = await page.evaluate(STITCH_IDS_JS, ids)
+            async def shot_preview(specs: list[dict], key: str) -> bool:
+                h = await page.evaluate(BUILD_VISUAL_PREVIEW_JS, specs)
                 if not h or h < MIN_PANEL_H:
                     await page.evaluate(REMOVE_STITCH_JS)
-                    return
+                    return False
                 loc = page.locator("#discord-stitch-preview")
                 pth = Path(f"/tmp/_discord_cap_{key}.png")
                 await loc.screenshot(path=str(pth), type="png")
                 await page.evaluate(REMOVE_STITCH_JS)
                 if pth.stat().st_size >= 1200:
                     shots[key] = pth
+                    return True
+                return False
 
-            # 1) よくある悩み：要点ボックス中心（会話は既に非表示）
-            if "worries" in meta:
-                inner = page.locator("#worries .worries-inner")
-                if await inner.count() and await inner.is_visible():
-                    h2 = page.locator("#worries > h2").first
-                    if await h2.count():
-                        await shot_stitch(["worries"], "worries")
-                    else:
-                        await shot_element(meta["worries"]["el"], "worries")
-                else:
-                    await shot_element(meta["worries"]["el"], "worries")
-
-            # 2) まず覚える3つ + 読む順（薄いページは結合）
-            reading_h = meta.get("reading", {}).get("height", 0) if "reading" in meta else 0
-            if "three" in meta and "reading" in meta and reading_h < READING_STITCH_MAX_H:
-                await shot_stitch(["three", "reading"], "three-reading")
-            elif "three" in meta:
-                await shot_element(meta["three"]["el"], "three")
-
-            # 3–4) 分岐・パターン・MC など厚いブロック
-            for pid in SOLO_PRIORITY:
-                if pid in ("worries", "three", "reading"):
-                    continue
-                if pid in shots or pid not in meta:
-                    continue
-                await shot_element(meta[pid]["el"], pid)
+            # 1) 図解セクションを1コマずつ（スコア順）
+            ranked = sorted(
+                [s for s in VISUAL_PANEL_SPECS if scores.get(s["id"], 0) > 0],
+                key=lambda s: scores.get(s["id"], 0),
+                reverse=True,
+            )
+            for spec in ranked:
                 if len(shots) >= 4:
                     break
+                await shot_preview([spec], spec["id"])
 
-            # まだ足りなければ reading / three を単体で
-            for pid in ("reading", "three", "summary"):
-                if len(shots) >= 4:
-                    break
-                if pid in meta and pid not in shots:
-                    await shot_element(meta[pid]["el"], pid)
+            # 2) まだ足りなければ fork+patterns を1コマに結合
+            if len(shots) < 4 and scores.get("fork", 0) and scores.get("patterns", 0):
+                if "fork-patterns" not in shots:
+                    specs = [s for s in VISUAL_PANEL_SPECS if s["id"] in ("fork", "patterns")]
+                    await shot_preview(specs, "fork-patterns")
+
+            # 3) MC（問題文＋選択肢）— 図が少ないページの主役
+            if len(shots) < 4:
+                mc = page.locator("#mc")
+                if await mc.count():
+                    first = mc.locator(".mc-card").first
+                    if await first.count():
+                        pth = Path("/tmp/_discord_cap_mc.png")
+                        await first.screenshot(path=str(pth), type="png")
+                        if pth.stat().st_size >= 1200:
+                            shots["mc"] = pth
+
+            # 4) テキストフォールバック（図がほぼ無い旧ページ）
+            if len(shots) < 2:
+                cards = page.locator("main > div.section-card, main > section")
+                n = await cards.count()
+                for i in range(n):
+                    if len(shots) >= 4:
+                        break
+                    el = cards.nth(i)
+                    eid = await el.evaluate("el => el.id || ''")
+                    if eid in SKIP_IDS or eid in shots or eid not in TEXT_FALLBACK_IDS:
+                        continue
+                    ht = await el.locator("h2").first.inner_text() if await el.locator("h2").count() else ""
+                    if any(s in ht for s in SKIP_HEADING):
+                        continue
+                    box = await el.bounding_box()
+                    if not box or box["height"] < MIN_PANEL_H:
+                        continue
+                    pth = Path(f"/tmp/_discord_cap_{eid or i}.png")
+                    await el.screenshot(path=str(pth), type="png")
+                    if pth.stat().st_size >= 1200:
+                        shots[eid or f"_{i}"] = pth
 
             if not shots:
                 raise RuntimeError("no sections captured")
 
-            # 表示順を固定
             order_keys = [
-                "worries",
-                "three-reading",
-                "three",
                 "fork",
                 "patterns",
-                "group-a",
+                "fork-patterns",
                 "group-b",
+                "group-a",
                 "terms",
                 "exam",
                 "mc",
+                "worries",
+                "three",
                 "summary",
-                "reading",
             ]
             ordered: list[Path] = []
             for k in order_keys:
@@ -260,10 +300,7 @@ async def capture(url: str, out: Path) -> None:
                     ordered.append(p)
                 if len(ordered) >= 4:
                     break
-            ordered = ordered[:4]
-            while len(ordered) < 4:
-                ordered.append(ordered[-1])
-
+            ordered = (ordered + [ordered[-1]] * 4)[:4]
             compose_grid(ordered, out)
         finally:
             await browser.close()
