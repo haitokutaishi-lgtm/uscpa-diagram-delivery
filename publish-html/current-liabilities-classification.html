@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【図解】流動負債の区分—試算表から current を積み上げる — オリジナルMC付き</title>
+  <title>【図解】current liabilities の区分—trial balance から積み上げ — オリジナルMC付き</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -42,10 +42,10 @@
 <body class="bg-slate-50 text-slate-800">
   <header class="header-gradient text-white py-10 px-4">
     <div class="max-w-3xl mx-auto">
-      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：BS の区分 — <span class="font-bold normal-case">流動負債に含める金額の積み上げ</span></p>
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：BS の区分 — <span class="font-bold normal-case">total current liabilities の積み上げ</span></p>
       <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Presentation（ASC 210 ほか）</p>
-      <h1 class="text-2xl md:text-3xl font-bold leading-snug">試算表から<strong class="font-semibold">流動負債セクション</strong>へ — 社債・割引・配当の落ちどころ</h1>
-      <p class="mt-3 text-sm opacity-95 max-w-2xl">一年内に<strong>支払義務が確定している／満期が一年内</strong>などの勘定を拾い、<strong>社債割引は控除</strong>して net で載せる型を固定します。問題・解説は<strong>オリジナル</strong>です。</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">trial balance から <strong class="font-semibold">current liabilities</strong> へ — bonds payable・discount・dividends payable</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl">一年内に<strong>支払義務が確定している／満期が一年内</strong>などの勘定を拾い、<strong>discount on bonds payable</strong> は face から控除して <strong>net carrying amount</strong> で載せる型を固定します。問題・解説は<strong>オリジナル</strong>です。</p>
     </div>
   </header>
 
@@ -70,24 +70,24 @@
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed"><strong>Notes payable</strong> は満期が来年以降なのに、同じ試算表に <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が並ぶと、「ノートも社債も全部 current に入れるの？」と頭がこんがらがる。行ごとに足していいのか、セットで見るのかもはっきりしない。</p>
+          <p class="text-sm leading-relaxed"><strong>Notes payable</strong> は満期が来年以降なのに、同じ trial balance に <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が並ぶと、「notes payable も bonds payable も全部 current liabilities に入れるの？」と頭がこんがらがる。行ごとに足していいのか、セットで見るのかもはっきりしない。</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="coach-bubble mb-0">
           <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">まず勘定ごとに、「<strong>決算日から見て一年内に、支払いや満期で現金が動く義務があるか</strong>」で仕分けると整理しやすいよ。<strong>Notes payable</strong> が翌期以降の満期なら、題意が<strong>合計流動負債</strong>ならその輪には<strong>最初から入れない</strong>。<strong>社債と割引</strong>は二行に分かれていても、イメージは<strong>一枚の負債</strong>で、表面額から discount を控除した<strong>net（帳簿価額）</strong>が載る金額。一年内に満期する社債なら、その net を流動に数える、という順番にすると取り違えにくい。</p>
+          <p class="text-sm leading-relaxed">まず勘定ごとに、「<strong>決算日から見て一年内に、支払いや満期で現金が動く義務があるか</strong>」で仕分けると整理しやすいよ。<strong>Notes payable</strong> が翌期以降の満期なら、題意が <strong>total current liabilities</strong> なら<strong>最初から除外</strong>。<strong>Bonds payable</strong> と <strong>discount on bonds payable</strong> は二行に分かれていても、イメージは<strong>一枚の負債</strong>で、<strong>face amount</strong> から discount を控除した <strong>net carrying amount</strong> が載る金額。一年内に満期する bonds payable なら、その net を current liabilities に数える、という順番にすると取り違えにくい。</p>
         </div>
       </div>
       <div class="worries-inner">
         <p class="text-sm font-bold text-amber-950 mb-2">要点ボックス</p>
         <ul class="text-sm text-slate-800 space-y-2 list-disc list-inside">
-          <li>流動負債に足すのは、<strong>一年内に決済する見込みの義務</strong>に該当するものだけ。</li>
-          <li>試算表では <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が別行でも、流動に載せる額を考えるときは<strong>相殺して net</strong>（社債の carrying amount）で一枚にまとめる。</li>
-          <li><strong>Notes payable</strong> が決算日から一年内に<strong>満期しない</strong>なら、「合計 current」の計算からは<strong>除外</strong>（設問が別に聞いていない限り）。</li>
-          <li><strong>Dividends payable</strong> は、宣言済みで<strong>一年内に支払う</strong>タイプなら、典型問題では流動に含めることが多い。</li>
-          <li>最後に、問題が求めているのが<strong>合計</strong>か<strong>個別の区分</strong>かを一文で確認し、長期項目を二重に足していないかだけチェック。</li>
+          <li><strong>Current liabilities</strong> に足すのは、<strong>一年内に決済する見込みの義務</strong>に該当するものだけ。</li>
+          <li>trial balance では <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が別行でも、current に載せる額は<strong>相殺して net carrying amount</strong>で一枚にまとめる。</li>
+          <li><strong>Notes payable</strong> が決算日から一年内に<strong>満期しない</strong>なら、<strong>total current liabilities</strong> の計算からは<strong>除外</strong>（設問が別に聞いていない限り）。</li>
+          <li><strong>Dividends payable</strong> は、宣言済みで<strong>一年内に支払う</strong>タイプなら、典型問題では current liabilities に含めることが多い。</li>
+          <li>最後に、問題が求めているのが<strong>合計</strong>か<strong>個別の区分</strong>かを一文で確認し、<strong>noncurrent</strong> 項目を二重に足していないかだけチェック。</li>
         </ul>
       </div>
     </section>
@@ -96,9 +96,9 @@
       <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
       <p class="part-lead"><strong>このパートの役割：</strong>勘定科目ごとに「current に載せる？」を<strong>機械的に</strong>振り分けるための最低限。</p>
       <ol class="space-y-4 text-sm">
-        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span><div><p class="font-bold text-slate-900">満期・支払時期が一年内か</p><p class="text-slate-600 mt-1">社債・ノート・割引は<strong>セットで</strong>見て net を current に載せるか判断。</p></div></li>
-        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span><div><p class="font-bold text-slate-900">Discount は「プラスの負債」を減らす</p><p class="text-slate-600 mt-1">表面の bonds から discount を<strong>引いた残額</strong>が負債の記載イメージ。</p></div></li>
-        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span><div><p class="font-bold text-slate-900">長期に振れるものは current 合計から除外</p><p class="text-slate-600 mt-1">問題が<strong>current の合計</strong>を問うなら、長期項目は足し込まない。</p></div></li>
+        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">1</span><div><p class="font-bold text-slate-900">満期・支払時期が一年内か</p><p class="text-slate-600 mt-1">bonds payable・notes payable・discount on bonds payable は<strong>セットで</strong>見て net を current liabilities に載せるか判断。</p></div></li>
+        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</span><div><p class="font-bold text-slate-900">Discount on bonds payable は負債を減らす</p><p class="text-slate-600 mt-1">bonds payable の <strong>face amount</strong> から discount を<strong>引いた carrying amount</strong>が BS イメージ。</p></div></li>
+        <li class="flex gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">3</span><div><p class="font-bold text-slate-900">noncurrent は total current から除外</p><p class="text-slate-600 mt-1">問題が <strong>total current liabilities</strong> を問うなら、long-term notes payable などは足し込まない。</p></div></li>
       </ol>
     </section>
 
@@ -108,36 +108,36 @@
         <li>問題が求めるのは <strong>current の合計</strong>か、個別区分かを確認。</li>
         <li>各勘定について<strong>一年内義務</strong>にチェック。</li>
         <li>Bonds と discount を<strong>ペア</strong>で net 化。</li>
-        <li>残りを流動負債の合計に足す。</li>
+        <li>残りを total current liabilities に足す。</li>
       </ol>
     </section>
 
     <section id="fork" class="diagram-panel bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8" data-diagram="fork">
       <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="git-branch" class="w-6 h-6 text-indigo-600"></i> 区分の見え方（本題の図解）</h2>
-      <p class="part-lead"><strong>このパートの役割：</strong>試算表の行を<strong>そのまま足さない</strong>。まず「一年内か」、社債は「net 一枚」、長期ノートは<strong>輪の外</strong>——この順で頭に置く地図です。</p>
+      <p class="part-lead"><strong>このパートの役割：</strong>trial balance の行を<strong>そのまま足さない</strong>。まず「一年内か」、bonds payable は net 一枚、long-term notes payable は <strong>current から除外</strong>——この順で頭に置く地図です。</p>
 
-      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="流動負債の積み上げ: 試算表の各行を一年内かで仕分け、社債は net で一枚、合計に足す。">
+      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="Current liabilities: trial balance 各行を一年内かで仕分け、bonds payable は net で一枚、合計に足す。">
         <p class="text-[0.65rem] font-bold text-indigo-900 mb-1 text-center leading-tight">フローチャート（試験で頭に置く一本道）</p>
         <svg viewBox="44 2 392 288" preserveAspectRatio="xMidYMid meet" class="h-auto block" aria-hidden="true" style="font-family: 'Noto Sans JP', system-ui, sans-serif;">
           <defs><marker id="cl-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#64748b"/></marker></defs>
           <rect x="50" y="6" width="380" height="40" rx="10" fill="#fff" stroke="#334155" stroke-width="1.5"/>
-          <text x="240" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">① 試算表の行を拾う（AP・Bonds・Discount・Dividends・Notes…）</text>
+          <text x="240" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">① trial balance の行（AP・bonds payable・discount・dividends payable・notes payable…）</text>
           <text x="240" y="38" text-anchor="middle" font-size="9" fill="#475569">設問が聞いているのは total current か個別区分かを先に確認</text>
           <rect x="70" y="56" width="340" height="44" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
           <text x="240" y="74" text-anchor="middle" font-size="11" font-weight="700" fill="#78350f">② 一年内に満期・支払う義務か？</text>
           <text x="240" y="90" text-anchor="middle" font-size="9" fill="#57534e">No → current 合計から除外（例：Notes due 20x3）</text>
           <rect x="45" y="110" width="190" height="52" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
           <text x="140" y="130" text-anchor="middle" font-size="10" font-weight="700" fill="#064e3b">Yes → 足す候補</text>
-          <text x="140" y="148" text-anchor="middle" font-size="9" fill="#166534">AP・配当・一年内社債…</text>
+          <text x="140" y="148" text-anchor="middle" font-size="9" fill="#166534">AP・dividends payable・bonds payable（一年内）…</text>
           <rect x="245" y="110" width="190" height="52" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-          <text x="340" y="130" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">No → 輪の外</text>
-          <text x="340" y="148" text-anchor="middle" font-size="9" fill="#64748b">長期 Notes など</text>
+          <text x="340" y="130" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">No → exclude from current</text>
+          <text x="340" y="148" text-anchor="middle" font-size="9" fill="#64748b">long-term notes payable など</text>
           <rect x="55" y="172" width="370" height="48" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
           <text x="240" y="192" text-anchor="middle" font-size="11" font-weight="700" fill="#1e1b4b">③ Bonds ＋ Discount は net で一枚</text>
           <text x="240" y="208" text-anchor="middle" font-size="10" fill="#4338ca">Carrying ＝ Face − Discount（二行を別々に足さない）</text>
           <rect x="80" y="230" width="320" height="58" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
           <text x="240" y="252" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">④ Current 合計 ＝ ②で Yes の行だけ（net 済み）</text>
-          <text x="240" y="272" text-anchor="middle" font-size="9.5" fill="#166534">二重計上・長期の混入がないか最後にチェック</text>
+          <text x="240" y="272" text-anchor="middle" font-size="9.5" fill="#166534">二重計上・noncurrent の混入がないか最後にチェック</text>
           <line x1="240" y1="46" x2="240" y2="56" stroke="#64748b" stroke-width="1.8" marker-end="url(#cl-arrow)"/>
           <line x1="240" y1="100" x2="140" y2="110" stroke="#64748b" stroke-width="1.8" marker-end="url(#cl-arrow)"/>
           <line x1="240" y1="100" x2="340" y2="110" stroke="#64748b" stroke-width="1.8" marker-end="url(#cl-arrow)"/>
@@ -149,25 +149,25 @@
       <div class="flex flex-col md:flex-row gap-3 mt-4">
         <div class="flex-1 rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4 text-center">
           <i data-lucide="circle-check" class="w-8 h-8 text-emerald-700 mx-auto mb-1"></i>
-          <p class="font-bold text-emerald-900 text-sm">足す側</p>
-          <p class="text-xs text-slate-600 mt-1">一年内の義務・社債は <strong>net</strong></p>
+          <p class="font-bold text-emerald-900 text-sm">Include in current</p>
+          <p class="text-xs text-slate-600 mt-1">一年内の義務・bonds payable は <strong>net</strong></p>
         </div>
         <div class="flex items-center justify-center"><i data-lucide="split" class="w-7 h-7 text-slate-400"></i></div>
         <div class="flex-1 rounded-xl border-2 border-slate-300 bg-slate-50 p-4 text-center">
           <i data-lucide="ban" class="w-8 h-8 text-slate-500 mx-auto mb-1"></i>
-          <p class="font-bold text-slate-700 text-sm">輪の外</p>
-          <p class="text-xs text-slate-600 mt-1">満期が翌期以降の Notes など</p>
+          <p class="font-bold text-slate-700 text-sm">Exclude from current</p>
+          <p class="text-xs text-slate-600 mt-1">満期が翌期以降の notes payable など</p>
         </div>
       </div>
     </section>
 
     <section id="patterns" class="diagram-panel bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8" data-diagram="patterns">
       <h2 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2"><i data-lucide="layout-grid" class="w-6 h-6 text-amber-600"></i> 積み上げの型（ミニ例・架空数字）</h2>
-      <p class="text-sm text-slate-600 mb-4">Mill 型の試算表を<strong>色付きバー</strong>で見比べます。緑＝current に入る、灰＝除外、紫＝社債 net。</p>
+      <p class="text-sm text-slate-600 mb-4">Mill 型の trial balance を<strong>色付きバー</strong>で見比べます。緑＝current に入る、灰＝除外、紫＝bonds payable net。</p>
 
       <div class="grid md:grid-cols-2 gap-5">
         <div class="border-2 border-slate-200 rounded-xl p-4 bg-slate-50/80">
-          <p class="text-xs font-bold text-slate-500 mb-2">試算表の行 → 判定</p>
+          <p class="text-xs font-bold text-slate-500 mb-2">trial balance の行 → 判定</p>
           <div class="space-y-2 text-sm">
             <div class="pattern-bar bg-emerald-500 text-white">AP $15,000 → IN</div>
             <div class="pattern-bar bg-emerald-500 text-white">Dividends payable $8,000 → IN</div>
@@ -184,14 +184,14 @@
             <span class="cl-bar-net" style="flex:22">22k net</span>
           </div>
           <p class="text-center text-lg font-bold text-emerald-800 mt-3">合計 $45,000</p>
-          <p class="text-[0.65rem] text-slate-500 text-center mt-1">20k の Notes は棒に含めない</p>
+          <p class="text-[0.65rem] text-slate-500 text-center mt-1">20k の notes payable は棒に含めない</p>
         </div>
       </div>
 
       <div class="mt-4 flex flex-col items-center gap-1 max-w-sm mx-auto">
         <div class="w-full pattern-bar bg-slate-200 text-slate-700 border border-dashed border-slate-400">Face $25,000</div>
         <i data-lucide="minus" class="w-5 h-5 text-slate-400"></i>
-        <div class="w-full pattern-bar bg-rose-200 text-rose-900 border border-rose-300">Discount $3,000（控除）</div>
+        <div class="w-full pattern-bar bg-rose-200 text-rose-900 border border-rose-300">discount on bonds payable $3,000</div>
         <i data-lucide="arrow-down" class="w-5 h-5 text-indigo-500"></i>
         <div class="w-full pattern-bar bg-violet-600 text-white shadow-md">Carrying $22,000 を current に足す</div>
       </div>
@@ -199,26 +199,26 @@
 
     <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
       <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまで（対話）</h2>
-      <p class="text-sm text-slate-600 mb-3">よくある悩みの続きとして、<strong>試算表の二行（社債＋割引）</strong>をどう足し込むか、<strong>長期ノート</strong>をどこで輪から外すかを、会話で手順に落とします。</p>
+      <p class="text-sm text-slate-600 mb-3">よくある悩みの続きとして、<strong>trial balance の二行（bonds payable ＋ discount on bonds payable）</strong>をどう足し込むか、<strong>long-term notes payable</strong> をどこで current から除外するかを、会話で手順に落とします。</p>
       <div class="persona-strip">
-        <span><strong>たくま</strong>：勘定の意味は分かっても、試算表の<strong>行の並びのまま足す</strong>と double count しそうで怖い。</span>
-        <span><strong>あおい先生</strong>：長期の notes は輪から外し、社債と割引は<strong>net で一枚</strong>。設問が列挙した勘定だけを、条件どおりに足す、と決め打ちしよう。</span>
+        <span><strong>たくま</strong>：勘定の意味は分かっても、trial balance の<strong>行の並びのまま足す</strong>と double count しそうで怖い。</span>
+        <span><strong>あおい先生</strong>：long-term notes payable は current から除外し、bonds payable と discount on bonds payable は<strong>net で一枚</strong>。設問が列挙した勘定だけを、条件どおりに足す、と決め打ちしよう。</span>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm leading-relaxed">試算表に <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が両方あるとき、流動負債の合計に入れるのは<strong>どの金額</strong>？　表面額と割引を別々に足しそうになる。</p></div>
+        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm leading-relaxed">trial balance に <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が両方あるとき、total current liabilities に入れるのは<strong>どの金額</strong>？　face amount と discount on bonds payable を別々に足しそうになる。</p></div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm leading-relaxed">社債が<strong>決算日から一年内に満期</strong>するなら、流動に載せるのは bonds だけを見るのではなく、<strong>discount で相殺したあとの金額</strong>、つまり帳簿上の<strong>carrying amount（net）</strong>だよ。割引は負債を増やす別勘定ではなく <strong>contra liability</strong> だから、二行あっても<strong>足すときは net で一枚</strong>にまとめる。表面額と割引を二重に足すと、一気に合計が膨らむから注意。</p></div>
+        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm leading-relaxed">bonds payable が<strong>決算日から一年内に満期</strong>するなら、current liabilities に載せるのは face だけを見るのではなく、<strong>discount on bonds payable で相殺したあとの金額</strong>、つまり <strong>net carrying amount</strong> だよ。discount on bonds payable は負債を増やす別勘定ではなく <strong>contra liability</strong> だから、二行あっても<strong>足すときは net で一枚</strong>にまとめる。face amount と discount on bonds payable を二重に足すと、一気に合計が膨らむから注意。</p></div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm leading-relaxed"><strong>Notes payable</strong> の満期が<strong>翌々期（例：20x3）</strong>って書いてあるなら、この「合計流動負債」の数字には<strong>含めなくていい</strong>んだよね？　試算表に載ってるから足しそうになる。</p></div>
+        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm leading-relaxed"><strong>Notes payable</strong> の満期が<strong>翌々期（例：20x3）</strong>って書いてあるなら、この <strong>total current liabilities</strong> の数字には<strong>含めなくていい</strong>んだよね？　trial balance に載ってるから足しそうになる。</p></div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm leading-relaxed">その理解で合ってる。決算日から<strong>一年内に満期しない</strong>ノートは、題意が<strong>total current liabilities</strong>ならその箱から<strong>外す</strong>。試算表に出ていても、設問が「流動の合計」を聞いている限りは輪に入れない。残りは accounts payable や、一年内満期の社債（net）、宣言済みで一年内支払いの dividends payable など、<strong>設問が明示した勘定だけ</strong>を条件に沿って足していけばよい。</p></div>
+        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm leading-relaxed">その理解で合ってる。決算日から<strong>一年内に満期しない</strong> notes payable は、題意が <strong>total current liabilities</strong> なら<strong>除外</strong>。trial balance に出ていても、設問が total current を聞いている限りは含めない。残りは accounts payable、一年内満期の bonds payable（net）、dividends payable（一年内支払）など、<strong>設問が明示した勘定だけ</strong>を条件に沿って足していけばよい。</p></div>
       </div>
     </section>
 
@@ -258,7 +258,7 @@
         <details>
           <summary>解説を開く</summary>
           <div class="mt-3 text-sm text-slate-700 border-t pt-3">
-            <p>割引は<strong>負債の控除（contra）</strong>として bonds と相殺し、<strong>carrying amount（net）</strong>を負債として表示するのが一般的な型。正解 <strong>B</strong>。</p>
+            <p>discount on bonds payable は<strong>contra liability</strong>として bonds payable と相殺し、<strong>carrying amount（net）</strong>を負債として表示するのが一般的な型。正解 <strong>B</strong>。</p>
           </div>
         </details>
       </div>
@@ -267,9 +267,9 @@
     <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
       <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> この図解のまとめ</h2>
       <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li>流動負債の合計は<strong>一年内の義務</strong>だけを足す。</li>
+        <li>total current liabilities は<strong>一年内の義務</strong>だけを足す。</li>
         <li>Bonds と discount は<strong>net</strong>で一枚に。</li>
-        <li>長期 notes は current の箱から<strong>外す</strong>。</li>
+        <li>long-term notes payable は current liabilities から<strong>除外</strong>。</li>
         <li>設問の<strong>due 日付</strong>に忠実に。</li>
       </ol>
     </section>
