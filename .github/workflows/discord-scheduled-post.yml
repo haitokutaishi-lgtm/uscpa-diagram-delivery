@@ -61,6 +61,7 @@ jobs:
       - name: Push diagram-site
         id: push-out
         if: steps.pat.outputs.ok == 'true'
+        continue-on-error: true
         working-directory: diagram-site
         env:
           FAR_SHA: ${{ github.sha }}
@@ -92,6 +93,7 @@ jobs:
 
   post:
     needs: sync-diagram-site
+    if: ${{ always() && needs.sync-diagram-site.result != 'cancelled' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
