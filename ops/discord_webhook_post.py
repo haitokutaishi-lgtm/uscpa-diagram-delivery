@@ -18,18 +18,19 @@ def post(webhook_url: str, payload: dict, image_path: Path | None) -> int:
     if image_path and image_path.is_file() and image_path.stat().st_size > 2000:
         fn = image_path.name
         body = dict(payload)
+        body.pop("attachments", None)
         embeds = list(body.get("embeds") or [])
         if embeds:
             embeds[0] = {**embeds[0], "image": {"url": f"attachment://{fn}"}}
         else:
             embeds = [{"image": {"url": f"attachment://{fn}"}}]
         body["embeds"] = embeds
-        body["attachments"] = [{"id": 0, "filename": fn}]
         with image_path.open("rb") as f:
+            # Webhook: file1= + attachment://<filename>（attachments 配列は不要）
             resp = requests.post(
                 webhook_url,
                 data={"payload_json": json.dumps(body, ensure_ascii=False)},
-                files={"file": (fn, f, "image/png")},
+                files={"file1": (fn, f, "image/png")},
                 timeout=60,
             )
     else:
