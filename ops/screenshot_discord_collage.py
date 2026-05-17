@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 """
-図解ページ（GitHub Pages）を開き、会話パートを除いた本文セクションを最大4枚キャプチャして
-2x2 の 1枚 PNG に合成する。Discord Webhook の attachments 用。
+図解ページ（GitHub Pages）を開き、会話パートを除いた本文を最大4枚キャプチャして
+2x2 の 1枚 PNG に合成する。Discord Webhook 用。
 
-使い方:
-  python ops/screenshot_discord_collage.py --url https://.../topics/foo/ --output /tmp/collage.png
-
-終了コード:
-  0 … 成功
-  2 … キャプチャ失敗（呼び出し側でテキストのみ投稿にフォールバック）
+会話（.dlg-row / .char-bubble）は非表示。薄い「読む順」だけのセクションは
+「まず覚える3つ」と縦に結合して1コマにする。
 """
 from __future__ import annotations
 
@@ -25,9 +21,11 @@ except ImportError as e:
     print("playwright がインストールされていません。", file=sys.stderr)
     raise SystemExit(2) from e
 
-# 会話・導入の対話ブロックをレイアウトから外す（図・MC・用語など本文だけ残す）
-HIDE_DIALOGUE_JS = r"""
+PREPARE_PAGE_JS = r"""
 () => {
+  document.querySelectorAll('nav.toc, main > nav').forEach((e) => {
+    e.style.setProperty('display', 'none', 'important');
+  });
   ['#intro', '#process'].forEach((sel) => {
     document.querySelectorAll(sel).forEach((e) => {
       e.style.setProperty('display', 'none', 'important');
@@ -41,28 +39,60 @@ HIDE_DIALOGUE_JS = r"""
       row.style.setProperty('display', 'none', 'important');
     }
   });
+  document.querySelectorAll('#mc details').forEach((d, i) => {
+    if (i === 0) d.open = true;
+  });
 }
 """
 
-SKIP_IDS = frozenset({"intro", "process", "summary"})
+STITCH_IDS_JS = r"""
+(ids) => {
+  document.getElementById('discord-stitch-preview')?.remove();
+  const box = document.createElement('div');
+  box.id = 'discord-stitch-preview';
+  box.style.cssText =
+    'position:absolute;left:0;top:0;z-index:99999;background:#fff;' +
+    'padding:20px 24px;max-width:760px;box-sizing:border-box;' +
+    'font-family:\"Noto Sans JP\",sans-serif';
+  ids.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const wrap = document.createElement('div');
+    wrap.style.marginBottom = '20px';
+    wrap.appendChild(el.cloneNode(true));
+    box.appendChild(wrap);
+  });
+  document.body.appendChild(box);
+  return box.scrollHeight;
+}
+"""
+
+REMOVE_STITCH_JS = r"""
+() => { document.getElementById('discord-stitch-preview')?.remove(); }
+"""
+
+SKIP_IDS = frozenset({"intro", "process"})
 SKIP_HEADING = ("対話", "悩みが解ける")
-# この順で最大4枚（会話セクションは上記で除外）
-PREFERRED_IDS = (
+# 単体キャプチャの優先順（厚いブロックを先に）
+SOLO_PRIORITY = (
     "worries",
     "three",
     "fork",
-    "reading",
     "patterns",
     "group-a",
     "group-b",
     "terms",
     "exam",
     "mc",
+    "summary",
+    "reading",
 )
 
-CELL_W = 560
-GAP = 14
-MAX_CELL_H = 720
+CELL_W = 680
+GAP = 16
+MAX_CELL_H = 920
+MIN_PANEL_H = 140
+READING_STITCH_MAX_H = 420
 
 
 def _resize_cell(im: Image.Image) -> Image.Image:
@@ -109,17 +139,17 @@ async def capture(url: str, out: Path) -> None:
         browser = await p.chromium.launch(headless=True)
         try:
             page = await browser.new_page(
-                viewport={"width": 1320, "height": 900},
-                device_scale_factor=1.25,
+                viewport={"width": 1400, "height": 1000},
+                device_scale_factor=1.5,
             )
             await page.goto(url, wait_until="networkidle", timeout=120_000)
             await page.wait_for_timeout(2800)
-            await page.evaluate(HIDE_DIALOGUE_JS)
-            await page.wait_for_timeout(400)
+            await page.evaluate(PREPARE_PAGE_JS)
+            await page.wait_for_timeout(500)
 
             cards = page.locator("main > div.section-card, main > section")
             n = await cards.count()
-            captured: dict[str, Path] = {}
+            meta: dict[str, dict] = {}
 
             async def heading_text(el) -> str:
                 h = el.locator("h2").first
@@ -127,43 +157,107 @@ async def capture(url: str, out: Path) -> None:
                     return (await h.inner_text()).strip()
                 return ""
 
-            async def should_skip(el, eid: str) -> bool:
-                if eid in SKIP_IDS:
-                    return True
-                ht = await heading_text(el)
-                return any(s in ht for s in SKIP_HEADING)
-
             for i in range(n):
                 el = cards.nth(i)
                 if not await el.is_visible():
                     continue
                 eid = await el.evaluate("el => el.id || ''")
-                if await should_skip(el, eid):
+                if eid in SKIP_IDS:
+                    continue
+                ht = await heading_text(el)
+                if any(s in ht for s in SKIP_HEADING):
                     continue
                 box = await el.bounding_box()
-                if not box or box["height"] < 120:
+                if not box or box["height"] < MIN_PANEL_H:
                     continue
-                key = eid or f"_idx{i}"
-                if key in captured:
-                    continue
+                meta[eid or f"_idx{i}"] = {"el": el, "height": box["height"]}
+
+            shots: dict[str, Path] = {}
+            tmp_i = 0
+
+            async def shot_element(el, key: str) -> None:
+                nonlocal tmp_i
                 pth = Path(f"/tmp/_discord_cap_{key}.png")
                 await el.screenshot(path=str(pth), type="png")
-                if pth.stat().st_size < 800:
-                    pth.unlink(missing_ok=True)
-                    continue
-                captured[key] = pth
+                if pth.stat().st_size >= 1200:
+                    shots[key] = pth
+                    tmp_i += 1
 
-            if not captured:
+            async def shot_stitch(ids: list[str], key: str) -> None:
+                h = await page.evaluate(STITCH_IDS_JS, ids)
+                if not h or h < MIN_PANEL_H:
+                    await page.evaluate(REMOVE_STITCH_JS)
+                    return
+                loc = page.locator("#discord-stitch-preview")
+                pth = Path(f"/tmp/_discord_cap_{key}.png")
+                await loc.screenshot(path=str(pth), type="png")
+                await page.evaluate(REMOVE_STITCH_JS)
+                if pth.stat().st_size >= 1200:
+                    shots[key] = pth
+
+            # 1) よくある悩み：要点ボックス中心（会話は既に非表示）
+            if "worries" in meta:
+                inner = page.locator("#worries .worries-inner")
+                if await inner.count() and await inner.is_visible():
+                    h2 = page.locator("#worries > h2").first
+                    if await h2.count():
+                        await shot_stitch(["worries"], "worries")
+                    else:
+                        await shot_element(meta["worries"]["el"], "worries")
+                else:
+                    await shot_element(meta["worries"]["el"], "worries")
+
+            # 2) まず覚える3つ + 読む順（薄いページは結合）
+            reading_h = meta.get("reading", {}).get("height", 0) if "reading" in meta else 0
+            if "three" in meta and "reading" in meta and reading_h < READING_STITCH_MAX_H:
+                await shot_stitch(["three", "reading"], "three-reading")
+            elif "three" in meta:
+                await shot_element(meta["three"]["el"], "three")
+
+            # 3–4) 分岐・パターン・MC など厚いブロック
+            for pid in SOLO_PRIORITY:
+                if pid in ("worries", "three", "reading"):
+                    continue
+                if pid in shots or pid not in meta:
+                    continue
+                await shot_element(meta[pid]["el"], pid)
+                if len(shots) >= 4:
+                    break
+
+            # まだ足りなければ reading / three を単体で
+            for pid in ("reading", "three", "summary"):
+                if len(shots) >= 4:
+                    break
+                if pid in meta and pid not in shots:
+                    await shot_element(meta[pid]["el"], pid)
+
+            if not shots:
                 raise RuntimeError("no sections captured")
 
+            # 表示順を固定
+            order_keys = [
+                "worries",
+                "three-reading",
+                "three",
+                "fork",
+                "patterns",
+                "group-a",
+                "group-b",
+                "terms",
+                "exam",
+                "mc",
+                "summary",
+                "reading",
+            ]
             ordered: list[Path] = []
-            for pid in PREFERRED_IDS:
-                if pid in captured:
-                    ordered.append(captured.pop(pid))
+            for k in order_keys:
+                if k in shots:
+                    ordered.append(shots[k])
                 if len(ordered) >= 4:
                     break
-            for key in sorted(captured.keys()):
-                ordered.append(captured[key])
+            for k, p in shots.items():
+                if p not in ordered:
+                    ordered.append(p)
                 if len(ordered) >= 4:
                     break
             ordered = ordered[:4]
