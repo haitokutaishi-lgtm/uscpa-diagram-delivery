@@ -66,28 +66,45 @@
 
     <section id="worries" class="worries-box">
       <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5 text-amber-700"></i> よくある悩み</h2>
+
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed"><strong>Notes payable</strong> は満期が来年以降なのに、同じ trial balance に <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が並ぶと、「notes payable も bonds payable も全部 current liabilities に入れるの？」と頭がこんがらがる。行ごとに足していいのか、セットで見るのかもはっきりしない。</p>
+          <p class="text-sm leading-relaxed">trial balance に <strong>notes payable</strong>（満期は来年以降）と <strong>bonds payable</strong> が並んでると、<strong>全部 current liabilities に足す</strong>の？　行があるだけで足しそうになる。</p>
         </div>
       </div>
+
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="coach-bubble mb-0">
           <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">まず勘定ごとに、「<strong>決算日から見て一年内に、支払いや満期で現金が動く義務があるか</strong>」で仕分けると整理しやすいよ。<strong>Notes payable</strong> が翌期以降の満期なら、題意が <strong>total current liabilities</strong> なら<strong>最初から除外</strong>。<strong>Bonds payable</strong> と <strong>discount on bonds payable</strong> は二行に分かれていても、イメージは<strong>一枚の負債</strong>で、<strong>face amount</strong> から discount を控除した <strong>net carrying amount</strong> が載る金額。一年内に満期する bonds payable なら、その net を current liabilities に数える、という順番にすると取り違えにくい。</p>
+          <p class="text-sm leading-relaxed">まず各行で「<strong>決算日から一年内に満期・支払うか</strong>」だけ見る。<strong>Long-term notes payable</strong> は <strong>total current liabilities</strong> から<strong>除外</strong>。載ってる行＝足す、ではないよ。</p>
         </div>
       </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">じゃあ <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> は？　二行あるから、両方足すと合計が膨らみそう。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">そこは<strong>一枚</strong>。<strong>Face amount − discount on bonds payable ＝ net carrying amount</strong>。一年内に満期する bonds なら、その net だけ current に入れる。詳しい積み上げは下の図で見よう。</p>
+        </div>
+      </div>
+
       <div class="worries-inner">
-        <p class="text-sm font-bold text-amber-950 mb-2">要点ボックス</p>
-        <ul class="text-sm text-slate-800 space-y-2 list-disc list-inside">
-          <li><strong>Current liabilities</strong> に足すのは、<strong>一年内に決済する見込みの義務</strong>に該当するものだけ。</li>
-          <li>trial balance では <strong>bonds payable</strong> と <strong>discount on bonds payable</strong> が別行でも、current に載せる額は<strong>相殺して net carrying amount</strong>で一枚にまとめる。</li>
-          <li><strong>Notes payable</strong> が決算日から一年内に<strong>満期しない</strong>なら、<strong>total current liabilities</strong> の計算からは<strong>除外</strong>（設問が別に聞いていない限り）。</li>
-          <li><strong>Dividends payable</strong> は、宣言済みで<strong>一年内に支払う</strong>タイプなら、典型問題では current liabilities に含めることが多い。</li>
-          <li>最後に、問題が求めているのが<strong>合計</strong>か<strong>個別の区分</strong>かを一文で確認し、<strong>noncurrent</strong> 項目を二重に足していないかだけチェック。</li>
+        <p class="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2"><i data-lucide="layout-list" class="w-4 h-4"></i> 要点ボックス（ここだけ押さえる）</p>
+        <ul class="text-sm text-slate-800 space-y-1.5 list-disc list-inside leading-relaxed">
+          <li><strong>One-year rule</strong>：一年内の義務だけ <strong>current liabilities</strong> に。</li>
+          <li><strong>Bonds + discount</strong>：別行でも <strong>net carrying amount</strong> で一枚（二重計上しない）。</li>
+          <li><strong>Long-term notes payable</strong>：<strong>total current</strong> には入れない。</li>
         </ul>
       </div>
     </section>
