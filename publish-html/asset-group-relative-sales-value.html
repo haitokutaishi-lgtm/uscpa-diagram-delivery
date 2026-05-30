@@ -39,6 +39,13 @@
     .alloc-bar { display: flex; height: 2rem; border-radius: 0.5rem; overflow: hidden; font-size: 0.7rem; font-weight: 700; }
     .alloc-bar-land { background: #16a34a; color: #fff; display: flex; align-items: center; justify-content: center; }
     .alloc-bar-bldg { background: #2563eb; color: #fff; display: flex; align-items: center; justify-content: center; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .mc-preview-hint { font-size: 0.75rem; color: #78716c; margin-bottom: 0.75rem; }
+    .mc-preview-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; font-size: 0.7rem; }
+    .mc-preview-tags span { padding: 0.2rem 0.5rem; border-radius: 0.35rem; font-weight: 600; }
+    .tag-use { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .tag-trap { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -66,13 +73,36 @@
     <!-- ① よくある悩み -->
     <section id="worries" class="section-card worries-box border-amber-300">
       <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
-      <p class="text-sm text-amber-950/90 mb-4">バンドル購入の MC では、<strong>どの数字を「割るための比率」にするか</strong>で迷い、次のような<strong>よくある間違い</strong>に落ちやすいです。</p>
+      <p class="text-sm text-amber-950/90 mb-4">まず<strong>試験でどんな英文・数字の並びか</strong>を把握してから、よくある間違いに入ります。下の代表問題は、⑤の理解確認MCの<strong>問題1と同じ</strong>です（先に読んでイメージを掴む用）。</p>
+
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 代表MC（計算型）— まず問題のイメージを掴む</h3>
+        <p class="mc-preview-hint">この時点では<strong>解かなくてOK</strong>。答え・解説は <a href="#mc" class="text-blue-700 font-semibold hover:underline">⑤ 理解確認MC</a> の問題1で確認。</p>
+        <div class="en-stem mb-3">
+          On March 1, Pelton Co. paid <strong>$820,000</strong> cash to acquire land and a warehouse in a single transaction. Independent appraisals indicated <strong>selling prices of $250,000 for the land</strong> and <strong>$550,000 for the warehouse</strong>. The seller’s carrying amount for the land was <strong>$95,000</strong> (disregard for this question). What amount should Pelton capitalize as <strong>land</strong>?
+        </div>
+        <ul class="text-sm space-y-1.5 mb-2">
+          <li><strong>A.</strong> $256,250</li>
+          <li><strong>B.</strong> $250,000</li>
+          <li><strong>C.</strong> $410,000</li>
+          <li><strong>D.</strong> $95,000</li>
+        </ul>
+        <p class="text-xs text-amber-900/90 leading-relaxed">概念だけ聞かれる型もあります（「按分の基準は何か」→ <a href="#mc" class="text-blue-700 hover:underline">⑤の問題2</a>）。</p>
+        <div class="mc-preview-tags" aria-label="問題文で見るべき数字">
+          <span class="tag-use">使う：一括 $820,000</span>
+          <span class="tag-use">使う：鑑定 $250,000 / $550,000</span>
+          <span class="tag-trap">罠：売主簿価 $95,000（選択肢D）</span>
+          <span class="tag-trap">罠：鑑定をそのまま載せる（選択肢B）</span>
+        </div>
+      </div>
+
+      <p class="text-sm text-amber-950/90 mb-4 font-semibold">この代表問題を読んだうえで、たくまが陥りやすい<strong>よくある間違い</strong>は次のとおりです。</p>
 
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed"><span class="mistake-tag mistake-tag--a">間違いA</span>問題文に<strong>売主の土地の帳簿価額 $80,000</strong>と<strong>建物の帳簿 $200,000</strong>が書いてある。土地の取得原価は $80,000 でいい？</p>
+          <p class="text-sm leading-relaxed"><span class="mistake-tag mistake-tag--a">間違いA</span>代表問題の<strong>売主の土地簿価 $95,000</strong>（選択肢D）が目に入る。土地の capitalized cost は $95,000 でいい？</p>
         </div>
       </div>
       <div class="dlg-row">
@@ -87,7 +117,7 @@
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed"><span class="mistake-tag mistake-tag--b">間違いB</span>土地は減価償却しないから、<strong>一括 $820,000 は全部土地</strong>に載せて、建物は $0 にしようと思った。</p>
+          <p class="text-sm leading-relaxed"><span class="mistake-tag mistake-tag--b">間違いB</span>土地は減価償却しないから、<strong>一括 $820,000 は全部土地</strong>に載せて、倉庫（建物）は $0 にしようと思った。</p>
         </div>
       </div>
       <div class="dlg-row">
@@ -102,7 +132,7 @@
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed"><span class="mistake-tag mistake-tag--c">間違いC</span>資産が2つだから、<strong>$820,000 ÷ 2 ＝ 各 $410,000</strong>でいい？</p>
+          <p class="text-sm leading-relaxed"><span class="mistake-tag mistake-tag--c">間違いC</span>土地と倉庫の<strong>2つだから $820,000 ÷ 2 ＝ $410,000</strong>（選択肢C）でいい？</p>
         </div>
       </div>
       <div class="dlg-row">
@@ -130,7 +160,7 @@
           <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
           <div>
             <p class="font-bold text-slate-900">割る比率は「買い手基準の相対的な価値」</p>
-            <p class="text-slate-600 mt-1">鑑定売価・見積売価は、<strong>もし個別に売ったらいくらか</strong>の目安。土地 $310,000・建物 $465,000 なら、グループの価値のうち<strong>土地が約40％・建物が約60％</strong>持つ、と読む。売主の簿価比率は<strong>別会社の歴史</strong>なので按分根拠にならない。</p>
+            <p class="text-slate-600 mt-1">鑑定売価・見積売価は、<strong>もし個別に売ったらいくらか</strong>の目安。代表問題なら土地 $250,000・倉庫 $550,000 で、合計 $800,000 のうち<strong>土地が 31.25％・倉庫が 68.75％</strong>。売主の簿価 $95,000 は<strong>別会社の歴史</strong>なので按分根拠にならない。</p>
           </div>
         </li>
         <li class="flex gap-3">
@@ -164,54 +194,54 @@
           <line x1="200" y1="52" x2="120" y2="88" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
           <line x1="280" y1="52" x2="360" y2="88" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
           <rect x="40" y="92" width="160" height="52" rx="8" fill="#166534"/>
-          <text x="120" y="112" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Land 310÷775</text>
-          <text x="120" y="130" text-anchor="middle" fill="#bbf7d0" font-size="12" font-weight="700">40% → $328,000</text>
+          <text x="120" y="112" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Land 250÷800</text>
+          <text x="120" y="130" text-anchor="middle" fill="#bbf7d0" font-size="12" font-weight="700">31.25% → $256,250</text>
           <rect x="280" y="92" width="160" height="52" rx="8" fill="#1d4ed8"/>
-          <text x="360" y="112" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Building 465÷775</text>
-          <text x="360" y="130" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="700">60% → $492,000</text>
-          <text x="240" y="175" text-anchor="middle" fill="#475569" font-size="10">Denominator: total appraised $775,000</text>
+          <text x="360" y="112" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Whse 550÷800</text>
+          <text x="360" y="130" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="700">68.75% → $563,750</text>
+          <text x="240" y="175" text-anchor="middle" fill="#475569" font-size="10">Denominator: total appraised $800,000</text>
           <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/></marker></defs>
         </svg>
       </div>
 
-      <p class="text-sm font-semibold text-slate-800 mt-6 mb-2">完成例（数値はオリジナル・イメージ用）</p>
+      <p class="text-sm font-semibold text-slate-800 mt-6 mb-2">完成例（①の代表問題＝Pelton と同じ数字）</p>
       <div class="alloc-bar mb-3 max-w-md mx-auto" aria-hidden="true">
-        <span class="alloc-bar-land" style="width:40%">土地 40%</span>
-        <span class="alloc-bar-bldg" style="width:60%">建物 60%</span>
+        <span class="alloc-bar-land" style="width:31.25%">土地 31.25%</span>
+        <span class="alloc-bar-bldg" style="width:68.75%">倉庫 68.75%</span>
       </div>
       <table class="alloc">
         <thead>
-          <tr><th>資産</th><th class="num">鑑定売価</th><th>比率（÷ $775,000）</th><th class="num">capitalized cost</th></tr>
+          <tr><th>資産</th><th class="num">鑑定売価</th><th>比率（÷ $800,000）</th><th class="num">capitalized cost</th></tr>
         </thead>
         <tbody>
-          <tr><td>土地</td><td class="num">$310,000</td><td>310 ÷ 775 ＝ 40%</td><td class="num"><strong>$328,000</strong></td></tr>
-          <tr><td>建物</td><td class="num">$465,000</td><td>465 ÷ 775 ＝ 60%</td><td class="num"><strong>$492,000</strong></td></tr>
-          <tr><td><strong>合計</strong></td><td class="num"><strong>$775,000</strong></td><td>100%</td><td class="num"><strong>$820,000</strong></td></tr>
+          <tr><td>土地</td><td class="num">$250,000</td><td>250 ÷ 800 ＝ 31.25%</td><td class="num"><strong>$256,250</strong></td></tr>
+          <tr><td>倉庫</td><td class="num">$550,000</td><td>550 ÷ 800 ＝ 68.75%</td><td class="num"><strong>$563,750</strong></td></tr>
+          <tr><td><strong>合計</strong></td><td class="num"><strong>$800,000</strong></td><td>100%</td><td class="num"><strong>$820,000</strong></td></tr>
         </tbody>
       </table>
-      <p class="text-xs text-slate-500 mt-3">※ $328,000 ＋ $492,000 ＝ $820,000（端数処理は設問指示に従う）。</p>
+      <p class="text-xs text-slate-500 mt-3">※ $256,250 ＋ $563,750 ＝ $820,000（端数処理は設問指示に従う）。</p>
     </section>
 
     <!-- ④ 悩みが解けるまで -->
     <section id="process" class="section-card">
       <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ④ 悩みが解けるまで</h2>
       <div class="persona-strip">
-        <span><strong>たくま</strong>：①の間違いA〜C、どれを使えば「割る比率」になるかまだ不安。</span>
-        <span><strong>あおい先生</strong>：設問の<strong>appraised values だけ</strong>を拾い、③の5ステップで一括現金を配分しよう。</span>
+        <span><strong>たくま</strong>：①の代表問題を読んだけど、どの数字で割るかまだ不安。</span>
+        <span><strong>あおい先生</strong>：Pelton の<strong>鑑定 $250,000 / $550,000 だけ</strong>を使い、③の5ステップで $820,000 を配分しよう。</span>
       </div>
 
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed">じゃあ、この問題で。<strong>現金 $820,000</strong>、<strong>土地の鑑定 $310,000</strong>、<strong>建物の鑑定 $465,000</strong>、あと売主の土地簿価 $90,000 が書いてある。土地はいくら capitalize する？</p>
+          <p class="text-sm leading-relaxed">①で読んだ Pelton の問題、もう一度。<strong>土地はいくら capitalize</strong> する？　選択肢 D の $95,000 が気になる。</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="coach-bubble mb-0">
           <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">まず <strong>$90,000 は捨てる</strong>。使うのは鑑定だけ。鑑定合計は $310,000 ＋ $465,000 ＝ <strong>$775,000</strong>。土地の比率は 310 ÷ 775 ＝ <strong>40%</strong>。だから土地の capitalized cost は $820,000 × 40% ＝ <strong>$328,000</strong>。これが①の「売主簿価で決める」を避けた答えだよ。</p>
+          <p class="text-sm leading-relaxed"><strong>$95,000 は捨てる</strong>（間違いA）。鑑定合計は $250,000 ＋ $550,000 ＝ <strong>$800,000</strong>。土地の比率は 250 ÷ 800 ＝ <strong>31.25%</strong>。capitalized cost は $820,000 × 31.25% ＝ <strong>$256,250</strong>。これが選択肢 <strong>A</strong> だよ。</p>
         </div>
       </div>
 
@@ -219,14 +249,14 @@
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
           <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed">建物は $820,000 − $328,000 ＝ $492,000 でもいい？　あと、<strong>建物の鑑定 $465,000 をそのまま</strong> capitalized しちゃダメ？</p>
+          <p class="text-sm leading-relaxed">倉庫は $820,000 − $256,250 ＝ $563,750 でもいい？　<strong>土地の鑑定 $250,000</strong>（選択肢B）をそのまま載せちゃダメ？</p>
         </div>
       </div>
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="coach-bubble mb-0">
           <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed"><strong>残差で建物を出す</strong>のは OK（合計が $820,000 に一致するか確認）。ただし <strong>$465,000 をそのまま載せるのは NG</strong>—それは比率の<strong>分子</strong>であって、買い手が払った<strong>配分後の取得原価</strong>ではない。一括が $820,000 なのに建物だけ $465,000 だと、土地に $355,000 しか残らず、比率 310:465 と矛盾する。</p>
+          <p class="text-sm leading-relaxed"><strong>残差で倉庫を出す</strong>のは OK。ただし <strong>$250,000 をそのまま載せるのは NG</strong>—鑑定は<strong>比率の分子</strong>であって、一括 $820,000 を按分した<strong>取得原価</strong>ではない。B は「鑑定＝capitalized cost」と混同した罠。</p>
         </div>
       </div>
 
@@ -249,10 +279,10 @@
     <!-- ⑤ 理解確認MC -->
     <section id="mc" class="section-card">
       <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑤ 理解確認MC</h2>
-      <p class="text-sm text-slate-600 mb-6">オリジナル問題。配信前は <strong>ASC 360-10</strong>（有形固定資産の取得・按分）の考え方でファクトチェック済み。</p>
+      <p class="text-sm text-slate-600 mb-6">オリジナル問題。①で読んだ<strong>代表問題の答え合わせ</strong>と、概念確認です。配信前は <strong>ASC 360-10</strong>（有形固定資産の取得・按分）の考え方でファクトチェック済み。</p>
 
       <div class="mc-card">
-        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — 土地の capitalized cost）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 1（①の代表問題 — 計算・土地の capitalized cost）</p>
         <div class="en-stem mb-4">
           On March 1, Pelton Co. paid <strong>$820,000</strong> cash to acquire land and a warehouse in a single transaction. Independent appraisals indicated <strong>selling prices of $250,000 for the land</strong> and <strong>$550,000 for the warehouse</strong>. The seller’s carrying amount for the land was <strong>$95,000</strong> (disregard for this question). What amount should Pelton capitalize as <strong>land</strong>?
         </div>
@@ -265,6 +295,7 @@
         <details>
           <summary>解説を開く（図解付き）</summary>
           <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-3">
+            <p class="text-slate-600">①で先に読んだ<strong>代表問題と同じ</strong>です。ここで初めて解く人も、③④を振り返ってからでOK。</p>
             <p><strong>Step 1〜2：</strong> 一括 $820,000。鑑定は土地 $250,000・倉庫 $550,000。</p>
             <p><strong>Step 3〜4：</strong> 鑑定合計 $800,000。土地比率 ＝ 250 ÷ 800 ＝ <strong>31.25%</strong>。</p>
             <div class="diagram-visual diagram-visual--flow rounded-lg border border-slate-200 bg-white p-3" role="img" aria-label="土地への按分：820000の31.25パーセント">
