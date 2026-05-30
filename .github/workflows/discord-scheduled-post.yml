@@ -274,9 +274,15 @@ jobs:
             --webhook-url "$DISCORD_WEBHOOK_URL" \
             --payload-json /tmp/discord_payload.json \
             $IMG_ARG
-          jq --arg d "$POST_DATE" '.last_posted_date = $d' "$STATE_FILE" > /tmp/discord-post-state.json
-          mv /tmp/discord-post-state.json "$STATE_FILE"
-          echo "OK Posted for $POST_DATE (state updated)"
+          LAST_KEEP=$(jq -r '.last_posted_date // ""' "$STATE_FILE")
+          if [ -n "${MANUAL}" ] && [ -n "${LAST_KEEP}" ] && [[ "$POST_DATE" < "$LAST_KEEP" ]]; then
+            echo "Manual repost ($POST_DATE) — keeping last_posted_date=$LAST_KEEP (no queue rollback)"
+          else
+            jq --arg d "$POST_DATE" '.last_posted_date = $d' "$STATE_FILE" > /tmp/discord-post-state.json
+            mv /tmp/discord-post-state.json "$STATE_FILE"
+            echo "Updated last_posted_date=$POST_DATE"
+          fi
+          echo "OK Posted for $POST_DATE"
 
       - name: Commit discord post state
         run: |
