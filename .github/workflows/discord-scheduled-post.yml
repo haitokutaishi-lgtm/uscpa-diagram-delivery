@@ -9,6 +9,9 @@
 
 name: Discord 図解配信
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   schedule:
     - cron: "0 0 * * 0" # 日曜 09:00 JST
@@ -58,6 +61,7 @@ jobs:
           token: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
           ref: main
           path: diagram-site
+          persist-credentials: true
 
       - name: Sync topics
         if: steps.pat.outputs.ok == 'true'
@@ -66,23 +70,38 @@ jobs:
       - name: Push diagram-site
         id: push-out
         if: steps.pat.outputs.ok == 'true'
-        continue-on-error: true
         working-directory: diagram-site
         env:
           FAR_SHA: ${{ github.sha }}
           FAR_REPO: ${{ github.repository }}
+          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${DIAGRAM_SITE_PUSH_TOKEN}@github.com/haitokutaishi-lgtm/diagram-site.git"
           git add topics
           if git diff --cached --quiet; then
             echo "pushed=false" >> "$GITHUB_OUTPUT"
             echo "No topic changes to push."
-          else
-            git commit -m "chore(topics): sync from ${FAR_REPO}@${FAR_SHA:0:7}"
-            git push origin HEAD:main
-            echo "pushed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          git commit -m "chore(topics): sync from ${FAR_REPO}@${FAR_SHA:0:7}"
+          pushed=false
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              pushed=true
+              break
+            fi
+            echo "::warning::diagram-site push retry $i ..."
+            sleep 5
+          done
+          if [ "$pushed" != "true" ]; then
+            echo "::error::diagram-site への push に失敗しました。DIAGRAM_SITE_PUSH_TOKEN が diagram-site リポジトリへの contents:write 付き PAT か確認してください。"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
 
       - name: Job output — pushed
         id: final-push-flag

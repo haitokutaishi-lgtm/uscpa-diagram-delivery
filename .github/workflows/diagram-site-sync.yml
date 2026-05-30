@@ -5,6 +5,9 @@
 
 name: Sync diagram-site topics
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches:
@@ -41,6 +44,7 @@ jobs:
           token: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
           ref: main
           path: diagram-site
+          persist-credentials: true
 
       - name: Copy manifest topics
         run: bash far/ops/sync_diagram_site.sh far diagram-site
@@ -50,13 +54,24 @@ jobs:
         env:
           FAR_SHA: ${{ github.sha }}
           FAR_REPO: ${{ github.repository }}
+          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${DIAGRAM_SITE_PUSH_TOKEN}@github.com/haitokutaishi-lgtm/diagram-site.git"
           git add topics
           if git diff --cached --quiet; then
             echo "No topic file changes."
-          else
-            git commit -m "chore(topics): sync from ${FAR_REPO}@${FAR_SHA:0:7}"
-            git push origin HEAD:main
+            exit 0
           fi
+          git commit -m "chore(topics): sync from ${FAR_REPO}@${FAR_SHA:0:7}"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "::warning::diagram-site push retry $i ..."
+            sleep 5
+          done
+          echo "::error::diagram-site への push に失敗。DIAGRAM_SITE_PUSH_TOKEN（diagram-site への write）を確認してください。"
+          exit 1
