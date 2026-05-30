@@ -25,6 +25,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: discord-scheduled-post
+  cancel-in-progress: false
+
 jobs:
   sync-diagram-site:
     runs-on: ubuntu-latest
@@ -264,5 +268,9 @@ jobs:
             echo "No state changes."
           else
             git commit -m "chore(delivery): update discord post state"
-            git push
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && break
+              echo "Push retry $i after rebase..."
+              sleep 5
+            done
           fi
