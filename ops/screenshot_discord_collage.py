@@ -133,7 +133,7 @@ VISUAL_PANEL_SPECS = [
 ]
 
 # 図が無いページ用フォールバック
-TEXT_FALLBACK_IDS = ("worries", "three", "reading", "mc", "summary")
+TEXT_FALLBACK_IDS = ("worries", "three", "theory", "reading", "mc", "summary")
 
 SKIP_IDS = frozenset({"intro", "process"})
 SKIP_HEADING = ("対話", "悩みが解ける")
