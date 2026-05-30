@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【図解】製品保証引当—売上ベースの見積りと実際支出（MC付き）</title>
+  <title>【図解】製品保証—売上連動の見積りと estimated warranty liability</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,120 +18,252 @@
     .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
     .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
     .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-    .avatar-frame svg { flex-shrink: 0; }
     .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
     .student-bubble .role-line { color: #c2410c; }
     .coach-bubble .role-line { color: #1d4ed8; }
-    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
     .persona-strip strong { color: #0f172a; }
-    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1rem; }
-    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
-</style>
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.roll { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.roll th, table.roll td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.roll th { background: #f1f5f9; }
+    table.roll td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
   <header class="header-gradient text-white py-10 px-4">
     <div class="max-w-3xl mx-auto">
-      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Warranty — <span class="font-bold normal-case">売上ベースの見積りと liability の推移</span></p>
-      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Guarantees（ASC 460）</p>
-      <h1 class="text-2xl md:text-3xl font-bold leading-snug">製品保証：<strong>見積りー実支出ー期末残高</strong>の一本線</h1>
-      <p class="mt-3 text-sm opacity-95 max-w-2xl">売上に<strong>見積率</strong>をかけて費用と引当を立て、実際の修理・交換で<strong>引当を減らす</strong>。期末の <strong>estimated warranty liability</strong> は「期首＋当期認識ー当期使用」のイメージで組み立てます。</p>
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Warranty — <span class="font-bold normal-case">売上連動の見積りと liability の推移</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / 製品保証（ASC 460 ほか）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">売上に連動する<strong>製品保証</strong>—<strong>expense</strong> と <strong>estimated warranty liability</strong> を混同しない</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、売上の一定割合で <span class="term-en">warranty expense</span> を認識し、同時に <span class="term-en">estimated warranty liability</span> を計上する問題がよく出ます。当期の修理費の現金支出は liability を減らし、期末残高は「期首＋当期認識−当期支出」で求めます。</p>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
     <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
       <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">読む順</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解けるまで（対話）</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">まとめ</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">③ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">④ 対話で整理</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑤ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑥ まとめ</a></li>
       </ul>
     </nav>
 
-    <section id="worries" class="worries-box">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> よくある悩み</h2>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm"><strong>保証費用</strong>と<strong>引当残高</strong>のどちらを聞かれているか、問いの語が似ていて取り違える。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">当期に<strong>損益に乗る額</strong>は多くの場合「売上×率」。貸借対照表の<strong>引当残高</strong>は、期首から当期認識と支出で<strong>増えたり減ったりする残り</strong>として捉える。</p></div>
-      </div>
-      <div class="worries-inner">
-        <ul class="text-sm list-disc list-inside space-y-1">
-          <li>認識：<strong>Dr. Warranty expense / Cr. Warranty liability</strong>（設問の型）。</li>
-          <li>支出：<strong>Dr. Liability / Cr. Cash（または部品）</strong>。</li>
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">
+          Lens Tech began Year 2 with an <strong>estimated warranty liability</strong> balance of <strong>$42,000</strong>. During Year 2, Lens recorded warranty expense equal to <strong>3%</strong> of <strong>$2,400,000</strong> sales. Actual warranty costs paid in cash during Year 2 totaled <strong>$58,000</strong>. What should Lens report as <strong>estimated warranty liability</strong> at the end of Year 2?
+        </div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A.</strong> $14,000</li>
+          <li><strong>B.</strong> $42,000</li>
+          <li><strong>C.</strong> $56,000</li>
+          <li><strong>D.</strong> $72,000</li>
         </ul>
       </div>
+
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　売上×率の結果を、そのまま期末 liability にする</span>
+          <p class="text-sm leading-relaxed">$2,400,000 × 3% ＝ <strong>$72,000</strong> が出るので、期末の <span class="term-en">estimated warranty liability</span> は $72,000（選択肢 D）ではないですか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">$72,000 は<strong>当期に liability に加える分</strong>（＝当期の <span class="term-en">warranty expense</span>）です。期末残高は、期首 $42,000 に加え、支出 $58,000 を差し引いた<strong>箱の中身</strong>として求めます。D はそのまま選ばないでください。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　warranty expense と liability の質問を取り違える</span>
+          <p class="text-sm leading-relaxed">問題文の英語が <em>expense</em> に近いのか <em>liability</em> に近いのかで、使う式が変わる気がして混乱します。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed"><span class="term-en">Warranty expense</span> を聞かれたら、多くは<strong>売上×率</strong>です。<span class="term-en">Estimated warranty liability</span> を聞かれたら、<strong>期首残高＋当期認識−当期の現金支出</strong>のロールフォワードです。キーワードで分岐しましょう。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　現金支出を expense としてもう一度計上する</span>
+          <p class="text-sm leading-relaxed">修理に $58,000 払ったので、費用としてもう $58,000 計上すればよいのでは？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">売上比例モデルでは、当期の費用はすでに<strong>見積りで認識済み</strong>です。現金支出は <strong>Dr. Estimated warranty liability / Cr. Cash</strong> で、liability を減らす処理です。二重計上しないでください。</p>
+        </div>
+      </div>
     </section>
 
-    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
-      <p class="part-lead">売上比例の典型モデル。</p>
-      <ol class="space-y-4 text-sm">
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span><div><p class="font-bold">当期の見積り費用</p><p class="text-slate-600 mt-1">売上 × 見積<strong>保証費用率</strong>（問題指定）。</p></div></li>
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span><div><p class="font-bold">実際の支出</p><p class="text-slate-600 mt-1">修理・交換で<strong>liability を減らす</strong>。</p></div></li>
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span><div><p class="font-bold">期末残高</p><p class="text-slate-600 mt-1">期首残高 ＋ 当期認識 ー 当期支出（±その他調整があれば従う）。</p></div></li>
+    <section id="three" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
+      <p class="part-lead">売上に一定率をかける典型モデル（ASC 460 の試験用レール）です。</p>
+      <ol class="space-y-5 text-sm leading-relaxed">
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
+          <div>
+            <p class="font-bold text-slate-900">当期認識＝売上 × 見積率</p>
+            <p class="text-slate-600 mt-1"><span class="term-en">Warranty expense</span> と同額で <span class="term-en">estimated warranty liability</span> が増えます（<strong>Dr. Warranty expense / Cr. Estimated warranty liability</strong>）。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
+          <div>
+            <p class="font-bold text-slate-900">現金支出は liability を減らす</p>
+            <p class="text-slate-600 mt-1">修理・交換の支払いは、すでに計上した引当の<strong>履行</strong>として処理します（<strong>Dr. Liability / Cr. Cash</strong>）。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
+          <div>
+            <p class="font-bold text-slate-900">期末 liability＝期首＋認識−支出</p>
+            <p class="text-slate-600 mt-1">貸借対照表の残高は、当期の expense そのものではありません。ロールフォワードで必ず確認します。</p>
+          </div>
+        </li>
       </ol>
     </section>
 
-    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4">読む順</h2>
-      <ol class="list-decimal list-inside text-sm text-slate-700 space-y-2">
-        <li>期首の <strong>warranty liability</strong> を拾う。</li>
-        <li>当期売上と率から<strong>追加認識</strong>を計算。</li>
-        <li>当期の<strong>実支出</strong>を引いて期末へ。</li>
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ③ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed">期末の <span class="term-en">estimated warranty liability</span> を求める<strong>4ステップ</strong>です。</p>
+
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span>問題文から<strong>期首の liability 残高</strong>を読み取る。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span>当期売上 × 率 ＝ <strong>当期の warranty expense</strong>（＝ liability の増加額）。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span>当期の<strong>現金支出</strong>（actual warranty costs paid）を把握する。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>期末 liability</strong> ＝ 期首 ＋ Step 2 − Step 3。</span></li>
       </ol>
+
+      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="warranty liability のロールフォワード">
+        <svg viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="20" y="20" width="120" height="44" rx="8" fill="#64748b"/>
+          <text x="80" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Beg.</text>
+          <text x="80" y="54" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">$42,000</text>
+          <text x="155" y="48" text-anchor="middle" fill="#475569" font-size="18" font-weight="700">+</text>
+          <rect x="175" y="20" width="120" height="44" rx="8" fill="#1d4ed8"/>
+          <text x="235" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Expense</text>
+          <text x="235" y="54" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="700">$72,000</text>
+          <text x="310" y="48" text-anchor="middle" fill="#475569" font-size="18" font-weight="700">−</text>
+          <rect x="330" y="20" width="130" height="44" rx="8" fill="#b45309"/>
+          <text x="395" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Cash paid</text>
+          <text x="395" y="54" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="700">$58,000</text>
+          <rect x="160" y="95" width="160" height="48" rx="8" fill="#166534"/>
+          <text x="240" y="115" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">End liability</text>
+          <text x="240" y="132" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">$56,000</text>
+        </svg>
+      </div>
+
+      <p class="text-sm font-semibold text-slate-800 mt-6 mb-2">計算例（上の試験問題と同じ数字）</p>
+      <table class="roll">
+        <thead>
+          <tr><th>項目</th><th class="num">金額</th><th>メモ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>期首 estimated warranty liability</td><td class="num">$42,000</td><td>問題文</td></tr>
+          <tr><td>＋ 当期 warranty expense（3% × $2,400,000）</td><td class="num">$72,000</td><td>誤解①の $72,000 はここ</td></tr>
+          <tr><td>− 当期 cash warranty costs</td><td class="num">$58,000</td><td>liability の減少</td></tr>
+          <tr><td><strong>期末 estimated warranty liability</strong></td><td class="num"><strong>$56,000</strong></td><td>正解 C</td></tr>
+        </tbody>
+      </table>
     </section>
 
-    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまで（対話）</h2>
-      <p class="text-sm text-slate-600 mb-3">先の「<strong>保証費用と引当残高を取り違える</strong>」という悩みに、会話で区別します。</p>
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ④ 対話で整理</h2>
       <div class="persona-strip">
-        <span><strong>受講生</strong>：設問の英語が <em>expense</em> に近いか <em>liability</em> に近いかで、使う式が変わる気がする。</span>
-        <span><strong>コーチ</strong>：その通り。<strong>売上×率</strong>は多くが当期の費用（と引当の増）。<strong>期末残高</strong>は箱の増減で求める。</span>
+        <span><strong>たくま</strong>：誤解①〜③のあと、数字の流れを一度通したいです。</span>
+        <span><strong>あおい先生</strong>：Lens Tech の例では、<strong>$42,000 → ＋$72,000 → −$58,000</strong> の順で期末 $56,000 です。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">選択肢 A の $14,000 は、どういう計算で出てきますか？</p>
+        </div>
       </div>
       <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">「当期の<strong>warranty expense</strong>」と「期末の <strong>estimated liability</strong>」が続けて出るとごちゃごちゃする。</p></div>
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">$72,000 − $58,000 ＝ $14,000 は、<strong>期首 $42,000 を忘れた</strong>パターンです。期末 liability は必ず期首からロールフォワードしてください。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">選択肢 B の $42,000 は、期首残高のまま期末も同じ、という意味ですか？</p>
+        </div>
       </div>
       <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">expense は<strong>この期の売上に対する見積り</strong>が中心。liability を聞かれたら<strong>期首残高 ＋ 当期に計上した分 − 当期に払った修理費</strong>の三段で考えると抜けない。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">売上だけ計算して、それを期末残高だと思いそうになる。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">それが一番の落とし穴。売上×率は<strong>箱に入れる追加分</strong>であって、箱の中身そのものではない。現金で払った分は<strong>箱から出す</strong>、までセットで見る。</p></div>
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">当期に $72,000 を認識し、$58,000 を支出しているので、残高は動きます。B は<strong>当期の動きを無視した</strong>誤答です。</p>
+        </div>
       </div>
     </section>
 
-    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認MC</h2>
-      <p class="text-sm text-slate-600 mb-6">公開前は <strong>ASC 460</strong> でファクトチェックを。</p>
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑤ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 460</strong> の考え方に沿って作成しています。</p>
 
       <div class="mc-card">
-        <p class="font-bold mb-2">問題 1（期末 liability）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — 期末 estimated warranty liability）</p>
         <div class="en-stem mb-4">
           Lens Tech began Year 2 with an <strong>estimated warranty liability</strong> balance of <strong>$42,000</strong>. During Year 2, Lens recorded warranty expense equal to <strong>3%</strong> of <strong>$2,400,000</strong> sales. Actual warranty costs paid in cash during Year 2 totaled <strong>$58,000</strong>. What should Lens report as <strong>estimated warranty liability</strong> at the end of Year 2?
         </div>
-        <ul class="text-sm space-y-2 mb-4"><li><strong>A.</strong> $14,000</li><li><strong>B.</strong> $42,000</li><li><strong>C.</strong> $56,000</li><li><strong>D.</strong> $72,000</li></ul>
-        <details><summary>解説</summary>
-          <div class="mt-3 text-sm border-t pt-3 space-y-2">
-            <p>当期認識の費用（引当の増）＝ $2,400,000 × 3% = <strong>$72,000</strong>。</p>
-            <p>期末 liability = $42,000 + $72,000 − $58,000 = <strong>$56,000</strong>。正解 <strong>C</strong>。</p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $14,000</li>
+          <li><strong>B.</strong> $42,000</li>
+          <li><strong>C.</strong> $56,000</li>
+          <li><strong>D.</strong> $72,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed">
+            <p>当期 expense ＝ $2,400,000 × 3% ＝ <strong>$72,000</strong>。</p>
+            <p>期末 liability ＝ $42,000 ＋ $72,000 − $58,000 ＝ <strong>$56,000</strong>。正解 <strong>C</strong>。</p>
+            <p class="text-slate-600">D＝誤解①。A＝期首を忘れた計算。B＝当期の動きを無視。</p>
           </div>
         </details>
       </div>
 
       <div class="mc-card">
-        <p class="font-bold mb-2">問題 2（概念）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — 支出が減らす勘定）</p>
         <div class="en-stem mb-4">
           When a company estimates warranty costs as a percentage of sales and recognizes warranty expense in the same period as the related revenue, subsequent cash payments for warranty repairs typically reduce which balance sheet account?
         </div>
@@ -141,19 +273,27 @@
           <li><strong>C.</strong> Additional paid-in capital</li>
           <li><strong>D.</strong> Deferred revenue</li>
         </ul>
-        <details><summary>解説</summary><div class="mt-3 text-sm border-t pt-3">支出は<strong>引当の履行</strong>として liability を減らす。<strong>B</strong>。</div></details>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 leading-relaxed">
+            <p>支出は、すでに計上した<strong>引当の履行</strong>として <span class="term-en">estimated warranty liability</span> を減らします。正解 <strong>B</strong>（誤解③の回避）。</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> まとめ</h2>
-      <ol class="list-decimal list-inside text-sm text-slate-700 space-y-2">
-        <li>売上×率は<strong>当期の箱（expense と liability の増）</strong>。</li>
-        <li>現金支出は<strong>liability の減</strong>。</li>
-        <li>期末は<strong>期首＋認識ー支出</strong>。</li>
+    <section id="summary" class="section-card border-2 border-slate-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑥ この図解のまとめ</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li><span class="term-en">Warranty expense</span>（売上×率）と <span class="term-en">estimated warranty liability</span>（期末残高）は、問題文のキーワードで使い分ける。</li>
+        <li>認識時は <strong>Dr. Warranty expense / Cr. Estimated warranty liability</strong>。</li>
+        <li>現金支出は liability を減らす。expense を二重に計上しない（誤解③）。</li>
+        <li>期末 liability ＝ 期首 ＋ 当期認識 − 当期の現金支出。$72,000 をそのまま期末にしない（誤解①）。</li>
+        <li>ロールフォワードの合計が、選択肢と一致するか必ず確認する。</li>
       </ol>
     </section>
-    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。</p></footer>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
   </main>
   <script>lucide.createIcons();</script>
 </body>
