@@ -124,6 +124,7 @@ REMOVE_STITCH_JS = r"""
 
 # ビジュアルキャプチャの優先順（図解セクション）
 VISUAL_PANEL_SPECS = [
+    {"id": "reading", "fallbackWhole": True, "includePatternBars": False},
     {"id": "fork", "fallbackWhole": False, "includePatternBars": False},
     {"id": "patterns", "fallbackWhole": False, "includePatternBars": True},
     {"id": "group-b", "fallbackWhole": False, "includePatternBars": True},
@@ -219,7 +220,7 @@ def compose_grid(paths: list[Path], out: Path) -> None:
 
 SCORE_VISUAL_JS = r"""
 () => {
-  const ids = ['fork','patterns','group-a','group-b','terms','exam','three','worries','mc','summary'];
+  const ids = ['fork','patterns','group-a','group-b','terms','exam','reading','three','worries','mc','summary'];
   const score = (el) => {
     if (!el) return 0;
     let s = 0;
@@ -253,6 +254,14 @@ async def capture(url: str, out: Path) -> None:
 
             scores: dict[str, int] = await page.evaluate(SCORE_VISUAL_JS)
             shots: dict[str, Path] = {}
+
+            # 0) 代表MCプレビュー（①よくある悩み内）— 改訂図解の差分が Discord で分かるように最優先
+            preview = page.locator("#worries .mc-preview-box, main .mc-preview-box").first
+            if await preview.count():
+                pth = Path("/tmp/_discord_cap_mc_preview.png")
+                await preview.screenshot(path=str(pth), type="png")
+                if pth.stat().st_size >= 1200:
+                    shots["mc-preview"] = pth
 
             async def shot_preview(specs: list[dict], key: str) -> bool:
                 h = await page.evaluate(BUILD_VISUAL_PREVIEW_JS, specs)
@@ -322,6 +331,7 @@ async def capture(url: str, out: Path) -> None:
                 raise RuntimeError("no sections captured")
 
             order_keys = [
+                "mc-preview",
                 "fork",
                 "patterns",
                 "fork-patterns",
@@ -329,6 +339,7 @@ async def capture(url: str, out: Path) -> None:
                 "group-a",
                 "terms",
                 "exam",
+                "reading",
                 "mc",
                 "worries",
                 "three",
