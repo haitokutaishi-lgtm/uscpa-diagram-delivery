@@ -25,12 +25,12 @@
     "description": "保証費用の見積パターンと実支出から、期末の estimated warranty liability を組み立てる（ASC 460）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/"
   },
-  "2026-05-25": {
+  "2026-05-27": {
     "title": "【図解】資産グループの購入—売価按分（相対公正価値）で土地・建物に配分（MC付き）",
     "description": "一括購入価額を、各資産の appraised value の比率で按分する型。売主簿価では割らない（ASC 360）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/"
   },
-  "2026-05-28": {
+  "2026-05-30": {
     "title": "【図解】強制転換・収用—補償金と帳簿価額から除却益を認識（MC付き）",
     "description": "収用補償と資産の帳簿価額の差額が当期 gain。再投資額は当期益の計算に使わない論点を整理（ASC 360）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/"

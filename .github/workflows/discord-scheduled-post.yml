@@ -1,4 +1,5 @@
 # 日・水・土 9:00 JST: diagram-site に topics を同期 → GitHub Pages の反映待ち → Discord 投稿
+# posts.json は日付キーで管理。当日キーが無くても last_posted_date より後で今日以前の最古キーを1件投稿（取りこぼし防止）。
 # diagram-site/topics/… のときは Playwright で本文ブロックを最大4枚キャプチャし、
 # 会話（.dlg-row / .char-bubble 等）を除いた 2x2 コラージュを embed に添付する。
 #
@@ -22,7 +23,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   sync-diagram-site:
@@ -115,18 +116,32 @@ jobs:
         run: |
           set -euo pipefail
           FILE="schedule/posts.json"
+          STATE_FILE="schedule/discord-post-state.json"
           MANIFEST="ops/diagram-publish-manifest.json"
 
           MANUAL=""
           if [ "${GITHUB_EVENT_NAME:-}" = "workflow_dispatch" ] && [ -f "${GITHUB_EVENT_PATH:-}" ]; then
             MANUAL=$(jq -r '.inputs.post_date // empty | if . == null or . == "" then empty else . end' "$GITHUB_EVENT_PATH" || true)
           fi
+          CALENDAR_TODAY=$(date +%Y-%m-%d)
           if [ -n "${MANUAL}" ]; then
-            TODAY=$(echo -n "$MANUAL" | tr -d ' \t\r\n')
-            echo "Using workflow input post_date: $TODAY"
+            POST_DATE=$(echo -n "$MANUAL" | tr -d ' \t\r\n')
+            echo "Using workflow input post_date: $POST_DATE"
           else
-            TODAY=$(date +%Y-%m-%d)
-            echo "Today (Asia/Tokyo): $TODAY"
+            LAST_POSTED=$(jq -r '.last_posted_date // ""' "$STATE_FILE" 2>/dev/null || echo "")
+            POST_DATE=$(jq -r --arg today "$CALENDAR_TODAY" --arg last "$LAST_POSTED" '
+              [keys[] | select(. != "_comment" and . != "_last_posted_date")]
+              | map(select(. <= $today))
+              | map(select($last == "" or . > $last))
+              | sort
+              | if length > 0 then .[0] else empty end
+            ' "$FILE")
+            if [ -z "${POST_DATE:-}" ]; then
+              echo "No queued post (calendar=$CALENDAR_TODAY, last_posted=${LAST_POSTED:-none}) — skipping."
+              exit 0
+            fi
+            echo "Calendar today (Asia/Tokyo): $CALENDAR_TODAY"
+            echo "Catch-up post date: $POST_DATE (last_posted=${LAST_POSTED:-none})"
           fi
 
           echo "Keys in $FILE (except _comment):"
@@ -138,7 +153,7 @@ jobs:
           fi
 
           # content も付ける → チャンネルに必ず1行は出る（embed 非表示トラブル回避）
-          PAYLOAD=$(jq -c --arg d "$TODAY" '
+          PAYLOAD=$(jq -c --arg d "$POST_DATE" '
             . as $root | $root[$d]
             | if . == null then
                 empty
@@ -156,11 +171,11 @@ jobs:
           ' "$FILE")
 
           if [ -z "$PAYLOAD" ] || [ "$PAYLOAD" = "null" ]; then
-            echo "No post for $TODAY — skipping."
+            echo "No post entry for $POST_DATE — skipping."
             exit 0
           fi
 
-          URL=$(jq -r --arg d "$TODAY" '.[$d].url' "$FILE")
+          URL=$(jq -r --arg d "$POST_DATE" '.[$d].url' "$FILE")
 
           # diagram-site/topics/<slug>/ のときだけ manifest とソース HTML を必須にする（低価法本体サイトなど外部 URL は smoke のみ）
           if echo "$URL" | grep -qE 'github\.io/diagram-site/topics/[^/?#]+'; then
@@ -236,4 +251,18 @@ jobs:
             --webhook-url "$DISCORD_WEBHOOK_URL" \
             --payload-json /tmp/discord_payload.json \
             $IMG_ARG
-          echo "OK Posted for $TODAY"
+          jq --arg d "$POST_DATE" '.last_posted_date = $d' "$STATE_FILE" > /tmp/discord-post-state.json
+          mv /tmp/discord-post-state.json "$STATE_FILE"
+          echo "OK Posted for $POST_DATE (state updated)"
+
+      - name: Commit discord post state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add schedule/discord-post-state.json
+          if git diff --staged --quiet; then
+            echo "No state changes."
+          else
+            git commit -m "chore(delivery): update discord post state"
+            git push
+          fi

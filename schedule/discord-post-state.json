@@ -1,0 +1,4 @@
+{
+  "_comment": "Discord 図解配信ワークフローが最後に投稿した posts.json の日付キー（YYYY-MM-DD）。手動で再投稿する場合は workflow_dispatch の post_date を使うか、この値を調整する。",
+  "last_posted_date": "2026-05-24"
+}

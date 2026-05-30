@@ -12,9 +12,8 @@
 name: FAR Discord post
 
 on:
-  schedule:
-    # 09:00 JST = 00:00 UTC（日本は夏時間なし）
-    - cron: "0 0 * * *"
+  # diagram-delivery に schedule.config.json 等が無いため定期実行は停止。
+  # 図解配信は .github/workflows/discord-scheduled-post.yml（schedule/posts.json）を使用。
   workflow_dispatch:
 
 permissions:
