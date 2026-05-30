@@ -26,8 +26,8 @@
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/"
   },
   "2026-05-27": {
-    "title": "【図解・改訂】バンドル購入—相対公正価値で按分（代表MC→型→MC）",
-    "description": "①で試験型MC（Pelton）を先に提示→よくある間違いA〜C→5ステップの計算の型→理解確認。売主簿価$95kの罠に注意。",
+    "title": "【図解】土地・建物を一括購入したときの取得原価の按分（lump-sum）",
+    "description": "一つの現金で land と building を買う問題。appraised value の比率で allocate。seller’s carrying amount や均等割りは誤答の定番。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/"
   },
   "2026-05-30": {

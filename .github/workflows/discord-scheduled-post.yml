@@ -182,7 +182,7 @@ jobs:
                 empty
               else
                 {
-                  content: ("【図解配信・改訂反映】 " + .title + "\n\nページを更新済みです。代表MC→よくある悩み→計算の型の順で読めます。\n\n参考になった場合はいいね👍でリアクションください！"),
+                  content: ("【図解配信】 " + .title + "\n\n参考になった場合はいいね👍でリアクションください！"),
                   embeds: [{
                     title: .title,
                     description: .description,
