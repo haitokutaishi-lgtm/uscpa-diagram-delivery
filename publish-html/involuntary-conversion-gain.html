@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【図解】強制転換・収用—補償金と帳簿価額から除却益</title>
+  <title>【図解】強制転換・収用—補償金と帳簿価額から除却益を求める</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,139 +18,305 @@
     .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
     .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
     .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-    .avatar-frame svg { flex-shrink: 0; }
     .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
     .student-bubble .role-line { color: #c2410c; }
     .coach-bubble .role-line { color: #1d4ed8; }
-    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
     .persona-strip strong { color: #0f172a; }
-    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1rem; }
-    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
-</style>
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.calc { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.calc th, table.calc td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.calc th { background: #f1f5f9; }
+    table.calc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
+    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
   <header class="header-gradient text-white py-10 px-4">
     <div class="max-w-3xl mx-auto">
-      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Involuntary conversion — <span class="font-bold normal-case">補償金 − 帳簿価額</span></p>
-      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / PP&E・除却（ASC 360 ほか）、試験典型の gain 認識</p>
-      <h1 class="text-2xl md:text-3xl font-bold leading-snug">収用・強制売却：<strong>いま認識する gain</strong>の芯</h1>
-      <p class="mt-3 text-sm opacity-95 max-w-2xl">FAR の典型的な短問では、補償金（又は受取現金）から<strong>除外する資産の帳簿価額（と設問があれば関連する除去コスト）</strong>を差し引いた<strong>差額を当期 gain</strong>として処理する流れが出題されます。<strong>再投資予定の取得価額</strong>そのものを当期 gain の計算にそのまま持ち込まない、という読み方が効きます。</p>
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：PP&amp;E — <span class="font-bold normal-case">involuntary conversion（強制転換・収用）と gain の認識</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / 固定資産の除却（ASC 360-10 ほか）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug">倉庫が<strong>収用・強制売却</strong>されたとき—<strong>補償金</strong>から<strong>帳簿価額</strong>を引いて <strong>gain</strong> を求める</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、災害・収用などで資産を失い、現金補償を受け取る <span class="term-en">involuntary conversion</span> の問題がよく出ます。当期に認識する <span class="term-en">gain</span>（又は <span class="term-en">loss</span>）は、<strong>受取現金（proceeds）− 帳簿価額（carrying amount）</strong> で求めます。</p>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
     <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
       <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">仕訳の骨格</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解けるまで（対話）</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">まとめ</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
       </ul>
     </nav>
 
-    <section id="worries" class="worries-box">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> よくある悩み</h2>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">新しい資産を<strong>いくらで買う予定か</strong>が書いてあって、それで gain を調整しそうになる。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">典型問題では<strong>受け取った補償と帳簿価額</strong>の差が gain の中心。再取得は<strong>別トランザクション</strong>として読むことが多い。</p></div>
-      </div>
-      <div class="worries-inner">
-        <ul class="text-sm list-disc list-inside space-y-1">
-          <li>除却：資産と<strong>累計減価償却</strong>を落とす。</li>
-          <li>gain：<strong>受取 − 帳簿純額</strong>（設問条件に従う）。</li>
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">
+          Dale Co. received <strong>$510,000</strong> cash when its warehouse was condemned by the city. The warehouse had a cost of <strong>$450,000</strong> and accumulated depreciation of <strong>$120,000</strong>. What amount of gain should Dale recognize on the involuntary conversion?
+        </div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A.</strong> $60,000</li>
+          <li><strong>B.</strong> $120,000</li>
+          <li><strong>C.</strong> $180,000</li>
+          <li><strong>D.</strong> $510,000</li>
         </ul>
+      </div>
+
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　replacement cost を gain の計算に使う</span>
+          <p class="text-sm leading-relaxed">倉庫を建て直すには $600,000 かかる、と問題文に書いてありました。gain は、補償金 $510,000 と <span class="term-en">replacement cost</span> の差で求めるのでは？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">再取得予定の建設費や <span class="term-en">replacement cost</span> は、<strong>当期 gain の式には通常入れません</strong>。除却時点で比べるのは、受取現金と<strong>帳簿上の資産（carrying amount）</strong>です。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　historical cost だけを差し引く</span>
+          <p class="text-sm leading-relaxed">cost が $450,000 なので、$510,000 − $450,000 ＝ <strong>$60,000</strong>（選択肢 A）が gain ではないですか？　<span class="term-en">accumulated depreciation</span> は無視してよい気がします。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">差し引くのは取得原価そのものではなく、<strong>帳簿価額</strong>です。$450,000 − $120,000 ＝ <strong>$330,000</strong> が <span class="term-en">carrying amount</span>。A は減価償却を忘れた計算です。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　proceeds をそのまま gain にする</span>
+          <p class="text-sm leading-relaxed">現金 $510,000 を受け取ったので、gain も $510,000（選択肢 D）でよいのでは？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">受取現金は gain そのものではありません。資産を帳簿から除去したうえで、<strong>proceeds − carrying amount</strong> が gain（又は loss）です。D は資産除去を無視した誤答です。</p>
+        </div>
       </div>
     </section>
 
-    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
-      <p class="part-lead">試験用のシンプル・レール。</p>
-      <ol class="space-y-4 text-sm">
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span><div><p class="font-bold">Proceeds</p><p class="text-slate-600 mt-1">現金又は<strong>受取補償の公正価値</strong>（問題指定）。</p></div></li>
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span><div><p class="font-bold">Book value</p><p class="text-slate-600 mt-1">原価 − <strong>累計減価償却</strong>（土地なら通常ゼロ）。</p></div></li>
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span><div><p class="font-bold">Gain</p><p class="text-slate-600 mt-1">Proceeds − Book value（マイナスなら損失）。</p></div></li>
+    <section id="three" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
+      <p class="part-lead"><span class="term-en">Involuntary conversion</span>（収用・災害など）で資産を失ったときの gain 計算の芯です。</p>
+      <ol class="space-y-5 text-sm leading-relaxed">
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
+          <div>
+            <p class="font-bold text-slate-900">帳簿価額＝cost − accumulated depreciation</p>
+            <p class="text-slate-600 mt-1">除却時点で資産に残っている金額が <span class="term-en">carrying amount</span>（帳簿価額）です。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
+          <div>
+            <p class="font-bold text-slate-900">gain＝proceeds − carrying amount</p>
+            <p class="text-slate-600 mt-1">受取現金から帳簿価額を引いた差額が、当期の <span class="term-en">gain</span>（マイナスなら <span class="term-en">loss</span>）です。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
+          <div>
+            <p class="font-bold text-slate-900">資産と減価償却累計額を除去してから gain を認識</p>
+            <p class="text-slate-600 mt-1">仕訳では、まず資産を帳簿価額で取り除き、受取現金と gain を認識します（③参照）。</p>
+          </div>
+        </li>
       </ol>
     </section>
 
-    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4">仕訳の骨格（イメージ）</h2>
-      <p class="text-sm text-slate-700 font-mono bg-slate-100 p-4 rounded-lg">Dr. Cash（補償）<br>Dr. Accumulated depreciation<br>&nbsp;&nbsp;Cr. PP&E（原価）<br>&nbsp;&nbsp;Cr. Gain on disposal（差額）</p>
-      <p class="text-sm text-slate-600 mt-3">設問が<strong>除去費用</strong>や<strong>税引後</strong>を問う場合は指示に従う。</p>
+    <section id="theory" class="section-card border-indigo-100">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
+      <p class="part-lead">②の3つは、ここでの<strong>資産除去と gain 認識の仕訳</strong>に対応します。計算の型の前に、除却時点で何が起きるかを押さえます。</p>
+      <div class="theory-block">
+        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed"><span class="term-en">Involuntary conversion</span>（収用・災害・盗難など）で資産を失ったとき、受け取った補償金と帳簿上の資産の差額を、除却のタイミングで <span class="term-en">gain</span> 又は <span class="term-en">loss</span> として認識します。比較するのは<strong>受取現金（proceeds）</strong>と<strong>帳簿価額（carrying amount）</strong>です。再取得コストや <span class="term-en">replacement cost</span> は、通常この gain の式には入れません（誤解①）。</p>
+      </div>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①帳簿価額（cost − AD）を求める → ②資産と accumulated depreciation を除去 → ③受取現金を認識 → ④proceeds − carrying amount で gain（又は loss）を認識</p>
+      <div class="theory-block">
+        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Dale 例・収用時）</h3>
+        <p class="text-sm text-slate-600 mb-2 leading-relaxed"><strong>収用・補償金受取時（帳簿価額 $330,000・proceeds $510,000）：</strong></p>
+        <p class="je-line">Dr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 510,000</p>
+        <p class="je-line">Dr. Accumulated depreciation — Warehouse &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 120,000</p>
+        <p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Warehouse (PP&amp;E) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 450,000</p>
+        <p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Gain on involuntary conversion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 180,000</p>
+        <p class="text-xs text-slate-500 mt-2 leading-relaxed">借方 $630,000 ＝ 貸方 $630,000。gain $180,000 ＝ proceeds $510,000 − carrying amount $330,000（誤解②③の回避）。</p>
+      </div>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、上記仕訳の gain $180,000 を求めるための数値手順です。</p>
     </section>
 
-    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまで（対話）</h2>
-      <p class="text-sm text-slate-600 mb-3">先の「<strong>再取得予定の金額で益を調整しそうになる</strong>」という悩みに、会話で益の芯を当てはめます。</p>
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed"><span class="term-en">Involuntary conversion</span> の gain を求める<strong>4ステップ</strong>です。</p>
+
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span>問題文から <strong>cost</strong> と <strong>accumulated depreciation</strong> を読み取る。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Carrying amount</strong> ＝ cost − AD。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span>受取現金（<span class="term-en">proceeds</span>）を把握する。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>Gain</strong>（又は loss）＝ proceeds − carrying amount。</span></li>
+      </ol>
+
+      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="proceeds から carrying amount を引いて gain を求める">
+        <svg viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="20" y="20" width="140" height="44" rx="8" fill="#1d4ed8"/>
+          <text x="90" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Proceeds</text>
+          <text x="90" y="54" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="700">$510,000</text>
+          <text x="175" y="48" text-anchor="middle" fill="#475569" font-size="18" font-weight="700">−</text>
+          <rect x="195" y="20" width="160" height="44" rx="8" fill="#64748b"/>
+          <text x="275" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Carrying amount</text>
+          <text x="275" y="54" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">$330,000</text>
+          <rect x="160" y="95" width="160" height="48" rx="8" fill="#166534"/>
+          <text x="240" y="115" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Gain</text>
+          <text x="240" y="132" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">$180,000</text>
+        </svg>
+      </div>
+
+      <p class="text-sm font-semibold text-slate-800 mt-6 mb-2">計算例（上の試験問題と同じ数字）</p>
+      <table class="calc">
+        <thead>
+          <tr><th>項目</th><th class="num">金額</th><th>メモ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Warehouse cost</td><td class="num">$450,000</td><td>問題文</td></tr>
+          <tr><td>− Accumulated depreciation</td><td class="num">$120,000</td><td>帳簿価額の計算</td></tr>
+          <tr><td><strong>Carrying amount</strong></td><td class="num"><strong>$330,000</strong></td><td>Step 2</td></tr>
+          <tr><td>Proceeds (cash received)</td><td class="num">$510,000</td><td>Step 3</td></tr>
+          <tr><td><strong>Gain on involuntary conversion</strong></td><td class="num"><strong>$180,000</strong></td><td>正解 C</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
       <div class="persona-strip">
-        <span><strong>受講生</strong>：文章が長いと、どの数字で益を切るか散らかる。</span>
-        <span><strong>コーチ</strong>：まず<strong>補償（受取）</strong>と<strong>帳簿から落とす純額</strong>の二つに絞る。</span>
+        <span><strong>たくま</strong>：誤解①〜③のあと、数字の流れを一度通したいです。</span>
+        <span><strong>あおい先生</strong>：Dale の例では、<strong>$510,000 − $330,000 ＝ $180,000</strong> が gain です。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">選択肢 A の $60,000 は、どういう計算で出てきますか？</p>
+        </div>
       </div>
       <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">あとで買い戻す資産の<strong>予定価格</strong>が書いてある。益はそれで減らす？</p></div>
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">$510,000 − $450,000 ＝ $60,000 は、<strong>accumulated depreciation を差し引いていない</strong>パターンです（誤解②）。必ず carrying amount を先に求めてください。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">選択肢 B の $120,000 は、accumulated depreciation の金額そのものですか？</p>
+        </div>
       </div>
       <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">典型の短問では<strong>いま受け取った補償と、除却する資産の帳簿価額（原価−累計減価償却）の差</strong>が益。再取得は<strong>別の取得</strong>として読むことが多い。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">「税引前の益」とか「所得税後」とか、言葉だけ変わっている気がする。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">設問が <strong>before income tax</strong> と書いていれば、益の計算に<strong>法人税を混ぜない</strong>。税効果は別の行か別の設問で聞かれることが多いので、<strong>最後の一文</strong>で切り分ける。</p></div>
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">$120,000 は AD の残高であり、gain ではありません。proceeds から cost だけを引いた $60,000（A）や、proceeds そのもの $510,000（D）も定番の誤答です。</p>
+        </div>
       </div>
     </section>
 
-    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認MC</h2>
-      <p class="text-sm text-slate-600 mb-6">公開前は<strong>該当 ASC／設問条件</strong>でファクトチェックを。</p>
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 360-10</strong> の考え方に沿って作成しています。</p>
 
       <div class="mc-card">
-        <p class="font-bold mb-2">問題 1（gain の金額）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — gain on involuntary conversion）</p>
         <div class="en-stem mb-4">
-          A city condemned Dale’s warehouse for a public project. Dale received <strong>$510,000</strong> cash compensation. The warehouse had an original cost of <strong>$450,000</strong> and <strong>accumulated depreciation of $120,000</strong> at the condemnation date. Dale should recognize a gain of:
+          Dale Co. received <strong>$510,000</strong> cash when its warehouse was condemned by the city. The warehouse had a cost of <strong>$450,000</strong> and accumulated depreciation of <strong>$120,000</strong>. What amount of gain should Dale recognize on the involuntary conversion?
         </div>
-        <ul class="text-sm space-y-2 mb-4"><li><strong>A.</strong> $60,000</li><li><strong>B.</strong> $120,000</li><li><strong>C.</strong> $180,000</li><li><strong>D.</strong> $510,000</li></ul>
-        <details><summary>解説</summary>
-          <div class="mt-3 text-sm border-t pt-3 space-y-2">
-            <p>帳簿純額 = $450,000 − $120,000 = <strong>$330,000</strong>。</p>
-            <p>Gain = $510,000 − $330,000 = <strong>$180,000</strong>。正解 <strong>C</strong>。</p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $60,000</li>
+          <li><strong>B.</strong> $120,000</li>
+          <li><strong>C.</strong> $180,000</li>
+          <li><strong>D.</strong> $510,000</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed">
+            <p><strong>Step 1〜2：</strong> Carrying amount ＝ $450,000 − $120,000 ＝ <strong>$330,000</strong>。</p>
+            <p><strong>Step 3〜4：</strong> Gain ＝ $510,000 − $330,000 ＝ <strong>$180,000</strong>。正解 <strong>C</strong>。</p>
+            <p class="text-slate-600">A＝誤解②（cost のみ差し引き）。B＝AD 金額の混同。D＝誤解③（proceeds を gain とみなす）。</p>
           </div>
         </details>
       </div>
 
       <div class="mc-card">
-        <p class="font-bold mb-2">問題 2（概念）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — gain の求め方）</p>
         <div class="en-stem mb-4">
-          In a typical FAR problem involving involuntary conversion of a depreciable asset, the amount recognized as a gain on conversion is most commonly measured as:
+          When a plant asset is involuntarily converted and the company receives cash proceeds, the gain recognized in the period of conversion is ordinarily measured as:
         </div>
         <ul class="text-sm space-y-2 mb-4">
-          <li><strong>A.</strong> Proceeds minus the asset’s carrying amount (cost less accumulated depreciation)</li>
-          <li><strong>B.</strong> Proceeds minus the expected cost of the replacement asset</li>
-          <li><strong>C.</strong> The asset’s original historical cost</li>
-          <li><strong>D.</strong> Fair value of the asset before conversion only</li>
+          <li><strong>A.</strong> Proceeds minus the asset's carrying amount at the date of conversion</li>
+          <li><strong>B.</strong> Proceeds minus the asset's original historical cost</li>
+          <li><strong>C.</strong> Proceeds minus the estimated replacement cost of a similar asset</li>
+          <li><strong>D.</strong> Proceeds received, with no deduction</li>
         </ul>
-        <details><summary>解説</summary><div class="mt-3 text-sm border-t pt-3"><strong>A</strong>。</div></details>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 leading-relaxed">
+            <p>除却時点の <span class="term-en">gain</span> は、<strong>proceeds − carrying amount</strong> です。正解 <strong>A</strong>。B＝誤解②、C＝誤解①、D＝誤解③。</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> まとめ</h2>
-      <ol class="list-decimal list-inside text-sm text-slate-700 space-y-2">
-        <li>補償（proceeds）と<strong>帳簿純額</strong>を並べる。</li>
-        <li>再投資予定額は<strong>別問題</strong>として読むことが多い。</li>
-        <li>設問の<strong>税・除去費</strong>の指示を最優先。</li>
+    <section id="summary" class="section-card border-2 border-slate-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li><span class="term-en">Involuntary conversion</span> の gain ＝ proceeds − carrying amount（cost − AD）。</li>
+        <li>差し引くのは historical cost そのものではなく、<strong>帳簿価額</strong>（誤解②）。</li>
+        <li><span class="term-en">Replacement cost</span> や proceeds そのものを gain にしない（誤解①③）。</li>
+        <li>仕訳：Dr. Cash / Dr. AD / Cr. PP&amp;E / Cr. Gain（③参照）。</li>
+        <li>選択肢 A $60,000 は cost のみ差し引き、D $510,000 は proceeds を gain とみなした誤答。</li>
+        <li>計算結果 $180,000 が選択肢 C と一致するか、必ず確認する。</li>
       </ol>
     </section>
-    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。</p></footer>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
   </main>
   <script>lucide.createIcons();</script>
 </body>

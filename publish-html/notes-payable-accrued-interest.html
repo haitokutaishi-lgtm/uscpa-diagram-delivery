@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【図解】Notes Payable と未払利息 — オリジナルMC付き</title>
+  <title>【図解】Notes Payable—元本返済後の未払利息（accrued interest）を求める</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,136 +18,310 @@
     .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
     .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
     .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-    .avatar-frame svg { flex-shrink: 0; }
     .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
     .student-bubble .role-line { color: #c2410c; }
     .coach-bubble .role-line { color: #1d4ed8; }
-    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 1rem; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
     .persona-strip strong { color: #0f172a; }
-    .worries-inner { background: rgba(255,255,255,.85); border: 1px solid rgba(180,83,9,.25); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1rem; }
-    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; }
-</style>
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.calc { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.calc th, table.calc td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.calc th { background: #f1f5f9; }
+    table.calc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
+    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
   <header class="header-gradient text-white py-10 px-4">
     <div class="max-w-3xl mx-auto">
-      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Interest — <span class="font-bold normal-case">分割返済後の残元本 × 経過期間</span></p>
-      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Interest（ASC 835）</p>
-      <h1 class="text-2xl md:text-3xl font-bold leading-snug">Notes Payable：<strong>未払利息</strong>は<strong>いつの元本</strong>に効くか</h1>
-      <p class="mt-3 text-sm opacity-95 max-w-2xl">直近の<strong>元本返済日</strong>から決算日までの<strong>月数</strong>を、問題が指定する<strong>利率（note rate）</strong>で按分します。プライムレートなど<strong>ダミー条件</strong>に惑わされない。</p>
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Liabilities — <span class="font-bold normal-case">notes payable の accrued interest（元本返済後の未払利息）</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / 利息の計上（ASC 835 ほか）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug"><strong>Notes payable</strong>で元本を返済したあと—<strong>残元本</strong>に<strong>何ヶ月分</strong>の利息を計上するか</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、分割返済の途中で決算日が来る問題がよく出ます。未払利息は、<strong>直近の返済後の残元本</strong> × 利率 × <strong>返済日から決算日までの月数／12</strong> で求めます。</p>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
     <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
       <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">まず覚える3つ</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">タイムラインの描き方</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">悩みが解けるまで（対話）</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">まとめ</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
       </ul>
     </nav>
 
-    <section id="worries" class="worries-box">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> よくある悩み</h2>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">問題に<strong>prime rate</strong>も書いてあって、どっちの利率で計算するか迷う。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">通常は<strong>ノートに書かれた契約利率</strong>で accrued interest を切る。設問が明示しない限り prime は<strong>無関係</strong>のダミーであることが多い。</p></div>
-      </div>
-      <div class="worries-inner">
-        <ul class="text-sm list-disc list-inside space-y-1">
-          <li>返済後の<strong>残元本</strong>をまず確定。</li>
-          <li>「直近の支払日〜決算日」の<strong>月数／日数</strong>。</li>
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">
+          Brak Co. signed a <strong>$1,350,000</strong> note payable at <strong>12%</strong> annual interest, payable in <strong>three equal annual installments of $450,000</strong> beginning <strong>September 1, 20X2</strong>. Brak's year-end is <strong>December 31</strong>. What amount of <strong>accrued interest payable</strong> should Brak report at December 31, 20X2?
+        </div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A.</strong> $54,000</li>
+          <li><strong>B.</strong> $40,500</li>
+          <li><strong>C.</strong> $36,000</li>
+          <li><strong>D.</strong> $16,200</li>
         </ul>
+      </div>
+
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　当初元本 $1,350,000 のまま利息を計算する</span>
+          <p class="text-sm leading-relaxed">9/1 に $450,000 を返済したあとも、利息は $1,350,000 × 12% × 4/12 ＝ <strong>$54,000</strong>（選択肢 A）ではないですか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">返済後の<strong>残元本</strong>に利息がかかります。$1,350,000 − $450,000 ＝ <strong>$900,000</strong> が 9/1 以降の元本です。A は返済前の元本で計算した誤答です。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　経過月数を間違える</span>
+          <p class="text-sm leading-relaxed">9/1 から 12/31 まで 3 ヶ月だと思って、$900,000 × 12% × 3/12 ＝ $27,000… 月数の数え方が毎回不安です。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">9/1（返済日）から 12/31（決算日）までは<strong>4 ヶ月</strong>です（9月・10月・11月・12月）。$900,000 × 12% × <strong>4/12</strong> ＝ $36,000 が正解 C です。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　返済日を無視して期首から利息を計算する</span>
+          <p class="text-sm leading-relaxed">20X2 の 1/1 から 12/31 まで丸1年として、$900,000 × 12% ＝ $108,000… と考えてしまいます。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">分割返済がある問題では、<strong>直近の元本変動日</strong>（ここでは 9/1 の返済）から決算日までの期間だけを見ます。返済前の元本で全年を計算しないでください（誤解①③）。</p>
+        </div>
       </div>
     </section>
 
-    <section id="three" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> まず覚える3つ</h2>
-      <p class="part-lead">未払利息の芯。</p>
-      <ol class="space-y-4 text-sm">
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span><div><p class="font-bold">利息の対象元本</p><p class="text-slate-600 mt-1">分割返済後は<strong>減った後の元本</strong>。</p></div></li>
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span><div><p class="font-bold">経過期間</p><p class="text-slate-600 mt-1">最後の<strong>現金支払日（元本＋利息）</strong>から決算日まで。</p></div></li>
-        <li class="flex gap-3"><span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span><div><p class="font-bold">利率</p><p class="text-slate-600 mt-1">問題指定の<strong>note rate</strong>を使う。</p></div></li>
+    <section id="three" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
+      <p class="part-lead">分割返済の途中で決算が来る、試験でよく出る型（ASC 835）です。</p>
+      <ol class="space-y-5 text-sm leading-relaxed">
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
+          <div>
+            <p class="font-bold text-slate-900">返済後の残元本を把握する</p>
+            <p class="text-slate-600 mt-1">元本返済があったら、<strong>notes payable の残高</strong>を更新してから利息を計算します。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
+          <div>
+            <p class="font-bold text-slate-900">利息の期間＝直近の元本変動日〜決算日</p>
+            <p class="text-slate-600 mt-1">返済日（9/1）から決算日（12/31）までの<strong>月数</strong>を数えます。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
+          <div>
+            <p class="font-bold text-slate-900">accrued interest＝残元本 × 利率 × 月数/12</p>
+            <p class="text-slate-600 mt-1">決算日時点でまだ支払っていない利息を <span class="term-en">accrued interest payable</span> として計上します。</p>
+          </div>
+        </li>
       </ol>
     </section>
 
-    <section id="reading" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4">タイムラインの描き方</h2>
-      <p class="text-sm text-slate-700">借入日 → 各返済日で元本を減らす → <strong>決算日</strong>で矢印を止めて「何か月か」を数える。</p>
+    <section id="theory" class="section-card border-indigo-100">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
+      <p class="part-lead">②の3つは、ここでの<strong>元本返済と期末の利息計上</strong>に対応します。計算の型の前に、発生主義でなぜ未払利息が必要かを押さえます。</p>
+      <div class="theory-block">
+        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">借入金を使っている期間に応じて <span class="term-en">interest expense</span> を認識し、まだ支払っていない分は <span class="term-en">accrued interest payable</span> として負債に計上します（<strong>ASC 835</strong>）。分割返済で元本が減ったあとは、<strong>残元本</strong>に対してのみ利息が発生します。当初元本のまま計算すると誤解①になります。</p>
+      </div>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①9/1 に元本 $450,000 を返済（notes payable を $900,000 に更新） → ②9/1〜12/31 の 4 ヶ月分の利息を計算 → ③期末に Dr. Interest expense / Cr. Accrued interest payable を認識</p>
+      <div class="theory-block">
+        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Brak 例・20X2 期末）</h3>
+        <p class="text-sm text-slate-600 mb-2 leading-relaxed"><strong>9/1/20X2 元本返済時：</strong></p>
+        <p class="je-line">Dr. Notes payable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 450,000</p>
+        <p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 450,000</p>
+        <p class="text-sm text-slate-600 mb-2 mt-3 leading-relaxed"><strong>12/31/20X2 未払利息の計上（残元本 $900,000・4 ヶ月）：</strong></p>
+        <p class="je-line">Dr. Interest expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 36,000</p>
+        <p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Accrued interest payable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 36,000</p>
+        <p class="text-xs text-slate-500 mt-2 leading-relaxed">$36,000 ＝ $900,000 × 12% × 4/12。$54,000 は返済前元本 $1,350,000 で計算した誤答（誤解①）。</p>
+      </div>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、上記仕訳の $36,000 を求めるための数値手順です。</p>
     </section>
 
-    <section id="process" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> 悩みが解けるまで（対話）</h2>
-      <p class="text-sm text-slate-600 mb-3">先の「<strong>prime rate と契約利率のどちらで計算するか迷う</strong>」と、暗算は簡単なのに落ちるパターンに答えます。</p>
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed"><span class="term-en">Accrued interest payable</span> を求める<strong>4ステップ</strong>です。</p>
+
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span>決算日より前の<strong>元本返済</strong>があれば、残元本を更新する。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>直近の元本変動日</strong>から決算日までの月数を数える。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span>問題文の<strong>note rate</strong>（年利率）を確認する。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>Accrued interest</strong> ＝ 残元本 × 利率 × 月数/12。</span></li>
+      </ol>
+
+      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="残元本に経過月数と利率をかけて未払利息を求める">
+        <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="20" y="20" width="130" height="44" rx="8" fill="#64748b"/>
+          <text x="85" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Remaining principal</text>
+          <text x="85" y="54" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">$900,000</text>
+          <text x="165" y="48" text-anchor="middle" fill="#475569" font-size="18" font-weight="700">×</text>
+          <rect x="185" y="20" width="90" height="44" rx="8" fill="#1d4ed8"/>
+          <text x="230" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Rate</text>
+          <text x="230" y="54" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="700">12%</text>
+          <text x="290" y="48" text-anchor="middle" fill="#475569" font-size="18" font-weight="700">×</text>
+          <rect x="310" y="20" width="150" height="44" rx="8" fill="#b45309"/>
+          <text x="385" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Period</text>
+          <text x="385" y="54" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="700">4/12 (Sep–Dec)</text>
+          <rect x="140" y="100" width="200" height="48" rx="8" fill="#166534"/>
+          <text x="240" y="120" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Accrued interest</text>
+          <text x="240" y="137" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">$36,000</text>
+        </svg>
+      </div>
+
+      <p class="text-sm font-semibold text-slate-800 mt-6 mb-2">計算例（上の試験問題と同じ数字）</p>
+      <table class="calc">
+        <thead>
+          <tr><th>項目</th><th class="num">金額</th><th>メモ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>当初 notes payable</td><td class="num">$1,350,000</td><td>問題文</td></tr>
+          <tr><td>− 9/1/20X2 元本返済</td><td class="num">$450,000</td><td>残元本の更新</td></tr>
+          <tr><td><strong>残元本（9/1 以降）</strong></td><td class="num"><strong>$900,000</strong></td><td>Step 1</td></tr>
+          <tr><td>経過期間（9/1〜12/31）</td><td class="num">4 ヶ月</td><td>Step 2</td></tr>
+          <tr><td><strong>Accrued interest（12% × 4/12）</strong></td><td class="num"><strong>$36,000</strong></td><td>正解 C</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
       <div class="persona-strip">
-        <span><strong>受講生</strong>：問題に金利が二種類書いてあると不安になる。</span>
-        <span><strong>コーチ</strong>：未払利息は<strong>ノートに書かれた利率 × 経過期間 × 対象元本</strong>。余計な金利は足がかりにしない。</span>
+        <span><strong>たくま</strong>：誤解①〜③のあと、数字の流れを一度通したいです。</span>
+        <span><strong>あおい先生</strong>：Brak の例では、<strong>$900,000 × 12% × 4/12 ＝ $36,000</strong> です。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">選択肢 A の $54,000 は、どういう計算で出てきますか？</p>
+        </div>
       </div>
       <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">文中に <strong>prime rate</strong> も出てくる。未払利息はこれで割る？</p></div>
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">$1,350,000 × 12% × 4/12 ＝ $54,000 は、<strong>返済前の元本</strong>で計算したパターンです（誤解①）。9/1 返済後は $900,000 が残元本です。</p>
+        </div>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">選択肢 B の $40,500 は、3 ヶ月で計算した結果ですか？</p>
+        </div>
       </div>
       <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm">設問が「prime で計算しろ」と言っていない限り、典型は<strong>ノートの契約利率（stated rate）</strong>。prime は<strong>紛らわせ</strong>か、別の小問用のことが多い。</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0"><p class="role-line">たくま（受講生）</p><p class="text-sm">元本が途中で減るタイプだと、決算日の未払利息は<strong>どの元本</strong>にかける？</p></div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0"><p class="role-line">あおい先生（コーチ）</p><p class="text-sm"><strong>直近の元本返済をしたあとの残高</strong>。タイムラインに書いて、最後の利息支払日から決算日までの<strong>月数だけ</strong>を数えると取り違えにくい。</p></div>
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">$900,000 × 12% × 3/12 ＝ $27,000 ではなく、問題によっては $1,350,000 × 12% × 3/12 ＝ $40,500 のような<strong>月数または元本の誤り</strong>です（誤解②③）。9/1 から 12/31 は 4 ヶ月です。</p>
+        </div>
       </div>
     </section>
 
-    <section id="mc" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> 理解確認MC</h2>
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 835</strong> の考え方に沿って作成しています。</p>
+
       <div class="mc-card">
-        <p class="font-bold mb-2">問題 1（計算）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — accrued interest payable）</p>
         <div class="en-stem mb-4">
-          On September 1, 20x1, Brak Co. borrowed <strong>$1,350,000</strong> on a note at <strong>12%</strong>, payable in <strong>three equal annual principal payments</strong> of <strong>$450,000</strong>. The first payment (principal plus interest) was made September 1, 20x2. At December 31, 20x2, what amount should Brak report as <strong>accrued interest payable</strong>? (Assume the note’s stated rate applies.)
+          Brak Co. signed a <strong>$1,350,000</strong> note payable at <strong>12%</strong> annual interest, payable in <strong>three equal annual installments of $450,000</strong> beginning <strong>September 1, 20X2</strong>. Brak's year-end is <strong>December 31</strong>. What amount of <strong>accrued interest payable</strong> should Brak report at December 31, 20X2?
         </div>
-        <ul class="text-sm space-y-2 mb-4"><li><strong>A.</strong> $54,000</li><li><strong>B.</strong> $49,500</li><li><strong>C.</strong> $36,000</li><li><strong>D.</strong> $33,000</li></ul>
-        <details><summary>解説</summary>
-          <div class="mt-3 text-sm border-t pt-3 space-y-2">
-            <p>20x2/9/1 に第一回返済後、残元本 <strong>$900,000</strong>（1,350,000 − 450,000）。</p>
-            <p>20x2/9/1 〜 20x2/12/31 は <strong>4 か月</strong>。</p>
-            <p>$900,000 × 12% × (4/12) = <strong>$36,000</strong>。正解 <strong>C</strong>。</p>
+        <ul class="text-sm space-y-2 mb-4">
+          <li><strong>A.</strong> $54,000</li>
+          <li><strong>B.</strong> $40,500</li>
+          <li><strong>C.</strong> $36,000</li>
+          <li><strong>D.</strong> $16,200</li>
+        </ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed">
+            <p><strong>Step 1：</strong> 残元本 ＝ $1,350,000 − $450,000 ＝ <strong>$900,000</strong>。</p>
+            <p><strong>Step 2〜4：</strong> $900,000 × 12% × 4/12 ＝ <strong>$36,000</strong>。正解 <strong>C</strong>。</p>
+            <p class="text-slate-600">A＝誤解①（返済前元本）。B＝月数または元本の誤り（誤解②）。D＝別期間の計算。</p>
           </div>
         </details>
       </div>
+
       <div class="mc-card">
-        <p class="font-bold mb-2">問題 2（概念）</p>
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — 利息計算の元本）</p>
         <div class="en-stem mb-4">
-          When calculating accrued interest on an outstanding note payable after a scheduled principal repayment, which principal balance should generally be used for periods after that repayment date?
+          After a borrower makes a scheduled principal payment on a note payable, accrued interest from the payment date to the balance sheet date should ordinarily be computed using:
         </div>
         <ul class="text-sm space-y-2 mb-4">
-          <li><strong>A.</strong> The original note principal only</li>
-          <li><strong>B.</strong> The remaining principal after applying the repayment</li>
-          <li><strong>C.</strong> Zero</li>
-          <li><strong>D.</strong> Fair value of pledged collateral</li>
+          <li><strong>A.</strong> The original face amount of the note before any repayments</li>
+          <li><strong>B.</strong> The remaining principal balance after the most recent repayment</li>
+          <li><strong>C.</strong> The total of all scheduled future principal payments</li>
+          <li><strong>D.</strong> The amount of cash paid at the most recent installment date only</li>
         </ul>
-        <details><summary>解説</summary><div class="mt-3 text-sm border-t pt-3">返済後は<strong>残元本</strong>が利息計算のベース。<strong>B</strong>。</div></details>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 leading-relaxed">
+            <p>元本返済後の未払利息は、<strong>直近返済後の残元本</strong>に対して計算します。正解 <strong>B</strong>（誤解①の回避）。A は返済前の元本です。</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <section id="summary" class="bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> まとめ</h2>
-      <ol class="list-decimal list-inside text-sm text-slate-700 space-y-2">
-        <li>残元本をタイムラインで更新。</li>
-        <li>経過月数 × note rate。</li>
-        <li>ダミー利率に注意。</li>
+    <section id="summary" class="section-card border-2 border-slate-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li>分割返済後の <span class="term-en">accrued interest</span> は、<strong>残元本</strong> × 利率 × 月数/12（③の仕訳）。</li>
+        <li>当初元本 $1,350,000 のまま計算しない（誤解①）。返済後は $900,000 が基礎。</li>
+        <li>利息の期間は<strong>直近の元本変動日〜決算日</strong>。9/1〜12/31 は 4 ヶ月（誤解②③）。</li>
+        <li>期末仕訳：<strong>Dr. Interest expense / Cr. Accrued interest payable</strong>。</li>
+        <li>選択肢 A $54,000 は返済前元本、B $40,500 は月数または元本の誤り。</li>
+        <li>計算結果 $36,000 が選択肢 C と一致するか、必ず確認する。</li>
       </ol>
     </section>
-    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。</p></footer>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
   </main>
   <script>lucide.createIcons();</script>
 </body>

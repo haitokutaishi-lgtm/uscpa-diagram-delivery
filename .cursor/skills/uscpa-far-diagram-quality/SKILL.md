@@ -131,17 +131,21 @@ description: >-
 - [ ] posts.json と URL が manifest と一致
 ```
 
-## 図解の改稿状況（目安）
+## 図解の改稿状況（manifest 全10件）
 
-| slug | 7部+理論+品質 | 備考 |
-|------|----------------|------|
-| asset-group-relative-sales-value | 済 | 按分・参照実装 |
-| warranty-liability | 済 | 製品保証・参照実装 |
-| refinancing-current-liabilities | 要改稿 | 再掲予定あり |
-| current-liabilities-classification | 要改稿 | |
-| treasury-stock-par-value | 要改稿 | |
-| notes-payable-accrued-interest | 要改稿 | |
-| involuntary-conversion-gain | 要改稿 | |
-| income-taxes-dta / inventory-lcm-* | 配信キュー外方針 | posts.json にキーなし |
+| slug | 7部+理論+品質 | source HTML |
+|------|----------------|-------------|
+| asset-group-relative-sales-value | 済 | `publish-html/asset-group-relative-sales-value.html` |
+| warranty-liability | 済 | `publish-html/warranty-liability.html` |
+| refinancing-current-liabilities | 済 | `publish-html/theme-refinancing-current-liabilities.html` |
+| current-liabilities-classification | 済 | `publish-html/current-liabilities-classification.html` |
+| treasury-stock-par-value | 済 | `publish-html/treasury-stock-par-value.html` |
+| notes-payable-accrued-interest | 済 | `publish-html/notes-payable-accrued-interest.html` |
+| involuntary-conversion-gain | 済 | `publish-html/involuntary-conversion-gain.html` |
+| deferred-tax-asset-dta | 済 | `publish-html/income-taxes-dta.html` |
+| inventory-lcm-reading-drill | 済 | `publish-html/inventory-lcm-reading-drill.html` |
+| ppe-impairment-held-for-use | 済 | `publish-html/ppe-impairment-held-for-use.html` |
+
+`posts.json` にキーがない slug（DTA・LCM・減損）は Discord 自動キュー対象外の方針を維持。
 
 未改稿テーマを配信する前に、可能なら本スキルで HTML を更新してから出す。
