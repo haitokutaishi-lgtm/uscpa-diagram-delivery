@@ -111,7 +111,7 @@
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="coach-bubble mb-0">
           <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed"><span class="term-en">Warranty expense</span> を聞かれたら、多くは<strong>売上×率</strong>です。<span class="term-en">Estimated warranty liability</span> を聞かれたら、<strong>期首残高＋当期認識−当期の現金支出</strong>のロールフォワードです。キーワードで分岐しましょう。</p>
+          <p class="text-sm leading-relaxed"><span class="term-en">Warranty expense</span> を聞かれたら、多くは<strong>売上×率</strong>です。<span class="term-en">Estimated warranty liability</span> を聞かれたら、<strong>期首残高＋当期認識−当期の現金支出</strong>で期末残高を求めます。キーワードで分岐しましょう。</p>
         </div>
       </div>
 
@@ -134,7 +134,7 @@
 
     <section id="three" class="section-card">
       <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
-      <p class="part-lead">売上に一定率をかける典型モデル（ASC 460 の試験用レール）です。</p>
+      <p class="part-lead">売上に一定率をかける、試験でよく出る型（ASC 460）です。</p>
       <ol class="space-y-5 text-sm leading-relaxed">
         <li class="flex gap-3">
           <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
@@ -147,14 +147,14 @@
           <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
           <div>
             <p class="font-bold text-slate-900">現金支出は liability を減らす</p>
-            <p class="text-slate-600 mt-1">修理・交換の支払いは、すでに計上した引当の<strong>履行</strong>として処理します（<strong>Dr. Liability / Cr. Cash</strong>）。</p>
+            <p class="text-slate-600 mt-1">修理・交換の支払いは、すでに計上した<strong>引当を減らす</strong>処理です（<strong>Dr. Liability / Cr. Cash</strong>）。</p>
           </div>
         </li>
         <li class="flex gap-3">
           <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
           <div>
             <p class="font-bold text-slate-900">期末 liability＝期首＋認識−支出</p>
-            <p class="text-slate-600 mt-1">貸借対照表の残高は、当期の expense そのものではありません。ロールフォワードで必ず確認します。</p>
+            <p class="text-slate-600 mt-1">貸借対照表の残高は、当期の expense そのものではありません。期首残高から増減を足し引きして、必ず確認します。</p>
           </div>
         </li>
       </ol>
@@ -165,9 +165,9 @@
       <p class="part-lead">②の3つは、ここでの<strong>販売時の見積り認識と、その後の現金支出</strong>に対応します。計算の型の前に、発生主義でなぜ二段階になるかを押さえます。</p>
       <div class="theory-block">
         <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
-        <p class="text-sm text-slate-700 leading-relaxed">製品を売った時点で、将来の修理・交換コストが発生しうると合理的に見積れる場合、<strong>売上と同じ期間</strong>に <span class="term-en">warranty expense</span> を認識します（マッチングの考え方）。同時に <span class="term-en">estimated warranty liability</span> を計上し、将来の支出に備えます。実際に現金を支払ったときは、すでに計上した費用をもう一度認識せず、<strong>liability の履行</strong>として処理します（誤解③の回避）。</p>
+        <p class="text-sm text-slate-700 leading-relaxed">製品を売った時点で、将来の修理・交換コストが発生しうると合理的に見積れる場合、<strong>売上と同じ期間</strong>に <span class="term-en">warranty expense</span> を認識します。同時に <span class="term-en">estimated warranty liability</span> を計上し、将来の支出に備えます。実際に現金を支払ったときは、すでに計上した費用をもう一度認識せず、<strong>引当を減らして</strong>現金を支払う処理にします（誤解③の回避）。</p>
       </div>
-      <p class="timeline-mini"><strong>処理の順序：</strong> ①販売時に売上×率で expense と liability を認識 → ②修理・交換で現金支出（liability 減少） → ③期末に liability 残高をロールフォワード</p>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①販売時に売上×率で expense と liability を認識 → ②修理・交換で現金支出（liability を減らす） → ③期首残高に認識を足し支出を引いて期末残高を求める</p>
       <div class="theory-block">
         <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Lens Tech 例）</h3>
         <p class="text-sm text-slate-600 mb-2 leading-relaxed"><strong>販売時（当期、売上 $2,400,000・率 3%）：</strong></p>
@@ -192,7 +192,7 @@
         <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>期末 liability</strong> ＝ 期首 ＋ Step 2 − Step 3。</span></li>
       </ol>
 
-      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="warranty liability のロールフォワード">
+      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="期首から期末までの warranty liability 残高の計算">
         <svg viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="20" y="20" width="120" height="44" rx="8" fill="#64748b"/>
           <text x="80" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Beg.</text>
@@ -243,7 +243,7 @@
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="coach-bubble mb-0">
           <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">$72,000 − $58,000 ＝ $14,000 は、<strong>期首 $42,000 を忘れた</strong>パターンです。期末 liability は必ず期首からロールフォワードしてください。</p>
+          <p class="text-sm leading-relaxed">$72,000 − $58,000 ＝ $14,000 は、<strong>期首 $42,000 を忘れた</strong>パターンです。期末 liability は、必ず期首残高から足し引きしてください。</p>
         </div>
       </div>
 
@@ -302,7 +302,7 @@
         <details>
           <summary>解説を開く</summary>
           <div class="mt-3 text-sm text-slate-700 border-t pt-3 leading-relaxed">
-            <p>支出は、すでに計上した<strong>引当の履行</strong>として <span class="term-en">estimated warranty liability</span> を減らします。正解 <strong>B</strong>（誤解③の回避）。</p>
+            <p>支出は、すでに計上した<strong>引当を減らす</strong>処理として <span class="term-en">estimated warranty liability</span> を減らします。正解 <strong>B</strong>（誤解③の回避）。</p>
           </div>
         </details>
       </div>
@@ -311,12 +311,12 @@
     <section id="summary" class="section-card border-2 border-slate-300">
       <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
       <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li>販売時に expense と liability を認識し、現金支出は liability の履行のみ（③の仕訳）。</li>
+        <li>販売時に expense と liability を認識し、現金支出は引当を減らすだけ（③の仕訳）。</li>
         <li><span class="term-en">Warranty expense</span>（売上×率）と <span class="term-en">estimated warranty liability</span>（期末残高）は、問題文のキーワードで使い分ける。</li>
         <li>認識時は <strong>Dr. Warranty expense / Cr. Estimated warranty liability</strong>。</li>
         <li>現金支出は liability を減らす。expense を二重に計上しない（誤解③）。</li>
         <li>期末 liability ＝ 期首 ＋ 当期認識 − 当期の現金支出。$72,000 をそのまま期末にしない（誤解①）。</li>
-        <li>ロールフォワードの合計が、選択肢と一致するか必ず確認する。</li>
+        <li>期首＋認識−支出の計算結果が、選択肢と一致するか必ず確認する。</li>
       </ol>
     </section>
 

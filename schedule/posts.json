@@ -22,7 +22,7 @@
   },
   "2026-05-24": {
     "title": "【図解】売上連動の製品保証—warranty expense と期末 liability",
-    "description": "売上×率の認識と現金支出。estimated warranty liability は期首＋認識−支出でロールフォワード（ASC 460）。",
+    "description": "売上×率の認識と現金支出。期末 liability は期首残高に認識を足し支出を引いて求める（ASC 460）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/"
   },
   "2026-05-27": {
