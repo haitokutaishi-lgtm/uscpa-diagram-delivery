@@ -1,0 +1,91 @@
+{
+  "_comment": "コピーして <slug>.json にリネーム。HTML 内は body_html 等に軽い HTML 可（term-en クラス推奨）",
+  "meta": {
+    "page_title": "【図解】テーマ名—試験で何を問うか",
+    "theme_line_html": "科目英語 — <span class=\"font-bold normal-case\">キーワード（日本語補足）</span>",
+    "subject_line": "USCPA FAR / 単元名（ASC ○○○ ほか）",
+    "h1_html": "見出し（試験で想像できる日本語）",
+    "lead_html": "試験でよく出る英文・数字の型を1文で。"
+  },
+  "mc_preview": {
+    "stem_html": "English MC stem here with <strong>$123</strong> amounts.",
+    "choices": ["A. $1", "B. $2", "C. $3", "D. $4"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　よくある間違いの要約",
+      "student_html": "たくまの誤解（です・ます）",
+      "coach_html": "あおい先生の訂正"
+    },
+    {
+      "label": "誤解②　…",
+      "student_html": "…",
+      "coach_html": "…"
+    },
+    {
+      "label": "誤解③　…",
+      "student_html": "…",
+      "coach_html": "…"
+    }
+  ],
+  "three_lead_html": "計算前の地図です。",
+  "three": [
+    { "title": "ポイント1", "body_html": "説明" },
+    { "title": "ポイント2", "body_html": "説明" },
+    { "title": "ポイント3", "body_html": "説明" }
+  ],
+  "theory": {
+    "lead_html": "②の3つは、ここでの仕訳に対応します。",
+    "timeline_html": "①… → ②… → ③…",
+    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、この仕訳の金額を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "背景の説明",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳",
+        "body_html": "",
+        "je_lines": ["Dr. Account &nbsp; 100", "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Account &nbsp; 100"]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "試験のメモ欄に書ける手順です。",
+    "steps": [
+      "<strong>Step 1</strong>の説明",
+      "<strong>Step 2</strong>の説明"
+    ],
+    "extra_html": ""
+  },
+  "process_persona_strip": {
+    "takuma": "①のあと、数字が不安です。",
+    "aoi": "この順で確認しましょう。"
+  },
+  "process_dialogues": [
+    { "student_html": "…", "coach_html": "…" }
+  ],
+  "mc_intro_html": "オリジナル問題です。<strong>ASC ○○○</strong> の考え方に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算）",
+      "stem_html": "English stem…",
+      "choices": ["A. …", "B. …", "C. …", "D. …"],
+      "explain_html": "<p>解説</p>"
+    },
+    {
+      "title": "問題 2（概念）",
+      "stem_html": "Concept stem…",
+      "choices": ["A. …", "B. …", "C. …", "D. …"],
+      "explain_html": "<p>解説</p>"
+    }
+  ],
+  "summary": [
+    "まとめ1",
+    "まとめ2",
+    "まとめ3"
+  ]
+}

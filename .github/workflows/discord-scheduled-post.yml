@@ -1,4 +1,4 @@
-# 日・水・土 9:00 JST: diagram-site に topics を同期 → GitHub Pages の反映待ち → Discord 投稿
+# 日・水・土 9:00 JST: （任意）topic-spec から HTML 自動生成 → diagram-site 同期 → Discord 投稿
 # posts.json は日付キーで管理。当日キーが無くても last_posted_date より後で今日以前の最古キーを1件投稿（取りこぼし防止）。
 # diagram-site/topics/… のときは Playwright で本文ブロックを最大4枚キャプチャし、
 # 会話（.dlg-row / .char-bubble 等）を除いた 2x2 コラージュを embed に添付する。
@@ -7,7 +7,7 @@
 #   DISCORD_WEBHOOK_URL       … 必須（投稿用）
 #   DIAGRAM_SITE_PUSH_TOKEN   … diagram-site への自動デプロイに必須（contents:write の PAT）
 
-name: Discord 図解配信
+name: 図解 自動生成→配信
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -24,6 +24,11 @@ on:
         required: false
         default: ""
         type: string
+      force_regenerate:
+        description: "topic-spec がある場合、HTML を強制再生成する"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -33,7 +38,77 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      post_date: ${{ steps.resolve.outputs.post_date }}
+      slug: ${{ steps.resolve.outputs.slug }}
+      source: ${{ steps.resolve.outputs.source }}
+      run_generate: ${{ steps.resolve.outputs.run_generate }}
+      skip: ${{ steps.resolve.outputs.skip }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolve next post
+        id: resolve
+        env:
+          TZ: Asia/Tokyo
+          CALENDAR_TODAY: ""
+          MANUAL_POST_DATE: ""
+          FORCE_REGENERATE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force_regenerate == 'true' }}
+        run: |
+          set -euo pipefail
+          export CALENDAR_TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MANUAL=$(jq -r '.inputs.post_date // empty' "$GITHUB_EVENT_PATH" || true)
+            if [ -n "$MANUAL" ] && [ "$MANUAL" != "null" ]; then
+              export MANUAL_POST_DATE="$MANUAL"
+            fi
+          fi
+          python ops/pipeline_resolve_post.py --github-output "$GITHUB_OUTPUT"
+
+  generate-diagram:
+    needs: prepare
+    if: needs.prepare.outputs.skip != 'true' && needs.prepare.outputs.run_generate == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate HTML from topic-spec
+        run: |
+          set -euo pipefail
+          SPEC="schedule/topic-specs/${{ needs.prepare.outputs.slug }}.json"
+          OUT="${{ needs.prepare.outputs.source }}"
+          python ops/generate_diagram_from_spec.py --spec "$SPEC" --output "$OUT"
+          echo "Generated $OUT from $SPEC"
+
+      - name: Commit generated HTML
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${{ needs.prepare.outputs.source }}"
+          if git diff --cached --quiet; then
+            echo "No HTML changes after generation."
+            exit 0
+          fi
+          git commit -m "chore(diagram): auto-generate ${{ needs.prepare.outputs.slug }} for ${{ needs.prepare.outputs.post_date }}"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            sleep 5
+          done
+
   sync-diagram-site:
+    needs: [prepare, generate-diagram]
+    if: always() && needs.prepare.outputs.skip != 'true' && (needs.generate-diagram.result == 'success' || needs.generate-diagram.result == 'skipped')
     runs-on: ubuntu-latest
     outputs:
       pushed: ${{ steps.final-push-flag.outputs.pushed }}
@@ -41,6 +116,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           path: far
+          ref: main
 
       - name: Check PAT
         id: pat
@@ -116,11 +192,13 @@ jobs:
           fi
 
   post:
-    needs: sync-diagram-site
-    if: ${{ always() && needs.sync-diagram-site.result != 'cancelled' }}
+    needs: [prepare, sync-diagram-site]
+    if: ${{ always() && needs.prepare.outputs.skip != 'true' && needs.sync-diagram-site.result != 'cancelled' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -142,29 +220,15 @@ jobs:
           STATE_FILE="schedule/discord-post-state.json"
           MANIFEST="ops/diagram-publish-manifest.json"
 
+          POST_DATE="${{ needs.prepare.outputs.post_date }}"
+          if [ -z "${POST_DATE}" ]; then
+            echo "No queued post — skipping."
+            exit 0
+          fi
+          echo "Posting for $POST_DATE (slug=${{ needs.prepare.outputs.slug }})"
           MANUAL=""
           if [ "${GITHUB_EVENT_NAME:-}" = "workflow_dispatch" ] && [ -f "${GITHUB_EVENT_PATH:-}" ]; then
             MANUAL=$(jq -r '.inputs.post_date // empty | if . == null or . == "" then empty else . end' "$GITHUB_EVENT_PATH" || true)
-          fi
-          CALENDAR_TODAY=$(date +%Y-%m-%d)
-          if [ -n "${MANUAL}" ]; then
-            POST_DATE=$(echo -n "$MANUAL" | tr -d ' \t\r\n')
-            echo "Using workflow input post_date: $POST_DATE"
-          else
-            LAST_POSTED=$(jq -r '.last_posted_date // ""' "$STATE_FILE" 2>/dev/null || echo "")
-            POST_DATE=$(jq -r --arg today "$CALENDAR_TODAY" --arg last "$LAST_POSTED" '
-              [keys[] | select(. != "_comment" and . != "_last_posted_date")]
-              | map(select(. <= $today))
-              | map(select($last == "" or . > $last))
-              | sort
-              | if length > 0 then .[0] else empty end
-            ' "$FILE")
-            if [ -z "${POST_DATE:-}" ]; then
-              echo "No queued post (calendar=$CALENDAR_TODAY, last_posted=${LAST_POSTED:-none}) — skipping."
-              exit 0
-            fi
-            echo "Calendar today (Asia/Tokyo): $CALENDAR_TODAY"
-            echo "Catch-up post date: $POST_DATE (last_posted=${LAST_POSTED:-none})"
           fi
 
           echo "Keys in $FILE (except _comment):"

@@ -58,7 +58,7 @@ magick "$SRC" -crop 74x104+442+526 +repage -resize 128x128 -background white -gr
 
 - `ops/sync_diagram_site.sh` は、manifest で同期する **各** `topics/<slug>/` に対し、`publish-html/avatars/` 内のファイルを **`topics/<slug>/avatars/`** へコピーする。
 - したがって HTML 内の `avatars/...` 参照は、GitHub Pages 上でも **同じ相対パス**で動く。
-- **Discord 図解配信**（`.github/workflows/discord-scheduled-post.yml`）は、配信 URL が `diagram-site/topics/…` のとき `ops/screenshot_discord_collage.py` で **会話を除いた本文セクション最大4枚**を 2x2 の PNG にして Webhook に添付する（`main > .section-card` / `main > section` を順に切り出す）。
+- **図解 自動生成→配信**（`.github/workflows/discord-scheduled-post.yml`）は、配信 URL が `diagram-site/topics/…` のとき `ops/screenshot_discord_collage.py` で **会話を除いた本文セクション最大4枚**を 2x2 の PNG にして Webhook に添付する（`main > .section-card` / `main > section` を順に切り出す）。
 
 ## エージェント向けルール
 

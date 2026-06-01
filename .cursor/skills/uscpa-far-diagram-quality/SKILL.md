@@ -94,25 +94,31 @@ description: >-
 
 ---
 
-## Discord 自動配信（読み方）
+## 自動生成 → 配信（標準運用）
 
-- **cron**: 日・水・土 9:00 JST（`.github/workflows/discord-scheduled-post.yml`）
-- **キュー**: `schedule/posts.json` の日付キー（昇順）
-- **次に出す1件**: `last_posted_date` **より後**で、**今日（JST）以前**のキーのうち**最古**
-- **手動再投稿**: `gh workflow run "Discord 図解配信" -f post_date=YYYY-MM-DD`（`last_posted_date` は巻き戻さない）
-- **diagram-site**: 配信前に `ops/sync_diagram_site.sh` で `topics/<slug>/index.html` を更新
+ワークフロー名: **`図解 自動生成→配信`**（`.github/workflows/discord-scheduled-post.yml`）
 
-ユーザーに「今後1週間の配信」を示すときは、上記ロジックで **次の cron 日ごとに何が出るか** を表にする。HTML が旧型のテーマは「図解は未改稿・再掲のみ」と明記する。
+| 順 | 処理 |
+|----|------|
+| 1 | `pipeline_resolve_post.py` で次の `post_date` と slug を決定 |
+| 2 | `schedule/topic-specs/<slug>.json` があり HTML が無い（又は `auto_generate`）→ `generate_diagram_from_spec.py` で `publish-html/` を生成して **main に commit** |
+| 3 | `diagram-site` に同期・push |
+| 4 | Pages が 200 になるまで待機 → Discord 投稿（コラージュ付き） |
+| 5 | `discord-post-state.json` 更新 |
+
+- **cron**: 日・水・土 9:00 JST
+- **手動**: `gh workflow run "図解 自動生成→配信" -f post_date=YYYY-MM-DD`（再生成は `-f force_regenerate=true`）
+- **新テーマ**: `schedule/topic-specs/<slug>.json` を追加 → `posts.json` に日付キー → あとは自動
+
+既存 HTML がある再掲日は **生成をスキップ**し、同期・配信のみ。
 
 ---
 
-## 配信前ワークフロー
+## 配信前ワークフロー（人が触るとき）
 
-1. `manifest` に slug / `publish-html/*.html` があるか
-2. 図解が本スキルの **7部構成・完成度** か確認（未改稿なら改稿 or 再掲のみと記載）
-3. `posts.json` の title / description を図解トーンに合わせる（平易な日本語）
-4. `bash ops/sync_diagram_site.sh <FAR_ROOT> <diagram-site clone>` → push
-5. ユーザー依頼時のみ Discord workflow 実行
+1. 新規: `topic-specs/<slug>.json` 作成（`_example.json` 参照）又は Cursor で `publish-html/` を直接改稿
+2. `manifest` + `posts.json` を整合
+3. push → Actions が残りを実行（ローカルだけなら `sync_diagram_site.sh`）
 
 ---
 

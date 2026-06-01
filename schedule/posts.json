@@ -1,5 +1,5 @@
 {
-  "_comment": "約1か月は税効果（ASC740／DTA）・低価法(LCM)本体・在庫『読む順』のキーを置かない方針。テーマはアビタスFAR MC由来（Liabilities／Equity／Interest／Warranty／PP&E取得・収用など）。diagram-site の slug は manifest とソース HTML が無い日は Discord がスキップ。低価法公開サイト・DTAページは配信に使わない。",
+  "_comment": "日・水・土9:00 JSTの「図解 自動生成→配信」が未投稿の最古キーを処理。HTMLが無く schedule/topic-specs/<slug>.json がある場合は先に自動生成→同期→Discord。任意: auto_generate=true, topic_spec=パス。再掲は既存HTMLのみで生成スキップ。",
   "2026-05-14": {
     "title": "【図解】短期債務の借換えと financing agreement の上限（MC付き）",
     "description": "長期借換の intent・ability と、融資枠・担保比率などの数的上限が current／noncurrent にどう効くかを整理（ASC 470-10）。",
