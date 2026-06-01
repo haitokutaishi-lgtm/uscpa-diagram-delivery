@@ -2,7 +2,7 @@
 
 ## 1. 正データ（何をいつ流すか）
 
-- **正は `schedule/posts.json`**。ここに書いた日付・タイトル・URL だけが Discord に飛ぶ。
+- **配信の正**: `schedule/posts.json`（**日・水・土の cron が `delivery-queue.json` から自動追記**）→ Discord。
 - スプレッドシートは **補助台帳**（コピー用）でよい。シートを正にすると二重管理なので、慣れるまでは **JSON だけ**で十分。
 
 ## 1b. スプレッドシート（任意）
@@ -35,14 +35,23 @@ GitHub リポジトリ → Settings → Secrets and variables → Actions → Ne
 - **`Sync diagram-site topics`** … `main` へ `publish-html/` が push されたときに diagram-site へ同期（手動編集時）。
 - **`図解 自動生成→配信`**（旧名 Discord 図解配信）… 日・水・土 9:00 JST に **(1) topic-spec から HTML 自動生成（必要時） (2) diagram-site 同期 (3) Discord 投稿** を一括実行。
 
-### 新テーマを自動で出す手順
+### 完全自動で回すために必要なもの
 
-1. `schedule/topic-specs/<slug>.json` を作成（`schedule/topic-specs/_example.json` をコピー）
-2. `ops/diagram-publish-manifest.json` に slug / source を追加
-3. `schedule/posts.json` に配信日・title・description・url を追加
-4. 何もしなくてよい — 配信日の cron で生成→公開→Discord
+| 項目 | 場所 |
+|------|------|
+| Discord Webhook | GitHub Secret `DISCORD_WEBHOOK_URL`（**必須**） |
+| diagram-site 更新 | Secret `DIAGRAM_SITE_PUSH_TOKEN`（**強く推奨**） |
+| 配信バックログ | `schedule/delivery-queue.json`（未スケジュール分） |
+| 先読み枠数 | `schedule/delivery-config.json` の `lookahead_slots`（既定6） |
+| 除外 slug | 同 `excluded_slugs`（既定: DTA・在庫LCMドリル） |
 
-既に `publish-html/` があるテーマ（再掲）は spec 不要。同期と Discord のみ走ります。
+### 新テーマを追加するとき（手動はここだけ）
+
+1. `publish-html/<slug>.html` を用意（または `schedule/topic-specs/<slug>.json`）
+2. `ops/diagram-publish-manifest.json` に `{ slug, source }` を追加
+3. `schedule/delivery-queue.json` の `items` に `{ id, slug, title, description }` を追加
+
+**`posts.json` に日付を書く必要はありません。** 次の日・水・土の枠が空いていれば cron が自動で日付キーを足します。
 
 スラッグとファイルの対応は **`ops/diagram-publish-manifest.json`** のみ。新しい `topics/...` を配信に載せるときは、(1) `publish-html/` に HTML を置く (2) manifest に `{ "slug", "source" }` を追加する (3) `posts.json` の URL の slug と一致させる。
 

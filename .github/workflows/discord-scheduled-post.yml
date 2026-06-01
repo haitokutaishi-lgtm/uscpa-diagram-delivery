@@ -46,12 +46,45 @@ jobs:
       source: ${{ steps.resolve.outputs.source }}
       run_generate: ${{ steps.resolve.outputs.run_generate }}
       skip: ${{ steps.resolve.outputs.skip }}
+      queue_updated: ${{ steps.maintain.outputs.queue_updated }}
     steps:
       - uses: actions/checkout@v5
+
+      - name: Verify required secrets
+        run: |
+          set -euo pipefail
+          missing=0
+          if [ -z "${{ secrets.DISCORD_WEBHOOK_URL }}" ]; then
+            echo "::error::DISCORD_WEBHOOK_URL が未設定です。Settings → Secrets → Actions に追加してください。"
+            missing=1
+          fi
+          if [ -z "${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}" ]; then
+            echo "::warning::DIAGRAM_SITE_PUSH_TOKEN が未設定です。diagram-site 同期はスキップされ、Pages が古いと URL が 404 になることがあります。"
+          fi
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Maintain posts queue (auto-fill)
+        id: maintain
+        run: python ops/maintain_posts_queue.py --github-output "$GITHUB_OUTPUT"
+
+      - name: Commit auto-filled posts.json
+        if: steps.maintain.outputs.queue_updated == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add schedule/posts.json
+          git commit -m "chore(delivery): auto-fill posts queue from delivery-queue.json"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            sleep 5
+          done
 
       - name: Resolve next post
         id: resolve

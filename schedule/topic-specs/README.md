@@ -9,14 +9,13 @@
 
 既に HTML があるテーマ（再掲・フォロー）は **spec 不要**。ワークフローはそのまま同期→Discord だけ実行します。
 
-## 手順
+## 手順（完全自動）
 
-1. `schedule/topic-specs/<slug>.json` を作成（`_example.json` をコピー）
-2. `schedule/posts.json` に日付キーを追加
-   - `url` の slug と spec の slug を一致させる
-   - 初回のみ `"auto_generate": true` を付けてもよい（HTML が無い場合は自動で true 扱い）
-3. `ops/diagram-publish-manifest.json` に `{ "slug", "source" }` があることを確認
-4. 日・水・土 9:00 JST に **図解 自動生成→配信** が走る（または手動 Run workflow）
+1. `schedule/topic-specs/<slug>.json` を作成（HTML を手書きしない場合）
+2. `ops/diagram-publish-manifest.json` に `{ "slug", "source" }` を追加
+3. `schedule/delivery-queue.json` の `items` に `{ id, slug, title, description }` を追加  
+   → **posts.json の日付は cron が自動追記**（`maintain_posts_queue.py`）
+4. 日・水・土 9:00 JST に **図解 自動生成→配信** が走る
 
 ## ローカルで生成テスト
 

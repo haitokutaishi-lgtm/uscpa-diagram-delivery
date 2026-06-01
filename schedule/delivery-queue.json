@@ -1,0 +1,53 @@
+{
+  "_comment": "未スケジュール分のみ並べる（上から順に posts.json へ日・水・土の枠で自動追加）。id が posts の queue_id に無いものが対象。excluded_slugs は delivery-config.json 参照。",
+  "items": [
+    {
+      "id": "ppe-impairment-2026q2",
+      "slug": "ppe-impairment-held-for-use",
+      "title": "【図解】固定資産の減損（held for use）—2段階テストと impairment loss",
+      "description": "recoverability test の比較相手と、認識する loss の切り方を一枚で整理（ASC 360-10）。"
+    },
+    {
+      "id": "warranty-review-2026q2",
+      "slug": "warranty-liability",
+      "title": "【図解・見直し】製品保証—expense と期末 liability の式",
+      "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。"
+    },
+    {
+      "id": "asset-group-review-2026q2",
+      "slug": "asset-group-relative-sales-value",
+      "title": "【図解・見直し】一括購入の按分—appraised value の比率だけを使う",
+      "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。"
+    },
+    {
+      "id": "refinancing-review-2026q2",
+      "slug": "refinancing-current-liabilities",
+      "title": "【図解・見直し】借換え—intent・ability と financing 上限のチェックリスト",
+      "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。"
+    },
+    {
+      "id": "current-liabilities-review2-2026q2",
+      "slug": "current-liabilities-classification",
+      "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
+      "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。"
+    },
+    {
+      "id": "treasury-review2-2026q2",
+      "slug": "treasury-stock-par-value",
+      "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
+      "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。"
+    },
+    {
+      "id": "notes-review2-2026q2",
+      "slug": "notes-payable-accrued-interest",
+      "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
+      "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。"
+    },
+    {
+      "id": "involuntary-review2-2026q2",
+      "slug": "involuntary-conversion-gain",
+      "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
+      "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。"
+    }
+  ]
+}

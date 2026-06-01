@@ -1,5 +1,5 @@
 {
-  "_comment": "日・水・土9:00 JSTの「図解 自動生成→配信」が未投稿の最古キーを処理。HTMLが無く schedule/topic-specs/<slug>.json がある場合は先に自動生成→同期→Discord。任意: auto_generate=true, topic_spec=パス。再掲は既存HTMLのみで生成スキップ。",
+  "_comment": "日・水・土9:00 JSTに配信。枠が足りないときは delivery-queue.json から自動追記（maintain_posts_queue.py）。HTML無しは topic-spec で自動生成。手動追記も可。excluded_slugs は delivery-config.json。",
   "2026-05-14": {
     "title": "【図解】短期債務の借換えと financing agreement の上限（MC付き）",
     "description": "長期借換の intent・ability と、融資枠・担保比率などの数的上限が current／noncurrent にどう効くかを整理（ASC 470-10）。",
@@ -59,5 +59,21 @@
     "title": "【図解・見直し】強制転換・収用—補償金と帳簿価額の差が gain",
     "description": "再取得コストを挟む問題でも、財務会計では差額を当期認識する型を再確認。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/"
+  },
+  "2026-06-13": {
+    "title": "【図解】固定資産の減損（held for use）—2段階テストと impairment loss",
+    "description": "recoverability test の比較相手と、認識する loss の切り方を一枚で整理（ASC 360-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-impairment-held-for-use/",
+    "slug": "ppe-impairment-held-for-use",
+    "queue_id": "ppe-impairment-2026q2",
+    "_auto": true
+  },
+  "2026-06-14": {
+    "title": "【図解・見直し】製品保証—expense と期末 liability の式",
+    "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/",
+    "slug": "warranty-liability",
+    "queue_id": "warranty-review-2026q2",
+    "_auto": true
   }
 }

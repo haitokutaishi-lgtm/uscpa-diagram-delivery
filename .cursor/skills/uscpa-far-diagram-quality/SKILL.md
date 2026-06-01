@@ -15,7 +15,9 @@ description: >-
 | キャラ | [uscpa-dialog-characters](../uscpa-dialog-characters/SKILL.md) |
 | 按分・取得（完成形） | `publish-html/asset-group-relative-sales-value.html` |
 | 製品保証（完成形） | `publish-html/warranty-liability.html` |
-| 配信カレンダー | `schedule/posts.json` |
+| 配信カレンダー | `schedule/posts.json`（**自動補充**あり） |
+| 配信バックログ | `schedule/delivery-queue.json` |
+| 自動化設定 | `schedule/delivery-config.json` |
 | 配信状態 | `schedule/discord-post-state.json` |
 | slug 一覧 | `ops/diagram-publish-manifest.json` |
 
@@ -94,23 +96,29 @@ description: >-
 
 ---
 
-## 自動生成 → 配信（標準運用）
+## 完全自動配信（標準運用）
 
 ワークフロー名: **`図解 自動生成→配信`**（`.github/workflows/discord-scheduled-post.yml`）
 
 | 順 | 処理 |
 |----|------|
+| 0 | `maintain_posts_queue.py` … `delivery-queue.json` から **未投稿枠を6件先まで** `posts.json` に自動追記 |
 | 1 | `pipeline_resolve_post.py` で次の `post_date` と slug を決定 |
-| 2 | `schedule/topic-specs/<slug>.json` があり HTML が無い（又は `auto_generate`）→ `generate_diagram_from_spec.py` で `publish-html/` を生成して **main に commit** |
-| 3 | `diagram-site` に同期・push |
-| 4 | Pages が 200 になるまで待機 → Discord 投稿（コラージュ付き） |
+| 2 | HTML が無く topic-spec あり → `generate_diagram_from_spec.py` で生成・commit |
+| 3 | `diagram-site` 同期・push |
+| 4 | Pages 200 確認 → Discord（コラージュ付き） |
 | 5 | `discord-post-state.json` 更新 |
 
-- **cron**: 日・水・土 9:00 JST
-- **手動**: `gh workflow run "図解 自動生成→配信" -f post_date=YYYY-MM-DD`（再生成は `-f force_regenerate=true`）
-- **新テーマ**: `schedule/topic-specs/<slug>.json` を追加 → `posts.json` に日付キー → あとは自動
+**人がやること（新テーマ追加時のみ）**
 
-既存 HTML がある再掲日は **生成をスキップ**し、同期・配信のみ。
+1. `publish-html/` または `schedule/topic-specs/<slug>.json` を用意
+2. `ops/diagram-publish-manifest.json` に slug を追加
+3. `schedule/delivery-queue.json` の `items` 末尾に `{ id, slug, title, description }` を1行追加
+
+`posts.json` の日付キーは **書かなくてよい**（cron が補充）。除外テーマは `delivery-config.json` の `excluded_slugs`。
+
+- **cron**: 日・水・土 9:00 JST
+- **手動**: `gh workflow run "図解 自動生成→配信" -f post_date=YYYY-MM-DD`
 
 ---
 

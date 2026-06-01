@@ -1,0 +1,11 @@
+{
+  "_comment": "図解 自動生成→配信の完全自動化設定。posts.json は maintain_posts_queue.py が delivery-queue.json から補充する。",
+  "topics_base_url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/",
+  "post_weekdays": [6, 2, 5],
+  "lookahead_slots": 6,
+  "excluded_slugs": [
+    "deferred-tax-asset-dta",
+    "inventory-lcm-reading-drill"
+  ],
+  "require_html_or_topic_spec": true
+}
