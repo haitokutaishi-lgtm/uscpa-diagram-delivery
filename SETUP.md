@@ -41,6 +41,14 @@ GitHub リポジトリ → Settings → Secrets and variables → Actions → Ne
 |------|------|
 | Discord Webhook | GitHub Secret `DISCORD_WEBHOOK_URL`（**必須**） |
 | diagram-site 更新 | Secret `DIAGRAM_SITE_PUSH_TOKEN`（**強く推奨**） |
+
+**Secret の手動確認は不要です。** 次のタイミングで Actions が自動検証します。
+
+- **毎回の配信**（日・水・土 9:00）… `図解 自動生成→配信` の prepare 冒頭
+- **週1回**（日曜 9:00 JST）… `図解配信 Secrets ヘルスチェック`（投稿なし・ログと Summary のみ）
+- **いつでも** … Actions → `図解配信 Secrets ヘルスチェック` → Run workflow
+
+失敗したら Actions の実行ログまたは **Summary** タブに ❌ と理由が出ます（Secret の値そのものは表示されません）。
 | 配信バックログ | `schedule/delivery-queue.json`（未スケジュール分） |
 | 先読み枠数 | `schedule/delivery-config.json` の `lookahead_slots`（既定6） |
 | 除外 slug | 同 `excluded_slugs`（既定: DTA・在庫LCMドリル） |

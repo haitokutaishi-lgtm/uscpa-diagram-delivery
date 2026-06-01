@@ -50,20 +50,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Verify required secrets
-        run: |
-          set -euo pipefail
-          missing=0
-          if [ -z "${{ secrets.DISCORD_WEBHOOK_URL }}" ]; then
-            echo "::error::DISCORD_WEBHOOK_URL が未設定です。Settings → Secrets → Actions に追加してください。"
-            missing=1
-          fi
-          if [ -z "${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}" ]; then
-            echo "::warning::DIAGRAM_SITE_PUSH_TOKEN が未設定です。diagram-site 同期はスキップされ、Pages が古いと URL が 404 になることがあります。"
-          fi
-          if [ "$missing" -ne 0 ]; then
-            exit 1
-          fi
+      - name: Verify secrets (presence + smoke)
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+        run: python ops/verify_delivery_secrets.py
 
       - uses: actions/setup-python@v5
         with:

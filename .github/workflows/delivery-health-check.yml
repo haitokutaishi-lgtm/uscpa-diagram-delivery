@@ -1,0 +1,29 @@
+# 図解配信に必要な Secrets を自動検証（Discord 投稿・diagram-site 同期は行わない）
+# 手動確認は不要: 週1回 + 各配信 cron の prepare でも同様のチェックを実施
+
+name: 図解配信 Secrets ヘルスチェック
+
+on:
+  schedule:
+    # 毎週月曜 09:00 JST（月曜 00:00 UTC）
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify secrets (presence + smoke)
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+        run: python ops/verify_delivery_secrets.py
