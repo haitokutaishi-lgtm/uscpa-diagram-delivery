@@ -1,4 +1,5 @@
-# 日・水・土 9:00 JST: （任意）topic-spec から HTML 自動生成 → diagram-site 同期 → Discord 投稿
+# 日・水・土 9:00 JST（Asia/Tokyo）: topic-spec 生成 → diagram-site 同期 → Discord 投稿
+# GitHub cron は UTC 0時台で遅延しやすいため、schedule 時は 9:00 JST まで wait_jst_delivery_window.py で待機
 # posts.json は日付キーで管理。当日キーが無くても last_posted_date より後で今日以前の最古キーを1件投稿（取りこぼし防止）。
 # diagram-site/topics/… のときは Playwright で本文ブロックを最大4枚キャプチャし、
 # 会話（.dlg-row / .char-bubble 等）を除いた 2x2 コラージュを embed に添付する。
@@ -14,9 +15,9 @@ env:
 
 on:
   schedule:
-    - cron: "0 0 * * 0" # 日曜 09:00 JST
-    - cron: "0 0 * * 3" # 水曜 09:00 JST
-    - cron: "0 0 * * 6" # 土曜 09:00 JST
+    # 9:05 JST・日水土（:05 は正時混雑回避）。timezone は GitHub Actions の IANA 指定
+    - cron: "5 9 * * 0,3,6"
+      timezone: Asia/Tokyo
   workflow_dispatch:
     inputs:
       post_date:
@@ -49,6 +50,10 @@ jobs:
       queue_updated: ${{ steps.maintain.outputs.queue_updated }}
     steps:
       - uses: actions/checkout@v5
+
+      - name: Wait until 09:00 JST (scheduled runs only)
+        if: github.event_name == 'schedule'
+        run: python ops/wait_jst_delivery_window.py
 
       - name: Verify secrets (presence + smoke)
         env:

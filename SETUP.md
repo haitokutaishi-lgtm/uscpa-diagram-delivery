@@ -42,6 +42,8 @@ GitHub リポジトリ → Settings → Secrets and variables → Actions → Ne
 | Discord Webhook | GitHub Secret `DISCORD_WEBHOOK_URL`（**必須**） |
 | diagram-site 更新 | Secret `DIAGRAM_SITE_PUSH_TOKEN`（**強く推奨**） |
 
+**配信時刻はランダムではありません。** 日・水・土 **9:00 JST** 固定です。以前 3:00 頃に出たのは GitHub cron の遅延（UTC 0時台の混雑）が原因で、`timezone: Asia/Tokyo` と 9:00 までの待機で抑えています。
+
 **Secret の手動確認は不要です。** 次のタイミングで Actions が自動検証します。
 
 - **毎回の配信**（日・水・土 9:00）… `図解 自動生成→配信` の prepare 冒頭
