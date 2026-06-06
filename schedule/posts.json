@@ -75,5 +75,13 @@
     "slug": "warranty-liability",
     "queue_id": "warranty-review-2026q2",
     "_auto": true
+  },
+  "2026-06-17": {
+    "title": "【図解・見直し】一括購入の按分—appraised value の比率だけを使う",
+    "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/",
+    "slug": "asset-group-relative-sales-value",
+    "queue_id": "asset-group-review-2026q2",
+    "_auto": true
   }
 }
