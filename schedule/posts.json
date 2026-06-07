@@ -83,5 +83,13 @@
     "slug": "asset-group-relative-sales-value",
     "queue_id": "asset-group-review-2026q2",
     "_auto": true
+  },
+  "2026-06-20": {
+    "title": "【図解・見直し】借換え—intent・ability と financing 上限のチェックリスト",
+    "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/refinancing-current-liabilities/",
+    "slug": "refinancing-current-liabilities",
+    "queue_id": "refinancing-review-2026q2",
+    "_auto": true
   }
 }
