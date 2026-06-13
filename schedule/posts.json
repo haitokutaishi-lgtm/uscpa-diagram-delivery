@@ -99,5 +99,13 @@
     "slug": "current-liabilities-classification",
     "queue_id": "current-liabilities-review2-2026q2",
     "_auto": true
+  },
+  "2026-06-24": {
+    "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
+    "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/treasury-stock-par-value/",
+    "slug": "treasury-stock-par-value",
+    "queue_id": "treasury-review2-2026q2",
+    "_auto": true
   }
 }
