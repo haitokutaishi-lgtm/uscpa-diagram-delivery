@@ -115,5 +115,13 @@
     "slug": "notes-payable-accrued-interest",
     "queue_id": "notes-review2-2026q2",
     "_auto": true
+  },
+  "2026-06-28": {
+    "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
+    "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/",
+    "slug": "involuntary-conversion-gain",
+    "queue_id": "involuntary-review2-2026q2",
+    "_auto": true
   }
 }
