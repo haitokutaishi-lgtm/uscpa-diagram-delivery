@@ -2,6 +2,12 @@
   "_comment": "未スケジュール分のみ並べる（上から順に posts.json へ日・水・土の枠で自動追加）。id が posts の queue_id に無いものが対象。excluded_slugs は delivery-config.json 参照。",
   "items": [
     {
+      "id": "loss-contingency-2026q3",
+      "slug": "loss-contingency-accrual",
+      "title": "【図解】偶発損失—probable / reasonably possible / remote と計上・注記の分岐",
+      "description": "ASC 450-20。発生可能性と見積り可否から計上／注記を分岐し、範囲で一点がないときは下限を計上する型。"
+    },
+    {
       "id": "ppe-impairment-2026q2",
       "slug": "ppe-impairment-held-for-use",
       "title": "【図解】固定資産の減損（held for use）—2段階テストと impairment loss",

@@ -38,5 +38,9 @@
   {
     "slug": "ppe-impairment-held-for-use",
     "source": "publish-html/ppe-impairment-held-for-use.html"
+  },
+  {
+    "slug": "loss-contingency-accrual",
+    "source": "publish-html/loss-contingency-accrual.html"
   }
 ]

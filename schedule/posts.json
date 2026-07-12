@@ -173,12 +173,11 @@
     "_auto": true
   },
   "2026-07-15": {
-    "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
-    "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/current-liabilities-classification/",
-    "slug": "current-liabilities-classification",
-    "queue_id": "current-liabilities-review-2026q3",
-    "_auto": true
+    "title": "【図解】偶発損失—probable / reasonably possible / remote と計上・注記の分岐",
+    "description": "ASC 450-20。発生可能性と見積り可否から計上／注記を分岐し、範囲で一点がないときは下限を計上する型。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/loss-contingency-accrual/",
+    "slug": "loss-contingency-accrual",
+    "queue_id": "loss-contingency-2026q3"
   },
   "2026-07-18": {
     "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
