@@ -84,6 +84,42 @@
       "slug": "asset-group-relative-sales-value",
       "title": "【図解・見直し】一括購入の按分—appraised value の比率だけ",
       "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。"
+    },
+    {
+      "id": "current-liabilities-review-2026q3",
+      "slug": "current-liabilities-classification",
+      "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
+      "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。"
+    },
+    {
+      "id": "treasury-review-2026q3",
+      "slug": "treasury-stock-par-value",
+      "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
+      "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。"
+    },
+    {
+      "id": "notes-review-2026q3",
+      "slug": "notes-payable-accrued-interest",
+      "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
+      "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。"
+    },
+    {
+      "id": "involuntary-review-2026q3",
+      "slug": "involuntary-conversion-gain",
+      "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
+      "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。"
+    },
+    {
+      "id": "dta-review-2026q3",
+      "slug": "deferred-tax-asset-dta",
+      "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
+      "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。"
+    },
+    {
+      "id": "lcm-review-2026q3",
+      "slug": "inventory-lcm-reading-drill",
+      "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
+      "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。"
     }
   ]
 }

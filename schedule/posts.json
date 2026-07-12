@@ -171,5 +171,53 @@
     "slug": "asset-group-relative-sales-value",
     "queue_id": "asset-group-review-2026q3",
     "_auto": true
+  },
+  "2026-07-15": {
+    "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
+    "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/current-liabilities-classification/",
+    "slug": "current-liabilities-classification",
+    "queue_id": "current-liabilities-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-18": {
+    "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
+    "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/treasury-stock-par-value/",
+    "slug": "treasury-stock-par-value",
+    "queue_id": "treasury-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-19": {
+    "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
+    "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/notes-payable-accrued-interest/",
+    "slug": "notes-payable-accrued-interest",
+    "queue_id": "notes-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-22": {
+    "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
+    "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/",
+    "slug": "involuntary-conversion-gain",
+    "queue_id": "involuntary-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-25": {
+    "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
+    "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/",
+    "slug": "deferred-tax-asset-dta",
+    "queue_id": "dta-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-26": {
+    "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
+    "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcm-reading-drill/",
+    "slug": "inventory-lcm-reading-drill",
+    "queue_id": "lcm-review-2026q3",
+    "_auto": true
   }
 }
