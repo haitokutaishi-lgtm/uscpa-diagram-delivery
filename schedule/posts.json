@@ -123,5 +123,53 @@
     "slug": "involuntary-conversion-gain",
     "queue_id": "involuntary-review2-2026q2",
     "_auto": true
+  },
+  "2026-07-01": {
+    "title": "【図解】Income Taxes — タイミング差異から deferred tax asset（DTA）を求める",
+    "description": "帳簿先行・支払時控除の一時差異から、差異のドル × enacted tax rate で DTA を求める型（ASC 740）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/",
+    "slug": "deferred-tax-asset-dta",
+    "queue_id": "dta-2026q3",
+    "_auto": true
+  },
+  "2026-07-04": {
+    "title": "【図解】在庫の低価法—LCM（LIFO）と LCNRV（FIFO）の読み分け",
+    "description": "LIFO は LCM、FIFO/平均/個別は LCNRV と覚える。天井・床・中央値の型を問題文から固定する。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcm-reading-drill/",
+    "slug": "inventory-lcm-reading-drill",
+    "queue_id": "lcm-drill-2026q3",
+    "_auto": true
+  },
+  "2026-07-05": {
+    "title": "【図解・見直し】固定資産の減損—recoverability test と loss の切り方",
+    "description": "held for use の2段階テストと、認識する impairment loss の比較相手を再確認（ASC 360-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-impairment-held-for-use/",
+    "slug": "ppe-impairment-held-for-use",
+    "queue_id": "ppe-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-08": {
+    "title": "【図解・見直し】借換え—intent・ability と financing 上限",
+    "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/refinancing-current-liabilities/",
+    "slug": "refinancing-current-liabilities",
+    "queue_id": "refinancing-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-11": {
+    "title": "【図解・見直し】製品保証—expense と期末 liability の式",
+    "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/",
+    "slug": "warranty-liability",
+    "queue_id": "warranty-review-2026q3",
+    "_auto": true
+  },
+  "2026-07-12": {
+    "title": "【図解・見直し】一括購入の按分—appraised value の比率だけ",
+    "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/",
+    "slug": "asset-group-relative-sales-value",
+    "queue_id": "asset-group-review-2026q3",
+    "_auto": true
   }
 }
