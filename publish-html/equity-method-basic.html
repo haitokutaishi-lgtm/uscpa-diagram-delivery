@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】持分法—被投資会社の利益・配当で投資勘定が動く</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .student-bubble { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 2px solid #ea580c; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .coach-bubble { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .mc-card { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem; background: #fafafa; }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: 1rem; margin: 0.75rem 0; color: #334155; font-size: 0.875rem; line-height: 1.65; }
+    .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
+    .persona-strip strong { color: #0f172a; }
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.calc { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.calc th, table.calc td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.calc th { background: #f1f5f9; }
+    table.calc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
+    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Investments — <span class="font-bold normal-case">equity method の基本仕訳</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Equity Method（ASC 323）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug"><strong>持分法</strong>—投資先の利益で投資を増やし、配当で投資を減らす（収益は利益シェア）</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">重要な影響力がある株式投資では、配当を収益にしません。投資先の当期純利益×持分比率を収益と投資の増加にし、受け取った配当は投資の減少です。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
+        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
+      </ul>
+    </nav>
+
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">On January 1, Year 1, Mesa Co. acquired <strong>30%</strong> of Tilo Inc. for <strong>$900,000</strong> and can exercise <strong>significant influence</strong>. During Year 1, Tilo reported net income of <strong>$200,000</strong> and paid cash dividends of <strong>$50,000</strong>. What amount should Mesa report as its <strong>investment in Tilo</strong> at December 31, Year 1 under the equity method?</div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A..</strong> $900,000</li>
+          <li><strong>B..</strong> $915,000</li>
+          <li><strong>C..</strong> $945,000</li>
+          <li><strong>D..</strong> $960,000</li>
+        </ul>
+      </div>
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　取得原価のまま動かさない</span>
+          <p class="text-sm leading-relaxed">株価も出ていないので、年末も $900,000（A）のままでは？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">持分法は公正価値評価ではありません。利益シェアで増やし、配当で減らします。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　配当を収益にして投資を減らさない</span>
+          <p class="text-sm leading-relaxed">利益 $60,000 だけ足して $960,000（D）、配当は収益、と考えていました。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">持分法では配当は<strong>収益ではありません</strong>。投資勘定を減らします。正しい年末残高は $900,000 ＋ $60,000 − $15,000 ＝ $945,000 です。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　配当だけを反映する</span>
+          <p class="text-sm leading-relaxed">$900,000 − $15,000 ＝ $885,000 のような動きですか？（選択肢にない誤答）</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">利益シェアを忘れると投資が減りすぎます。必ず<strong>利益→増、配当→減</strong>の両方です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="three" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
+      <p class="part-lead">持分法（ASC 323）の地図です。</p>
+      <ol class="space-y-5 text-sm leading-relaxed">
+
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
+          <div>
+            <p class="font-bold text-slate-900">Significant influence → equity method</p>
+            <p class="text-slate-600 mt-1">目安は議決権 20%〜50%だが、実態で判定。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
+          <div>
+            <p class="font-bold text-slate-900">Investee NI × % ＝ equity in earnings（投資↑）</p>
+            <p class="text-slate-600 mt-1">投資先の利益を持分比率で取り込みます。</p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
+          <div>
+            <p class="font-bold text-slate-900">Dividends × % ＝ 投資↓（収益ではない）</p>
+            <p class="text-slate-600 mt-1">現金は増えるが、投資勘定を減らす。配当収益は計上しない。</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="theory" class="section-card border-indigo-100">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
+      <p class="part-lead">②の3つは、ここでの<strong>投資勘定の増減</strong>に対応します。</p>
+
+      <div class="theory-block">
+        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">重要な影響力があるなら、投資先の業績が投資者の経済実態に直結します。利益の発生時点で持分を取り込み、配当は利益の分配（すでに取り込んだ利益の現金化）なので投資を減らします。</p>
+        
+      </div>
+      <div class="theory-block">
+        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Mesa）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">利益シェア $60,000、配当 $15,000。</p>
+        <p class="je-line">Dr. Investment in Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Equity in earnings of Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60,000</p><p class="je-line">Dr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Investment in Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15,000</p>
+      </div>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①取得時に Investment を計上 → ②期末に利益シェアを認識 → ③配当受取で Investment を減らす</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、Mesa の年末投資 $945,000 を求める手順です。</p>
+    </section>
+
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed">年末の Investment 残高の<strong>3ステップ</strong>です。</p>
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> 取得原価から始める。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> ＋（投資先 NI × 持分比率）。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> −（配当 × 持分比率）。</span></li>
+      </ol>
+      
+      <table class="calc">
+        <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
+        <tbody>
+          <tr><td>Cost</td><td class="num">$900,000</td></tr>
+          <tr><td>＋ Share of NI (30%×$200,000)</td><td class="num">60,000</td></tr>
+          <tr><td>− Share of dividends (30%×$50,000)</td><td class="num">(15,000)</td></tr>
+          <tr><td><strong>Investment, 12/31</strong></td><td class="num"><strong>$945,000</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
+
+      <div class="persona-strip">
+        <span><strong>たくま</strong>：配当を収益にしてしまいそうです。</span>
+        <span><strong>あおい先生</strong>：持分法の配当は投資を減らすだけ。年末は <strong>$945,000</strong>。</span>
+      </div>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">公正価値オプションや市場価格がある場合は？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">significant influence があり持分法を使う前提なら、毎期末の時価評価にはしません。別の測定の話になったら問題文が明示します。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">投資先が損失のときは？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">持分比率分だけ Investment を減らし、Equity in losses を認識します（投資がゼロになるまでの制限など、発展論点あり）。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 323</strong> の考え方に沿って作成しています。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — investment balance）</p>
+        <div class="en-stem mb-4">Mesa acquired 30% of Tilo for $900,000 (significant influence). Tilo NI $200,000; dividends $50,000. Investment at year-end?</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. $900,000</li>
+          <li>B. $915,000</li>
+          <li>C. $945,000</li>
+          <li>D. $960,000</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>$900,000 ＋ $60,000 − $15,000 ＝ <strong>$945,000</strong>。正解 <strong>C</strong>。</p><p class="text-slate-600">A＝動かさない。D＝配当を無視。B＝計算誤り。</p></div>
+        </details>
+      </div>
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — dividends）</p>
+        <div class="en-stem mb-4">Under the equity method, cash dividends received from the investee are recorded as:</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. Dividend revenue</li>
+          <li>B. A reduction of the investment account</li>
+          <li>C. An increase in additional paid-in capital</li>
+          <li>D. Unrealized gain in OCI</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>配当は投資勘定の減少。正解 <strong>B</strong>。</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="section-card border-2 border-slate-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
+      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
+        <li>Significant influence → equity method。</li>
+        <li>利益シェアで投資↑・収益計上。</li>
+        <li>配当で投資↓（収益にしない）。</li>
+        <li>年末残高＝原価＋利益シェア−配当シェア。</li>
+        <li>公正価値の毎期評価とは別物。</li>
+        <li>仕訳：Investment / Equity in earnings、Cash / Investment。</li>
+      </ol>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
+  </main>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

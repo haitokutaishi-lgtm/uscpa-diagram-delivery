@@ -2,6 +2,36 @@
   "_comment": "未スケジュール分のみ並べる（上から順に posts.json へ日・水・土の枠で自動追加）。id が posts の queue_id に無いものが対象。excluded_slugs は delivery-config.json 参照。",
   "items": [
     {
+      "id": "subsequent-events-2026q3",
+      "slug": "subsequent-events-recognized",
+      "title": "【図解】後発事象—recognized と nonrecognized の切り分け",
+      "description": "ASC 855。決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型。"
+    },
+    {
+      "id": "lease-finance-2026q3",
+      "slug": "lease-lessee-finance-initial",
+      "title": "【図解】リース（借手・finance）—ROU資産と lease liability の初期計上",
+      "description": "ASC 842。開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブ。"
+    },
+    {
+      "id": "bond-effective-2026q3",
+      "slug": "bond-effective-interest",
+      "title": "【図解】社債（割引発行）—実効金利法の利息費用",
+      "description": "利息費用＝carrying×effective rate。現金利息（クーポン）との差額が割引償却。"
+    },
+    {
+      "id": "equity-method-2026q3",
+      "slug": "equity-method-basic",
+      "title": "【図解】持分法—被投資会社の利益・配当で投資勘定が動く",
+      "description": "ASC 323。利益シェアで投資↑、配当で投資↓（配当は収益にしない）。"
+    },
+    {
+      "id": "scf-classify-2026q3",
+      "slug": "cash-flow-classification",
+      "title": "【図解】キャッシュ・フロー計算書—営業・投資・財務の区分",
+      "description": "ASC 230。支払利息は原則営業、支払配当は財務、PPE購入は投資。"
+    },
+    {
       "id": "loss-contingency-2026q3",
       "slug": "loss-contingency-accrual",
       "title": "【図解】偶発損失—probable / reasonably possible / remote と計上・注記の分岐",

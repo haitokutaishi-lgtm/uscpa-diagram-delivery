@@ -180,43 +180,38 @@
     "queue_id": "loss-contingency-2026q3"
   },
   "2026-07-18": {
-    "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
-    "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/treasury-stock-par-value/",
-    "slug": "treasury-stock-par-value",
-    "queue_id": "treasury-review-2026q3",
-    "_auto": true
+    "title": "【図解】後発事象—recognized と nonrecognized の切り分け",
+    "description": "ASC 855。決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/subsequent-events-recognized/",
+    "slug": "subsequent-events-recognized",
+    "queue_id": "subsequent-events-2026q3"
   },
   "2026-07-19": {
-    "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
-    "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/notes-payable-accrued-interest/",
-    "slug": "notes-payable-accrued-interest",
-    "queue_id": "notes-review-2026q3",
-    "_auto": true
+    "title": "【図解】リース（借手・finance）—ROU資産と lease liability の初期計上",
+    "description": "ASC 842。開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブ。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-finance-initial/",
+    "slug": "lease-lessee-finance-initial",
+    "queue_id": "lease-finance-2026q3"
   },
   "2026-07-22": {
-    "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
-    "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/involuntary-conversion-gain/",
-    "slug": "involuntary-conversion-gain",
-    "queue_id": "involuntary-review-2026q3",
-    "_auto": true
+    "title": "【図解】社債（割引発行）—実効金利法の利息費用",
+    "description": "利息費用＝carrying×effective rate。現金利息（クーポン）との差額が割引償却。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/bond-effective-interest/",
+    "slug": "bond-effective-interest",
+    "queue_id": "bond-effective-2026q3"
   },
   "2026-07-25": {
-    "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
-    "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/",
-    "slug": "deferred-tax-asset-dta",
-    "queue_id": "dta-review-2026q3",
-    "_auto": true
+    "title": "【図解】持分法—被投資会社の利益・配当で投資勘定が動く",
+    "description": "ASC 323。利益シェアで投資↑、配当で投資↓（配当は収益にしない）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/equity-method-basic/",
+    "slug": "equity-method-basic",
+    "queue_id": "equity-method-2026q3"
   },
   "2026-07-26": {
-    "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
-    "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcm-reading-drill/",
-    "slug": "inventory-lcm-reading-drill",
-    "queue_id": "lcm-review-2026q3",
-    "_auto": true
+    "title": "【図解】キャッシュ・フロー計算書—営業・投資・財務の区分",
+    "description": "ASC 230。支払利息は原則営業、支払配当は財務、PPE購入は投資。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-classification/",
+    "slug": "cash-flow-classification",
+    "queue_id": "scf-classify-2026q3"
   }
 }

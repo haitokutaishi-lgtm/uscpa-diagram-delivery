@@ -42,5 +42,25 @@
   {
     "slug": "loss-contingency-accrual",
     "source": "publish-html/loss-contingency-accrual.html"
+  },
+  {
+    "slug": "subsequent-events-recognized",
+    "source": "publish-html/subsequent-events-recognized.html"
+  },
+  {
+    "slug": "lease-lessee-finance-initial",
+    "source": "publish-html/lease-lessee-finance-initial.html"
+  },
+  {
+    "slug": "bond-effective-interest",
+    "source": "publish-html/bond-effective-interest.html"
+  },
+  {
+    "slug": "equity-method-basic",
+    "source": "publish-html/equity-method-basic.html"
+  },
+  {
+    "slug": "cash-flow-classification",
+    "source": "publish-html/cash-flow-classification.html"
   }
 ]

@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "page_title": "【図解】キャッシュ・フロー計算書—営業・投資・財務の区分",
+    "theme_line_html": "Statement of Cash Flows — <span class=\"font-bold normal-case\">O / I / F の振り分け</span>",
+    "subject_line": "USCPA FAR / Statement of Cash Flows（ASC 230）",
+    "h1_html": "<strong>キャッシュ・フローの区分</strong>—設備の購入は投資、借入の返済は財務、利息の支払は原則営業",
+    "lead_html": "試験では、取引を <span class=\"term-en\">operating / investing / financing</span> に振り分けます。U.S. GAAP では、支払利息・受取利息・受取配当は原則<strong>営業</strong>、支払配当は<strong>財務</strong>です。"
+  },
+  "mc_preview": {
+    "stem_html": "Which of the following is classified as a <strong>financing</strong> cash outflow under U.S. GAAP?",
+    "choices": [
+      "A. Payment of interest on bonds",
+      "B. Purchase of equipment for cash",
+      "C. Cash dividend paid to shareholders",
+      "D. Collection of a loan receivable from a customer (trade)"
+    ]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　支払利息を財務にする",
+      "student_html": "借金の利息だから financing（でも選択肢では A）では？",
+      "coach_html": "U.S. GAAP では支払利息は原則 <strong>operating</strong> です。元本の借入・返済が financing です。"
+    },
+    {
+      "label": "誤解②　設備購入を営業にする",
+      "student_html": "事業に使う機械だから operating では？",
+      "coach_html": "有形固定資産の購入・売却は <strong>investing</strong> です。"
+    },
+    {
+      "label": "誤解③　支払配当を営業にする",
+      "student_html": "利益処分なので operating、と考えていました。",
+      "coach_html": "株主への現金配当は <strong>financing outflow</strong> です（正解 C）。"
+    }
+  ],
+  "three_lead_html": "SCF 区分（ASC 230）の地図です。",
+  "three": [
+    {
+      "title": "Operating：本業のキャッシュ（利息・税を含むことが多い）",
+      "body_html": "売上債権・仕入債務、支払利息、受取利息、受取配当など。"
+    },
+    {
+      "title": "Investing：貸付・有価証券・PPE の取得と売却",
+      "body_html": "設備購入、投資有価証券、他社への貸付など。"
+    },
+    {
+      "title": "Financing：資本・借入の調達と返済、支払配当",
+      "body_html": "株式発行、借入、元本返済、自社株買い、配当支払い。"
+    }
+  ],
+  "theory": {
+    "lead_html": "②の3つは、ここでの<strong>区分判定</strong>に対応します。",
+    "timeline_html": "①取引の相手（顧客／設備／株主・債権者）を見る → ②元本か利息・配当かを見る → ③O/I/F に振る",
+    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、判定チェックリストです（金額計算より分類が主戦場）。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "キャッシュ・フロー計算書は、現金の増減を活動の性質ごとに分け、本業で回っているか、投資しているか、資金調達しているかを示します。U.S. GAAP は利息・受取配当を営業に置くのが原則です。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "よく出る対応表（抜粋）",
+        "body_html": "支払利息→Operating／支払配当→Financing／PPE購入→Investing／借入金返済（元本）→Financing",
+        "je_lines": []
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "分類の<strong>4ステップ</strong>です。",
+    "steps": [
+      "<strong>Step 1</strong> 現金が増えたか減ったかを確認する。",
+      "<strong>Step 2</strong> PPE・投資・貸付なら Investing を疑う。",
+      "<strong>Step 3</strong> 株主・借入の元本・支払配当なら Financing を疑う。",
+      "<strong>Step 4</strong> 利息の受払・受取配当・税金・運転資本は原則 Operating。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>取引例</th><th>区分</th></tr></thead>\n        <tbody>\n          <tr><td>Interest paid on bonds</td><td>Operating</td></tr>\n          <tr><td>Cash dividends paid</td><td>Financing</td></tr>\n          <tr><td>Purchase of equipment</td><td>Investing</td></tr>\n          <tr><td>Issuance of common stock</td><td>Financing</td></tr>\n          <tr><td>Dividends received</td><td>Operating（U.S. GAAP）</td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "利息と配当の置き場が毎回揺れます。",
+    "aoi": "U.S. GAAP：支払利息は営業、支払配当は財務、と先に固定しましょう。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "IFRS だと利息の区分が違うと聞きました。",
+      "coach_html": "その通りで、IFRS は選択肢があります。FAR の U.S. GAAP 問題では、原則どおり <strong>interest paid = operating</strong> で答えます。"
+    },
+    {
+      "student_html": "非現金の設備購入（手形）は？",
+      "coach_html": "現金が動かないので本文の3区分には入れず、<strong>noncash investing/financing</strong> の注記です。"
+    }
+  ],
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 230</strong> の考え方に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（概念 — financing outflow）",
+      "stem_html": "Which is a <strong>financing</strong> cash outflow under U.S. GAAP?",
+      "choices": [
+        "A. Payment of interest on bonds",
+        "B. Purchase of equipment for cash",
+        "C. Cash dividend paid to shareholders",
+        "D. Collection on a short-term trade receivable"
+      ],
+      "explain_html": "<p>株主への現金配当は financing。正解 <strong>C</strong>。</p><p class=\"text-slate-600\">A＝operating。B＝investing。D＝operating。</p>"
+    },
+    {
+      "title": "問題 2（概念 — interest）",
+      "stem_html": "Under U.S. GAAP, cash paid for <strong>interest</strong> on long-term debt is generally classified as:",
+      "choices": [
+        "A. Operating",
+        "B. Investing",
+        "C. Financing",
+        "D. Noncash disclosure only"
+      ],
+      "explain_html": "<p>支払利息は原則 operating。正解 <strong>A</strong>。</p>"
+    }
+  ],
+  "summary": [
+    "O：本業・利息の受払・受取配当・税金など。",
+    "I：PPE・投資・貸付の取得と売却。",
+    "F：資本・借入元本・支払配当。",
+    "支払利息≠財務（U.S. GAAP）。",
+    "支払配当＝財務。",
+    "非現金取引は注記。"
+  ]
+}

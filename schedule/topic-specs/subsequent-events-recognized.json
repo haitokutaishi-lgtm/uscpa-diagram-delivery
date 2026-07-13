@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "page_title": "【図解】後発事象—recognized と nonrecognized の切り分け",
+    "theme_line_html": "Subsequent Events — <span class=\"font-bold normal-case\">決算日後の事実をいつ計上するか</span>",
+    "subject_line": "USCPA FAR / Subsequent Events（ASC 855）",
+    "h1_html": "<strong>後発事象</strong>の分岐—<span class=\"term-en\">recognized</span>（条件確認）と <span class=\"term-en\">nonrecognized</span>（注記）を決算日で切る",
+    "lead_html": "試験では、決算日後に起きた事実が「決算日時点ですでに存在した条件を確認する情報」なら帳簿を直し、<strong>新しい条件が決算日後に発生</strong>したなら原則は注記です。"
+  },
+  "mc_preview": {
+    "stem_html": "Polar Co.'s year-end is <strong>December 31, Year 1</strong>. On <strong>January 18, Year 2</strong>, before the financial statements are issued, Polar learns that a major customer declared bankruptcy on <strong>January 12, Year 2</strong>. The customer's December 31 receivable of <strong>$180,000</strong> is now expected to be <strong>uncollectible</strong>. Polar had previously estimated an allowance of <strong>$20,000</strong> for this customer. What amount of <strong>additional bad debt expense</strong> should Polar recognize in its Year 1 financial statements under U.S. GAAP?",
+    "choices": [
+      "A. $0",
+      "B. $20,000",
+      "C. $160,000",
+      "D. $180,000"
+    ]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　決算日後の出来事だから必ず Year 1 に計上しない",
+      "student_html": "破産は 1/12 なので Year 2 の話です。Year 1 の費用は $0（選択肢 A）では？",
+      "coach_html": "日付だけ見るとそう見えますが、顧客の財務悪化は<strong>決算日時点ですでに進行していた条件</strong>を確認する情報なら <span class=\"term-en\">recognized subsequent event</span> です。貸倒引当の見積りを修正します。"
+    },
+    {
+      "label": "誤解②　債権全額 $180,000 を追加費用にする",
+      "student_html": "回収不能なら $180,000（D）を全部費用にしますか？",
+      "coach_html": "すでに手当している <strong>$20,000</strong> があるので、追加は <strong>$160,000</strong> です。残高ゼロにするための不足分だけを足します。"
+    },
+    {
+      "label": "誤解③　発行前なら何でも帳簿を直す",
+      "student_html": "発行前に知った事実は全部 Year 1 に計上する、と覚えていました。",
+      "coach_html": "発行前は<strong>評価の対象になる期間</strong>です。ただし内容が「新しい条件の発生」（工場火災など）なら、原則は注記で、帳簿の修正ではありません。"
+    }
+  ],
+  "three_lead_html": "ASC 855 の地図です。計算の前に、この3点を固定します。",
+  "three": [
+    {
+      "title": "Recognized = 決算日時点の条件を確認する情報",
+      "body_html": "貸倒・訴訟の決着など、<strong>すでに存在した条件</strong>の見積りを更新 → 帳簿を修正する。"
+    },
+    {
+      "title": "Nonrecognized = 決算日後に新しい条件が発生",
+      "body_html": "火災・事業買収など → 原則は<strong>注記</strong>（重大なら）。帳簿は直さない。"
+    },
+    {
+      "title": "評価期間は「発行（available to be issued）まで」",
+      "body_html": "発行後に知った事実は、この図解の後発事象の枠外です。"
+    }
+  ],
+  "theory": {
+    "lead_html": "②の3つは、ここでの<strong>見積り修正か注記か</strong>の分岐に対応します。",
+    "timeline_html": "①決算日 → ②発行までの事実を読む → ③条件確認か新規発生かを判定 → ④計上 or 注記",
+    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、Polar の追加貸倒費用 $160,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "財務諸表は決算日時点の状態を表します。決算日後に得た情報でも、「その日にすでにあつた条件」を確かめるなら、見積りを直して実態に合わせます。新しい出来事は、注記で利用者に知らせます（ASC 855）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Polar Co 例・追加 $160,000）",
+        "body_html": "既存の allowance $20,000 では不足するため、追加で引当を積む。",
+        "je_lines": [
+          "Dr. Bad debt expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 160,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Allowance for doubtful accounts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 160,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "後発事象の<strong>読み分け＋金額</strong>の4ステップです。",
+    "steps": [
+      "<strong>Step 1</strong> 決算日と、事実が起きた日・知った日を並べる。",
+      "<strong>Step 2</strong> 「決算日時点の条件確認」か「決算日後の新規発生」かを判定する。",
+      "<strong>Step 3</strong> recognized なら、見積り（貸倒・損失など）を更新する。",
+      "<strong>Step 4</strong> 既に計上済みの額を差し引き、<strong>追加で必要な額</strong>だけを費用にする。"
+    ],
+    "extra_html": "\n      <p class=\"text-sm font-semibold text-slate-800 mt-4 mb-2\">計算例（Polar）</p>\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th><th>メモ</th></tr></thead>\n        <tbody>\n          <tr><td>Receivable</td><td class=\"num\">$180,000</td><td>全額回収不能</td></tr>\n          <tr><td>Existing allowance</td><td class=\"num\">$20,000</td><td>すでに積んである</td></tr>\n          <tr><td><strong>Additional expense</strong></td><td class=\"num\"><strong>$160,000</strong></td><td>正解 C</td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "日付と「条件確認／新規」の切り分けがまだ不安です。",
+    "aoi": "Polar は recognized → 追加 <strong>$160,000</strong> です。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "もし 1/12 に工場が全焼したら、Year 1 で損失を計上しますか？",
+      "coach_html": "原則は <strong>nonrecognized</strong> です。火災は決算日後の新しい条件なので、重大なら注記し、帳簿の Year 1 損失にはしません。"
+    },
+    {
+      "student_html": "訴訟が 1/20 に決着し、決算日時点ですでに probable だった場合は？",
+      "coach_html": "決着額は、決算日時点の偶発損失の見積りを<strong>確認する情報</strong>になりやすいです。recognized として計上額を更新します。"
+    }
+  ],
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 855</strong> の考え方に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — additional bad debt）",
+      "stem_html": "Polar Co.'s year-end is <strong>December 31, Year 1</strong>. On <strong>January 18, Year 2</strong>, before issuance, Polar learns that a major customer declared bankruptcy on <strong>January 12, Year 2</strong>. The December 31 receivable of <strong>$180,000</strong> is uncollectible. Prior allowance for this customer was <strong>$20,000</strong>. What <strong>additional bad debt expense</strong> should Polar recognize in Year 1?",
+      "choices": [
+        "A. $0",
+        "B. $20,000",
+        "C. $160,000",
+        "D. $180,000"
+      ],
+      "explain_html": "<p>顧客破綻は貸倒見積りの条件確認（recognized）。追加は $180,000 − $20,000 ＝ <strong>$160,000</strong>。正解 <strong>C</strong>。</p><p class=\"text-slate-600\">A＝誤解①。D＝既存引当を無視。B＝既存額そのもの。</p>"
+    },
+    {
+      "title": "問題 2（概念 — nonrecognized）",
+      "stem_html": "Which of the following is typically a <strong>nonrecognized subsequent event</strong> under U.S. GAAP?",
+      "choices": [
+        "A. Settlement of litigation that confirms a loss that existed at the balance sheet date",
+        "B. Loss of a plant due to a fire that occurred after the balance sheet date",
+        "C. Bankruptcy of a customer that confirms collectibility issues existing at year-end",
+        "D. Finalization of a year-end inventory count adjustment"
+      ],
+      "explain_html": "<p>火災は決算日後の新しい条件 → <strong>nonrecognized</strong>（注記）。正解 <strong>B</strong>。</p><p class=\"text-slate-600\">A・C は条件確認。D は見積り・集計の修正に近い。</p>"
+    }
+  ],
+  "summary": [
+    "後発事象は「条件確認」か「新規発生」かで切る。",
+    "Recognized → 帳簿を修正（貸倒・偶発損失の見積り更新など）。",
+    "Nonrecognized → 原則は注記（工場火災など）。",
+    "追加費用は、必要な残高 − 既存計上額。",
+    "評価期間は財務諸表の発行まで。",
+    "仕訳例：Dr. Bad debt expense / Cr. Allowance。"
+  ]
+}

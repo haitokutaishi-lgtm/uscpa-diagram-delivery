@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "page_title": "【図解】リース（借手・finance）—ROU資産と lease liability の初期計上",
+    "theme_line_html": "Leases — <span class=\"font-bold normal-case\">借手 finance lease の開始時仕訳</span>",
+    "subject_line": "USCPA FAR / Leases（ASC 842）",
+    "h1_html": "<strong>借手の finance lease</strong>—開始時は <span class=\"term-en\">lease liability</span> を PV で測り、<span class=\"term-en\">ROU asset</span> に初期直接費用などを足す",
+    "lead_html": "試験では、リース開始日に <span class=\"term-en\">lease liability</span>＝将来支払の割引現在価値を求め、ROU 資産＝負債＋初期直接費用−インセンティブ、の型で金額を決めます。"
+  },
+  "mc_preview": {
+    "stem_html": "On January 1, Year 1, Nori Co. leases equipment under a <strong>finance lease</strong>. The present value of lease payments is <strong>$420,000</strong>. Nori pays <strong>initial direct costs</strong> of <strong>$12,000</strong> and receives a <strong>lease incentive</strong> of <strong>$8,000</strong> from the lessor. What amount should Nori record as the <strong>right-of-use (ROU) asset</strong> at commencement?",
+    "choices": [
+      "A. $412,000",
+      "B. $420,000",
+      "C. $424,000",
+      "D. $440,000"
+    ]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　ROU 資産＝lease liability と同額だけ",
+      "student_html": "開始時はいつも ROU と負債が同じ $420,000（B）では？",
+      "coach_html": "負債は PV ですが、ROU は <strong>負債＋初期直接費用−インセンティブ</strong> です。費用とインセンティブがあるときは一致しません。"
+    },
+    {
+      "label": "誤解②　初期直接費用を費用処理してしまう",
+      "student_html": "$12,000 は支払った瞬間に費用で、$420,000 − $8,000 ＝ $412,000（A）では？",
+      "coach_html": "ASC 842 の借手では、初期直接費用は原則 <strong>ROU に加算</strong>します。開始時に一括費用にはしません。"
+    },
+    {
+      "label": "誤解③　インセンティブを無視して足しすぎる",
+      "student_html": "$420,000 ＋ $12,000 ＋ $8,000 ＝ $440,000（D）でしょうか？",
+      "coach_html": "インセンティブは ROU から<strong>減らす</strong>側です。足し算ではありません。"
+    }
+  ],
+  "three_lead_html": "借手・開始時（ASC 842）の地図です。",
+  "three": [
+    {
+      "title": "Lease liability ＝ 将来支払の PV",
+      "body_html": "割引率は、知り得るなら lessor の implicit rate、否则 は借手の incremental borrowing rate。"
+    },
+    {
+      "title": "ROU ＝ liability ＋ IDC − incentive",
+      "body_html": "初期直接費用（IDC）を足し、受け取ったリースインセンティブを引きます。"
+    },
+    {
+      "title": "Finance でも Operating でも開始時の測り方は同じ型",
+      "body_html": "分類の違いは、その後の費用の出方（利息＋償却 vs 単一リース費用）に出ます。"
+    }
+  ],
+  "theory": {
+    "lead_html": "②の3つは、ここでの<strong>開始時の資産・負債の初期測定</strong>に対応します。",
+    "timeline_html": "①開始日に支払の PV を計算 → ②lease liability を計上 → ③IDC・incentive を調整して ROU を計上",
+    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、Nori の ROU $424,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "借手は、使用権（ROU）と支払義務（lease liability）を開始時に認識します。負債は将来キャッシュの割引、資産はその義務をベースに、付随コストとインセンティブで調整します（ASC 842）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Nori・要約）",
+        "body_html": "ROU $424,000、liability $420,000、現金純額（IDC−incentive）$4,000。",
+        "je_lines": [
+          "Dr. Right-of-use asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 424,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Lease liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 420,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash (net IDC − incentive) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "開始時 ROU の<strong>3ステップ</strong>です。",
+    "steps": [
+      "<strong>Step 1</strong> 将来リース支払の <strong>PV</strong> を求め、それが lease liability。",
+      "<strong>Step 2</strong> <strong>初期直接費用</strong>を足す。",
+      "<strong>Step 3</strong> <strong>リースインセンティブ</strong>を引く → ROU。"
+    ],
+    "extra_html": "\n      <p class=\"text-sm font-semibold text-slate-800 mt-4 mb-2\">計算例（Nori）</p>\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>PV of lease payments（＝liability）</td><td class=\"num\">$420,000</td></tr>\n          <tr><td>＋ Initial direct costs</td><td class=\"num\">12,000</td></tr>\n          <tr><td>− Lease incentive</td><td class=\"num\">(8,000)</td></tr>\n          <tr><td><strong>ROU asset</strong></td><td class=\"num\"><strong>$424,000</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "負債と ROU がズレる理由を確認したいです。",
+    "aoi": "ズレの原因は IDC と incentive です。ROU は <strong>$424,000</strong>。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "支払が期末払いでも、開始時に liability を計上しますか？",
+      "coach_html": "はい。開始日に将来支払の PV を負債にします。最初の支払タイミングは、PV の計算と翌期以降の利息計算に影響します。"
+    },
+    {
+      "student_html": "operating lease だと開始時の仕訳は変わりますか？",
+      "coach_html": "開始時の <strong>測定の型は同じ</strong>です。違いはその後の費用認識（単一の lease expense）です。"
+    }
+  ],
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 842</strong> の考え方に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — ROU asset）",
+      "stem_html": "Nori Co. enters a <strong>finance lease</strong>. PV of lease payments is <strong>$420,000</strong>. Initial direct costs <strong>$12,000</strong>. Lease incentive received <strong>$8,000</strong>. ROU asset at commencement?",
+      "choices": [
+        "A. $412,000",
+        "B. $420,000",
+        "C. $424,000",
+        "D. $440,000"
+      ],
+      "explain_html": "<p>$420,000 ＋ $12,000 − $8,000 ＝ <strong>$424,000</strong>。正解 <strong>C</strong>。</p><p class=\"text-slate-600\">A＝IDCを費用扱い。B＝調整なし。D＝incentiveを加算。</p>"
+    },
+    {
+      "title": "問題 2（概念 — lease liability）",
+      "stem_html": "At lease commencement, a lessee's <strong>lease liability</strong> is generally measured as:",
+      "choices": [
+        "A. The fair value of the underlying asset",
+        "B. The present value of the unpaid lease payments",
+        "C. The sum of all undiscounted lease payments",
+        "D. The lessor's carrying amount of the asset"
+      ],
+      "explain_html": "<p>負債は将来支払の<strong>現在価値</strong>。正解 <strong>B</strong>。</p>"
+    }
+  ],
+  "summary": [
+    "開始時：liability ＝ 支払の PV。",
+    "ROU ＝ liability ＋ 初期直接費用 − インセンティブ。",
+    "IDC は開始時に一括費用にしない。",
+    "incentive は ROU を減らす。",
+    "finance / operating の違いは主にその後の費用の出方。",
+    "仕訳：Dr. ROU / Cr. Lease liability（＋現金の純額）。"
+  ]
+}

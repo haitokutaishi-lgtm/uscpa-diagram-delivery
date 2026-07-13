@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "page_title": "【図解】持分法—被投資会社の利益・配当で投資勘定が動く",
+    "theme_line_html": "Investments — <span class=\"font-bold normal-case\">equity method の基本仕訳</span>",
+    "subject_line": "USCPA FAR / Equity Method（ASC 323）",
+    "h1_html": "<strong>持分法</strong>—投資先の利益で投資を増やし、配当で投資を減らす（収益は利益シェア）",
+    "lead_html": "重要な影響力がある株式投資では、配当を収益にしません。投資先の当期純利益×持分比率を収益と投資の増加にし、受け取った配当は投資の減少です。"
+  },
+  "mc_preview": {
+    "stem_html": "On January 1, Year 1, Mesa Co. acquired <strong>30%</strong> of Tilo Inc. for <strong>$900,000</strong> and can exercise <strong>significant influence</strong>. During Year 1, Tilo reported net income of <strong>$200,000</strong> and paid cash dividends of <strong>$50,000</strong>. What amount should Mesa report as its <strong>investment in Tilo</strong> at December 31, Year 1 under the equity method?",
+    "choices": [
+      "A. $900,000",
+      "B. $915,000",
+      "C. $945,000",
+      "D. $960,000"
+    ]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　取得原価のまま動かさない",
+      "student_html": "株価も出ていないので、年末も $900,000（A）のままでは？",
+      "coach_html": "持分法は公正価値評価ではありません。利益シェアで増やし、配当で減らします。"
+    },
+    {
+      "label": "誤解②　配当を収益にして投資を減らさない",
+      "student_html": "利益 $60,000 だけ足して $960,000（D）、配当は収益、と考えていました。",
+      "coach_html": "持分法では配当は<strong>収益ではありません</strong>。投資勘定を減らします。正しい年末残高は $900,000 ＋ $60,000 − $15,000 ＝ $945,000 です。"
+    },
+    {
+      "label": "誤解③　配当だけを反映する",
+      "student_html": "$900,000 − $15,000 ＝ $885,000 のような動きですか？（選択肢にない誤答）",
+      "coach_html": "利益シェアを忘れると投資が減りすぎます。必ず<strong>利益→増、配当→減</strong>の両方です。"
+    }
+  ],
+  "three_lead_html": "持分法（ASC 323）の地図です。",
+  "three": [
+    {
+      "title": "Significant influence → equity method",
+      "body_html": "目安は議決権 20%〜50%だが、実態で判定。"
+    },
+    {
+      "title": "Investee NI × % ＝ equity in earnings（投資↑）",
+      "body_html": "投資先の利益を持分比率で取り込みます。"
+    },
+    {
+      "title": "Dividends × % ＝ 投資↓（収益ではない）",
+      "body_html": "現金は増えるが、投資勘定を減らす。配当収益は計上しない。"
+    }
+  ],
+  "theory": {
+    "lead_html": "②の3つは、ここでの<strong>投資勘定の増減</strong>に対応します。",
+    "timeline_html": "①取得時に Investment を計上 → ②期末に利益シェアを認識 → ③配当受取で Investment を減らす",
+    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、Mesa の年末投資 $945,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "重要な影響力があるなら、投資先の業績が投資者の経済実態に直結します。利益の発生時点で持分を取り込み、配当は利益の分配（すでに取り込んだ利益の現金化）なので投資を減らします。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Mesa）",
+        "body_html": "利益シェア $60,000、配当 $15,000。",
+        "je_lines": [
+          "Dr. Investment in Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Equity in earnings of Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60,000",
+          "Dr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Investment in Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "年末の Investment 残高の<strong>3ステップ</strong>です。",
+    "steps": [
+      "<strong>Step 1</strong> 取得原価から始める。",
+      "<strong>Step 2</strong> ＋（投資先 NI × 持分比率）。",
+      "<strong>Step 3</strong> −（配当 × 持分比率）。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>Cost</td><td class=\"num\">$900,000</td></tr>\n          <tr><td>＋ Share of NI (30%×$200,000)</td><td class=\"num\">60,000</td></tr>\n          <tr><td>− Share of dividends (30%×$50,000)</td><td class=\"num\">(15,000)</td></tr>\n          <tr><td><strong>Investment, 12/31</strong></td><td class=\"num\"><strong>$945,000</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "配当を収益にしてしまいそうです。",
+    "aoi": "持分法の配当は投資を減らすだけ。年末は <strong>$945,000</strong>。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "公正価値オプションや市場価格がある場合は？",
+      "coach_html": "significant influence があり持分法を使う前提なら、毎期末の時価評価にはしません。別の測定の話になったら問題文が明示します。"
+    },
+    {
+      "student_html": "投資先が損失のときは？",
+      "coach_html": "持分比率分だけ Investment を減らし、Equity in losses を認識します（投資がゼロになるまでの制限など、発展論点あり）。"
+    }
+  ],
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 323</strong> の考え方に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — investment balance）",
+      "stem_html": "Mesa acquired 30% of Tilo for $900,000 (significant influence). Tilo NI $200,000; dividends $50,000. Investment at year-end?",
+      "choices": [
+        "A. $900,000",
+        "B. $915,000",
+        "C. $945,000",
+        "D. $960,000"
+      ],
+      "explain_html": "<p>$900,000 ＋ $60,000 − $15,000 ＝ <strong>$945,000</strong>。正解 <strong>C</strong>。</p><p class=\"text-slate-600\">A＝動かさない。D＝配当を無視。B＝計算誤り。</p>"
+    },
+    {
+      "title": "問題 2（概念 — dividends）",
+      "stem_html": "Under the equity method, cash dividends received from the investee are recorded as:",
+      "choices": [
+        "A. Dividend revenue",
+        "B. A reduction of the investment account",
+        "C. An increase in additional paid-in capital",
+        "D. Unrealized gain in OCI"
+      ],
+      "explain_html": "<p>配当は投資勘定の減少。正解 <strong>B</strong>。</p>"
+    }
+  ],
+  "summary": [
+    "Significant influence → equity method。",
+    "利益シェアで投資↑・収益計上。",
+    "配当で投資↓（収益にしない）。",
+    "年末残高＝原価＋利益シェア−配当シェア。",
+    "公正価値の毎期評価とは別物。",
+    "仕訳：Investment / Equity in earnings、Cash / Investment。"
+  ]
+}
