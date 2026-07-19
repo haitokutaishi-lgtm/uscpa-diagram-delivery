@@ -6,7 +6,7 @@
 #
 # シークレット:
 #   DISCORD_WEBHOOK_URL       … 必須（投稿用）
-#   DIAGRAM_SITE_PUSH_TOKEN   … diagram-site への自動デプロイに必須（contents:write の PAT）
+#   DIAGRAM_SITE_DEPLOY_KEY   … diagram-site への自動デプロイに必須（write 権限つき Deploy Key の SSH 秘密鍵）
 
 name: 図解 自動生成→配信
 
@@ -58,7 +58,7 @@ jobs:
       - name: Verify secrets (presence + smoke)
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          DIAGRAM_SITE_DEPLOY_KEY: ${{ secrets.DIAGRAM_SITE_DEPLOY_KEY }}
         run: python ops/verify_delivery_secrets.py
 
       - uses: actions/setup-python@v5
@@ -147,23 +147,23 @@ jobs:
           path: far
           ref: main
 
-      - name: Check PAT
+      - name: Check deploy key
         id: pat
         env:
-          PAT: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          DEPLOY_KEY: ${{ secrets.DIAGRAM_SITE_DEPLOY_KEY }}
         run: |
-          if [ -n "${PAT}" ]; then
+          if [ -n "${DEPLOY_KEY}" ]; then
             echo "ok=true" >> "$GITHUB_OUTPUT"
           else
             echo "ok=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::DIAGRAM_SITE_PUSH_TOKEN がありません。diagram-site への同期をスキップします（Pages が古いと URL が 404 のままになります）。"
+            echo "::warning::DIAGRAM_SITE_DEPLOY_KEY がありません。diagram-site への同期をスキップします（Pages が古いと URL が 404 のままになります）。"
           fi
 
       - uses: actions/checkout@v5
         if: steps.pat.outputs.ok == 'true'
         with:
           repository: haitokutaishi-lgtm/diagram-site
-          token: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          ssh-key: ${{ secrets.DIAGRAM_SITE_DEPLOY_KEY }}
           ref: main
           path: diagram-site
           persist-credentials: true
@@ -179,12 +179,10 @@ jobs:
         env:
           FAR_SHA: ${{ github.sha }}
           FAR_REPO: ${{ github.repository }}
-          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin "https://x-access-token:${DIAGRAM_SITE_PUSH_TOKEN}@github.com/haitokutaishi-lgtm/diagram-site.git"
           git add topics
           if git diff --cached --quiet; then
             echo "pushed=false" >> "$GITHUB_OUTPUT"
@@ -202,7 +200,7 @@ jobs:
             sleep 5
           done
           if [ "$pushed" != "true" ]; then
-            echo "::error::diagram-site への push に失敗しました。DIAGRAM_SITE_PUSH_TOKEN が diagram-site リポジトリへの contents:write 付き PAT か確認してください。"
+            echo "::error::diagram-site への push に失敗しました。DIAGRAM_SITE_DEPLOY_KEY が diagram-site の write 権限つき Deploy Key か確認してください。"
             echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 1
           fi
@@ -333,7 +331,7 @@ jobs:
             sleep 30
           done
           if [ -z "$ok" ]; then
-            echo "::error::Topic URL が 200 になりませんでした: $URL（Pages または PAT 同期を確認）"
+            echo "::error::Topic URL が 200 になりませんでした: $URL（Pages または Deploy Key 同期を確認）"
             exit 1
           fi
 

@@ -27,34 +27,39 @@ def check_discord_webhook(url: str) -> tuple[str, str]:
         return "fail", f"接続失敗: {e}"
 
 
-def check_github_pat(token: str, repo: str) -> tuple[str, str]:
-    if not token.strip():
+def check_deploy_key(key: str, repo: str) -> tuple[str, str]:
+    if not key.strip():
         return "warn", "未設定（diagram-site 同期はスキップされます）"
-    url = f"https://api.github.com/repos/{repo}"
-    req = urllib.request.Request(
-        url,
-        method="GET",
-        headers={
-            "Authorization": f"Bearer {token.strip()}",
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "uscpa-diagram-delivery-health",
-        },
-    )
+    if "PRIVATE KEY" not in key:
+        return "fail", "SSH 秘密鍵の形式ではありません（-----BEGIN ... PRIVATE KEY----- が必要）"
+    import subprocess
+    import tempfile
+
+    with tempfile.NamedTemporaryFile("w", suffix=".key", delete=False) as f:
+        f.write(key.strip() + "\n")
+        key_path = f.name
+    os.chmod(key_path, 0o600)
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            if resp.status == 200:
-                return "ok", f"{repo} への contents 読取 OK"
-            return "warn", f"HTTP {resp.status}"
-    except urllib.error.HTTPError as e:
-        if e.code == 401:
-            return "fail", "PAT 無効または期限切れ（HTTP 401）"
-        if e.code == 403:
-            return "fail", "PAT の権限不足（diagram-site へ write が必要）"
-        if e.code == 404:
-            return "fail", f"リポジトリ未検出: {repo}"
-        return "fail", f"HTTP {e.code}: {e.reason}"
+        proc = subprocess.run(
+            ["git", "ls-remote", f"git@github.com:{repo}.git", "HEAD"],
+            env={
+                **os.environ,
+                "GIT_SSH_COMMAND": f"ssh -i {key_path} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new",
+            },
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if proc.returncode == 0:
+            return "ok", f"{repo} への SSH 接続 OK（Deploy Key 有効）"
+        return "fail", f"SSH 接続失敗（Deploy Key の登録・権限を確認）: {proc.stderr.strip()[:200]}"
     except Exception as e:
         return "fail", f"接続失敗: {e}"
+    finally:
+        try:
+            os.unlink(key_path)
+        except OSError:
+            pass
 
 
 def main() -> int:
@@ -65,11 +70,11 @@ def main() -> int:
     args = ap.parse_args()
 
     discord_url = os.environ.get("DISCORD_WEBHOOK_URL", "")
-    pat = os.environ.get("DIAGRAM_SITE_PUSH_TOKEN", "")
+    deploy_key = os.environ.get("DIAGRAM_SITE_DEPLOY_KEY", "")
 
     checks = [
         ("DISCORD_WEBHOOK_URL", *check_discord_webhook(discord_url), True),
-        ("DIAGRAM_SITE_PUSH_TOKEN", *check_github_pat(pat, args.diagram_site_repo), False),
+        ("DIAGRAM_SITE_DEPLOY_KEY", *check_deploy_key(deploy_key, args.diagram_site_repo), False),
     ]
 
     lines = [
@@ -110,8 +115,8 @@ def main() -> int:
     if failed_required:
         print("::error::必須 Secret が未設定または無効です。", file=sys.stderr)
         return 1
-    if result["DIAGRAM_SITE_PUSH_TOKEN"]["status"] == "fail":
-        print("::error::DIAGRAM_SITE_PUSH_TOKEN が無効です。", file=sys.stderr)
+    if result["DIAGRAM_SITE_DEPLOY_KEY"]["status"] == "fail":
+        print("::error::DIAGRAM_SITE_DEPLOY_KEY が無効です。", file=sys.stderr)
         return 1
     return 0
 

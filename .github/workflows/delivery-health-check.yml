@@ -25,5 +25,5 @@ jobs:
       - name: Verify secrets (presence + smoke)
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          DIAGRAM_SITE_DEPLOY_KEY: ${{ secrets.DIAGRAM_SITE_DEPLOY_KEY }}
         run: python ops/verify_delivery_secrets.py

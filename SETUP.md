@@ -25,10 +25,25 @@ GitHub リポジトリ → Settings → Secrets and variables → Actions → Ne
 
 図解 HTML はこのリポジトリの `publish-html/` を正とし、Actions が **`diagram-site` リポジトリの `topics/<slug>/index.html` にコピーして push** します。
 
-1. GitHub で **Fine-grained personal access token**（または classic PAT）を作成し、対象リポジトリ **`diagram-site`** に **Contents: Read and write** を付与する。
+1. SSH 鍵ペアを作成し、公開鍵を **`diagram-site` リポジトリの Deploy Key（Allow write access 有効）** として登録する。
+
+   ```bash
+   ssh-keygen -t ed25519 -N "" -f /tmp/diagram_site_deploy_key
+   gh api repos/haitokutaishi-lgtm/diagram-site/keys \
+     -f title="uscpa-diagram-delivery sync (Actions)" \
+     -f key="$(cat /tmp/diagram_site_deploy_key.pub)" -F read_only=false
+   ```
+
 2. このリポジトリ（FAR テキスト一覧）の Secrets に追加する。
-   - Name: `DIAGRAM_SITE_PUSH_TOKEN`
-   - Value: 上記 PAT（1行）
+   - Name: `DIAGRAM_SITE_DEPLOY_KEY`
+   - Value: 上記の **秘密鍵**（`/tmp/diagram_site_deploy_key` の中身）
+
+   ```bash
+   gh secret set DIAGRAM_SITE_DEPLOY_KEY \
+     --repo haitokutaishi-lgtm/uscpa-diagram-delivery < /tmp/diagram_site_deploy_key
+   ```
+
+   Deploy Key は `diagram-site` 1リポジトリにしか効かないため、PAT より漏えい時の影響が小さい（旧 `DIAGRAM_SITE_PUSH_TOKEN` 方式は 2026-07 に廃止）。
 
 **動き:**
 
@@ -40,7 +55,7 @@ GitHub リポジトリ → Settings → Secrets and variables → Actions → Ne
 | 項目 | 場所 |
 |------|------|
 | Discord Webhook | GitHub Secret `DISCORD_WEBHOOK_URL`（**必須**） |
-| diagram-site 更新 | Secret `DIAGRAM_SITE_PUSH_TOKEN`（**強く推奨**） |
+| diagram-site 更新 | Secret `DIAGRAM_SITE_DEPLOY_KEY`（**強く推奨**） |
 
 **配信時刻はランダムではありません。** 日・水・土 **9:00 JST** 固定です。以前 3:00 頃に出たのは GitHub cron の遅延（UTC 0時台の混雑）が原因で、`timezone: Asia/Tokyo` と 9:00 までの待機で抑えています。
 

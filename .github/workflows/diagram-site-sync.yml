@@ -1,7 +1,7 @@
 # publish-html を diagram-site の GitHub Pages に反映する（main への push 時）
 #
 # 必要なシークレット（このリポジトリの Settings → Secrets）:
-#   DIAGRAM_SITE_PUSH_TOKEN … diagram-site リポジトリへの contents:write が付いた PAT
+#   DIAGRAM_SITE_DEPLOY_KEY … diagram-site リポジトリの write 権限つき Deploy Key（SSH 秘密鍵）
 
 name: Sync diagram-site topics
 
@@ -29,19 +29,19 @@ jobs:
         with:
           path: far
 
-      - name: Validate deploy token
+      - name: Validate deploy key
         env:
-          PAT: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          DEPLOY_KEY: ${{ secrets.DIAGRAM_SITE_DEPLOY_KEY }}
         run: |
-          if [ -z "${PAT}" ]; then
-            echo "::error::DIAGRAM_SITE_PUSH_TOKEN が未設定です。diagram-site へ push できません。"
+          if [ -z "${DEPLOY_KEY}" ]; then
+            echo "::error::DIAGRAM_SITE_DEPLOY_KEY が未設定です。diagram-site へ push できません。"
             exit 1
           fi
 
       - uses: actions/checkout@v5
         with:
           repository: haitokutaishi-lgtm/diagram-site
-          token: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
+          ssh-key: ${{ secrets.DIAGRAM_SITE_DEPLOY_KEY }}
           ref: main
           path: diagram-site
           persist-credentials: true
@@ -54,12 +54,10 @@ jobs:
         env:
           FAR_SHA: ${{ github.sha }}
           FAR_REPO: ${{ github.repository }}
-          DIAGRAM_SITE_PUSH_TOKEN: ${{ secrets.DIAGRAM_SITE_PUSH_TOKEN }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin "https://x-access-token:${DIAGRAM_SITE_PUSH_TOKEN}@github.com/haitokutaishi-lgtm/diagram-site.git"
           git add topics
           if git diff --cached --quiet; then
             echo "No topic file changes."
@@ -73,5 +71,5 @@ jobs:
             echo "::warning::diagram-site push retry $i ..."
             sleep 5
           done
-          echo "::error::diagram-site への push に失敗。DIAGRAM_SITE_PUSH_TOKEN（diagram-site への write）を確認してください。"
+          echo "::error::diagram-site への push に失敗。DIAGRAM_SITE_DEPLOY_KEY（diagram-site の write 権限つき Deploy Key）を確認してください。"
           exit 1
