@@ -1,5 +1,5 @@
 {
-  "_comment": "コピーして <slug>.json にリネーム。HTML 内は body_html 等に軽い HTML 可（term-en クラス推奨）",
+  "_comment": "コピーして <slug>.json にリネーム。HTML 内は body_html 等に軽い HTML 可（term-en クラス推奨）。glossary / crossmap / patterns / focus / distractors_html / one_minute_html / checklist は新設フィールド（省略するとそのセクションは出力されない。新規テーマでは必須とする）",
   "meta": {
     "page_title": "【図解】テーマ名—試験で何を問うか",
     "theme_line_html": "科目英語 — <span class=\"font-bold normal-case\">キーワード（日本語補足）</span>",
@@ -7,6 +7,20 @@
     "h1_html": "見出し（試験で想像できる日本語）",
     "lead_html": "試験でよく出る英文・数字の型を1文で。"
   },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Term 1</span>（日本語）",
+      "body_html": "受講生の言葉での言い換え。最大3語まで。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Term 2</span>（日本語）",
+      "body_html": "…"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Term 3</span>（日本語）",
+      "body_html": "…"
+    }
+  ],
   "mc_preview": {
     "stem_html": "English MC stem here with <strong>$123</strong> amounts.",
     "choices": ["A. $1", "B. $2", "C. $3", "D. $4"]
@@ -28,16 +42,16 @@
       "coach_html": "…"
     }
   ],
-  "three_lead_html": "計算前の地図です。",
+  "three_lead_html": "このページの核心3点。冒頭の「30秒でわかるこのページ」に表示される。",
   "three": [
     { "title": "ポイント1", "body_html": "説明" },
     { "title": "ポイント2", "body_html": "説明" },
     { "title": "ポイント3", "body_html": "説明" }
   ],
   "theory": {
-    "lead_html": "②の3つは、ここでの仕訳に対応します。",
+    "lead_html": "①の3つは、ここでの仕訳に対応します。",
     "timeline_html": "①… → ②… → ③…",
-    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、この仕訳の金額を求める手順です。",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、この仕訳の金額を求める手順です。",
     "blocks": [
       {
         "icon": "help-circle",
@@ -68,24 +82,71 @@
   "process_dialogues": [
     { "student_html": "…", "coach_html": "…" }
   ],
+  "crossmap": {
+    "lead_html": "この論点がつながる他論点の一言。",
+    "items": [
+      {
+        "title_html": "つながる論点1（別テーマ・別ASC）",
+        "body_html": "どうつながるか、何が共通で何が違うかを2〜3文で。"
+      },
+      {
+        "title_html": "つながる論点2",
+        "body_html": "…"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "出題側の引き出し（このテーマのMCの出方）を先に見せる。",
+    "mc_patterns": [
+      "<strong>出方1</strong>：何を与えて何を聞くか",
+      "<strong>出方2</strong>：…",
+      "<strong>出方3</strong>：…"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ○ステップ",
+      "steps": [
+        "手順1",
+        "手順2"
+      ]
+    }
+  },
   "mc_intro_html": "オリジナル問題です。<strong>ASC ○○○</strong> の考え方に沿って作成しています。",
   "mc": [
     {
       "title": "問題 1（計算）",
+      "focus": [
+        "読む前に確認する観点1（何と何を混同させに来るか）",
+        "観点2"
+      ],
       "stem_html": "English stem…",
       "choices": ["A. …", "B. …", "C. …", "D. …"],
-      "explain_html": "<p>解説</p>"
+      "explain_html": "<p>解説（正解の根拠）</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝どういうミスをした人向けに作られた誤答か",
+        "<strong>B</strong>＝…",
+        "<strong>D</strong>＝…"
+      ]
     },
     {
       "title": "問題 2（概念）",
+      "focus": [
+        "読む前に確認する観点"
+      ],
       "stem_html": "Concept stem…",
       "choices": ["A. …", "B. …", "C. …", "D. …"],
-      "explain_html": "<p>解説</p>"
+      "explain_html": "<p>解説</p>",
+      "distractors_html": [
+        "<strong>誤答肢</strong>＝作られ方の説明"
+      ]
     }
   ],
+  "one_minute_html": "このテーマを<strong>1分で人に説明できる形</strong>の段落。核心の式・分岐・例外を1つの文章に圧縮する。",
+  "checklist": [
+    "見ずに言える／10秒で再現できる、の形で書く自己テスト項目1",
+    "項目2",
+    "項目3"
+  ],
   "summary": [
-    "まとめ1",
-    "まとめ2",
-    "まとめ3"
+    "（後方互換用。one_minute_html があるときは表示されない）"
   ]
 }

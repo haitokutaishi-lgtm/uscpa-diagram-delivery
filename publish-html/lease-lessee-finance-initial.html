@@ -40,6 +40,17 @@
     .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
     .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
     .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+    .badge-essential { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .glossary-card { background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.25rem; }
+    .glossary-term { font-weight: 700; color: #065f46; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .crossmap-item { background: #f1f5f9; border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .crossmap-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .pattern-card { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 0.75rem; padding: 1.25rem; }
+    .focus-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .focus-title { font-size: 0.8rem; font-weight: 700; color: #1d4ed8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .distractor-list { list-style: disc; list-style-position: inside; font-size: 0.85rem; color: #475569; line-height: 1.7; }
+    .one-minute { background: #f8fafc; border-left: 4px solid #64748b; border-radius: 0.5rem; padding: 1rem 1.25rem; }
+    .checklist-box { background: #ecfdf5; border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
 
   </style>
 </head>
@@ -56,18 +67,59 @@
   <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
     <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
       <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
-        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
+        <li><a href="#summary30" class="text-blue-700 hover:underline">① 30秒でわかるこのページ</a></li>
+        <li><a href="#glossary" class="text-blue-700 hover:underline">② 先に言葉をそろえる（3語だけ）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">③ よくある悩み</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">④ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">⑤ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑥ 対話で整理</a></li>
+        <li><a href="#crossmap" class="text-blue-700 hover:underline">⑦ 横串マップ（他の論点とのつながり）</a></li>
+        <li><a href="#patterns" class="text-blue-700 hover:underline">⑧ 出題パターンの引き出し</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑨ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑩ まとめ：1分で人に説明できる形</a></li>
       </ul>
     </nav>
 
+    <section id="summary30" class="section-card border-2 border-blue-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-6 h-6 text-blue-600"></i> ① 30秒でわかるこのページ</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">借手・開始時（ASC 842）の地図です。</p>
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">1</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Lease liability ＝ 将来支払の PV</strong>　割引率は、知り得るなら lessor の implicit rate、知り得なければ借手の incremental borrowing rate。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">2</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>ROU ＝ liability ＋ IDC − incentive</strong>　初期直接費用（IDC）を足し、受け取ったリースインセンティブを引きます。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">3</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Finance でも Operating でも開始時の測り方は同じ型</strong>　分類の違いは、その後の費用の出方（利息＋償却 vs 単一リース費用）に出ます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-6 h-6 text-emerald-600"></i> ② 先に言葉をそろえる（3語だけ）</h2>
+      <p class="part-lead">本文の前に、この3語だけ意味を固定します。</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">ROU asset</span>（使用権資産）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">リース物件を「使う権利」を資産にしたもの。物件そのものではなく<strong>権利</strong>を計上する。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Initial direct costs（IDC）</span>（初期直接費用）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">そのリース契約が成立したから発生したコスト（仲介手数料など）。開始時に費用にせず<strong>ROU に上乗せ</strong>する。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Lease incentive</span>（リースインセンティブ）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">貸手からもらうキャッシュバック等。実質的な値引きなので <strong>ROU から差し引く</strong>。</p>
+        </div>
+      </div>
+    </section>
+
     <section id="worries" class="section-card worries-box border-amber-300">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-6 h-6"></i> ③ よくある悩み</h2>
       <div class="mc-preview-box">
         <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
         <div class="en-stem mb-3">On January 1, Year 1, Nori Co. leases equipment under a <strong>finance lease</strong>. The present value of lease payments is <strong>$420,000</strong>. Nori pays <strong>initial direct costs</strong> of <strong>$12,000</strong> and receives a <strong>lease incentive</strong> of <strong>$8,000</strong> from the lessor. What amount should Nori record as the <strong>right-of-use (ROU) asset</strong> at commencement?</div>
@@ -127,38 +179,9 @@
       </div>
     </section>
 
-    <section id="three" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
-      <p class="part-lead">借手・開始時（ASC 842）の地図です。</p>
-      <ol class="space-y-5 text-sm leading-relaxed">
-
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
-          <div>
-            <p class="font-bold text-slate-900">Lease liability ＝ 将来支払の PV</p>
-            <p class="text-slate-600 mt-1">割引率は、知り得るなら lessor の implicit rate、否则 は借手の incremental borrowing rate。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
-          <div>
-            <p class="font-bold text-slate-900">ROU ＝ liability ＋ IDC − incentive</p>
-            <p class="text-slate-600 mt-1">初期直接費用（IDC）を足し、受け取ったリースインセンティブを引きます。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
-          <div>
-            <p class="font-bold text-slate-900">Finance でも Operating でも開始時の測り方は同じ型</p>
-            <p class="text-slate-600 mt-1">分類の違いは、その後の費用の出方（利息＋償却 vs 単一リース費用）に出ます。</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
     <section id="theory" class="section-card border-indigo-100">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
-      <p class="part-lead">②の3つは、ここでの<strong>開始時の資産・負債の初期測定</strong>に対応します。</p>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ④ 会計の背景と仕訳</h2>
+      <p class="part-lead">①の3つは、ここでの<strong>開始時の資産・負債の初期測定</strong>に対応します。</p>
 
       <div class="theory-block">
         <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
@@ -171,14 +194,13 @@
         <p class="je-line">Dr. Right-of-use asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 424,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Lease liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 420,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash (net IDC − incentive) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4,000</p>
       </div>
       <p class="timeline-mini"><strong>処理の順序：</strong> ①開始日に支払の PV を計算 → ②lease liability を計上 → ③IDC・incentive を調整して ROU を計上</p>
-      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、Nori の ROU $424,000 を求める手順です。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>計算の型</strong>は、Nori の ROU $424,000 を求める手順です。</p>
     </section>
 
     <section id="reading" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ⑤ 計算の型</h2>
       <p class="text-sm text-slate-700 mb-4 leading-relaxed">開始時 ROU の<strong>3ステップ</strong>です。</p>
       <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
-
         <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> 将来リース支払の <strong>PV</strong> を求め、それが lease liability。</span></li>
         <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> <strong>初期直接費用</strong>を足す。</span></li>
         <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> <strong>リースインセンティブ</strong>を引く → ROU。</span></li>
@@ -197,13 +219,11 @@
     </section>
 
     <section id="process" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
-
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑥ 対話で整理</h2>
       <div class="persona-strip">
         <span><strong>たくま</strong>：負債と ROU がズレる理由を確認したいです。</span>
         <span><strong>あおい先生</strong>：ズレの原因は IDC と incentive です。ROU は <strong>$424,000</strong>。</span>
       </div>
-
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
@@ -234,12 +254,62 @@
       </div>
     </section>
 
+    <section id="crossmap" class="section-card border-2 border-amber-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="network" class="w-6 h-6 text-amber-600"></i> ⑦ 横串マップ（他の論点とのつながり）</h2>
+      <p class="part-lead">開始時の測定は、リース論点全体の入口です。前後の論点とつなげて回路にします。</p>
+      <div class="space-y-3">
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> finance / operating の分類テスト</p>
+          <p class="text-sm text-slate-700 leading-relaxed">この図解の<strong>1つ手前</strong>の論点。移転・購入オプション・リース期間・PV・特殊資産の5基準のどれかを満たせば finance。開始時の測定は分類が済んだ後の話です。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 開始後の費用処理（利息＋償却）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">finance lease はその後、<strong>lease liability × 割引率</strong>で利息、ROU を耐用期間で償却。社債の実効金利法と同じ「期首残高×率」の回路です。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 固定資産の取得原価</p>
+          <p class="text-sm text-slate-700 leading-relaxed">「取得のために直接かかったコストは資産に乗せる」という発想は、PPE の取得原価（運送費・据付費を含める）と同じ。IDC を ROU に足すのはその応用です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section-card border-2 border-violet-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="file-question" class="w-6 h-6 text-violet-600"></i> ⑧ 出題パターンの引き出し</h2>
+      <p class="part-lead">開始時測定の MC は、IDC とインセンティブの「足すか・引くか・無視か」を試すために作られます。</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">MC の出方</p>
+          <ul class="text-sm text-slate-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>ROU asset の金額</strong>：PV ＋ IDC − incentive（本ページの型）</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>lease liability の金額</strong>：将来支払の PV だけ。IDC・incentive を混ぜたら引っかけ</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>概念問題</strong>：liability の測定基礎（PV か、未割引合計か、資産の FV か）を直接聞く</span></li>
+          </ul>
+        </div>
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">解く手順は毎回同じ4ステップ</p>
+          <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside leading-relaxed">
+            <li>将来リース支払の PV を確認（与えられていれば、それが liability）</li>
+            <li>問われているのが liability か ROU かを確認する</li>
+            <li>ROU なら ＋IDC、−incentive を調整する</li>
+            <li>検算：ROU − liability ＝ IDC − incentive になっているか</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section id="mc" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑨ 理解確認MC</h2>
       <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 842</strong> の考え方に沿って作成しています。</p>
 
       <div class="mc-card">
         <p class="font-bold text-slate-900 mb-2">問題 1（計算 — ROU asset）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>問われているのは <strong>ROU</strong> か <strong>liability</strong> か</li>
+            <li>IDC は「支払った」、incentive は「受け取った」——符号が逆になる</li>
+          </ul>
+        </div>
         <div class="en-stem mb-4">Nori Co. enters a <strong>finance lease</strong>. PV of lease payments is <strong>$420,000</strong>. Initial direct costs <strong>$12,000</strong>. Lease incentive received <strong>$8,000</strong>. ROU asset at commencement?</div>
         <ul class="text-sm space-y-2 mb-4">          <li>A. $412,000</li>
           <li>B. $420,000</li>
@@ -247,11 +317,24 @@
           <li>D. $440,000</li></ul>
         <details>
           <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>$420,000 ＋ $12,000 − $8,000 ＝ <strong>$424,000</strong>。正解 <strong>C</strong>。</p><p class="text-slate-600">A＝IDCを費用扱い。B＝調整なし。D＝incentiveを加算。</p></div>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>$420,000 ＋ $12,000 − $8,000 ＝ <strong>$424,000</strong>。正解 <strong>C</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A（$412,000）</strong>＝IDC を開始時に費用処理し、incentive だけ引いたパターン（誤解②）</li>
+              <li><strong>B（$420,000）</strong>＝「ROU＝liability」と思い込んで調整を忘れたパターン（誤解①）</li>
+              <li><strong>D（$440,000）</strong>＝incentive まで足し算してしまったパターン（誤解③）</li>
+            </ul></div>
         </details>
       </div>
       <div class="mc-card">
         <p class="font-bold text-slate-900 mb-2">問題 2（概念 — lease liability）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>liability の測定基礎は<strong>割引後</strong>か割引前か</li>
+            <li>「資産の公正価値」との違い</li>
+          </ul>
+        </div>
         <div class="en-stem mb-4">At lease commencement, a lessee's <strong>lease liability</strong> is generally measured as:</div>
         <ul class="text-sm space-y-2 mb-4">          <li>A. The fair value of the underlying asset</li>
           <li>B. The present value of the unpaid lease payments</li>
@@ -259,21 +342,33 @@
           <li>D. The lessor's carrying amount of the asset</li></ul>
         <details>
           <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>負債は将来支払の<strong>現在価値</strong>。正解 <strong>B</strong>。</p></div>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>負債は将来支払の<strong>現在価値</strong>。正解 <strong>B</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A</strong>＝物件の FV は貸手側・分類テストで登場する数字。借手の負債の測定基礎ではない</li>
+              <li><strong>C</strong>＝割引を忘れた「未割引合計」。PV という言葉が抜けた人向け</li>
+              <li><strong>D</strong>＝貸手の帳簿価額は借手には無関係</li>
+            </ul></div>
         </details>
       </div>
     </section>
 
-    <section id="summary" class="section-card border-2 border-slate-300">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
-      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li>開始時：liability ＝ 支払の PV。</li>
-        <li>ROU ＝ liability ＋ 初期直接費用 − インセンティブ。</li>
-        <li>IDC は開始時に一括費用にしない。</li>
-        <li>incentive は ROU を減らす。</li>
-        <li>finance / operating の違いは主にその後の費用の出方。</li>
-        <li>仕訳：Dr. ROU / Cr. Lease liability（＋現金の純額）。</li>
-      </ol>
+    <section id="summary" class="section-card border-2 border-emerald-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-6 h-6 text-emerald-600"></i> ⑩ まとめ：1分で人に説明できる形</h2>
+      <p class="text-sm font-bold text-slate-700 mb-2">1分で人に説明できる形</p>
+      <div class="one-minute mb-6">
+        <p class="text-sm text-slate-700 leading-relaxed">借手はリース開始日に、<strong>支払義務（lease liability）＝将来支払の PV</strong> と、<strong>使う権利（ROU asset）＝ liability ＋ 初期直接費用 − インセンティブ</strong> を両建てで計上する。IDC は費用にせず資産に乗せ、もらったインセンティブは値引きとして資産から引く。この開始時の型は finance でも operating でも同じで、違いが出るのは<strong>その後の費用の出方</strong>（利息＋償却か、単一費用か）。</p>
+      </div>
+      <div class="checklist-box">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> 今日のチェックリスト</p>
+        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>「liability＝PV」「ROU＝liability＋IDC−incentive」を見ずに言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>Nori の ROU $424,000 を10秒で再現できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>ROU と liability の差額が IDC−incentive になることを検算に使える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>IDC を開始時に費用処理しない理由を説明できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>finance / operating で開始時の測定が同じ型だと言える</span></li>
+        </ul>
+      </div>
     </section>
 
     <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>

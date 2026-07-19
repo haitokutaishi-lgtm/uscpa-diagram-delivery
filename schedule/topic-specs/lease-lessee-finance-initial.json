@@ -6,6 +6,20 @@
     "h1_html": "<strong>借手の finance lease</strong>—開始時は <span class=\"term-en\">lease liability</span> を PV で測り、<span class=\"term-en\">ROU asset</span> に初期直接費用などを足す",
     "lead_html": "試験では、リース開始日に <span class=\"term-en\">lease liability</span>＝将来支払の割引現在価値を求め、ROU 資産＝負債＋初期直接費用−インセンティブ、の型で金額を決めます。"
   },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">ROU asset</span>（使用権資産）",
+      "body_html": "リース物件を「使う権利」を資産にしたもの。物件そのものではなく<strong>権利</strong>を計上する。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Initial direct costs（IDC）</span>（初期直接費用）",
+      "body_html": "そのリース契約が成立したから発生したコスト（仲介手数料など）。開始時に費用にせず<strong>ROU に上乗せ</strong>する。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Lease incentive</span>（リースインセンティブ）",
+      "body_html": "貸手からもらうキャッシュバック等。実質的な値引きなので <strong>ROU から差し引く</strong>。"
+    }
+  ],
   "mc_preview": {
     "stem_html": "On January 1, Year 1, Nori Co. leases equipment under a <strong>finance lease</strong>. The present value of lease payments is <strong>$420,000</strong>. Nori pays <strong>initial direct costs</strong> of <strong>$12,000</strong> and receives a <strong>lease incentive</strong> of <strong>$8,000</strong> from the lessor. What amount should Nori record as the <strong>right-of-use (ROU) asset</strong> at commencement?",
     "choices": [
@@ -36,7 +50,7 @@
   "three": [
     {
       "title": "Lease liability ＝ 将来支払の PV",
-      "body_html": "割引率は、知り得るなら lessor の implicit rate、否则 は借手の incremental borrowing rate。"
+      "body_html": "割引率は、知り得るなら lessor の implicit rate、知り得なければ借手の incremental borrowing rate。"
     },
     {
       "title": "ROU ＝ liability ＋ IDC − incentive",
@@ -48,9 +62,9 @@
     }
   ],
   "theory": {
-    "lead_html": "②の3つは、ここでの<strong>開始時の資産・負債の初期測定</strong>に対応します。",
+    "lead_html": "①の3つは、ここでの<strong>開始時の資産・負債の初期測定</strong>に対応します。",
     "timeline_html": "①開始日に支払の PV を計算 → ②lease liability を計上 → ③IDC・incentive を調整して ROU を計上",
-    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、Nori の ROU $424,000 を求める手順です。",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Nori の ROU $424,000 を求める手順です。",
     "blocks": [
       {
         "icon": "help-circle",
@@ -93,10 +107,48 @@
       "coach_html": "開始時の <strong>測定の型は同じ</strong>です。違いはその後の費用認識（単一の lease expense）です。"
     }
   ],
+  "crossmap": {
+    "lead_html": "開始時の測定は、リース論点全体の入口です。前後の論点とつなげて回路にします。",
+    "items": [
+      {
+        "title_html": "finance / operating の分類テスト",
+        "body_html": "この図解の<strong>1つ手前</strong>の論点。移転・購入オプション・リース期間・PV・特殊資産の5基準のどれかを満たせば finance。開始時の測定は分類が済んだ後の話です。"
+      },
+      {
+        "title_html": "開始後の費用処理（利息＋償却）",
+        "body_html": "finance lease はその後、<strong>lease liability × 割引率</strong>で利息、ROU を耐用期間で償却。社債の実効金利法と同じ「期首残高×率」の回路です。"
+      },
+      {
+        "title_html": "固定資産の取得原価",
+        "body_html": "「取得のために直接かかったコストは資産に乗せる」という発想は、PPE の取得原価（運送費・据付費を含める）と同じ。IDC を ROU に足すのはその応用です。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "開始時測定の MC は、IDC とインセンティブの「足すか・引くか・無視か」を試すために作られます。",
+    "mc_patterns": [
+      "<strong>ROU asset の金額</strong>：PV ＋ IDC − incentive（本ページの型）",
+      "<strong>lease liability の金額</strong>：将来支払の PV だけ。IDC・incentive を混ぜたら引っかけ",
+      "<strong>概念問題</strong>：liability の測定基礎（PV か、未割引合計か、資産の FV か）を直接聞く"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "将来リース支払の PV を確認（与えられていれば、それが liability）",
+        "問われているのが liability か ROU かを確認する",
+        "ROU なら ＋IDC、−incentive を調整する",
+        "検算：ROU − liability ＝ IDC − incentive になっているか"
+      ]
+    }
+  },
   "mc_intro_html": "オリジナル問題です。<strong>ASC 842</strong> の考え方に沿って作成しています。",
   "mc": [
     {
       "title": "問題 1（計算 — ROU asset）",
+      "focus": [
+        "問われているのは <strong>ROU</strong> か <strong>liability</strong> か",
+        "IDC は「支払った」、incentive は「受け取った」——符号が逆になる"
+      ],
       "stem_html": "Nori Co. enters a <strong>finance lease</strong>. PV of lease payments is <strong>$420,000</strong>. Initial direct costs <strong>$12,000</strong>. Lease incentive received <strong>$8,000</strong>. ROU asset at commencement?",
       "choices": [
         "A. $412,000",
@@ -104,10 +156,19 @@
         "C. $424,000",
         "D. $440,000"
       ],
-      "explain_html": "<p>$420,000 ＋ $12,000 − $8,000 ＝ <strong>$424,000</strong>。正解 <strong>C</strong>。</p><p class=\"text-slate-600\">A＝IDCを費用扱い。B＝調整なし。D＝incentiveを加算。</p>"
+      "explain_html": "<p>$420,000 ＋ $12,000 − $8,000 ＝ <strong>$424,000</strong>。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$412,000）</strong>＝IDC を開始時に費用処理し、incentive だけ引いたパターン（誤解②）",
+        "<strong>B（$420,000）</strong>＝「ROU＝liability」と思い込んで調整を忘れたパターン（誤解①）",
+        "<strong>D（$440,000）</strong>＝incentive まで足し算してしまったパターン（誤解③）"
+      ]
     },
     {
       "title": "問題 2（概念 — lease liability）",
+      "focus": [
+        "liability の測定基礎は<strong>割引後</strong>か割引前か",
+        "「資産の公正価値」との違い"
+      ],
       "stem_html": "At lease commencement, a lessee's <strong>lease liability</strong> is generally measured as:",
       "choices": [
         "A. The fair value of the underlying asset",
@@ -115,15 +176,20 @@
         "C. The sum of all undiscounted lease payments",
         "D. The lessor's carrying amount of the asset"
       ],
-      "explain_html": "<p>負債は将来支払の<strong>現在価値</strong>。正解 <strong>B</strong>。</p>"
+      "explain_html": "<p>負債は将来支払の<strong>現在価値</strong>。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝物件の FV は貸手側・分類テストで登場する数字。借手の負債の測定基礎ではない",
+        "<strong>C</strong>＝割引を忘れた「未割引合計」。PV という言葉が抜けた人向け",
+        "<strong>D</strong>＝貸手の帳簿価額は借手には無関係"
+      ]
     }
   ],
-  "summary": [
-    "開始時：liability ＝ 支払の PV。",
-    "ROU ＝ liability ＋ 初期直接費用 − インセンティブ。",
-    "IDC は開始時に一括費用にしない。",
-    "incentive は ROU を減らす。",
-    "finance / operating の違いは主にその後の費用の出方。",
-    "仕訳：Dr. ROU / Cr. Lease liability（＋現金の純額）。"
+  "one_minute_html": "借手はリース開始日に、<strong>支払義務（lease liability）＝将来支払の PV</strong> と、<strong>使う権利（ROU asset）＝ liability ＋ 初期直接費用 − インセンティブ</strong> を両建てで計上する。IDC は費用にせず資産に乗せ、もらったインセンティブは値引きとして資産から引く。この開始時の型は finance でも operating でも同じで、違いが出るのは<strong>その後の費用の出方</strong>（利息＋償却か、単一費用か）。",
+  "checklist": [
+    "「liability＝PV」「ROU＝liability＋IDC−incentive」を見ずに言える",
+    "Nori の ROU $424,000 を10秒で再現できる",
+    "ROU と liability の差額が IDC−incentive になることを検算に使える",
+    "IDC を開始時に費用処理しない理由を説明できる",
+    "finance / operating で開始時の測定が同じ型だと言える"
   ]
 }

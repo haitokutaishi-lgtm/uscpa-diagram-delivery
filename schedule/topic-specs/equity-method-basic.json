@@ -6,6 +6,20 @@
     "h1_html": "<strong>持分法</strong>—投資先の利益で投資を増やし、配当で投資を減らす（収益は利益シェア）",
     "lead_html": "重要な影響力がある株式投資では、配当を収益にしません。投資先の当期純利益×持分比率を収益と投資の増加にし、受け取った配当は投資の減少です。"
   },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Significant influence</span>（重要な影響力）",
+      "body_html": "投資先の経営に口を出せる力。目安は議決権 <strong>20%〜50%</strong>（実態で判定）。これがあると持分法。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Equity in earnings</span>（持分法投資利益）",
+      "body_html": "投資先の当期純利益 × 持分比率。持分法で P/L に載る収益は<strong>これだけ</strong>で、配当ではない。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Investment account</span>（投資勘定）",
+      "body_html": "取得原価から出発し、<strong>利益シェアで増え、配当で減る</strong>「生きている」残高。毎期末の時価評価はしない。"
+    }
+  ],
   "mc_preview": {
     "stem_html": "On January 1, Year 1, Mesa Co. acquired <strong>30%</strong> of Tilo Inc. for <strong>$900,000</strong> and can exercise <strong>significant influence</strong>. During Year 1, Tilo reported net income of <strong>$200,000</strong> and paid cash dividends of <strong>$50,000</strong>. What amount should Mesa report as its <strong>investment in Tilo</strong> at December 31, Year 1 under the equity method?",
     "choices": [
@@ -48,9 +62,9 @@
     }
   ],
   "theory": {
-    "lead_html": "②の3つは、ここでの<strong>投資勘定の増減</strong>に対応します。",
+    "lead_html": "①の3つは、ここでの<strong>投資勘定の増減</strong>に対応します。",
     "timeline_html": "①取得時に Investment を計上 → ②期末に利益シェアを認識 → ③配当受取で Investment を減らす",
-    "bridge_to_calc_html": "次の<strong>④ 計算の型</strong>は、Mesa の年末投資 $945,000 を求める手順です。",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Mesa の年末投資 $945,000 を求める手順です。",
     "blocks": [
       {
         "icon": "help-circle",
@@ -94,10 +108,48 @@
       "coach_html": "持分比率分だけ Investment を減らし、Equity in losses を認識します（投資がゼロになるまでの制限など、発展論点あり）。"
     }
   ],
+  "crossmap": {
+    "lead_html": "持分法は「影響力の強さで測定方法が変わる」ものさしの真ん中です。",
+    "items": [
+      {
+        "title_html": "影響力のものさし（FV法 ↔ 持分法 ↔ 連結）",
+        "body_html": "影響力なし（目安 20%未満）＝公正価値評価・<strong>配当は収益</strong>／重要な影響力（20〜50%）＝持分法・<strong>配当は投資減</strong>／支配（50%超）＝連結。問題文の持株比率とキーワードで、まずどの世界かを決めます。"
+      },
+      {
+        "title_html": "連結（支配獲得後）",
+        "body_html": "持分法の「利益を取り込み、配当で戻す」発想は、連結の親会社側の処理と地続きです。持分法を one-line consolidation（1行連結）と呼ぶのはこのため。"
+      },
+      {
+        "title_html": "発展：basis difference・のれん相当",
+        "body_html": "取得価額が純資産持分を上回る場合、その差額のうち償却性資産分は<strong>利益シェアから毎期償却</strong>して差し引きます。基本形が固まったら上乗せする論点。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「投資残高」「P/L の収益」「配当の扱い」の3方向から聞いてきます。",
+    "mc_patterns": [
+      "<strong>年末の investment 残高</strong>：原価 ＋ NI×% − 配当×%（本ページの型）",
+      "<strong>当期の収益（equity in earnings）</strong>：NI×% だけ。配当を足したら引っかけに乗った合図",
+      "<strong>受取配当の処理</strong>：収益ではなく投資の減少、を概念で直接聞く"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "持株比率とキーワード（significant influence）で持分法だと確定する",
+        "取得原価を書く",
+        "＋ NI × %（P/L に載る収益はこれ）",
+        "− 配当 × %（現金は増えるが収益にしない）"
+      ]
+    }
+  },
   "mc_intro_html": "オリジナル問題です。<strong>ASC 323</strong> の考え方に沿って作成しています。",
   "mc": [
     {
       "title": "問題 1（計算 — investment balance）",
+      "focus": [
+        "問われているのは<strong>年末の投資残高</strong>か、当期の収益か",
+        "NI と配当の<strong>両方</strong>に持分比率を掛けたか"
+      ],
       "stem_html": "Mesa acquired 30% of Tilo for $900,000 (significant influence). Tilo NI $200,000; dividends $50,000. Investment at year-end?",
       "choices": [
         "A. $900,000",
@@ -105,10 +157,18 @@
         "C. $945,000",
         "D. $960,000"
       ],
-      "explain_html": "<p>$900,000 ＋ $60,000 − $15,000 ＝ <strong>$945,000</strong>。正解 <strong>C</strong>。</p><p class=\"text-slate-600\">A＝動かさない。D＝配当を無視。B＝計算誤り。</p>"
+      "explain_html": "<p>$900,000 ＋ $60,000 − $15,000 ＝ <strong>$945,000</strong>。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$900,000）</strong>＝原価のまま動かさない人向け（誤解①）",
+        "<strong>D（$960,000）</strong>＝利益シェアは足したが、配当を収益扱いして投資から引かなかった人向け（誤解②）",
+        "<strong>B（$915,000）</strong>＝$900,000＋$15,000。利益と配当の役割を取り違えて配当シェアだけ足したパターン"
+      ]
     },
     {
       "title": "問題 2（概念 — dividends）",
+      "focus": [
+        "持分法における配当の行き先（P/L か、投資勘定か）"
+      ],
       "stem_html": "Under the equity method, cash dividends received from the investee are recorded as:",
       "choices": [
         "A. Dividend revenue",
@@ -116,15 +176,20 @@
         "C. An increase in additional paid-in capital",
         "D. Unrealized gain in OCI"
       ],
-      "explain_html": "<p>配当は投資勘定の減少。正解 <strong>B</strong>。</p>"
+      "explain_html": "<p>配当は投資勘定の減少。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝影響力が<strong>ない</strong>投資（FV法）の処理。持分法と混同させる定番の誤答",
+        "<strong>C</strong>＝資本取引ではないので APIC は動かない",
+        "<strong>D</strong>＝OCI に飛ばすのは特定の証券評価の話。持分法の配当とは無関係"
+      ]
     }
   ],
-  "summary": [
-    "Significant influence → equity method。",
-    "利益シェアで投資↑・収益計上。",
-    "配当で投資↓（収益にしない）。",
-    "年末残高＝原価＋利益シェア−配当シェア。",
-    "公正価値の毎期評価とは別物。",
-    "仕訳：Investment / Equity in earnings、Cash / Investment。"
+  "one_minute_html": "議決権 20〜50% で<strong>重要な影響力</strong>があれば持分法。投資勘定は<strong>原価＋利益シェア−配当シェア</strong>で毎期動く。P/L に載せる収益は <strong>NI×持分比率だけ</strong>で、配当は「すでに取り込んだ利益の現金化」だから収益にせず投資を減らす。時価では評価しない。影響力なしなら FV 法（配当＝収益）、支配なら連結、と<strong>影響力の強さで世界が切り替わる</strong>。",
+  "checklist": [
+    "「原価＋NI×%−配当×%」を見ずに言える",
+    "Mesa の年末残高 $945,000 を10秒で再現できる",
+    "P/L に載る収益が $60,000（配当を含まない）と即答できる",
+    "FV法（20%未満）との配当の扱いの違いを説明できる",
+    "持分法の2本の仕訳（利益シェア／配当受取）を書ける"
   ]
 }

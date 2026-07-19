@@ -40,6 +40,17 @@
     .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
     .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
     .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+    .badge-essential { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .glossary-card { background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.25rem; }
+    .glossary-term { font-weight: 700; color: #065f46; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .crossmap-item { background: #f1f5f9; border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .crossmap-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .pattern-card { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 0.75rem; padding: 1.25rem; }
+    .focus-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .focus-title { font-size: 0.8rem; font-weight: 700; color: #1d4ed8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .distractor-list { list-style: disc; list-style-position: inside; font-size: 0.85rem; color: #475569; line-height: 1.7; }
+    .one-minute { background: #f8fafc; border-left: 4px solid #64748b; border-radius: 0.5rem; padding: 1rem 1.25rem; }
+    .checklist-box { background: #ecfdf5; border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
 
   </style>
 </head>
@@ -56,18 +67,59 @@
   <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
     <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
       <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
-        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
+        <li><a href="#summary30" class="text-blue-700 hover:underline">① 30秒でわかるこのページ</a></li>
+        <li><a href="#glossary" class="text-blue-700 hover:underline">② 先に言葉をそろえる（3語だけ）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">③ よくある悩み</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">④ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">⑤ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑥ 対話で整理</a></li>
+        <li><a href="#crossmap" class="text-blue-700 hover:underline">⑦ 横串マップ（他の論点とのつながり）</a></li>
+        <li><a href="#patterns" class="text-blue-700 hover:underline">⑧ 出題パターンの引き出し</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑨ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑩ まとめ：1分で人に説明できる形</a></li>
       </ul>
     </nav>
 
+    <section id="summary30" class="section-card border-2 border-blue-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-6 h-6 text-blue-600"></i> ① 30秒でわかるこのページ</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">SCF 区分（ASC 230）の地図です。</p>
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">1</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Operating：本業のキャッシュ（利息・税を含むことが多い）</strong>　売上債権・仕入債務、支払利息、受取利息、受取配当など。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">2</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Investing：貸付・有価証券・PPE の取得と売却</strong>　設備購入、投資有価証券、他社への貸付など。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">3</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Financing：資本・借入の調達と返済、支払配当</strong>　株式発行、借入、元本返済、自社株買い、配当支払い。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-6 h-6 text-emerald-600"></i> ② 先に言葉をそろえる（3語だけ）</h2>
+      <p class="part-lead">本文の前に、この3語だけ意味を固定します。</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Operating</span>（営業活動）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">本業のキャッシュ。売上・仕入だけでなく、<strong>利息の受払・受取配当・税金</strong>も U.S. GAAP では原則ここ。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Investing</span>（投資活動）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">会社の外にある資産を売り買いするキャッシュ。<strong>PPE・有価証券・貸付金</strong>の取得と回収。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Financing</span>（財務活動）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">資金の出し手（株主・債権者）とのキャッシュ。株式発行・借入と<strong>元本</strong>返済・自社株買い・<strong>支払配当</strong>。</p>
+        </div>
+      </div>
+    </section>
+
     <section id="worries" class="section-card worries-box border-amber-300">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-6 h-6"></i> ③ よくある悩み</h2>
       <div class="mc-preview-box">
         <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
         <div class="en-stem mb-3">Which of the following is classified as a <strong>financing</strong> cash outflow under U.S. GAAP?</div>
@@ -75,7 +127,7 @@
           <li><strong>A..</strong> Payment of interest on bonds</li>
           <li><strong>B..</strong> Purchase of equipment for cash</li>
           <li><strong>C..</strong> Cash dividend paid to shareholders</li>
-          <li><strong>D..</strong> Collection of a loan receivable from a customer (trade)</li>
+          <li><strong>D..</strong> Collection of a short-term trade receivable from a customer</li>
         </ul>
       </div>
       <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
@@ -127,38 +179,9 @@
       </div>
     </section>
 
-    <section id="three" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
-      <p class="part-lead">SCF 区分（ASC 230）の地図です。</p>
-      <ol class="space-y-5 text-sm leading-relaxed">
-
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
-          <div>
-            <p class="font-bold text-slate-900">Operating：本業のキャッシュ（利息・税を含むことが多い）</p>
-            <p class="text-slate-600 mt-1">売上債権・仕入債務、支払利息、受取利息、受取配当など。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
-          <div>
-            <p class="font-bold text-slate-900">Investing：貸付・有価証券・PPE の取得と売却</p>
-            <p class="text-slate-600 mt-1">設備購入、投資有価証券、他社への貸付など。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
-          <div>
-            <p class="font-bold text-slate-900">Financing：資本・借入の調達と返済、支払配当</p>
-            <p class="text-slate-600 mt-1">株式発行、借入、元本返済、自社株買い、配当支払い。</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
     <section id="theory" class="section-card border-indigo-100">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
-      <p class="part-lead">②の3つは、ここでの<strong>区分判定</strong>に対応します。</p>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ④ 会計の背景と仕訳</h2>
+      <p class="part-lead">①の3つは、ここでの<strong>区分判定</strong>に対応します。</p>
 
       <div class="theory-block">
         <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
@@ -171,14 +194,13 @@
         
       </div>
       <p class="timeline-mini"><strong>処理の順序：</strong> ①取引の相手（顧客／設備／株主・債権者）を見る → ②元本か利息・配当かを見る → ③O/I/F に振る</p>
-      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、判定チェックリストです（金額計算より分類が主戦場）。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>計算の型</strong>は、判定チェックリストです（金額計算より分類が主戦場）。</p>
     </section>
 
     <section id="reading" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ⑤ 計算の型</h2>
       <p class="text-sm text-slate-700 mb-4 leading-relaxed">分類の<strong>4ステップ</strong>です。</p>
       <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
-
         <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> 現金が増えたか減ったかを確認する。</span></li>
         <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> PPE・投資・貸付なら Investing を疑う。</span></li>
         <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> 株主・借入の元本・支払配当なら Financing を疑う。</span></li>
@@ -198,13 +220,11 @@
     </section>
 
     <section id="process" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
-
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑥ 対話で整理</h2>
       <div class="persona-strip">
         <span><strong>たくま</strong>：利息と配当の置き場が毎回揺れます。</span>
         <span><strong>あおい先生</strong>：U.S. GAAP：支払利息は営業、支払配当は財務、と先に固定しましょう。</span>
       </div>
-
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
@@ -235,12 +255,61 @@
       </div>
     </section>
 
+    <section id="crossmap" class="section-card border-2 border-amber-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="network" class="w-6 h-6 text-amber-600"></i> ⑦ 横串マップ（他の論点とのつながり）</h2>
+      <p class="part-lead">SCF の区分は、他の論点の「その取引、CFではどこ？」という一言で横から出てきます。</p>
+      <div class="space-y-3">
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 間接法の営業CF調整</p>
+          <p class="text-sm text-slate-700 leading-relaxed">この図解は「どの箱に入れるか」。間接法は営業の箱の<strong>中身の作り方</strong>（純利益±非現金項目±運転資本）です。減価償却の足し戻しなどはあちらの論点。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 社債・借入（ASC 470）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">同じ1本の借金でも、<strong>元本の借入・返済は financing、利息の支払いは operating</strong> に割れます。「1取引が2区分に分解される」典型例として頻出。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 連結財務諸表</p>
+          <p class="text-sm text-slate-700 leading-relaxed">連結CF計算書は<strong>内部取引消去後の連結数値</strong>から作るため、グループ内の売買や配当は最初から数字に含まれません。「追加調整が要りそうで要らない」引っかけに注意。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section-card border-2 border-violet-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="file-question" class="w-6 h-6 text-violet-600"></i> ⑧ 出題パターンの引き出し</h2>
+      <p class="part-lead">この論点の MC は計算より分類。出題側の引き出しは実質3つです。</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">MC の出方</p>
+          <ul class="text-sm text-slate-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>「次のうち financing（または investing）はどれ？」</strong>：選択肢に必ず利息・配当を混ぜてくる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>利息・配当の直球</strong>：interest paid / dividends received / dividends paid の区分を単独で聞く</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>区分ごとの合計額</strong>：取引リストを渡して「investing activities の純額はいくらか」を計算させる</span></li>
+          </ul>
+        </div>
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">解く手順は毎回同じ3ステップ</p>
+          <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside leading-relaxed">
+            <li>取引の相手を見る（顧客か／資産か／株主・債権者か）</li>
+            <li>元本か、利息・配当かを見る（借入は元本＝F・利息＝O に分解）</li>
+            <li>迷ったら原則へ：利息の受払・受取配当・税金 → Operating、支払配当 → Financing</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section id="mc" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑨ 理解確認MC</h2>
       <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 230</strong> の考え方に沿って作成しています。</p>
 
       <div class="mc-card">
         <p class="font-bold text-slate-900 mb-2">問題 1（概念 — financing outflow）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>問われているのは <strong>financing</strong> の <strong>outflow</strong>（両方の条件を満たすもの）</li>
+            <li>利息と配当が両方混ざっている——U.S. GAAP の原則で振り分ける</li>
+          </ul>
+        </div>
         <div class="en-stem mb-4">Which is a <strong>financing</strong> cash outflow under U.S. GAAP?</div>
         <ul class="text-sm space-y-2 mb-4">          <li>A. Payment of interest on bonds</li>
           <li>B. Purchase of equipment for cash</li>
@@ -248,11 +317,24 @@
           <li>D. Collection on a short-term trade receivable</li></ul>
         <details>
           <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>株主への現金配当は financing。正解 <strong>C</strong>。</p><p class="text-slate-600">A＝operating。B＝investing。D＝operating。</p></div>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>株主への現金配当は financing。正解 <strong>C</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A</strong>＝「借金がらみ＝財務」と連想した人向け。支払利息は operating（誤解①）</li>
+              <li><strong>B</strong>＝「事業に使う＝営業」と連想した人向け。PPE の購入は investing（誤解②）</li>
+              <li><strong>D</strong>＝売上債権の回収は本業のキャッシュで operating。しかも inflow なので outflow の条件も満たさない</li>
+            </ul></div>
         </details>
       </div>
       <div class="mc-card">
         <p class="font-bold text-slate-900 mb-2">問題 2（概念 — interest）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>「利息」でも<strong>支払う側</strong>の話か、受け取る側の話か</li>
+            <li>U.S. GAAP の原則（IFRS の選択制と混同しない）</li>
+          </ul>
+        </div>
         <div class="en-stem mb-4">Under U.S. GAAP, cash paid for <strong>interest</strong> on long-term debt is generally classified as:</div>
         <ul class="text-sm space-y-2 mb-4">          <li>A. Operating</li>
           <li>B. Investing</li>
@@ -260,21 +342,33 @@
           <li>D. Noncash disclosure only</li></ul>
         <details>
           <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>支払利息は原則 operating。正解 <strong>A</strong>。</p></div>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>支払利息は原則 operating。正解 <strong>A</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>C</strong>＝一番選ばれる誤答。「借金＝財務」の連想で作られる。財務に入るのは<strong>元本</strong>の借入・返済</li>
+              <li><strong>B</strong>＝「長期」という言葉から投資を連想した人向け</li>
+              <li><strong>D</strong>＝現金が実際に動いているので noncash 注記ではない</li>
+            </ul></div>
         </details>
       </div>
     </section>
 
-    <section id="summary" class="section-card border-2 border-slate-300">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
-      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li>O：本業・利息の受払・受取配当・税金など。</li>
-        <li>I：PPE・投資・貸付の取得と売却。</li>
-        <li>F：資本・借入元本・支払配当。</li>
-        <li>支払利息≠財務（U.S. GAAP）。</li>
-        <li>支払配当＝財務。</li>
-        <li>非現金取引は注記。</li>
-      </ol>
+    <section id="summary" class="section-card border-2 border-emerald-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-6 h-6 text-emerald-600"></i> ⑩ まとめ：1分で人に説明できる形</h2>
+      <p class="text-sm font-bold text-slate-700 mb-2">1分で人に説明できる形</p>
+      <div class="one-minute mb-6">
+        <p class="text-sm text-slate-700 leading-relaxed">キャッシュ・フロー計算書は現金の動きを<strong>相手別に3つの箱</strong>へ振り分ける。顧客・本業まわりは <strong>Operating</strong>、PPE・有価証券・貸付は <strong>Investing</strong>、株主・借入の元本は <strong>Financing</strong>。引っかけどころは利息と配当で、U.S. GAAP では<strong>利息の受払・受取配当は営業、支払配当だけ財務</strong>。現金が動かない取引は箱に入れず注記する。</p>
+      </div>
+      <div class="checklist-box">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> 今日のチェックリスト</p>
+        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>O / I / F それぞれの代表例を2つずつ即答できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>「支払利息＝営業、支払配当＝財務」を迷わず言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>借入1本を「元本＝F・利息＝O」に分解できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>非現金取引（手形での設備購入など）を注記に回せる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>IFRS では利息区分に選択があることを知った上で、FAR は U.S. GAAP 原則で答えられる</span></li>
+        </ul>
+      </div>
     </section>
 
     <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>

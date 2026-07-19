@@ -40,6 +40,17 @@
     .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
     .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
     .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+    .badge-essential { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .glossary-card { background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.25rem; }
+    .glossary-term { font-weight: 700; color: #065f46; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .crossmap-item { background: #f1f5f9; border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .crossmap-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .pattern-card { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 0.75rem; padding: 1.25rem; }
+    .focus-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .focus-title { font-size: 0.8rem; font-weight: 700; color: #1d4ed8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .distractor-list { list-style: disc; list-style-position: inside; font-size: 0.85rem; color: #475569; line-height: 1.7; }
+    .one-minute { background: #f8fafc; border-left: 4px solid #64748b; border-radius: 0.5rem; padding: 1rem 1.25rem; }
+    .checklist-box { background: #ecfdf5; border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
 
   </style>
 </head>
@@ -56,18 +67,59 @@
   <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
     <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
       <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
-        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
+        <li><a href="#summary30" class="text-blue-700 hover:underline">① 30秒でわかるこのページ</a></li>
+        <li><a href="#glossary" class="text-blue-700 hover:underline">② 先に言葉をそろえる（3語だけ）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">③ よくある悩み</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">④ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">⑤ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑥ 対話で整理</a></li>
+        <li><a href="#crossmap" class="text-blue-700 hover:underline">⑦ 横串マップ（他の論点とのつながり）</a></li>
+        <li><a href="#patterns" class="text-blue-700 hover:underline">⑧ 出題パターンの引き出し</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑨ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑩ まとめ：1分で人に説明できる形</a></li>
       </ul>
     </nav>
 
+    <section id="summary30" class="section-card border-2 border-blue-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-6 h-6 text-blue-600"></i> ① 30秒でわかるこのページ</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">ASC 855 の地図です。計算の前に、この3点を固定します。</p>
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">1</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Recognized = 決算日時点の条件を確認する情報</strong>　貸倒・訴訟の決着など、<strong>すでに存在した条件</strong>の見積りを更新 → 帳簿を修正する。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">2</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>Nonrecognized = 決算日後に新しい条件が発生</strong>　火災・事業買収など → 原則は<strong>注記</strong>（重大なら）。帳簿は直さない。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">3</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>評価期間は「発行（available to be issued）まで」</strong>　発行後に知った事実は、この図解の後発事象の枠外です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-6 h-6 text-emerald-600"></i> ② 先に言葉をそろえる（3語だけ）</h2>
+      <p class="part-lead">本文の前に、この3語だけ意味を固定します。</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Recognized subsequent event</span></p>
+          <p class="text-sm text-slate-700 leading-relaxed">決算日時点で<strong>すでに存在した条件</strong>を確認する情報。帳簿（見積り）を修正する。例：期末に悪化していた顧客の破産。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Nonrecognized subsequent event</span></p>
+          <p class="text-sm text-slate-700 leading-relaxed">決算日<strong>後に新しく発生</strong>した条件。帳簿は直さず、重大なら<strong>注記</strong>。例：決算日後の火災・買収。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Available to be issued / issued</span>（評価期間の終点）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">後発事象を評価するのは<strong>財務諸表の発行（または発行可能日）まで</strong>。それ以降に知った事実はこの枠の外。</p>
+        </div>
+      </div>
+    </section>
+
     <section id="worries" class="section-card worries-box border-amber-300">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-6 h-6"></i> ③ よくある悩み</h2>
       <div class="mc-preview-box">
         <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
         <div class="en-stem mb-3">Polar Co.'s year-end is <strong>December 31, Year 1</strong>. On <strong>January 18, Year 2</strong>, before the financial statements are issued, Polar learns that a major customer declared bankruptcy on <strong>January 12, Year 2</strong>. The customer's December 31 receivable of <strong>$180,000</strong> is now expected to be <strong>uncollectible</strong>. Polar had previously estimated an allowance of <strong>$20,000</strong> for this customer. What amount of <strong>additional bad debt expense</strong> should Polar recognize in its Year 1 financial statements under U.S. GAAP?</div>
@@ -127,42 +179,13 @@
       </div>
     </section>
 
-    <section id="three" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
-      <p class="part-lead">ASC 855 の地図です。計算の前に、この3点を固定します。</p>
-      <ol class="space-y-5 text-sm leading-relaxed">
-
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
-          <div>
-            <p class="font-bold text-slate-900">Recognized = 決算日時点の条件を確認する情報</p>
-            <p class="text-slate-600 mt-1">貸倒・訴訟の決着など、<strong>すでに存在した条件</strong>の見積りを更新 → 帳簿を修正する。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
-          <div>
-            <p class="font-bold text-slate-900">Nonrecognized = 決算日後に新しい条件が発生</p>
-            <p class="text-slate-600 mt-1">火災・事業買収など → 原則は<strong>注記</strong>（重大なら）。帳簿は直さない。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
-          <div>
-            <p class="font-bold text-slate-900">評価期間は「発行（available to be issued）まで」</p>
-            <p class="text-slate-600 mt-1">発行後に知った事実は、この図解の後発事象の枠外です。</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
     <section id="theory" class="section-card border-indigo-100">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
-      <p class="part-lead">②の3つは、ここでの<strong>見積り修正か注記か</strong>の分岐に対応します。</p>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ④ 会計の背景と仕訳</h2>
+      <p class="part-lead">①の3つは、ここでの<strong>見積り修正か注記か</strong>の分岐に対応します。</p>
 
       <div class="theory-block">
         <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
-        <p class="text-sm text-slate-700 leading-relaxed">財務諸表は決算日時点の状態を表します。決算日後に得た情報でも、「その日にすでにあつた条件」を確かめるなら、見積りを直して実態に合わせます。新しい出来事は、注記で利用者に知らせます（ASC 855）。</p>
+        <p class="text-sm text-slate-700 leading-relaxed">財務諸表は決算日時点の状態を表します。決算日後に得た情報でも、「その日にすでにあった条件」を確かめるなら、見積りを直して実態に合わせます。新しい出来事は、注記で利用者に知らせます（ASC 855）。</p>
         
       </div>
       <div class="theory-block">
@@ -171,14 +194,13 @@
         <p class="je-line">Dr. Bad debt expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 160,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Allowance for doubtful accounts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 160,000</p>
       </div>
       <p class="timeline-mini"><strong>処理の順序：</strong> ①決算日 → ②発行までの事実を読む → ③条件確認か新規発生かを判定 → ④計上 or 注記</p>
-      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、Polar の追加貸倒費用 $160,000 を求める手順です。</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>計算の型</strong>は、Polar の追加貸倒費用 $160,000 を求める手順です。</p>
     </section>
 
     <section id="reading" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ⑤ 計算の型</h2>
       <p class="text-sm text-slate-700 mb-4 leading-relaxed">後発事象の<strong>読み分け＋金額</strong>の4ステップです。</p>
       <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
-
         <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> 決算日と、事実が起きた日・知った日を並べる。</span></li>
         <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> 「決算日時点の条件確認」か「決算日後の新規発生」かを判定する。</span></li>
         <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> recognized なら、見積り（貸倒・損失など）を更新する。</span></li>
@@ -197,13 +219,11 @@
     </section>
 
     <section id="process" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
-
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑥ 対話で整理</h2>
       <div class="persona-strip">
         <span><strong>たくま</strong>：日付と「条件確認／新規」の切り分けがまだ不安です。</span>
         <span><strong>あおい先生</strong>：Polar は recognized → 追加 <strong>$160,000</strong> です。</span>
       </div>
-
       <div class="dlg-row">
         <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
         <div class="student-bubble mb-0">
@@ -234,12 +254,62 @@
       </div>
     </section>
 
+    <section id="crossmap" class="section-card border-2 border-amber-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="network" class="w-6 h-6 text-amber-600"></i> ⑦ 横串マップ（他の論点とのつながり）</h2>
+      <p class="part-lead">後発事象は単独では出ず、貸倒・偶発損失などの「見積り論点」と組み合わせて出ます。</p>
+      <div class="space-y-3">
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 偶発損失（ASC 450）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">決算日時点で probable ＋ 見積り可能なら計上、という判定に、決算日後の訴訟決着が「確認情報」として乗ってきます。<strong>855（いつの条件か）× 450（計上か注記か）</strong>の二段判定が頻出。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 貸倒引当金（受取債権の評価）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">本ページの Polar がまさにこの組み合わせ。「必要残高 − 既存残高 ＝ 追加費用」という引当金の差額計算は、後発事象に限らず引当系すべてで使う型です。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 監査（AUD）へのつながり</p>
+          <p class="text-sm text-slate-700 leading-relaxed">同じ Type I / Type II の区別が AUD では監査手続の論点として再登場します。FAR で回路を作っておくと AUD がそのまま楽になります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section-card border-2 border-violet-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="file-question" class="w-6 h-6 text-violet-600"></i> ⑧ 出題パターンの引き出し</h2>
+      <p class="part-lead">MC は「日付の錯覚」を誘うように作られます。出方は3つ。</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">MC の出方</p>
+          <ul class="text-sm text-slate-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>計算型</strong>：決算日後の破産・決着を与えて「Year 1 に追加計上する額」を聞く（既存引当の差し引きがポイント）</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>分類型</strong>：事象リストから recognized / nonrecognized を選ばせる（火災・買収・株式発行は nonrecognized の定番）</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>期間型</strong>：発行後に知った事実を混ぜて「そもそも後発事象の枠外」を問う</span></li>
+          </ul>
+        </div>
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">解く手順は毎回同じ4ステップ</p>
+          <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside leading-relaxed">
+            <li>決算日・事象発生日・発行日をタイムラインに並べる</li>
+            <li>「決算日時点にあった条件の確認」か「新規発生」かを判定する</li>
+            <li>recognized → 見積りを更新。nonrecognized → 注記（帳簿は触らない）</li>
+            <li>金額は「必要な残高 − 既存計上額」の差額だけ</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section id="mc" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑨ 理解確認MC</h2>
       <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 855</strong> の考え方に沿って作成しています。</p>
 
       <div class="mc-card">
         <p class="font-bold text-slate-900 mb-2">問題 1（計算 — additional bad debt）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>破産の日付（1/12）に引きずられない——問題は「<strong>いつの条件</strong>を確認する情報か」</li>
+            <li>既存の allowance $20,000 を差し引いたか</li>
+          </ul>
+        </div>
         <div class="en-stem mb-4">Polar Co.'s year-end is <strong>December 31, Year 1</strong>. On <strong>January 18, Year 2</strong>, before issuance, Polar learns that a major customer declared bankruptcy on <strong>January 12, Year 2</strong>. The December 31 receivable of <strong>$180,000</strong> is uncollectible. Prior allowance for this customer was <strong>$20,000</strong>. What <strong>additional bad debt expense</strong> should Polar recognize in Year 1?</div>
         <ul class="text-sm space-y-2 mb-4">          <li>A. $0</li>
           <li>B. $20,000</li>
@@ -247,11 +317,23 @@
           <li>D. $180,000</li></ul>
         <details>
           <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>顧客破綻は貸倒見積りの条件確認（recognized）。追加は $180,000 − $20,000 ＝ <strong>$160,000</strong>。正解 <strong>C</strong>。</p><p class="text-slate-600">A＝誤解①。D＝既存引当を無視。B＝既存額そのもの。</p></div>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>顧客破綻は貸倒見積りの条件確認（recognized）。追加は $180,000 − $20,000 ＝ <strong>$160,000</strong>。正解 <strong>C</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A（$0）</strong>＝「決算日後の出来事だから Year 2」と日付だけで判断した人向け（誤解①）</li>
+              <li><strong>D（$180,000）</strong>＝既存の引当 $20,000 を忘れて全額を費用にした人向け（誤解②）</li>
+              <li><strong>B（$20,000）</strong>＝既存引当の額そのもの。設問の「additional」を読み落とした人向け</li>
+            </ul></div>
         </details>
       </div>
       <div class="mc-card">
         <p class="font-bold text-slate-900 mb-2">問題 2（概念 — nonrecognized）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>各選択肢の事象が「決算日時点にあった条件」か「決算日後の新規発生」か</li>
+          </ul>
+        </div>
         <div class="en-stem mb-4">Which of the following is typically a <strong>nonrecognized subsequent event</strong> under U.S. GAAP?</div>
         <ul class="text-sm space-y-2 mb-4">          <li>A. Settlement of litigation that confirms a loss that existed at the balance sheet date</li>
           <li>B. Loss of a plant due to a fire that occurred after the balance sheet date</li>
@@ -259,21 +341,32 @@
           <li>D. Finalization of a year-end inventory count adjustment</li></ul>
         <details>
           <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>火災は決算日後の新しい条件 → <strong>nonrecognized</strong>（注記）。正解 <strong>B</strong>。</p><p class="text-slate-600">A・C は条件確認。D は見積り・集計の修正に近い。</p></div>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>火災は決算日後の新しい条件 → <strong>nonrecognized</strong>（注記）。正解 <strong>B</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A・C</strong>＝どちらも「決算日時点にあった条件の確認」で recognized。stem の confirms / existing がヒント</li>
+              <li><strong>D</strong>＝期末実地棚卸の確定は通常の決算プロセスに近く、nonrecognized の代表例ではない</li>
+            </ul></div>
         </details>
       </div>
     </section>
 
-    <section id="summary" class="section-card border-2 border-slate-300">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
-      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li>後発事象は「条件確認」か「新規発生」かで切る。</li>
-        <li>Recognized → 帳簿を修正（貸倒・偶発損失の見積り更新など）。</li>
-        <li>Nonrecognized → 原則は注記（工場火災など）。</li>
-        <li>追加費用は、必要な残高 − 既存計上額。</li>
-        <li>評価期間は財務諸表の発行まで。</li>
-        <li>仕訳例：Dr. Bad debt expense / Cr. Allowance。</li>
-      </ol>
+    <section id="summary" class="section-card border-2 border-emerald-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-6 h-6 text-emerald-600"></i> ⑩ まとめ：1分で人に説明できる形</h2>
+      <p class="text-sm font-bold text-slate-700 mb-2">1分で人に説明できる形</p>
+      <div class="one-minute mb-6">
+        <p class="text-sm text-slate-700 leading-relaxed">決算日後に知った事実は、まず「<strong>決算日時点にすでにあった条件の確認</strong>か、<strong>決算日後に新しく生まれた条件</strong>か」で切る。前者（recognized）は見積りを直して帳簿を修正、後者（nonrecognized）は重大なら注記のみ。評価するのは<strong>財務諸表の発行まで</strong>。金額を聞かれたら、必要な残高から<strong>既に計上済みの額を引いた差額だけ</strong>を追加する。</p>
+      </div>
+      <div class="checklist-box">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> 今日のチェックリスト</p>
+        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>recognized / nonrecognized の判定基準を一言で言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>顧客破産＝recognized、決算日後の火災＝nonrecognized、を即答できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>Polar の追加費用 $160,000（差額計算）を10秒で再現できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>評価期間の終点（発行まで）を言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>「発行前に知った＝必ず帳簿修正」ではない理由を説明できる</span></li>
+        </ul>
+      </div>
     </section>
 
     <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
