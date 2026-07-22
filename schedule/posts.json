@@ -229,5 +229,13 @@
     "slug": "treasury-stock-par-value",
     "queue_id": "treasury-review-2026q3",
     "_auto": true
+  },
+  "2026-08-02": {
+    "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
+    "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/notes-payable-accrued-interest/",
+    "slug": "notes-payable-accrued-interest",
+    "queue_id": "notes-review-2026q3",
+    "_auto": true
   }
 }
