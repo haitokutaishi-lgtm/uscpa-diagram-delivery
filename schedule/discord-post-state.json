@@ -1,4 +1,4 @@
 {
   "_comment": "図解 自動生成→配信ワークフローが最後に投稿した posts.json の日付キー（YYYY-MM-DD）。手動再投稿は workflow_dispatch の post_date。last_posted_date は巻き戻さない。",
-  "last_posted_date": "2026-07-19"
+  "last_posted_date": "2026-07-22"
 }
