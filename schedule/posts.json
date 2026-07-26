@@ -245,5 +245,13 @@
     "slug": "involuntary-conversion-gain",
     "queue_id": "involuntary-review-2026q3",
     "_auto": true
+  },
+  "2026-08-08": {
+    "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
+    "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-tax-asset-dta/",
+    "slug": "deferred-tax-asset-dta",
+    "queue_id": "dta-review-2026q3",
+    "_auto": true
   }
 }
