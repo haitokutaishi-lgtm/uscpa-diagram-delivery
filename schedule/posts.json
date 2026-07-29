@@ -253,5 +253,13 @@
     "slug": "deferred-tax-asset-dta",
     "queue_id": "dta-review-2026q3",
     "_auto": true
+  },
+  "2026-08-09": {
+    "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
+    "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcm-reading-drill/",
+    "slug": "inventory-lcm-reading-drill",
+    "queue_id": "lcm-review-2026q3",
+    "_auto": true
   }
 }
