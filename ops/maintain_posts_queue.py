@@ -7,8 +7,15 @@ import json
 import os
 import re
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
+
+JST = ZoneInfo("Asia/Tokyo")
+
+
+def today_jst() -> date:
+    return datetime.now(JST).date()
 
 
 def parse_date(s: str) -> date:
@@ -89,6 +96,7 @@ def main() -> int:
     require_ready = bool(config.get("require_html_or_topic_spec", True))
 
     last_posted = state.get("last_posted_date") or ""
+    today = today_jst()
     scheduled_ids = scheduled_queue_ids(posts)
     pending = pending_post_dates(posts, last_posted)
     need = max(0, lookahead - len(pending))
@@ -110,8 +118,13 @@ def main() -> int:
     elif last_posted:
         anchor = parse_date(last_posted)
     else:
-        anchor = date.today()
-    start = anchor + timedelta(days=1)
+        anchor = today
+    # 停止期間の過去枠は埋めない。取りこぼしは posts.json に既にある日付だけ catch-up する。
+    start = max(anchor + timedelta(days=1), today)
+    if start != anchor + timedelta(days=1):
+        print(
+            f"Fill from {start.isoformat()} JST (skip empty cadence after {anchor.isoformat()})."
+        )
 
     new_dates = next_cadence_dates(start, need, weekdays, post_keys)
     if len(new_dates) < need:

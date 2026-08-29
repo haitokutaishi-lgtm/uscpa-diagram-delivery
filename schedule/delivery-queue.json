@@ -156,6 +156,102 @@
       "slug": "inventory-lcm-reading-drill",
       "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
       "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。"
+    },
+    {
+      "id": "loss-contingency-review-2026q3",
+      "slug": "loss-contingency-accrual",
+      "title": "【図解・見直し】偶発損失—probable / reasonably possible / remote",
+      "description": "発生可能性と見積り可否から計上／注記を分岐し、範囲なら下限を計上する型を再確認（ASC 450-20）。"
+    },
+    {
+      "id": "subsequent-events-review-2026q3",
+      "slug": "subsequent-events-recognized",
+      "title": "【図解・見直し】後発事象—recognized と nonrecognized",
+      "description": "決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型を再確認（ASC 855）。"
+    },
+    {
+      "id": "lease-finance-review-2026q3",
+      "slug": "lease-lessee-finance-initial",
+      "title": "【図解・見直し】リース（借手・finance）—初期の ROU と liability",
+      "description": "開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブの型を再確認（ASC 842）。"
+    },
+    {
+      "id": "bond-effective-review-2026q3",
+      "slug": "bond-effective-interest",
+      "title": "【図解・見直し】社債—実効金利法の利息費用",
+      "description": "利息費用＝carrying×effective rate。現金利息との差額が割引償却になる型を再確認。"
+    },
+    {
+      "id": "equity-method-review-2026q3",
+      "slug": "equity-method-basic",
+      "title": "【図解・見直し】持分法—利益シェアと配当で投資勘定が動く",
+      "description": "利益シェアで投資↑、配当で投資↓（配当は収益にしない）の型を再確認（ASC 323）。"
+    },
+    {
+      "id": "scf-classify-review-2026q3",
+      "slug": "cash-flow-classification",
+      "title": "【図解・見直し】キャッシュ・フロー—営業・投資・財務の区分",
+      "description": "支払利息は原則営業、支払配当は財務、PPE購入は投資。区分の型を再確認（ASC 230）。"
+    },
+    {
+      "id": "ppe-review-2026q4",
+      "slug": "ppe-impairment-held-for-use",
+      "title": "【図解・見直し】固定資産の減損—recoverability test と loss",
+      "description": "held for use の2段階テストと、認識する impairment loss の比較相手を再確認（ASC 360-10）。"
+    },
+    {
+      "id": "refinancing-review-2026q4",
+      "slug": "refinancing-current-liabilities",
+      "title": "【図解・見直し】借換え—intent・ability と financing 上限",
+      "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。"
+    },
+    {
+      "id": "warranty-review-2026q4",
+      "slug": "warranty-liability",
+      "title": "【図解・見直し】製品保証—expense と期末 liability の式",
+      "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。"
+    },
+    {
+      "id": "asset-group-review-2026q4",
+      "slug": "asset-group-relative-sales-value",
+      "title": "【図解・見直し】一括購入の按分—appraised value の比率だけ",
+      "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。"
+    },
+    {
+      "id": "current-liabilities-review-2026q4",
+      "slug": "current-liabilities-classification",
+      "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
+      "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。"
+    },
+    {
+      "id": "treasury-review-2026q4",
+      "slug": "treasury-stock-par-value",
+      "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
+      "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。"
+    },
+    {
+      "id": "notes-review-2026q4",
+      "slug": "notes-payable-accrued-interest",
+      "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
+      "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。"
+    },
+    {
+      "id": "involuntary-review-2026q4",
+      "slug": "involuntary-conversion-gain",
+      "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
+      "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。"
+    },
+    {
+      "id": "dta-review-2026q4",
+      "slug": "deferred-tax-asset-dta",
+      "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
+      "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。"
+    },
+    {
+      "id": "lcm-review-2026q4",
+      "slug": "inventory-lcm-reading-drill",
+      "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
+      "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。"
     }
   ]
 }

@@ -50,8 +50,14 @@ def main() -> int:
 
     post_date = resolve_post_date(posts, state, args.today, args.manual_date or None)
     if not post_date:
+        last = state.get("last_posted_date") or ""
         _emit(args.github_output, post_date="", slug="", source="", run_generate="false", skip="true")
         print("No queued post.", file=sys.stderr)
+        print(
+            f"::warning::配信キューが空です（last_posted_date={last or 'none'}, today={args.today}）。"
+            "schedule/delivery-queue.json に未スケジュールの items を追加してください。",
+            file=sys.stderr,
+        )
         return 0
 
     entry = posts.get(post_date)
