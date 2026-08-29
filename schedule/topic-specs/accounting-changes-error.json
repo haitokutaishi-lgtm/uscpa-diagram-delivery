@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "page_title": "【図解】会計上の変更と誤謬—見積りは将来、原則は遡及、誤謬は修正再表示",
+    "theme_line_html": "Accounting changes — <span class=\"font-bold normal-case\">estimate / principle / error（ASC 250）</span>",
+    "subject_line": "USCPA FAR / Accounting Changes and Error Corrections（ASC 250）",
+    "h1_html": "<strong>見積り・原則・誤謬</strong>—いつから直すかが3通りに分かれる",
+    "lead_html": "試験では、<span class=\"term-en\">change in estimate</span> は将来に向けて、<span class=\"term-en\">change in principle</span> は遡及、<span class=\"term-en\">error</span> は修正再表示です。耐用年数の変更は見積りです。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Prospective</span>（将来に向けて）",
+      "body_html": "過去の損益は触らない。残存簿価を、新しい前提でこれから配分する。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Retrospective</span>（遡及）",
+      "body_html": "比較年度の数字を、最初からその方法だったかのように直す。期首利益剰余金も動かす。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Restatement</span>（修正再表示）",
+      "body_html": "誤謬の直し方。過去の誤りを訂正し、利益剰余金の期首を調整する。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "On January 1, Year 5, Pike Co. changed the useful life of a machine. Cost <strong>$90,000</strong>, salvage <strong>$10,000</strong>, original life 10 years, straight-line. After 4 years, remaining life is now estimated at 4 years (salvage unchanged). Year 5 depreciation?",
+    "choices": ["A. $8,000", "B. $12,000", "C. $16,000", "D. $20,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　過去4年分を遡って直す",
+      "student_html": "最初から8年で償却していたことにして、過年度を直すのでしょうか？",
+      "coach_html": "耐用年数の変更は<strong>見積りの変更</strong>です。過去は触らず、残った簿価をこれから4年で配分します。"
+    },
+    {
+      "label": "誤解②　取得原価を新しい年数で割る",
+      "student_html": "（$90,000−$10,000）÷ 8年 ＝ $10,000、または ÷ 4年 ＝ $20,000 にしたくなります。",
+      "coach_html": "割る相手は取得原価ではなく、<strong>変更時点の帳簿価額 − 残存価額</strong>です。"
+    },
+    {
+      "label": "誤解③　減価償却方法の変更を誤謬にする",
+      "student_html": "定額法から定率法への変更は、誤りを直すのだと思ってしまいます。",
+      "coach_html": "減価償却方法の変更は、US GAAP では<strong>見積りと区別できない原則変更</strong>として、将来に向けて処理します。"
+    }
+  ],
+  "three_lead_html": "ASC 250 の分岐は、この3つです。",
+  "three": [
+    {
+      "title": "見積り変更 ＝ 将来だけ",
+      "body_html": "耐用年数・残存価額・貸倒率など。残った額をこれから配分します。"
+    },
+    {
+      "title": "原則変更 ＝ 遡及が原則",
+      "body_html": "在庫の評価方法など。比較年度を直します。実行不能なら将来。"
+    },
+    {
+      "title": "誤謬 ＝ 修正再表示",
+      "body_html": "計算間違い・原則の誤適用。利益剰余金の期首を直します。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>いつ仕訳するか</strong>に対応します。見積り変更に「過年度修正」の仕訳はありません。",
+    "timeline_html": "①何の変更／誤りかを判定 → ②見積りなら残存簿価を再計算 → ③原則なら比較年度を遡及 → ④誤謬なら利益剰余金の期首を修正",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Pike の Year 5 減価償却 $12,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "見積りは、新しい情報で将来の見込みを更新する行為です。当時の情報で正しく計算していれば、過去は「誤り」ではありません。だから過去の損益は触らず、これからを直します（ASC 250）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Pike・Year 5）",
+        "body_html": "変更時の帳簿価額 $58,000。残存 $10,000、残り4年。年額 $12,000。",
+        "je_lines": [
+          "Dr. Depreciation expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Accumulated depreciation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Pike の Year 5 減価償却を、残存簿価から求めます。",
+    "steps": [
+      "<strong>Step 1</strong> これまでの年額：（$90,000−$10,000）÷10 ＝ $8,000。4年で累計 $32,000。",
+      "<strong>Step 2</strong> 変更時の帳簿価額：$90,000 − $32,000 ＝ <strong>$58,000</strong>。",
+      "<strong>Step 3</strong> これから償却する額：$58,000 − $10,000 ＝ $48,000。",
+      "<strong>Step 4</strong> 新しい残り年数 4 で割る：$48,000 ÷ 4 ＝ <strong>$12,000</strong>。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>取得原価</td><td class=\"num\">$90,000</td></tr>\n          <tr><td>4年分の償却（$8,000×4）</td><td class=\"num\">$32,000</td></tr>\n          <tr><td>変更時帳簿価額</td><td class=\"num\">$58,000</td></tr>\n          <tr><td>− 残存価額</td><td class=\"num\">$10,000</td></tr>\n          <tr><td>÷ 残り4年</td><td class=\"num\"><strong>$12,000</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "原則変更と誤謬の仕分けがまだ曖昧です。",
+    "aoi": "当時正しく選んで今変えるのが原則変更。当時から間違いなのが誤謬です。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "FIFO から加重平均への変更は、見積りですか？",
+      "coach_html": "在庫の評価方法は<strong>原則変更</strong>です。比較年度を遡及して直します。"
+    },
+    {
+      "student_html": "減価償却を誤って資産計上していなかった場合は？",
+      "coach_html": "それは見積りではなく<strong>誤謬</strong>です。過年度の損益を直し、利益剰余金の期首を修正します。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "「いつから直すか」は、後発事象や減損の見積りとも隣り合います。",
+    "items": [
+      {
+        "title_html": "後発事象（ASC 855）",
+        "body_html": "決算日時点の見積りを、発行前の新しい情報で確認するのは recognized subsequent event。見積りの「将来処理」とは別で、当年度の帳簿を直します。"
+      },
+      {
+        "title_html": "貸倒引当の率変更",
+        "body_html": "回収率の見込みを変えるのは見積り変更。過去の費用は触らず、期末の必要額を新しい率で決めます。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「遡及してしまう数字」と「取得原価÷新年数」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>耐用年数変更後の減価償却</strong>：（帳簿価額−残存）÷残り年数",
+      "<strong>どれを遡及するか</strong>：原則と誤謬は過去、見積りは将来",
+      "<strong>減価償却方法の変更</strong>：将来処理"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "見積り／原則／誤謬のどれかを判定する",
+        "見積りなら変更時点の帳簿価額を出す",
+        "残存価額を引き、新しい残り期間で割る",
+        "過去年度の損益は触らない"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 250</strong> に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — 見積り変更後の減価償却）",
+      "focus": [
+        "過去4年は触らない",
+        "割るのは変更時の帳簿価額から残存を引いた額"
+      ],
+      "stem_html": "Pike's machine: cost <strong>$90,000</strong>, salvage <strong>$10,000</strong>, 10-year SL. After 4 years, remaining life is changed to 4 years. Year 5 depreciation?",
+      "choices": ["A. $8,000", "B. $12,000", "C. $16,000", "D. $20,000"],
+      "explain_html": "<p>帳簿価額 $58,000 − $10,000 ＝ $48,000。÷4 ＝ <strong>$12,000</strong>。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$8,000）</strong>＝変更前の年額のまま",
+        "<strong>C（$16,000）</strong>＝$58,000 を残存なしで 4 年割り（残存を忘れた）",
+        "<strong>D（$20,000）</strong>＝（$90,000−$10,000）÷4（取得原価を新しい残り年数で割った）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — どの処理か）",
+      "focus": [
+        "耐用年数は見積り、在庫方法は原則、計算ミスは誤謬"
+      ],
+      "stem_html": "Which of the following is accounted for prospectively?",
+      "choices": [
+        "A. Change from FIFO to weighted-average inventory",
+        "B. Correction of an error in depreciating a building",
+        "C. Change in the estimated useful life of equipment",
+        "D. Change in reporting entity"
+      ],
+      "explain_html": "<p>耐用年数の変更は見積り変更なので将来処理。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝原則変更。遡及が原則",
+        "<strong>B</strong>＝誤謬。修正再表示",
+        "<strong>D</strong>＝報告主体の変更。遡及"
+      ]
+    }
+  ],
+  "one_minute_html": "見積りの変更（耐用年数など）は過去を触らず、残った簿価をこれから配分する。原則の変更は比較年度を遡及し、誤謬は修正再表示で利益剰余金の期首を直す。減価償却方法の変更は、見積りと区別できない原則変更として将来処理。",
+  "checklist": [
+    "見積り＝将来、原則＝遡及、誤謬＝再表示、を見ずに言える",
+    "Pike の $12,000 を10秒で再現できる",
+    "変更時帳簿価額の出し方を説明できる",
+    "FIFO 変更と耐用年数変更の処理の違いを1文で言える"
+  ]
+}

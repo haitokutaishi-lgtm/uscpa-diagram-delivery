@@ -62,5 +62,45 @@
   {
     "slug": "cash-flow-classification",
     "source": "publish-html/cash-flow-classification.html"
+  },
+  {
+    "slug": "bank-reconciliation",
+    "source": "publish-html/bank-reconciliation.html"
+  },
+  {
+    "slug": "allowance-aging-method",
+    "source": "publish-html/allowance-aging-method.html"
+  },
+  {
+    "slug": "interest-capitalization",
+    "source": "publish-html/interest-capitalization.html"
+  },
+  {
+    "slug": "goodwill-impairment",
+    "source": "publish-html/goodwill-impairment.html"
+  },
+  {
+    "slug": "eps-basic",
+    "source": "publish-html/eps-basic.html"
+  },
+  {
+    "slug": "accounting-changes-error",
+    "source": "publish-html/accounting-changes-error.html"
+  },
+  {
+    "slug": "stock-dividend-vs-split",
+    "source": "publish-html/stock-dividend-vs-split.html"
+  },
+  {
+    "slug": "revenue-over-time-poc",
+    "source": "publish-html/revenue-over-time-poc.html"
+  },
+  {
+    "slug": "r-and-d-costs",
+    "source": "publish-html/r-and-d-costs.html"
+  },
+  {
+    "slug": "ppe-held-for-sale",
+    "source": "publish-html/ppe-held-for-sale.html"
   }
 ]

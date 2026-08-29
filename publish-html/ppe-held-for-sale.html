@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】売却予定の固定資産—簿価と「時価−売却費用」の低い方、償却は止める</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .student-bubble { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 2px solid #ea580c; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .coach-bubble { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .mc-card { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem; background: #fafafa; }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: 1rem; margin: 0.75rem 0; color: #334155; font-size: 0.875rem; line-height: 1.65; }
+    .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
+    .persona-strip strong { color: #0f172a; }
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.calc { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.calc th, table.calc td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.calc th { background: #f1f5f9; }
+    table.calc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
+    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+    .badge-essential { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .glossary-card { background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.25rem; }
+    .glossary-term { font-weight: 700; color: #065f46; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .crossmap-item { background: #f1f5f9; border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .crossmap-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .pattern-card { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 0.75rem; padding: 1.25rem; }
+    .focus-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .focus-title { font-size: 0.8rem; font-weight: 700; color: #1d4ed8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .distractor-list { list-style: disc; list-style-position: inside; font-size: 0.85rem; color: #475569; line-height: 1.7; }
+    .one-minute { background: #f8fafc; border-left: 4px solid #64748b; border-radius: 0.5rem; padding: 1rem 1.25rem; }
+    .checklist-box { background: #ecfdf5; border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
+
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：PP&amp;E — <span class="font-bold normal-case">held for sale（ASC 360-10）</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / PP&amp;amp;E（ASC 360-10）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug"><strong>売却予定の固定資産</strong>—帳簿価額と <span class="term-en">FV − cost to sell</span> の低い方。減価償却は止める</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、売却方針が固まった資産は <span class="term-en">held for use</span> の2段階テストをしません。測定は低い方、減価償却は停止です。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#summary30" class="text-blue-700 hover:underline">① 30秒でわかるこのページ</a></li>
+        <li><a href="#glossary" class="text-blue-700 hover:underline">② 先に言葉をそろえる（3語だけ）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">③ よくある悩み</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">④ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">⑤ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑥ 対話で整理</a></li>
+        <li><a href="#crossmap" class="text-blue-700 hover:underline">⑦ 横串マップ（他の論点とのつながり）</a></li>
+        <li><a href="#patterns" class="text-blue-700 hover:underline">⑧ 出題パターンの引き出し</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑨ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑩ まとめ：1分で人に説明できる形</a></li>
+      </ul>
+    </nav>
+
+    <section id="summary30" class="section-card border-2 border-blue-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-6 h-6 text-blue-600"></i> ① 30秒でわかるこのページ</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">売却予定の地図は、この3つです。</p>
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">1</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>測定 ＝ carrying と（FV − cost to sell）の低い方</strong>　将来CF合計との比較はしません。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">2</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>分類した時点で減価償却を止める</strong>　期末まで使い続けていても、償却は足しません。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">3</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>held for use の2段階とは別回路</strong>　使い続ける資産だけ、先に割引前CFを見ます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-6 h-6 text-emerald-600"></i> ② 先に言葉をそろえる（3語だけ）</h2>
+      <p class="part-lead">本文の前に、この3語だけ意味を固定します。</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Held for sale</span>（売却予定）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">売却の方針があり、1年以内の売却が見込め、積極的に売っている状態。流動／非流動の表示は別判定です。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">FV less cost to sell</span>（時価−売却費用）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">売って手元に残る見込額。これと帳簿価額の<strong>低い方</strong>で測定します。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">No depreciation</span>（償却停止）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">もう使い続ける前提ではないので、分類した時点から減価償却を止めます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-6 h-6"></i> ③ よくある悩み</h2>
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">On July 1, Year 1, Vetch Co. classified a machine as held for sale. Carrying amount <strong>$90,000</strong>, fair value <strong>$82,000</strong>, cost to sell <strong>$4,000</strong>. The machine had 3 years of remaining life and no salvage. What amount should Vetch report for the machine on December 31, Year 1?</div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A..</strong> $75,000</li>
+          <li><strong>B..</strong> $78,000</li>
+          <li><strong>C..</strong> $82,000</li>
+          <li><strong>D..</strong> $90,000</li>
+        </ul>
+      </div>
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　held for use の2段階を続ける</span>
+          <p class="text-sm leading-relaxed">将来CF合計と比べてから、時価との差を落とすのでは？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">売却予定は recoverability test をしません。<strong>帳簿価額と FV−売却費用の低い方</strong>です。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　分類後も減価償却する</span>
+          <p class="text-sm leading-relaxed">残り3年なので、半年で $15,000 償却して $75,000 では？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">売却予定に分類したら償却は止めます。12月31日も、分類時の測定額のままです（追加の下落がなければ）。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　売却費用を引かない</span>
+          <p class="text-sm leading-relaxed">時価 $82,000 をそのまま載せたくなります。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">手元に残るのは $82,000 − $4,000 ＝ <strong>$78,000</strong> です。これと $90,000 の低い方が測定額です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="theory" class="section-card border-indigo-100">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ④ 会計の背景と仕訳</h2>
+      <p class="part-lead">①の3つは、ここでの<strong>評価損仕訳</strong>に対応します。</p>
+
+      <div class="theory-block">
+        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">もう使い続けてキャッシュを生む前提ではなく、「売って現金にする」前提です。だから将来CFの合計ではなく、今売ったらいくら残るかを見ます。使う前提の減価償却も止めます（ASC 360-10）。</p>
+        
+      </div>
+      <div class="theory-block">
+        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Vetch・7月1日）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">測定額 $78,000。帳簿 $90,000 との差 $12,000 を損失。</p>
+        <p class="je-line">Dr. Impairment loss（held for sale） &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Machine / Valuation allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000</p>
+      </div>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①売却方針が揃ったら held for sale に分類 → ②償却を止める → ③carrying と FV−売却費用を比べ、低ければ評価損</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>計算の型</strong>は、Vetch の 12月31日残高 $78,000 を求める手順です。</p>
+    </section>
+
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ⑤ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed">Vetch の期末表示額を、低い方で止めます。</p>
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> FV − 売却費用：$82,000 − $4,000 ＝ $78,000。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> 帳簿価額 $90,000 と比べ、低い方 <strong>$78,000</strong>。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> 7月1日以降の減価償却は足さない（$15,000 を引かない）。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>Step 4</strong> 12月31日も、追加の下落がなければ $78,000。</span></li>
+      </ol>
+      
+      <table class="calc">
+        <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
+        <tbody>
+          <tr><td>Carrying（7/1）</td><td class="num">$90,000</td></tr>
+          <tr><td>FV</td><td class="num">$82,000</td></tr>
+          <tr><td>− Cost to sell</td><td class="num">$4,000</td></tr>
+          <tr><td>FV − cost to sell</td><td class="num">$78,000</td></tr>
+          <tr><td>測定（低い方）</td><td class="num"><strong>$78,000</strong></td></tr>
+          <tr><td>その後の減価償却</td><td class="num">なし</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑥ 対話で整理</h2>
+      <div class="persona-strip">
+        <span><strong>たくま</strong>：held for use の2段階と混ぜてしまいます。</span>
+        <span><strong>あおい先生</strong>：売る方針なら、低い方で測って償却停止。将来CF合計は使いません。</span>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">12月に時価が $88,000（売却費用 $4,000）まで戻ったら、戻し入れますか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">売却予定の評価損は、当初の帳簿価額を超えない範囲で戻し入れできます。この例では $84,000 まで上がり得ますが、最初の $90,000 は超えません。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">のれんの減損と同じですか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">違います。のれんは報告単位の FV 対 carrying で、戻し入れしません。売却予定の有形は FV−売却費用です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="crossmap" class="section-card border-2 border-amber-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="network" class="w-6 h-6 text-amber-600"></i> ⑦ 横串マップ（他の論点とのつながり）</h2>
+      <p class="part-lead">減損は、資産の置き場所（使い続ける／売る／のれん）でテストが変わります。</p>
+      <div class="space-y-3">
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> held for use の減損（ASC 360）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">先に割引前の将来CF合計と carrying を比べ、落ちるときだけ FV との差を損失にします。償却は続けます。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> のれん（ASC 350）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">報告単位の FV と carrying の1段階。売却費用を引く測定でも、recoverability でもありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section-card border-2 border-violet-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="file-question" class="w-6 h-6 text-violet-600"></i> ⑧ 出題パターンの引き出し</h2>
+      <p class="part-lead">MC は「半年分の償却」と「FV そのまま」を誤答に置きます。</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">MC の出方</p>
+          <ul class="text-sm text-slate-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>期末残高</strong>：carrying と FV−売却費用の低い方（償却なし）</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>分類時の損失</strong>：carrying −（FV−売却費用）</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>held for use との分岐</strong>：売却方針があるか</span></li>
+          </ul>
+        </div>
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">解く手順は毎回同じ4ステップ</p>
+          <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside leading-relaxed">
+            <li>held for sale の条件を確認する</li>
+            <li>FV から売却費用を引く</li>
+            <li>帳簿価額と比べて低い方を残す</li>
+            <li>分類後の減価償却を足さない</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑨ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 360-10（held for sale）</strong>に沿って作成しています。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — 12月31日の残高）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>FV から売却費用を引く</li>
+            <li>7月以降の減価償却はしない</li>
+          </ul>
+        </div>
+        <div class="en-stem mb-4">On July 1, Vetch classified a machine as held for sale. Carrying <strong>$90,000</strong>, FV <strong>$82,000</strong>, cost to sell <strong>$4,000</strong>, remaining life 3 years. Amount reported at December 31?</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. $75,000</li>
+          <li>B. $78,000</li>
+          <li>C. $82,000</li>
+          <li>D. $90,000</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>min($90,000, $82,000−$4,000) ＝ <strong>$78,000</strong>。償却なし。正解 <strong>B</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A（$75,000）</strong>＝$90,000 から半年分 $15,000 を償却した（誤解②）</li>
+              <li><strong>C（$82,000）</strong>＝売却費用を引かなかった（誤解③）</li>
+              <li><strong>D</strong>＝帳簿価額のまま（評価損を忘れている）</li>
+            </ul></div>
+        </details>
+      </div>
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — どのテストか）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>売却予定は recoverability test を使わない</li>
+          </ul>
+        </div>
+        <div class="en-stem mb-4">A long-lived asset classified as held for sale is measured at:</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. Carrying amount, and depreciation continues</li>
+          <li>B. The lower of carrying amount and fair value less cost to sell, and depreciation stops</li>
+          <li>C. Fair value, if undiscounted future cash flows are less than carrying amount</li>
+          <li>D. Replacement cost</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>低い方で測定し、償却は停止。正解 <strong>B</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A</strong>＝held for use のままの処理</li>
+              <li><strong>C</strong>＝held for use の2段階を混ぜた誤答</li>
+              <li><strong>D</strong>＝再調達原価。この測定には使わない</li>
+            </ul></div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="section-card border-2 border-emerald-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-6 h-6 text-emerald-600"></i> ⑩ まとめ：1分で人に説明できる形</h2>
+      <p class="text-sm font-bold text-slate-700 mb-2">1分で人に説明できる形</p>
+      <div class="one-minute mb-6">
+        <p class="text-sm text-slate-700 leading-relaxed">売却予定の固定資産は、使い続ける2段階テストをしない。帳簿価額と「時価−売却費用」の低い方で測り、分類した時点で減価償却を止める。追加の下落がなければ、その額が期末残高です。</p>
+      </div>
+      <div class="checklist-box">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> 今日のチェックリスト</p>
+        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>測定＝carrying と FV−売却費用の低い方、を見ずに言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>Vetch の $78,000 を10秒で再現できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>分類後に償却しない理由を説明できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>held for use の recoverability test との違いを1文で言える</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
+  </main>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

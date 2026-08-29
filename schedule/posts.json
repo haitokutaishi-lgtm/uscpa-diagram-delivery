@@ -271,43 +271,63 @@
     "_auto": true
   },
   "2026-08-30": {
-    "title": "【図解・見直し】後発事象—recognized と nonrecognized",
-    "description": "決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型を再確認（ASC 855）。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/subsequent-events-recognized/",
-    "slug": "subsequent-events-recognized",
-    "queue_id": "subsequent-events-review-2026q3",
-    "_auto": true
+    "title": "【図解】銀行勘定調整—帳簿と銀行残高を同じ現金に合わせる",
+    "description": "未達預金・未取付小切手は銀行側、NSF・手数料・取立は帳簿側。調整後残高は一致する。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/bank-reconciliation/",
+    "slug": "bank-reconciliation",
+    "queue_id": "bank-reconciliation-2026q4",
+    "_auto": true,
+    "auto_generate": true,
+    "topic_spec": "schedule/topic-specs/bank-reconciliation.json"
   },
   "2026-09-02": {
-    "title": "【図解・見直し】リース（借手・finance）—初期の ROU と liability",
-    "description": "開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブの型を再確認（ASC 842）。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-finance-initial/",
-    "slug": "lease-lessee-finance-initial",
-    "queue_id": "lease-finance-review-2026q3",
-    "_auto": true
+    "title": "【図解】貸倒引当—年齢表から期末 allowance を決める",
+    "description": "年齢表の合計が期末引当の必要額。費用はその必要額と調整前残高の差（ASC 326）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/allowance-aging-method/",
+    "slug": "allowance-aging-method",
+    "queue_id": "allowance-aging-2026q4",
+    "_auto": true,
+    "auto_generate": true,
+    "topic_spec": "schedule/topic-specs/allowance-aging-method.json"
   },
   "2026-09-05": {
-    "title": "【図解・見直し】社債—実効金利法の利息費用",
-    "description": "利息費用＝carrying×effective rate。現金利息との差額が割引償却になる型を再確認。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/bond-effective-interest/",
-    "slug": "bond-effective-interest",
-    "queue_id": "bond-effective-review-2026q3",
-    "_auto": true
+    "title": "【図解】自己建設の利息資本化—avoidable と actual の小さい方",
+    "description": "加重平均支出に利率を掛けた avoidable interest と実際利息の小さい方を資産へ（ASC 835-20）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/interest-capitalization/",
+    "slug": "interest-capitalization",
+    "queue_id": "interest-cap-2026q4",
+    "_auto": true,
+    "auto_generate": true,
+    "topic_spec": "schedule/topic-specs/interest-capitalization.json"
   },
   "2026-09-06": {
-    "title": "【図解・見直し】持分法—利益シェアと配当で投資勘定が動く",
-    "description": "利益シェアで投資↑、配当で投資↓（配当は収益にしない）の型を再確認（ASC 323）。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/equity-method-basic/",
-    "slug": "equity-method-basic",
-    "queue_id": "equity-method-review-2026q3",
-    "_auto": true
+    "title": "【図解】のれんの減損—報告単位の FV と carrying の1段階",
+    "description": "FV が carrying を下回ったら差額を減損。のれん残高が上限（ASC 350）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/goodwill-impairment/",
+    "slug": "goodwill-impairment",
+    "queue_id": "goodwill-impairment-2026q4",
+    "_auto": true,
+    "auto_generate": true,
+    "topic_spec": "schedule/topic-specs/goodwill-impairment.json"
   },
   "2026-09-09": {
-    "title": "【図解・見直し】キャッシュ・フロー—営業・投資・財務の区分",
-    "description": "支払利息は原則営業、支払配当は財務、PPE購入は投資。区分の型を再確認（ASC 230）。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-classification/",
-    "slug": "cash-flow-classification",
-    "queue_id": "scf-classify-review-2026q3",
-    "_auto": true
+    "title": "【図解】基本EPS—優先配当を引き、加重平均株式数で割る",
+    "description": "分子は NI−優先配当。現金増資は月数按分、株式配当・分割は遡及（ASC 260）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-basic/",
+    "slug": "eps-basic",
+    "queue_id": "eps-basic-2026q4",
+    "_auto": true,
+    "auto_generate": true,
+    "topic_spec": "schedule/topic-specs/eps-basic.json"
+  },
+  "2026-09-12": {
+    "title": "【図解】会計上の変更と誤謬—見積りは将来、原則は遡及、誤謬は再表示",
+    "description": "耐用年数の変更は残存簿価をこれから配分。原則変更は遡及、誤謬は修正再表示（ASC 250）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/accounting-changes-error/",
+    "slug": "accounting-changes-error",
+    "queue_id": "accounting-changes-2026q4",
+    "_auto": true,
+    "auto_generate": true,
+    "topic_spec": "schedule/topic-specs/accounting-changes-error.json"
   }
 }

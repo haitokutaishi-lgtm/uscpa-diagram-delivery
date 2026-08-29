@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "page_title": "【図解】売却予定の固定資産—簿価と「時価−売却費用」の低い方、償却は止める",
+    "theme_line_html": "PP&amp;E — <span class=\"font-bold normal-case\">held for sale（ASC 360-10）</span>",
+    "subject_line": "USCPA FAR / PP&amp;E（ASC 360-10）",
+    "h1_html": "<strong>売却予定の固定資産</strong>—帳簿価額と <span class=\"term-en\">FV − cost to sell</span> の低い方。減価償却は止める",
+    "lead_html": "試験では、売却方針が固まった資産は <span class=\"term-en\">held for use</span> の2段階テストをしません。測定は低い方、減価償却は停止です。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Held for sale</span>（売却予定）",
+      "body_html": "売却の方針があり、1年以内の売却が見込め、積極的に売っている状態。流動／非流動の表示は別判定です。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">FV less cost to sell</span>（時価−売却費用）",
+      "body_html": "売って手元に残る見込額。これと帳簿価額の<strong>低い方</strong>で測定します。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">No depreciation</span>（償却停止）",
+      "body_html": "もう使い続ける前提ではないので、分類した時点から減価償却を止めます。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "On July 1, Year 1, Vetch Co. classified a machine as held for sale. Carrying amount <strong>$90,000</strong>, fair value <strong>$82,000</strong>, cost to sell <strong>$4,000</strong>. The machine had 3 years of remaining life and no salvage. What amount should Vetch report for the machine on December 31, Year 1?",
+    "choices": ["A. $75,000", "B. $78,000", "C. $82,000", "D. $90,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　held for use の2段階を続ける",
+      "student_html": "将来CF合計と比べてから、時価との差を落とすのでは？",
+      "coach_html": "売却予定は recoverability test をしません。<strong>帳簿価額と FV−売却費用の低い方</strong>です。"
+    },
+    {
+      "label": "誤解②　分類後も減価償却する",
+      "student_html": "残り3年なので、半年で $15,000 償却して $75,000 では？",
+      "coach_html": "売却予定に分類したら償却は止めます。12月31日も、分類時の測定額のままです（追加の下落がなければ）。"
+    },
+    {
+      "label": "誤解③　売却費用を引かない",
+      "student_html": "時価 $82,000 をそのまま載せたくなります。",
+      "coach_html": "手元に残るのは $82,000 − $4,000 ＝ <strong>$78,000</strong> です。これと $90,000 の低い方が測定額です。"
+    }
+  ],
+  "three_lead_html": "売却予定の地図は、この3つです。",
+  "three": [
+    {
+      "title": "測定 ＝ carrying と（FV − cost to sell）の低い方",
+      "body_html": "将来CF合計との比較はしません。"
+    },
+    {
+      "title": "分類した時点で減価償却を止める",
+      "body_html": "期末まで使い続けていても、償却は足しません。"
+    },
+    {
+      "title": "held for use の2段階とは別回路",
+      "body_html": "使い続ける資産だけ、先に割引前CFを見ます。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>評価損仕訳</strong>に対応します。",
+    "timeline_html": "①売却方針が揃ったら held for sale に分類 → ②償却を止める → ③carrying と FV−売却費用を比べ、低ければ評価損",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Vetch の 12月31日残高 $78,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "もう使い続けてキャッシュを生む前提ではなく、「売って現金にする」前提です。だから将来CFの合計ではなく、今売ったらいくら残るかを見ます。使う前提の減価償却も止めます（ASC 360-10）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Vetch・7月1日）",
+        "body_html": "測定額 $78,000。帳簿 $90,000 との差 $12,000 を損失。",
+        "je_lines": [
+          "Dr. Impairment loss（held for sale） &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Machine / Valuation allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Vetch の期末表示額を、低い方で止めます。",
+    "steps": [
+      "<strong>Step 1</strong> FV − 売却費用：$82,000 − $4,000 ＝ $78,000。",
+      "<strong>Step 2</strong> 帳簿価額 $90,000 と比べ、低い方 <strong>$78,000</strong>。",
+      "<strong>Step 3</strong> 7月1日以降の減価償却は足さない（$15,000 を引かない）。",
+      "<strong>Step 4</strong> 12月31日も、追加の下落がなければ $78,000。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>Carrying（7/1）</td><td class=\"num\">$90,000</td></tr>\n          <tr><td>FV</td><td class=\"num\">$82,000</td></tr>\n          <tr><td>− Cost to sell</td><td class=\"num\">$4,000</td></tr>\n          <tr><td>FV − cost to sell</td><td class=\"num\">$78,000</td></tr>\n          <tr><td>測定（低い方）</td><td class=\"num\"><strong>$78,000</strong></td></tr>\n          <tr><td>その後の減価償却</td><td class=\"num\">なし</td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "held for use の2段階と混ぜてしまいます。",
+    "aoi": "売る方針なら、低い方で測って償却停止。将来CF合計は使いません。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "12月に時価が $88,000（売却費用 $4,000）まで戻ったら、戻し入れますか？",
+      "coach_html": "売却予定の評価損は、当初の帳簿価額を超えない範囲で戻し入れできます。この例では $84,000 まで上がり得ますが、最初の $90,000 は超えません。"
+    },
+    {
+      "student_html": "のれんの減損と同じですか？",
+      "coach_html": "違います。のれんは報告単位の FV 対 carrying で、戻し入れしません。売却予定の有形は FV−売却費用です。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "減損は、資産の置き場所（使い続ける／売る／のれん）でテストが変わります。",
+    "items": [
+      {
+        "title_html": "held for use の減損（ASC 360）",
+        "body_html": "先に割引前の将来CF合計と carrying を比べ、落ちるときだけ FV との差を損失にします。償却は続けます。"
+      },
+      {
+        "title_html": "のれん（ASC 350）",
+        "body_html": "報告単位の FV と carrying の1段階。売却費用を引く測定でも、recoverability でもありません。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「半年分の償却」と「FV そのまま」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>期末残高</strong>：carrying と FV−売却費用の低い方（償却なし）",
+      "<strong>分類時の損失</strong>：carrying −（FV−売却費用）",
+      "<strong>held for use との分岐</strong>：売却方針があるか"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "held for sale の条件を確認する",
+        "FV から売却費用を引く",
+        "帳簿価額と比べて低い方を残す",
+        "分類後の減価償却を足さない"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 360-10（held for sale）</strong>に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — 12月31日の残高）",
+      "focus": [
+        "FV から売却費用を引く",
+        "7月以降の減価償却はしない"
+      ],
+      "stem_html": "On July 1, Vetch classified a machine as held for sale. Carrying <strong>$90,000</strong>, FV <strong>$82,000</strong>, cost to sell <strong>$4,000</strong>, remaining life 3 years. Amount reported at December 31?",
+      "choices": ["A. $75,000", "B. $78,000", "C. $82,000", "D. $90,000"],
+      "explain_html": "<p>min($90,000, $82,000−$4,000) ＝ <strong>$78,000</strong>。償却なし。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$75,000）</strong>＝$90,000 から半年分 $15,000 を償却した（誤解②）",
+        "<strong>C（$82,000）</strong>＝売却費用を引かなかった（誤解③）",
+        "<strong>D</strong>＝帳簿価額のまま（評価損を忘れている）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — どのテストか）",
+      "focus": [
+        "売却予定は recoverability test を使わない"
+      ],
+      "stem_html": "A long-lived asset classified as held for sale is measured at:",
+      "choices": [
+        "A. Carrying amount, and depreciation continues",
+        "B. The lower of carrying amount and fair value less cost to sell, and depreciation stops",
+        "C. Fair value, if undiscounted future cash flows are less than carrying amount",
+        "D. Replacement cost"
+      ],
+      "explain_html": "<p>低い方で測定し、償却は停止。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝held for use のままの処理",
+        "<strong>C</strong>＝held for use の2段階を混ぜた誤答",
+        "<strong>D</strong>＝再調達原価。この測定には使わない"
+      ]
+    }
+  ],
+  "one_minute_html": "売却予定の固定資産は、使い続ける2段階テストをしない。帳簿価額と「時価−売却費用」の低い方で測り、分類した時点で減価償却を止める。追加の下落がなければ、その額が期末残高です。",
+  "checklist": [
+    "測定＝carrying と FV−売却費用の低い方、を見ずに言える",
+    "Vetch の $78,000 を10秒で再現できる",
+    "分類後に償却しない理由を説明できる",
+    "held for use の recoverability test との違いを1文で言える"
+  ]
+}

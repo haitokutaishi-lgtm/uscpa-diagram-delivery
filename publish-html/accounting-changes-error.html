@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】会計上の変更と誤謬—見積りは将来、原則は遡及、誤謬は修正再表示</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .student-bubble { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 2px solid #ea580c; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .coach-bubble { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .mc-card { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem; background: #fafafa; }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: 1rem; margin: 0.75rem 0; color: #334155; font-size: 0.875rem; line-height: 1.65; }
+    .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
+    .persona-strip strong { color: #0f172a; }
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.calc { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.calc th, table.calc td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.calc th { background: #f1f5f9; }
+    table.calc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
+    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+    .badge-essential { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .glossary-card { background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.25rem; }
+    .glossary-term { font-weight: 700; color: #065f46; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .crossmap-item { background: #f1f5f9; border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .crossmap-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .pattern-card { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 0.75rem; padding: 1.25rem; }
+    .focus-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .focus-title { font-size: 0.8rem; font-weight: 700; color: #1d4ed8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .distractor-list { list-style: disc; list-style-position: inside; font-size: 0.85rem; color: #475569; line-height: 1.7; }
+    .one-minute { background: #f8fafc; border-left: 4px solid #64748b; border-radius: 0.5rem; padding: 1rem 1.25rem; }
+    .checklist-box { background: #ecfdf5; border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
+
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Accounting changes — <span class="font-bold normal-case">estimate / principle / error（ASC 250）</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Accounting Changes and Error Corrections（ASC 250）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug"><strong>見積り・原則・誤謬</strong>—いつから直すかが3通りに分かれる</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、<span class="term-en">change in estimate</span> は将来に向けて、<span class="term-en">change in principle</span> は遡及、<span class="term-en">error</span> は修正再表示です。耐用年数の変更は見積りです。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#summary30" class="text-blue-700 hover:underline">① 30秒でわかるこのページ</a></li>
+        <li><a href="#glossary" class="text-blue-700 hover:underline">② 先に言葉をそろえる（3語だけ）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">③ よくある悩み</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">④ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">⑤ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑥ 対話で整理</a></li>
+        <li><a href="#crossmap" class="text-blue-700 hover:underline">⑦ 横串マップ（他の論点とのつながり）</a></li>
+        <li><a href="#patterns" class="text-blue-700 hover:underline">⑧ 出題パターンの引き出し</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑨ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑩ まとめ：1分で人に説明できる形</a></li>
+      </ul>
+    </nav>
+
+    <section id="summary30" class="section-card border-2 border-blue-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-6 h-6 text-blue-600"></i> ① 30秒でわかるこのページ</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">ASC 250 の分岐は、この3つです。</p>
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">1</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>見積り変更 ＝ 将来だけ</strong>　耐用年数・残存価額・貸倒率など。残った額をこれから配分します。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">2</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>原則変更 ＝ 遡及が原則</strong>　在庫の評価方法など。比較年度を直します。実行不能なら将来。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">3</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>誤謬 ＝ 修正再表示</strong>　計算間違い・原則の誤適用。利益剰余金の期首を直します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-6 h-6 text-emerald-600"></i> ② 先に言葉をそろえる（3語だけ）</h2>
+      <p class="part-lead">本文の前に、この3語だけ意味を固定します。</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Prospective</span>（将来に向けて）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">過去の損益は触らない。残存簿価を、新しい前提でこれから配分する。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Retrospective</span>（遡及）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">比較年度の数字を、最初からその方法だったかのように直す。期首利益剰余金も動かす。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Restatement</span>（修正再表示）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">誤謬の直し方。過去の誤りを訂正し、利益剰余金の期首を調整する。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-6 h-6"></i> ③ よくある悩み</h2>
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">On January 1, Year 5, Pike Co. changed the useful life of a machine. Cost <strong>$90,000</strong>, salvage <strong>$10,000</strong>, original life 10 years, straight-line. After 4 years, remaining life is now estimated at 4 years (salvage unchanged). Year 5 depreciation?</div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A..</strong> $8,000</li>
+          <li><strong>B..</strong> $12,000</li>
+          <li><strong>C..</strong> $16,000</li>
+          <li><strong>D..</strong> $20,000</li>
+        </ul>
+      </div>
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　過去4年分を遡って直す</span>
+          <p class="text-sm leading-relaxed">最初から8年で償却していたことにして、過年度を直すのでしょうか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">耐用年数の変更は<strong>見積りの変更</strong>です。過去は触らず、残った簿価をこれから4年で配分します。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　取得原価を新しい年数で割る</span>
+          <p class="text-sm leading-relaxed">（$90,000−$10,000）÷ 8年 ＝ $10,000、または ÷ 4年 ＝ $20,000 にしたくなります。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">割る相手は取得原価ではなく、<strong>変更時点の帳簿価額 − 残存価額</strong>です。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　減価償却方法の変更を誤謬にする</span>
+          <p class="text-sm leading-relaxed">定額法から定率法への変更は、誤りを直すのだと思ってしまいます。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">減価償却方法の変更は、US GAAP では<strong>見積りと区別できない原則変更</strong>として、将来に向けて処理します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="theory" class="section-card border-indigo-100">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ④ 会計の背景と仕訳</h2>
+      <p class="part-lead">①の3つは、ここでの<strong>いつ仕訳するか</strong>に対応します。見積り変更に「過年度修正」の仕訳はありません。</p>
+
+      <div class="theory-block">
+        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">見積りは、新しい情報で将来の見込みを更新する行為です。当時の情報で正しく計算していれば、過去は「誤り」ではありません。だから過去の損益は触らず、これからを直します（ASC 250）。</p>
+        
+      </div>
+      <div class="theory-block">
+        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Pike・Year 5）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">変更時の帳簿価額 $58,000。残存 $10,000、残り4年。年額 $12,000。</p>
+        <p class="je-line">Dr. Depreciation expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Accumulated depreciation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12,000</p>
+      </div>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①何の変更／誤りかを判定 → ②見積りなら残存簿価を再計算 → ③原則なら比較年度を遡及 → ④誤謬なら利益剰余金の期首を修正</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>計算の型</strong>は、Pike の Year 5 減価償却 $12,000 を求める手順です。</p>
+    </section>
+
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ⑤ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed">Pike の Year 5 減価償却を、残存簿価から求めます。</p>
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> これまでの年額：（$90,000−$10,000）÷10 ＝ $8,000。4年で累計 $32,000。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> 変更時の帳簿価額：$90,000 − $32,000 ＝ <strong>$58,000</strong>。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> これから償却する額：$58,000 − $10,000 ＝ $48,000。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>Step 4</strong> 新しい残り年数 4 で割る：$48,000 ÷ 4 ＝ <strong>$12,000</strong>。</span></li>
+      </ol>
+      
+      <table class="calc">
+        <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
+        <tbody>
+          <tr><td>取得原価</td><td class="num">$90,000</td></tr>
+          <tr><td>4年分の償却（$8,000×4）</td><td class="num">$32,000</td></tr>
+          <tr><td>変更時帳簿価額</td><td class="num">$58,000</td></tr>
+          <tr><td>− 残存価額</td><td class="num">$10,000</td></tr>
+          <tr><td>÷ 残り4年</td><td class="num"><strong>$12,000</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑥ 対話で整理</h2>
+      <div class="persona-strip">
+        <span><strong>たくま</strong>：原則変更と誤謬の仕分けがまだ曖昧です。</span>
+        <span><strong>あおい先生</strong>：当時正しく選んで今変えるのが原則変更。当時から間違いなのが誤謬です。</span>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">FIFO から加重平均への変更は、見積りですか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">在庫の評価方法は<strong>原則変更</strong>です。比較年度を遡及して直します。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">減価償却を誤って資産計上していなかった場合は？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">それは見積りではなく<strong>誤謬</strong>です。過年度の損益を直し、利益剰余金の期首を修正します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="crossmap" class="section-card border-2 border-amber-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="network" class="w-6 h-6 text-amber-600"></i> ⑦ 横串マップ（他の論点とのつながり）</h2>
+      <p class="part-lead">「いつから直すか」は、後発事象や減損の見積りとも隣り合います。</p>
+      <div class="space-y-3">
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 後発事象（ASC 855）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">決算日時点の見積りを、発行前の新しい情報で確認するのは recognized subsequent event。見積りの「将来処理」とは別で、当年度の帳簿を直します。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 貸倒引当の率変更</p>
+          <p class="text-sm text-slate-700 leading-relaxed">回収率の見込みを変えるのは見積り変更。過去の費用は触らず、期末の必要額を新しい率で決めます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section-card border-2 border-violet-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="file-question" class="w-6 h-6 text-violet-600"></i> ⑧ 出題パターンの引き出し</h2>
+      <p class="part-lead">MC は「遡及してしまう数字」と「取得原価÷新年数」を誤答に置きます。</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">MC の出方</p>
+          <ul class="text-sm text-slate-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>耐用年数変更後の減価償却</strong>：（帳簿価額−残存）÷残り年数</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>どれを遡及するか</strong>：原則と誤謬は過去、見積りは将来</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>減価償却方法の変更</strong>：将来処理</span></li>
+          </ul>
+        </div>
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">解く手順は毎回同じ4ステップ</p>
+          <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside leading-relaxed">
+            <li>見積り／原則／誤謬のどれかを判定する</li>
+            <li>見積りなら変更時点の帳簿価額を出す</li>
+            <li>残存価額を引き、新しい残り期間で割る</li>
+            <li>過去年度の損益は触らない</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑨ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 250</strong> に沿って作成しています。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — 見積り変更後の減価償却）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>過去4年は触らない</li>
+            <li>割るのは変更時の帳簿価額から残存を引いた額</li>
+          </ul>
+        </div>
+        <div class="en-stem mb-4">Pike's machine: cost <strong>$90,000</strong>, salvage <strong>$10,000</strong>, 10-year SL. After 4 years, remaining life is changed to 4 years. Year 5 depreciation?</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. $8,000</li>
+          <li>B. $12,000</li>
+          <li>C. $16,000</li>
+          <li>D. $20,000</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>帳簿価額 $58,000 − $10,000 ＝ $48,000。÷4 ＝ <strong>$12,000</strong>。正解 <strong>B</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A（$8,000）</strong>＝変更前の年額のまま</li>
+              <li><strong>C（$16,000）</strong>＝$58,000 を残存なしで 4 年割り（残存を忘れた）</li>
+              <li><strong>D（$20,000）</strong>＝（$90,000−$10,000）÷4（取得原価を新しい残り年数で割った）</li>
+            </ul></div>
+        </details>
+      </div>
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — どの処理か）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>耐用年数は見積り、在庫方法は原則、計算ミスは誤謬</li>
+          </ul>
+        </div>
+        <div class="en-stem mb-4">Which of the following is accounted for prospectively?</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. Change from FIFO to weighted-average inventory</li>
+          <li>B. Correction of an error in depreciating a building</li>
+          <li>C. Change in the estimated useful life of equipment</li>
+          <li>D. Change in reporting entity</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>耐用年数の変更は見積り変更なので将来処理。正解 <strong>C</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A</strong>＝原則変更。遡及が原則</li>
+              <li><strong>B</strong>＝誤謬。修正再表示</li>
+              <li><strong>D</strong>＝報告主体の変更。遡及</li>
+            </ul></div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="section-card border-2 border-emerald-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-6 h-6 text-emerald-600"></i> ⑩ まとめ：1分で人に説明できる形</h2>
+      <p class="text-sm font-bold text-slate-700 mb-2">1分で人に説明できる形</p>
+      <div class="one-minute mb-6">
+        <p class="text-sm text-slate-700 leading-relaxed">見積りの変更（耐用年数など）は過去を触らず、残った簿価をこれから配分する。原則の変更は比較年度を遡及し、誤謬は修正再表示で利益剰余金の期首を直す。減価償却方法の変更は、見積りと区別できない原則変更として将来処理。</p>
+      </div>
+      <div class="checklist-box">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> 今日のチェックリスト</p>
+        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>見積り＝将来、原則＝遡及、誤謬＝再表示、を見ずに言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>Pike の $12,000 を10秒で再現できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>変更時帳簿価額の出し方を説明できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>FIFO 変更と耐用年数変更の処理の違いを1文で言える</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
+  </main>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

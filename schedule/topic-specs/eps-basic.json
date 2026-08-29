@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "page_title": "【図解】基本EPS—優先配当を引き、加重平均株式数で割る",
+    "theme_line_html": "EPS — <span class=\"font-bold normal-case\">basic earnings per share（ASC 260）</span>",
+    "subject_line": "USCPA FAR / Earnings per Share（ASC 260）",
+    "h1_html": "<strong>基本EPS</strong>—分子は当期純利益から優先配当を引き、分母は加重平均した普通株式数",
+    "lead_html": "試験では、<span class=\"term-en\">(Net income − preferred dividends) / weighted-average common shares</span> です。期中発行は月数で按分し、株式配当・分割は期首に遡って直します。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Preferred dividends</span>（優先配当）",
+      "body_html": "累積型は<strong>宣言の有無にかかわらず</strong>当年分を分子から引く。非累積型は宣言した分だけ。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Weighted-average shares</span>（加重平均株式数）",
+      "body_html": "その年に何株が何ヶ月あったか。期中発行は月数／12 を掛ける。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Retroactive treatment</span>（遡及）",
+      "body_html": "株式配当・株式分割は、その年前の株数にも遡って掛け直す。現金増資とは別です。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "Cedar Co. reported net income of <strong>$480,000</strong>. Preferred dividends were <strong>$20,000</strong>. Common shares outstanding were <strong>100,000</strong> on January 1. On July 1, Cedar issued <strong>40,000</strong> additional shares for cash. What is <strong>basic EPS</strong>?",
+    "choices": ["A. $3.43", "B. $4.00", "C. $4.60", "D. $4.80"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　優先配当を引かない",
+      "student_html": "$480,000 ÷ 何か、で始めてしまいます。",
+      "coach_html": "普通株主に残る利益は $480,000 − $20,000 ＝ <strong>$460,000</strong> です。ここから割ります。"
+    },
+    {
+      "label": "誤解②　期末株式数で割る",
+      "student_html": "140,000 株で割ると $3.29 くらいになります。",
+      "coach_html": "7月発行の 40,000 株は半年分です。分母は 100,000 ＋ 40,000×6/12 ＝ <strong>120,000</strong>。"
+    },
+    {
+      "label": "誤解③　株式配当も月数按分する",
+      "student_html": "12月の株式配当も、1ヶ月分だけ増やしたくなります。",
+      "coach_html": "株式配当・分割は<strong>期首からあったものとして</strong>掛け直します。現金で株を売った発行とは違います。"
+    }
+  ],
+  "three_lead_html": "基本EPSの地図は、この3つです。",
+  "three": [
+    {
+      "title": "分子 ＝ NI − 優先配当",
+      "body_html": "普通株主の取り分だけを残します。"
+    },
+    {
+      "title": "分母 ＝ 加重平均した普通株式数",
+      "body_html": "現金増資・自己株式は月数で按分します。"
+    },
+    {
+      "title": "株式配当・分割は遡及",
+      "body_html": "比較年度も含め、株数を掛け直します。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>1株当たりの割り算</strong>に対応します。仕訳は発行時の現金・資本の仕訳で、EPS 自体は注記・表示の計算です。",
+    "timeline_html": "①当期純利益を確認 → ②優先配当を引く → ③普通株式を月数で加重（配当・分割は遡及） → ④割る",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Cedar の基本EPS $4.00 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "1株当たり利益は、普通株主が1株でいくら稼いだかを見せる数字です。優先株主に約束した配当は先に除き、年の途中で増えた株は「その分だけ」分母に入れます（ASC 260）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "発行時の仕訳（Cedar・7月の現金増資）",
+        "body_html": "EPS の分母を増やす取引の例です（1株 $10 額面、発行価額 $15 と仮定）。",
+        "je_lines": [
+          "Dr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 600,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Common stock &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 400,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. APIC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 200,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Cedar の基本EPSを、分子と分母に分けます。",
+    "steps": [
+      "<strong>Step 1</strong> 分子：$480,000 − $20,000 ＝ <strong>$460,000</strong>。",
+      "<strong>Step 2</strong> 分母：100,000 ＋ 40,000×6/12 ＝ <strong>120,000</strong>。",
+      "<strong>Step 3</strong> 基本EPS ＝ $460,000 ÷ 120,000 ＝ <strong>$4.00</strong>。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額／株数</th></tr></thead>\n        <tbody>\n          <tr><td>Net income</td><td class=\"num\">$480,000</td></tr>\n          <tr><td>− Preferred dividends</td><td class=\"num\">$20,000</td></tr>\n          <tr><td>分子</td><td class=\"num\"><strong>$460,000</strong></td></tr>\n          <tr><td>1/1 shares</td><td class=\"num\">100,000</td></tr>\n          <tr><td>7/1 issue × 6/12</td><td class=\"num\">20,000</td></tr>\n          <tr><td>加重平均</td><td class=\"num\"><strong>120,000</strong></td></tr>\n          <tr><td>Basic EPS</td><td class=\"num\"><strong>$4.00</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "分母を期末株数にしてしまいそうです。",
+    "aoi": "現金で増えた株だけ月数按分。配当・分割は遡及です。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "自己株式を9月に買ったら、分母はどうなりますか？",
+      "coach_html": "買った株数 × 残りの月数／12 を<strong>引きます</strong>。発行の逆です。"
+    },
+    {
+      "student_html": "希薄化EPS（diluted）はいつ使いますか？",
+      "coach_html": "転換社債・新株予約権など、普通株に変わり得る証券があるときです。この図解は基本EPSだけを固定します。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "株数が変わる取引は、自己株式・株式配当と同じ家族です。",
+    "items": [
+      {
+        "title_html": "株式配当と株式分割（ASC 505）",
+        "body_html": "会計上の資本の振り替えは別論点ですが、EPS ではどちらも分母を遡及して増やします。"
+      },
+      {
+        "title_html": "自己株式（額面法）",
+        "body_html": "取得は分母を減らす（月数按分）。消却の仕訳は資本の中の話で、EPS の分子は原則として動きません。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は分子の引き忘れと、分母の期末株数を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>基本EPS</strong>：(NI − pref) ÷ 加重平均株数",
+      "<strong>株式配当後</strong>：当年の期首株にも掛け直す",
+      "<strong>累積優先株</strong>：宣言していなくても当年分を引く"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "NI から優先配当を引く",
+        "現金増資・自己株式を月数で加重する",
+        "株式配当・分割があれば遡及する",
+        "割って基本EPSを出す"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 260</strong> の基本EPSに沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — basic EPS）",
+      "focus": [
+        "優先配当を分子から引く",
+        "7月発行は 6/12 だけ分母に入れる"
+      ],
+      "stem_html": "Cedar reported NI <strong>$480,000</strong>, preferred dividends <strong>$20,000</strong>. Shares: 100,000 on January 1, plus 40,000 issued for cash on July 1. Basic EPS?",
+      "choices": ["A. $3.43", "B. $4.00", "C. $4.60", "D. $4.80"],
+      "explain_html": "<p>（$480,000−$20,000）÷（100,000＋20,000）＝$460,000÷120,000＝<strong>$4.00</strong>。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$3.43）</strong>＝分子は正しいが、分母を期末 140,000 にした",
+        "<strong>C（$4.60）</strong>＝分子は正しいが、分母を期首の 100,000 株だけにした（$460,000÷100,000）",
+        "<strong>D（$4.80）</strong>＝優先配当を引かず期首株だけで割った（$480,000÷100,000）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — 株式配当）",
+      "focus": [
+        "株式配当は月数按分せず、期首に遡る"
+      ],
+      "stem_html": "On December 1, a company declared and issued a 10% stock dividend. For basic EPS, the additional shares are treated as outstanding:",
+      "choices": [
+        "A. For one month only",
+        "B. From December 1 forward",
+        "C. Retroactively for the entire year (and for prior periods presented)",
+        "D. Only if the stock dividend is large (25% or more)"
+      ],
+      "explain_html": "<p>株式配当・分割は、表示するすべての期間に遡って株数を直します。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A・B</strong>＝現金増資の月数按分と混ぜた誤答",
+        "<strong>D</strong>＝小配当／大配当は資本の振り替え（RE を時価で落とすか）の話。EPS の遡及とは別"
+      ]
+    }
+  ],
+  "one_minute_html": "基本EPSは、当期純利益から優先配当を引いた額を、加重平均した普通株式数で割る。現金で増えた株は月数按分、株式配当と分割は期首に遡って掛け直す。期末株数で割らない。",
+  "checklist": [
+    "分子＝NI−優先配当、を見ずに言える",
+    "Cedar の $4.00 を10秒で再現できる",
+    "現金増資と株式配当で分母の扱いが違う理由を説明できる",
+    "累積優先株は宣言なしでも当年分を引く、を言える"
+  ]
+}

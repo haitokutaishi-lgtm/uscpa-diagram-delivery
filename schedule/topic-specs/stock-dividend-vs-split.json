@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "page_title": "【図解】株式配当と株式分割—小配当は時価、分割は額面メモ",
+    "theme_line_html": "Equity — <span class=\"font-bold normal-case\">stock dividend vs stock split（ASC 505）</span>",
+    "subject_line": "USCPA FAR / Equity（ASC 505）",
+    "h1_html": "<strong>株式配当と株式分割</strong>—小配当は利益剰余金を時価で振り替え、分割は株数と額面のメモ",
+    "lead_html": "試験では、おおむね <strong>20〜25%未満</strong>の株式配当は時価で利益剰余金を減らし、株式分割は資本の合計を変えません。どちらも資産は動きません。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Small stock dividend</span>（小規模株式配当）",
+      "body_html": "発行済の約 20〜25% 未満。利益剰余金を<strong>時価</strong>で普通株式と APIC へ振り替えます。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Large stock dividend / split</span>（大規模株式配当・分割）",
+      "body_html": "約 20〜25% 以上、または分割。利益剰余金を時価では落としません。額面分の振替か、額面の引き下げです。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">No change in total equity</span>（資本合計は変わらない）",
+      "body_html": "どちらも株主に現金を払いません。中身の科目が動くか、株数メモだけです。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "Aspen Co. has <strong>100,000</strong> shares of <strong>$10</strong> par common stock outstanding. The fair value is <strong>$24</strong> per share. Aspen declares a <strong>5%</strong> stock dividend. By what amount should retained earnings decrease?",
+    "choices": ["A. $0", "B. $50,000", "C. $120,000", "D. $240,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　株式配当でも現金のように時価全額を費用にする",
+      "student_html": "配当だから費用 $120,000 では？",
+      "coach_html": "株式配当は費用ではありません。利益剰余金を資本金・APIC へ<strong>振り替える</strong>だけです。"
+    },
+    {
+      "label": "誤解②　小配当を額面だけで落とす",
+      "student_html": "5,000 株 × $10 ＝ $50,000 でしょうか？",
+      "coach_html": "小配当は<strong>時価</strong>です。5,000 × $24 ＝ $120,000 を利益剰余金から落とします。"
+    },
+    {
+      "label": "誤解③　分割で利益剰余金が減る",
+      "student_html": "2分割でも、何か資本を減らす気がします。",
+      "coach_html": "分割は株数を増やし額面を半分にするメモです。利益剰余金も資本合計も<strong>動きません</strong>。"
+    }
+  ],
+  "three_lead_html": "株式配当と分割の地図は、この3つです。",
+  "three": [
+    {
+      "title": "小配当 ＝ RE を時価で振り替える",
+      "body_html": "増加株数 × 時価が利益剰余金の減少。うち額面が Common stock、残りが APIC。"
+    },
+    {
+      "title": "分割 ＝ 株数と額面のメモ",
+      "body_html": "資本の合計も利益剰余金も変わりません。"
+    },
+    {
+      "title": "どちらも現金は出ない",
+      "body_html": "資産は動かず、総資本も原則として変わりません。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>資本の振替仕訳</strong>に対応します。",
+    "timeline_html": "①発行済株数と時価・額面を確認 → ②小配当か分割（大配当）かを判定 → ③小配当なら時価で RE を振り替え → ④分割なら仕訳なし（または額面の組替）",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Aspen の利益剰余金減少 $120,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "小規模な株式配当は、株主が「時価相当の持分を資本金へ移した」と見る慣習があります。大規模な配当や分割は、株を細かくするだけなので、時価での振替はしません（ASC 505）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Aspen・5% 小配当）",
+        "body_html": "5,000 株 × 時価 $24 ＝ $120,000。うち額面 $50,000、APIC $70,000。",
+        "je_lines": [
+          "Dr. Retained earnings &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 120,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Common stock &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. APIC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 70,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Aspen の利益剰余金の減少を、小配当の型で求めます。",
+    "steps": [
+      "<strong>Step 1</strong> 増加株数：100,000 × 5% ＝ 5,000 株。20〜25% 未満なので小配当。",
+      "<strong>Step 2</strong> RE 減少：5,000 × 時価 $24 ＝ <strong>$120,000</strong>。",
+      "<strong>Step 3</strong> Common stock：5,000 × 額面 $10 ＝ $50,000。",
+      "<strong>Step 4</strong> APIC：$120,000 − $50,000 ＝ $70,000。総資本は変わらない。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>増加株数</td><td class=\"num\">5,000</td></tr>\n          <tr><td>RE 減少（× FV $24）</td><td class=\"num\"><strong>$120,000</strong></td></tr>\n          <tr><td>Common stock（× par $10）</td><td class=\"num\">$50,000</td></tr>\n          <tr><td>APIC</td><td class=\"num\">$70,000</td></tr>\n          <tr><td>総資本の増減</td><td class=\"num\">$0</td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "小配当と分割で、どちらが時価か忘れます。",
+    "aoi": "小さい配当だけ時価。分割はメモです。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "30% の株式配当だったら、利益剰余金はいくら減りますか？",
+      "coach_html": "大規模なので時価は使いません。額面分（30,000 × $10 ＝ $30,000）を振り替えるか、分割と同様に扱う問題が多いです。"
+    },
+    {
+      "student_html": "EPS の分母は、どちらも遡及しますか？",
+      "coach_html": "はい。株式配当も分割も、基本EPSでは表示期間の株数を遡って増やします。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "資本の中の振り替えは、自己株式・基本EPSと隣り合います。",
+    "items": [
+      {
+        "title_html": "自己株式・額面法（ASC 505）",
+        "body_html": "自己株式は取得と消却で APIC と RE が動きます。株式配当は「新しい株を株主に渡す」振り替えで、現金は出ません。"
+      },
+      {
+        "title_html": "基本EPS（ASC 260）",
+        "body_html": "配当も分割も分母を遡及します。現金増資だけが月数按分です。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「額面だけ」と「総資本が増える」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>小配当の RE 減少</strong>：増加株数 × 時価",
+      "<strong>分割の RE</strong>：$0",
+      "<strong>総資本</strong>：どちらも原則 $0 増減"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "増加割合が約 20〜25% 未満かを見る",
+        "小配当なら増加株数 × 時価が RE 減少",
+        "額面を Common stock、残りを APIC にする",
+        "分割なら総資本・RE は動かさない"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 505</strong> の株式配当・分割に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — 小配当の RE）",
+      "focus": [
+        "5% は小配当なので時価",
+        "問われているのは利益剰余金の減少"
+      ],
+      "stem_html": "Aspen has <strong>100,000</strong> shares of <strong>$10</strong> par common. FV is <strong>$24</strong>. A <strong>5%</strong> stock dividend is declared. Decrease in retained earnings?",
+      "choices": ["A. $0", "B. $50,000", "C. $120,000", "D. $240,000"],
+      "explain_html": "<p>5,000 × $24 ＝ <strong>$120,000</strong>。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝分割と混ぜて RE を動かさなかった",
+        "<strong>B（$50,000）</strong>＝額面だけ（5,000×$10）。大配当の型を小配当に使った",
+        "<strong>D（$240,000）</strong>＝発行済全株 × 時価の一部、または 10,000×$24 など株数を取り違えた見せかけ（100,000×$24×10%）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — 分割）",
+      "focus": [
+        "2分割で総資本と RE は動かない"
+      ],
+      "stem_html": "A 2-for-1 stock split typically:",
+      "choices": [
+        "A. Decreases retained earnings at fair value",
+        "B. Increases total stockholders' equity",
+        "C. Doubles the number of shares and halves par value, with no change in total equity",
+        "D. Decreases retained earnings at par"
+      ],
+      "explain_html": "<p>株数は2倍、額面は半分、総資本は同じ。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝小配当の時価振替を分割に使った",
+        "<strong>B</strong>＝資産も資本合計も増えない",
+        "<strong>D</strong>＝大配当の額面振替を分割に使った"
+      ]
+    }
+  ],
+  "one_minute_html": "約 20〜25% 未満の株式配当は、増加株数×時価で利益剰余金を減らし、額面を Common stock、残りを APIC へ振り替える。株式分割は株数と額面のメモで、利益剰余金も総資本も動かない。どちらも現金は出ない。",
+  "checklist": [
+    "小配当の RE＝増加株数×時価、を見ずに言える",
+    "Aspen の $120,000 を10秒で再現できる",
+    "分割で総資本が変わらない理由を説明できる",
+    "EPS では配当も分割も遡及する、を言える"
+  ]
+}

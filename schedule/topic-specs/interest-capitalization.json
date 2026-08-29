@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "page_title": "【図解】自己建設の利息資本化—avoidable interest と actual の小さい方",
+    "theme_line_html": "PP&amp;E — <span class=\"font-bold normal-case\">capitalization of interest（ASC 835-20）</span>",
+    "subject_line": "USCPA FAR / PP&amp;E（ASC 835-20）",
+    "h1_html": "<strong>自己建設の利息</strong>—資本化するのは <span class=\"term-en\">avoidable interest</span> と実際利息の小さい方",
+    "lead_html": "試験では、加重平均した支出額に利率を掛けて <strong>avoidable interest</strong> を出し、実際に払った利息と比べて小さい方を資産に含めます。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Weighted-average accumulated expenditures</span>（加重平均支出）",
+      "body_html": "その年に建設へ出した現金を、何ヶ月置いたかで平均した額。利息を掛ける相手です。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Avoidable interest</span>（回避可能利息）",
+      "body_html": "建設しなければ払わずに済んだ利息。加重平均支出 × 適切な利率。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Actual interest</span>（実際利息）",
+      "body_html": "その年に会社全体で発生した利息。資本化の<strong>上限</strong>です。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "On January 1, Year 1, Lark began constructing a building. Expenditures were <strong>$200,000</strong> on January 1 and <strong>$300,000</strong> on July 1. Lark borrowed <strong>$200,000</strong> specifically at <strong>10%</strong>. Other borrowings outstanding all year cost <strong>8%</strong>. Actual interest for Year 1 is <strong>$40,000</strong>. What amount of interest should Lark <strong>capitalize</strong>?",
+    "choices": ["A. $20,000", "B. $28,000", "C. $32,000", "D. $40,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　実際利息を全部資本化する",
+      "student_html": "払った $40,000 をそのまま建物に載せればよいのでは？",
+      "coach_html": "上限は実際利息ですが、資本化するのは<strong>avoidable interest との小さい方</strong>です。この例では $32,000 です。"
+    },
+    {
+      "label": "誤解②　支出の合計に利率を掛ける",
+      "student_html": "$500,000 × 何か、で計算したくなります。",
+      "coach_html": "7月の $300,000 は半年しか置いていません。掛ける相手は<strong>加重平均した支出</strong>（$350,000）です。"
+    },
+    {
+      "label": "誤解③　特定借入の利率だけを全部に使う",
+      "student_html": "$350,000 × 10% ＝ $35,000 でしょうか？",
+      "coach_html": "特定借入 $200,000 までが 10%。残り $150,000 には<strong>一般借入の利率 8%</strong> を使います。"
+    }
+  ],
+  "three_lead_html": "利息資本化の地図は、この3つです。",
+  "three": [
+    {
+      "title": "掛ける相手は加重平均支出",
+      "body_html": "支出 × その年に置いた月数／12 を足します。"
+    },
+    {
+      "title": "利率は特定借入が先、余りは一般借入",
+      "body_html": "建設のための借入があれば、その額まで特定利率。超過分は一般借入の加重平均利率。"
+    },
+    {
+      "title": "資本化額 ＝ avoidable と actual の小さい方",
+      "body_html": "実際より多く資本化することはできません。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>建物への振替仕訳</strong>に対応します。",
+    "timeline_html": "①期中の建設支出を記録 → ②期末に加重平均支出と avoidable interest を計算 → ③actual と比べて小さい方を建物に振り替える",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Lark の資本化額 $32,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "自分で建物を建てている間、その資金の利息は「今の期間費用」ではなく、使えるようになる資産の取得原価です（ASC 835-20）。ただし、建設しなくても払う利息まで資産にしてはいけません。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Lark・Year 1）",
+        "body_html": "avoidable $32,000 ＜ actual $40,000 なので、$32,000 を建物へ。残り $8,000 は利息費用。",
+        "je_lines": [
+          "Dr. Building &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 32,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Interest expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 32,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Lark の資本化額を、4ステップで固定します。",
+    "steps": [
+      "<strong>Step 1</strong> 加重平均支出：$200,000×12/12 ＋ $300,000×6/12 ＝ <strong>$350,000</strong>。",
+      "<strong>Step 2</strong> 特定借入：$200,000×10% ＝ $20,000。",
+      "<strong>Step 3</strong> 残り $150,000×一般 8% ＝ $12,000。avoidable ＝ $20,000＋$12,000 ＝ <strong>$32,000</strong>。",
+      "<strong>Step 4</strong> actual $40,000 と比べ、小さい方 <strong>$32,000</strong> を資本化。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>加重平均支出</td><td class=\"num\">$350,000</td></tr>\n          <tr><td>特定 $200,000 × 10%</td><td class=\"num\">$20,000</td></tr>\n          <tr><td>残り $150,000 × 8%</td><td class=\"num\">$12,000</td></tr>\n          <tr><td>Avoidable interest</td><td class=\"num\"><strong>$32,000</strong></td></tr>\n          <tr><td>Actual interest</td><td class=\"num\">$40,000</td></tr>\n          <tr><td>Capitalize（小さい方）</td><td class=\"num\"><strong>$32,000</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "利率をどこまで特定借入に使うかで止まります。",
+    "aoi": "特定借入の元本までが特定利率。超過だけ一般利率です。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "特定借入が加重平均支出より大きいときは？",
+      "coach_html": "全部に特定利率を使います。一般借入の利率は出てきません。"
+    },
+    {
+      "student_html": "土地の取得にも利息を資本化しますか？",
+      "coach_html": "建物を建てるための土地なら、建設期間の利息は<strong>建物</strong>に含めます。土地そのものには載せません。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "「資産の取得原価に何を含めるか」は、一括購入の按分と同じ家族です。",
+    "items": [
+      {
+        "title_html": "一括購入の按分（ASC 360）",
+        "body_html": "土地と建物を一度に買ったときは、鑑定価額の比率で取得原価を分けます。自己建設では、現金支出に加えて回避可能利息を建物に足します。"
+      },
+      {
+        "title_html": "社債の実効金利法（ASC 470）",
+        "body_html": "利息費用の計算は carrying × effective rate。資本化は、その利息費用のうち「建設のための分」を資産へ振り替える話です。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「actual をそのまま」か「支出合計×利率」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>資本化額</strong>：avoidable と actual の小さい方",
+      "<strong>加重平均支出</strong>：月数で割った支出の合計",
+      "<strong>特定借入と一般借入の二段利率</strong>"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "支出を月数で加重平均する",
+        "特定借入額まで特定利率を掛ける",
+        "残りに一般借入の利率を掛ける",
+        "actual と比べて小さい方を資本化する"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 835-20</strong> に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — 資本化額）",
+      "focus": [
+        "7月の支出は半年分だけ加重する",
+        "特定借入を超えた分は一般利率"
+      ],
+      "stem_html": "Lark spent <strong>$200,000</strong> on January 1 and <strong>$300,000</strong> on July 1. Specific borrowing <strong>$200,000</strong> at 10%. General borrowings 8%. Actual interest <strong>$40,000</strong>. Interest capitalized?",
+      "choices": ["A. $20,000", "B. $28,000", "C. $32,000", "D. $40,000"],
+      "explain_html": "<p>加重平均 $350,000。$200,000×10%＋$150,000×8%＝$32,000 ＜ $40,000。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$20,000）</strong>＝特定借入の利息だけ（一般分を忘れた）",
+        "<strong>B（$28,000）</strong>＝$350,000×8%（特定利率を使わなかった）",
+        "<strong>D</strong>＝実際利息を全部資本化した（誤解①）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — 上限）",
+      "focus": [
+        "資本化できる利息の上限は何か"
+      ],
+      "stem_html": "The amount of interest capitalized during construction cannot exceed:",
+      "choices": [
+        "A. Avoidable interest",
+        "B. Actual interest incurred",
+        "C. Weighted-average accumulated expenditures",
+        "D. Interest on specific borrowings only"
+      ],
+      "explain_html": "<p>資本化額は avoidable と actual の小さい方なので、actual を超えることはできません。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝avoidable は計算結果の一方。actual の方が小さいときは actual が上限",
+        "<strong>C</strong>＝利息を掛ける相手であり、上限そのものではない",
+        "<strong>D</strong>＝一般借入の利息も、余りがあれば資本化対象"
+      ]
+    }
+  ],
+  "one_minute_html": "自己建設の利息は、支出を月数で加重平均し、特定借入の利率→余りの一般利率で <strong>avoidable interest</strong> を出す。資本化するのは、その額と<strong>実際利息の小さい方</strong>。実際に払っていない利息まで資産にはできません。",
+  "checklist": [
+    "加重平均支出の式（支出×月数/12）を見ずに書ける",
+    "Lark の $32,000 を10秒で再現できる",
+    "特定借入を超えた分に一般利率を使う理由を言える",
+    "actual が上限になる場面を説明できる"
+  ]
+}

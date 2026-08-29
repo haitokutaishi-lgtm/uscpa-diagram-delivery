@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【図解】貸倒引当—年齢表から期末 allowance を決める</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+    .student-bubble { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 2px solid #ea580c; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .coach-bubble { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .mc-card { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem; background: #fafafa; }
+    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
+    .en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: 1rem; margin: 0.75rem 0; color: #334155; font-size: 0.875rem; line-height: 1.65; }
+    .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
+    .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .student-bubble .role-line { color: #c2410c; }
+    .coach-bubble .role-line { color: #1d4ed8; }
+    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
+    .persona-strip strong { color: #0f172a; }
+    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
+    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
+    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
+    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
+    table.calc { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
+    table.calc th, table.calc td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+    table.calc th { background: #f1f5f9; }
+    table.calc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
+    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
+    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
+    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
+    .badge-essential { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: #fff; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; }
+    .glossary-card { background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.25rem; }
+    .glossary-term { font-weight: 700; color: #065f46; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .crossmap-item { background: #f1f5f9; border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .crossmap-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .pattern-card { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 0.75rem; padding: 1.25rem; }
+    .focus-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.75rem; }
+    .focus-title { font-size: 0.8rem; font-weight: 700; color: #1d4ed8; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem; }
+    .distractor-list { list-style: disc; list-style-position: inside; font-size: 0.85rem; color: #475569; line-height: 1.7; }
+    .one-minute { background: #f8fafc; border-left: 4px solid #64748b; border-radius: 0.5rem; padding: 1rem 1.25rem; }
+    .checklist-box { background: #ecfdf5; border-radius: 0.75rem; padding: 1.25rem 1.5rem; }
+
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="header-gradient text-white py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Receivables — <span class="font-bold normal-case">aging method で期末引当を求める</span></p>
+      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / Receivables（ASC 326）</p>
+      <h1 class="text-2xl md:text-3xl font-bold leading-snug"><strong>売掛金の貸倒引当</strong>—年齢表で「期末にいくら残すか」を先に決める</h1>
+      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、年齢表の各区分×見積率の合計が<strong>期末の allowance 残高</strong>です。費用は、その必要額と現在の allowance の差です。</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
+    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
+      <ul class="list-disc list-inside space-y-1 text-slate-600">
+        <li><a href="#summary30" class="text-blue-700 hover:underline">① 30秒でわかるこのページ</a></li>
+        <li><a href="#glossary" class="text-blue-700 hover:underline">② 先に言葉をそろえる（3語だけ）</a></li>
+        <li><a href="#worries" class="text-blue-700 hover:underline">③ よくある悩み</a></li>
+        <li><a href="#theory" class="text-blue-700 hover:underline">④ 会計の背景と仕訳</a></li>
+        <li><a href="#reading" class="text-blue-700 hover:underline">⑤ 計算の型</a></li>
+        <li><a href="#process" class="text-blue-700 hover:underline">⑥ 対話で整理</a></li>
+        <li><a href="#crossmap" class="text-blue-700 hover:underline">⑦ 横串マップ（他の論点とのつながり）</a></li>
+        <li><a href="#patterns" class="text-blue-700 hover:underline">⑧ 出題パターンの引き出し</a></li>
+        <li><a href="#mc" class="text-blue-700 hover:underline">⑨ 理解確認MC</a></li>
+        <li><a href="#summary" class="text-blue-700 hover:underline">⑩ まとめ：1分で人に説明できる形</a></li>
+      </ul>
+    </nav>
+
+    <section id="summary30" class="section-card border-2 border-blue-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-6 h-6 text-blue-600"></i> ① 30秒でわかるこのページ</h2>
+      <p class="text-sm text-slate-700 leading-relaxed mb-4">年齢表の貸倒引当は、この3つです。</p>
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">1</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>年齢表の合計 ＝ 期末 allowance の必要額</strong>　各区分の残高×率を足します。これがゴールの残高です。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">2</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>費用 ＝ 必要額 − 調整前の allowance</strong>　調整前が貸方なら引き、借方（マイナス）なら足します。</p>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-4">
+          <span class="badge-essential flex-shrink-0">3</span>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong>償却（write-off）は費用を動かさない</strong>　Dr. Allowance / Cr. AR。損益は、期末の見積り直しのときだけ動きます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="glossary" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-6 h-6 text-emerald-600"></i> ② 先に言葉をそろえる（3語だけ）</h2>
+      <p class="part-lead">本文の前に、この3語だけ意味を固定します。</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Allowance for credit losses</span>（貸倒引当金）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">売掛金の評価勘定。貸借対照表では売掛金から控除します。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Aging schedule</span>（年齢表）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">未回収期間ごとに残高を分け、区分ごとに見積率を掛ける表。</p>
+        </div>
+        <div class="glossary-card">
+          <p class="glossary-term"><span class="term-en">Balance sheet approach</span>（貸借対照表アプローチ）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">先に<strong>期末引当の必要額</strong>を決め、差額を費用にする方法。売上高×率が先に来る方法とは別です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="worries" class="section-card worries-box border-amber-300">
+      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-6 h-6"></i> ③ よくある悩み</h2>
+      <div class="mc-preview-box">
+        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
+        <div class="en-stem mb-3">Maple Co. ages its receivables: current <strong>$80,000</strong> at 1%, 31–60 days <strong>$20,000</strong> at 5%, 61–90 days <strong>$8,000</strong> at 15%, over 90 days <strong>$4,000</strong> at 40%. The allowance has a <strong>$1,200 credit</strong> before adjustment. What is <strong>credit loss expense</strong>?</div>
+        <ul class="text-sm space-y-1.5">
+          <li><strong>A..</strong> $3,400</li>
+          <li><strong>B..</strong> $4,600</li>
+          <li><strong>C..</strong> $5,800</li>
+          <li><strong>D..</strong> $1,200</li>
+        </ul>
+      </div>
+      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
+
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解①　年齢表の合計をそのまま費用にする</span>
+          <p class="text-sm leading-relaxed">$800＋$1,000＋$1,200＋$1,600＝$4,600 が費用では？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">それは<strong>期末に残すべき allowance</strong>です。費用は、必要額 $4,600 − 既にある貸方 $1,200 ＝ $3,400 です。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解②　既にある引当を足してしまう</span>
+          <p class="text-sm leading-relaxed">$4,600＋$1,200＝$5,800 にしてしまいそうです。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">既にある貸方は、必要額に<strong>近づけるための出発点</strong>です。足すのではなく引きます。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <span class="mistake-label">誤解③　売上高×率と混ぜる</span>
+          <p class="text-sm leading-relaxed">売上の何％、という数字も問題文に混ざると、どちらを使えばよいか迷います。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">年齢表がある問題は、<strong>期末残高を先に決める</strong>型です。売上高×率は使いません。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="theory" class="section-card border-indigo-100">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ④ 会計の背景と仕訳</h2>
+      <p class="part-lead">①の3つは、ここでの<strong>見積り仕訳</strong>に対応します。</p>
+
+      <div class="theory-block">
+        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">売掛金は、全額回収できるとは限りません。期末時点で「回収できないと見込む額」を引当として差し引き、同じ期間の収益に費用を対応させます（ASC 326）。</p>
+        
+      </div>
+      <div class="theory-block">
+        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳（Maple の期末調整）</h3>
+        <p class="text-sm text-slate-700 leading-relaxed">必要額 $4,600、調整前貸方 $1,200、費用 $3,400。</p>
+        <p class="je-line">Dr. Credit loss expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3,400</p><p class="je-line">&nbsp;&nbsp;&nbsp;&nbsp;Cr. Allowance for credit losses &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3,400</p>
+      </div>
+      <p class="timeline-mini"><strong>処理の順序：</strong> ①年齢表で必要額を計算 → ②調整前 allowance を確認 → ③差額を費用計上 → ④個別に回収不能が確定したら write-off</p>
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>計算の型</strong>は、Maple の費用 $3,400 を求める手順です。</p>
+    </section>
+
+    <section id="reading" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ⑤ 計算の型</h2>
+      <p class="text-sm text-slate-700 mb-4 leading-relaxed">Maple の費用を、必要額から逆算します。</p>
+      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
+        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span><strong>Step 1</strong> 区分ごとに残高×率：$80,000×1%＝$800、$20,000×5%＝$1,000、$8,000×15%＝$1,200、$4,000×40%＝$1,600。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><strong>Step 2</strong> 合計＝期末必要額 <strong>$4,600</strong>。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span><strong>Step 3</strong> 調整前 allowance を見る（この例は貸方 $1,200）。</span></li>
+        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>Step 4</strong> 費用＝$4,600 − $1,200 ＝ <strong>$3,400</strong>。</span></li>
+      </ol>
+      
+      <table class="calc">
+        <thead><tr><th>区分</th><th class="num">残高</th><th class="num">率</th><th class="num">引当</th></tr></thead>
+        <tbody>
+          <tr><td>Current</td><td class="num">$80,000</td><td class="num">1%</td><td class="num">$800</td></tr>
+          <tr><td>31–60</td><td class="num">$20,000</td><td class="num">5%</td><td class="num">$1,000</td></tr>
+          <tr><td>61–90</td><td class="num">$8,000</td><td class="num">15%</td><td class="num">$1,200</td></tr>
+          <tr><td>Over 90</td><td class="num">$4,000</td><td class="num">40%</td><td class="num">$1,600</td></tr>
+          <tr><td colspan="3">必要額</td><td class="num"><strong>$4,600</strong></td></tr>
+          <tr><td colspan="3">− 調整前（貸方）</td><td class="num">$1,200</td></tr>
+          <tr><td colspan="3">Credit loss expense</td><td class="num"><strong>$3,400</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="process" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑥ 対話で整理</h2>
+      <div class="persona-strip">
+        <span><strong>たくま</strong>：必要額と費用を取り違えやすいです。</span>
+        <span><strong>あおい先生</strong>：年齢表はゴールの残高。費用はそこへ動かす差額です。</span>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">調整前が借方 $500 だったら、費用はどうなりますか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">必要額 $4,600 に届けるために、$4,600＋$500＝<strong>$5,100</strong> を費用にします。借方は「すでに足りない」状態です。</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="student-bubble mb-0">
+          <p class="role-line">たくま（受講生）</p>
+          <p class="text-sm leading-relaxed">年度中に $700 を write-off したら、その年の費用は減りますか？</p>
+        </div>
+      </div>
+      <div class="dlg-row">
+        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
+        <div class="coach-bubble mb-0">
+          <p class="role-line">あおい先生（コーチ）</p>
+          <p class="text-sm leading-relaxed">減りません。write-off は Allowance と AR を同時に減らすだけです。費用は期末の見積り直しで決まります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="crossmap" class="section-card border-2 border-amber-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="network" class="w-6 h-6 text-amber-600"></i> ⑦ 横串マップ（他の論点とのつながり）</h2>
+      <p class="part-lead">引当は、売掛金以外の見積りとも同じ回路です。</p>
+      <div class="space-y-3">
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 製品保証（ASC 460）</p>
+          <p class="text-sm text-slate-700 leading-relaxed">保証も「期末負債の必要額」を先に決める型があります。売上×率で認識し、支出で減らす点は、引当の write-off と似ています。</p>
+        </div>
+        <div class="crossmap-item">
+          <p class="crossmap-title"><i data-lucide="link" class="w-4 h-4"></i> 後発事象の貸倒</p>
+          <p class="text-sm text-slate-700 leading-relaxed">決算日後に得意先が倒産した場合、決算日時点の回収可能性の確認なら帳簿を直します（recognized subsequent event）。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns" class="section-card border-2 border-violet-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="file-question" class="w-6 h-6 text-violet-600"></i> ⑧ 出題パターンの引き出し</h2>
+      <p class="part-lead">MC は「必要額」と「費用」を入れ替えた誤答を置きます。</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">MC の出方</p>
+          <ul class="text-sm text-slate-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>Credit loss expense</strong>：必要額と調整前残高の差</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>期末 allowance</strong>：年齢表の合計そのもの</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="circle-dot" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i><span><strong>調整前が借方</strong>：必要額に借方残高を足す</span></li>
+          </ul>
+        </div>
+        <div class="pattern-card">
+          <p class="font-bold text-violet-900 mb-3">解く手順は毎回同じ4ステップ</p>
+          <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside leading-relaxed">
+            <li>区分ごとに残高×率を計算する</li>
+            <li>合計を期末必要額とする</li>
+            <li>調整前 allowance が貸方か借方かを見る</li>
+            <li>差額を費用（または戻入れ）にする</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑨ 理解確認MC</h2>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 326</strong> の期末見積り（年齢表）に沿って作成しています。</p>
+
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — credit loss expense）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>年齢表の合計は費用ではなく期末必要額</li>
+            <li>調整前が貸方なら、必要額から引く</li>
+          </ul>
+        </div>
+        <div class="en-stem mb-4">Maple ages AR: current <strong>$80,000</strong> at 1%, 31–60 <strong>$20,000</strong> at 5%, 61–90 <strong>$8,000</strong> at 15%, over 90 <strong>$4,000</strong> at 40%. Allowance has a <strong>$1,200 credit</strong>. Credit loss expense?</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. $3,400</li>
+          <li>B. $4,600</li>
+          <li>C. $5,800</li>
+          <li>D. $1,200</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>必要額 $4,600 − 貸方 $1,200 ＝ <strong>$3,400</strong>。正解 <strong>A</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>B（$4,600）</strong>＝必要額をそのまま費用にした（誤解①）</li>
+              <li><strong>C（$5,800）</strong>＝必要額に既存引当を足した（誤解②）</li>
+              <li><strong>D</strong>＝調整前残高そのもの</li>
+            </ul></div>
+        </details>
+      </div>
+      <div class="mc-card">
+        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — write-off）</p>
+        <div class="focus-box">
+          <p class="focus-title"><i data-lucide="target" class="w-4 h-4"></i> ここで見るポイント（読む前に）</p>
+          <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+            <li>write-off が損益を動かすかどうか</li>
+          </ul>
+        </div>
+        <div class="en-stem mb-4">Under the allowance method, writing off a specific uncollectible account:</div>
+        <ul class="text-sm space-y-2 mb-4">          <li>A. Increases credit loss expense</li>
+          <li>B. Decreases net accounts receivable</li>
+          <li>C. Has no effect on net accounts receivable</li>
+          <li>D. Increases the allowance balance</li></ul>
+        <details>
+          <summary>解説を開く</summary>
+          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed"><p>Dr. Allowance / Cr. AR なので、総額と引当が同じだけ減り、<strong>純額は変わらない</strong>。正解 <strong>C</strong>。</p>
+            <p class="font-bold text-slate-900 mt-3 mb-1">誤答の作られ方</p>
+            <ul class="distractor-list">
+              <li><strong>A</strong>＝費用は期末の見積り直しで動く。write-off 時点では動かない</li>
+              <li><strong>B</strong>＝総額は減るが、引当も減るので純額は同じ</li>
+              <li><strong>D</strong>＝write-off は allowance を減らす（借方）</li>
+            </ul></div>
+        </details>
+      </div>
+    </section>
+
+    <section id="summary" class="section-card border-2 border-emerald-300">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-6 h-6 text-emerald-600"></i> ⑩ まとめ：1分で人に説明できる形</h2>
+      <p class="text-sm font-bold text-slate-700 mb-2">1分で人に説明できる形</p>
+      <div class="one-minute mb-6">
+        <p class="text-sm text-slate-700 leading-relaxed">年齢表の貸倒引当は、区分ごとの残高×率を足して<strong>期末 allowance の必要額</strong>を先に決める。費用は、その必要額と調整前残高の差。write-off は Allowance と AR を同時に減らすだけで、損益は動かさない。</p>
+      </div>
+      <div class="checklist-box">
+        <p class="font-bold text-emerald-900 mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> 今日のチェックリスト</p>
+        <ul class="space-y-2 text-sm text-slate-700 leading-relaxed">
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>年齢表の合計＝期末必要額、を見ずに言える</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>Maple の費用 $3,400 を10秒で再現できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>調整前が借方のとき、必要額に足す理由を説明できる</span></li>
+          <li class="flex items-start gap-2"><i data-lucide="square" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i><span>write-off で純売掛金が変わらない理由を言える</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
+  </main>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

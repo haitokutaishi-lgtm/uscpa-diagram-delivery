@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "page_title": "【図解】一定期間にわたる収益—原価進捗率で売上と利益を切り出す",
+    "theme_line_html": "Revenue — <span class=\"font-bold normal-case\">over time / cost-to-cost（ASC 606）</span>",
+    "subject_line": "USCPA FAR / Revenue from Contracts with Customers（ASC 606）",
+    "h1_html": "<strong>一定期間にわたる収益</strong>—かかった原価 ÷ 見積総原価で、その年の売上を切り出す",
+    "lead_html": "試験では、顧客が仕掛を支配している（または代替用途がなく支払請求権がある）とき、<span class=\"term-en\">cost-to-cost</span> で進捗率を出し、契約価格に掛けて売上を認識します。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Over time</span>（一定期間）",
+      "body_html": "完成を待たず、進捗に応じて収益を認識する。一時点（point in time）の対です。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Cost-to-cost</span>（原価進捗率）",
+      "body_html": "当期までの発生原価 ÷ 見積総原価。この率が、契約価格のうち「もう稼いだ分」です。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">CIP / Billings</span>（仕掛と請求）",
+      "body_html": "発生原価＋認識利益が CIP。請求は別口座。差額が債権または契約負債です。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "In Year 1, Quay Construction has a <strong>$800,000</strong> contract. Estimated total cost is <strong>$500,000</strong>. Costs incurred to date are <strong>$200,000</strong>. Progress billings are <strong>$280,000</strong>. What amount of <strong>gross profit</strong> should Quay recognize in Year 1 if revenue is recognized over time using cost-to-cost?",
+    "choices": ["A. $80,000", "B. $120,000", "C. $200,000", "D. $300,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　請求した金額を売上にする",
+      "student_html": "請求 $280,000 が Year 1 の収益では？",
+      "coach_html": "請求は現金をいつ受け取るかの話です。収益は<strong>進捗率 × 契約価格</strong>です。"
+    },
+    {
+      "label": "誤解②　発生原価をそのまま利益にする",
+      "student_html": "使った $200,000 が利益に見えます。",
+      "coach_html": "$200,000 は原価です。利益は、進捗率 40% × 見積総利益 $300,000 ＝ <strong>$120,000</strong> です。"
+    },
+    {
+      "label": "誤解③　完成するまで何も認識しない",
+      "student_html": "引き渡しまで売上ゼロ、ではないのですか？",
+      "coach_html": "代替用途がなく、履行済み分の支払を請求できる契約では、<strong>一定期間</strong>で認識します。完成基準は、その条件を満たさないときです。"
+    }
+  ],
+  "three_lead_html": "一定期間の収益認識は、この3つです。",
+  "three": [
+    {
+      "title": "進捗率 ＝ 発生原価 ÷ 見積総原価",
+      "body_html": "Year 1 は $200,000 ÷ $500,000 ＝ 40%。"
+    },
+    {
+      "title": "売上 ＝ 進捗率 × 契約価格",
+      "body_html": "利益 ＝ 進捗率 ×（契約価格 − 見積総原価）。"
+    },
+    {
+      "title": "請求は収益ではない",
+      "body_html": "CIP（原価＋利益）と請求の差額が、債権か契約負債です。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>収益・原価・利益の仕訳</strong>に対応します。",
+    "timeline_html": "①契約と見積総原価を確認 → ②発生原価を CIP に積む → ③進捗率で収益と利益を切り出す → ④請求・回収を別記帳",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Quay の Year 1 粗利益 $120,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "顧客が仕掛を支配しているなら、会社はすでに履行義務の一部を果たしています。完成まで待たず、果たした分だけ収益を認識します（ASC 606）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Quay・Year 1 の収益認識）",
+        "body_html": "売上 $320,000、原価 $200,000、利益 $120,000（CIP に加算）。",
+        "je_lines": [
+          "Dr. Construction in progress &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 120,000",
+          "Dr. Construction expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 200,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Construction revenue &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 320,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Quay の Year 1 粗利益を、進捗率から切り出します。",
+    "steps": [
+      "<strong>Step 1</strong> 進捗率：$200,000 ÷ $500,000 ＝ <strong>40%</strong>。",
+      "<strong>Step 2</strong> 売上：40% × $800,000 ＝ $320,000。",
+      "<strong>Step 3</strong> 原価：発生額 $200,000（または 40% × $500,000）。",
+      "<strong>Step 4</strong> 粗利益：$320,000 − $200,000 ＝ <strong>$120,000</strong>（40% × 見積総利益 $300,000）。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>契約価格</td><td class=\"num\">$800,000</td></tr>\n          <tr><td>見積総原価</td><td class=\"num\">$500,000</td></tr>\n          <tr><td>見積総利益</td><td class=\"num\">$300,000</td></tr>\n          <tr><td>発生原価</td><td class=\"num\">$200,000</td></tr>\n          <tr><td>進捗率</td><td class=\"num\">40%</td></tr>\n          <tr><td>Year 1 粗利益</td><td class=\"num\"><strong>$120,000</strong></td></tr>\n          <tr><td>請求</td><td class=\"num\">$280,000</td></tr>\n          <tr><td>CIP＋利益 − 請求</td><td class=\"num\">$40,000（契約資産）</td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "請求と進捗を混ぜやすいです。",
+    "aoi": "収益は進捗率×契約価格。請求は残高の表示だけです。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "見積総原価が $600,000 に上がったら、Year 1 の利益は？",
+      "coach_html": "進捗率は $200,000÷$600,000＝1/3。総利益は $200,000。Year 1 利益は約 <strong>$66,667</strong> です。見積りが変わると、進捗率も総利益も両方動きます。"
+    },
+    {
+      "student_html": "損失が見込まれる契約は、進捗率で少しずつですか？",
+      "coach_html": "見積総損失は、<strong>見込んだ期に全額</strong>認識します。利益のときだけ進捗で切り出します。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "進捗率の切り出しは、一定期間のリースや長期契約と隣り合います。",
+    "items": [
+      {
+        "title_html": "一時点の収益（point in time）",
+        "body_html": "支配が移転するまで売上はゼロ。在庫の引渡し型です。over time の条件を満たさないときに使います。"
+      },
+      {
+        "title_html": "偶発損失（ASC 450）",
+        "body_html": "工事契約の見込損失は、発生可能性の見積りというより、契約全体が損失になることが見えた時点で全額です。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「請求額」と「発生原価」を利益の誤答に置きます。",
+    "mc_patterns": [
+      "<strong>その年の粗利益</strong>：進捗率 × 見積総利益",
+      "<strong>貸借対照表</strong>：CIP＋利益 と 請求の差額",
+      "<strong>見込損失</strong>：全額をその期に認識"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "発生原価 ÷ 見積総原価で進捗率を出す",
+        "進捗率 × 契約価格が売上",
+        "売上 − 発生原価が粗利益",
+        "請求は収益に使わず、残高の差額に使う"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 606</strong> の一定期間（原価進捗率）に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — Year 1 粗利益）",
+      "focus": [
+        "進捗率は発生原価 ÷ 見積総原価",
+        "請求額は利益の計算に使わない"
+      ],
+      "stem_html": "Quay: contract <strong>$800,000</strong>, estimated cost <strong>$500,000</strong>, costs to date <strong>$200,000</strong>, billings <strong>$280,000</strong>. Year 1 gross profit (over time, cost-to-cost)?",
+      "choices": ["A. $80,000", "B. $120,000", "C. $200,000", "D. $300,000"],
+      "explain_html": "<p>40% ×（$800,000−$500,000）＝ <strong>$120,000</strong>。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$80,000）</strong>＝CIP $320,000 − 請求 $280,000 を利益と取り違えた、または請求−原価",
+        "<strong>C（$200,000）</strong>＝発生原価を利益にした（誤解②）",
+        "<strong>D（$300,000）</strong>＝見積総利益を初年度に全部認識した"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — 請求と収益）",
+      "focus": [
+        "進捗請求は収益の測定に使わない"
+      ],
+      "stem_html": "When revenue is recognized over time using cost-to-cost, progress billings:",
+      "choices": [
+        "A. Equal construction revenue for the period",
+        "B. Are subtracted from costs to compute gross profit",
+        "C. Are compared with CIP (including profit) to present a contract asset or liability",
+        "D. Are recognized as revenue when cash is collected"
+      ],
+      "explain_html": "<p>請求は CIP（原価＋利益）との差額表示に使います。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝請求＝収益という誤解①",
+        "<strong>B</strong>＝利益の算式に請求を入れた",
+        "<strong>D</strong>＝回収基準。ASC 606 の原則ではない"
+      ]
+    }
+  ],
+  "one_minute_html": "一定期間の収益は、発生原価÷見積総原価で進捗率を出し、契約価格と見積総利益に掛ける。請求額は売上ではない。CIP（原価＋利益）と請求の差額が契約資産または契約負債。見込損失は、見えた期に全額。",
+  "checklist": [
+    "進捗率＝発生原価÷見積総原価、を見ずに言える",
+    "Quay の利益 $120,000 を10秒で再現できる",
+    "請求を収益に使わない理由を説明できる",
+    "見込損失は全額、利益は進捗、の違いを言える"
+  ]
+}

@@ -158,6 +158,66 @@
       "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。"
     },
     {
+      "id": "bank-reconciliation-2026q4",
+      "slug": "bank-reconciliation",
+      "title": "【図解】銀行勘定調整—帳簿と銀行残高を同じ現金に合わせる",
+      "description": "未達預金・未取付小切手は銀行側、NSF・手数料・取立は帳簿側。調整後残高は一致する。"
+    },
+    {
+      "id": "allowance-aging-2026q4",
+      "slug": "allowance-aging-method",
+      "title": "【図解】貸倒引当—年齢表から期末 allowance を決める",
+      "description": "年齢表の合計が期末引当の必要額。費用はその必要額と調整前残高の差（ASC 326）。"
+    },
+    {
+      "id": "interest-cap-2026q4",
+      "slug": "interest-capitalization",
+      "title": "【図解】自己建設の利息資本化—avoidable と actual の小さい方",
+      "description": "加重平均支出に利率を掛けた avoidable interest と実際利息の小さい方を資産へ（ASC 835-20）。"
+    },
+    {
+      "id": "goodwill-impairment-2026q4",
+      "slug": "goodwill-impairment",
+      "title": "【図解】のれんの減損—報告単位の FV と carrying の1段階",
+      "description": "FV が carrying を下回ったら差額を減損。のれん残高が上限（ASC 350）。"
+    },
+    {
+      "id": "eps-basic-2026q4",
+      "slug": "eps-basic",
+      "title": "【図解】基本EPS—優先配当を引き、加重平均株式数で割る",
+      "description": "分子は NI−優先配当。現金増資は月数按分、株式配当・分割は遡及（ASC 260）。"
+    },
+    {
+      "id": "accounting-changes-2026q4",
+      "slug": "accounting-changes-error",
+      "title": "【図解】会計上の変更と誤謬—見積りは将来、原則は遡及、誤謬は再表示",
+      "description": "耐用年数の変更は残存簿価をこれから配分。原則変更は遡及、誤謬は修正再表示（ASC 250）。"
+    },
+    {
+      "id": "stock-div-split-2026q4",
+      "slug": "stock-dividend-vs-split",
+      "title": "【図解】株式配当と株式分割—小配当は時価、分割は額面メモ",
+      "description": "約20〜25%未満は時価で利益剰余金を振り替え。分割は総資本もREも動かない（ASC 505）。"
+    },
+    {
+      "id": "revenue-poc-2026q4",
+      "slug": "revenue-over-time-poc",
+      "title": "【図解】一定期間にわたる収益—原価進捗率で売上と利益を切り出す",
+      "description": "発生原価÷見積総原価が進捗率。請求額は収益ではない（ASC 606）。"
+    },
+    {
+      "id": "rd-costs-2026q4",
+      "slug": "r-and-d-costs",
+      "title": "【図解】研究開発費—原則は発生時費用、転用できる設備だけ資産",
+      "description": "材料・人件・外注は費用。代替用途がある設備は償却だけが R&D（ASC 730）。"
+    },
+    {
+      "id": "ppe-hfs-2026q4",
+      "slug": "ppe-held-for-sale",
+      "title": "【図解】売却予定の固定資産—簿価と FV−売却費用の低い方、償却停止",
+      "description": "held for use の2段階は使わない。分類したら減価償却を止める（ASC 360-10）。"
+    },
+    {
       "id": "loss-contingency-review-2026q3",
       "slug": "loss-contingency-accrual",
       "title": "【図解・見直し】偶発損失—probable / reasonably possible / remote",

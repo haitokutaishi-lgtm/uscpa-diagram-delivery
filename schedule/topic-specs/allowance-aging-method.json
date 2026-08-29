@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "page_title": "【図解】貸倒引当—年齢表から期末 allowance を決める",
+    "theme_line_html": "Receivables — <span class=\"font-bold normal-case\">aging method で期末引当を求める</span>",
+    "subject_line": "USCPA FAR / Receivables（ASC 326）",
+    "h1_html": "<strong>売掛金の貸倒引当</strong>—年齢表で「期末にいくら残すか」を先に決める",
+    "lead_html": "試験では、年齢表の各区分×見積率の合計が<strong>期末の allowance 残高</strong>です。費用は、その必要額と現在の allowance の差です。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Allowance for credit losses</span>（貸倒引当金）",
+      "body_html": "売掛金の評価勘定。貸借対照表では売掛金から控除します。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Aging schedule</span>（年齢表）",
+      "body_html": "未回収期間ごとに残高を分け、区分ごとに見積率を掛ける表。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Balance sheet approach</span>（貸借対照表アプローチ）",
+      "body_html": "先に<strong>期末引当の必要額</strong>を決め、差額を費用にする方法。売上高×率が先に来る方法とは別です。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "Maple Co. ages its receivables: current <strong>$80,000</strong> at 1%, 31–60 days <strong>$20,000</strong> at 5%, 61–90 days <strong>$8,000</strong> at 15%, over 90 days <strong>$4,000</strong> at 40%. The allowance has a <strong>$1,200 credit</strong> before adjustment. What is <strong>credit loss expense</strong>?",
+    "choices": ["A. $3,400", "B. $4,600", "C. $5,800", "D. $1,200"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　年齢表の合計をそのまま費用にする",
+      "student_html": "$800＋$1,000＋$1,200＋$1,600＝$4,600 が費用では？",
+      "coach_html": "それは<strong>期末に残すべき allowance</strong>です。費用は、必要額 $4,600 − 既にある貸方 $1,200 ＝ $3,400 です。"
+    },
+    {
+      "label": "誤解②　既にある引当を足してしまう",
+      "student_html": "$4,600＋$1,200＝$5,800 にしてしまいそうです。",
+      "coach_html": "既にある貸方は、必要額に<strong>近づけるための出発点</strong>です。足すのではなく引きます。"
+    },
+    {
+      "label": "誤解③　売上高×率と混ぜる",
+      "student_html": "売上の何％、という数字も問題文に混ざると、どちらを使えばよいか迷います。",
+      "coach_html": "年齢表がある問題は、<strong>期末残高を先に決める</strong>型です。売上高×率は使いません。"
+    }
+  ],
+  "three_lead_html": "年齢表の貸倒引当は、この3つです。",
+  "three": [
+    {
+      "title": "年齢表の合計 ＝ 期末 allowance の必要額",
+      "body_html": "各区分の残高×率を足します。これがゴールの残高です。"
+    },
+    {
+      "title": "費用 ＝ 必要額 − 調整前の allowance",
+      "body_html": "調整前が貸方なら引き、借方（マイナス）なら足します。"
+    },
+    {
+      "title": "償却（write-off）は費用を動かさない",
+      "body_html": "Dr. Allowance / Cr. AR。損益は、期末の見積り直しのときだけ動きます。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>見積り仕訳</strong>に対応します。",
+    "timeline_html": "①年齢表で必要額を計算 → ②調整前 allowance を確認 → ③差額を費用計上 → ④個別に回収不能が確定したら write-off",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Maple の費用 $3,400 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "売掛金は、全額回収できるとは限りません。期末時点で「回収できないと見込む額」を引当として差し引き、同じ期間の収益に費用を対応させます（ASC 326）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Maple の期末調整）",
+        "body_html": "必要額 $4,600、調整前貸方 $1,200、費用 $3,400。",
+        "je_lines": [
+          "Dr. Credit loss expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3,400",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Allowance for credit losses &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3,400"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Maple の費用を、必要額から逆算します。",
+    "steps": [
+      "<strong>Step 1</strong> 区分ごとに残高×率：$80,000×1%＝$800、$20,000×5%＝$1,000、$8,000×15%＝$1,200、$4,000×40%＝$1,600。",
+      "<strong>Step 2</strong> 合計＝期末必要額 <strong>$4,600</strong>。",
+      "<strong>Step 3</strong> 調整前 allowance を見る（この例は貸方 $1,200）。",
+      "<strong>Step 4</strong> 費用＝$4,600 − $1,200 ＝ <strong>$3,400</strong>。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>区分</th><th class=\"num\">残高</th><th class=\"num\">率</th><th class=\"num\">引当</th></tr></thead>\n        <tbody>\n          <tr><td>Current</td><td class=\"num\">$80,000</td><td class=\"num\">1%</td><td class=\"num\">$800</td></tr>\n          <tr><td>31–60</td><td class=\"num\">$20,000</td><td class=\"num\">5%</td><td class=\"num\">$1,000</td></tr>\n          <tr><td>61–90</td><td class=\"num\">$8,000</td><td class=\"num\">15%</td><td class=\"num\">$1,200</td></tr>\n          <tr><td>Over 90</td><td class=\"num\">$4,000</td><td class=\"num\">40%</td><td class=\"num\">$1,600</td></tr>\n          <tr><td colspan=\"3\">必要額</td><td class=\"num\"><strong>$4,600</strong></td></tr>\n          <tr><td colspan=\"3\">− 調整前（貸方）</td><td class=\"num\">$1,200</td></tr>\n          <tr><td colspan=\"3\">Credit loss expense</td><td class=\"num\"><strong>$3,400</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "必要額と費用を取り違えやすいです。",
+    "aoi": "年齢表はゴールの残高。費用はそこへ動かす差額です。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "調整前が借方 $500 だったら、費用はどうなりますか？",
+      "coach_html": "必要額 $4,600 に届けるために、$4,600＋$500＝<strong>$5,100</strong> を費用にします。借方は「すでに足りない」状態です。"
+    },
+    {
+      "student_html": "年度中に $700 を write-off したら、その年の費用は減りますか？",
+      "coach_html": "減りません。write-off は Allowance と AR を同時に減らすだけです。費用は期末の見積り直しで決まります。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "引当は、売掛金以外の見積りとも同じ回路です。",
+    "items": [
+      {
+        "title_html": "製品保証（ASC 460）",
+        "body_html": "保証も「期末負債の必要額」を先に決める型があります。売上×率で認識し、支出で減らす点は、引当の write-off と似ています。"
+      },
+      {
+        "title_html": "後発事象の貸倒",
+        "body_html": "決算日後に得意先が倒産した場合、決算日時点の回収可能性の確認なら帳簿を直します（recognized subsequent event）。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「必要額」と「費用」を入れ替えた誤答を置きます。",
+    "mc_patterns": [
+      "<strong>Credit loss expense</strong>：必要額と調整前残高の差",
+      "<strong>期末 allowance</strong>：年齢表の合計そのもの",
+      "<strong>調整前が借方</strong>：必要額に借方残高を足す"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "区分ごとに残高×率を計算する",
+        "合計を期末必要額とする",
+        "調整前 allowance が貸方か借方かを見る",
+        "差額を費用（または戻入れ）にする"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 326</strong> の期末見積り（年齢表）に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — credit loss expense）",
+      "focus": [
+        "年齢表の合計は費用ではなく期末必要額",
+        "調整前が貸方なら、必要額から引く"
+      ],
+      "stem_html": "Maple ages AR: current <strong>$80,000</strong> at 1%, 31–60 <strong>$20,000</strong> at 5%, 61–90 <strong>$8,000</strong> at 15%, over 90 <strong>$4,000</strong> at 40%. Allowance has a <strong>$1,200 credit</strong>. Credit loss expense?",
+      "choices": ["A. $3,400", "B. $4,600", "C. $5,800", "D. $1,200"],
+      "explain_html": "<p>必要額 $4,600 − 貸方 $1,200 ＝ <strong>$3,400</strong>。正解 <strong>A</strong>。</p>",
+      "distractors_html": [
+        "<strong>B（$4,600）</strong>＝必要額をそのまま費用にした（誤解①）",
+        "<strong>C（$5,800）</strong>＝必要額に既存引当を足した（誤解②）",
+        "<strong>D</strong>＝調整前残高そのもの"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — write-off）",
+      "focus": [
+        "write-off が損益を動かすかどうか"
+      ],
+      "stem_html": "Under the allowance method, writing off a specific uncollectible account:",
+      "choices": [
+        "A. Increases credit loss expense",
+        "B. Decreases net accounts receivable",
+        "C. Has no effect on net accounts receivable",
+        "D. Increases the allowance balance"
+      ],
+      "explain_html": "<p>Dr. Allowance / Cr. AR なので、総額と引当が同じだけ減り、<strong>純額は変わらない</strong>。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝費用は期末の見積り直しで動く。write-off 時点では動かない",
+        "<strong>B</strong>＝総額は減るが、引当も減るので純額は同じ",
+        "<strong>D</strong>＝write-off は allowance を減らす（借方）"
+      ]
+    }
+  ],
+  "one_minute_html": "年齢表の貸倒引当は、区分ごとの残高×率を足して<strong>期末 allowance の必要額</strong>を先に決める。費用は、その必要額と調整前残高の差。write-off は Allowance と AR を同時に減らすだけで、損益は動かさない。",
+  "checklist": [
+    "年齢表の合計＝期末必要額、を見ずに言える",
+    "Maple の費用 $3,400 を10秒で再現できる",
+    "調整前が借方のとき、必要額に足す理由を説明できる",
+    "write-off で純売掛金が変わらない理由を言える"
+  ]
+}

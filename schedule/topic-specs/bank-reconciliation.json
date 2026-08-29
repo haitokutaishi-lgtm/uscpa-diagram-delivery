@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "page_title": "【図解】銀行勘定調整—帳簿と銀行残高を同じ現金に合わせる",
+    "theme_line_html": "Cash — <span class=\"font-bold normal-case\">bank reconciliation（帳簿側と銀行側）</span>",
+    "subject_line": "USCPA FAR / Cash（内部統制・期末現金）",
+    "h1_html": "<strong>銀行勘定調整</strong>—帳簿の現金と銀行残高を、同じ「本当の現金」に合わせる",
+    "lead_html": "試験では、未達預金・未取付小切手は<strong>銀行側</strong>、NSF・手数料・銀行取立は<strong>帳簿側</strong>に足し引きします。調整後の2つの残高は一致します。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Deposits in transit</span>（未達預金）",
+      "body_html": "会社は入金済みだが、銀行がまだ記帳していない入金。<strong>銀行残高に足す</strong>。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Outstanding checks</span>（未取付小切手）",
+      "body_html": "会社は支払済みだが、受取人がまだ銀行に出していない小切手。<strong>銀行残高から引く</strong>。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">NSF check</span>（不渡小切手）",
+      "body_html": "得意先の小切手が資金不足で戻ったもの。<strong>帳簿の現金から引く</strong>（売掛金に戻す）。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "Pebble Co.'s cash per books is <strong>$46,100</strong>. The bank statement shows <strong>$42,000</strong>. Deposits in transit <strong>$8,500</strong>, outstanding checks <strong>$3,200</strong>, a note collected by the bank <strong>$1,400</strong>, an NSF check <strong>$150</strong>, and a bank service charge <strong>$50</strong>. What is the <strong>adjusted cash balance</strong>?",
+    "choices": ["A. $42,000", "B. $46,100", "C. $47,300", "D. $47,450"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　未達預金を帳簿に足す",
+      "student_html": "会社はもう入金したので、帳簿にも $8,500 を足すのでしょうか？",
+      "coach_html": "会社の帳簿には、すでに入っています。足すのは<strong>銀行残高</strong>です。"
+    },
+    {
+      "label": "誤解②　NSF を銀行側から引く",
+      "student_html": "銀行が戻したのだから、銀行残高を直せばよい気がします。",
+      "coach_html": "銀行はすでに残高から落としています。直すのは<strong>まだ減っていない帳簿</strong>です。"
+    },
+    {
+      "label": "誤解③　どちらか一方だけ合わせればよい",
+      "student_html": "銀行残高に未達と未取付だけ直せば終わり、と思ってしまいます。",
+      "coach_html": "帳簿側も直します。調整後の銀行と帳簿は<strong>同じ金額</strong>になります。"
+    }
+  ],
+  "three_lead_html": "銀行勘定調整の地図は、この3つです。",
+  "three": [
+    {
+      "title": "銀行側は「銀行がまだ知らない取引」",
+      "body_html": "未達預金を足し、未取付小切手を引きます。"
+    },
+    {
+      "title": "帳簿側は「会社がまだ知らない取引」",
+      "body_html": "銀行取立を足し、NSF・手数料を引きます。"
+    },
+    {
+      "title": "調整後残高は左右で一致する",
+      "body_html": "それが貸借対照表の現金です。仕訳を切るのは帳簿側だけです。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>帳簿仕訳</strong>に対応します。銀行側の調整はメモであり、仕訳はしません。",
+    "timeline_html": "①銀行残高証明書と帳簿を並べる → ②銀行側（未達・未取付） → ③帳簿側（取立・NSF・手数料） → ④一致を確認して仕訳",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Pebble の調整後現金 $47,300 を左右から求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "現金は盗難・誤記のリスクが高いので、独立した銀行記録と会社記録を突き合わせます。財務諸表に載せるのは「どちらかの生の数字」ではなく、両方を直したあとの金額です。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（帳簿側だけ）",
+        "body_html": "銀行取立 $1,400 を足し、NSF $150 と手数料 $50 を引きます。",
+        "je_lines": [
+          "Dr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,400",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Notes receivable / Interest &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,400",
+          "Dr. Accounts receivable (NSF) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 150",
+          "Dr. Bank service expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 200"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Pebble の調整後現金を、左右から同じ数字にします。",
+    "steps": [
+      "<strong>Step 1</strong> 銀行：$42,000 ＋ 未達 $8,500 − 未取付 $3,200 ＝ <strong>$47,300</strong>。",
+      "<strong>Step 2</strong> 帳簿：$46,100 ＋ 取立 $1,400 − NSF $150 − 手数料 $50 ＝ <strong>$47,300</strong>。",
+      "<strong>Step 3</strong> 一致を確認する。仕訳は Step 2 の項目だけ。",
+      "<strong>Step 4</strong> 未達・未取付は仕訳しない（翌営業日に銀行が追いつく）。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>側</th><th>計算</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>Bank</td><td>$42,000 + $8,500 − $3,200</td><td class=\"num\"><strong>$47,300</strong></td></tr>\n          <tr><td>Books</td><td>$46,100 + $1,400 − $150 − $50</td><td class=\"num\"><strong>$47,300</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "足す・引くの置き場を逆にしやすいです。",
+    "aoi": "「銀行がまだ知らない／会社がまだ知らない」で分けます。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "銀行が誤って他社の小切手を引き落としていたときは、どちらですか？",
+      "coach_html": "銀行の誤りなので<strong>銀行側に戻します</strong>。会社の帳簿は正しく、仕訳は不要です。"
+    },
+    {
+      "student_html": "期末の貸借対照表には、調整前のどちらの数字を載せますか？",
+      "coach_html": "どちらでもなく、<strong>調整後の一致額</strong>（この例では $47,300）です。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "現金の調整は、売掛金・内部統制の入口でもあります。",
+    "items": [
+      {
+        "title_html": "売掛金の貸倒（NSF）",
+        "body_html": "NSF は現金を減らし、売掛金を戻します。そのあと回収できなければ、貸倒引当の論点（ASC 326）につながります。"
+      },
+      {
+        "title_html": "キャッシュ・フロー計算書",
+        "body_html": "ここに載せる「期末現金」は、この調整後残高です。銀行残高証明書の生数字ではありません。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「足す場所を間違えた数字」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>調整後現金</strong>：左右どちらからでも同じ答え",
+      "<strong>帳簿に切る仕訳の金額</strong>：取立・NSF・手数料だけ",
+      "<strong>銀行誤記</strong>：銀行側、仕訳なし"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "項目を「銀行が知らない／会社が知らない」に分ける",
+        "銀行側を足し引きする",
+        "帳簿側を足し引きする",
+        "一致を確認し、帳簿側だけ仕訳する"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。銀行勘定調整の一般的な手続に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — 調整後現金）",
+      "focus": [
+        "未達・未取付は銀行側、取立・NSF・手数料は帳簿側",
+        "問われているのは調整後の一致額"
+      ],
+      "stem_html": "Pebble Co.'s cash per books is <strong>$46,100</strong>. Bank statement <strong>$42,000</strong>. Deposits in transit <strong>$8,500</strong>, outstanding checks <strong>$3,200</strong>, note collected by bank <strong>$1,400</strong>, NSF <strong>$150</strong>, service charge <strong>$50</strong>. Adjusted cash?",
+      "choices": ["A. $42,000", "B. $46,100", "C. $47,300", "D. $47,450"],
+      "explain_html": "<p>銀行：$42,000＋$8,500−$3,200＝$47,300。帳簿：$46,100＋$1,400−$150−$50＝$47,300。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝銀行残高証明書の生数字",
+        "<strong>B</strong>＝帳簿の生数字",
+        "<strong>D（$47,450）</strong>＝帳簿に NSF を引き忘れた（$46,100＋$1,400−$50）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — 仕訳の対象）",
+      "focus": [
+        "仕訳を切るのは帳簿を直す項目だけ"
+      ],
+      "stem_html": "Which reconciling item requires a journal entry on the company's books?",
+      "choices": [
+        "A. Deposits in transit",
+        "B. Outstanding checks",
+        "C. NSF checks returned by the bank",
+        "D. A bank error that understated the company's bank balance"
+      ],
+      "explain_html": "<p>NSF は会社がまだ現金を減らしていないので、帳簿仕訳が必要です。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A・B</strong>＝銀行側のタイミング差。翌営業日に銀行が追いつく",
+        "<strong>D</strong>＝銀行の誤り。会社の帳簿は正しく、仕訳は不要"
+      ]
+    }
+  ],
+  "one_minute_html": "銀行勘定調整は、銀行がまだ知らない取引（未達預金・未取付小切手）を銀行残高に足し引きし、会社がまだ知らない取引（取立・NSF・手数料）を帳簿に足し引きする。仕訳は帳簿側だけ。調整後の2つの数字が一致した金額が、貸借対照表の現金です。",
+  "checklist": [
+    "未達は銀行に足す、未取付は銀行から引く、を見ずに言える",
+    "NSF と手数料は帳簿から引く、を説明できる",
+    "Pebble の $47,300 を左右から10秒で再現できる",
+    "仕訳を切る項目と切らない項目を分けられる"
+  ]
+}

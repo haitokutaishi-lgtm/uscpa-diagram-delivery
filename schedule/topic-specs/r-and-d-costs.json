@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "page_title": "【図解】研究開発費—原則は発生時費用、資産になる例外だけを分ける",
+    "theme_line_html": "R&amp;D — <span class=\"font-bold normal-case\">expense as incurred（ASC 730）</span>",
+    "subject_line": "USCPA FAR / Research and Development（ASC 730）",
+    "h1_html": "<strong>研究開発費</strong>—原則は使った期の費用。他社のため・将来の転用設備だけ資産",
+    "lead_html": "試験では、人件費・材料・外部委託の研究開発は原則として<strong>発生時費用</strong>です。他社契約で回収できる分や、将来ほかのプロジェクトにも使える設備だけが資産になります。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Research and development</span>（研究開発）",
+      "body_html": "新しい知識を探す、または新しい製品・製法を設計する活動。販売用の量産は含みません。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Expense as incurred</span>（発生時費用）",
+      "body_html": "成功するかどうかが不確実なので、原則として資産にしない。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Alternative future use</span>（ほかの用途）",
+      "body_html": "その設備が、今の研究以外にも使えるなら資産計上し、減価償却します。償却費のうち研究に使った分が R&amp;D 費用です。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "In Year 1, Helix Co. incurred: materials for a current research project <strong>$40,000</strong>, salaries of researchers <strong>$90,000</strong>, equipment with alternative future use <strong>$80,000</strong> (4-year life, no salvage, bought January 1), and contract R&amp;D performed by a vendor for Helix <strong>$25,000</strong>. What amount should Helix report as <strong>R&amp;D expense</strong> for Year 1?",
+    "choices": ["A. $130,000", "B. $155,000", "C. $175,000", "D. $235,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　成功しそうなら資産にする",
+      "student_html": "研究がうまくいきそうなら、$40,000 の材料は資産では？",
+      "coach_html": "成功見込みでは判定しません。その研究専用の材料・人件費は、<strong>使った期の費用</strong>です。"
+    },
+    {
+      "label": "誤解②　転用できる設備も全額費用",
+      "student_html": "研究用に買ったので、$80,000 も今年の R&amp;D では？",
+      "coach_html": "ほかの用途がある設備は資産です。Year 1 の R&amp;D に入れるのは減価償却 <strong>$20,000</strong> だけです。"
+    },
+    {
+      "label": "誤解③　外部委託は資産",
+      "student_html": "外注した $25,000 は前払では？",
+      "coach_html": "自社のための研究を外注しても、原則は R&amp;D 費用です（前払いで翌期にまたがる分は除く）。"
+    }
+  ],
+  "three_lead_html": "研究開発費の地図は、この3つです。",
+  "three": [
+    {
+      "title": "研究専用の材料・人件費・外注 ＝ 費用",
+      "body_html": "成功見込みでは資産にしません。"
+    },
+    {
+      "title": "転用できる設備 ＝ 資産 → 減価償却が R&amp;D",
+      "body_html": "取得額そのものは、その年の費用ではありません。"
+    },
+    {
+      "title": "他社のための受託研究は、売掛・在庫の世界",
+      "body_html": "自社の R&amp;D 費用ではなく、収益獲得のための原価です。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>費用と資産の仕訳</strong>に対応します。",
+    "timeline_html": "①支出の中身を分ける → ②転用できる設備だけ資産計上 → ③研究専用の支出とその年の償却を R&amp;D 費用にする",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Helix の Year 1 費用 $175,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "研究の成果が将来の収益になるかは、支出した時点では不確実です。だから原則として資産にせず、使った期の費用にします（ASC 730）。例外は、その支出が「今の研究以外にも価値がある」と説明できるときだけです。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Helix・Year 1）",
+        "body_html": "材料・人件費・外注を費用に。設備 $80,000 は資産、償却 $20,000 が R&amp;D。",
+        "je_lines": [
+          "Dr. R&amp;D expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 155,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash / Payables（材料・人件・外注） &nbsp;&nbsp; 155,000",
+          "Dr. Equipment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 80,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 80,000",
+          "Dr. R&amp;D expense（償却） &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Accumulated depreciation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Helix の Year 1 R&amp;D 費用を、資産になる分を除いて足します。",
+    "steps": [
+      "<strong>Step 1</strong> 材料 $40,000 ＋ 人件費 $90,000 ＋ 外注 $25,000 ＝ $155,000（全額費用）。",
+      "<strong>Step 2</strong> 転用できる設備 $80,000 は資産。Year 1 償却 $80,000÷4 ＝ $20,000。",
+      "<strong>Step 3</strong> R&amp;D 費用 ＝ $155,000 ＋ $20,000 ＝ <strong>$175,000</strong>。",
+      "<strong>Step 4</strong> $80,000 を費用に足さない。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">R&amp;D費用</th></tr></thead>\n        <tbody>\n          <tr><td>材料（専用）</td><td class=\"num\">$40,000</td></tr>\n          <tr><td>研究者給与</td><td class=\"num\">$90,000</td></tr>\n          <tr><td>外注研究</td><td class=\"num\">$25,000</td></tr>\n          <tr><td>設備の償却（$80,000÷4）</td><td class=\"num\">$20,000</td></tr>\n          <tr><td>設備の取得額</td><td class=\"num\">含めない</td></tr>\n          <tr><td>Year 1 R&amp;D expense</td><td class=\"num\"><strong>$175,000</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "設備を全額費用にしてしまいそうです。",
+    "aoi": "ほかの用途があるか、が分岐です。あるなら償却だけが R&amp;D です。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "市場調査や品質管理の人件費も R&amp;D ですか？",
+      "coach_html": "いいえ。販売・一般管理や、量産の品質管理は R&amp;D ではありません。"
+    },
+    {
+      "student_html": "ソフトウェアの開発費は、全部費用ですか？",
+      "coach_html": "販売用ソフトウェアは、技術的実現可能性の前後で処理が分かれます。この図解は ASC 730 の一般的な研究開発です。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "「いつ資産にするか」は、自己建設の利息や無形資産と隣り合います。",
+    "items": [
+      {
+        "title_html": "自己建設の利息資本化（ASC 835-20）",
+        "body_html": "建物は将来使うことが見えているので、回避可能利息を資産にします。研究は成果が見えないので、原則費用です。"
+      },
+      {
+        "title_html": "のれん・無形（ASC 350）",
+        "body_html": "外部から買った特許は資産になり得ます。自社で研究して得た知識は、ASC 730 では原則として資産にしません。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「設備全額」と「材料を資産」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>当年の R&amp;D 費用</strong>：専用支出 ＋ 転用設備の償却",
+      "<strong>転用できる設備</strong>：取得は資産、償却だけ費用",
+      "<strong>受託研究</strong>：自社の R&amp;D ではない"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ4ステップ",
+      "steps": [
+        "材料・人件・外注など研究専用を費用に入れる",
+        "転用できる設備を資産として除く",
+        "その年の減価償却だけを費用に足す",
+        "販売管理や受託原価を混ぜない"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 730</strong> に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — Year 1 R&amp;D）",
+      "focus": [
+        "転用できる設備は取得額ではなく償却だけ",
+        "材料・人件・外注は全額費用"
+      ],
+      "stem_html": "Helix Year 1: materials <strong>$40,000</strong>, researcher salaries <strong>$90,000</strong>, equipment with alternative future use <strong>$80,000</strong> (4-year life, Jan 1), vendor R&amp;D <strong>$25,000</strong>. R&amp;D expense?",
+      "choices": ["A. $130,000", "B. $155,000", "C. $175,000", "D. $235,000"],
+      "explain_html": "<p>$40,000＋$90,000＋$25,000＋$20,000 ＝ <strong>$175,000</strong>。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A（$130,000）</strong>＝材料＋人件だけ（外注と償却を忘れた）",
+        "<strong>B（$155,000）</strong>＝償却を入れず、設備も除外した途中まで",
+        "<strong>D（$235,000）</strong>＝設備 $80,000 を全額費用に足した（誤解②）"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — 資産になるもの）",
+      "focus": [
+        "代替用途がある設備だけ資産"
+      ],
+      "stem_html": "Which of the following is capitalized and then depreciated as R&amp;D expense over time?",
+      "choices": [
+        "A. Materials consumed in a current research project with no alternative use",
+        "B. Salaries of researchers",
+        "C. Equipment that has an alternative future use",
+        "D. Payments to a vendor to perform R&amp;D for the company"
+      ],
+      "explain_html": "<p>ほかの用途がある設備は資産計上し、償却が R&amp;D です。正解 <strong>C</strong>。</p>",
+      "distractors_html": [
+        "<strong>A・B・D</strong>＝原則どおり発生時費用"
+      ]
+    }
+  ],
+  "one_minute_html": "研究開発は成果が不確実なので、材料・人件・外注は原則として使った期の費用。ほかのプロジェクトにも使える設備だけ資産にし、その年の減価償却を R&amp;D に入れる。成功見込みでは資産判定しない。",
+  "checklist": [
+    "専用の材料・人件・外注は費用、を見ずに言える",
+    "Helix の $175,000 を10秒で再現できる",
+    "転用できる設備で取得額を費用にしない理由を説明できる",
+    "受託研究が自社 R&amp;D に入らない理由を言える"
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "page_title": "【図解】のれんの減損—報告単位の公正価値と帳簿価額の1段階",
+    "theme_line_html": "Intangibles — <span class=\"font-bold normal-case\">goodwill impairment（ASC 350）</span>",
+    "subject_line": "USCPA FAR / Intangibles（ASC 350）",
+    "h1_html": "<strong>のれんの減損</strong>—報告単位の公正価値が帳簿価額を下回ったら、その差額（のれんが上限）",
+    "lead_html": "現行 US GAAP は1段階です。報告単位の <span class=\"term-en\">fair value</span> が carrying を下回れば、その差額を減損とします。ただし減損はのれん残高を超えません。"
+  },
+  "glossary": [
+    {
+      "term_html": "<span class=\"term-en\">Reporting unit</span>（報告単位）",
+      "body_html": "のれんを載せる単位。事業セグメントか、その一段階下です。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">One-step test</span>（1段階テスト）",
+      "body_html": "FV ＜ carrying なら、差額が減損。かつての「のれんを逆算する2段階」は使いません。"
+    },
+    {
+      "term_html": "<span class=\"term-en\">Implied goodwill</span>（推定のれん）",
+      "body_html": "旧2段階で使った考え方。現行の公開企業向けテストでは計算しません。"
+    }
+  ],
+  "mc_preview": {
+    "stem_html": "Nori Co.'s reporting unit has a carrying amount of <strong>$800,000</strong>, including goodwill of <strong>$150,000</strong>. The fair value of the reporting unit is <strong>$720,000</strong>. What amount of goodwill impairment should Nori recognize?",
+    "choices": ["A. $0", "B. $80,000", "C. $150,000", "D. $230,000"]
+  },
+  "misconceptions": [
+    {
+      "label": "誤解①　FV が carrying を下回っても減損しない",
+      "student_html": "のれん自体の時価が出ていないので、$0 では？",
+      "coach_html": "現行は報告単位全体で比べます。$720,000 ＜ $800,000 なので、差額 $80,000 が減損です。"
+    },
+    {
+      "label": "誤解②　のれん全額を落とす",
+      "student_html": "減損が出たので $150,000 全部では？",
+      "coach_html": "差額が $80,000 なら $80,000 だけです。のれん全額は、差額がのれんを超えるときだけです。"
+    },
+    {
+      "label": "誤解③　有形資産の2段階テストを混ぜる",
+      "student_html": "将来キャッシュフローの合計と比べる recoverability test が先では？",
+      "coach_html": "それは <span class=\"term-en\">held for use</span> の有形固定資産（ASC 360）です。のれん（ASC 350）は FV と carrying の1回です。"
+    }
+  ],
+  "three_lead_html": "のれん減損の地図は、この3つです。",
+  "three": [
+    {
+      "title": "比べる相手は報告単位の FV と carrying",
+      "body_html": "のれん単体の時価は使いません。"
+    },
+    {
+      "title": "減損 ＝ carrying − FV（ただしのれんが上限）",
+      "body_html": "FV の方が高ければ $0。差額がのれんを超えたら、のれん残高まで。"
+    },
+    {
+      "title": "有形の recoverability test は使わない",
+      "body_html": "将来CF合計との比較は ASC 360 の話です。"
+    }
+  ],
+  "theory": {
+    "lead_html": "①の3つは、ここでの<strong>減損仕訳</strong>に対応します。",
+    "timeline_html": "①年次（または兆候時）に報告単位の FV を測る → ②carrying と比べる → ③差額とのれん残高の小さい方を費用計上",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Nori の減損 $80,000 を求める手順です。",
+    "blocks": [
+      {
+        "icon": "help-circle",
+        "heading": "なぜこの処理か（会計の背景）",
+        "body_html": "のれんは償却しません。かわりに、その事業のまとまり（報告単位）の価値が帳簿を下回っていないかを見ます。価値の下落分だけ、のれんを減らします（ASC 350、ASU 2017-04 以降の1段階）。",
+        "je_lines": []
+      },
+      {
+        "icon": "book-open",
+        "heading": "典型仕訳（Nori）",
+        "body_html": "carrying $800,000 − FV $720,000 ＝ $80,000。のれん $150,000 の範囲内。",
+        "je_lines": [
+          "Dr. Goodwill impairment loss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 80,000",
+          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Goodwill &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 80,000"
+        ]
+      }
+    ]
+  },
+  "calc": {
+    "intro_html": "Nori の減損を、3ステップで切ります。",
+    "steps": [
+      "<strong>Step 1</strong> 報告単位の FV と carrying を並べる（$720,000 と $800,000）。",
+      "<strong>Step 2</strong> FV の方が小さければ、差額 $80,000 が仮の減損。",
+      "<strong>Step 3</strong> のれん残高 $150,000 と比べ、小さい方 <strong>$80,000</strong> を認識。"
+    ],
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>Reporting unit carrying</td><td class=\"num\">$800,000</td></tr>\n          <tr><td>Reporting unit FV</td><td class=\"num\">$720,000</td></tr>\n          <tr><td>差額</td><td class=\"num\">$80,000</td></tr>\n          <tr><td>Goodwill 残高（上限）</td><td class=\"num\">$150,000</td></tr>\n          <tr><td>Impairment</td><td class=\"num\"><strong>$80,000</strong></td></tr>\n        </tbody>\n      </table>"
+  },
+  "process_persona_strip": {
+    "takuma": "有形の2段階と混ぜてしまいます。",
+    "aoi": "のれんは報告単位の FV 対 carrying。将来CF合計は使いません。"
+  },
+  "process_dialogues": [
+    {
+      "student_html": "FV が $620,000 まで落ちたら、減損は $180,000 ですか？",
+      "coach_html": "差額は $180,000 ですが、のれんは $150,000 しかないので、減損は<strong>$150,000</strong> までです。のれん以外の資産は、この仕訳では落としません。"
+    },
+    {
+      "student_html": "翌年に FV が戻ったら、減損を戻し入れますか？",
+      "coach_html": "のれんの減損は、戻し入れしません。"
+    }
+  ],
+  "crossmap": {
+    "lead_html": "減損は、載っている資産の種類でテストが変わります。",
+    "items": [
+      {
+        "title_html": "有形固定資産・held for use（ASC 360）",
+        "body_html": "先に将来CF合計（割引前）と carrying を比べ、落ちるときだけ FV との差を損失にします。のれんの1段階とは別回路です。"
+      },
+      {
+        "title_html": "売却予定（held for sale）",
+        "body_html": "売却予定は、carrying と「FV−売却費用」の低い方。減価償却は止めます。のれんテストとは別です。"
+      }
+    ]
+  },
+  "patterns": {
+    "lead_html": "MC は「2段階の名残」と「のれん全額」を誤答に置きます。",
+    "mc_patterns": [
+      "<strong>減損額</strong>：carrying − FV（のれんが上限）",
+      "<strong>$0</strong>：FV ≧ carrying のとき",
+      "<strong>有形の recoverability を混ぜた選択肢</strong>"
+    ],
+    "solve": {
+      "title_html": "解く手順は毎回同じ3ステップ",
+      "steps": [
+        "報告単位の FV と carrying を比べる",
+        "FV の方が低ければ差額を出す",
+        "その差額とのれん残高の小さい方を損失にする"
+      ]
+    }
+  },
+  "mc_intro_html": "オリジナル問題です。<strong>ASC 350（1段階テスト）</strong>に沿って作成しています。",
+  "mc": [
+    {
+      "title": "問題 1（計算 — impairment）",
+      "focus": [
+        "報告単位全体の FV と carrying を比べる",
+        "のれん残高が上限"
+      ],
+      "stem_html": "Nori's reporting unit carrying is <strong>$800,000</strong>, including goodwill of <strong>$150,000</strong>. Fair value is <strong>$720,000</strong>. Goodwill impairment?",
+      "choices": ["A. $0", "B. $80,000", "C. $150,000", "D. $230,000"],
+      "explain_html": "<p>$800,000 − $720,000 ＝ $80,000。のれん $150,000 未満なので <strong>$80,000</strong>。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝「のれん単体の時価がないからゼロ」と考えたパターン（誤解①）",
+        "<strong>C</strong>＝のれん全額（誤解②）",
+        "<strong>D</strong>＝差額にのれんを足した見せかけ"
+      ]
+    },
+    {
+      "title": "問題 2（概念 — テストの型）",
+      "focus": [
+        "のれんは recoverability test（割引前CF）を使わない"
+      ],
+      "stem_html": "Under current U.S. GAAP, goodwill impairment is measured as:",
+      "choices": [
+        "A. Carrying amount of the reporting unit minus the sum of undiscounted future cash flows",
+        "B. Excess of the reporting unit's carrying amount over its fair value, limited to the goodwill balance",
+        "C. Excess of implied goodwill over recorded goodwill",
+        "D. Excess of the reporting unit's fair value over its carrying amount"
+      ],
+      "explain_html": "<p>1段階：carrying − FV（のれんが上限）。正解 <strong>B</strong>。</p>",
+      "distractors_html": [
+        "<strong>A</strong>＝ASC 360 の recoverability test を混ぜた誤答",
+        "<strong>C</strong>＝廃止された2段階（implied goodwill）",
+        "<strong>D</strong>＝向きが逆。FV の方が高いときは減損なし"
+      ]
+    }
+  ],
+  "one_minute_html": "のれんは償却せず、報告単位の公正価値と帳簿価額を1回比べる。FV が低ければその差額を減損とするが、のれん残高は超えられない。有形固定資産の「将来CF合計」テストとは別です。",
+  "checklist": [
+    "比べる相手は報告単位の FV と carrying、を見ずに言える",
+    "Nori の $80,000 を10秒で再現できる",
+    "差額がのれんを超えたときの上限を説明できる",
+    "ASC 360 の recoverability test との違いを1文で言える"
+  ]
+}
