@@ -329,5 +329,13 @@
     "_auto": true,
     "auto_generate": true,
     "topic_spec": "schedule/topic-specs/accounting-changes-error.json"
+  },
+  "2026-09-13": {
+    "title": "【図解】株式配当と株式分割—小配当は時価、分割は額面メモ",
+    "description": "約20〜25%未満は時価で利益剰余金を振り替え。分割は総資本もREも動かない（ASC 505）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/stock-dividend-vs-split/",
+    "slug": "stock-dividend-vs-split",
+    "queue_id": "stock-div-split-2026q4",
+    "_auto": true
   }
 }
