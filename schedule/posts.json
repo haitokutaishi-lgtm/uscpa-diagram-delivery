@@ -337,5 +337,13 @@
     "slug": "stock-dividend-vs-split",
     "queue_id": "stock-div-split-2026q4",
     "_auto": true
+  },
+  "2026-09-16": {
+    "title": "【図解】一定期間にわたる収益—原価進捗率で売上と利益を切り出す",
+    "description": "発生原価÷見積総原価が進捗率。請求額は収益ではない（ASC 606）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/revenue-over-time-poc/",
+    "slug": "revenue-over-time-poc",
+    "queue_id": "revenue-poc-2026q4",
+    "_auto": true
   }
 }
