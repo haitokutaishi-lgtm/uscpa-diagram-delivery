@@ -345,5 +345,13 @@
     "slug": "revenue-over-time-poc",
     "queue_id": "revenue-poc-2026q4",
     "_auto": true
+  },
+  "2026-09-19": {
+    "title": "【図解】研究開発費—原則は発生時費用、転用できる設備だけ資産",
+    "description": "材料・人件・外注は費用。代替用途がある設備は償却だけが R&D（ASC 730）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/r-and-d-costs/",
+    "slug": "r-and-d-costs",
+    "queue_id": "rd-costs-2026q4",
+    "_auto": true
   }
 }
