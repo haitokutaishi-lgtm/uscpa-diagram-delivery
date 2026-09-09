@@ -353,5 +353,13 @@
     "slug": "r-and-d-costs",
     "queue_id": "rd-costs-2026q4",
     "_auto": true
+  },
+  "2026-09-20": {
+    "title": "【図解】売却予定の固定資産—簿価と FV−売却費用の低い方、償却停止",
+    "description": "held for use の2段階は使わない。分類したら減価償却を止める（ASC 360-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-held-for-sale/",
+    "slug": "ppe-held-for-sale",
+    "queue_id": "ppe-hfs-2026q4",
+    "_auto": true
   }
 }
