@@ -361,5 +361,13 @@
     "slug": "ppe-held-for-sale",
     "queue_id": "ppe-hfs-2026q4",
     "_auto": true
+  },
+  "2026-09-23": {
+    "title": "【図解・見直し】後発事象—recognized と nonrecognized",
+    "description": "決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型を再確認（ASC 855）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/subsequent-events-recognized/",
+    "slug": "subsequent-events-recognized",
+    "queue_id": "subsequent-events-review-2026q3",
+    "_auto": true
   }
 }
