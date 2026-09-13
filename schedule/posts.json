@@ -369,5 +369,13 @@
     "slug": "subsequent-events-recognized",
     "queue_id": "subsequent-events-review-2026q3",
     "_auto": true
+  },
+  "2026-09-26": {
+    "title": "【図解・見直し】リース（借手・finance）—初期の ROU と liability",
+    "description": "開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブの型を再確認（ASC 842）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-finance-initial/",
+    "slug": "lease-lessee-finance-initial",
+    "queue_id": "lease-finance-review-2026q3",
+    "_auto": true
   }
 }
