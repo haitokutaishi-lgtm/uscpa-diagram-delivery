@@ -385,5 +385,13 @@
     "slug": "bond-effective-interest",
     "queue_id": "bond-effective-review-2026q3",
     "_auto": true
+  },
+  "2026-09-30": {
+    "title": "【図解・見直し】持分法—利益シェアと配当で投資勘定が動く",
+    "description": "利益シェアで投資↑、配当で投資↓（配当は収益にしない）の型を再確認（ASC 323）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/equity-method-basic/",
+    "slug": "equity-method-basic",
+    "queue_id": "equity-method-review-2026q3",
+    "_auto": true
   }
 }
