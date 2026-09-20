@@ -393,5 +393,13 @@
     "slug": "equity-method-basic",
     "queue_id": "equity-method-review-2026q3",
     "_auto": true
+  },
+  "2026-10-03": {
+    "title": "【図解・見直し】キャッシュ・フロー—営業・投資・財務の区分",
+    "description": "支払利息は原則営業、支払配当は財務、PPE購入は投資。区分の型を再確認（ASC 230）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-classification/",
+    "slug": "cash-flow-classification",
+    "queue_id": "scf-classify-review-2026q3",
+    "_auto": true
   }
 }
