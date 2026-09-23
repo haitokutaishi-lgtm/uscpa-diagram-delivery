@@ -401,5 +401,13 @@
     "slug": "cash-flow-classification",
     "queue_id": "scf-classify-review-2026q3",
     "_auto": true
+  },
+  "2026-10-04": {
+    "title": "【図解・見直し】固定資産の減損—recoverability test と loss",
+    "description": "held for use の2段階テストと、認識する impairment loss の比較相手を再確認（ASC 360-10）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/ppe-impairment-held-for-use/",
+    "slug": "ppe-impairment-held-for-use",
+    "queue_id": "ppe-review-2026q4",
+    "_auto": true
   }
 }
