@@ -440,5 +440,13 @@
     "slug": "asset-group-relative-sales-value",
     "queue_id": "asset-group-review-2026q4",
     "_auto": true
+  },
+  "2026-10-14": {
+    "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
+    "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/current-liabilities-classification/",
+    "slug": "current-liabilities-classification",
+    "queue_id": "current-liabilities-review-2026q4",
+    "_auto": true
   }
 }
