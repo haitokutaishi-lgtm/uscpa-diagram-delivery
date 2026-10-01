@@ -2,7 +2,13 @@
 
 `図解 自動生成→配信` ワークフローが、配信日の直前に **HTML を自動生成**するときに読む JSON です。
 
-## 構成（10部・2026-07改訂）
+## 構成 v2（復習シート型・2026-10〜 標準）
+
+spec の先頭に `"version": 2` を書くと `ops/generate_diagram_v2.py` で生成される。
+`sections` の配列順にセクションが並び、番号と目次は自動。block の種類は `generate_diagram_v2.py` の `BLOCKS` を参照。
+見本は `equity-method-basic.json`。品質基準は `.cursor/skills/uscpa-far-diagram-quality/SKILL.md`。
+
+## 構成 v1（10部・2026-07改訂、新規では使わない）
 
 生成される HTML は次の順（存在するセクションのみ・番号は自動採番）。
 

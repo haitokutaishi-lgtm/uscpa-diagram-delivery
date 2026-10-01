@@ -374,6 +374,16 @@ def main() -> int:
     args = ap.parse_args()
 
     spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
+    if spec.get("version") == 2:
+        # 復習シート型（v2）は別モジュールで生成する
+        import generate_diagram_v2 as v2
+
+        styles = (Path(__file__).parent / "diagram_v2_styles.css").read_text(encoding="utf-8")
+        out = Path(args.output)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(v2.build_html(spec, styles), encoding="utf-8")
+        print(f"Wrote {out} ({out.stat().st_size} bytes) [v2]")
+        return 0
     styles = Path(args.styles).read_text(encoding="utf-8")
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -1,195 +1,446 @@
 {
+  "version": 2,
   "meta": {
-    "page_title": "【図解】持分法—被投資会社の利益・配当で投資勘定が動く",
-    "theme_line_html": "Investments — <span class=\"font-bold normal-case\">equity method の基本仕訳</span>",
-    "subject_line": "USCPA FAR / Equity Method（ASC 323）",
-    "h1_html": "<strong>持分法</strong>—投資先の利益で投資を増やし、配当で投資を減らす（収益は利益シェア）",
-    "lead_html": "重要な影響力がある株式投資では、配当を収益にしません。投資先の当期純利益×持分比率を収益と投資の増加にし、受け取った配当は投資の減少です。"
+    "page_title": "【復習シート】持分法（Equity Method）—投資勘定を動かす5つの要素",
+    "badge": "FAR 復習シート｜Investments — Equity Method（ASC 323）",
+    "h1_html": "持分法：投資勘定を動かす5つの要素と、差がつく論点",
+    "lead_html": "テキストで一度学んだ人向けの復習用です。最初の図1枚で全体を確認し、差がつく論点と引っかけを確認したら、最後に問題で仕上げてください。"
   },
-  "glossary": [
+  "sections": [
     {
-      "term_html": "<span class=\"term-en\">Significant influence</span>（重要な影響力）",
-      "body_html": "投資先の経営に口を出せる力。目安は議決権 <strong>20%〜50%</strong>（実態で判定）。これがあると持分法。"
-    },
-    {
-      "term_html": "<span class=\"term-en\">Equity in earnings</span>（持分法投資利益）",
-      "body_html": "投資先の当期純利益 × 持分比率。持分法で P/L に載る収益は<strong>これだけ</strong>で、配当ではない。"
-    },
-    {
-      "term_html": "<span class=\"term-en\">Investment account</span>（投資勘定）",
-      "body_html": "取得原価から出発し、<strong>利益シェアで増え、配当で減る</strong>「生きている」残高。毎期末の時価評価はしない。"
-    }
-  ],
-  "mc_preview": {
-    "stem_html": "On January 1, Year 1, Mesa Co. acquired <strong>30%</strong> of Tilo Inc. for <strong>$900,000</strong> and can exercise <strong>significant influence</strong>. During Year 1, Tilo reported net income of <strong>$200,000</strong> and paid cash dividends of <strong>$50,000</strong>. What amount should Mesa report as its <strong>investment in Tilo</strong> at December 31, Year 1 under the equity method?",
-    "choices": [
-      "A. $900,000",
-      "B. $915,000",
-      "C. $945,000",
-      "D. $960,000"
-    ]
-  },
-  "misconceptions": [
-    {
-      "label": "誤解①　取得原価のまま動かさない",
-      "student_html": "株価も出ていないので、年末も $900,000（A）のままでは？",
-      "coach_html": "持分法は公正価値評価ではありません。利益シェアで増やし、配当で減らします。"
-    },
-    {
-      "label": "誤解②　配当を収益にして投資を減らさない",
-      "student_html": "利益 $60,000 だけ足して $960,000（D）、配当は収益、と考えていました。",
-      "coach_html": "持分法では配当は<strong>収益ではありません</strong>。投資勘定を減らします。正しい年末残高は $900,000 ＋ $60,000 − $15,000 ＝ $945,000 です。"
-    },
-    {
-      "label": "誤解③　配当だけを反映する",
-      "student_html": "$900,000 − $15,000 ＝ $885,000 のような動きですか？（選択肢にない誤答）",
-      "coach_html": "利益シェアを忘れると投資が減りすぎます。必ず<strong>利益→増、配当→減</strong>の両方です。"
-    }
-  ],
-  "three_lead_html": "持分法（ASC 323）の地図です。",
-  "three": [
-    {
-      "title": "Significant influence → equity method",
-      "body_html": "目安は議決権 20%〜50%だが、実態で判定。"
-    },
-    {
-      "title": "Investee NI × % ＝ equity in earnings（投資↑）",
-      "body_html": "投資先の利益を持分比率で取り込みます。"
-    },
-    {
-      "title": "Dividends × % ＝ 投資↓（収益ではない）",
-      "body_html": "現金は増えるが、投資勘定を減らす。配当収益は計上しない。"
-    }
-  ],
-  "theory": {
-    "lead_html": "①の3つは、ここでの<strong>投資勘定の増減</strong>に対応します。",
-    "timeline_html": "①取得時に Investment を計上 → ②期末に利益シェアを認識 → ③配当受取で Investment を減らす",
-    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Mesa の年末投資 $945,000 を求める手順です。",
-    "blocks": [
-      {
-        "icon": "help-circle",
-        "heading": "なぜこの処理か（会計の背景）",
-        "body_html": "重要な影響力があるなら、投資先の業績が投資者の経済実態に直結します。利益の発生時点で持分を取り込み、配当は利益の分配（すでに取り込んだ利益の現金化）なので投資を減らします。",
-        "je_lines": []
-      },
-      {
-        "icon": "book-open",
-        "heading": "典型仕訳（Mesa）",
-        "body_html": "利益シェア $60,000、配当 $15,000。",
-        "je_lines": [
-          "Dr. Investment in Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60,000",
-          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Equity in earnings of Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60,000",
-          "Dr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15,000",
-          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Investment in Tilo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15,000"
-        ]
-      }
-    ]
-  },
-  "calc": {
-    "intro_html": "年末の Investment 残高の<strong>3ステップ</strong>です。",
-    "steps": [
-      "<strong>Step 1</strong> 取得原価から始める。",
-      "<strong>Step 2</strong> ＋（投資先 NI × 持分比率）。",
-      "<strong>Step 3</strong> −（配当 × 持分比率）。"
-    ],
-    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>Cost</td><td class=\"num\">$900,000</td></tr>\n          <tr><td>＋ Share of NI (30%×$200,000)</td><td class=\"num\">60,000</td></tr>\n          <tr><td>− Share of dividends (30%×$50,000)</td><td class=\"num\">(15,000)</td></tr>\n          <tr><td><strong>Investment, 12/31</strong></td><td class=\"num\"><strong>$945,000</strong></td></tr>\n        </tbody>\n      </table>"
-  },
-  "process_persona_strip": {
-    "takuma": "配当を収益にしてしまいそうです。",
-    "aoi": "持分法の配当は投資を減らすだけ。年末は <strong>$945,000</strong>。"
-  },
-  "process_dialogues": [
-    {
-      "student_html": "公正価値オプションや市場価格がある場合は？",
-      "coach_html": "significant influence があり持分法を使う前提なら、毎期末の時価評価にはしません。別の測定の話になったら問題文が明示します。"
-    },
-    {
-      "student_html": "投資先が損失のときは？",
-      "coach_html": "持分比率分だけ Investment を減らし、Equity in losses を認識します（投資がゼロになるまでの制限など、発展論点あり）。"
-    }
-  ],
-  "crossmap": {
-    "lead_html": "持分法は「影響力の強さで測定方法が変わる」ものさしの真ん中です。",
-    "items": [
-      {
-        "title_html": "影響力のものさし（FV法 ↔ 持分法 ↔ 連結）",
-        "body_html": "影響力なし（目安 20%未満）＝公正価値評価・<strong>配当は収益</strong>／重要な影響力（20〜50%）＝持分法・<strong>配当は投資減</strong>／支配（50%超）＝連結。問題文の持株比率とキーワードで、まずどの世界かを決めます。"
-      },
-      {
-        "title_html": "連結（支配獲得後）",
-        "body_html": "持分法の「利益を取り込み、配当で戻す」発想は、連結の親会社側の処理と地続きです。持分法を one-line consolidation（1行連結）と呼ぶのはこのため。"
-      },
-      {
-        "title_html": "発展：basis difference・のれん相当",
-        "body_html": "取得価額が純資産持分を上回る場合、その差額のうち償却性資産分は<strong>利益シェアから毎期償却</strong>して差し引きます。基本形が固まったら上乗せする論点。"
-      }
-    ]
-  },
-  "patterns": {
-    "lead_html": "MC は「投資残高」「P/L の収益」「配当の扱い」の3方向から聞いてきます。",
-    "mc_patterns": [
-      "<strong>年末の investment 残高</strong>：原価 ＋ NI×% − 配当×%（本ページの型）",
-      "<strong>当期の収益（equity in earnings）</strong>：NI×% だけ。配当を足したら引っかけに乗った合図",
-      "<strong>受取配当の処理</strong>：収益ではなく投資の減少、を概念で直接聞く"
-    ],
-    "solve": {
-      "title_html": "解く手順は毎回同じ4ステップ",
-      "steps": [
-        "持株比率とキーワード（significant influence）で持分法だと確定する",
-        "取得原価を書く",
-        "＋ NI × %（P/L に載る収益はこれ）",
-        "− 配当 × %（現金は増えるが収益にしない）"
-      ]
-    }
-  },
-  "mc_intro_html": "オリジナル問題です。<strong>ASC 323</strong> の考え方に沿って作成しています。",
-  "mc": [
-    {
-      "title": "問題 1（計算 — investment balance）",
-      "focus": [
-        "問われているのは<strong>年末の投資残高</strong>か、当期の収益か",
-        "NI と配当の<strong>両方</strong>に持分比率を掛けたか"
-      ],
-      "stem_html": "Mesa acquired 30% of Tilo for $900,000 (significant influence). Tilo NI $200,000; dividends $50,000. Investment at year-end?",
-      "choices": [
-        "A. $900,000",
-        "B. $915,000",
-        "C. $945,000",
-        "D. $960,000"
-      ],
-      "explain_html": "<p>$900,000 ＋ $60,000 − $15,000 ＝ <strong>$945,000</strong>。正解 <strong>C</strong>。</p>",
-      "distractors_html": [
-        "<strong>A（$900,000）</strong>＝原価のまま動かさない人向け（誤解①）",
-        "<strong>D（$960,000）</strong>＝利益シェアは足したが、配当を収益扱いして投資から引かなかった人向け（誤解②）",
-        "<strong>B（$915,000）</strong>＝$900,000＋$15,000。利益と配当の役割を取り違えて配当シェアだけ足したパターン"
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：投資勘定はこの5つで動く",
+      "lead_html": "持分法の計算問題は、ほぼすべてこの1枚に当てはめれば解けます。下の例の数字で、投資勘定（左）と P/L（右）がどうつながるかを確認してください。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Ardon Co. が Year 1 の1月1日に Hale Inc. の株式30%を $1,000,000 で取得（重要な影響力あり）",
+          "items": [
+            "取得時の Hale の純資産簿価は $3,000,000（30%分＝$900,000）。差額 $100,000 のうち、設備の時価超過分（$200,000 × 30%＝$60,000、残存耐用年数10年）以外はのれん相当（$40,000）",
+            "Year 1 の Hale の当期純利益は $400,000、支払配当は $100,000",
+            "Ardon が Hale に販売した商品のうち、利益 $20,000 分が Hale の期末在庫に残っている"
+          ]
+        },
+        {
+          "type": "taccount_map",
+          "account_title": "Investment in Hale（投資勘定）",
+          "dr": [
+            {
+              "label_html": "① 取得原価",
+              "amt": "1,000,000",
+              "style": "base"
+            },
+            {
+              "label_html": "② 純利益 × 持分%",
+              "calc": "400,000 × 30%",
+              "amt": "+120,000",
+              "style": "up",
+              "tag": "pl"
+            }
+          ],
+          "cr": [
+            {
+              "label_html": "③ 時価超過分の償却",
+              "calc": "60,000 ÷ 10年",
+              "amt": "−6,000",
+              "style": "down",
+              "tag": "pl"
+            },
+            {
+              "label_html": "④ 内部利益の消去",
+              "calc": "20,000 × 30%",
+              "amt": "−6,000",
+              "style": "down",
+              "tag": "pl"
+            },
+            {
+              "label_html": "⑤ 受取配当 × 持分%",
+              "calc": "100,000 × 30%",
+              "amt": "−30,000",
+              "style": "cash",
+              "tag": "nopl"
+            }
+          ],
+          "balance_label": "Year 1 期末残高",
+          "balance_amt": "$1,078,000",
+          "side": [
+            {
+              "kind": "pl",
+              "title_html": "P/L：<span class=\"term-en\">Equity in earnings of Hale</span>",
+              "lines": [
+                [
+                  "② 純利益 × 30%",
+                  "120,000"
+                ],
+                [
+                  "③ 時価超過分の償却",
+                  "(6,000)"
+                ],
+                [
+                  "④ 内部利益の消去",
+                  "(6,000)"
+                ]
+              ],
+              "total": [
+                "持分法投資利益",
+                "108,000"
+              ]
+            },
+            {
+              "kind": "cash",
+              "title_html": "配当（⑤）は P/L を通らない",
+              "body_html": "Dr. Cash 30,000 ／ Cr. Investment 30,000。②で取り込み済みの利益が現金で戻ってきただけなので、収益にすると二重計上になります。"
+            },
+            {
+              "kind": "note",
+              "body_html": "のれん相当 $40,000 は償却しません。投資勘定の中に含めたままにします。"
+            }
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式は2本だけ",
+          "lines": [
+            "Equity in earnings ＝ NI × % − 時価超過分の償却 − 未実現の内部利益",
+            "期末 Investment ＝ 期首 ＋ Equity in earnings − 配当 × %"
+          ]
+        }
       ]
     },
     {
-      "title": "問題 2（概念 — dividends）",
-      "focus": [
-        "持分法における配当の行き先（P/L か、投資勘定か）"
-      ],
-      "stem_html": "Under the equity method, cash dividends received from the investee are recorded as:",
-      "choices": [
-        "A. Dividend revenue",
-        "B. A reduction of the investment account",
-        "C. An increase in additional paid-in capital",
-        "D. Unrealized gain in OCI"
-      ],
-      "explain_html": "<p>配当は投資勘定の減少。正解 <strong>B</strong>。</p>",
-      "distractors_html": [
-        "<strong>A</strong>＝影響力が<strong>ない</strong>投資（FV法）の処理。持分法と混同させる定番の誤答",
-        "<strong>C</strong>＝資本取引ではないので APIC は動かない",
-        "<strong>D</strong>＝OCI に飛ばすのは特定の証券評価の話。持分法の配当とは無関係"
+      "id": "judge",
+      "nav": "いつ持分法か",
+      "title_html": "いつ持分法か：比率は「推定」、決め手は実態",
+      "blocks": [
+        {
+          "type": "ruler",
+          "segments": [
+            {
+              "head": "20%未満",
+              "body_html": "影響力なし（と推定）<br>公正価値（ASC 321）<br>配当＝収益",
+              "style": "r1"
+            },
+            {
+              "head": "20〜50%",
+              "body_html": "重要な影響力（と推定）<br>持分法（ASC 323）<br>配当＝投資の減少",
+              "style": "r2",
+              "width": "1.4fr"
+            },
+            {
+              "head": "50%超",
+              "body_html": "支配<br>連結（ASC 810）",
+              "style": "r3"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "<span class=\"term-en\">Significant influence</span>（重要な影響力）は持株比率20%以上で「あると推定」されるだけです。反証があれば覆ります。"
+        },
+        {
+          "type": "cards2",
+          "cards": [
+            {
+              "title": "20%未満でも持分法になるサイン",
+              "tone": "teal",
+              "items": [
+                "取締役会に役員を送っている（<span class=\"en\">board representation</span>）",
+                "経営方針の決定に参加している",
+                "重要な取引が多い、経営者を出し合っている",
+                "技術面で投資先が依存している"
+              ]
+            },
+            {
+              "title": "20%以上でも持分法にならないサイン",
+              "tone": "red",
+              "items": [
+                "投資先が訴訟などで強く反対している",
+                "別の株主が過半数を持ち、こちらの意見が通らない",
+                "取締役を送れない、財務情報をもらえない"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "html": "補足：持分法の対象になる投資でも、取得時に <span class=\"term-en\">fair value option</span>（ASC 825）を選べば公正価値で測定できます。選択は取り消せません。問題文に明記がない限り、持分法で解いてください。"
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "仕訳一覧",
+      "title_html": "仕訳一覧（1の例の数字）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "場面",
+            "仕訳",
+            "ポイント"
+          ],
+          "en_cols": [
+            1
+          ],
+          "rows": [
+            [
+              "① 取得",
+              "Dr. Investment 1,000,000<br>　Cr. Cash 1,000,000",
+              "差額の内訳（設備・のれん相当）は仕訳しません。内訳は計算メモで管理します"
+            ],
+            [
+              "② 利益の取り込み",
+              "Dr. Investment 120,000<br>　Cr. Equity in earnings 120,000",
+              "投資先が損失なら逆仕訳（<span class=\"en\">Equity in losses</span>）"
+            ],
+            [
+              "③ 時価超過分の償却",
+              "Dr. Equity in earnings 6,000<br>　Cr. Investment 6,000",
+              "償却費の勘定は使わず、持分法投資利益を直接減らします"
+            ],
+            [
+              "④ 内部利益の消去",
+              "Dr. Equity in earnings 6,000<br>　Cr. Investment 6,000",
+              "翌年、在庫が外部に売れたら逆仕訳で戻します"
+            ],
+            [
+              "⑤ 配当の受取",
+              "Dr. Cash 30,000<br>　Cr. Investment 30,000",
+              "収益にしません"
+            ],
+            [
+              "投資先の OCI",
+              "Dr. Investment<br>　Cr. OCI（持分%分）",
+              "投資先にOCIが出たら、自社の OCI に持分%分を計上します（P/Lではない）"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "基本の「利益で増え、配当で減る」が分かっていても、ここで点を落とす人が多いところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "取得原価と簿価の差額（<span class=\"term-en\">basis difference</span>）",
+          "rule_html": "差額は、どの資産の時価超過分かで扱いが変わります。<br>・償却する資産（設備・建物など）→ 残存耐用年数で償却し、持分法投資利益から引く<br>・棚卸資産 → 投資先がその在庫を売った年に全額引く<br>・土地 → 償却しない（売却時に引く）<br>・残り（のれん相当）→ 償却しない。減損も単独では判定しない",
+          "calc_html": "1の例：差額 $100,000 ＝ 設備 $60,000（10年で償却 → 毎年 $6,000）＋ のれん相当 $40,000（償却なし）",
+          "miss_html": "差額 $100,000 全体を10年で割って $10,000 を毎年引いてしまう。のれん相当分まで償却すると持分法投資利益が $4,000 小さくなります。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "内部利益の消去（<span class=\"term-en\">intra-entity profit</span>）",
+          "rule_html": "投資者と投資先の間の売買で、期末在庫に残っている利益は「まだ外部に売れていない利益」です。その<b>持分%分だけ</b>持分法投資利益から引きます。投資者→投資先（<span class=\"en\">downstream</span>）でも、投資先→投資者（<span class=\"en\">upstream</span>）でも同じです。翌年に在庫が外部へ売れたら、引いた分を足し戻します。",
+          "calc_html": "1の例：期末在庫に残る利益 $20,000 × 30% ＝ $6,000 を引く。Year 2 に外部へ売れたら $6,000 を足し戻す。",
+          "miss_html": "連結の感覚で $20,000 を全額消去してしまう。持分法で消すのは持分%分（$6,000）だけです。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "期中に取得したとき",
+          "rule_html": "取り込むのは<b>取得日以降の利益だけ</b>です。純利益 × 持分% × 保有月数/12。時価超過分の償却も同じく月割りします。",
+          "calc_html": "例：7月1日に30%取得、投資先の年間純利益 $400,000 → 400,000 × 30% × 6/12 ＝ $60,000",
+          "miss_html": "年間の純利益に30%を掛けて $120,000 を取り込む。取得前の利益は取得原価に含まれているので、取り込むと二重になります。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "投資先が大きな損失を出したとき",
+          "rule_html": "投資勘定は<b>ゼロで止めます</b>（マイナスにしない）。投資先の債務を保証しているなど、追加で支援する義務がある場合だけ、ゼロを超えて損失を計上します。その後、投資先が利益を出したら、計上しなかった損失分を埋め終わってから利益の取り込みを再開します。",
+          "calc_html": "例：投資勘定 $50,000、損失の持分 $80,000 → 計上できるのは $50,000（残り $30,000 は未計上としてメモ）。翌年の利益の持分が $40,000 なら、$30,000 を埋めて残り $10,000 だけ取り込む。",
+          "miss_html": "翌年の $40,000 をそのまま全額取り込む。未計上の損失 $30,000 を先に埋めるのを忘れています。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "持株比率が変わったとき",
+          "rule_html": "<b>持分法に切り替わる</b>（買い増しで影響力を得た）：それまでの帳簿価額に追加の取得原価を足し、その日から持分法を適用します。<b>過去にさかのぼって修正しません</b>。<br><b>持分法をやめる</b>（売却で影響力を失った）：その日の帳簿価額をスタートにし、以後は公正価値で測定します。こちらも過去は修正しません。<br><b>一部を売却</b>：売却益 ＝ 売却額 − 売った部分の帳簿価額（持分法で動かした後の金額）",
+          "miss_html": "15%保有から25%に買い増した問題で、過去の年度も持分法だったことにして修正する。2016年の基準改正（ASU 2016-07）以降はさかのぼりません。古い問題集の解説には「遡及修正する」と書かれていることがあるので注意してください。"
+        },
+        {
+          "type": "point",
+          "no": "論点6",
+          "title_html": "そのほかの細かい論点",
+          "list": [
+            "<b>投資先に累積型の優先株がある：</b>優先配当（宣言の有無にかかわらず）を純利益から引いた残りに持分%を掛けます。",
+            "<b>減損：</b>投資の価値の下落が一時的でないと判断したら、公正価値まで減額します。減額後に回復しても戻しません。",
+            "<b>キャッシュフロー計算書：</b>間接法では持分法投資利益を純利益から引き、受け取った配当は原則として営業活動に入れます。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "cash dividends received",
+              "投資勘定を減らす。P/L には入れない",
+              "配当を収益に足す"
+            ],
+            [
+              "fair value of … exceeded its carrying amount",
+              "どの資産か確認して償却する（土地なら償却しない）",
+              "差額全体を償却する／償却を忘れる"
+            ],
+            [
+              "remaining in … ending inventory",
+              "内部利益の持分%分を引く",
+              "全額を消去する／消去を忘れる"
+            ],
+            [
+              "acquired on July 1",
+              "利益も償却も月割りにする",
+              "年間の利益をまるごと取り込む"
+            ],
+            [
+              "guaranteed the obligations",
+              "ゼロを超えて損失を計上する",
+              "投資勘定ゼロで止めてしまう"
+            ],
+            [
+              "purchased an additional …%",
+              "持分法への切替。過去はさかのぼらない",
+              "過去の年度を遡及修正する"
+            ],
+            [
+              "cumulative preferred stock",
+              "優先配当を引いてから持分%を掛ける",
+              "純利益にそのまま%を掛ける"
+            ],
+            [
+              "19% / 25% だけが書かれている",
+              "役員派遣・反対などの事実がないか本文を確認する",
+              "比率だけで方法を決める"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 323 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜basis difference",
+          "stem": "On January 1, Year 1, Kole Corp. purchased 25% of the outstanding common stock of Ward Inc. for $600,000 and obtained significant influence. On that date, Ward's net assets had a carrying amount of $2,000,000, and the fair value of Ward's building exceeded its carrying amount by $160,000. The building had a remaining useful life of 20 years. Any remaining excess is attributable to goodwill. Ward reported net income of $240,000 and paid dividends of $80,000 for Year 1. What amount should Kole report as equity in earnings of Ward for Year 1?",
+          "choices": [
+            "A. $38,000",
+            "B. $55,000",
+            "C. $58,000",
+            "D. $60,000"
+          ],
+          "ja_html": "Year 1 の1月1日、Kole社は Ward社の普通株式の25%を $600,000 で取得し、重要な影響力を得た。同日の Ward社の純資産の帳簿価額は $2,000,000 で、建物の公正価値は帳簿価額を $160,000 上回っていた（残存耐用年数20年）。残りの差額はのれんに相当する。Ward社の Year 1 の純利益は $240,000、支払配当は $80,000。Kole社が計上する Year 1 の持分法投資利益はいくらか。<br>A. $38,000　B. $55,000　C. $58,000　D. $60,000",
+          "answer_html": "<b>正解：C（$58,000）</b><br>純利益の持分：240,000 × 25% ＝ 60,000<br>建物の時価超過分の償却：160,000 × 25% ÷ 20年 ＝ 2,000<br>60,000 − 2,000 ＝ <b>58,000</b><br>A：配当の持分 $20,000 も引いている（配当は P/L に関係しません）<br>B：のれん相当 $60,000 も20年で償却している（のれん相当は償却しません）<br>D：償却を忘れている（論点1）"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜複合：内部利益 ＋ 配当 → 期末残高",
+          "stem": "On January 1, Year 1, Dorn Co. acquired 30% of Pike Corp. for $450,000, which equaled 30% of Pike's net assets. During Year 1, Pike reported net income of $300,000 and paid dividends of $100,000. Also during Year 1, Dorn sold inventory to Pike at a gross profit of $40,000; one-half of this inventory remained in Pike's ending inventory at December 31, Year 1. What is the carrying amount of Dorn's investment in Pike at December 31, Year 1?",
+          "choices": [
+            "A. $490,000",
+            "B. $504,000",
+            "C. $510,000",
+            "D. $534,000"
+          ],
+          "ja_html": "Year 1 の1月1日、Dorn社は Pike社の30%を $450,000 で取得した（Pike社の純資産の30%と同額）。Year 1 の Pike社の純利益は $300,000、支払配当は $100,000。また Year 1 中に Dorn社は Pike社に商品を販売し、売上総利益は $40,000。そのうち半分が Pike社の期末在庫に残っている。Dorn社の投資勘定の Year 1 期末残高はいくらか。<br>A. $490,000　B. $504,000　C. $510,000　D. $534,000",
+          "answer_html": "<b>正解：B（$504,000）</b><br>取得原価 450,000 ＋ 純利益の持分 90,000 − 内部利益（40,000 × 1/2 × 30% ＝ 6,000）− 配当の持分 30,000 ＝ <b>504,000</b><br>A：内部利益 $20,000 を全額消去している（消すのは持分%分だけ）<br>C：内部利益の消去を忘れている<br>D：配当の持分を引いていない"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜損失で投資勘定がゼロになった後",
+          "stem": "Rand Co. owns 40% of Tate Inc. and accounts for the investment using the equity method. At January 1, Year 1, the carrying amount of the investment was $50,000. Tate reported a net loss of $200,000 for Year 1 and net income of $100,000 for Year 2. Rand has not guaranteed any of Tate's obligations and is not committed to provide further financial support. What amount of equity in earnings should Rand report for Year 2?",
+          "choices": [
+            "A. $0",
+            "B. $10,000",
+            "C. $30,000",
+            "D. $40,000"
+          ],
+          "ja_html": "Rand社は Tate社の40%を保有し、持分法で処理している。Year 1 期首の投資勘定は $50,000。Tate社は Year 1 に $200,000 の純損失、Year 2 に $100,000 の純利益を計上した。Rand社は Tate社の債務を保証しておらず、追加の財務支援も約束していない。Rand社が Year 2 に計上する持分法投資利益はいくらか。<br>A. $0　B. $10,000　C. $30,000　D. $40,000",
+          "answer_html": "<b>正解：B（$10,000）</b><br>Year 1：損失の持分 80,000 のうち、投資勘定 50,000 までしか計上できない → 未計上の損失 30,000<br>Year 2：利益の持分 40,000 − 未計上の損失 30,000 ＝ <b>10,000</b><br>A：未計上の損失を埋めきれないと考えている<br>C：未計上の損失の額と取り違えている<br>D：未計上の損失を埋めずに全額取り込んでいる（論点4）"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜持株比率が変わったとき（概念）",
+          "stem": "Lund Co. held 15% of Mace Corp.'s common stock and measured the investment at fair value through net income. On July 1, Year 2, Lund purchased an additional 10% of Mace's common stock and obtained significant influence. How should Lund account for the change?",
+          "choices": [
+            "A. Retroactively adjust prior periods as if the equity method had always been applied.",
+            "B. Add the cost of the additional interest to the current basis of the previously held interest and apply the equity method prospectively.",
+            "C. Continue to measure the entire 25% interest at fair value through net income.",
+            "D. Measure only the additional 10% interest using the equity method."
+          ],
+          "ja_html": "Lund社は Mace社の普通株式の15%を保有し、公正価値（評価差額は純利益）で測定していた。Year 2 の7月1日、さらに10%を取得して重要な影響力を得た。Lund社はこの変更をどう処理すべきか。<br>A. 最初から持分法を適用していたものとして、過去の期間を遡及修正する<br>B. 既存持分の現在の帳簿価額に追加取得の原価を加え、その日から将来に向かって持分法を適用する<br>C. 25%全体を引き続き公正価値（評価差額は純利益）で測定する<br>D. 追加取得した10%分だけを持分法で測定する",
+          "answer_html": "<b>正解：B</b><br>ASU 2016-07 以降、持分法への切替は将来に向かって行い、過去はさかのぼりません（論点5）。<br>A：基準改正前の処理<br>C：重要な影響力を得たので持分法に切り替えます<br>D：持分法は保有する25%全体に適用します"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：投資勘定の残高推移を埋める",
+          "intro_html": "1の例（Ardon と Hale）の Year 2 です。Hale の Year 2 の純利益は $500,000、支払配当は $150,000。Year 1 末に Hale の在庫に残っていた商品は、Year 2 中にすべて外部へ売れました。Year 2 に新しい内部取引はありません。空欄に金額を入れて「答え合わせ」を押してください",
+          "rows": [
+            {
+              "label": "期首残高（Year 1 期末）",
+              "value": "1,078,000"
+            },
+            {
+              "label": "純利益の持分",
+              "ans": 150000
+            },
+            {
+              "label": "設備の時価超過分の償却",
+              "ans": -6000
+            },
+            {
+              "label": "Year 1 に消去した内部利益の実現",
+              "ans": 6000
+            },
+            {
+              "label": "配当の持分",
+              "ans": -45000
+            },
+            {
+              "label": "Year 2 期末残高",
+              "ans": 1183000,
+              "head": true
+            },
+            {
+              "label": "Year 2 の持分法投資利益",
+              "ans": 150000,
+              "head": true
+            }
+          ],
+          "explain_html": "純利益の持分 500,000 × 30% ＝ 150,000<br>償却は Year 1 と同じ −6,000（10年間続く）<br>Year 1 に引いた内部利益 6,000 は、在庫が外部に売れた Year 2 に足し戻す ＋6,000<br>配当の持分 150,000 × 30% ＝ −45,000<br>期末残高 1,078,000 ＋ 150,000 − 6,000 ＋ 6,000 − 45,000 ＝ <b>1,183,000</b><br>持分法投資利益 150,000 − 6,000 ＋ 6,000 ＝ <b>150,000</b>（配当は含めない）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "投資勘定を動かす5つの要素（取得・利益・償却・内部利益・配当）と、P/L に入るのはどれかを言える",
+            "basis difference のうち、償却するもの・しないもの（土地・のれん相当）を区別できる",
+            "内部利益は持分%分だけ消去し、翌年に戻すと説明できる",
+            "損失で投資勘定がゼロになった後の処理を、数字で説明できる",
+            "持分法への切替・持分法をやめるときに、過去をさかのぼらないことを言える"
+          ]
+        }
       ]
     }
-  ],
-  "one_minute_html": "議決権 20〜50% で<strong>重要な影響力</strong>があれば持分法。投資勘定は<strong>原価＋利益シェア−配当シェア</strong>で毎期動く。P/L に載せる収益は <strong>NI×持分比率だけ</strong>で、配当は「すでに取り込んだ利益の現金化」だから収益にせず投資を減らす。時価では評価しない。影響力なしなら FV 法（配当＝収益）、支配なら連結、と<strong>影響力の強さで世界が切り替わる</strong>。",
-  "checklist": [
-    "「原価＋NI×%−配当×%」を見ずに言える",
-    "Mesa の年末残高 $945,000 を10秒で再現できる",
-    "P/L に載る収益が $60,000（配当を含まない）と即答できる",
-    "FV法（20%未満）との配当の扱いの違いを説明できる",
-    "持分法の2本の仕訳（利益シェア／配当受取）を書ける"
   ]
 }

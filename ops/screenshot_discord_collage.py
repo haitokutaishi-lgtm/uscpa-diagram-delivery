@@ -122,6 +122,14 @@ REMOVE_STITCH_JS = r"""
 () => { document.getElementById('discord-stitch-preview')?.remove(); }
 """
 
+# 復習シート型（v2）のコラージュ用パネル（左上→右上→左下→右下）
+V2_PANELS = [
+    ("map", "#map .map-grid"),
+    ("traps", "#traps .table-wrap"),
+    ("mc", "#mc .mc-card"),
+    ("judge", "#judge .diagram-visual, #points .point"),
+]
+
 # ビジュアルキャプチャの優先順（図解セクション）
 VISUAL_PANEL_SPECS = [
     {"id": "reading", "fallbackWhole": True, "includePatternBars": False},
@@ -251,6 +259,21 @@ async def capture(url: str, out: Path) -> None:
             await page.wait_for_timeout(2800)
             await page.evaluate(PREPARE_PAGE_JS)
             await page.wait_for_timeout(600)
+
+            # 復習シート型（v2）: 全体図・引っかけ一覧・確認問題・判定の順に要素を直接撮る
+            if await page.locator("#map .map-grid, #map .diagram-visual").count():
+                v2_shots: list[Path] = []
+                for key, sel in V2_PANELS:
+                    loc = page.locator(sel).first
+                    if not await loc.count():
+                        continue
+                    pth = Path(f"/tmp/_discord_cap_v2_{key}.png")
+                    await loc.screenshot(path=str(pth), type="png")
+                    if pth.stat().st_size >= 1200:
+                        v2_shots.append(pth)
+                if v2_shots:
+                    compose_grid((v2_shots + [v2_shots[-1]] * 4)[:4], out)
+                    return
 
             scores: dict[str, int] = await page.evaluate(SCORE_VISUAL_JS)
             shots: dict[str, Path] = {}
