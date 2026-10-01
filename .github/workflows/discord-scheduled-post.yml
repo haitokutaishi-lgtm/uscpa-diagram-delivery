@@ -266,23 +266,12 @@ jobs:
             exit 1
           fi
 
-          # content も付ける → チャンネルに必ず1行は出る（embed 非表示トラブル回避）
-          PAYLOAD=$(jq -c --arg d "$POST_DATE" '
-            . as $root | $root[$d]
-            | if . == null then
-                empty
-              else
-                {
-                  content: ("【図解配信】 " + .title + "\n\n参考になった場合はいいね👍でリアクションください！"),
-                  embeds: [{
-                    title: .title,
-                    description: .description,
-                    url: .url,
-                    color: 3447003
-                  }]
-                }
-              end
-          ' "$FILE")
+          # 投稿文は ops/build_discord_payload.py が組み立てる
+          # （v2 spec に "post" があれば問いかけ＋リアクション選択肢つき、無ければ従来の1行＋embed）
+          PAYLOAD=""
+          if python ops/build_discord_payload.py --posts "$FILE" --date "$POST_DATE" --output /tmp/discord_payload_built.json; then
+            PAYLOAD=$(cat /tmp/discord_payload_built.json)
+          fi
 
           if [ -z "$PAYLOAD" ] || [ "$PAYLOAD" = "null" ]; then
             echo "No post entry for $POST_DATE — skipping."

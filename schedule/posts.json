@@ -423,7 +423,8 @@
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/refinancing-current-liabilities/",
     "slug": "refinancing-current-liabilities",
     "queue_id": "refinancing-review-2026q4",
-    "_auto": true
+    "_auto": true,
+    "revised": true
   },
   "2026-10-10": {
     "title": "【図解・改訂版】製品保証—費用は売った年、支出は負債を減らすだけ（復習シート）",
@@ -431,7 +432,8 @@
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/",
     "slug": "warranty-liability",
     "queue_id": "warranty-review-2026q4",
-    "_auto": true
+    "_auto": true,
+    "revised": true
   },
   "2026-10-11": {
     "title": "【図解・改訂版】一括購入の按分—時価の比率で取得原価を配る（復習シート）",
@@ -439,7 +441,8 @@
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/",
     "slug": "asset-group-relative-sales-value",
     "queue_id": "asset-group-review-2026q4",
-    "_auto": true
+    "_auto": true,
+    "revised": true
   },
   "2026-10-14": {
     "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
