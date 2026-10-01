@@ -1,0 +1,390 @@
+{
+  "version": 2,
+  "knowledge": {
+    "far_text": "FAR1-3 4-10 製品保証の会計処理／FAR4 Ch9 製品保証債務",
+    "asc": "ASC 460 / ASC 606",
+    "updated": "2026-10-02",
+    "sources": []
+  },
+  "meta": {
+    "page_title": "【復習シート】製品保証（Product Warranties）—費用は売った年、支出は負債を減らすだけ",
+    "badge": "FAR 復習シート｜Liabilities — Product Warranties（ASC 460 / ASC 606）",
+    "h1_html": "製品保証：費用は「売った年」に見積もり、実際の支出は負債を減らすだけ",
+    "lead_html": "テキスト 4-10 の復習用です。最初の図で費用と負債の動きを確認し、アシュアランス型とサービス型の違い、差がつく論点を見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：製品保証の負債はこの3つで動く",
+      "lead_html": "アシュアランス型の製品保証は、この1枚に当てはめれば解けます。P/L に載る費用（右）と、実際に払った額（左の減少）が別物になるのがポイントです。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Nolan Co. は Year 1 に家電を販売（2年間の無料保証つき＝アシュアランス型）",
+          "items": [
+            "Year 1 の売上高は $2,000,000。保証にかかるコストは売上高の3%と見積もっている",
+            "Year 1 中に実際に支払った修理費は $25,000",
+            "Year 1 が販売初年度で、期首の負債はゼロ"
+          ]
+        },
+        {
+          "type": "taccount_map",
+          "account_title": "Warranty liability（製品保証の負債）",
+          "dr_head": "減る（Dr）",
+          "cr_head": "増える（Cr）",
+          "dr": [
+            {
+              "label_html": "③ 実際に払った修理費",
+              "calc": "当期の支出",
+              "amt": "−25,000",
+              "style": "cash",
+              "tag": "nopl"
+            }
+          ],
+          "cr": [
+            {
+              "label_html": "① 期首残高",
+              "amt": "0",
+              "style": "base"
+            },
+            {
+              "label_html": "② 売上高 × 見積率",
+              "calc": "2,000,000 × 3%",
+              "amt": "+60,000",
+              "style": "up",
+              "tag": "pl",
+              "tag_text": "P/Lへ（費用）"
+            }
+          ],
+          "balance_label": "Year 1 期末残高",
+          "balance_amt": "$35,000",
+          "side": [
+            {
+              "kind": "pl",
+              "title_html": "P/L：<span class=\"term-en\">Warranty expense</span>",
+              "lines": [
+                [
+                  "② 売上高 × 3%",
+                  "60,000"
+                ]
+              ],
+              "total": [
+                "製品保証費用",
+                "60,000"
+              ]
+            },
+            {
+              "kind": "cash",
+              "title_html": "実際の支出（③）は費用にならない",
+              "body_html": "Dr. Warranty liability 25,000 ／ Cr. Cash 25,000。費用は販売時に見積もり済みなので、支出のときは負債を減らすだけです。"
+            },
+            {
+              "kind": "note",
+              "body_html": "費用 $60,000 と実際の支出 $25,000 は一致しません。差額 $35,000 が来年以降に払う見込みとして負債に残ります。"
+            }
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式は2本だけ",
+          "lines": [
+            "Warranty expense ＝ 当期の売上高 × 見積率（実際に払った額ではない）",
+            "期末 Warranty liability ＝ 期首 ＋ 当期の費用 − 当期の支出"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "2つの型",
+      "title_html": "どちらの型か：アシュアランス型とサービス型",
+      "blocks": [
+        {
+          "type": "ruler",
+          "segments": [
+            {
+              "head": "アシュアランス型（<span class=\"en\">assurance-type</span>）",
+              "body_html": "製品が仕様どおり動くことの保証<br>販売時に費用と負債を見積もる<br>支出時は負債を減らすだけ",
+              "style": "r2"
+            },
+            {
+              "head": "サービス型（<span class=\"en\">service-type</span>）",
+              "body_html": "別料金で買える延長保証など<br>受け取った代金は前受（契約負債）<br>保証期間にわたって収益にする",
+              "style": "r3"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "見分け方：顧客が保証を<b>別に買うかどうか選べる</b>（別料金がついている・別に交渉する）ならサービス型です。製品に最初から付いていて、仕様どおり動くことを保証するだけならアシュアランス型です。"
+        },
+        {
+          "type": "cards2",
+          "cards": [
+            {
+              "title": "アシュアランス型の仕訳（1の例）",
+              "tone": "teal",
+              "items": [
+                "販売時：Dr. Warranty expense 60,000 ／ Cr. Warranty liability 60,000",
+                "支出時：Dr. Warranty liability 25,000 ／ Cr. Cash 25,000"
+              ]
+            },
+            {
+              "title": "サービス型の仕訳（3年延長保証 $900 を販売）",
+              "tone": "navy",
+              "items": [
+                "販売時：Dr. Cash 900 ／ Cr. Unearned warranty revenue 900",
+                "毎年：Dr. Unearned warranty revenue 300 ／ Cr. Warranty revenue 300",
+                "修理したとき：Dr. Warranty expense ／ Cr. Cash（実際にかかった時に費用）"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "仕訳一覧",
+      "title_html": "仕訳一覧（アシュアランス型・1の例の数字）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "場面",
+            "仕訳",
+            "ポイント"
+          ],
+          "en_cols": [
+            1
+          ],
+          "rows": [
+            [
+              "販売",
+              "Dr. Cash 2,000,000<br>　Cr. Sales revenue 2,000,000",
+              "売上はそのまま計上"
+            ],
+            [
+              "保証費用の見積計上（販売年度）",
+              "Dr. Warranty expense 60,000<br>　Cr. Warranty liability 60,000",
+              "売上と同じ年に費用を計上します（実際の支出を待たない）"
+            ],
+            [
+              "修理などの支出",
+              "Dr. Warranty liability 25,000<br>　Cr. Cash 25,000",
+              "費用は計上しません"
+            ],
+            [
+              "見積りの変更",
+              "差額を当期の費用で調整",
+              "過去の年度は修正しません（見積りの変更は将来に向かって処理）"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "「売った年に費用」は分かっていても、数年分の売上が混ざると点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "費用は「売上 × 率」、支出額ではない",
+          "rule_html": "P/L の製品保証費用は、<b>その年の売上高に見積率を掛けた額</b>です。その年に実際に払った修理費は関係ありません。払った額は負債を減らすだけです。",
+          "calc_html": "1の例：費用 2,000,000 × 3% ＝ $60,000（実際の支出 $25,000 ではない）",
+          "miss_html": "「実際にかかった費用」と読んで $25,000 を費用にしてしまう。これは見積りができないときの方法で、GAAP の原則ではありません。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "保証期間が複数年で、率が年ごとに分かれているとき",
+          "rule_html": "「販売した年に売上の2%、翌年に3%」のように率が分かれていても、<b>費用は販売した年に合計（5%）を計上</b>します。期末の負債は「まだ保証期間が残っている売上の見積総額 − これまでに払った額」で求めます。",
+          "calc_html": "例：Year 1 売上 $500,000、Year 2 売上 $700,000、率は販売年2%＋翌年3%（計5%）、支出は Year 1 $6,000・Year 2 $30,000<br>Year 2 末の負債 ＝（500,000 ＋ 700,000）× 5% −（6,000 ＋ 30,000）＝ $24,000",
+          "miss_html": "販売年の2%だけを費用にして、翌年の3%を翌年の費用にしてしまう。翌年分も販売した年に見積もって計上します。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "サービス型は前受で受けて、期間で収益にする",
+          "rule_html": "延長保証を別料金で売ったら、受け取った代金は<b>契約負債</b>（<span class=\"en\">Unearned warranty revenue</span>）にして、保証期間にわたって収益にします（通常は定額）。修理費は実際にかかった時に費用です。販売時に費用を見積もることはしません。",
+          "calc_html": "例：1月1日に3年延長保証を合計 $90,000 で販売 → Year 1 の収益 $30,000、期末の契約負債 $60,000",
+          "miss_html": "アシュアランス型と同じように、販売時に費用と負債を見積もってしまう／受け取った $90,000 を全額その年の収益にしてしまう。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "見積りを変えたときは過去を直さない",
+          "rule_html": "実績を見て見積率を変えるのは<b>会計上の見積りの変更</b>です。変更した年以降の費用で調整し、過去の年度は修正しません。",
+          "miss_html": "前年度の費用が少なすぎたとして、前期の数字を修正（遡及修正）してしまう。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>税効果：</b>税務では実際に払った時に損金になるので、会計の負債残高が将来減算一時差異になり、繰延税金資産（DTA）が生じます。",
+            "<b>偶発損失との関係：</b>製品保証は、損失の可能性が高く（<span class=\"en\">probable</span>）金額を合理的に見積もれる偶発損失なので、見積計上します。",
+            "<b>他者の債務の保証（<span class=\"en\">guarantee</span>）：</b>製品保証とは別物です。保証人は保証を始めた時点で負債を公正価値で計上します。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "actual warranty costs incurred",
+              "支出額は負債を減らすだけ。費用は売上 × 率",
+              "支出額を費用にする"
+            ],
+            [
+              "estimated at 2% in the year of sale and 3% in the following year",
+              "販売した年に合計5%を費用にする",
+              "翌年分を翌年の費用にする"
+            ],
+            [
+              "warranty liability at December 31",
+              "期首 ＋ 費用 − 支出、または見積総額 − 支出累計",
+              "当期の費用額をそのまま答える"
+            ],
+            [
+              "sold separately / separately priced",
+              "サービス型。前受にして期間で収益",
+              "販売時に費用と負債を見積もる"
+            ],
+            [
+              "extended warranty for three years",
+              "受け取った額 ÷ 年数を毎年の収益に",
+              "全額をその年の収益にする"
+            ],
+            [
+              "revised its estimate",
+              "見積りの変更。当期以降で調整",
+              "過去の年度を修正する"
+            ],
+            [
+              "deductible when paid（税務）",
+              "負債残高が将来減算一時差異 → DTA",
+              "DTL と取り違える"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 460・ASC 606 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜費用と支出の区別",
+          "stem": "During Year 1, Tavo Co. sold products with a one-year assurance-type warranty for $900,000. Tavo estimates that warranty costs will equal 4% of sales. Actual warranty expenditures in Year 1 were $20,000. What amount should Tavo report as warranty expense for Year 1?",
+          "choices": [
+            "A. $16,000",
+            "B. $20,000",
+            "C. $36,000",
+            "D. $56,000"
+          ],
+          "ja_html": "Year 1 中に Tavo社は、1年間のアシュアランス型保証つきの製品を $900,000 販売した。保証コストは売上高の4%と見積もっている。Year 1 の実際の保証支出は $20,000 だった。Year 1 の製品保証費用はいくらか。<br>A. $16,000　B. $20,000　C. $36,000　D. $56,000",
+          "answer_html": "<b>正解：C（$36,000）</b><br>900,000 × 4% ＝ <b>36,000</b>（論点1）<br>A：期末の負債（36,000 − 20,000）と取り違えている<br>B：実際の支出を費用にしている<br>D：見積りと支出を足している"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜複数年の見積率と期末の負債",
+          "stem": "Vell Co. offers a two-year warranty on its products. Vell estimates warranty costs at 2% of sales in the year of sale and 3% of sales in the following year. Sales were $500,000 in Year 1 and $700,000 in Year 2. Actual warranty expenditures were $6,000 in Year 1 and $30,000 in Year 2. What amount should Vell report as its warranty liability at December 31, Year 2?",
+          "choices": [
+            "A. $24,000",
+            "B. $30,000",
+            "C. $35,000",
+            "D. $60,000"
+          ],
+          "ja_html": "Vell社は製品に2年間の保証を付けている。保証コストは、販売した年に売上高の2%、翌年に3%と見積もっている。売上高は Year 1 が $500,000、Year 2 が $700,000。実際の保証支出は Year 1 が $6,000、Year 2 が $30,000。Year 2 の12月31日の製品保証の負債はいくらか。<br>A. $24,000　B. $30,000　C. $35,000　D. $60,000",
+          "answer_html": "<b>正解：A（$24,000）</b><br>見積総額：（500,000 ＋ 700,000）× 5% ＝ 60,000<br>支出累計：6,000 ＋ 30,000 ＝ 36,000<br>60,000 − 36,000 ＝ <b>24,000</b>（論点2）<br>B：Year 1 の支出 $6,000 を引き忘れている<br>C：Year 2 の売上の見積額だけを答えている<br>D：支出を引いていない"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜サービス型の収益",
+          "stem": "On January 1, Year 1, Orin Co. sold separately priced three-year extended warranty contracts for $90,000 in cash. Coverage begins immediately, and Orin recognizes revenue on a straight-line basis. Orin incurred $18,000 of costs to service the contracts in Year 1. What amount of warranty revenue should Orin recognize for Year 1?",
+          "choices": [
+            "A. $0",
+            "B. $18,000",
+            "C. $30,000",
+            "D. $90,000"
+          ],
+          "ja_html": "Year 1 の1月1日、Orin社は別料金の3年延長保証を合計 $90,000（現金）で販売した。保証はすぐに始まり、収益は定額で計上する。Year 1 に保証対応で $18,000 のコストがかかった。Year 1 に計上する保証収益はいくらか。<br>A. $0　B. $18,000　C. $30,000　D. $90,000",
+          "answer_html": "<b>正解：C（$30,000）</b><br>90,000 ÷ 3年 ＝ <b>30,000</b>（論点3）。コスト $18,000 は別に費用として計上します。<br>A：保証期間が終わるまで収益にしないと考えている<br>B：かかったコストと同額を収益にしている<br>D：受け取った全額をその年の収益にしている"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜サービス型の判定（概念）",
+          "stem": "Which of the following warranties should be accounted for as a separate performance obligation?",
+          "choices": [
+            "A. A warranty that assures the product complies with agreed-upon specifications",
+            "B. A warranty that the customer has the option to purchase separately",
+            "C. A warranty required by law that protects customers from defective products",
+            "D. A standard 90-day warranty included in the price of every product"
+          ],
+          "ja_html": "次の保証のうち、別個の履行義務として処理すべきものはどれか。<br>A. 製品が合意した仕様に合っていることを保証するもの<br>B. 顧客が別に購入するかどうかを選べるもの<br>C. 欠陥品から顧客を守るために法律で義務づけられているもの<br>D. すべての製品の価格に含まれている標準の90日保証",
+          "answer_html": "<b>正解：B</b><br>別に買うかどうか選べる保証はサービス型で、別個の履行義務になります。<br>A・C・D はいずれも製品が仕様どおり動くことを保証するもので、アシュアランス型（販売時に費用と負債を見積もる）です。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：負債の残高推移を埋める",
+          "intro_html": "1の例（Nolan Co.）の Year 2 です。Year 2 の売上高は $2,500,000、見積率は3%のまま。Year 2 中に実際に払った修理費は $50,000 でした。空欄に金額を入れて「答え合わせ」を押してください",
+          "rows": [
+            {
+              "label": "期首残高（Year 1 期末）",
+              "value": "35,000"
+            },
+            {
+              "label": "当期の見積計上",
+              "ans": 75000
+            },
+            {
+              "label": "当期の支出",
+              "ans": -50000
+            },
+            {
+              "label": "Year 2 期末残高",
+              "ans": 60000,
+              "head": true
+            },
+            {
+              "label": "Year 2 の製品保証費用（P/L）",
+              "ans": 75000,
+              "head": true
+            }
+          ],
+          "explain_html": "見積計上 2,500,000 × 3% ＝ 75,000<br>支出 −50,000（負債を減らすだけ）<br>期末残高 35,000 ＋ 75,000 − 50,000 ＝ <b>60,000</b><br>P/L の費用は見積計上額の <b>75,000</b>（支出額ではない）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "製品保証費用は「売上 × 率」で、実際の支出ではないと言える",
+            "期末の負債を「期首 ＋ 費用 − 支出」で計算できる",
+            "率が「販売年＋翌年」に分かれている問題で、期末の負債を計算できる",
+            "アシュアランス型とサービス型の見分け方と、それぞれの仕訳を説明できる",
+            "見積りを変えたときは過去を修正しないと言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

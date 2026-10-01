@@ -168,6 +168,32 @@ def _checklist(b: dict, idx: int) -> str:
     return f'<ul class="check">{items}</ul>'
 
 
+def _timeline(b: dict) -> str:
+    items = "".join(
+        f'<div class="tl-item {i.get("tone", "")}"><span class="tl-date">{i["date"]}</span>{i["label_html"]}</div>' for i in b["items"]
+    )
+    window = f'<div class="tl-window">{b["window_html"]}</div>' if b.get("window_html") else ""
+    return f'<div class="diagram-visual mb-3"><div class="tl">{items}</div>{window}</div>'
+
+
+SPLIT_COLORS = {"teal": "#0f766e", "navy": "#1e3a5f", "sky": "#0284c7", "amber": "#d97706", "red": "#dc2626", "gray": "#94a3b8"}
+
+
+def _splitbar(b: dict) -> str:
+    """bars: [{title, parts: [{label, amt, pct, color}]}]。pct は幅（%）。凡例に金額を出す。"""
+    out = ""
+    for bar in b["bars"]:
+        segs = "".join(
+            f'<div class="s-{p.get("color", "teal")}" style="width:{p["pct"]}%">{p.get("short", p["label"]) if p["pct"] >= 12 else ""}</div>'
+            for p in bar["parts"]
+        )
+        legend = "".join(
+            f'<span style="--c:{SPLIT_COLORS[p.get("color", "teal")]}">{p["label"]} <b class="en">{p["amt"]}</b></span>' for p in bar["parts"]
+        )
+        out += f'<div class="split-wrap"><p class="split-title">{bar["title"]}</p><div class="split">{segs}</div><div class="split-legend">{legend}</div></div>'
+    return f'<div class="diagram-visual">{out}</div>'
+
+
 def _html(b: dict) -> str:
     return b["html"]
 
@@ -184,6 +210,8 @@ BLOCKS = {
     "point": _point,
     "traps": _traps,
     "mcq": _mcq,
+    "timeline": _timeline,
+    "splitbar": _splitbar,
     "html": _html,
 }
 

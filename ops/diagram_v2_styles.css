@@ -91,3 +91,23 @@ table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
 .check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
 nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
 nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }

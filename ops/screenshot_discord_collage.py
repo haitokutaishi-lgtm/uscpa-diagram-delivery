@@ -124,10 +124,10 @@ REMOVE_STITCH_JS = r"""
 
 # 復習シート型（v2）のコラージュ用パネル（左上→右上→左下→右下）
 V2_PANELS = [
-    ("map", "#map .map-grid"),
+    ("map", "#map"),
     ("traps", "#traps .table-wrap"),
     ("mc", "#mc .mc-card"),
-    ("judge", "#judge .diagram-visual, #points .point"),
+    ("judge", "#judge"),
 ]
 
 # ビジュアルキャプチャの優先順（図解セクション）
@@ -261,7 +261,7 @@ async def capture(url: str, out: Path) -> None:
             await page.wait_for_timeout(600)
 
             # 復習シート型（v2）: 全体図・引っかけ一覧・確認問題・判定の順に要素を直接撮る
-            if await page.locator("#map .map-grid, #map .diagram-visual").count():
+            if await page.locator("#map .diagram-visual").count():
                 v2_shots: list[Path] = []
                 for key, sel in V2_PANELS:
                     loc = page.locator(sel).first

@@ -1,0 +1,382 @@
+{
+  "version": 2,
+  "knowledge": {
+    "far_text": "FAR1-3 4-7 短期債務の借換え",
+    "asc": "ASC 470-10",
+    "updated": "2026-10-02",
+    "sources": []
+  },
+  "meta": {
+    "page_title": "【復習シート】短期債務の借換え（Refinancing）—固定負債にできる条件と金額",
+    "badge": "FAR 復習シート｜Liabilities — Refinancing of Short-term Obligations（ASC 470-10）",
+    "h1_html": "短期債務の借換え：固定負債にできるのは「意思＋能力」が示せた金額だけ",
+    "lead_html": "テキスト 4-7 の復習用です。最初の図で「いつまでに・何があれば・いくら」固定負債にできるかを確認し、差がつく論点と引っかけを見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：B/S日から財務諸表の発行日までに何が起きたか",
+      "lead_html": "借換えの問題は、B/S日（期末）から財務諸表の発行日までの間に「長期で借り換える能力」が示されたかどうかで決まります。下の例で、時系列と金額の分かれ方を確認してください。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Corvin Co. の Year 1 の B/S（12月31日）",
+          "items": [
+            "Year 2 の6月30日が返済期限の借入金（<span class=\"en\">short-term obligation</span>）$800,000 があり、長期で借り換えるつもりでいる",
+            "Year 2 の2月15日、銀行と借換契約を締結。担保価値の75%まで借りられ、Year 4 まで解約されない契約。担保に出す土地の価値は $1,000,000",
+            "Year 1 の財務諸表は Year 2 の3月20日に発行"
+          ]
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "date": "Year 1  12/31",
+              "label_html": "B/S日。$800,000 は本来は流動負債",
+              "tone": "muted"
+            },
+            {
+              "date": "Year 2  2/15",
+              "label_html": "借換契約を締結（解約不能・Year 4 まで）→ 能力が示された",
+              "tone": "key"
+            },
+            {
+              "date": "Year 2  3/20",
+              "label_html": "財務諸表の発行日。ここまでに起きたことで判断",
+              "tone": "key"
+            },
+            {
+              "date": "Year 2  6/30",
+              "label_html": "返済期限。発行日より後の出来事は判断に使わない",
+              "tone": "muted"
+            }
+          ],
+          "window_html": "12/31〜3/20 の間に「長期の借入・株式の発行」か「条件を満たす借換契約」があれば、その金額まで固定負債にできる"
+        },
+        {
+          "type": "splitbar",
+          "bars": [
+            {
+              "title": "B/S での表示（$800,000 の内訳）",
+              "parts": [
+                {
+                  "label": "固定負債（契約で借りられる額 $1,000,000 × 75%）",
+                  "short": "固定負債 750,000",
+                  "amt": "$750,000",
+                  "pct": 93.75,
+                  "color": "teal"
+                },
+                {
+                  "label": "流動負債（借りられない残り）",
+                  "short": "",
+                  "amt": "$50,000",
+                  "pct": 6.25,
+                  "color": "red"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式",
+          "lines": [
+            "固定負債にできる額 ＝ 短期債務の額 と 借換えで実際に調達できる額 の小さい方",
+            "流動負債に残る額 ＝ 短期債務 − 固定負債にできる額"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "条件",
+      "title_html": "条件：意思と能力の両方が必要",
+      "blocks": [
+        {
+          "type": "rule",
+          "html": "短期債務を固定負債（<span class=\"en\">noncurrent</span>）に分類できるのは、① 長期で借り換える<b>意思</b>（<span class=\"en\">intent to refinance</span>）があり、② その<b>能力</b>（<span class=\"en\">ability</span>）が B/S日後・財務諸表の発行前に示された場合だけです。"
+        },
+        {
+          "type": "cards2",
+          "cards": [
+            {
+              "title": "能力の示し方A：実際に調達した",
+              "tone": "teal",
+              "items": [
+                "B/S日後、発行日までに長期借入を実行した",
+                "B/S日後、発行日までに株式（<span class=\"en\">equity securities</span>）を発行した",
+                "どちらも「借換えのため」の調達であること"
+              ]
+            },
+            {
+              "title": "能力の示し方B：借換契約を結んだ",
+              "tone": "teal",
+              "items": [
+                "B/S日から1年（または営業循環期間）以内に契約が切れない",
+                "貸手が自由に解約できない（借手の違反がある場合を除く）",
+                "B/S日時点で契約違反がない（違反があれば免除を得ている）"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "html": "テキストの設例は「契約後に実際に借入を実行した」ケース、この図の例は「契約を結んだ」ケースです。どちらも能力を示す方法として認められます。"
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "表示一覧",
+      "title_html": "表示の判断一覧（主な場面）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "B/S日後〜発行日に起きたこと",
+            "B/S での分類",
+            "ポイント"
+          ],
+          "rows": [
+            [
+              "解約不能の借換契約を締結（期限は1年超）",
+              "契約で借りられる額まで固定負債",
+              "担保の%など上限があれば、その額まで"
+            ],
+            [
+              "長期借入を実行し、その資金で返済",
+              "固定負債",
+              "借換えのための調達であること"
+            ],
+            [
+              "株式を発行し、その資金で返済",
+              "固定負債（株式の調達額まで）",
+              "資本の部には入れません。負債の分類が変わるだけです"
+            ],
+            [
+              "手元の現金で返済し、その後に長期借入",
+              "流動負債",
+              "返済に流動資産を使ったので、借換えにはなりません"
+            ],
+            [
+              "貸手がいつでも解約できる契約",
+              "流動負債",
+              "能力が示されたことになりません"
+            ],
+            [
+              "発行日より後に借換契約を締結",
+              "流動負債",
+              "発行日以降の出来事は判断に使いません"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "条件を覚えていても、金額と時系列の読み方で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "固定負債にできる金額には上限がある",
+          "rule_html": "固定負債にできるのは、借換えで<b>実際に調達できる額まで</b>です。契約に「担保価値の◯%まで」などの制限があれば、その額が上限になります。調達できる額が変動する契約では、合理的に見積もった最低額を使います。",
+          "calc_html": "1の例：$1,000,000 × 75% ＝ $750,000 が上限 → 固定負債 $750,000、流動負債 $50,000",
+          "miss_html": "契約の融資枠（例えば「$800,000 まで」）だけを見て、担保の75%制限を見落とし $800,000 全額を固定負債にしてしまう。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "「先に現金で返して、後から借りた」は借換えではない",
+          "rule_html": "B/S日後に、手元の現金など<b>流動資産で返済した</b>場合は、その後に長期借入をしても流動負債のままです。返済に運転資本を使ってしまったので、「流動資産を使わずに済んだ」とは言えないからです。",
+          "calc_html": "例：$300,000 を2月10日に現金で返済 → 2月20日に10年債 $300,000 を発行して資金を補てん → B/S では $300,000 を流動負債",
+          "miss_html": "発行日までに長期の資金調達をしているので固定負債にしてしまう。順番（返済が先か、調達が先か）を必ず確認してください。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "株式の発行でも借換えになる",
+          "rule_html": "B/S日後、発行日までに株式を発行し、その資金で短期債務を返す場合も、調達額までは流動負債から外します。表示は固定負債（または流動負債から除外）で、<b>資本の部には入れません</b>。",
+          "calc_html": "例：短期債務 $400,000、2月1日に株式発行で $250,000 調達し返済に充当 → 流動負債 $150,000、固定負債扱い $250,000",
+          "miss_html": "「株式で調達したなら資本に入る」と考えて、B/S日の負債から $250,000 を消してしまう。B/S日時点では負債は残っており、分類が変わるだけです。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "判断に使えるのは発行日までの出来事だけ",
+          "rule_html": "能力を示す出来事は、<b>B/S日後から財務諸表の発行日まで</b>に起きている必要があります。B/S日より前に契約していてももちろん構いませんが、発行日より後の契約や借入は判断に使えません。",
+          "miss_html": "問題文の日付を並べずに読み、発行日（例：3月20日）より後の4月1日の借換契約を根拠に固定負債にしてしまう。日付は必ず時系列に並べ直してください。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "契約違反で返済を求められる長期債務（関連論点）",
+          "rule_html": "B/S日時点で契約条項（<span class=\"en\">covenant</span>）に違反し、貸手がすぐに返済を求められる長期債務は<b>流動負債</b>になります。ただし、貸手から1年超の免除（<span class=\"en\">waiver</span>）を得ている場合や、猶予期間内に違反が解消される可能性が高い場合は固定負債のままです。",
+          "miss_html": "「満期が5年後だから固定負債」と満期だけで判断する。返済を求められる状態（<span class=\"en\">callable</span>）かどうかを先に確認してください。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "intends to refinance",
+              "意思だけでは足りない。能力を示す出来事が発行日までにあるか",
+              "意思があるだけで固定負債にする"
+            ],
+            [
+              "up to 80% of the value of the collateral",
+              "上限 ＝ 担保価値 × %。短期債務の額と小さい方",
+              "融資枠の額や債務の全額で固定負債にする"
+            ],
+            [
+              "paid … with cash on hand, then issued bonds",
+              "流動資産で先に返済 → 流動負債のまま",
+              "後の長期借入を見て固定負債にする"
+            ],
+            [
+              "issued common stock … used the proceeds",
+              "調達額まで流動負債から外す（資本には入れない）",
+              "負債を消す／資本に足す"
+            ],
+            [
+              "financial statements were issued on …",
+              "判断はこの日まで。日付を時系列に並べる",
+              "発行日より後の出来事を使う"
+            ],
+            [
+              "cancelable at the lender's discretion",
+              "能力が示されたことにならない → 流動負債",
+              "契約があるだけで固定負債にする"
+            ],
+            [
+              "agreement expires within one year",
+              "1年以内に切れる契約は能力の根拠にならない",
+              "契約があるだけで固定負債にする"
+            ],
+            [
+              "violated a debt covenant",
+              "返済を求められるなら流動負債。免除（waiver）を確認",
+              "満期だけで固定負債にする"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 470-10 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜借換えできる金額の上限",
+          "stem": "Rexo Corp. has a $600,000 note payable due March 1, Year 2, which it intends to refinance on a long-term basis. On January 20, Year 2, Rexo entered into a noncancelable financing agreement that expires in Year 5 and permits Rexo to borrow up to 80% of the value of inventory pledged as collateral. The inventory has a value of $500,000. Rexo's Year 1 financial statements were issued on February 25, Year 2. What amount of the note should be classified as noncurrent at December 31, Year 1?",
+          "choices": [
+            "A. $0",
+            "B. $400,000",
+            "C. $500,000",
+            "D. $600,000"
+          ],
+          "ja_html": "Rexo社には Year 2 の3月1日が期限の手形債務 $600,000 があり、長期で借り換えるつもりでいる。Year 2 の1月20日、Year 5 まで解約されない借換契約を締結した。担保に出す棚卸資産の価値の80%まで借りられる。棚卸資産の価値は $500,000。Year 1 の財務諸表は Year 2 の2月25日に発行された。Year 1 の12月31日に固定負債に分類すべき金額はいくらか。<br>A. $0　B. $400,000　C. $500,000　D. $600,000",
+          "answer_html": "<b>正解：B（$400,000）</b><br>借りられる上限：500,000 × 80% ＝ 400,000。債務 600,000 との小さい方 → <b>400,000</b><br>A：契約が B/S日後なので無効と考えている（発行日までの契約は使えます）<br>C：担保の%を掛けていない<br>D：上限を考えずに全額を固定負債にしている（論点1）"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜先に現金で返済したケース",
+          "stem": "Halden Co. had a $300,000 note payable due February 10, Year 2. On February 10, Year 2, Halden paid the note using cash on hand. On February 20, Year 2, Halden issued $300,000 of 10-year bonds to replenish its cash. Halden's Year 1 financial statements were issued on March 15, Year 2. How should the note be reported in Halden's December 31, Year 1 balance sheet?",
+          "choices": [
+            "A. As a noncurrent liability of $300,000",
+            "B. As a current liability of $300,000",
+            "C. Excluded from liabilities and disclosed in the notes only",
+            "D. As a current liability of $150,000 and a noncurrent liability of $150,000"
+          ],
+          "ja_html": "Halden社には Year 2 の2月10日が期限の手形債務 $300,000 があった。2月10日、手元の現金で返済した。2月20日、現金を補てんするため10年債 $300,000 を発行した。Year 1 の財務諸表は3月15日に発行された。Year 1 の12月31日の B/S で、この手形はどう表示すべきか。<br>A. 固定負債 $300,000<br>B. 流動負債 $300,000<br>C. 負債から除き、注記のみ<br>D. 流動負債 $150,000、固定負債 $150,000",
+          "answer_html": "<b>正解：B</b><br>流動資産（現金）で先に返済しているので、後から長期の社債を発行しても借換えにはなりません（論点2）。<br>A：後の社債発行だけを見ている<br>C：B/S日時点では負債として存在します<br>D：分ける根拠がありません"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜株式の発行による借換え",
+          "stem": "At December 31, Year 1, Pelt Inc. had a $400,000 note payable due April 1, Year 2. On February 1, Year 2, Pelt issued common stock for $250,000 and used the proceeds to repay part of the note. Pelt's Year 1 financial statements were issued on March 1, Year 2. What amount of the note should Pelt report as a current liability at December 31, Year 1?",
+          "choices": [
+            "A. $0",
+            "B. $150,000",
+            "C. $250,000",
+            "D. $400,000"
+          ],
+          "ja_html": "Pelt社には Year 1 の12月31日時点で、Year 2 の4月1日が期限の手形債務 $400,000 があった。Year 2 の2月1日、普通株式を発行して $250,000 を調達し、手形の一部の返済に充てた。Year 1 の財務諸表は3月1日に発行された。Year 1 の12月31日に流動負債として表示すべき金額はいくらか。<br>A. $0　B. $150,000　C. $250,000　D. $400,000",
+          "answer_html": "<b>正解：B（$150,000）</b><br>株式で調達した 250,000 は流動負債から外す → 400,000 − 250,000 ＝ <b>150,000</b>（論点3）<br>A：全額を借り換えたと考えている<br>C：外す額と残る額を取り違えている<br>D：株式の発行は借換えにならないと考えている"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜能力を示さない契約（概念）",
+          "stem": "A company intends to refinance a short-term obligation on a long-term basis. Which of the following financing agreements, entered into before the financial statements are issued, would NOT demonstrate the ability to refinance?",
+          "choices": [
+            "A. An agreement that does not expire within one year of the balance sheet date",
+            "B. An agreement that the lender may cancel at its discretion",
+            "C. An agreement under which the company was not in violation at the balance sheet date",
+            "D. An agreement with a lender that is expected to be financially capable of honoring it"
+          ],
+          "ja_html": "ある会社は短期債務を長期で借り換えるつもりでいる。財務諸表の発行前に結んだ次の借換契約のうち、借換えの能力を示さないものはどれか。<br>A. B/S日から1年以内に期限が切れない契約<br>B. 貸手が自由に解約できる契約<br>C. B/S日時点で会社が契約に違反していない契約<br>D. 契約を履行できる財務力があると見込まれる貸手との契約",
+          "answer_html": "<b>正解：B</b><br>貸手が自由に解約できる契約では、長期で借りられる保証がありません。<br>A・C・D は、いずれも能力を示す契約の条件です。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：複数の短期債務を分類する",
+          "intro_html": "Mira Co. の Year 1 の12月31日の B/S です。財務諸表は Year 2 の3月10日に発行。<br>Note A $200,000（5月1日期限）：2月5日に5年債 $200,000 を発行し、その資金で期限に返済する予定<br>Note B $150,000（1月31日期限）：1月31日に手元の現金で返済。2月20日に長期借入 $150,000 を実行<br>Note C $500,000（6月30日期限）：2月1日に、Year 4 まで解約されない借換契約（上限 $350,000）を締結<br>空欄に金額を入れて「答え合わせ」を押してください",
+          "rows": [
+            {
+              "label": "Note A のうち流動負債",
+              "ans": 0
+            },
+            {
+              "label": "Note B のうち流動負債",
+              "ans": 150000
+            },
+            {
+              "label": "Note C のうち流動負債",
+              "ans": 150000
+            },
+            {
+              "label": "流動負債の合計",
+              "ans": 300000,
+              "head": true
+            },
+            {
+              "label": "固定負債に分類する合計",
+              "ans": 550000,
+              "head": true
+            }
+          ],
+          "explain_html": "Note A：発行日前に長期の社債で調達 → 全額固定負債（流動 0）<br>Note B：先に現金で返済 → 流動負債 150,000（論点2）<br>Note C：上限 350,000 まで固定負債、残り 150,000 は流動負債（論点1）<br>流動負債 0 ＋ 150,000 ＋ 150,000 ＝ <b>300,000</b><br>固定負債 200,000 ＋ 350,000 ＝ <b>550,000</b>"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "固定負債にできる2つの条件（意思と能力）と、能力の示し方2通りを言える",
+            "担保の%などの上限がある契約で、固定負債にできる額を計算できる",
+            "「先に現金で返済してから借りた」が流動負債のままになる理由を説明できる",
+            "株式の発行で借り換えたときの表示（資本には入れない）を説明できる",
+            "判断に使えるのは財務諸表の発行日までの出来事だけだと言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

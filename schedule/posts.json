@@ -394,6 +394,13 @@
     "queue_id": "equity-method-review-2026q3",
     "_auto": true
   },
+  "2026-10-02": {
+    "title": "【図解・改訂版】持分法—投資勘定を動かす5つの要素（復習シート）",
+    "description": "全体図1枚で、取得・利益・償却・内部利益・配当の動きを確認。basis difference・損失・持株比率の変化まで、初見の確認問題とTBS入力式つき（ASC 323）。",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/equity-method-basic/",
+    "slug": "equity-method-basic",
+    "queue_id": "equity-method-v2-announce-2026q4"
+  },
   "2026-10-03": {
     "title": "【図解・見直し】キャッシュ・フロー—営業・投資・財務の区分",
     "description": "支払利息は原則営業、支払配当は財務、PPE購入は投資。区分の型を再確認（ASC 230）。",
@@ -411,24 +418,24 @@
     "_auto": true
   },
   "2026-10-07": {
-    "title": "【図解・見直し】借換え—intent・ability と financing 上限",
-    "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。",
+    "title": "【図解・改訂版】短期債務の借換え—固定負債にできる条件と金額（復習シート）",
+    "description": "B/S日から発行日までの時系列と、担保%の上限・先に現金で返済したケース・株式発行まで。初見の確認問題とTBS入力式つき（ASC 470-10／テキスト4-7）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/refinancing-current-liabilities/",
     "slug": "refinancing-current-liabilities",
     "queue_id": "refinancing-review-2026q4",
     "_auto": true
   },
   "2026-10-10": {
-    "title": "【図解・見直し】製品保証—expense と期末 liability の式",
-    "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。",
+    "title": "【図解・改訂版】製品保証—費用は売った年、支出は負債を減らすだけ（復習シート）",
+    "description": "負債の動きを1枚の図で。販売年＋翌年の見積率、アシュアランス型とサービス型の違いまで。初見の確認問題とTBS入力式つき（ASC 460・606／テキスト4-10）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/warranty-liability/",
     "slug": "warranty-liability",
     "queue_id": "warranty-review-2026q4",
     "_auto": true
   },
   "2026-10-11": {
-    "title": "【図解・見直し】一括購入の按分—appraised value の比率だけ",
-    "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。",
+    "title": "【図解・改訂版】一括購入の按分—時価の比率で取得原価を配る（復習シート）",
+    "description": "按分の流れを1枚の図で。付随費用・撤去費の扱い、按分後の減価償却まで。初見の確認問題とTBS入力式つき（ASC 360／テキスト5-1・5-2）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/",
     "slug": "asset-group-relative-sales-value",
     "queue_id": "asset-group-review-2026q4",

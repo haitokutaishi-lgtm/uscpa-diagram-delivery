@@ -43,6 +43,15 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 - **確認問題は初見の数字**：本文に出した問題・答えを再利用しない
 - **FARテキストに合わせる**：`07_ナレッジ/ナレッジ/予備校の教材/OCR済みMarkdown/` に該当章があれば用語・論点の範囲をそろえる（転載はしない）
 
+## ナレッジの読み書き（必須）
+
+`knowledge/` に図解づくりの知見を貯めている（使い方は `knowledge/README.md`）。
+
+- **作る前**：`knowledge/lessons.md` → `knowledge/topics/<slug>.md`（あれば）→ `knowledge/traps-index.md`（近い論点の引っかけ）を読む
+- **作った後**：topic-spec の `knowledge`（`far_text` / `asc` / `updated` / `sources`）を埋め、`knowledge/topics/<slug>.md` を `_template.md` から作るか追記する。テーマ横断の気づきは `lessons.md` に追記
+- **受講生の反応**：該当テーマのノートの「受講生の反応」に日付つきで残す
+- `knowledge/index.md` と `traps-index.md` は push 時に自動生成（`knowledge-index.yml`）。手で直さない
+
 ## v2 の標準構成（spec の sections に並べる。番号・目次は自動）
 
 | # | id | 見出しの例 | 中身 | 主な block |
@@ -106,7 +115,8 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 ## 改稿チェックリスト（v2）
 
 ```
-- [ ] topic-spec に "version": 2、publish-html は spec から生成（手書きしない）
+- [ ] topic-spec に "version": 2 と knowledge、publish-html は spec から生成（手書きしない）
+- [ ] knowledge/topics/<slug>.md を作成・追記した
 - [ ] 1 全体図だけで計算・処理の全体が分かる。例題の数字は1セットのみ
 - [ ] 差がつく論点に「ルール → 数字 → こう間違える」がそろっている
 - [ ] 引っかけ一覧の英語は実際の問題文に出る言い回し
@@ -119,7 +129,7 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 
 ## 図解の改稿状況
 
-v2 化済み：equity-method-basic（2026-10-02）。ほかは旧型のまま（順次 v2 へ）。
+v2 化の状況は `knowledge/index.md`（自動生成）を見る。
 
 ### 旧型時代の記録（manifest 全10件）
 

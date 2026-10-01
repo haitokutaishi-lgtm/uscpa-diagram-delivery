@@ -1,5 +1,14 @@
 {
   "version": 2,
+  "knowledge": {
+    "far_text": "未収録（Unit 13-10〜13-13。録画待ち）",
+    "asc": "ASC 323",
+    "updated": "2026-10-02",
+    "sources": [
+      "02_講座制作/FAR論点解説コンテンツ/B1_台本_持分法.md（VIP B1）",
+      "Bridge2-2・Bridge3-8 台本"
+    ]
+  },
   "meta": {
     "page_title": "【復習シート】持分法（Equity Method）—投資勘定を動かす5つの要素",
     "badge": "FAR 復習シート｜Investments — Equity Method（ASC 323）",

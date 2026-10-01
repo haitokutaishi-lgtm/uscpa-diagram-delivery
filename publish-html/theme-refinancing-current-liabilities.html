@@ -3,351 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【図解】短期債務の借換え区分—financing agreement の上限と current / noncurrent</title>
+  <title>【復習シート】短期債務の借換え（Refinancing）—固定負債にできる条件と金額</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Noto Sans JP', sans-serif; }
-    .header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
-    .student-bubble { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 2px solid #ea580c; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-    .coach-bubble { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-    .mc-card { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem; background: #fafafa; }
-    details summary { cursor: pointer; font-weight: 600; color: #1d4ed8; }
-    .en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: 1rem; margin: 0.75rem 0; color: #334155; font-size: 0.875rem; line-height: 1.65; }
-    .worries-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #d97706; border-radius: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-    .dlg-row { display: grid; grid-template-columns: 4.25rem 1fr; gap: 0.85rem; align-items: start; margin: 1rem 0; }
-    .avatar-frame { border-radius: 0.75rem; width: 56px; height: 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-    .role-line { font-size: 0.7rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .student-bubble .role-line { color: #c2410c; }
-    .coach-bubble .role-line { color: #1d4ed8; }
-    .persona-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.8rem; color: #475569; margin-bottom: 1rem; line-height: 1.5; }
-    .persona-strip strong { color: #0f172a; }
-    .mistake-label { display: block; font-size: 0.75rem; font-weight: 700; color: #9a3412; margin-bottom: 0.35rem; }
-    .part-lead { font-size: 0.8rem; color: #64748b; border-left: 3px solid #94a3b8; padding-left: 0.75rem; margin-bottom: 1rem; line-height: 1.6; }
-    .section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 2rem; }
-    .diagram-visual--flow { padding: 0.75rem 1rem; margin: 0.75rem 0; }
-    .diagram-visual--flow svg { display: block; width: 100%; max-width: 32rem; margin: 0 auto; }
-    table.roll { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.75rem; }
-    table.roll th, table.roll td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
-    table.roll th { background: #f1f5f9; }
-    table.roll td.num { text-align: right; font-variant-numeric: tabular-nums; }
-    .step-pill { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #1d4ed8; color: #fff; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-    .mc-preview-box { background: rgba(255,255,255,.92); border: 2px solid #b45309; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
-    .mc-preview-box h3 { font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.75rem; }
-    .term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
-    .theory-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
-    .theory-block h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
-    .je-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; padding: 0.4rem 0.65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; margin: 0.35rem 0; color: #1e293b; }
-    .timeline-mini { font-size: 0.8rem; color: #475569; border-left: 3px solid #6366f1; padding-left: 0.75rem; margin: 0.75rem 0; line-height: 1.65; }
-    .bar-split { display: flex; height: 2rem; border-radius: 0.5rem; overflow: hidden; margin-top: 0.75rem; font-size: 0.7rem; font-weight: 700; color: #fff; }
-    .bar-nc { flex: 48; background: linear-gradient(90deg, #4f46e5, #6366f1); display: flex; align-items: center; justify-content: center; }
-    .bar-c { flex: 4; background: linear-gradient(90deg, #ea580c, #f97316); display: flex; align-items: center; justify-content: center; min-width: 2.75rem; }
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-  <header class="header-gradient text-white py-10 px-4">
-    <div class="max-w-3xl mx-auto">
-      <p class="text-xs font-semibold tracking-wide uppercase opacity-95 mb-3 py-2 px-3 rounded-lg bg-white/15 border border-white/20 inline-block">今回のテーマ：Liabilities — <span class="font-bold normal-case">short-term debt refinancing classification（短期債務の借換え区分）</span></p>
-      <p class="text-sm opacity-90 mb-2 flex items-center gap-2"><i data-lucide="book-marked" class="w-5 h-5"></i> USCPA FAR / 流動・非流動負債（ASC 470-10）</p>
-      <h1 class="text-2xl md:text-3xl font-bold leading-snug"><strong>短期債務</strong>の<strong>借換え</strong>—<span class="term-en">financing agreement</span> があるのに <strong>current</strong> が残る理由</h1>
-      <p class="mt-3 text-sm opacity-95 max-w-2xl leading-relaxed">試験では、決算日時点で <span class="term-en">long-term financing agreement</span> があり <span class="term-en">intent and ability</span> を示せても、担保比率などで<strong>借り換え上限（cap）</strong>が決まり、<strong>$520,000</strong> のうち <strong>$480,000</strong> だけが <span class="term-en">noncurrent</span>、残り <strong>$40,000</strong> が <span class="term-en">current</span> になる型がよく出ます。</p>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Liabilities — Refinancing of Short-term Obligations（ASC 470-10）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">短期債務の借換え：固定負債にできるのは「意思＋能力」が示せた金額だけ</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">テキスト 4-7 の復習用です。最初の図で「いつまでに・何があれば・いくら」固定負債にできるかを確認し、差がつく論点と引っかけを見たら、最後に問題で仕上げてください。</p>
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-4 py-10 space-y-10">
-    <nav class="rounded-xl bg-white border border-slate-200 p-4 text-sm">
-      <ul class="list-disc list-inside space-y-1 text-slate-600">
-        <li><a href="#worries" class="text-blue-700 hover:underline">① よくある悩み</a></li>
-        <li><a href="#three" class="text-blue-700 hover:underline">② まず覚える3つ</a></li>
-        <li><a href="#theory" class="text-blue-700 hover:underline">③ 会計の背景と仕訳</a></li>
-        <li><a href="#reading" class="text-blue-700 hover:underline">④ 計算の型</a></li>
-        <li><a href="#process" class="text-blue-700 hover:underline">⑤ 対話で整理</a></li>
-        <li><a href="#mc" class="text-blue-700 hover:underline">⑥ 理解確認MC</a></li>
-        <li><a href="#summary" class="text-blue-700 hover:underline">⑦ まとめ</a></li>
-      </ul>
-    </nav>
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 条件</a><a href="#je">3 表示一覧</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 チェック</a></nav>
 
-    <section id="worries" class="section-card worries-box border-amber-300">
-      <h2 class="text-lg font-bold text-amber-950 mb-3 flex items-center gap-2"><i data-lucide="coffee" class="w-5 h-5"></i> ① よくある悩み</h2>
-
-      <div class="mc-preview-box">
-        <h3><i data-lucide="file-question" class="w-4 h-4"></i> 試験でよく出る問題文の例</h3>
-        <div class="en-stem mb-3">
-          Ridgehill Corp. has a <strong>$520,000</strong> note payable due August 31 of the following year. Before year-end, it enters into a <strong>long-term financing agreement</strong> that permits refinancing the obligation. The agreement states that <strong>refinancing is permitted up to 75% of the appraised fair value</strong> of the pledged collateral. At the balance sheet date, the collateral is appraised at <strong>$640,000</strong>, and the company expects no issues utilizing the available capacity. What is the most appropriate split between <strong>current liabilities</strong> and <strong>noncurrent liabilities</strong> for this obligation on the year-end balance sheet under these facts?
-        </div>
-        <ul class="text-sm space-y-1.5">
-          <li><strong>A.</strong> Current $520,000 / Noncurrent $0</li>
-          <li><strong>B.</strong> Current $0 / Noncurrent $520,000</li>
-          <li><strong>C.</strong> Current $40,000 / Noncurrent $480,000</li>
-          <li><strong>D.</strong> Current $120,000 / Noncurrent $400,000</li>
-        </ul>
-      </div>
-
-      <p class="text-sm text-amber-950/90 mb-4 leading-relaxed">このあと、たくまがつまずきやすい<strong>3つの考え方の誤り</strong>を対話で整理します。<strong>誤解①〜③</strong>は、試験でよく見かける間違いの番号です（選択肢 A〜D の記号とは別です）。</p>
-
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たくま（受講生）</p>
-          <span class="mistake-label">誤解①　financing agreement があれば、全部 noncurrent にできる</span>
-          <p class="text-sm leading-relaxed"><span class="term-en">Long-term financing agreement</span> があるなら、$520,000 はすべて <span class="term-en">noncurrent</span>（選択肢 B）ではないですか？</p>
-        </div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">契約があっても、<strong>借り換えられる上限（cap）</strong>が別途書かれていることがあります。ここでは担保 $640,000 の 75% ＝ <strong>$480,000</strong> が上限なので、$520,000 全部を noncurrent にできません。超えた <strong>$40,000</strong> は current のままです。</p>
-        </div>
-      </div>
-
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たくま（受講生）</p>
-          <span class="mistake-label">誤解②　一年内満期だから、financing があっても全部 current</span>
-          <p class="text-sm leading-relaxed">元の手形は翌年8月満期なので、結局 <strong>current $520,000</strong>（選択肢 A）が正解では？</p>
-        </div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">決算日時点で <span class="term-en">intent and ability</span> を示せるなら、<strong>借換可能な範囲</strong>は noncurrent に振り分けられます。A は financing の効果を無視した誤答です。全部 current にする必要はありません。</p>
-        </div>
-      </div>
-
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たくま（受講生）</p>
-          <span class="mistake-label">誤解③　cap の計算を間違える（残高×率、または差額の取り方）</span>
-          <p class="text-sm leading-relaxed">75% を $520,000 にかけて $390,000… あ、$640,000 × 75% ＝ $480,000 ですよね。current は $520,000 − $480,000 ＝ $40,000。選択肢 D の $120,000 はどう出るんですか？</p>
-        </div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">cap は<strong>担保の fair value × 契約比率</strong>です。残高 $520,000 に 75% をかけるのは誤解③の典型です。D は $640,000 − $520,000 ＝ $120,000 のように<strong>担保と残高の差</strong>を current にしてしまうパターンです。正しくは <strong>残高 − min(残高, cap)</strong> です。</p>
-        </div>
-      </div>
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：B/S日から財務諸表の発行日までに何が起きたか</h2>
+      <p class="lead">借換えの問題は、B/S日（期末）から財務諸表の発行日までの間に「長期で借り換える能力」が示されたかどうかで決まります。下の例で、時系列と金額の分かれ方を確認してください。</p>
+      <div class="facts"><p class="font-bold mb-1">例：Corvin Co. の Year 1 の B/S（12月31日）</p><ul><li>Year 2 の6月30日が返済期限の借入金（<span class="en">short-term obligation</span>）$800,000 があり、長期で借り換えるつもりでいる</li><li>Year 2 の2月15日、銀行と借換契約を締結。担保価値の75%まで借りられ、Year 4 まで解約されない契約。担保に出す土地の価値は $1,000,000</li><li>Year 1 の財務諸表は Year 2 の3月20日に発行</li></ul></div>
+      <div class="diagram-visual mb-3"><div class="tl"><div class="tl-item muted"><span class="tl-date">Year 1  12/31</span>B/S日。$800,000 は本来は流動負債</div><div class="tl-item key"><span class="tl-date">Year 2  2/15</span>借換契約を締結（解約不能・Year 4 まで）→ 能力が示された</div><div class="tl-item key"><span class="tl-date">Year 2  3/20</span>財務諸表の発行日。ここまでに起きたことで判断</div><div class="tl-item muted"><span class="tl-date">Year 2  6/30</span>返済期限。発行日より後の出来事は判断に使わない</div></div><div class="tl-window">12/31〜3/20 の間に「長期の借入・株式の発行」か「条件を満たす借換契約」があれば、その金額まで固定負債にできる</div></div>
+      <div class="diagram-visual"><div class="split-wrap"><p class="split-title">B/S での表示（$800,000 の内訳）</p><div class="split"><div class="s-teal" style="width:93.75%">固定負債 750,000</div><div class="s-red" style="width:6.25%"></div></div><div class="split-legend"><span style="--c:#0f766e">固定負債（契約で借りられる額 $1,000,000 × 75%） <b class="en">$750,000</b></span><span style="--c:#dc2626">流動負債（借りられない残り） <b class="en">$50,000</b></span></div></div></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">覚える式</p><p class="en text-[13px]">固定負債にできる額 ＝ 短期債務の額 と 借換えで実際に調達できる額 の小さい方</p><p class="en text-[13px]">流動負債に残る額 ＝ 短期債務 − 固定負債にできる額</p></div>
+      
     </section>
 
-    <section id="three" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="star" class="w-6 h-6 text-amber-500"></i> ② まず覚える3つ</h2>
-      <p class="part-lead">決算日時点の短期債務を current / noncurrent に分ける型（ASC 470-10）です。</p>
-      <ol class="space-y-5 text-sm leading-relaxed">
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</span>
-          <div>
-            <p class="font-bold text-slate-900">期末日時点で <span class="term-en">intent and ability</span> を示せるか</p>
-            <p class="text-slate-600 mt-1"><span class="term-en">Intent</span> は長期借換の意思、<span class="term-en">ability</span> は長期資金を確保できる具体的な裏付け（<span class="term-en">financing agreement</span>、<span class="term-en">committed line of credit</span>、実際の借換えなど、設問が認める証拠）です。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</span>
-          <div>
-            <p class="font-bold text-slate-900"><span class="term-en">Borrowing capacity</span> の上限（cap）を先に計算する</p>
-            <p class="text-slate-600 mt-1">担保の <span class="term-en">fair value × covenant で決まるパーセント</span> などが書かれていたら、noncurrent に振り分けてよい金額の<strong>天井</strong>が先に決まります（誤解③の回避）。</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</span>
-          <div>
-            <p class="font-bold text-slate-900">noncurrent ＝ min(残高, cap)、current ＝ 残り</p>
-            <p class="text-slate-600 mt-1">上限を超えた分は、決算日時点ではまだ短期性が残るため <span class="term-en">current liabilities</span> に計上し続けます（誤解①の回避）。</p>
-          </div>
-        </li>
-      </ol>
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>条件：意思と能力の両方が必要</h2>
+      
+      <div class="rule">短期債務を固定負債（<span class="en">noncurrent</span>）に分類できるのは、① 長期で借り換える<b>意思</b>（<span class="en">intent to refinance</span>）があり、② その<b>能力</b>（<span class="en">ability</span>）が B/S日後・財務諸表の発行前に示された場合だけです。</div>
+      <div class="grid md:grid-cols-2 gap-3 mt-3 text-sm leading-relaxed"><div class="point mb-0"><p class="font-bold text-teal-800 mb-1">能力の示し方A：実際に調達した</p><ul class="list-disc ml-5 text-[13px]"><li>B/S日後、発行日までに長期借入を実行した</li><li>B/S日後、発行日までに株式（<span class="en">equity securities</span>）を発行した</li><li>どちらも「借換えのため」の調達であること</li></ul></div><div class="point mb-0"><p class="font-bold text-teal-800 mb-1">能力の示し方B：借換契約を結んだ</p><ul class="list-disc ml-5 text-[13px]"><li>B/S日から1年（または営業循環期間）以内に契約が切れない</li><li>貸手が自由に解約できない（借手の違反がある場合を除く）</li><li>B/S日時点で契約違反がない（違反があれば免除を得ている）</li></ul></div></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">テキストの設例は「契約後に実際に借入を実行した」ケース、この図の例は「契約を結んだ」ケースです。どちらも能力を示す方法として認められます。</p>
+      
     </section>
 
-    <section id="theory" class="section-card border-indigo-100">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="landmark" class="w-6 h-6 text-indigo-600"></i> ③ 会計の背景と仕訳</h2>
-      <p class="part-lead">②の3つは、ここでの<strong>決算日時点の貸借対照表区分</strong>に対応します。計算の型の前に、なぜ「借換の意思・能力」だけでは足りないかを押さえます。</p>
-      <div class="theory-block">
-        <h3><i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> なぜこの処理か（会計の背景）</h3>
-        <p class="text-sm text-slate-700 leading-relaxed">本来、決算日から1年以内に満期を迎える負債は <span class="term-en">current liabilities</span> です。ただし、決算日時点で<strong>長期借換の意思と能力</strong>を示せ、かつ財務諸表発行前に借換が完了（または確実な financing が存在）する場合、<strong>借換可能な部分</strong>は <span class="term-en">noncurrent liabilities</span> として表示できます。一方、融資契約に<strong>借入上限</strong>があるときは、上限を超える部分はまだ短期性が残るため current のままです（ASC 470-10 の考え方）。</p>
-      </div>
-      <p class="timeline-mini"><strong>処理の順序：</strong> ①決算日の短期債務残高・満期を確認 → ②<span class="term-en">financing agreement</span> 等で intent / ability を確認 → ③担保比率などから cap を計算 → ④BS 上で current / noncurrent に分割表示</p>
-      <div class="theory-block">
-        <h3><i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> 典型仕訳・表示（Ridgehill 例）</h3>
-        <p class="text-sm text-slate-600 mb-2 leading-relaxed">区分変更は多くの場合<strong>表示上の整理</strong>ですが、試験では次の内訳を BS に計上します（①の数字と一致）：</p>
-        <p class="text-sm text-slate-600 mb-2 leading-relaxed"><strong>決算日 BS 表示（$520,000 note payable）：</strong></p>
-        <p class="je-line">Current liabilities — Notes payable (current portion) &nbsp;&nbsp;&nbsp;&nbsp; 40,000</p>
-        <p class="je-line">Noncurrent liabilities — Notes payable (long-term portion) &nbsp; 480,000</p>
-        <p class="text-xs text-slate-500 mt-2 leading-relaxed">合計 $520,000。noncurrent 側 $480,000 ＝ min($520,000, cap $480,000)。current 側 $40,000 ＝ 残高 − noncurrent（誤解①・②の回避）。</p>
-      </div>
-      <p class="text-sm text-slate-700 leading-relaxed mt-4">次の<strong>④ 計算の型</strong>は、上記の current $40,000 / noncurrent $480,000 を求める数値手順です。</p>
+    <section id="je" class="section-card">
+      <h2><span class="sec-no">3</span>表示の判断一覧（主な場面）</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>B/S日後〜発行日に起きたこと</th><th>B/S での分類</th><th>ポイント</th></tr></thead><tbody><tr><td>解約不能の借換契約を締結（期限は1年超）</td><td>契約で借りられる額まで固定負債</td><td>担保の%など上限があれば、その額まで</td></tr><tr><td>長期借入を実行し、その資金で返済</td><td>固定負債</td><td>借換えのための調達であること</td></tr><tr><td>株式を発行し、その資金で返済</td><td>固定負債（株式の調達額まで）</td><td>資本の部には入れません。負債の分類が変わるだけです</td></tr><tr><td>手元の現金で返済し、その後に長期借入</td><td>流動負債</td><td>返済に流動資産を使ったので、借換えにはなりません</td></tr><tr><td>貸手がいつでも解約できる契約</td><td>流動負債</td><td>能力が示されたことになりません</td></tr><tr><td>発行日より後に借換契約を締結</td><td>流動負債</td><td>発行日以降の出来事は判断に使いません</td></tr></tbody></table></div>
+      
     </section>
 
-    <section id="reading" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-6 h-6 text-indigo-600"></i> ④ 計算の型</h2>
-      <p class="text-sm text-slate-700 mb-4 leading-relaxed">Ridgehill の例で、<span class="term-en">current</span> / <span class="term-en">noncurrent</span> の分割を求める<strong>5ステップ</strong>です。</p>
-
-      <ol class="space-y-3 text-sm text-slate-800 mb-6 leading-relaxed">
-        <li class="flex gap-2 items-start"><span class="step-pill">1</span><span>問題文から<strong>短期債務の残高</strong>（$520,000）と、決算日から<strong>1年以内の満期</strong>であることを確認する。</span></li>
-        <li class="flex gap-2 items-start"><span class="step-pill">2</span><span><span class="term-en">Long-term financing agreement</span> など、<strong>intent and ability</strong> を示す証拠があるか確認する（なければ原則すべて current）。</span></li>
-        <li class="flex gap-2 items-start"><span class="step-pill">3</span><span>契約条件から<strong>cap</strong> を計算する。担保 <span class="term-en">fair value</span> $640,000 × 75% ＝ <strong>$480,000</strong>（誤解③：残高に率をかけない）。</span></li>
-        <li class="flex gap-2 items-start"><span class="step-pill">4</span><span><strong>Noncurrent</strong> ＝ min(残高, cap) ＝ min($520,000, $480,000) ＝ <strong>$480,000</strong>。</span></li>
-        <li class="flex gap-2 items-start"><span class="step-pill">5</span><span><strong>Current</strong> ＝ 残高 − noncurrent ＝ $520,000 − $480,000 ＝ <strong>$40,000</strong>。合計 $480,000 + $40,000 ＝ $520,000 を確認する。</span></li>
-      </ol>
-
-      <div class="diagram-visual diagram-visual--flow rounded-xl border-2 border-indigo-200/90 bg-gradient-to-br from-white via-indigo-50/40 to-emerald-50/30 shadow-sm" role="img" aria-label="520,000 ドルの負債を noncurrent 480,000 と current 40,000 に分割する計算">
-        <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="20" y="20" width="440" height="44" rx="8" fill="#64748b"/>
-          <text x="240" y="38" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Note payable (total)</text>
-          <text x="240" y="54" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">$520,000</text>
-          <line x1="240" y1="64" x2="240" y2="82" stroke="#64748b" stroke-width="2"/>
-          <text x="240" y="96" text-anchor="middle" fill="#475569" font-size="10" font-weight="600">cap = $640,000 × 75% = $480,000</text>
-          <rect x="30" y="108" width="360" height="52" rx="8" fill="#4f46e5"/>
-          <text x="210" y="130" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">Noncurrent</text>
-          <text x="210" y="148" text-anchor="middle" fill="#c7d2fe" font-size="13" font-weight="700">$480,000</text>
-          <rect x="400" y="108" width="60" height="52" rx="8" fill="#ea580c"/>
-          <text x="430" y="130" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">Current</text>
-          <text x="430" y="148" text-anchor="middle" fill="#fed7aa" font-size="12" font-weight="700">$40k</text>
-          <text x="240" y="172" text-anchor="middle" fill="#166534" font-size="11" font-weight="700">$480,000 + $40,000 = $520,000</text>
-        </svg>
-      </div>
-
-      <div class="rounded-xl border border-slate-200 bg-white p-4 mt-4">
-        <p class="text-sm font-semibold text-slate-800 mb-1">$520,000 の分割（棒グラフ）</p>
-        <div class="bar-split" role="img" aria-label="480,000 ドルが noncurrent、40,000 ドルが current">
-          <span class="bar-nc">Noncurrent $480,000</span>
-          <span class="bar-c">$40k</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-2 text-center">左 $480,000 ＋ 右 $40,000 ＝ 合計 $520,000（正解 C）</p>
-      </div>
-
-      <p class="text-sm font-semibold text-slate-800 mt-6 mb-2">計算例（Ridgehill・①の試験問題と同じ数字）</p>
-      <table class="roll">
-        <thead>
-          <tr><th>項目</th><th class="num">金額</th><th>メモ</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>note payable 残高</td><td class="num">$520,000</td><td>Step 1</td></tr>
-          <tr><td>financing agreement（intent / ability）</td><td class="num">あり</td><td>Step 2</td></tr>
-          <tr><td>cap（$640,000 × 75%）</td><td class="num">$480,000</td><td>Step 3・誤解③</td></tr>
-          <tr><td>noncurrent ＝ min(残高, cap)</td><td class="num">$480,000</td><td>Step 4・誤解①</td></tr>
-          <tr><td>current ＝ 残高 − noncurrent</td><td class="num">$40,000</td><td>Step 5・誤解②</td></tr>
-        </tbody>
-      </table>
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>差がつく論点</h2>
+      <p class="lead">条件を覚えていても、金額と時系列の読み方で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>固定負債にできる金額には上限がある</div><div class="rule">固定負債にできるのは、借換えで<b>実際に調達できる額まで</b>です。契約に「担保価値の◯%まで」などの制限があれば、その額が上限になります。調達できる額が変動する契約では、合理的に見積もった最低額を使います。</div><div class="calc">1の例：$1,000,000 × 75% ＝ $750,000 が上限 → 固定負債 $750,000、流動負債 $50,000</div><div class="miss"><b>こう間違える：</b>契約の融資枠（例えば「$800,000 まで」）だけを見て、担保の75%制限を見落とし $800,000 全額を固定負債にしてしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>「先に現金で返して、後から借りた」は借換えではない</div><div class="rule">B/S日後に、手元の現金など<b>流動資産で返済した</b>場合は、その後に長期借入をしても流動負債のままです。返済に運転資本を使ってしまったので、「流動資産を使わずに済んだ」とは言えないからです。</div><div class="calc">例：$300,000 を2月10日に現金で返済 → 2月20日に10年債 $300,000 を発行して資金を補てん → B/S では $300,000 を流動負債</div><div class="miss"><b>こう間違える：</b>発行日までに長期の資金調達をしているので固定負債にしてしまう。順番（返済が先か、調達が先か）を必ず確認してください。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>株式の発行でも借換えになる</div><div class="rule">B/S日後、発行日までに株式を発行し、その資金で短期債務を返す場合も、調達額までは流動負債から外します。表示は固定負債（または流動負債から除外）で、<b>資本の部には入れません</b>。</div><div class="calc">例：短期債務 $400,000、2月1日に株式発行で $250,000 調達し返済に充当 → 流動負債 $150,000、固定負債扱い $250,000</div><div class="miss"><b>こう間違える：</b>「株式で調達したなら資本に入る」と考えて、B/S日の負債から $250,000 を消してしまう。B/S日時点では負債は残っており、分類が変わるだけです。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>判断に使えるのは発行日までの出来事だけ</div><div class="rule">能力を示す出来事は、<b>B/S日後から財務諸表の発行日まで</b>に起きている必要があります。B/S日より前に契約していてももちろん構いませんが、発行日より後の契約や借入は判断に使えません。</div><div class="miss"><b>こう間違える：</b>問題文の日付を並べずに読み、発行日（例：3月20日）より後の4月1日の借換契約を根拠に固定負債にしてしまう。日付は必ず時系列に並べ直してください。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>契約違反で返済を求められる長期債務（関連論点）</div><div class="rule">B/S日時点で契約条項（<span class="en">covenant</span>）に違反し、貸手がすぐに返済を求められる長期債務は<b>流動負債</b>になります。ただし、貸手から1年超の免除（<span class="en">waiver</span>）を得ている場合や、猶予期間内に違反が解消される可能性が高い場合は固定負債のままです。</div><div class="miss"><b>こう間違える：</b>「満期が5年後だから固定負債」と満期だけで判断する。返済を求められる状態（<span class="en">callable</span>）かどうかを先に確認してください。</div></div>
+      
     </section>
 
-    <section id="process" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="message-circle" class="w-6 h-6 text-rose-500"></i> ⑤ 対話で整理</h2>
-      <div class="persona-strip">
-        <span><strong>たくま</strong>：誤解①〜③のあと、選択肢 A と B の違いをはっきりさせたいです。</span>
-        <span><strong>あおい先生</strong>：Ridgehill では <strong>$480,000（noncurrent）＋ $40,000（current）</strong> が正解 C です。</span>
-      </div>
-
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed">選択肢 B（Current $0 / Noncurrent $520,000）は、誤解①そのものですよね？</p>
-        </div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">その通りです。<span class="term-en">Financing agreement</span> があるから<strong>全部 noncurrent</strong>、と決め打ちしないでください。cap $480,000 を超える $40,000 は current に残ります。</p>
-        </div>
-      </div>
-
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed">選択肢 A は、financing を無視して全部 current にしたパターン（誤解②）ですね。D の $120,000 は？</p>
-        </div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed">$640,000 − $520,000 ＝ $120,000 のように、<strong>担保と残高の差</strong>を current にしてしまう誤答です（誤解③の別形）。current は<strong>残高 − noncurrent</strong> で $40,000。正解は <strong>C</strong> です。</p>
-        </div>
-      </div>
-
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-sky-100 bg-sky-50 p-0" aria-hidden="true"><img src="avatars/takuma-dialog.png" alt="たくま" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="student-bubble mb-0">
-          <p class="role-line">たくま（受講生）</p>
-          <p class="text-sm leading-relaxed">概念問では <span class="term-en">ability</span> の証拠は何を選べばいいですか？</p>
-        </div>
-      </div>
-      <div class="dlg-row">
-        <div class="avatar-col"><div class="avatar-frame overflow-hidden border border-slate-200 bg-slate-100 p-0" aria-hidden="true"><img src="avatars/aoi-dialog.png" alt="あおい先生" width="56" height="56" class="h-full w-full object-contain object-center"></div></div>
-        <div class="coach-bubble mb-0">
-          <p class="role-line">あおい先生（コーチ）</p>
-          <p class="text-sm leading-relaxed"><span class="term-en">Ability</span> は「長期資金を確保できるか」の話です。試験では <span class="term-en">financing agreement</span>、<span class="term-en">committed line of credit</span>、実際の借換えなど、<strong>資金の裏付け</strong>を選びます。広告計画や無関係な議事録は典型の誤答です。</p>
-        </div>
-      </div>
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>intends to refinance</td><td>意思だけでは足りない。能力を示す出来事が発行日までにあるか</td><td>意思があるだけで固定負債にする</td></tr><tr><td>up to 80% of the value of the collateral</td><td>上限 ＝ 担保価値 × %。短期債務の額と小さい方</td><td>融資枠の額や債務の全額で固定負債にする</td></tr><tr><td>paid … with cash on hand, then issued bonds</td><td>流動資産で先に返済 → 流動負債のまま</td><td>後の長期借入を見て固定負債にする</td></tr><tr><td>issued common stock … used the proceeds</td><td>調達額まで流動負債から外す（資本には入れない）</td><td>負債を消す／資本に足す</td></tr><tr><td>financial statements were issued on …</td><td>判断はこの日まで。日付を時系列に並べる</td><td>発行日より後の出来事を使う</td></tr><tr><td>cancelable at the lender's discretion</td><td>能力が示されたことにならない → 流動負債</td><td>契約があるだけで固定負債にする</td></tr><tr><td>agreement expires within one year</td><td>1年以内に切れる契約は能力の根拠にならない</td><td>契約があるだけで固定負債にする</td></tr><tr><td>violated a debt covenant</td><td>返済を求められるなら流動負債。免除（waiver）を確認</td><td>満期だけで固定負債にする</td></tr></tbody></table></div>
+      
     </section>
 
     <section id="mc" class="section-card">
-      <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-6 h-6 text-teal-600"></i> ⑥ 理解確認MC</h2>
-      <p class="text-sm text-slate-600 mb-6 leading-relaxed">オリジナル問題です。<strong>ASC 470-10</strong> の考え方に沿って作成しています。</p>
-
+      <h2><span class="sec-no">6</span>確認問題（初見の数字）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 470-10 の考え方に沿って作っています。</p>
       <div class="mc-card">
-        <p class="font-bold text-slate-900 mb-2">問題 1（計算 — current / noncurrent の分割）</p>
-        <div class="en-stem mb-4">
-          Ridgehill Corp. has a <strong>$520,000</strong> note payable due August 31 of the following year. Before year-end, it enters into a <strong>long-term financing agreement</strong> that permits refinancing the obligation. The agreement states that <strong>refinancing is permitted up to 75% of the appraised fair value</strong> of the pledged collateral. At the balance sheet date, the collateral is appraised at <strong>$640,000</strong>, and the company expects no issues utilizing the available capacity. What is the most appropriate split between <strong>current liabilities</strong> and <strong>noncurrent liabilities</strong> for this obligation on the year-end balance sheet under these facts?
-        </div>
-        <ul class="text-sm space-y-2 mb-4">
-          <li><strong>A.</strong> Current $520,000 / Noncurrent $0</li>
-          <li><strong>B.</strong> Current $0 / Noncurrent $520,000</li>
-          <li><strong>C.</strong> Current $40,000 / Noncurrent $480,000</li>
-          <li><strong>D.</strong> Current $120,000 / Noncurrent $400,000</li>
-        </ul>
-        <details>
-          <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 space-y-2 leading-relaxed">
-            <p>Step 3：cap ＝ $640,000 × 75% ＝ <strong>$480,000</strong>。</p>
-            <p>Step 4：noncurrent ＝ min($520,000, $480,000) ＝ <strong>$480,000</strong>。</p>
-            <p>Step 5：current ＝ $520,000 − $480,000 ＝ <strong>$40,000</strong>。正解 <strong>C</strong>。</p>
-            <p class="text-slate-600">A＝誤解②（financing 無視）。B＝誤解①（全部 noncurrent）。D＝誤解③（cap または差額の取り方を誤る）。</p>
-          </div>
-        </details>
+        <p class="mc-label">問題1｜借換えできる金額の上限</p>
+        <p class="en-stem">Rexo Corp. has a $600,000 note payable due March 1, Year 2, which it intends to refinance on a long-term basis. On January 20, Year 2, Rexo entered into a noncancelable financing agreement that expires in Year 5 and permits Rexo to borrow up to 80% of the value of inventory pledged as collateral. The inventory has a value of $500,000. Rexo's Year 1 financial statements were issued on February 25, Year 2. What amount of the note should be classified as noncurrent at December 31, Year 1?</p>
+        <div class="choices">A. $0<br>B. $400,000<br>C. $500,000<br>D. $600,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Rexo社には Year 2 の3月1日が期限の手形債務 $600,000 があり、長期で借り換えるつもりでいる。Year 2 の1月20日、Year 5 まで解約されない借換契約を締結した。担保に出す棚卸資産の価値の80%まで借りられる。棚卸資産の価値は $500,000。Year 1 の財務諸表は Year 2 の2月25日に発行された。Year 1 の12月31日に固定負債に分類すべき金額はいくらか。<br>A. $0　B. $400,000　C. $500,000　D. $600,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$400,000）</b><br>借りられる上限：500,000 × 80% ＝ 400,000。債務 600,000 との小さい方 → <b>400,000</b><br>A：契約が B/S日後なので無効と考えている（発行日までの契約は使えます）<br>C：担保の%を掛けていない<br>D：上限を考えずに全額を固定負債にしている（論点1）</div></details>
       </div>
-
       <div class="mc-card">
-        <p class="font-bold text-slate-900 mb-2">問題 2（概念 — ability の証拠）</p>
-        <div class="en-stem mb-4">
-          Which item best represents evidence of an entity's <strong>ability</strong> to refinance a short-term obligation <strong>on a long-term basis</strong> as commonly tested on the CPA Exam?
-        </div>
-        <ul class="text-sm space-y-2 mb-4">
-          <li><strong>A.</strong> A marketing plan for an advertising campaign scheduled only in the next fiscal year</li>
-          <li><strong>B.</strong> A financing agreement (or similar arrangement) that demonstrates available long-term financing under the facts specified in the question</li>
-          <li><strong>C.</strong> Shareholders' meeting minutes unrelated to financing</li>
-          <li><strong>D.</strong> A copy of the income tax return only</li>
-        </ul>
-        <details>
-          <summary>解説を開く</summary>
-          <div class="mt-3 text-sm text-slate-700 border-t pt-3 leading-relaxed">
-            <p><span class="term-en">Ability</span> は長期資金を確保できる具体的な裏付けです。試験では <span class="term-en">financing agreement</span> など、設問が認める<strong>資金の確保</strong>を選びます。正解 <strong>B</strong>。</p>
-          </div>
-        </details>
+        <p class="mc-label">問題2｜先に現金で返済したケース</p>
+        <p class="en-stem">Halden Co. had a $300,000 note payable due February 10, Year 2. On February 10, Year 2, Halden paid the note using cash on hand. On February 20, Year 2, Halden issued $300,000 of 10-year bonds to replenish its cash. Halden's Year 1 financial statements were issued on March 15, Year 2. How should the note be reported in Halden's December 31, Year 1 balance sheet?</p>
+        <div class="choices">A. As a noncurrent liability of $300,000<br>B. As a current liability of $300,000<br>C. Excluded from liabilities and disclosed in the notes only<br>D. As a current liability of $150,000 and a noncurrent liability of $150,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Halden社には Year 2 の2月10日が期限の手形債務 $300,000 があった。2月10日、手元の現金で返済した。2月20日、現金を補てんするため10年債 $300,000 を発行した。Year 1 の財務諸表は3月15日に発行された。Year 1 の12月31日の B/S で、この手形はどう表示すべきか。<br>A. 固定負債 $300,000<br>B. 流動負債 $300,000<br>C. 負債から除き、注記のみ<br>D. 流動負債 $150,000、固定負債 $150,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>流動資産（現金）で先に返済しているので、後から長期の社債を発行しても借換えにはなりません（論点2）。<br>A：後の社債発行だけを見ている<br>C：B/S日時点では負債として存在します<br>D：分ける根拠がありません</div></details>
       </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜株式の発行による借換え</p>
+        <p class="en-stem">At December 31, Year 1, Pelt Inc. had a $400,000 note payable due April 1, Year 2. On February 1, Year 2, Pelt issued common stock for $250,000 and used the proceeds to repay part of the note. Pelt's Year 1 financial statements were issued on March 1, Year 2. What amount of the note should Pelt report as a current liability at December 31, Year 1?</p>
+        <div class="choices">A. $0<br>B. $150,000<br>C. $250,000<br>D. $400,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Pelt社には Year 1 の12月31日時点で、Year 2 の4月1日が期限の手形債務 $400,000 があった。Year 2 の2月1日、普通株式を発行して $250,000 を調達し、手形の一部の返済に充てた。Year 1 の財務諸表は3月1日に発行された。Year 1 の12月31日に流動負債として表示すべき金額はいくらか。<br>A. $0　B. $150,000　C. $250,000　D. $400,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$150,000）</b><br>株式で調達した 250,000 は流動負債から外す → 400,000 − 250,000 ＝ <b>150,000</b>（論点3）<br>A：全額を借り換えたと考えている<br>C：外す額と残る額を取り違えている<br>D：株式の発行は借換えにならないと考えている</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜能力を示さない契約（概念）</p>
+        <p class="en-stem">A company intends to refinance a short-term obligation on a long-term basis. Which of the following financing agreements, entered into before the financial statements are issued, would NOT demonstrate the ability to refinance?</p>
+        <div class="choices">A. An agreement that does not expire within one year of the balance sheet date<br>B. An agreement that the lender may cancel at its discretion<br>C. An agreement under which the company was not in violation at the balance sheet date<br>D. An agreement with a lender that is expected to be financially capable of honoring it</div>
+        <details><summary>和訳を見る</summary><div class="body">ある会社は短期債務を長期で借り換えるつもりでいる。財務諸表の発行前に結んだ次の借換契約のうち、借換えの能力を示さないものはどれか。<br>A. B/S日から1年以内に期限が切れない契約<br>B. 貸手が自由に解約できる契約<br>C. B/S日時点で会社が契約に違反していない契約<br>D. 契約を履行できる財務力があると見込まれる貸手との契約</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>貸手が自由に解約できる契約では、長期で借りられる保証がありません。<br>A・C・D は、いずれも能力を示す契約の条件です。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="19">
+        <p class="mc-label">問題5｜TBS形式：複数の短期債務を分類する</p>
+        <p class="text-[13px] leading-relaxed mb-2">Mira Co. の Year 1 の12月31日の B/S です。財務諸表は Year 2 の3月10日に発行。<br>Note A $200,000（5月1日期限）：2月5日に5年債 $200,000 を発行し、その資金で期限に返済する予定<br>Note B $150,000（1月31日期限）：1月31日に手元の現金で返済。2月20日に長期借入 $150,000 を実行<br>Note C $500,000（6月30日期限）：2月1日に、Year 4 まで解約されない借換契約（上限 $350,000）を締結<br>空欄に金額を入れて「答え合わせ」を押してください（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>Note A のうち流動負債</td><td class="num"><input inputmode="numeric" data-ans="0" aria-label="Note A のうち流動負債"></td></tr><tr><td>Note B のうち流動負債</td><td class="num"><input inputmode="numeric" data-ans="150000" aria-label="Note B のうち流動負債"></td></tr><tr><td>Note C のうち流動負債</td><td class="num"><input inputmode="numeric" data-ans="150000" aria-label="Note C のうち流動負債"></td></tr><tr><th>流動負債の合計</th><td class="num"><input inputmode="numeric" data-ans="300000" aria-label="流動負債の合計"></td></tr><tr><th>固定負債に分類する合計</th><td class="num"><input inputmode="numeric" data-ans="550000" aria-label="固定負債に分類する合計"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">Note A：発行日前に長期の社債で調達 → 全額固定負債（流動 0）<br>Note B：先に現金で返済 → 流動負債 150,000（論点2）<br>Note C：上限 350,000 まで固定負債、残り 150,000 は流動負債（論点1）<br>流動負債 0 ＋ 150,000 ＋ 150,000 ＝ <b>300,000</b><br>固定負債 200,000 ＋ 350,000 ＝ <b>550,000</b></div></details>
+      </div>
+      
     </section>
 
-    <section id="summary" class="section-card border-2 border-slate-300">
-      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-6 h-6 text-emerald-600"></i> ⑦ この図解のまとめ</h2>
-      <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 leading-relaxed">
-        <li>決算日から1年以内満期の負債でも、<span class="term-en">intent and ability</span> を示せれば、借換可能な部分は <span class="term-en">noncurrent</span> に振り分けられる（③の背景）。</li>
-        <li><span class="term-en">Financing agreement</span> があっても、<strong>cap（借入上限）</strong>を超える分は current のまま（誤解①）。</li>
-        <li>cap ＝ 担保 <span class="term-en">fair value × 契約比率</span>。残高に率をかけない（誤解③）。</li>
-        <li>noncurrent ＝ min(残高, cap)、current ＝ 残高 − noncurrent。Ridgehill では $480,000 + $40,000 ＝ $520,000。</li>
-        <li>financing を無視して全部 current にするのは誤解②（選択肢 A）。</li>
-        <li><span class="term-en">Ability</span> の証拠は <span class="term-en">financing agreement</span> 等の長期資金の裏付け（MC 問題 2＝B）。</li>
-      </ol>
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c20-1"><label for="c20-1">固定負債にできる2つの条件（意思と能力）と、能力の示し方2通りを言える</label></li><li><input type="checkbox" id="c20-2"><label for="c20-2">担保の%などの上限がある契約で、固定負債にできる額を計算できる</label></li><li><input type="checkbox" id="c20-3"><label for="c20-3">「先に現金で返済してから借りた」が流動負債のままになる理由を説明できる</label></li><li><input type="checkbox" id="c20-4"><label for="c20-4">株式の発行で借り換えたときの表示（資本には入れない）を説明できる</label></li><li><input type="checkbox" id="c20-5"><label for="c20-5">判断に使えるのは財務諸表の発行日までの出来事だけだと言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
     </section>
 
-    <footer class="text-center text-xs text-slate-500 pb-12"><p>オリジナル教材。第三者問題・商用テキストの転載なし。</p></footer>
   </main>
-  <script>lucide.createIcons();</script>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input');
+        let ok = 0;
+        inputs.forEach((el) => {
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
 </body>
 </html>
