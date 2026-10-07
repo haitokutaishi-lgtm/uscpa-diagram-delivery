@@ -1,4 +1,4 @@
-# topic-spec や knowledge/ が変わったら、knowledge/index.md と traps-index.md を作り直してコミットする
+# topic-spec や knowledge/ が変わったら、knowledge/index.md・traps-index.md と毎日問題のストック（daily-question-bank.json）を作り直してコミットする
 name: ナレッジ索引の更新
 
 on:
@@ -9,6 +9,8 @@ on:
       - "knowledge/topics/**"
       - "ops/diagram-publish-manifest.json"
       - "ops/build_knowledge_index.py"
+      - "ops/build_daily_bank.py"
+      - "schedule/daily-extra-questions.json"
   workflow_dispatch:
 
 permissions:
@@ -27,13 +29,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: Build index
-        run: python ops/build_knowledge_index.py
+        run: |
+          python ops/build_knowledge_index.py
+          python ops/build_daily_bank.py
       - name: Commit if changed
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add knowledge/index.md knowledge/traps-index.md
+          git add knowledge/index.md knowledge/traps-index.md schedule/daily-question-bank.json
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0
