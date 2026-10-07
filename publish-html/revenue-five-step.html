@@ -137,7 +137,10 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
 .matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
 .matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
 .matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
-.matrix .mx-row { display: flex; align-items: center; justify-content: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
 .matrix .mx-cell { text-align: center; }
 .matrix .mx-cell.ok { background: #ecfdf5; }
 .matrix .mx-cell.mid { background: #fffbeb; }
@@ -146,6 +149,9 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
 table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
 table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
 table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
 
   </style>
 </head>

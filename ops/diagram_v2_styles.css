@@ -139,3 +139,6 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
 table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
 table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
 table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }

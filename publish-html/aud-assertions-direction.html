@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】アサーションと手続の向き—過大計上は帳簿から、過小計上は証憑から</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Assertions and Direction of Testing（AU-C 315 / 500）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">アサーションと手続の向き：過大計上（実在性・発生）は帳簿から証憑へ、過小計上（網羅性）は証憑から帳簿へ</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">この論点の復習用です。最初の図で手続の向きとアサーションの関係を確認し、差がつく論点を見たら、最後に問題で仕上げてください。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 アサーション一覧</a><a href="#proc">3 手続との対応</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：どちらから出発するかで、見つかる虚偽表示が変わる</h2>
+      <p class="lead">取引は「受注 → 出荷 → 請求 → 帳簿」の順に記録されます。テストの出発点（サンプルを取る所）を帳簿にするか証憑にするかで、確かめられるアサーションが決まります。</p>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>受注伝票（<span class="en">sales order</span>）</b><p>顧客から注文を受け、与信を承認する</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>出荷指示書・出荷記録（<span class="en">shipping document</span>）</b><p>商品を出荷した証拠。売上の発生・カットオフの決め手</p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>請求書（<span class="en">sales invoice</span>）</b><p>出荷した数量・単価で請求する</p></div></div><div class="flow-step key"><span class="flow-no">4</span><div><b>売上帳・売掛金の元帳（<span class="en">sales journal / ledger</span>）</b><p>帳簿に記録される。財務諸表はここから作られる</p></div></div></div>
+      <div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat(3,minmax(0,1fr))"><div class="mx-corner">向き</div><div class="mx-col">出発点（サンプル）</div><div class="mx-col">確かめるアサーション</div><div class="mx-col">見つかる虚偽表示</div><div class="mx-row">帳簿 → 証憑<br><span class="en">vouching</span></div><div class="mx-cell ">帳簿の仕訳・残高</div><div class="mx-cell ok"><b>実在性・発生</b><span class="en">existence / occurrence</span></div><div class="mx-cell "><b>過大計上</b><br>証憑がない＝架空</div><div class="mx-row">証憑 → 帳簿<br><span class="en">tracing</span></div><div class="mx-cell ">出荷記録・受領書などの証憑</div><div class="mx-cell mid"><b>網羅性</b><span class="en">completeness</span></div><div class="mx-cell "><b>過小計上</b><br>帳簿にない＝記録漏れ</div></div>
+      <div class="rule">帳簿から出発すると、帳簿に<b>載っていないもの</b>は永遠にサンプルに入りません。だから記録漏れ（網羅性）を探すときは、帳簿の外（証憑・期末後の支払・倉庫の現物）から出発します。</div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>アサーション一覧（3つのグループ）</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>グループ</th><th>アサーション</th><th>確かめること（例）</th></tr></thead><tbody><tr><td>期末の残高（B/S）</td><td>実在性・権利と義務・網羅性・評価と配分</td><td>売掛金の相手が実在する／棚卸資産に他社からの預り品が入っていない／引当金が十分</td></tr><tr><td>期中の取引（P/L など）</td><td>発生・網羅性・正確性・カットオフ・分類</td><td>売上が実際に出荷したもの／期末後の出荷を当期の売上にしていない</td></tr><tr><td>表示と開示</td><td>発生と権利義務・網羅性・分類と理解可能性・正確性と評価</td><td>関連当事者取引・後発事象が漏れなく注記されている</td></tr></tbody></table></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">売上と売掛金のように、同じ取引から生まれる勘定のアサーションは表裏一体で、ふつう一緒に確かめます（売上の発生 ⇔ 売掛金の実在性）。</p>
+      
+    </section>
+
+    <section id="proc" class="section-card">
+      <h2><span class="sec-no">3</span>代表的な手続とアサーションの対応</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>手続</th><th>主なアサーション</th><th>ポイント</th></tr></thead><tbody><tr><td>売掛金の確認状（<span class="en">confirmation</span>）</td><td>実在性（権利）</td><td>網羅性・評価の証拠としては弱い（回収できるかは分からない）</td></tr><tr><td>期末前後の出荷記録と売上計上日の照合</td><td>カットオフ</td><td>期末後の出荷が当期売上に入っていないか</td></tr><tr><td>期末後の支払記録・未払の請求書を調べ、期末の負債に入っているか確かめる（未記録負債の検索）</td><td>網羅性（負債）</td><td>帳簿の外から出発する</td></tr><tr><td>棚卸立会い：現物 → 在庫リスト</td><td>網羅性</td><td>倉庫にあるのにリストにない</td></tr><tr><td>棚卸立会い：在庫リスト → 現物</td><td>実在性</td><td>リストにあるのに倉庫にない</td></tr><tr><td>売掛金の年齢表・期末後の回収の検討</td><td>評価と配分</td><td>貸倒引当金が十分か</td></tr><tr><td>登記簿・契約書・委託品の確認</td><td>権利と義務</td><td>抵当権・預り品・委託品</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>差がつく論点</h2>
+      <p class="lead">向きのルールを覚えていても、資産と負債で「どちらのリスクが大きいか」が逆になる所で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>過大計上は帳簿から、過小計上は証憑から</div><div class="rule"><b>実在性・発生</b>（載っているものが本当か）は帳簿の記録をサンプルにして証憑を確かめる（<span class="en">vouching</span>）。<b>網羅性</b>（全部載っているか）は証憑をサンプルにして帳簿に載っているかを確かめる（<span class="en">tracing</span>）。</div><div class="calc">例：架空売上を探す → 売上帳の仕訳から出荷記録へ。売上の記録漏れを探す → 出荷記録から売上帳へ</div><div class="miss"><b>こう間違える：</b>架空売上を探すのに、出荷記録から売上帳へたどる（出荷していない架空の売上は出荷記録に無いので見つからない）。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>資産は過大、負債は過小のリスクが大きい</div><div class="rule">経営者は良く見せたいので、<b>資産・収益は過大計上</b>、<b>負債・費用は過小計上</b>のリスクが大きくなります。だから資産は実在性、負債は網羅性が中心です。</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li>売掛金：確認状で実在性 → 残高のある顧客を中心に選ぶ</li><li>買掛金：網羅性 → 残高ゼロや小さい仕入先、取引量の多い仕入先にも確認する／期末後の支払を調べる（未記録負債の検索）</li></ul><div class="miss"><b>こう間違える：</b>買掛金の確認先を、帳簿残高の大きい仕入先だけから選ぶ（記録漏れは帳簿残高が小さく見える）。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>カットオフは「期末日の前後」を両方見る</div><div class="rule">カットオフは取引が正しい期間に記録されているかです。期末日の<b>前後数日の出荷記録・受領記録</b>と計上日を照合します。期末後の出荷が当期の売上になっていれば過大計上、期末前の出荷が翌期になっていれば過小計上です。</div><div class="miss"><b>こう間違える：</b>期末前の取引だけを調べて、期末後に計上された当期分（過小）を見落とす。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>確認状は実在性には強いが、評価には弱い</div><div class="rule">第三者からの回答なので実在性（と権利）の証拠としては強いですが、顧客が残高を認めても<b>払えるか（評価）は分かりません</b>。評価は期末後の回収や年齢表で確かめます。</div><div class="miss"><b>こう間違える：</b>確認状の回答があったので、貸倒引当金も十分だと判断する。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>そのほかの関連論点</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li><b>統制テストにも向きがある：</b>受注伝票から帳簿までたどるテストは「記録漏れを防ぐ統制」、帳簿から証憑へ遡るテストは「架空記録を防ぐ統制」の有効性を確かめます。</li><li><b>連番の確認：</b>出荷記録・請求書の連番に欠番がないかを見るのは網羅性の手続です。</li><li><b>正確性：</b>請求書の単価・数量を承認済みの価格表・出荷記録と照合し、再計算します。</li><li><b>分類：</b>資本的支出と修繕費、売却可能証券の評価差額が OCI に入っているかなど。</li></ul></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>select entries from the sales journal and examine shipping documents</td><td>帳簿 → 証憑。実在性・発生</td><td>網羅性と答える</td></tr><tr><td>select shipping documents and trace to the sales journal</td><td>証憑 → 帳簿。網羅性</td><td>発生と答える</td></tr><tr><td>trace test counts to the inventory listing</td><td>現物 → リスト。網羅性</td><td>実在性と答える</td></tr><tr><td>examine cash disbursements after year-end</td><td>未記録負債の検索。負債の網羅性</td><td>実在性と答える</td></tr><tr><td>confirm vendors with zero balances</td><td>買掛金の網羅性</td><td>意味がないと考える</td></tr><tr><td>shipments made a few days before and after year-end</td><td>カットオフ</td><td>発生だけと考える</td></tr><tr><td>positive confirmation of receivables</td><td>実在性に強い、評価には弱い</td><td>評価の証拠にする</td></tr><tr><td>account for the numerical sequence</td><td>網羅性</td><td>正確性と答える</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">6</span>確認問題（初見の設定）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、AU-C 315・500 の考え方に沿って作っています。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜発生のテストの出発点</p>
+        <p class="en-stem">An auditor wants to obtain evidence that recorded sales transactions actually occurred. From which population should the auditor select the sample?</p>
+        <div class="choices">A. Shipping documents<br>B. Entries in the sales journal<br>C. Approved customer sales orders<br>D. Prenumbered sales invoices not yet recorded</div>
+        <details><summary>和訳を見る</summary><div class="body">監査人は、記録された売上取引が実際に発生したことの証拠を得たい。どの母集団からサンプルを選ぶべきか。<br>A. 出荷指示書<br>B. 売上帳の記録<br>C. 承認済みの受注伝票<br>D. まだ記録されていない連番の請求書</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>「記録された取引が本当か」＝発生 → 帳簿から出発して証憑を確かめる（論点1）<br>A・C・D：証憑から出発するのは網羅性のテスト</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜棚卸立会いの向き</p>
+        <p class="en-stem">During the observation of the client's physical inventory count, the auditor traced test counts from the warehouse floor to the client's inventory listing. This procedure primarily provides evidence about which assertion?</p>
+        <div class="choices">A. Existence<br>B. Completeness<br>C. Rights and obligations<br>D. Valuation</div>
+        <details><summary>和訳を見る</summary><div class="body">実地棚卸の立会いで、監査人は倉庫の現物で数えたテストカウントを、会社の在庫リストにたどった。この手続が主に証拠を与えるアサーションはどれか。<br>A. 実在性　B. 網羅性　C. 権利と義務　D. 評価</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>現物（帳簿の外）→ リスト（帳簿）なので網羅性（手続との対応の表）<br>A：実在性はリスト → 現物<br>C：預り品・委託品の確認が必要<br>D：単価・陳腐化の検討が必要</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜未記録負債の検索</p>
+        <p class="en-stem">Which of the following procedures is most likely to detect unrecorded accounts payable at year-end?</p>
+        <div class="choices">A. Confirming year-end balances of vendors with the largest recorded balances<br>B. Vouching recorded accounts payable to vendor invoices<br>C. Examining cash disbursements made after year-end and related supporting documents<br>D. Recomputing the accounts payable subsidiary ledger total</div>
+        <details><summary>和訳を見る</summary><div class="body">期末の買掛金の計上漏れを見つける可能性が最も高い手続はどれか。<br>A. 帳簿残高の大きい仕入先に期末残高を確認する<br>B. 記録された買掛金を仕入先の請求書と照合する<br>C. 期末後の支払と関連する証憑を調べる<br>D. 買掛金の補助元帳の合計を再計算する</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>期末後に払ったものの中に、期末にはもう負っていた負債がないかを見る＝帳簿の外から出発（論点2）<br>A：記録漏れの仕入先は残高が小さく見えるので選ばれにくい<br>B：帳簿から出発するので実在性<br>D：計算の正確性</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜手続とアサーションの組み合わせ（複合）</p>
+        <p class="en-stem">Which of the following pairs of an audit procedure and the assertion it primarily addresses is correct?</p>
+        <div class="choices">A. Sending positive confirmations of accounts receivable — Completeness<br>B. Tracing shipping documents to the sales journal — Occurrence<br>C. Comparing shipping dates near year-end with the dates sales were recorded — Cutoff<br>D. Vouching recorded sales to shipping documents — Completeness</div>
+        <details><summary>和訳を見る</summary><div class="body">監査手続と、それが主に対応するアサーションの組み合わせとして正しいものはどれか。<br>A. 売掛金の積極的確認 — 網羅性<br>B. 出荷指示書から売上帳へのたどり — 発生<br>C. 期末前後の出荷日と売上の記録日の比較 — カットオフ<br>D. 記録された売上から出荷指示書への照合 — 網羅性</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>期末前後の出荷日と計上日の比較はカットオフ（論点3）<br>A：確認状は実在性（論点4）<br>B：証憑 → 帳簿は網羅性<br>D：帳簿 → 証憑は発生</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="17">
+        <p class="mc-label">問題5｜TBS形式：手続からアサーションを選ぶ</p>
+        <p class="text-[13px] leading-relaxed mb-2">次の手続が主に確かめるアサーションを選んで、「答え合わせ」を押してください</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">アサーション</th></tr></thead><tbody><tr><td>①売上帳から仕訳を選び、出荷記録と請求書を確かめる</td><td class="num"><select data-ans="実在性・発生" aria-label="①売上帳から仕訳を選び、出荷記録と請求書を確かめる"><option value="">選ぶ</option><option value="実在性・発生">実在性・発生</option><option value="網羅性">網羅性</option><option value="カットオフ">カットオフ</option><option value="評価">評価</option><option value="権利と義務">権利と義務</option></select></td></tr><tr><td>②出荷記録から選び、売上帳に記録されているかを確かめる</td><td class="num"><select data-ans="網羅性" aria-label="②出荷記録から選び、売上帳に記録されているかを確かめる"><option value="">選ぶ</option><option value="実在性・発生">実在性・発生</option><option value="網羅性">網羅性</option><option value="カットオフ">カットオフ</option><option value="評価">評価</option><option value="権利と義務">権利と義務</option></select></td></tr><tr><td>③期末日の前後5日の出荷記録と、売上の計上日を照合する</td><td class="num"><select data-ans="カットオフ" aria-label="③期末日の前後5日の出荷記録と、売上の計上日を照合する"><option value="">選ぶ</option><option value="実在性・発生">実在性・発生</option><option value="網羅性">網羅性</option><option value="カットオフ">カットオフ</option><option value="評価">評価</option><option value="権利と義務">権利と義務</option></select></td></tr><tr><td>④売掛金の年齢表で、長期間回収されていない残高を検討する</td><td class="num"><select data-ans="評価" aria-label="④売掛金の年齢表で、長期間回収されていない残高を検討する"><option value="">選ぶ</option><option value="実在性・発生">実在性・発生</option><option value="網羅性">網羅性</option><option value="カットオフ">カットオフ</option><option value="評価">評価</option><option value="権利と義務">権利と義務</option></select></td></tr><tr><td>⑤倉庫にある他社からの預り品が、在庫リストに入っていないかを確かめる</td><td class="num"><select data-ans="権利と義務" aria-label="⑤倉庫にある他社からの預り品が、在庫リストに入っていないかを確かめる"><option value="">選ぶ</option><option value="実在性・発生">実在性・発生</option><option value="網羅性">網羅性</option><option value="カットオフ">カットオフ</option><option value="評価">評価</option><option value="権利と義務">権利と義務</option></select></td></tr><tr><td>⑥期末後の支払記録から、期末の負債に入るべきものを探す</td><td class="num"><select data-ans="網羅性" aria-label="⑥期末後の支払記録から、期末の負債に入るべきものを探す"><option value="">選ぶ</option><option value="実在性・発生">実在性・発生</option><option value="網羅性">網羅性</option><option value="カットオフ">カットオフ</option><option value="評価">評価</option><option value="権利と義務">権利と義務</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">①帳簿 → 証憑なので<b>実在性・発生</b>（論点1）<br>②証憑 → 帳簿なので<b>網羅性</b><br>③期末前後の期間の正しさは<b>カットオフ</b>（論点3）<br>④回収できる金額は<b>評価</b>（論点4）<br>⑤自社の資産かどうかは<b>権利と義務</b><br>⑥未記録負債の検索は負債の<b>網羅性</b>（論点2）</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c18-1"><label for="c18-1">実在性・発生と網羅性で、テストの出発点がどちらかを言える</label></li><li><input type="checkbox" id="c18-2"><label for="c18-2">vouching と tracing の向きを言える</label></li><li><input type="checkbox" id="c18-3"><label for="c18-3">資産は過大、負債は過小のリスクが大きい理由を言える</label></li><li><input type="checkbox" id="c18-4"><label for="c18-4">未記録負債の検索の手続を言える</label></li><li><input type="checkbox" id="c18-5"><label for="c18-5">棚卸立会いの2つの向きと、それぞれのアサーションを言える</label></li><li><input type="checkbox" id="c18-6"><label for="c18-6">確認状が評価の証拠として弱い理由を言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch2 2-1〜2-3 アサーション／Ch7 7-6 内部統制プロセスと監査テスト／7-7 網羅性のテスト／7-8 実在性・発生のテスト／Ch9 売掛金・棚卸資産・未払金の実証性テスト",
+    "asc": "AU-C 315 / AU-C 500",
+    "updated": "2026-10-07",
+    "sources": []
+  },
+  "post": {
+    "name": "アサーションと手続の向き",
+    "hook_q": "売上の架空計上（過大計上）を見つけたいとき、サンプルは「帳簿の仕訳」から取りますか、それとも「出荷指示書」から取りますか？",
+    "hook_where": "全体図と差がつく論点1",
+    "bullets": [
+      "帳簿 → 証憑（実在性・発生）と 証憑 → 帳簿（網羅性）の向きを1枚の図で確認",
+      "アサーション一覧と、未記録負債の検索・カットオフ・棚卸立会いの手続の対応",
+      "初見の英語MC4問＋TBS（選ぶと自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】アサーションと手続の向き—過大計上は帳簿から、過小計上は証憑から",
+    "badge": "AUD 復習シート｜Assertions and Direction of Testing（AU-C 315 / 500）",
+    "h1_html": "アサーションと手続の向き：過大計上（実在性・発生）は帳簿から証憑へ、過小計上（網羅性）は証憑から帳簿へ",
+    "lead_html": "この論点の復習用です。最初の図で手続の向きとアサーションの関係を確認し、差がつく論点を見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：どちらから出発するかで、見つかる虚偽表示が変わる",
+      "lead_html": "取引は「受注 → 出荷 → 請求 → 帳簿」の順に記録されます。テストの出発点（サンプルを取る所）を帳簿にするか証憑にするかで、確かめられるアサーションが決まります。",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "受注伝票（<span class=\"en\">sales order</span>）",
+              "body_html": "顧客から注文を受け、与信を承認する"
+            },
+            {
+              "head": "出荷指示書・出荷記録（<span class=\"en\">shipping document</span>）",
+              "body_html": "商品を出荷した証拠。売上の発生・カットオフの決め手"
+            },
+            {
+              "head": "請求書（<span class=\"en\">sales invoice</span>）",
+              "body_html": "出荷した数量・単価で請求する"
+            },
+            {
+              "head": "売上帳・売掛金の元帳（<span class=\"en\">sales journal / ledger</span>）",
+              "body_html": "帳簿に記録される。財務諸表はここから作られる",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "matrix",
+          "corner_html": "向き",
+          "col_heads": ["出発点（サンプル）", "確かめるアサーション", "見つかる虚偽表示"],
+          "row_heads": ["帳簿 → 証憑<br><span class=\"en\">vouching</span>", "証憑 → 帳簿<br><span class=\"en\">tracing</span>"],
+          "cells": [
+            [
+              {"html": "帳簿の仕訳・残高"},
+              {"html": "<b>実在性・発生</b><span class=\"en\">existence / occurrence</span>", "tone": "ok"},
+              {"html": "<b>過大計上</b><br>証憑がない＝架空"}
+            ],
+            [
+              {"html": "出荷記録・受領書などの証憑"},
+              {"html": "<b>網羅性</b><span class=\"en\">completeness</span>", "tone": "mid"},
+              {"html": "<b>過小計上</b><br>帳簿にない＝記録漏れ"}
+            ]
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "帳簿から出発すると、帳簿に<b>載っていないもの</b>は永遠にサンプルに入りません。だから記録漏れ（網羅性）を探すときは、帳簿の外（証憑・期末後の支払・倉庫の現物）から出発します。"
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "アサーション一覧",
+      "title_html": "アサーション一覧（3つのグループ）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["グループ", "アサーション", "確かめること（例）"],
+          "rows": [
+            ["期末の残高（B/S）", "実在性・権利と義務・網羅性・評価と配分", "売掛金の相手が実在する／棚卸資産に他社からの預り品が入っていない／引当金が十分"],
+            ["期中の取引（P/L など）", "発生・網羅性・正確性・カットオフ・分類", "売上が実際に出荷したもの／期末後の出荷を当期の売上にしていない"],
+            ["表示と開示", "発生と権利義務・網羅性・分類と理解可能性・正確性と評価", "関連当事者取引・後発事象が漏れなく注記されている"]
+          ]
+        },
+        {
+          "type": "note",
+          "html": "売上と売掛金のように、同じ取引から生まれる勘定のアサーションは表裏一体で、ふつう一緒に確かめます（売上の発生 ⇔ 売掛金の実在性）。"
+        }
+      ]
+    },
+    {
+      "id": "proc",
+      "nav": "手続との対応",
+      "title_html": "代表的な手続とアサーションの対応",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["手続", "主なアサーション", "ポイント"],
+          "rows": [
+            ["売掛金の確認状（<span class=\"en\">confirmation</span>）", "実在性（権利）", "網羅性・評価の証拠としては弱い（回収できるかは分からない）"],
+            ["期末前後の出荷記録と売上計上日の照合", "カットオフ", "期末後の出荷が当期売上に入っていないか"],
+            ["期末後の支払記録・未払の請求書を調べ、期末の負債に入っているか確かめる（未記録負債の検索）", "網羅性（負債）", "帳簿の外から出発する"],
+            ["棚卸立会い：現物 → 在庫リスト", "網羅性", "倉庫にあるのにリストにない"],
+            ["棚卸立会い：在庫リスト → 現物", "実在性", "リストにあるのに倉庫にない"],
+            ["売掛金の年齢表・期末後の回収の検討", "評価と配分", "貸倒引当金が十分か"],
+            ["登記簿・契約書・委託品の確認", "権利と義務", "抵当権・預り品・委託品"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "向きのルールを覚えていても、資産と負債で「どちらのリスクが大きいか」が逆になる所で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "過大計上は帳簿から、過小計上は証憑から",
+          "rule_html": "<b>実在性・発生</b>（載っているものが本当か）は帳簿の記録をサンプルにして証憑を確かめる（<span class=\"en\">vouching</span>）。<b>網羅性</b>（全部載っているか）は証憑をサンプルにして帳簿に載っているかを確かめる（<span class=\"en\">tracing</span>）。",
+          "calc_html": "例：架空売上を探す → 売上帳の仕訳から出荷記録へ。売上の記録漏れを探す → 出荷記録から売上帳へ",
+          "miss_html": "架空売上を探すのに、出荷記録から売上帳へたどる（出荷していない架空の売上は出荷記録に無いので見つからない）。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "資産は過大、負債は過小のリスクが大きい",
+          "rule_html": "経営者は良く見せたいので、<b>資産・収益は過大計上</b>、<b>負債・費用は過小計上</b>のリスクが大きくなります。だから資産は実在性、負債は網羅性が中心です。",
+          "list": [
+            "売掛金：確認状で実在性 → 残高のある顧客を中心に選ぶ",
+            "買掛金：網羅性 → 残高ゼロや小さい仕入先、取引量の多い仕入先にも確認する／期末後の支払を調べる（未記録負債の検索）"
+          ],
+          "miss_html": "買掛金の確認先を、帳簿残高の大きい仕入先だけから選ぶ（記録漏れは帳簿残高が小さく見える）。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "カットオフは「期末日の前後」を両方見る",
+          "rule_html": "カットオフは取引が正しい期間に記録されているかです。期末日の<b>前後数日の出荷記録・受領記録</b>と計上日を照合します。期末後の出荷が当期の売上になっていれば過大計上、期末前の出荷が翌期になっていれば過小計上です。",
+          "miss_html": "期末前の取引だけを調べて、期末後に計上された当期分（過小）を見落とす。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "確認状は実在性には強いが、評価には弱い",
+          "rule_html": "第三者からの回答なので実在性（と権利）の証拠としては強いですが、顧客が残高を認めても<b>払えるか（評価）は分かりません</b>。評価は期末後の回収や年齢表で確かめます。",
+          "miss_html": "確認状の回答があったので、貸倒引当金も十分だと判断する。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>統制テストにも向きがある：</b>受注伝票から帳簿までたどるテストは「記録漏れを防ぐ統制」、帳簿から証憑へ遡るテストは「架空記録を防ぐ統制」の有効性を確かめます。",
+            "<b>連番の確認：</b>出荷記録・請求書の連番に欠番がないかを見るのは網羅性の手続です。",
+            "<b>正確性：</b>請求書の単価・数量を承認済みの価格表・出荷記録と照合し、再計算します。",
+            "<b>分類：</b>資本的支出と修繕費、売却可能証券の評価差額が OCI に入っているかなど。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            ["select entries from the sales journal and examine shipping documents", "帳簿 → 証憑。実在性・発生", "網羅性と答える"],
+            ["select shipping documents and trace to the sales journal", "証憑 → 帳簿。網羅性", "発生と答える"],
+            ["trace test counts to the inventory listing", "現物 → リスト。網羅性", "実在性と答える"],
+            ["examine cash disbursements after year-end", "未記録負債の検索。負債の網羅性", "実在性と答える"],
+            ["confirm vendors with zero balances", "買掛金の網羅性", "意味がないと考える"],
+            ["shipments made a few days before and after year-end", "カットオフ", "発生だけと考える"],
+            ["positive confirmation of receivables", "実在性に強い、評価には弱い", "評価の証拠にする"],
+            ["account for the numerical sequence", "網羅性", "正確性と答える"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の設定）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、AU-C 315・500 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜発生のテストの出発点",
+          "stem": "An auditor wants to obtain evidence that recorded sales transactions actually occurred. From which population should the auditor select the sample?",
+          "choices": ["A. Shipping documents", "B. Entries in the sales journal", "C. Approved customer sales orders", "D. Prenumbered sales invoices not yet recorded"],
+          "ja_html": "監査人は、記録された売上取引が実際に発生したことの証拠を得たい。どの母集団からサンプルを選ぶべきか。<br>A. 出荷指示書<br>B. 売上帳の記録<br>C. 承認済みの受注伝票<br>D. まだ記録されていない連番の請求書",
+          "answer_html": "<b>正解：B</b><br>「記録された取引が本当か」＝発生 → 帳簿から出発して証憑を確かめる（論点1）<br>A・C・D：証憑から出発するのは網羅性のテスト"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜棚卸立会いの向き",
+          "stem": "During the observation of the client's physical inventory count, the auditor traced test counts from the warehouse floor to the client's inventory listing. This procedure primarily provides evidence about which assertion?",
+          "choices": ["A. Existence", "B. Completeness", "C. Rights and obligations", "D. Valuation"],
+          "ja_html": "実地棚卸の立会いで、監査人は倉庫の現物で数えたテストカウントを、会社の在庫リストにたどった。この手続が主に証拠を与えるアサーションはどれか。<br>A. 実在性　B. 網羅性　C. 権利と義務　D. 評価",
+          "answer_html": "<b>正解：B</b><br>現物（帳簿の外）→ リスト（帳簿）なので網羅性（手続との対応の表）<br>A：実在性はリスト → 現物<br>C：預り品・委託品の確認が必要<br>D：単価・陳腐化の検討が必要"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜未記録負債の検索",
+          "stem": "Which of the following procedures is most likely to detect unrecorded accounts payable at year-end?",
+          "choices": ["A. Confirming year-end balances of vendors with the largest recorded balances", "B. Vouching recorded accounts payable to vendor invoices", "C. Examining cash disbursements made after year-end and related supporting documents", "D. Recomputing the accounts payable subsidiary ledger total"],
+          "ja_html": "期末の買掛金の計上漏れを見つける可能性が最も高い手続はどれか。<br>A. 帳簿残高の大きい仕入先に期末残高を確認する<br>B. 記録された買掛金を仕入先の請求書と照合する<br>C. 期末後の支払と関連する証憑を調べる<br>D. 買掛金の補助元帳の合計を再計算する",
+          "answer_html": "<b>正解：C</b><br>期末後に払ったものの中に、期末にはもう負っていた負債がないかを見る＝帳簿の外から出発（論点2）<br>A：記録漏れの仕入先は残高が小さく見えるので選ばれにくい<br>B：帳簿から出発するので実在性<br>D：計算の正確性"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜手続とアサーションの組み合わせ（複合）",
+          "stem": "Which of the following pairs of an audit procedure and the assertion it primarily addresses is correct?",
+          "choices": ["A. Sending positive confirmations of accounts receivable — Completeness", "B. Tracing shipping documents to the sales journal — Occurrence", "C. Comparing shipping dates near year-end with the dates sales were recorded — Cutoff", "D. Vouching recorded sales to shipping documents — Completeness"],
+          "ja_html": "監査手続と、それが主に対応するアサーションの組み合わせとして正しいものはどれか。<br>A. 売掛金の積極的確認 — 網羅性<br>B. 出荷指示書から売上帳へのたどり — 発生<br>C. 期末前後の出荷日と売上の記録日の比較 — カットオフ<br>D. 記録された売上から出荷指示書への照合 — 網羅性",
+          "answer_html": "<b>正解：C</b><br>期末前後の出荷日と計上日の比較はカットオフ（論点3）<br>A：確認状は実在性（論点4）<br>B：証憑 → 帳簿は網羅性<br>D：帳簿 → 証憑は発生"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：手続からアサーションを選ぶ",
+          "select": true,
+          "value_head": "アサーション",
+          "intro_html": "次の手続が主に確かめるアサーションを選んで、「答え合わせ」を押してください",
+          "rows": [
+            {"label": "①売上帳から仕訳を選び、出荷記録と請求書を確かめる", "options": ["実在性・発生", "網羅性", "カットオフ", "評価", "権利と義務"], "ans": "実在性・発生"},
+            {"label": "②出荷記録から選び、売上帳に記録されているかを確かめる", "options": ["実在性・発生", "網羅性", "カットオフ", "評価", "権利と義務"], "ans": "網羅性"},
+            {"label": "③期末日の前後5日の出荷記録と、売上の計上日を照合する", "options": ["実在性・発生", "網羅性", "カットオフ", "評価", "権利と義務"], "ans": "カットオフ"},
+            {"label": "④売掛金の年齢表で、長期間回収されていない残高を検討する", "options": ["実在性・発生", "網羅性", "カットオフ", "評価", "権利と義務"], "ans": "評価"},
+            {"label": "⑤倉庫にある他社からの預り品が、在庫リストに入っていないかを確かめる", "options": ["実在性・発生", "網羅性", "カットオフ", "評価", "権利と義務"], "ans": "権利と義務"},
+            {"label": "⑥期末後の支払記録から、期末の負債に入るべきものを探す", "options": ["実在性・発生", "網羅性", "カットオフ", "評価", "権利と義務"], "ans": "網羅性"}
+          ],
+          "explain_html": "①帳簿 → 証憑なので<b>実在性・発生</b>（論点1）<br>②証憑 → 帳簿なので<b>網羅性</b><br>③期末前後の期間の正しさは<b>カットオフ</b>（論点3）<br>④回収できる金額は<b>評価</b>（論点4）<br>⑤自社の資産かどうかは<b>権利と義務</b><br>⑥未記録負債の検索は負債の<b>網羅性</b>（論点2）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "実在性・発生と網羅性で、テストの出発点がどちらかを言える",
+            "vouching と tracing の向きを言える",
+            "資産は過大、負債は過小のリスクが大きい理由を言える",
+            "未記録負債の検索の手続を言える",
+            "棚卸立会いの2つの向きと、それぞれのアサーションを言える",
+            "確認状が評価の証拠として弱い理由を言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

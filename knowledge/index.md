@@ -1,7 +1,7 @@
 <!-- 自動生成（ops/build_knowledge_index.py）。手で編集しない -->
 # 図解ナレッジ索引
 
-全 31 テーマ／v2（復習シート型）10 本。
+全 33 テーマ／v2（復習シート型）12 本。
 
 | slug | 科目 | 型 | タイトル | テキスト | 基準 | 更新日 | ノート |
 |---|---|---|---|---|---|---|---|
@@ -36,3 +36,5 @@
 | [deferred-taxes-temporary-differences](https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-taxes-temporary-differences/) | FAR | v2 | 税効果：差異を「永久」と「一時」に分け、一時差異だけに解消年度の税率を掛ける | Ch15 15-2〜15-14 会計利益と課税所得・一時差異・DTA/DTL・適用税率・税金費用／15-15 表示／15-16 評価引当／15-19 永久差異 | ASC 740 | 2026-10-07 | [ノート](topics/deferred-taxes-temporary-differences.md) |
 | [aud-opinion-types](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-opinion-types/) | AUD | v2 | 監査意見の種類：原因（虚偽表示か・範囲の制限か）と、影響が広範かどうかの2つで決まる | Ch4 4-1 GAAPからの逸脱／4-2〜4-4 限定・不適正の文例／4-6 監査範囲の制限／4-7・4-8 限定・意見差控えの文例／4-10 意見差控えとなるその他の場合／Ch3 追記情報 | AU-C 705 / AU-C 706 / AU-C 570 | 2026-10-07 | [ノート](topics/aud-opinion-types.md) |
 | [aud-risk-model](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-risk-model/) | AUD | v2 | 監査リスクモデル：固有リスク × 統制リスクを評価し、残りの発見リスクを逆算して実証手続の強さを決める | Ch1 1-7 リスク・アプローチ／1-8 実証性テストの性質・範囲・時期／Ch2 2-7〜2-11 監査リスクと3要素・監査リスクモデル | AU-C 200 / AU-C 315 / AU-C 330 | 2026-10-07 | [ノート](topics/aud-risk-model.md) |
+| [cash-flow-indirect](https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-indirect/) | FAR | v2 | 間接法の営業CF：純利益に「現金が動かない損益」「投資・財務の損益」「営業の資産・負債の増減」を足し引きする | Ch16 16-1〜16-7 区分／16-9 間接法：資産増減／16-10 負債増減／16-11 利益と現金収支の調整／16-12 二重計上の防止 | ASC 230 | 2026-10-07 | [ノート](topics/cash-flow-indirect.md) |
+| [aud-assertions-direction](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-assertions-direction/) | AUD | v2 | アサーションと手続の向き：過大計上（実在性・発生）は帳簿から証憑へ、過小計上（網羅性）は証憑から帳簿へ | Ch2 2-1〜2-3 アサーション／Ch7 7-6 内部統制プロセスと監査テスト／7-7 網羅性のテスト／7-8 実在性・発生のテスト／Ch9 売掛金・棚卸資産・未払金の実証性テスト | AU-C 315 / AU-C 500 | 2026-10-07 | [ノート](topics/aud-assertions-direction.md) |

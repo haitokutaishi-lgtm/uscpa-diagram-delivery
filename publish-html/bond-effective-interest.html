@@ -150,6 +150,9 @@ table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .2
 table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
 table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
 
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
   </style>
 </head>
 <body>
@@ -177,7 +180,7 @@ table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
     <section id="judge" class="section-card">
       <h2><span class="sec-no">2</span>割引発行と打歩発行（プレミアム）の違い</h2>
       
-      <div class="ruler mb-4 diagram-visual" style="grid-template-columns:1fr 1fr 1fr"><div class="r2"><b>割引発行（<span class="en">discount</span>）</b>表面利率 ＜ 市場利率<br>価格は額面より安い<br>利息費用 ＞ 支払利息<br>簿価は毎年<b>増える</b></div><div class="r1"><b>額面発行</b>表面利率 ＝ 市場利率<br>価格 ＝ 額面<br>利息費用 ＝ 支払利息</div><div class="r3"><b>打歩発行（<span class="en">premium</span>）</b>表面利率 ＞ 市場利率<br>価格は額面より高い<br>利息費用 ＜ 支払利息<br>簿価は毎年<b>減る</b></div></div>
+      <div class="ruler mb-4 diagram-visual" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)"><div class="r2"><b>割引発行（<span class="en">discount</span>）</b>表面利率 ＜ 市場利率<br>価格は額面より安い<br>利息費用 ＞ 支払利息<br>簿価は毎年<b>増える</b></div><div class="r1"><b>額面発行</b>表面利率 ＝ 市場利率<br>価格 ＝ 額面<br>利息費用 ＝ 支払利息</div><div class="r3"><b>打歩発行（<span class="en">premium</span>）</b>表面利率 ＞ 市場利率<br>価格は額面より高い<br>利息費用 ＜ 支払利息<br>簿価は毎年<b>減る</b></div></div>
       <div class="rule">どちらでも、償却が進むと簿価は額面に近づき、<b>満期には額面と一致</b>します。貸借対照表には「額面 − 未償却の割引額（＋未償却のプレミアム）− 未償却の発行費」の純額で表示します。</div>
       
     </section>

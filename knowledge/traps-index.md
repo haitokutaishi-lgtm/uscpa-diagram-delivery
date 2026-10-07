@@ -24,6 +24,26 @@
 - 按分の結果が減価償却費を決める：建物の時価 $1,100,000 を40年で割って $27,500 にしてしまう。
 - 資産の取得か、事業の取得か：資産の取得なのに、払った額が時価の合計を上回った分をのれんにしてしまう。
 
+## aud-assertions-direction（AU-C 315 / AU-C 500）
+
+| 問題文の言葉 | 確認すること | よくある誤答 |
+|---|---|---|
+| select entries from the sales journal and examine shipping documents | 帳簿 → 証憑。実在性・発生 | 網羅性と答える |
+| select shipping documents and trace to the sales journal | 証憑 → 帳簿。網羅性 | 発生と答える |
+| trace test counts to the inventory listing | 現物 → リスト。網羅性 | 実在性と答える |
+| examine cash disbursements after year-end | 未記録負債の検索。負債の網羅性 | 実在性と答える |
+| confirm vendors with zero balances | 買掛金の網羅性 | 意味がないと考える |
+| shipments made a few days before and after year-end | カットオフ | 発生だけと考える |
+| positive confirmation of receivables | 実在性に強い、評価には弱い | 評価の証拠にする |
+| account for the numerical sequence | 網羅性 | 正確性と答える |
+
+**こう間違える**
+
+- 過大計上は帳簿から、過小計上は証憑から：架空売上を探すのに、出荷記録から売上帳へたどる（出荷していない架空の売上は出荷記録に無いので見つからない）。
+- 資産は過大、負債は過小のリスクが大きい：買掛金の確認先を、帳簿残高の大きい仕入先だけから選ぶ（記録漏れは帳簿残高が小さく見える）。
+- カットオフは「期末日の前後」を両方見る：期末前の取引だけを調べて、期末後に計上された当期分（過小）を見落とす。
+- 確認状は実在性には強いが、評価には弱い：確認状の回答があったので、貸倒引当金も十分だと判断する。
+
 ## aud-opinion-types（AU-C 705 / AU-C 706 / AU-C 570）
 
 | 問題文の言葉 | 確認すること | よくある誤答 |
@@ -82,6 +102,26 @@
 - 利払日の間に発行したら、経過利息を上乗せで受け取る：受け取った現金 304,500 を社債の発行価格として、プレミアム 4,500 を計上する。
 - 発行費は資産にせず、社債の簿価から引く：発行費を繰延資産（deferred charge）として計上し、社債の簿価を 980,000 にする（以前の処理）。
 - 早期償還の損益は「払った額 − 償還時の簿価」：額面と比べて損失 10,000 にする（未償却の割引額 17,356 を落とす）／特別損益として表示する。
+
+## cash-flow-indirect（ASC 230）
+
+| 問題文の言葉 | 確認すること | よくある誤答 |
+|---|---|---|
+| gain on sale of equipment | 営業CFから引き、代金全額を投資CFへ | 売却益を足す／投資CFに売却益だけを入れる |
+| increase in accounts receivable | 引く | 資産が増えたので足す |
+| decrease in accrued liabilities | 引く | 足す |
+| amortization of bond premium | 引く | 割引と同じく足す |
+| equity in earnings of investee | 引く（受け取った配当は足す） | 足す |
+| dividends payable increased | 営業の調整には入れない（財務） | 負債の増加として足す |
+| dividends received / interest paid | 営業 | 投資・財務にする |
+| acquired a building by issuing a note | 現金が動かないので注記で開示 | 投資の支出と財務の収入にする |
+
+**こう間違える**
+
+- 売却益は引き、売却代金は全額を投資CFへ：売却益 8,000 を足してしまう／投資CF に簿価 22,000 や売却益 8,000 だけを入れる。
+- 運転資本の調整は「営業の」資産・負債だけ：未払配当金の増加を「負債の増加」として営業CFに足す。
+- 社債の割引・プレミアムと持分法の向き：プレミアムの償却を割引と同じく足してしまう／受け取った配当を投資CFに入れる。
+- 引当金・評価損・繰延税金も「現金が動かない」グループ：DTA の増加を「資産が増えた」ではなく費用の戻しと考えて足してしまう。
 
 ## deferred-taxes-temporary-differences（ASC 740）
 

@@ -78,7 +78,7 @@ def _formulas(b: dict) -> str:
 
 def _ruler(b: dict) -> str:
     segs = b["segments"]
-    cols = " ".join(s.get("width", "1fr") for s in segs)
+    cols = " ".join(s.get("width", "minmax(0,1fr)") for s in segs)
     cells = "".join(f'<div class="{s.get("style", "r1")}"><b>{s["head"]}</b>{s["body_html"]}</div>' for s in segs)
     return f'<div class="ruler mb-4 diagram-visual" style="grid-template-columns:{cols}">{cells}</div>'
 

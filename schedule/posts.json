@@ -462,6 +462,15 @@
     "_auto": true,
     "revised": true
   },
+  "2026-10-16": {
+    "title": "【AUD図解】アサーションと手続の向き—実在性は帳簿から、網羅性は証憑から",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-assertions-direction/",
+    "slug": "aud-assertions-direction",
+    "queue_id": "aud-assertions-direction-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
   "2026-10-17": {
     "title": "【図解】収益認識—5ステップと取引価格の配分",
     "description": "",

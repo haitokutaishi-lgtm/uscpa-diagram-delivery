@@ -122,5 +122,13 @@
   {
     "slug": "aud-risk-model",
     "source": "publish-html/aud-risk-model.html"
+  },
+  {
+    "slug": "cash-flow-indirect",
+    "source": "publish-html/cash-flow-indirect.html"
+  },
+  {
+    "slug": "aud-assertions-direction",
+    "source": "publish-html/aud-assertions-direction.html"
   }
 ]

@@ -122,6 +122,37 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
 .split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
 .split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
 
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
   </style>
 </head>
 <body>
@@ -158,7 +189,7 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
     <section id="judge" class="section-card">
       <h2><span class="sec-no">2</span>いつ持分法か：比率は「推定」、決め手は実態</h2>
       
-      <div class="ruler mb-4 diagram-visual" style="grid-template-columns:1fr 1.4fr 1fr"><div class="r1"><b>20%未満</b>影響力なし（と推定）<br>公正価値（ASC 321）<br>配当＝収益</div><div class="r2"><b>20〜50%</b>重要な影響力（と推定）<br>持分法（ASC 323）<br>配当＝投資の減少</div><div class="r3"><b>50%超</b>支配<br>連結（ASC 810）</div></div>
+      <div class="ruler mb-4 diagram-visual" style="grid-template-columns:minmax(0,1fr) 1.4fr minmax(0,1fr)"><div class="r1"><b>20%未満</b>影響力なし（と推定）<br>公正価値（ASC 321）<br>配当＝収益</div><div class="r2"><b>20〜50%</b>重要な影響力（と推定）<br>持分法（ASC 323）<br>配当＝投資の減少</div><div class="r3"><b>50%超</b>支配<br>連結（ASC 810）</div></div>
       <div class="rule"><span class="term-en">Significant influence</span>（重要な影響力）は持株比率20%以上で「あると推定」されるだけです。反証があれば覆ります。</div>
       <div class="grid md:grid-cols-2 gap-3 mt-3 text-sm leading-relaxed"><div class="point mb-0"><p class="font-bold text-teal-800 mb-1">20%未満でも持分法になるサイン</p><ul class="list-disc ml-5 text-[13px]"><li>取締役会に役員を送っている（<span class="en">board representation</span>）</li><li>経営方針の決定に参加している</li><li>重要な取引が多い、経営者を出し合っている</li><li>技術面で投資先が依存している</li></ul></div><div class="point mb-0"><p class="font-bold text-red-700 mb-1">20%以上でも持分法にならないサイン</p><ul class="list-disc ml-5 text-[13px]"><li>投資先が訴訟などで強く反対している</li><li>別の株主が過半数を持ち、こちらの意見が通らない</li><li>取締役を送れない、財務情報をもらえない</li></ul></div></div>
       <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">補足：持分法の対象になる投資でも、取得時に <span class="term-en">fair value option</span>（ASC 825）を選べば公正価値で測定できます。選択は取り消せません。問題文に明記がない限り、持分法で解いてください。</p>
@@ -248,9 +279,16 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
     lucide.createIcons();
     document.querySelectorAll('.tbs-block').forEach((box) => {
       box.querySelector('.tbs-check').addEventListener('click', () => {
-        const inputs = box.querySelectorAll('table.tbs input');
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
         let ok = 0;
         inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
           const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
           const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
           el.classList.toggle('ok', hit);
