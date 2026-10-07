@@ -445,27 +445,30 @@
     "revised": true
   },
   "2026-10-14": {
-    "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
-    "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/current-liabilities-classification/",
-    "slug": "current-liabilities-classification",
-    "queue_id": "current-liabilities-review-2026q4",
+    "title": "【図解】収益認識—5ステップと取引価格の配分",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/revenue-five-step/",
+    "slug": "revenue-five-step",
+    "queue_id": "revenue-five-step-v2",
+    "subject": "FAR",
     "_auto": true
   },
   "2026-10-17": {
-    "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
-    "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/treasury-stock-par-value/",
-    "slug": "treasury-stock-par-value",
-    "queue_id": "treasury-review-2026q4",
+    "title": "【図解】リース（借手）—分類・開始時の計上・その後の費用",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-classification/",
+    "slug": "lease-lessee-classification",
+    "queue_id": "lease-lessee-classification-v2",
+    "subject": "FAR",
     "_auto": true
   },
   "2026-10-18": {
-    "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
-    "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。",
-    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/notes-payable-accrued-interest/",
-    "slug": "notes-payable-accrued-interest",
-    "queue_id": "notes-review-2026q4",
+    "title": "【図解】税効果—一時差異からDTA・DTLを決める",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-taxes-temporary-differences/",
+    "slug": "deferred-taxes-temporary-differences",
+    "queue_id": "deferred-taxes-temporary-differences-v2",
+    "subject": "FAR",
     "_auto": true
   }
 }

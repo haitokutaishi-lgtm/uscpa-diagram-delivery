@@ -93,10 +93,11 @@ def main() -> int:
         slug=slug,
         source=source,
         topic_spec=str(spec_file),
+        subject=entry.get("subject") or "FAR",
         run_generate="true" if run_generate else "false",
         skip=skip,
     )
-    print(f"post_date={post_date} slug={slug} source={source} run_generate={run_generate}")
+    print(f"subject={entry.get('subject') or 'FAR'} post_date={post_date} slug={slug} source={source} run_generate={run_generate}")
     return 0
 
 

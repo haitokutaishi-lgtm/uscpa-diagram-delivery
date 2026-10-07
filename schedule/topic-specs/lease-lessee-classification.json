@@ -1,0 +1,280 @@
+{
+  "version": 2,
+  "knowledge": {
+    "far_text": "Ch9 9-2 分類の5条件／9-3 リース期間・短期リース／9-4 改良費／9-5 開始日の負債・使用権資産／9-6 オペレーティング／9-7 ファイナンス",
+    "asc": "ASC 842-20",
+    "updated": "2026-10-07",
+    "sources": []
+  },
+  "post": {
+    "name": "リース（借手）",
+    "hook_q": "同じ5年リース・同じ支払額でも、ファイナンスとオペレーティングで Year 1 の費用は変わります。変わるのは負債の残高ですか、それとも使用権資産の残高ですか？",
+    "hook_where": "全体図と差がつく論点1",
+    "bullets": [
+      "分類の5条件と、開始時の負債・使用権資産の計算を1枚の図で確認",
+      "ファイナンスとオペレーティングの費用の出し方の違い（同じ数字で並べて比較）",
+      "初見の英語MC4問＋TBS（入力すると自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】リース（借手）—分類・開始時の計上・その後の費用（ASC 842）",
+    "badge": "FAR 復習シート｜Leases — Lessee（ASC 842-20）",
+    "h1_html": "リース（借手）：どちらの分類でも負債と使用権資産を計上し、違いは「費用の出し方」だけ",
+    "lead_html": "この論点の復習用です。最初の図で分類と開始時の計算、2つの分類の費用の違いを確認し、差がつく論点を見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：開始時は同じ、違うのは開始後の費用",
+      "lead_html": "借手は、ファイナンスでもオペレーティングでも開始日に負債と使用権資産（<span class=\"term-en\">ROU asset</span>）を計上します。負債の動きは両方同じで、違うのは P/L の費用と使用権資産の減らし方です。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Gama Co. は Year 1 の1月1日に機械をリースした",
+          "items": [
+            "リース期間5年。支払は毎年12月31日に $26,380（期末払い）。所有権の移転・購入選択権はない",
+            "貸手の計算利子率 10% が分かる。支払の現在価値は <b>$100,000</b>",
+            "機械の経済的耐用年数は6年。契約のために払った初期直接コストは $2,000"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "分類：5条件のどれか1つに当たればファイナンス",
+              "body_html": "所有権移転／行使が合理的に確実な購入選択権／期間が経済的耐用年数の大部分（目安75%以上）／支払の現在価値が公正価値のほぼ全部（目安90%以上）／他に転用できない特殊な資産<br>→ 5 ÷ 6 ＝ 83%（大部分）なので<b>ファイナンス</b>"
+            },
+            {
+              "head": "開始日：負債 → 使用権資産の順に計算",
+              "body_html": "リース負債 ＝ まだ払っていない支払の現在価値 <span class=\"en\">100,000</span><br>使用権資産 ＝ 負債 ＋ 開始日までの支払 ＋ 初期直接コスト − 受け取ったインセンティブ ＝ 100,000 ＋ 2,000 ＝ <span class=\"en\">102,000</span>",
+              "tone": "key"
+            },
+            {
+              "head": "開始後：負債は両方とも実効金利法で減らす",
+              "body_html": "利息 100,000 × 10% ＝ 10,000、支払 26,380 → Year 1 末の負債 <span class=\"en\">83,620</span>"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "head": ["Year 1", "ファイナンス", "オペレーティング（仮に分類がこちらだった場合）"],
+          "rows": [
+            ["P/L の費用", "利息 10,000 ＋ 償却 20,400 ＝ <b>30,400</b>（2本立て）", "単一のリース費用 <b>26,780</b>（毎年同じ額）"],
+            ["費用の出し方", "使用権資産 102,000 ÷ 5年 ＝ 20,400 を償却", "（支払総額 131,900 ＋ 初期直接コスト 2,000）÷ 5年 ＝ 26,780"],
+            ["使用権資産の減少", "償却額 20,400 → 期末 81,600", "26,780 − 利息相当 10,000 ＝ 16,780 → 期末 85,220"],
+            ["リース負債の期末残高", "83,620", "83,620（同じ）"]
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式は3本",
+          "lines": [
+            "期末のリース負債 ＝ 期首の負債 ＋ 期首の負債 × 利率 − 支払額（両方の分類で同じ）",
+            "ファイナンスの費用 ＝ 利息 ＋ 使用権資産の償却（通常は定額）",
+            "オペレーティングの費用 ＝（支払総額 ＋ 初期直接コスト − インセンティブ）÷ 期間、使用権資産の減少 ＝ その費用 − 利息相当"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "期間と支払額",
+      "title_html": "計算の前に決める：リース期間・支払額・割引率",
+      "blocks": [
+        {
+          "type": "cards2",
+          "cards": [
+            {
+              "title": "リース期間に入れるもの",
+              "tone": "teal",
+              "items": [
+                "解約できない期間",
+                "行使することが合理的に確実な延長オプションの期間",
+                "行使しないことが合理的に確実な解約オプションの期間",
+                "貸手が延長を決められる期間"
+              ]
+            },
+            {
+              "title": "リース料（負債）に入れるもの・入れないもの",
+              "tone": "navy",
+              "items": [
+                "入れる：固定の支払（インセンティブを引く）、指数・レートに連動する支払（開始日の指数で）、行使が合理的に確実な購入選択権の価格、期間に織り込んだ解約違約金、残価保証で払う見込みの額",
+                "入れない：売上や使用量に連動する変動支払、貸手の借入の保証、リース以外の部分（保守など）"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "割引率は、<b>貸手の計算利子率がすぐに分かればそれ</b>、分からなければ<b>借手の追加借入利子率</b>です。期首払いのときは、開始日に払う1回目は割り引きません。"
+        },
+        {
+          "type": "note",
+          "html": "期間12か月以下で、行使が合理的に確実な購入選択権がない短期リースは、負債と使用権資産を計上しない方法を選べます（支払は期間にわたって定額で費用）。"
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "仕訳一覧",
+      "title_html": "仕訳一覧（1の例・ファイナンス）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["場面", "仕訳", "ポイント"],
+          "en_cols": [1],
+          "rows": [
+            ["1/1 開始日", "Dr. ROU asset 102,000<br>　Cr. Lease liability 100,000<br>　Cr. Cash 2,000", "初期直接コストは使用権資産に入れる"],
+            ["12/31 支払", "Dr. Interest expense 10,000<br>Dr. Lease liability 16,380<br>　Cr. Cash 26,380", "支払は利息と元本に分ける"],
+            ["12/31 償却", "Dr. Amortization expense 20,400<br>　Cr. ROU asset 20,400", "102,000 ÷ 5年（所有権移転なしなので期間と耐用年数の短い方）"],
+            ["（オペレーティングなら）12/31", "Dr. Lease expense 26,780<br>Dr. Lease liability 16,380<br>　Cr. Cash 26,380<br>　Cr. ROU asset 16,780", "費用は1本。使用権資産は差額で減らす"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "分類の5条件は覚えていても、費用の計算と使用権資産の残高で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "負債の残高は同じ。違うのは費用と使用権資産の残高",
+          "rule_html": "リース負債はどちらの分類でも実効金利法で減らします。ファイナンスは利息と償却を別々に計上し、オペレーティングは<b>単一のリース費用を定額</b>で計上して、使用権資産は「その費用 − 利息相当」だけ減らします。",
+          "calc_html": "1の例 Year 1：ファイナンスの費用 30,400／オペレーティングの費用 26,780。負債はどちらも 83,620、使用権資産はファイナンス 81,600／オペレーティング 85,220",
+          "miss_html": "オペレーティングでも使用権資産を 102,000 ÷ 5 ＝ 20,400 減らしてしまう／オペレーティングの費用を支払額 26,380 と答える（初期直接コストの配分 400 を忘れる）。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "リース期間は「合理的に確実な延長」まで含める",
+          "rule_html": "延長できる権利があるだけでは期間に入れませんが、<b>行使することが合理的に確実</b>なら入れます。この期間で分類（75%の目安）も、負債の割引回数も、償却期間も決まります。",
+          "calc_html": "例：解約できない期間3年＋延長2年（行使が合理的に確実）、経済的耐用年数6年 → 期間5年、5 ÷ 6 ＝ 83% でファイナンス",
+          "miss_html": "解約できない3年だけで 3 ÷ 6 ＝ 50% と計算し、オペレーティングにしてしまう。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "使用権資産の調整は「＋前払・＋初期直接コスト・−インセンティブ」",
+          "rule_html": "開始日までに払った額と初期直接コストを足し、貸手から受け取ったインセンティブを引きます。初期直接コストは<b>契約が成立しなければ発生しなかった費用</b>（仲介手数料など）だけで、成立しなくてもかかる交渉・法務の費用は入れません。",
+          "calc_html": "例：支払の現在価値 60,000、前払 2,000、仲介手数料 1,500、インセンティブ受取 4,000 → 60,000 ＋ 2,000 ＋ 1,500 − 4,000 ＝ 59,500",
+          "miss_html": "インセンティブを足してしまう（67,500）／弁護士への相談料まで初期直接コストに入れる。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "ファイナンスの償却期間",
+          "rule_html": "通常は<b>リース期間と耐用年数の短い方</b>で償却します。所有権が移転する、または購入選択権の行使が合理的に確実なときは、リース後も使うので<b>耐用年数</b>で償却します。借手の内装などの改良費（リース物件改良）も同じ考え方です。",
+          "calc_html": "例：使用権資産 80,000、リース期間4年、耐用年数10年、所有権が移転する → 80,000 ÷ 10 ＝ 8,000",
+          "miss_html": "所有権が移転するのにリース期間4年で割って 20,000 にする。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>期首払い：</b>開始日に払う1回目は割り引かずに足します。開始日の支払は負債に残らず、使用権資産には含まれます。",
+            "<b>残価保証：</b>負債に入れるのは保証額全部ではなく、払う見込みの額だけです。",
+            "<b>表示：</b>ファイナンスとオペレーティングの使用権資産・負債は、合算せずに分けて表示します（本体か注記）。",
+            "<b>キャッシュ・フロー計算書：</b>ファイナンスの元本返済は財務活動、オペレーティングの支払は営業活動です。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            ["reasonably certain to exercise the renewal option", "延長期間もリース期間に入れる", "解約できない期間だけで判定する"],
+            ["implicit rate is readily determinable", "貸手の計算利子率で割り引く", "借手の追加借入利子率を使う"],
+            ["payments due at the beginning of each year", "1回目は割り引かない（期首払いの係数）", "期末払いの係数を使う"],
+            ["lease incentive received from the lessor", "使用権資産から引く", "使用権資産に足す"],
+            ["based on a percentage of sales", "変動支払。負債に入れない", "見込み額を負債に入れる"],
+            ["title transfers at the end of the lease term", "耐用年数で償却", "リース期間で償却"],
+            ["single lease cost / straight-line basis", "オペレーティング。使用権資産は差額で減らす", "償却と利息を2本立てで計上する"],
+            ["term of 12 months or less", "短期リースの簡便法を選べる", "必ず負債を計上する"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 842 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜リース期間と分類",
+          "stem": "Kesh Co. leased equipment with a noncancelable term of three years. Kesh has an option to renew the lease for two additional years and is reasonably certain to exercise it. The equipment has a remaining economic life of six years. Ownership does not transfer, there is no purchase option, the present value of the lease payments is 70% of the fair value, and the equipment is not specialized. How should Kesh classify the lease?",
+          "choices": ["A. Operating lease, because the lease term is 50% of the economic life", "B. Finance lease, because the lease term is a major part of the economic life", "C. Operating lease, because the present value of payments is less than substantially all of fair value", "D. Short-term lease, because the noncancelable term is three years"],
+          "ja_html": "Kesh社は、解約できない期間3年の設備リース契約を結んだ。さらに2年延長できるオプションがあり、行使することが合理的に確実である。設備の残りの経済的耐用年数は6年。所有権は移転せず、購入選択権もなく、支払の現在価値は公正価値の70%で、特殊な資産ではない。分類はどれか。<br>A. オペレーティング（期間が耐用年数の50%だから）<br>B. ファイナンス（期間が耐用年数の大部分だから）<br>C. オペレーティング（支払の現在価値が公正価値のほぼ全部に満たないから）<br>D. 短期リース（解約できない期間が3年だから）",
+          "answer_html": "<b>正解：B</b><br>リース期間＝3年＋合理的に確実な延長2年＝5年。5 ÷ 6 ＝ 83% で大部分（論点2）。5条件のうち1つに当たればファイナンス<br>A：延長期間を入れていない<br>C：現在価値の条件に当たらなくても、期間の条件に当たればファイナンス<br>D：短期リースは12か月以下"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜使用権資産の当初測定",
+          "stem": "On the commencement date, the present value of Lyra Co.'s unpaid lease payments is $60,000. Before the commencement date, Lyra prepaid $2,000 of rent and paid a $1,500 commission to a broker that was incurred only because the lease was obtained. Lyra also received a $4,000 lease incentive from the lessor. At what amount should Lyra initially measure the right-of-use asset?",
+          "choices": ["A. $56,000", "B. $59,500", "C. $63,500", "D. $67,500"],
+          "ja_html": "開始日に、Lyra社のまだ払っていないリース料の現在価値は $60,000 である。開始日前に Lyra社は賃料 $2,000 を前払いし、リース契約が成立したことでのみ発生した仲介手数料 $1,500 を支払った。また、貸手からインセンティブ $4,000 を受け取った。使用権資産の当初測定額はいくらか。<br>A. $56,000　B. $59,500　C. $63,500　D. $67,500",
+          "answer_html": "<b>正解：B（$59,500）</b><br>60,000 ＋ 2,000 ＋ 1,500 − 4,000 ＝ <b>59,500</b>（論点3）<br>A：前払と初期直接コストを足していない<br>C：インセンティブを引いていない<br>D：インセンティブを足している"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜オペレーティングの費用",
+          "stem": "On January 1, Year 1, Mora Co. entered into a four-year operating lease requiring payments of $15,000 at the end of each year. The present value of the payments at Mora's 8% incremental borrowing rate is $49,682. Mora incurred no initial direct costs and received no incentives. What amount of lease expense should Mora report for Year 1?",
+          "choices": ["A. $3,975", "B. $12,420", "C. $15,000", "D. $16,395"],
+          "ja_html": "Year 1 の1月1日、Mora社は4年間のオペレーティング・リース契約を結んだ。支払は毎年末に $15,000。追加借入利子率8%による支払の現在価値は $49,682。初期直接コストもインセンティブもない。Year 1 に計上するリース費用はいくらか。<br>A. $3,975　B. $12,420　C. $15,000　D. $16,395",
+          "answer_html": "<b>正解：C（$15,000）</b><br>オペレーティングは単一のリース費用を定額で計上：60,000 ÷ 4年 ＝ <b>15,000</b>（論点1）<br>A：負債の利息相当（49,682 × 8%）だけを答えている<br>B：使用権資産を4年で割った額だけを答えている<br>D：ファイナンスのように利息 3,975 ＋ 償却 12,420 を足している"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜償却期間と費用の複合",
+          "stem": "Noro Co. entered into a four-year finance lease of a building component on January 1, Year 1. The lease transfers ownership to Noro at the end of the lease term. The lease liability and the right-of-use asset were each initially measured at $80,000, using a discount rate of 6%. The asset has a useful life of ten years with no residual value. What amount of amortization expense should Noro recognize for Year 1?",
+          "choices": ["A. $8,000", "B. $12,800", "C. $20,000", "D. $24,800"],
+          "ja_html": "Year 1 の1月1日、Noro社は4年間のファイナンス・リース契約を結んだ。リース期間の終了時に所有権が Noro社に移転する。リース負債と使用権資産の当初測定額はどちらも $80,000（割引率6%）、資産の耐用年数は10年で残存価額はない。Year 1 の償却費はいくらか。<br>A. $8,000　B. $12,800　C. $20,000　D. $24,800",
+          "answer_html": "<b>正解：A（$8,000）</b><br>所有権が移転するので耐用年数10年で償却：80,000 ÷ 10 ＝ <b>8,000</b>（論点4）<br>B：償却費に利息 80,000 × 6% ＝ 4,800 を足している（聞かれているのは償却費だけ）<br>C：リース期間4年で割っている<br>D：4年で割った償却費に利息を足している"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：Year 2 の残高と費用（ファイナンス）",
+          "intro_html": "1の例（Gama Co.・ファイナンス）の Year 2 です。利率10%、支払は12月31日に $26,380。空欄に金額を入れて「答え合わせ」を押してください",
+          "rows": [
+            {"label": "Year 2 期首のリース負債", "value": "83,620"},
+            {"label": "Year 2 の利息費用", "ans": 8362},
+            {"label": "Year 2 期末のリース負債", "ans": 65602},
+            {"label": "Year 2 の使用権資産の償却", "ans": 20400},
+            {"label": "Year 2 期末の使用権資産", "ans": 61200},
+            {"label": "Year 2 の費用合計（P/L）", "ans": 28762, "head": true}
+          ],
+          "explain_html": "利息 83,620 × 10% ＝ <b>8,362</b><br>期末の負債 83,620 ＋ 8,362 − 26,380 ＝ <b>65,602</b><br>償却 102,000 ÷ 5 ＝ <b>20,400</b>、期末の使用権資産 102,000 − 20,400 × 2 ＝ <b>61,200</b><br>費用合計 8,362 ＋ 20,400 ＝ <b>28,762</b>（利息が減るので Year 1 の 30,400 より小さい）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "ファイナンスに分類する5条件を言える",
+            "リース期間に入れる延長・解約オプションの条件を言える",
+            "リース負債と使用権資産の当初測定を計算できる",
+            "ファイナンスとオペレーティングの Year 1 の費用を同じ数字で計算し分けられる",
+            "オペレーティングの使用権資産の減少額を「費用 − 利息相当」で出せる",
+            "償却期間が耐用年数になる2つのケースを言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

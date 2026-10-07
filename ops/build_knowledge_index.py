@@ -45,13 +45,13 @@ def build_index(specs: dict[str, dict]) -> str:
         note = f"[ノート](topics/{slug}.md)" if (KN / "topics" / f"{slug}.md").is_file() else "—"
         title = plain(spec.get("meta", {}).get("h1_html", "")) or slug
         rows.append(
-            f"| [{slug}]({SITE}/{slug}/) | {ver} | {title} | {k.get('far_text', '')} | {k.get('asc', '')} | {k.get('updated', '')} | {note} |"
+            f"| [{slug}]({SITE}/{slug}/) | {spec.get('subject', 'FAR')} | {ver} | {title} | {k.get('far_text') or k.get('aud_text', '')} | {k.get('asc', '')} | {k.get('updated', '')} | {note} |"
         )
     v2 = sum(1 for r in rows if "| v2 |" in r)
     return (
         HEADER
         + f"# 図解ナレッジ索引\n\n全 {len(rows)} テーマ／v2（復習シート型）{v2} 本。\n\n"
-        + "| slug | 型 | タイトル | FARテキスト | ASC | 更新日 | ノート |\n|---|---|---|---|---|---|---|\n"
+        + "| slug | 科目 | 型 | タイトル | テキスト | 基準 | 更新日 | ノート |\n|---|---|---|---|---|---|---|---|\n"
         + "\n".join(rows)
         + "\n"
     )

@@ -102,5 +102,21 @@
   {
     "slug": "ppe-held-for-sale",
     "source": "publish-html/ppe-held-for-sale.html"
+  },
+  {
+    "slug": "revenue-five-step",
+    "source": "publish-html/revenue-five-step.html"
+  },
+  {
+    "slug": "lease-lessee-classification",
+    "source": "publish-html/lease-lessee-classification.html"
+  },
+  {
+    "slug": "deferred-taxes-temporary-differences",
+    "source": "publish-html/deferred-taxes-temporary-differences.html"
+  },
+  {
+    "slug": "aud-opinion-types",
+    "source": "publish-html/aud-opinion-types.html"
   }
 ]

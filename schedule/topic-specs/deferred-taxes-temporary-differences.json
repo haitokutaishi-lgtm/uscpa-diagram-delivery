@@ -1,0 +1,262 @@
+{
+  "version": 2,
+  "knowledge": {
+    "far_text": "Ch15 15-2〜15-14 会計利益と課税所得・一時差異・DTA/DTL・適用税率・税金費用／15-15 表示／15-16 評価引当／15-19 永久差異",
+    "asc": "ASC 740",
+    "updated": "2026-10-07",
+    "sources": []
+  },
+  "post": {
+    "name": "税効果（一時差異とDTA・DTL）",
+    "hook_q": "期首に DTL が $9,000 あり、期末に必要な DTL は $15,000。当期の繰延税金費用は $15,000 ですか、$6,000 ですか？",
+    "hook_where": "差がつく論点1と問題5",
+    "bullets": [
+      "税引前利益 → 課税所得 → 当期税金・繰延税金 → 税金費用の流れを1枚の図で確認",
+      "よく出る差異の DTA・DTL 早見表と、適用税率・評価性引当金の計算",
+      "初見の英語MC4問＋TBS（入力すると自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】税効果（ASC 740）—一時差異から DTA・DTL を決め、税金費用につなげる",
+    "badge": "FAR 復習シート｜Income Taxes — Temporary Differences（ASC 740）",
+    "h1_html": "税効果：差異を「永久」と「一時」に分け、一時差異だけに解消年度の税率を掛ける",
+    "lead_html": "この論点の復習用です。最初の図で課税所得と税金費用の流れを確認し、DTA・DTL の早見表と差がつく論点を見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：税引前利益から税金費用まで",
+      "lead_html": "税金費用は「当期に払う税金」と「繰延税金の増減」の合計です。永久差異は課税所得の計算にだけ使い、DTA・DTL は作りません。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Hira Co. の Year 1（税率は今後も25%で成立済み、期首の繰延税金はゼロ）",
+          "items": [
+            "税引前利益（会計）は $500,000",
+            "税務の減価償却が会計より $60,000 多い（Year 2・3 に $30,000 ずつ解消）",
+            "製品保証費用 $40,000 を会計で見積計上。税務は実際に払った時に損金（Year 2 に支払）",
+            "地方債の受取利息 $20,000（非課税）、罰金 $10,000（損金にならない）"
+          ]
+        },
+        {
+          "type": "table",
+          "head": ["項目", "課税所得への調整", "差異の種類", "繰延税金"],
+          "rows": [
+            ["税引前利益", "500,000", "", ""],
+            ["減価償却（税務が多い）", "−60,000", "将来加算一時差異", "DTL 60,000 × 25% ＝ <b>15,000</b>"],
+            ["製品保証（会計だけ先に費用）", "＋40,000", "将来減算一時差異", "DTA 40,000 × 25% ＝ <b>10,000</b>"],
+            ["地方債の受取利息", "−20,000", "永久差異", "なし"],
+            ["罰金", "＋10,000", "永久差異", "なし"],
+            ["<b>課税所得</b>", "<b>470,000</b>", "", "当期税金 470,000 × 25% ＝ <b>117,500</b>"]
+          ]
+        },
+        {
+          "type": "splitbar",
+          "bars": [
+            {
+              "title": "税金費用 $122,500 の内訳（＝ 永久差異を除いた利益 490,000 × 25%）",
+              "parts": [
+                {"label": "当期税金（未払法人税）", "short": "当期 117,500", "amt": "$117,500", "pct": 95.9, "color": "navy"},
+                {"label": "繰延税金費用（DTL 15,000 − DTA 10,000）", "short": "", "amt": "$5,000", "pct": 4.1, "color": "amber"}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式は3本",
+          "lines": [
+            "当期税金 ＝ 課税所得 × 当期の税率",
+            "DTA・DTL ＝ 期末の一時差異 × 解消する年度の成立済み税率",
+            "繰延税金費用 ＝ DTL の増加 − DTA の増加（期首と期末の残高の差）／税金費用 ＝ 当期税金 ＋ 繰延税金費用"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "DTA・DTL早見表",
+      "title_html": "DTA か DTL か：会計と税務、どちらが先か",
+      "lead_html": "科目名で覚えるより、「課税所得が会計利益より先に増えるか（→ 将来は減る → DTA）、後で増えるか（→ DTL）」で判断します。問題文の税務の条件を必ず読みます。",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["差異", "会計", "税務", "結果"],
+          "rows": [
+            ["加速償却（税務の償却が先に多い）", "定額で費用", "先に多く損金", "<b>DTL</b>"],
+            ["前払費用（税務は支払時に損金）", "翌期に費用", "当期に損金", "<b>DTL</b>"],
+            ["割賦販売・掛売り（税務は回収時に益金）", "販売時に収益", "回収時に益金", "<b>DTL</b>"],
+            ["持分法の未配当の利益", "利益の持分を収益", "配当を受けた時に益金", "<b>DTL</b>"],
+            ["強制転換の利得（税務は繰延べ）", "当期に利得", "将来に課税", "<b>DTL</b>"],
+            ["製品保証・偶発損失の見積計上", "見積時に費用", "支払時に損金", "<b>DTA</b>"],
+            ["前受収益（税務は受取時に益金）", "提供時に収益", "受取時に益金", "<b>DTA</b>"],
+            ["貸倒引当金", "見積時に費用", "貸倒れ時に損金", "<b>DTA</b>"],
+            ["税務上の欠損金の繰越", "—", "将来の所得から控除", "<b>DTA</b>"],
+            ["地方債利息・会社が受取人の生命保険金・保険料・罰金・受取配当控除", "—", "—", "<b>永久差異（なし）</b>"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "仕訳一覧",
+      "title_html": "仕訳一覧（1の例の数字）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["場面", "仕訳", "ポイント"],
+          "en_cols": [1],
+          "rows": [
+            ["当期税金", "Dr. Income tax expense—current 117,500<br>　Cr. Income taxes payable 117,500", "課税所得 × 当期の税率"],
+            ["繰延税金", "Dr. Income tax expense—deferred 5,000<br>Dr. Deferred tax asset 10,000<br>　Cr. Deferred tax liability 15,000", "DTL の増加は費用を増やし、DTA の増加は費用を減らす"],
+            ["評価性引当金（必要なとき）", "Dr. Income tax expense—deferred<br>　Cr. Valuation allowance", "DTA から控除して表示。費用が増える"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "DTA・DTL の判定ができても、期首残高・税率・評価性引当金で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "繰延税金費用は「残高の差」で出す",
+          "rule_html": "まず<b>期末に必要な DTA・DTL の残高</b>を出し、期首の残高との差を繰延税金費用にします。当期に発生した差異 × 税率をそのまま費用にすると、期首に残高があるときに合いません。",
+          "calc_html": "例：期首 DTL 9,000、期末の将来加算一時差異 60,000 × 25% ＝ 必要な DTL 15,000 → 繰延税金費用 15,000 − 9,000 ＝ 6,000",
+          "miss_html": "期首残高を無視して、期末の DTL 15,000 をそのまま繰延税金費用にしてしまう。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "税率は「解消する年度の成立済み税率」",
+          "rule_html": "将来の税率の変更が<b>成立していれば</b>、その差異が解消する年度の税率を使います。解消が複数年に分かれるなら年ごとに税率を掛けて合計します。成立前の予定税率は使いません。",
+          "calc_html": "例：将来加算一時差異 60,000 が Year 2 に 30,000（税率25%）、Year 3 に 30,000（成立済みの税率20%）で解消 → DTL ＝ 7,500 ＋ 6,000 ＝ 13,500",
+          "miss_html": "当期の税率25%を全体に掛けて 15,000 にする。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "DTA は回収できる分だけ。評価性引当金",
+          "rule_html": "DTA の一部（または全部）が実現しない可能性が<b>実現する可能性より高い</b>（<span class=\"en\">more likely than not</span>）とき、その分を評価性引当金（<span class=\"en\">valuation allowance</span>）にします。DTA からの控除で表示し、その分だけ税金費用が増えます。",
+          "calc_html": "例：DTA 10,000 のうち 30% は将来の課税所得が足りず実現しない可能性が高い → 評価性引当金 3,000、純額の DTA 7,000",
+          "miss_html": "評価性引当金を DTL として計上する／実現しない分を DTA から直接消して引当金を使わない。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "表示は非流動で、同じ納税単位・税務管轄ごとに相殺",
+          "rule_html": "DTA・DTL は、もとになった資産・負債が流動かどうかにかかわらず<b>すべて非流動</b>で表示します。同じ納税単位・同じ税務管轄のものは相殺して純額で表示し、別の管轄のものは相殺しません。",
+          "calc_html": "1の例：DTL 15,000 と DTA 10,000（同じ管轄）→ 非流動の DTL 5,000（純額）",
+          "miss_html": "製品保証の DTA は翌年に解消するからと、流動資産に表示する。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>欠損金の繰越：</b>発生した年に将来の控除効果を DTA にし、損失に対する税の便益を計上します（テキストの設例は無期限繰越・所得の80%まで控除・繰戻しなし）。",
+            "<b>不確実な税務ポジション：</b>税務当局の調査で認められる可能性が50%超のものだけ認識し、実現する可能性が50%超となる最大の金額で測定します。申告で控除した額との差は負債にします。",
+            "<b>永久差異と実効税率：</b>永久差異があると、税金費用 ÷ 税引前利益（実効税率）が法定税率と一致しません。",
+            "<b>税率変更の影響：</b>成立した期に既存の DTA・DTL を測り直し、差額は継続事業の税金費用に入れます。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            ["interest on municipal bonds", "永久差異。DTA・DTL は作らない", "一時差異として DTL を作る"],
+            ["deductible when paid / when incurred for tax", "会計が先に費用 → DTA", "DTL と取り違える"],
+            ["taxable when received", "前受収益 → DTA", "DTL にする"],
+            ["enacted tax rates for future years", "解消年度の成立済み税率で測る", "当期の税率を全体に掛ける"],
+            ["balance at the beginning of the year", "繰延税金費用は残高の差", "期末残高をそのまま費用にする"],
+            ["more likely than not that some portion will not be realized", "評価性引当金で DTA を減らす", "DTL を計上する"],
+            ["classified balance sheet", "繰延税金はすべて非流動", "解消時期で流動に分ける"],
+            ["total income tax expense", "当期税金 ＋ 繰延税金費用", "当期の未払法人税だけを答える"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 740 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜DTA になる差異（概念）",
+          "stem": "Which of the following differences between financial statement and tax reporting would result in a deferred tax asset?",
+          "choices": ["A. Depreciation is accelerated for tax purposes and straight-line for book purposes", "B. Rent received in advance is taxable when received but recognized as revenue when earned for book purposes", "C. Interest on municipal bonds is recognized as revenue for book purposes but is never taxable", "D. Installment sales are recognized at the point of sale for book purposes and taxed when collected"],
+          "ja_html": "財務諸表と税務の次の差異のうち、繰延税金資産が生じるものはどれか。<br>A. 減価償却が税務では加速償却、会計では定額法<br>B. 前受家賃が税務では受取時に課税、会計では提供時に収益<br>C. 地方債の利息が会計では収益だが、税務では課税されない<br>D. 割賦販売が会計では販売時に収益、税務では回収時に課税",
+          "answer_html": "<b>正解：B</b><br>税務が先に課税するので、将来は会計で収益にしても課税されない＝将来減算一時差異 → DTA（早見表）<br>A・D：税務が後で課税（損金が先）→ DTL<br>C：永久差異で、DTA・DTL は生じない"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜税金費用の合計",
+          "stem": "Tavi Co. reported pretax financial income of $300,000 for Year 1, which included $15,000 of interest on municipal bonds. Tax depreciation exceeded book depreciation by $25,000. The enacted tax rate is 30% for all years, and there were no deferred taxes at the beginning of Year 1. What amount should Tavi report as total income tax expense for Year 1?",
+          "choices": ["A. $78,000", "B. $85,500", "C. $90,000", "D. $93,000"],
+          "ja_html": "Tavi社の Year 1 の税引前利益は $300,000 で、地方債の受取利息 $15,000 を含む。税務の減価償却は会計より $25,000 多い。税率はすべての年度で30%（成立済み）、Year 1 期首の繰延税金はない。Year 1 の税金費用の合計はいくらか。<br>A. $78,000　B. $85,500　C. $90,000　D. $93,000",
+          "answer_html": "<b>正解：B（$85,500）</b><br>当期税金：（300,000 − 15,000 − 25,000）× 30% ＝ 78,000<br>繰延税金費用：DTL 25,000 × 30% ＝ 7,500<br>合計 78,000 ＋ 7,500 ＝ <b>85,500</b>（＝（300,000 − 15,000）× 30%）<br>A：当期税金だけを答えている<br>C：永久差異を除いていない（300,000 × 30%）<br>D：減価償却の差を逆向きに足している"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜解消年度の税率",
+          "stem": "At December 31, Year 1, Sela Co. had a $90,000 future taxable temporary difference that will reverse equally in Years 2, 3, and 4. Enacted tax rates are 30% for Year 2 and 25% for Years 3 and 4. What amount should Sela report as its deferred tax liability at December 31, Year 1?",
+          "choices": ["A. $22,500", "B. $24,000", "C. $25,500", "D. $27,000"],
+          "ja_html": "Year 1 の12月31日、Sela社には将来加算一時差異 $90,000 があり、Year 2・3・4 に均等に解消する。成立済みの税率は Year 2 が30%、Year 3・4 が25%。Year 1 の12月31日の繰延税金負債はいくらか。<br>A. $22,500　B. $24,000　C. $25,500　D. $27,000",
+          "answer_html": "<b>正解：B（$24,000）</b><br>30,000 × 30% ＋ 30,000 × 25% ＋ 30,000 × 25% ＝ 9,000 ＋ 7,500 ＋ 7,500 ＝ <b>24,000</b>（論点2）<br>A：全体に25%を掛けている<br>C：Year 3 にも30%を使っている<br>D：全体に30%を掛けている"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜評価性引当金と純額の DTA",
+          "stem": "At the end of Year 1, its first year of operations, Ruko Co. had $50,000 of future deductible temporary differences. The enacted tax rate is 21%. Based on available evidence, it is more likely than not that 40% of the deferred tax asset will not be realized. What amount of net deferred tax asset should Ruko report?",
+          "choices": ["A. $4,200", "B. $6,300", "C. $10,500", "D. $0"],
+          "ja_html": "営業初年度の Year 1 末、Ruko社には将来減算一時差異 $50,000 がある。成立済みの税率は21%。入手できる証拠から、繰延税金資産の40%は実現しない可能性が高い。純額で表示する繰延税金資産はいくらか。<br>A. $4,200　B. $6,300　C. $10,500　D. $0",
+          "answer_html": "<b>正解：B（$6,300）</b><br>DTA 50,000 × 21% ＝ 10,500、評価性引当金 10,500 × 40% ＝ 4,200<br>純額 10,500 − 4,200 ＝ <b>6,300</b>（論点3）<br>A：評価性引当金の額を答えている<br>C：評価性引当金を引いていない<br>D：一部が実現しないだけで、全額を消している"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：Year 2 の税金費用",
+          "intro_html": "1の例（Hira Co.）の Year 2 です。税引前利益 $600,000（永久差異なし）。減価償却の差のうち $30,000 が解消（会計の償却が税務より $30,000 多い）。Year 1 分の製品保証 $40,000 を支払い、Year 2 分として新たに $50,000 を見積計上（未払い）。税率25%。繰延税金費用が減る（便益）ときはマイナスで入力。空欄に金額を入れて「答え合わせ」を押してください",
+          "rows": [
+            {"label": "Year 2 の課税所得", "ans": 640000},
+            {"label": "当期税金", "ans": 160000},
+            {"label": "Year 2 期末の DTL", "ans": 7500},
+            {"label": "Year 2 期末の DTA", "ans": 12500},
+            {"label": "繰延税金費用（便益はマイナス）", "ans": -10000},
+            {"label": "税金費用の合計", "ans": 150000, "head": true}
+          ],
+          "explain_html": "課税所得：600,000 ＋ 30,000（償却の解消）＋ 50,000（新しい見積計上）− 40,000（支払で損金）＝ <b>640,000</b><br>当期税金：640,000 × 25% ＝ <b>160,000</b><br>DTL：残る差異 30,000 × 25% ＝ <b>7,500</b>（期首 15,000 から 7,500 減少）<br>DTA：未払いの保証 50,000 × 25% ＝ <b>12,500</b>（期首 10,000 から 2,500 増加）<br>繰延税金費用：−7,500 − 2,500 ＝ <b>−10,000</b>（論点1：残高の差）<br>合計 160,000 − 10,000 ＝ <b>150,000</b>（＝ 600,000 × 25%）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "永久差異の例を3つ言え、DTA・DTL を作らない理由を言える",
+            "早見表の差異を DTA・DTL に分けられる（税務の条件を読んで）",
+            "税引前利益から課税所得を計算できる",
+            "繰延税金費用を期首・期末の残高の差で出せる",
+            "複数年に解消する差異に年ごとの成立済み税率を掛けられる",
+            "評価性引当金の判断基準と表示を説明できる"
+          ]
+        }
+      ]
+    }
+  ]
+}

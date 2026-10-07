@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】監査意見の種類—限定・不適正・意見差控えは「原因」と「広範性」で決まる</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Audit Reports — Modified Opinions（AU-C 705）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">監査意見の種類：原因（虚偽表示か・範囲の制限か）と、影響が広範かどうかの2つで決まる</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">この論点の復習用です。最初の表で4つの意見の決まり方を確認し、報告書の文言と差がつく論点を見たら、最後に問題で仕上げてください。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 範囲の制限</a><a href="#report">3 報告書の文言</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：意見はこの表で決まる</h2>
+      <p class="lead">修正付き意見は、縦の「原因」と横の「影響の広がり」の組み合わせで決まります。重要でなければ、どちらの原因でも無修正意見です。</p>
+      <div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat(3,minmax(0,1fr))"><div class="mx-corner">原因 ＼ 影響</div><div class="mx-col">重要でない</div><div class="mx-col">重要だが広範でない<br><span class="en">material, not pervasive</span></div><div class="mx-col">重要かつ広範<br><span class="en">material and pervasive</span></div><div class="mx-row">虚偽表示がある<br><span class="en">(GAAP departure)</span></div><div class="mx-cell ok"><b>無修正意見</b><span class="en">unmodified</span></div><div class="mx-cell mid"><b>限定意見</b><span class="en">qualified — except for</span></div><div class="mx-cell ng"><b>不適正意見</b><span class="en">adverse</span></div><div class="mx-row">証拠が得られない<br><span class="en">(scope limitation)</span></div><div class="mx-cell ok"><b>無修正意見</b><span class="en">unmodified</span></div><div class="mx-cell mid"><b>限定意見</b><span class="en">qualified — except for</span></div><div class="mx-cell ng"><b>意見差控え</b><span class="en">disclaimer</span></div></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>問1　何が起きたか</b><p>十分な証拠を得たうえで<b>虚偽表示がある</b>（会計方針・測定・開示が GAAP に合わない）→ 上の行／<b>十分かつ適切な証拠が得られない</b> → 下の行</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>問2　重要か</b><p>重要でなければ、どちらの原因でも<b>無修正意見</b></p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>問3　広範か</b><p>広範でない → どちらの行も<b>限定意見</b>。広範 → 虚偽表示なら<b>不適正意見</b>、証拠が得られないなら<b>意見差控え</b></p></div></div></div>
+      <div class="rule">「広範（<span class="en">pervasive</span>）」とは、①特定の要素・勘定・項目に限られない、②限られていても財務諸表の大部分を占める、③開示なら利用者の理解に根本的に関わる、のどれかに当たる影響です。</div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>範囲の制限が起きる3つの状況と、経営者による制限への対応</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>状況</th><th>例</th></tr></thead><tbody><tr><td>企業がコントロールできない状況</td><td>火災で会計記録が失われた、政府機関に重要な記録を無期限に押収された</td></tr><tr><td>監査の時期・性質による状況</td><td>期中に契約したため、前期末の実地棚卸に立ち会えなかった</td></tr><tr><td>経営者が課した制限</td><td>経営者が売掛金の確認状の送付を認めない</td></tr></tbody></table></div>
+      <div class="grid md:grid-cols-2 gap-3 mt-3 text-sm leading-relaxed"><div class="point mb-0"><p class="font-bold text-teal-800 mb-1">まず代替手続を試す</p><ul class="list-disc ml-5 text-[13px]"><li>確認状が送れなくても、期末後の入金や出荷記録で十分な証拠が得られれば範囲の制限ではない → 無修正意見</li><li>立会いができなくても、別の日に実地棚卸を行い期末まで戻す手続で証拠が得られれば同じ</li></ul></div><div class="point mb-0"><p class="font-bold text-red-700 mb-1">経営者による制限が解けないとき</p><ul class="list-disc ml-5 text-[13px]"><li>経営者に制限をやめるよう求める → 応じなければ監査委員会など（ガバナンスに責任を負う者）に伝える</li><li>影響が重要だが広範でない → 限定意見</li><li>重要かつ広範 → 意見差控え、または（法令で許されれば）監査契約の解除</li></ul></div></div>
+      
+    </section>
+
+    <section id="report" class="section-card">
+      <h2><span class="sec-no">3</span>報告書の決まり文句（英語のまま覚える）</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>意見</th><th>意見区分の文言</th><th>根拠区分の見出し</th><th>ポイント</th></tr></thead><tbody><tr><td>無修正意見</td><td class="en">present fairly, in all material respects</td><td class="en">Basis for Opinion</td><td>強調事項・継続企業の区分を追加しても意見は無修正</td></tr><tr><td>限定意見（虚偽表示）</td><td class="en">except for the effects of the matter described in the Basis for Qualified Opinion section</td><td class="en">Basis for Qualified Opinion</td><td>影響額を具体的に書く（例：低価法なら評価減と利益への影響）</td></tr><tr><td>限定意見（開示不足）</td><td class="en">except for the omission of the information described in …</td><td class="en">Basis for Qualified Opinion</td><td>可能なら、欠けている情報そのものを根拠区分に書く</td></tr><tr><td>限定意見（範囲の制限）</td><td class="en">except for the possible effects of the matter …</td><td class="en">Basis for Qualified Opinion</td><td>「影響があるかもしれない」＝ possible effects</td></tr><tr><td>不適正意見</td><td class="en">do not present fairly …</td><td class="en">Basis for Adverse Opinion</td><td>例：連結すべき子会社を連結していない</td></tr><tr><td>意見差控え</td><td class="en">We were engaged to audit … we do not express an opinion</td><td class="en">Basis for Disclaimer of Opinion</td><td>「監査した」と書かない。監査人の責任区分は簡略にする</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>差がつく論点</h2>
+      <p class="lead">表は覚えていても、「修正しないケース」と「範囲の制限かどうか」の判断で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>意見を分けるのは「金額の大きさ」ではなく「広範かどうか」</div><div class="rule">限定意見と不適正意見（または意見差控え）の分かれ目は、虚偽表示がどれだけ大きいかではなく、<b>影響が財務諸表全体に広がるか</b>です。1つの勘定に限られていれば、金額が大きくても限定意見になり得ます。</div><div class="calc">例：棚卸資産の評価減の漏れ（重要、他の項目への影響は売上原価と利益だけ）→ 限定意見／主要な子会社を連結していない（資産・負債・収益の多くに影響）→ 不適正意見</div><div class="miss"><b>こう間違える：</b>「金額が重要だから不適正意見」と判断してしまう。重要性は「修正するかどうか」、広範性は「どの修正意見か」を決めます。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>経営者が手続を拒否しても、それだけでは限定意見にならない</div><div class="rule">範囲の制限になるのは、<b>代替手続でも十分かつ適切な証拠が得られないとき</b>です。代替手続で証拠が得られれば無修正意見です。経営者による制限は経営者の誠実性の評価にも関わるので、リスク評価を見直します。</div><div class="calc">例：確認状の送付を拒否 → 期末後の入金・出荷記録・請求書で残高を確かめられた → 無修正意見</div><div class="miss"><b>こう間違える：</b>「経営者が確認を拒否した＝範囲の制限＝限定意見」と短絡する。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>意見を修正しないケース：継続企業・強調事項・その他の事項</div><div class="rule">継続企業の前提に重要な疑義があっても、<b>適切に開示されていれば無修正意見</b>のまま、継続企業についての区分を追加します。重要な訴訟の不確実性や会計方針の変更（適切に処理・開示）を目立たせたいときの強調事項（<span class="en">emphasis-of-matter</span>）、他の監査人の報告など財務諸表以外の事項を伝えるその他の事項（<span class="en">other-matter</span>）も、意見は修正しません。</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li>継続企業の開示が不十分 → 開示の虚偽表示として限定意見または不適正意見</li><li>会計方針の変更が適切に処理されていない → 虚偽表示として限定意見または不適正意見</li></ul><div class="miss"><b>こう間違える：</b>「重要な疑義がある＝限定意見」と答える。疑義そのものは修正の理由になりません。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>不適正意見・意見差控えのとき、部分的に「適正」と言わない</div><div class="rule">財務諸表全体に不適正意見や意見差控えを出す報告書の中で、特定の項目だけ「適正に表示されている」と述べること（<span class="en">piecemeal opinion</span>）はできません。全体の意見と矛盾するからです。</div><div class="miss"><b>こう間違える：</b>意見差控えにしたうえで、「ただし現金と売掛金は適正」と書き添えてよいと考える。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>そのほかの関連論点</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li><b>独立性がない：</b>監査意見は出せず、意見差控えにして独立していない旨を書きます。</li><li><b>比較財務諸表：</b>年度ごとに意見を分けられます（例：当期は無修正、前期の損益計算書だけ意見差控え）。</li><li><b>前期末の棚卸に立ち会えなかった：</b>期首の棚卸資産は当期の売上原価に影響するため、損益計算書・キャッシュ・フロー計算書は意見差控え、期末の貸借対照表は無修正、という分け方があります。</li><li><b>公開会社（PCAOB）：</b>監査上の重要な事項（<span class="en">CAM</span>）の記載は意見の修正ではありません。</li></ul></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>management refused to permit confirmation</td><td>代替手続で証拠が得られたかを確認</td><td>すぐに限定意見にする</td></tr><tr><td>unable to apply alternative procedures</td><td>範囲の制限。次に広範かどうか</td><td>不適正意見にする</td></tr><tr><td>material but not pervasive</td><td>原因にかかわらず限定意見</td><td>金額が大きいので不適正意見にする</td></tr><tr><td>material and pervasive / GAAP departure</td><td>不適正意見</td><td>意見差控えにする</td></tr><tr><td>material and pervasive / scope limitation</td><td>意見差控え</td><td>不適正意見にする</td></tr><tr><td>substantial doubt … adequately disclosed</td><td>無修正意見＋継続企業の区分</td><td>限定意見にする</td></tr><tr><td>emphasize a matter</td><td>強調事項。意見は無修正</td><td>修正付き意見だと考える</td></tr><tr><td>the auditor is not independent</td><td>意見差控え（独立していない旨を記載）</td><td>限定意見にする</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">6</span>確認問題（初見の設定）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、AU-C 705・706・570 の考え方に沿って作っています。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜経営者による範囲の制限</p>
+        <p class="en-stem">Management of Corva Co. refused to allow the auditor to confirm a material receivable balance with a major customer. The auditor was unable to obtain sufficient appropriate audit evidence through alternative procedures. The possible effects of the matter are material but not pervasive. Which type of opinion should the auditor express?</p>
+        <div class="choices">A. An unmodified opinion with an emphasis-of-matter paragraph<br>B. A qualified opinion<br>C. An adverse opinion<br>D. A disclaimer of opinion</div>
+        <details><summary>和訳を見る</summary><div class="body">Corva社の経営者は、主要な得意先への重要な売掛金残高の確認を監査人に認めなかった。監査人は代替手続でも十分かつ適切な監査証拠を得られなかった。影響の可能性は重要だが広範ではない。監査人はどの意見を表明すべきか。<br>A. 強調事項つきの無修正意見<br>B. 限定意見<br>C. 不適正意見<br>D. 意見差控え</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>代替手続でも証拠が得られない＝範囲の制限。重要だが広範でないので限定意見（全体図の下の行の真ん中）<br>A：重要な範囲の制限があるので無修正にはできない<br>C：不適正意見は虚偽表示があり、かつ広範なとき<br>D：意見差控えは範囲の制限の影響が広範なとき</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜広範な GAAP からの逸脱</p>
+        <p class="en-stem">Delo Co. did not consolidate a subsidiary that it controls, and instead accounted for the investment at cost. The auditor concluded that the effects on the financial statements are material and pervasive, and that sufficient appropriate evidence was obtained. Which type of opinion should the auditor express?</p>
+        <div class="choices">A. A qualified opinion<br>B. A disclaimer of opinion<br>C. An adverse opinion<br>D. An unmodified opinion with an other-matter paragraph</div>
+        <details><summary>和訳を見る</summary><div class="body">Delo社は支配している子会社を連結せず、投資を原価法で処理した。監査人は、財務諸表への影響が重要かつ広範であり、十分かつ適切な証拠は得られたと結論づけた。監査人はどの意見を表明すべきか。<br>A. 限定意見<br>B. 意見差控え<br>C. 不適正意見<br>D. その他の事項つきの無修正意見</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>証拠は得られており、虚偽表示（GAAP からの逸脱）が重要かつ広範 → 不適正意見（論点1）<br>A：広範なので限定意見では足りない<br>B：意見差控えは証拠が得られないとき<br>D：重要な虚偽表示があるので無修正にはできない</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜意見差控えの報告書の文言</p>
+        <p class="en-stem">Which of the following phrases would most likely appear in an auditor's report that expresses a disclaimer of opinion?</p>
+        <div class="choices">A. "Except for the possible effects of the matter described …"<br>B. "We were engaged to audit the financial statements …"<br>C. "The financial statements do not present fairly …"<br>D. "In our opinion, the financial statements present fairly, in all material respects …"</div>
+        <details><summary>和訳を見る</summary><div class="body">意見差控えの監査報告書に記載される可能性が最も高い文言はどれか。<br>A. 「…に記載した事項の影響の可能性を除き」<br>B. 「我々は財務諸表の監査を引き受けた」<br>C. 「財務諸表は適正に表示していない」<br>D. 「我々の意見では、財務諸表はすべての重要な点において適正に表示している」</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>意見差控えは十分な監査ができていないので、「監査した（we audited）」ではなく「監査を引き受けた（we were engaged to audit）」と書く（報告書の決まり文句）<br>A：範囲の制限による限定意見の文言<br>C：不適正意見の文言<br>D：無修正意見の文言</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜継続企業の重要な疑義（複合）</p>
+        <p class="en-stem">An auditor concludes that there is substantial doubt about Ferro Co.'s ability to continue as a going concern for a reasonable period of time. Management's disclosures about the conditions and its plans are adequate. In addition, Ferro changed its inventory method during the year; the change is properly accounted for and disclosed. Which report is appropriate?</p>
+        <div class="choices">A. A qualified opinion because of the going concern doubt<br>B. An unmodified opinion with a separate going concern section<br>C. An adverse opinion because of the going concern doubt and the change in accounting principle<br>D. A disclaimer of opinion because the going concern conclusion is uncertain</div>
+        <details><summary>和訳を見る</summary><div class="body">監査人は、Ferro社が合理的な期間、継続企業として存続できるかについて重要な疑義があると結論づけた。状況と経営者の計画についての開示は適切である。また Ferro社は当期に棚卸資産の評価方法を変更しており、変更は適切に処理・開示されている。適切な報告はどれか。<br>A. 継続企業の疑義による限定意見<br>B. 継続企業についての区分を追加した無修正意見<br>C. 継続企業の疑義と会計方針の変更による不適正意見<br>D. 継続企業の結論が不確実なので意見差控え</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>重要な疑義があっても開示が適切なら意見は修正せず、継続企業の区分を追加する。会計方針の変更も適切に処理・開示されていれば虚偽表示ではない（論点3）<br>A・C：疑義そのものや適切な方針変更は修正の理由にならない<br>D：不確実性は範囲の制限ではない</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="17">
+        <p class="mc-label">問題5｜TBS形式：状況から意見を選ぶ</p>
+        <p class="text-[13px] leading-relaxed mb-2">次の状況それぞれについて、表明すべき意見を選んで「答え合わせ」を押してください。特に書いていない限り、影響は重要です</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">意見</th></tr></thead><tbody><tr><td>①経営者が売掛金の確認を拒否したが、期末後の入金と出荷記録で残高を確かめられた</td><td class="num"><select data-ans="無修正意見" aria-label="①経営者が売掛金の確認を拒否したが、期末後の入金と出荷記録で残高を確かめられた"><option value="">選ぶ</option><option value="無修正意見">無修正意見</option><option value="限定意見">限定意見</option><option value="不適正意見">不適正意見</option><option value="意見差控え">意見差控え</option></select></td></tr><tr><td>②棚卸資産を低価法で評価減していない。影響は棚卸資産・売上原価・利益に限られ、広範ではない</td><td class="num"><select data-ans="限定意見" aria-label="②棚卸資産を低価法で評価減していない。影響は棚卸資産・売上原価・利益に限られ、広範ではない"><option value="">選ぶ</option><option value="無修正意見">無修正意見</option><option value="限定意見">限定意見</option><option value="不適正意見">不適正意見</option><option value="意見差控え">意見差控え</option></select></td></tr><tr><td>③純資産の大部分を占める投資先の財務情報を入手できず、代替手続もない。影響は広範</td><td class="num"><select data-ans="意見差控え" aria-label="③純資産の大部分を占める投資先の財務情報を入手できず、代替手続もない。影響は広範"><option value="">選ぶ</option><option value="無修正意見">無修正意見</option><option value="限定意見">限定意見</option><option value="不適正意見">不適正意見</option><option value="意見差控え">意見差控え</option></select></td></tr><tr><td>④リース取引の大半を負債として計上しておらず、多くの項目に影響が広がっている</td><td class="num"><select data-ans="不適正意見" aria-label="④リース取引の大半を負債として計上しておらず、多くの項目に影響が広がっている"><option value="">選ぶ</option><option value="無修正意見">無修正意見</option><option value="限定意見">限定意見</option><option value="不適正意見">不適正意見</option><option value="意見差控え">意見差控え</option></select></td></tr><tr><td>⑤重要な訴訟の結果が不確実だが、注記で適切に開示されている</td><td class="num"><select data-ans="無修正意見" aria-label="⑤重要な訴訟の結果が不確実だが、注記で適切に開示されている"><option value="">選ぶ</option><option value="無修正意見">無修正意見</option><option value="限定意見">限定意見</option><option value="不適正意見">不適正意見</option><option value="意見差控え">意見差控え</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">①代替手続で証拠が得られたので範囲の制限ではない → <b>無修正意見</b>（論点2）<br>②虚偽表示・重要・広範でない → <b>限定意見</b><br>③証拠が得られない・広範 → <b>意見差控え</b><br>④虚偽表示・広範 → <b>不適正意見</b><br>⑤不確実性は適切に開示されていれば修正の理由にならない → <b>無修正意見</b>（必要なら強調事項を追加）</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c18-1"><label for="c18-1">「原因 × 影響」の表を白紙に書ける</label></li><li><input type="checkbox" id="c18-2"><label for="c18-2">広範（pervasive）の3つの意味を言える</label></li><li><input type="checkbox" id="c18-3"><label for="c18-3">範囲の制限が起きる3つの状況と、代替手続の考え方を言える</label></li><li><input type="checkbox" id="c18-4"><label for="c18-4">限定・不適正・意見差控えの報告書の決まり文句を英語で言える</label></li><li><input type="checkbox" id="c18-5"><label for="c18-5">継続企業の疑義・強調事項では意見を修正しない理由を言える</label></li><li><input type="checkbox" id="c18-6"><label for="c18-6">部分的に適正と言えない（piecemeal opinion）ことを説明できる</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

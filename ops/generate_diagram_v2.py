@@ -144,15 +144,18 @@ def _tbs(b: dict, idx: int) -> str:
     rows = ""
     for r in b["rows"]:
         tag = "th" if r.get("head") else "td"
-        if "ans" in r:
+        if "options" in r:
+            opts = '<option value="">選ぶ</option>' + "".join(f'<option value="{o}">{o}</option>' for o in r["options"])
+            val = f'<select data-ans="{r["ans"]}" aria-label="{r["label"]}">{opts}</select>'
+        elif "ans" in r:
             val = f'<input inputmode="numeric" data-ans="{r["ans"]}" aria-label="{r["label"]}">'
         else:
             val = r.get("value", "")
         rows += f'<tr><{tag}>{r["label"]}</{tag}><td class="num">{val}</td></tr>'
     return f"""<div class="mc-card tbs-block" data-tbs="{idx}">
         <p class="mc-label">{b["label"]}</p>
-        <p class="text-[13px] leading-relaxed mb-2">{b["intro_html"]}（マイナスは「-」を付けて入力）</p>
-        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody>{rows}</tbody></table></div>
+        <p class="text-[13px] leading-relaxed mb-2">{b["intro_html"]}{"" if b.get("select") else "（マイナスは「-」を付けて入力）"}</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">{b.get("value_head", "金額")}</th></tr></thead><tbody>{rows}</tbody></table></div>
         <div class="mt-3 flex flex-wrap items-center gap-3">
           <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
           <span class="tbs-result text-sm font-bold"></span>
@@ -194,6 +197,25 @@ def _splitbar(b: dict) -> str:
     return f'<div class="diagram-visual">{out}</div>'
 
 
+def _flow(b: dict) -> str:
+    """steps: [{head, body_html, tone}]。縦に並ぶ手順（矢印つき）。判定フローなら body に分岐を書く。"""
+    steps = "".join(
+        f'<div class="flow-step {s.get("tone", "")}"><span class="flow-no">{i}</span><div><b>{s["head"]}</b><p>{s["body_html"]}</p></div></div>'
+        for i, s in enumerate(b["steps"], 1)
+    )
+    return f'<div class="flow diagram-visual">{steps}</div>'
+
+
+def _matrix(b: dict) -> str:
+    """2軸の判定表。col_heads / row_heads と cells[行][列] = {html, tone}。"""
+    head = f'<div class="mx-corner">{b.get("corner_html", "")}</div>' + "".join(f'<div class="mx-col">{h}</div>' for h in b["col_heads"])
+    body = ""
+    for rh, row in zip(b["row_heads"], b["cells"]):
+        body += f'<div class="mx-row">{rh}</div>' + "".join(f'<div class="mx-cell {c.get("tone", "")}">{c["html"]}</div>' for c in row)
+    cols = len(b["col_heads"])
+    return f'<div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat({cols},minmax(0,1fr))">{head}{body}</div>'
+
+
 def _html(b: dict) -> str:
     return b["html"]
 
@@ -212,6 +234,8 @@ BLOCKS = {
     "mcq": _mcq,
     "timeline": _timeline,
     "splitbar": _splitbar,
+    "flow": _flow,
+    "matrix": _matrix,
     "html": _html,
 }
 
@@ -232,9 +256,16 @@ SCRIPT = """
     lucide.createIcons();
     document.querySelectorAll('.tbs-block').forEach((box) => {
       box.querySelector('.tbs-check').addEventListener('click', () => {
-        const inputs = box.querySelectorAll('table.tbs input');
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
         let ok = 0;
         inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
           const v = Number(String(el.value).replace(/[,\\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\\((.*)\\)$/, '-$1'));
           const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
           el.classList.toggle('ok', hit);

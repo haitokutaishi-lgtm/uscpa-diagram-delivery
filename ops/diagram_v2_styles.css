@@ -111,3 +111,31 @@ nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
 .split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
 .split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
 .split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }

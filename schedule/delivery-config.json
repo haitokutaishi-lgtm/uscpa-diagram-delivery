@@ -1,8 +1,35 @@
 {
-  "_comment": "図解 自動生成→配信の完全自動化設定。posts.json は maintain_posts_queue.py が delivery-queue.json から補充する。",
+  "_comment": "図解 自動生成→配信の設定。科目ごとに曜日とキューを分ける（weekday: 月=0 … 日=6）。posts.json は maintain_posts_queue.py が各 queue から補充する。enabled=false の科目は補充しない。",
   "topics_base_url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/",
-  "post_weekdays": [6, 2, 5],
   "lookahead_slots": 6,
   "excluded_slugs": [],
-  "require_html_or_topic_spec": true
+  "require_html_or_topic_spec": true,
+  "subjects": {
+    "FAR": {
+      "enabled": true,
+      "post_weekdays": [
+        6,
+        2,
+        5
+      ],
+      "queue": "schedule/delivery-queue.json",
+      "label": "FAR図解",
+      "require_v2": true,
+      "emoji": "📘",
+      "lookahead_slots": 6
+    },
+    "AUD": {
+      "enabled": false,
+      "post_weekdays": [
+        1,
+        4
+      ],
+      "queue": "schedule/delivery-queue-aud.json",
+      "label": "AUD図解",
+      "require_v2": true,
+      "webhook_secret": "DISCORD_WEBHOOK_URL_AUD",
+      "emoji": "📗",
+      "lookahead_slots": 4
+    }
+  }
 }

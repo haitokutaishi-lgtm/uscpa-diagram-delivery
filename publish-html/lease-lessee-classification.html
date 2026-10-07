@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】リース（借手）—分類・開始時の計上・その後の費用（ASC 842）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; align-items: center; justify-content: center; }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Leases — Lessee（ASC 842-20）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">リース（借手）：どちらの分類でも負債と使用権資産を計上し、違いは「費用の出し方」だけ</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">この論点の復習用です。最初の図で分類と開始時の計算、2つの分類の費用の違いを確認し、差がつく論点を見たら、最後に問題で仕上げてください。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 期間と支払額</a><a href="#je">3 仕訳一覧</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：開始時は同じ、違うのは開始後の費用</h2>
+      <p class="lead">借手は、ファイナンスでもオペレーティングでも開始日に負債と使用権資産（<span class="term-en">ROU asset</span>）を計上します。負債の動きは両方同じで、違うのは P/L の費用と使用権資産の減らし方です。</p>
+      <div class="facts"><p class="font-bold mb-1">例：Gama Co. は Year 1 の1月1日に機械をリースした</p><ul><li>リース期間5年。支払は毎年12月31日に $26,380（期末払い）。所有権の移転・購入選択権はない</li><li>貸手の計算利子率 10% が分かる。支払の現在価値は <b>$100,000</b></li><li>機械の経済的耐用年数は6年。契約のために払った初期直接コストは $2,000</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>分類：5条件のどれか1つに当たればファイナンス</b><p>所有権移転／行使が合理的に確実な購入選択権／期間が経済的耐用年数の大部分（目安75%以上）／支払の現在価値が公正価値のほぼ全部（目安90%以上）／他に転用できない特殊な資産<br>→ 5 ÷ 6 ＝ 83%（大部分）なので<b>ファイナンス</b></p></div></div><div class="flow-step key"><span class="flow-no">2</span><div><b>開始日：負債 → 使用権資産の順に計算</b><p>リース負債 ＝ まだ払っていない支払の現在価値 <span class="en">100,000</span><br>使用権資産 ＝ 負債 ＋ 開始日までの支払 ＋ 初期直接コスト − 受け取ったインセンティブ ＝ 100,000 ＋ 2,000 ＝ <span class="en">102,000</span></p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>開始後：負債は両方とも実効金利法で減らす</b><p>利息 100,000 × 10% ＝ 10,000、支払 26,380 → Year 1 末の負債 <span class="en">83,620</span></p></div></div></div>
+      <div class="table-wrap"><table class="je"><thead><tr><th>Year 1</th><th>ファイナンス</th><th>オペレーティング（仮に分類がこちらだった場合）</th></tr></thead><tbody><tr><td>P/L の費用</td><td>利息 10,000 ＋ 償却 20,400 ＝ <b>30,400</b>（2本立て）</td><td>単一のリース費用 <b>26,780</b>（毎年同じ額）</td></tr><tr><td>費用の出し方</td><td>使用権資産 102,000 ÷ 5年 ＝ 20,400 を償却</td><td>（支払総額 131,900 ＋ 初期直接コスト 2,000）÷ 5年 ＝ 26,780</td></tr><tr><td>使用権資産の減少</td><td>償却額 20,400 → 期末 81,600</td><td>26,780 − 利息相当 10,000 ＝ 16,780 → 期末 85,220</td></tr><tr><td>リース負債の期末残高</td><td>83,620</td><td>83,620（同じ）</td></tr></tbody></table></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">覚える式は3本</p><p class="en text-[13px]">期末のリース負債 ＝ 期首の負債 ＋ 期首の負債 × 利率 − 支払額（両方の分類で同じ）</p><p class="en text-[13px]">ファイナンスの費用 ＝ 利息 ＋ 使用権資産の償却（通常は定額）</p><p class="en text-[13px]">オペレーティングの費用 ＝（支払総額 ＋ 初期直接コスト − インセンティブ）÷ 期間、使用権資産の減少 ＝ その費用 − 利息相当</p></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>計算の前に決める：リース期間・支払額・割引率</h2>
+      
+      <div class="grid md:grid-cols-2 gap-3 mt-3 text-sm leading-relaxed"><div class="point mb-0"><p class="font-bold text-teal-800 mb-1">リース期間に入れるもの</p><ul class="list-disc ml-5 text-[13px]"><li>解約できない期間</li><li>行使することが合理的に確実な延長オプションの期間</li><li>行使しないことが合理的に確実な解約オプションの期間</li><li>貸手が延長を決められる期間</li></ul></div><div class="point mb-0"><p class="font-bold text-slate-800 mb-1">リース料（負債）に入れるもの・入れないもの</p><ul class="list-disc ml-5 text-[13px]"><li>入れる：固定の支払（インセンティブを引く）、指数・レートに連動する支払（開始日の指数で）、行使が合理的に確実な購入選択権の価格、期間に織り込んだ解約違約金、残価保証で払う見込みの額</li><li>入れない：売上や使用量に連動する変動支払、貸手の借入の保証、リース以外の部分（保守など）</li></ul></div></div>
+      <div class="rule">割引率は、<b>貸手の計算利子率がすぐに分かればそれ</b>、分からなければ<b>借手の追加借入利子率</b>です。期首払いのときは、開始日に払う1回目は割り引きません。</div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">期間12か月以下で、行使が合理的に確実な購入選択権がない短期リースは、負債と使用権資産を計上しない方法を選べます（支払は期間にわたって定額で費用）。</p>
+      
+    </section>
+
+    <section id="je" class="section-card">
+      <h2><span class="sec-no">3</span>仕訳一覧（1の例・ファイナンス）</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>場面</th><th>仕訳</th><th>ポイント</th></tr></thead><tbody><tr><td>1/1 開始日</td><td class="en">Dr. ROU asset 102,000<br>　Cr. Lease liability 100,000<br>　Cr. Cash 2,000</td><td>初期直接コストは使用権資産に入れる</td></tr><tr><td>12/31 支払</td><td class="en">Dr. Interest expense 10,000<br>Dr. Lease liability 16,380<br>　Cr. Cash 26,380</td><td>支払は利息と元本に分ける</td></tr><tr><td>12/31 償却</td><td class="en">Dr. Amortization expense 20,400<br>　Cr. ROU asset 20,400</td><td>102,000 ÷ 5年（所有権移転なしなので期間と耐用年数の短い方）</td></tr><tr><td>（オペレーティングなら）12/31</td><td class="en">Dr. Lease expense 26,780<br>Dr. Lease liability 16,380<br>　Cr. Cash 26,380<br>　Cr. ROU asset 16,780</td><td>費用は1本。使用権資産は差額で減らす</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>差がつく論点</h2>
+      <p class="lead">分類の5条件は覚えていても、費用の計算と使用権資産の残高で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>負債の残高は同じ。違うのは費用と使用権資産の残高</div><div class="rule">リース負債はどちらの分類でも実効金利法で減らします。ファイナンスは利息と償却を別々に計上し、オペレーティングは<b>単一のリース費用を定額</b>で計上して、使用権資産は「その費用 − 利息相当」だけ減らします。</div><div class="calc">1の例 Year 1：ファイナンスの費用 30,400／オペレーティングの費用 26,780。負債はどちらも 83,620、使用権資産はファイナンス 81,600／オペレーティング 85,220</div><div class="miss"><b>こう間違える：</b>オペレーティングでも使用権資産を 102,000 ÷ 5 ＝ 20,400 減らしてしまう／オペレーティングの費用を支払額 26,380 と答える（初期直接コストの配分 400 を忘れる）。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>リース期間は「合理的に確実な延長」まで含める</div><div class="rule">延長できる権利があるだけでは期間に入れませんが、<b>行使することが合理的に確実</b>なら入れます。この期間で分類（75%の目安）も、負債の割引回数も、償却期間も決まります。</div><div class="calc">例：解約できない期間3年＋延長2年（行使が合理的に確実）、経済的耐用年数6年 → 期間5年、5 ÷ 6 ＝ 83% でファイナンス</div><div class="miss"><b>こう間違える：</b>解約できない3年だけで 3 ÷ 6 ＝ 50% と計算し、オペレーティングにしてしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>使用権資産の調整は「＋前払・＋初期直接コスト・−インセンティブ」</div><div class="rule">開始日までに払った額と初期直接コストを足し、貸手から受け取ったインセンティブを引きます。初期直接コストは<b>契約が成立しなければ発生しなかった費用</b>（仲介手数料など）だけで、成立しなくてもかかる交渉・法務の費用は入れません。</div><div class="calc">例：支払の現在価値 60,000、前払 2,000、仲介手数料 1,500、インセンティブ受取 4,000 → 60,000 ＋ 2,000 ＋ 1,500 − 4,000 ＝ 59,500</div><div class="miss"><b>こう間違える：</b>インセンティブを足してしまう（67,500）／弁護士への相談料まで初期直接コストに入れる。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>ファイナンスの償却期間</div><div class="rule">通常は<b>リース期間と耐用年数の短い方</b>で償却します。所有権が移転する、または購入選択権の行使が合理的に確実なときは、リース後も使うので<b>耐用年数</b>で償却します。借手の内装などの改良費（リース物件改良）も同じ考え方です。</div><div class="calc">例：使用権資産 80,000、リース期間4年、耐用年数10年、所有権が移転する → 80,000 ÷ 10 ＝ 8,000</div><div class="miss"><b>こう間違える：</b>所有権が移転するのにリース期間4年で割って 20,000 にする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>そのほかの関連論点</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li><b>期首払い：</b>開始日に払う1回目は割り引かずに足します。開始日の支払は負債に残らず、使用権資産には含まれます。</li><li><b>残価保証：</b>負債に入れるのは保証額全部ではなく、払う見込みの額だけです。</li><li><b>表示：</b>ファイナンスとオペレーティングの使用権資産・負債は、合算せずに分けて表示します（本体か注記）。</li><li><b>キャッシュ・フロー計算書：</b>ファイナンスの元本返済は財務活動、オペレーティングの支払は営業活動です。</li></ul></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>reasonably certain to exercise the renewal option</td><td>延長期間もリース期間に入れる</td><td>解約できない期間だけで判定する</td></tr><tr><td>implicit rate is readily determinable</td><td>貸手の計算利子率で割り引く</td><td>借手の追加借入利子率を使う</td></tr><tr><td>payments due at the beginning of each year</td><td>1回目は割り引かない（期首払いの係数）</td><td>期末払いの係数を使う</td></tr><tr><td>lease incentive received from the lessor</td><td>使用権資産から引く</td><td>使用権資産に足す</td></tr><tr><td>based on a percentage of sales</td><td>変動支払。負債に入れない</td><td>見込み額を負債に入れる</td></tr><tr><td>title transfers at the end of the lease term</td><td>耐用年数で償却</td><td>リース期間で償却</td></tr><tr><td>single lease cost / straight-line basis</td><td>オペレーティング。使用権資産は差額で減らす</td><td>償却と利息を2本立てで計上する</td></tr><tr><td>term of 12 months or less</td><td>短期リースの簡便法を選べる</td><td>必ず負債を計上する</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">6</span>確認問題（初見の数字）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 842 の考え方に沿って作っています。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜リース期間と分類</p>
+        <p class="en-stem">Kesh Co. leased equipment with a noncancelable term of three years. Kesh has an option to renew the lease for two additional years and is reasonably certain to exercise it. The equipment has a remaining economic life of six years. Ownership does not transfer, there is no purchase option, the present value of the lease payments is 70% of the fair value, and the equipment is not specialized. How should Kesh classify the lease?</p>
+        <div class="choices">A. Operating lease, because the lease term is 50% of the economic life<br>B. Finance lease, because the lease term is a major part of the economic life<br>C. Operating lease, because the present value of payments is less than substantially all of fair value<br>D. Short-term lease, because the noncancelable term is three years</div>
+        <details><summary>和訳を見る</summary><div class="body">Kesh社は、解約できない期間3年の設備リース契約を結んだ。さらに2年延長できるオプションがあり、行使することが合理的に確実である。設備の残りの経済的耐用年数は6年。所有権は移転せず、購入選択権もなく、支払の現在価値は公正価値の70%で、特殊な資産ではない。分類はどれか。<br>A. オペレーティング（期間が耐用年数の50%だから）<br>B. ファイナンス（期間が耐用年数の大部分だから）<br>C. オペレーティング（支払の現在価値が公正価値のほぼ全部に満たないから）<br>D. 短期リース（解約できない期間が3年だから）</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>リース期間＝3年＋合理的に確実な延長2年＝5年。5 ÷ 6 ＝ 83% で大部分（論点2）。5条件のうち1つに当たればファイナンス<br>A：延長期間を入れていない<br>C：現在価値の条件に当たらなくても、期間の条件に当たればファイナンス<br>D：短期リースは12か月以下</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜使用権資産の当初測定</p>
+        <p class="en-stem">On the commencement date, the present value of Lyra Co.'s unpaid lease payments is $60,000. Before the commencement date, Lyra prepaid $2,000 of rent and paid a $1,500 commission to a broker that was incurred only because the lease was obtained. Lyra also received a $4,000 lease incentive from the lessor. At what amount should Lyra initially measure the right-of-use asset?</p>
+        <div class="choices">A. $56,000<br>B. $59,500<br>C. $63,500<br>D. $67,500</div>
+        <details><summary>和訳を見る</summary><div class="body">開始日に、Lyra社のまだ払っていないリース料の現在価値は $60,000 である。開始日前に Lyra社は賃料 $2,000 を前払いし、リース契約が成立したことでのみ発生した仲介手数料 $1,500 を支払った。また、貸手からインセンティブ $4,000 を受け取った。使用権資産の当初測定額はいくらか。<br>A. $56,000　B. $59,500　C. $63,500　D. $67,500</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$59,500）</b><br>60,000 ＋ 2,000 ＋ 1,500 − 4,000 ＝ <b>59,500</b>（論点3）<br>A：前払と初期直接コストを足していない<br>C：インセンティブを引いていない<br>D：インセンティブを足している</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜オペレーティングの費用</p>
+        <p class="en-stem">On January 1, Year 1, Mora Co. entered into a four-year operating lease requiring payments of $15,000 at the end of each year. The present value of the payments at Mora's 8% incremental borrowing rate is $49,682. Mora incurred no initial direct costs and received no incentives. What amount of lease expense should Mora report for Year 1?</p>
+        <div class="choices">A. $3,975<br>B. $12,420<br>C. $15,000<br>D. $16,395</div>
+        <details><summary>和訳を見る</summary><div class="body">Year 1 の1月1日、Mora社は4年間のオペレーティング・リース契約を結んだ。支払は毎年末に $15,000。追加借入利子率8%による支払の現在価値は $49,682。初期直接コストもインセンティブもない。Year 1 に計上するリース費用はいくらか。<br>A. $3,975　B. $12,420　C. $15,000　D. $16,395</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C（$15,000）</b><br>オペレーティングは単一のリース費用を定額で計上：60,000 ÷ 4年 ＝ <b>15,000</b>（論点1）<br>A：負債の利息相当（49,682 × 8%）だけを答えている<br>B：使用権資産を4年で割った額だけを答えている<br>D：ファイナンスのように利息 3,975 ＋ 償却 12,420 を足している</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜償却期間と費用の複合</p>
+        <p class="en-stem">Noro Co. entered into a four-year finance lease of a building component on January 1, Year 1. The lease transfers ownership to Noro at the end of the lease term. The lease liability and the right-of-use asset were each initially measured at $80,000, using a discount rate of 6%. The asset has a useful life of ten years with no residual value. What amount of amortization expense should Noro recognize for Year 1?</p>
+        <div class="choices">A. $8,000<br>B. $12,800<br>C. $20,000<br>D. $24,800</div>
+        <details><summary>和訳を見る</summary><div class="body">Year 1 の1月1日、Noro社は4年間のファイナンス・リース契約を結んだ。リース期間の終了時に所有権が Noro社に移転する。リース負債と使用権資産の当初測定額はどちらも $80,000（割引率6%）、資産の耐用年数は10年で残存価額はない。Year 1 の償却費はいくらか。<br>A. $8,000　B. $12,800　C. $20,000　D. $24,800</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：A（$8,000）</b><br>所有権が移転するので耐用年数10年で償却：80,000 ÷ 10 ＝ <b>8,000</b>（論点4）<br>B：償却費に利息 80,000 × 6% ＝ 4,800 を足している（聞かれているのは償却費だけ）<br>C：リース期間4年で割っている<br>D：4年で割った償却費に利息を足している</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="19">
+        <p class="mc-label">問題5｜TBS形式：Year 2 の残高と費用（ファイナンス）</p>
+        <p class="text-[13px] leading-relaxed mb-2">1の例（Gama Co.・ファイナンス）の Year 2 です。利率10%、支払は12月31日に $26,380。空欄に金額を入れて「答え合わせ」を押してください（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>Year 2 期首のリース負債</td><td class="num">83,620</td></tr><tr><td>Year 2 の利息費用</td><td class="num"><input inputmode="numeric" data-ans="8362" aria-label="Year 2 の利息費用"></td></tr><tr><td>Year 2 期末のリース負債</td><td class="num"><input inputmode="numeric" data-ans="65602" aria-label="Year 2 期末のリース負債"></td></tr><tr><td>Year 2 の使用権資産の償却</td><td class="num"><input inputmode="numeric" data-ans="20400" aria-label="Year 2 の使用権資産の償却"></td></tr><tr><td>Year 2 期末の使用権資産</td><td class="num"><input inputmode="numeric" data-ans="61200" aria-label="Year 2 期末の使用権資産"></td></tr><tr><th>Year 2 の費用合計（P/L）</th><td class="num"><input inputmode="numeric" data-ans="28762" aria-label="Year 2 の費用合計（P/L）"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">利息 83,620 × 10% ＝ <b>8,362</b><br>期末の負債 83,620 ＋ 8,362 − 26,380 ＝ <b>65,602</b><br>償却 102,000 ÷ 5 ＝ <b>20,400</b>、期末の使用権資産 102,000 − 20,400 × 2 ＝ <b>61,200</b><br>費用合計 8,362 ＋ 20,400 ＝ <b>28,762</b>（利息が減るので Year 1 の 30,400 より小さい）</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c20-1"><label for="c20-1">ファイナンスに分類する5条件を言える</label></li><li><input type="checkbox" id="c20-2"><label for="c20-2">リース期間に入れる延長・解約オプションの条件を言える</label></li><li><input type="checkbox" id="c20-3"><label for="c20-3">リース負債と使用権資産の当初測定を計算できる</label></li><li><input type="checkbox" id="c20-4"><label for="c20-4">ファイナンスとオペレーティングの Year 1 の費用を同じ数字で計算し分けられる</label></li><li><input type="checkbox" id="c20-5"><label for="c20-5">オペレーティングの使用権資産の減少額を「費用 − 利息相当」で出せる</label></li><li><input type="checkbox" id="c20-6"><label for="c20-6">償却期間が耐用年数になる2つのケースを言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

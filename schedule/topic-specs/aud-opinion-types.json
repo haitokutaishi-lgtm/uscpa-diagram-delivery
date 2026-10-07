@@ -1,0 +1,280 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch4 4-1 GAAPからの逸脱／4-2〜4-4 限定・不適正の文例／4-6 監査範囲の制限／4-7・4-8 限定・意見差控えの文例／4-10 意見差控えとなるその他の場合／Ch3 追記情報",
+    "asc": "AU-C 705 / AU-C 706 / AU-C 570",
+    "updated": "2026-10-07",
+    "sources": []
+  },
+  "post": {
+    "name": "監査意見の種類",
+    "hook_q": "経営者が、売掛金の確認状の送付を拒否しました。この事実だけで、監査意見は限定意見になりますか？",
+    "hook_where": "差がつく論点2と問題5",
+    "bullets": [
+      "「原因（虚偽表示か・範囲の制限か）× 影響（広範か）」の表1枚で4つの意見を判定",
+      "意見ごとの報告書の決まり文句と、意見を修正しないケース（継続企業・強調事項）",
+      "初見の英語MC4問＋TBS（選ぶと自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】監査意見の種類—限定・不適正・意見差控えは「原因」と「広範性」で決まる",
+    "badge": "AUD 復習シート｜Audit Reports — Modified Opinions（AU-C 705）",
+    "h1_html": "監査意見の種類：原因（虚偽表示か・範囲の制限か）と、影響が広範かどうかの2つで決まる",
+    "lead_html": "この論点の復習用です。最初の表で4つの意見の決まり方を確認し、報告書の文言と差がつく論点を見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：意見はこの表で決まる",
+      "lead_html": "修正付き意見は、縦の「原因」と横の「影響の広がり」の組み合わせで決まります。重要でなければ、どちらの原因でも無修正意見です。",
+      "blocks": [
+        {
+          "type": "matrix",
+          "corner_html": "原因 ＼ 影響",
+          "col_heads": ["重要でない", "重要だが広範でない<br><span class=\"en\">material, not pervasive</span>", "重要かつ広範<br><span class=\"en\">material and pervasive</span>"],
+          "row_heads": ["虚偽表示がある<br><span class=\"en\">(GAAP departure)</span>", "証拠が得られない<br><span class=\"en\">(scope limitation)</span>"],
+          "cells": [
+            [
+              {"html": "<b>無修正意見</b><span class=\"en\">unmodified</span>", "tone": "ok"},
+              {"html": "<b>限定意見</b><span class=\"en\">qualified — except for</span>", "tone": "mid"},
+              {"html": "<b>不適正意見</b><span class=\"en\">adverse</span>", "tone": "ng"}
+            ],
+            [
+              {"html": "<b>無修正意見</b><span class=\"en\">unmodified</span>", "tone": "ok"},
+              {"html": "<b>限定意見</b><span class=\"en\">qualified — except for</span>", "tone": "mid"},
+              {"html": "<b>意見差控え</b><span class=\"en\">disclaimer</span>", "tone": "ng"}
+            ]
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "問1　何が起きたか",
+              "body_html": "十分な証拠を得たうえで<b>虚偽表示がある</b>（会計方針・測定・開示が GAAP に合わない）→ 上の行／<b>十分かつ適切な証拠が得られない</b> → 下の行"
+            },
+            {
+              "head": "問2　重要か",
+              "body_html": "重要でなければ、どちらの原因でも<b>無修正意見</b>"
+            },
+            {
+              "head": "問3　広範か",
+              "body_html": "広範でない → どちらの行も<b>限定意見</b>。広範 → 虚偽表示なら<b>不適正意見</b>、証拠が得られないなら<b>意見差控え</b>",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "「広範（<span class=\"en\">pervasive</span>）」とは、①特定の要素・勘定・項目に限られない、②限られていても財務諸表の大部分を占める、③開示なら利用者の理解に根本的に関わる、のどれかに当たる影響です。"
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "範囲の制限",
+      "title_html": "範囲の制限が起きる3つの状況と、経営者による制限への対応",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["状況", "例"],
+          "rows": [
+            ["企業がコントロールできない状況", "火災で会計記録が失われた、政府機関に重要な記録を無期限に押収された"],
+            ["監査の時期・性質による状況", "期中に契約したため、前期末の実地棚卸に立ち会えなかった"],
+            ["経営者が課した制限", "経営者が売掛金の確認状の送付を認めない"]
+          ]
+        },
+        {
+          "type": "cards2",
+          "cards": [
+            {
+              "title": "まず代替手続を試す",
+              "tone": "teal",
+              "items": [
+                "確認状が送れなくても、期末後の入金や出荷記録で十分な証拠が得られれば範囲の制限ではない → 無修正意見",
+                "立会いができなくても、別の日に実地棚卸を行い期末まで戻す手続で証拠が得られれば同じ"
+              ]
+            },
+            {
+              "title": "経営者による制限が解けないとき",
+              "tone": "red",
+              "items": [
+                "経営者に制限をやめるよう求める → 応じなければ監査委員会など（ガバナンスに責任を負う者）に伝える",
+                "影響が重要だが広範でない → 限定意見",
+                "重要かつ広範 → 意見差控え、または（法令で許されれば）監査契約の解除"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "report",
+      "nav": "報告書の文言",
+      "title_html": "報告書の決まり文句（英語のまま覚える）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["意見", "意見区分の文言", "根拠区分の見出し", "ポイント"],
+          "en_cols": [1, 2],
+          "rows": [
+            ["無修正意見", "present fairly, in all material respects", "Basis for Opinion", "強調事項・継続企業の区分を追加しても意見は無修正"],
+            ["限定意見（虚偽表示）", "except for the effects of the matter described in the Basis for Qualified Opinion section", "Basis for Qualified Opinion", "影響額を具体的に書く（例：低価法なら評価減と利益への影響）"],
+            ["限定意見（開示不足）", "except for the omission of the information described in …", "Basis for Qualified Opinion", "可能なら、欠けている情報そのものを根拠区分に書く"],
+            ["限定意見（範囲の制限）", "except for the possible effects of the matter …", "Basis for Qualified Opinion", "「影響があるかもしれない」＝ possible effects"],
+            ["不適正意見", "do not present fairly …", "Basis for Adverse Opinion", "例：連結すべき子会社を連結していない"],
+            ["意見差控え", "We were engaged to audit … we do not express an opinion", "Basis for Disclaimer of Opinion", "「監査した」と書かない。監査人の責任区分は簡略にする"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "表は覚えていても、「修正しないケース」と「範囲の制限かどうか」の判断で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "意見を分けるのは「金額の大きさ」ではなく「広範かどうか」",
+          "rule_html": "限定意見と不適正意見（または意見差控え）の分かれ目は、虚偽表示がどれだけ大きいかではなく、<b>影響が財務諸表全体に広がるか</b>です。1つの勘定に限られていれば、金額が大きくても限定意見になり得ます。",
+          "calc_html": "例：棚卸資産の評価減の漏れ（重要、他の項目への影響は売上原価と利益だけ）→ 限定意見／主要な子会社を連結していない（資産・負債・収益の多くに影響）→ 不適正意見",
+          "miss_html": "「金額が重要だから不適正意見」と判断してしまう。重要性は「修正するかどうか」、広範性は「どの修正意見か」を決めます。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "経営者が手続を拒否しても、それだけでは限定意見にならない",
+          "rule_html": "範囲の制限になるのは、<b>代替手続でも十分かつ適切な証拠が得られないとき</b>です。代替手続で証拠が得られれば無修正意見です。経営者による制限は経営者の誠実性の評価にも関わるので、リスク評価を見直します。",
+          "calc_html": "例：確認状の送付を拒否 → 期末後の入金・出荷記録・請求書で残高を確かめられた → 無修正意見",
+          "miss_html": "「経営者が確認を拒否した＝範囲の制限＝限定意見」と短絡する。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "意見を修正しないケース：継続企業・強調事項・その他の事項",
+          "rule_html": "継続企業の前提に重要な疑義があっても、<b>適切に開示されていれば無修正意見</b>のまま、継続企業についての区分を追加します。重要な訴訟の不確実性や会計方針の変更（適切に処理・開示）を目立たせたいときの強調事項（<span class=\"en\">emphasis-of-matter</span>）、他の監査人の報告など財務諸表以外の事項を伝えるその他の事項（<span class=\"en\">other-matter</span>）も、意見は修正しません。",
+          "list": [
+            "継続企業の開示が不十分 → 開示の虚偽表示として限定意見または不適正意見",
+            "会計方針の変更が適切に処理されていない → 虚偽表示として限定意見または不適正意見"
+          ],
+          "miss_html": "「重要な疑義がある＝限定意見」と答える。疑義そのものは修正の理由になりません。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "不適正意見・意見差控えのとき、部分的に「適正」と言わない",
+          "rule_html": "財務諸表全体に不適正意見や意見差控えを出す報告書の中で、特定の項目だけ「適正に表示されている」と述べること（<span class=\"en\">piecemeal opinion</span>）はできません。全体の意見と矛盾するからです。",
+          "miss_html": "意見差控えにしたうえで、「ただし現金と売掛金は適正」と書き添えてよいと考える。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>独立性がない：</b>監査意見は出せず、意見差控えにして独立していない旨を書きます。",
+            "<b>比較財務諸表：</b>年度ごとに意見を分けられます（例：当期は無修正、前期の損益計算書だけ意見差控え）。",
+            "<b>前期末の棚卸に立ち会えなかった：</b>期首の棚卸資産は当期の売上原価に影響するため、損益計算書・キャッシュ・フロー計算書は意見差控え、期末の貸借対照表は無修正、という分け方があります。",
+            "<b>公開会社（PCAOB）：</b>監査上の重要な事項（<span class=\"en\">CAM</span>）の記載は意見の修正ではありません。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            ["management refused to permit confirmation", "代替手続で証拠が得られたかを確認", "すぐに限定意見にする"],
+            ["unable to apply alternative procedures", "範囲の制限。次に広範かどうか", "不適正意見にする"],
+            ["material but not pervasive", "原因にかかわらず限定意見", "金額が大きいので不適正意見にする"],
+            ["material and pervasive / GAAP departure", "不適正意見", "意見差控えにする"],
+            ["material and pervasive / scope limitation", "意見差控え", "不適正意見にする"],
+            ["substantial doubt … adequately disclosed", "無修正意見＋継続企業の区分", "限定意見にする"],
+            ["emphasize a matter", "強調事項。意見は無修正", "修正付き意見だと考える"],
+            ["the auditor is not independent", "意見差控え（独立していない旨を記載）", "限定意見にする"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の設定）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、AU-C 705・706・570 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜経営者による範囲の制限",
+          "stem": "Management of Corva Co. refused to allow the auditor to confirm a material receivable balance with a major customer. The auditor was unable to obtain sufficient appropriate audit evidence through alternative procedures. The possible effects of the matter are material but not pervasive. Which type of opinion should the auditor express?",
+          "choices": ["A. An unmodified opinion with an emphasis-of-matter paragraph", "B. A qualified opinion", "C. An adverse opinion", "D. A disclaimer of opinion"],
+          "ja_html": "Corva社の経営者は、主要な得意先への重要な売掛金残高の確認を監査人に認めなかった。監査人は代替手続でも十分かつ適切な監査証拠を得られなかった。影響の可能性は重要だが広範ではない。監査人はどの意見を表明すべきか。<br>A. 強調事項つきの無修正意見<br>B. 限定意見<br>C. 不適正意見<br>D. 意見差控え",
+          "answer_html": "<b>正解：B</b><br>代替手続でも証拠が得られない＝範囲の制限。重要だが広範でないので限定意見（全体図の下の行の真ん中）<br>A：重要な範囲の制限があるので無修正にはできない<br>C：不適正意見は虚偽表示があり、かつ広範なとき<br>D：意見差控えは範囲の制限の影響が広範なとき"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜広範な GAAP からの逸脱",
+          "stem": "Delo Co. did not consolidate a subsidiary that it controls, and instead accounted for the investment at cost. The auditor concluded that the effects on the financial statements are material and pervasive, and that sufficient appropriate evidence was obtained. Which type of opinion should the auditor express?",
+          "choices": ["A. A qualified opinion", "B. A disclaimer of opinion", "C. An adverse opinion", "D. An unmodified opinion with an other-matter paragraph"],
+          "ja_html": "Delo社は支配している子会社を連結せず、投資を原価法で処理した。監査人は、財務諸表への影響が重要かつ広範であり、十分かつ適切な証拠は得られたと結論づけた。監査人はどの意見を表明すべきか。<br>A. 限定意見<br>B. 意見差控え<br>C. 不適正意見<br>D. その他の事項つきの無修正意見",
+          "answer_html": "<b>正解：C</b><br>証拠は得られており、虚偽表示（GAAP からの逸脱）が重要かつ広範 → 不適正意見（論点1）<br>A：広範なので限定意見では足りない<br>B：意見差控えは証拠が得られないとき<br>D：重要な虚偽表示があるので無修正にはできない"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜意見差控えの報告書の文言",
+          "stem": "Which of the following phrases would most likely appear in an auditor's report that expresses a disclaimer of opinion?",
+          "choices": ["A. \"Except for the possible effects of the matter described …\"", "B. \"We were engaged to audit the financial statements …\"", "C. \"The financial statements do not present fairly …\"", "D. \"In our opinion, the financial statements present fairly, in all material respects …\""],
+          "ja_html": "意見差控えの監査報告書に記載される可能性が最も高い文言はどれか。<br>A. 「…に記載した事項の影響の可能性を除き」<br>B. 「我々は財務諸表の監査を引き受けた」<br>C. 「財務諸表は適正に表示していない」<br>D. 「我々の意見では、財務諸表はすべての重要な点において適正に表示している」",
+          "answer_html": "<b>正解：B</b><br>意見差控えは十分な監査ができていないので、「監査した（we audited）」ではなく「監査を引き受けた（we were engaged to audit）」と書く（報告書の決まり文句）<br>A：範囲の制限による限定意見の文言<br>C：不適正意見の文言<br>D：無修正意見の文言"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜継続企業の重要な疑義（複合）",
+          "stem": "An auditor concludes that there is substantial doubt about Ferro Co.'s ability to continue as a going concern for a reasonable period of time. Management's disclosures about the conditions and its plans are adequate. In addition, Ferro changed its inventory method during the year; the change is properly accounted for and disclosed. Which report is appropriate?",
+          "choices": ["A. A qualified opinion because of the going concern doubt", "B. An unmodified opinion with a separate going concern section", "C. An adverse opinion because of the going concern doubt and the change in accounting principle", "D. A disclaimer of opinion because the going concern conclusion is uncertain"],
+          "ja_html": "監査人は、Ferro社が合理的な期間、継続企業として存続できるかについて重要な疑義があると結論づけた。状況と経営者の計画についての開示は適切である。また Ferro社は当期に棚卸資産の評価方法を変更しており、変更は適切に処理・開示されている。適切な報告はどれか。<br>A. 継続企業の疑義による限定意見<br>B. 継続企業についての区分を追加した無修正意見<br>C. 継続企業の疑義と会計方針の変更による不適正意見<br>D. 継続企業の結論が不確実なので意見差控え",
+          "answer_html": "<b>正解：B</b><br>重要な疑義があっても開示が適切なら意見は修正せず、継続企業の区分を追加する。会計方針の変更も適切に処理・開示されていれば虚偽表示ではない（論点3）<br>A・C：疑義そのものや適切な方針変更は修正の理由にならない<br>D：不確実性は範囲の制限ではない"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：状況から意見を選ぶ",
+          "select": true,
+          "value_head": "意見",
+          "intro_html": "次の状況それぞれについて、表明すべき意見を選んで「答え合わせ」を押してください。特に書いていない限り、影響は重要です",
+          "rows": [
+            {"label": "①経営者が売掛金の確認を拒否したが、期末後の入金と出荷記録で残高を確かめられた", "options": ["無修正意見", "限定意見", "不適正意見", "意見差控え"], "ans": "無修正意見"},
+            {"label": "②棚卸資産を低価法で評価減していない。影響は棚卸資産・売上原価・利益に限られ、広範ではない", "options": ["無修正意見", "限定意見", "不適正意見", "意見差控え"], "ans": "限定意見"},
+            {"label": "③純資産の大部分を占める投資先の財務情報を入手できず、代替手続もない。影響は広範", "options": ["無修正意見", "限定意見", "不適正意見", "意見差控え"], "ans": "意見差控え"},
+            {"label": "④リース取引の大半を負債として計上しておらず、多くの項目に影響が広がっている", "options": ["無修正意見", "限定意見", "不適正意見", "意見差控え"], "ans": "不適正意見"},
+            {"label": "⑤重要な訴訟の結果が不確実だが、注記で適切に開示されている", "options": ["無修正意見", "限定意見", "不適正意見", "意見差控え"], "ans": "無修正意見"}
+          ],
+          "explain_html": "①代替手続で証拠が得られたので範囲の制限ではない → <b>無修正意見</b>（論点2）<br>②虚偽表示・重要・広範でない → <b>限定意見</b><br>③証拠が得られない・広範 → <b>意見差控え</b><br>④虚偽表示・広範 → <b>不適正意見</b><br>⑤不確実性は適切に開示されていれば修正の理由にならない → <b>無修正意見</b>（必要なら強調事項を追加）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "「原因 × 影響」の表を白紙に書ける",
+            "広範（pervasive）の3つの意味を言える",
+            "範囲の制限が起きる3つの状況と、代替手続の考え方を言える",
+            "限定・不適正・意見差控えの報告書の決まり文句を英語で言える",
+            "継続企業の疑義・強調事項では意見を修正しない理由を言える",
+            "部分的に適正と言えない（piecemeal opinion）ことを説明できる"
+          ]
+        }
+      ]
+    }
+  ]
+}

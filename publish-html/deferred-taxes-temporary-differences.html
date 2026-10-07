@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】税効果（ASC 740）—一時差異から DTA・DTL を決め、税金費用につなげる</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; align-items: center; justify-content: center; }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Income Taxes — Temporary Differences（ASC 740）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">税効果：差異を「永久」と「一時」に分け、一時差異だけに解消年度の税率を掛ける</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">この論点の復習用です。最初の図で課税所得と税金費用の流れを確認し、DTA・DTL の早見表と差がつく論点を見たら、最後に問題で仕上げてください。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 DTA・DTL早見表</a><a href="#je">3 仕訳一覧</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：税引前利益から税金費用まで</h2>
+      <p class="lead">税金費用は「当期に払う税金」と「繰延税金の増減」の合計です。永久差異は課税所得の計算にだけ使い、DTA・DTL は作りません。</p>
+      <div class="facts"><p class="font-bold mb-1">例：Hira Co. の Year 1（税率は今後も25%で成立済み、期首の繰延税金はゼロ）</p><ul><li>税引前利益（会計）は $500,000</li><li>税務の減価償却が会計より $60,000 多い（Year 2・3 に $30,000 ずつ解消）</li><li>製品保証費用 $40,000 を会計で見積計上。税務は実際に払った時に損金（Year 2 に支払）</li><li>地方債の受取利息 $20,000（非課税）、罰金 $10,000（損金にならない）</li></ul></div>
+      <div class="table-wrap"><table class="je"><thead><tr><th>項目</th><th>課税所得への調整</th><th>差異の種類</th><th>繰延税金</th></tr></thead><tbody><tr><td>税引前利益</td><td>500,000</td><td></td><td></td></tr><tr><td>減価償却（税務が多い）</td><td>−60,000</td><td>将来加算一時差異</td><td>DTL 60,000 × 25% ＝ <b>15,000</b></td></tr><tr><td>製品保証（会計だけ先に費用）</td><td>＋40,000</td><td>将来減算一時差異</td><td>DTA 40,000 × 25% ＝ <b>10,000</b></td></tr><tr><td>地方債の受取利息</td><td>−20,000</td><td>永久差異</td><td>なし</td></tr><tr><td>罰金</td><td>＋10,000</td><td>永久差異</td><td>なし</td></tr><tr><td><b>課税所得</b></td><td><b>470,000</b></td><td></td><td>当期税金 470,000 × 25% ＝ <b>117,500</b></td></tr></tbody></table></div>
+      <div class="diagram-visual"><div class="split-wrap"><p class="split-title">税金費用 $122,500 の内訳（＝ 永久差異を除いた利益 490,000 × 25%）</p><div class="split"><div class="s-navy" style="width:95.9%">当期 117,500</div><div class="s-amber" style="width:4.1%"></div></div><div class="split-legend"><span style="--c:#1e3a5f">当期税金（未払法人税） <b class="en">$117,500</b></span><span style="--c:#d97706">繰延税金費用（DTL 15,000 − DTA 10,000） <b class="en">$5,000</b></span></div></div></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">覚える式は3本</p><p class="en text-[13px]">当期税金 ＝ 課税所得 × 当期の税率</p><p class="en text-[13px]">DTA・DTL ＝ 期末の一時差異 × 解消する年度の成立済み税率</p><p class="en text-[13px]">繰延税金費用 ＝ DTL の増加 − DTA の増加（期首と期末の残高の差）／税金費用 ＝ 当期税金 ＋ 繰延税金費用</p></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>DTA か DTL か：会計と税務、どちらが先か</h2>
+      <p class="lead">科目名で覚えるより、「課税所得が会計利益より先に増えるか（→ 将来は減る → DTA）、後で増えるか（→ DTL）」で判断します。問題文の税務の条件を必ず読みます。</p>
+      <div class="table-wrap"><table class="je"><thead><tr><th>差異</th><th>会計</th><th>税務</th><th>結果</th></tr></thead><tbody><tr><td>加速償却（税務の償却が先に多い）</td><td>定額で費用</td><td>先に多く損金</td><td><b>DTL</b></td></tr><tr><td>前払費用（税務は支払時に損金）</td><td>翌期に費用</td><td>当期に損金</td><td><b>DTL</b></td></tr><tr><td>割賦販売・掛売り（税務は回収時に益金）</td><td>販売時に収益</td><td>回収時に益金</td><td><b>DTL</b></td></tr><tr><td>持分法の未配当の利益</td><td>利益の持分を収益</td><td>配当を受けた時に益金</td><td><b>DTL</b></td></tr><tr><td>強制転換の利得（税務は繰延べ）</td><td>当期に利得</td><td>将来に課税</td><td><b>DTL</b></td></tr><tr><td>製品保証・偶発損失の見積計上</td><td>見積時に費用</td><td>支払時に損金</td><td><b>DTA</b></td></tr><tr><td>前受収益（税務は受取時に益金）</td><td>提供時に収益</td><td>受取時に益金</td><td><b>DTA</b></td></tr><tr><td>貸倒引当金</td><td>見積時に費用</td><td>貸倒れ時に損金</td><td><b>DTA</b></td></tr><tr><td>税務上の欠損金の繰越</td><td>—</td><td>将来の所得から控除</td><td><b>DTA</b></td></tr><tr><td>地方債利息・会社が受取人の生命保険金・保険料・罰金・受取配当控除</td><td>—</td><td>—</td><td><b>永久差異（なし）</b></td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="je" class="section-card">
+      <h2><span class="sec-no">3</span>仕訳一覧（1の例の数字）</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>場面</th><th>仕訳</th><th>ポイント</th></tr></thead><tbody><tr><td>当期税金</td><td class="en">Dr. Income tax expense—current 117,500<br>　Cr. Income taxes payable 117,500</td><td>課税所得 × 当期の税率</td></tr><tr><td>繰延税金</td><td class="en">Dr. Income tax expense—deferred 5,000<br>Dr. Deferred tax asset 10,000<br>　Cr. Deferred tax liability 15,000</td><td>DTL の増加は費用を増やし、DTA の増加は費用を減らす</td></tr><tr><td>評価性引当金（必要なとき）</td><td class="en">Dr. Income tax expense—deferred<br>　Cr. Valuation allowance</td><td>DTA から控除して表示。費用が増える</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>差がつく論点</h2>
+      <p class="lead">DTA・DTL の判定ができても、期首残高・税率・評価性引当金で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>繰延税金費用は「残高の差」で出す</div><div class="rule">まず<b>期末に必要な DTA・DTL の残高</b>を出し、期首の残高との差を繰延税金費用にします。当期に発生した差異 × 税率をそのまま費用にすると、期首に残高があるときに合いません。</div><div class="calc">例：期首 DTL 9,000、期末の将来加算一時差異 60,000 × 25% ＝ 必要な DTL 15,000 → 繰延税金費用 15,000 − 9,000 ＝ 6,000</div><div class="miss"><b>こう間違える：</b>期首残高を無視して、期末の DTL 15,000 をそのまま繰延税金費用にしてしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>税率は「解消する年度の成立済み税率」</div><div class="rule">将来の税率の変更が<b>成立していれば</b>、その差異が解消する年度の税率を使います。解消が複数年に分かれるなら年ごとに税率を掛けて合計します。成立前の予定税率は使いません。</div><div class="calc">例：将来加算一時差異 60,000 が Year 2 に 30,000（税率25%）、Year 3 に 30,000（成立済みの税率20%）で解消 → DTL ＝ 7,500 ＋ 6,000 ＝ 13,500</div><div class="miss"><b>こう間違える：</b>当期の税率25%を全体に掛けて 15,000 にする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>DTA は回収できる分だけ。評価性引当金</div><div class="rule">DTA の一部（または全部）が実現しない可能性が<b>実現する可能性より高い</b>（<span class="en">more likely than not</span>）とき、その分を評価性引当金（<span class="en">valuation allowance</span>）にします。DTA からの控除で表示し、その分だけ税金費用が増えます。</div><div class="calc">例：DTA 10,000 のうち 30% は将来の課税所得が足りず実現しない可能性が高い → 評価性引当金 3,000、純額の DTA 7,000</div><div class="miss"><b>こう間違える：</b>評価性引当金を DTL として計上する／実現しない分を DTA から直接消して引当金を使わない。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>表示は非流動で、同じ納税単位・税務管轄ごとに相殺</div><div class="rule">DTA・DTL は、もとになった資産・負債が流動かどうかにかかわらず<b>すべて非流動</b>で表示します。同じ納税単位・同じ税務管轄のものは相殺して純額で表示し、別の管轄のものは相殺しません。</div><div class="calc">1の例：DTL 15,000 と DTA 10,000（同じ管轄）→ 非流動の DTL 5,000（純額）</div><div class="miss"><b>こう間違える：</b>製品保証の DTA は翌年に解消するからと、流動資産に表示する。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>そのほかの関連論点</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li><b>欠損金の繰越：</b>発生した年に将来の控除効果を DTA にし、損失に対する税の便益を計上します（テキストの設例は無期限繰越・所得の80%まで控除・繰戻しなし）。</li><li><b>不確実な税務ポジション：</b>税務当局の調査で認められる可能性が50%超のものだけ認識し、実現する可能性が50%超となる最大の金額で測定します。申告で控除した額との差は負債にします。</li><li><b>永久差異と実効税率：</b>永久差異があると、税金費用 ÷ 税引前利益（実効税率）が法定税率と一致しません。</li><li><b>税率変更の影響：</b>成立した期に既存の DTA・DTL を測り直し、差額は継続事業の税金費用に入れます。</li></ul></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>interest on municipal bonds</td><td>永久差異。DTA・DTL は作らない</td><td>一時差異として DTL を作る</td></tr><tr><td>deductible when paid / when incurred for tax</td><td>会計が先に費用 → DTA</td><td>DTL と取り違える</td></tr><tr><td>taxable when received</td><td>前受収益 → DTA</td><td>DTL にする</td></tr><tr><td>enacted tax rates for future years</td><td>解消年度の成立済み税率で測る</td><td>当期の税率を全体に掛ける</td></tr><tr><td>balance at the beginning of the year</td><td>繰延税金費用は残高の差</td><td>期末残高をそのまま費用にする</td></tr><tr><td>more likely than not that some portion will not be realized</td><td>評価性引当金で DTA を減らす</td><td>DTL を計上する</td></tr><tr><td>classified balance sheet</td><td>繰延税金はすべて非流動</td><td>解消時期で流動に分ける</td></tr><tr><td>total income tax expense</td><td>当期税金 ＋ 繰延税金費用</td><td>当期の未払法人税だけを答える</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">6</span>確認問題（初見の数字）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 740 の考え方に沿って作っています。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜DTA になる差異（概念）</p>
+        <p class="en-stem">Which of the following differences between financial statement and tax reporting would result in a deferred tax asset?</p>
+        <div class="choices">A. Depreciation is accelerated for tax purposes and straight-line for book purposes<br>B. Rent received in advance is taxable when received but recognized as revenue when earned for book purposes<br>C. Interest on municipal bonds is recognized as revenue for book purposes but is never taxable<br>D. Installment sales are recognized at the point of sale for book purposes and taxed when collected</div>
+        <details><summary>和訳を見る</summary><div class="body">財務諸表と税務の次の差異のうち、繰延税金資産が生じるものはどれか。<br>A. 減価償却が税務では加速償却、会計では定額法<br>B. 前受家賃が税務では受取時に課税、会計では提供時に収益<br>C. 地方債の利息が会計では収益だが、税務では課税されない<br>D. 割賦販売が会計では販売時に収益、税務では回収時に課税</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>税務が先に課税するので、将来は会計で収益にしても課税されない＝将来減算一時差異 → DTA（早見表）<br>A・D：税務が後で課税（損金が先）→ DTL<br>C：永久差異で、DTA・DTL は生じない</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜税金費用の合計</p>
+        <p class="en-stem">Tavi Co. reported pretax financial income of $300,000 for Year 1, which included $15,000 of interest on municipal bonds. Tax depreciation exceeded book depreciation by $25,000. The enacted tax rate is 30% for all years, and there were no deferred taxes at the beginning of Year 1. What amount should Tavi report as total income tax expense for Year 1?</p>
+        <div class="choices">A. $78,000<br>B. $85,500<br>C. $90,000<br>D. $93,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Tavi社の Year 1 の税引前利益は $300,000 で、地方債の受取利息 $15,000 を含む。税務の減価償却は会計より $25,000 多い。税率はすべての年度で30%（成立済み）、Year 1 期首の繰延税金はない。Year 1 の税金費用の合計はいくらか。<br>A. $78,000　B. $85,500　C. $90,000　D. $93,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$85,500）</b><br>当期税金：（300,000 − 15,000 − 25,000）× 30% ＝ 78,000<br>繰延税金費用：DTL 25,000 × 30% ＝ 7,500<br>合計 78,000 ＋ 7,500 ＝ <b>85,500</b>（＝（300,000 − 15,000）× 30%）<br>A：当期税金だけを答えている<br>C：永久差異を除いていない（300,000 × 30%）<br>D：減価償却の差を逆向きに足している</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜解消年度の税率</p>
+        <p class="en-stem">At December 31, Year 1, Sela Co. had a $90,000 future taxable temporary difference that will reverse equally in Years 2, 3, and 4. Enacted tax rates are 30% for Year 2 and 25% for Years 3 and 4. What amount should Sela report as its deferred tax liability at December 31, Year 1?</p>
+        <div class="choices">A. $22,500<br>B. $24,000<br>C. $25,500<br>D. $27,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Year 1 の12月31日、Sela社には将来加算一時差異 $90,000 があり、Year 2・3・4 に均等に解消する。成立済みの税率は Year 2 が30%、Year 3・4 が25%。Year 1 の12月31日の繰延税金負債はいくらか。<br>A. $22,500　B. $24,000　C. $25,500　D. $27,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$24,000）</b><br>30,000 × 30% ＋ 30,000 × 25% ＋ 30,000 × 25% ＝ 9,000 ＋ 7,500 ＋ 7,500 ＝ <b>24,000</b>（論点2）<br>A：全体に25%を掛けている<br>C：Year 3 にも30%を使っている<br>D：全体に30%を掛けている</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜評価性引当金と純額の DTA</p>
+        <p class="en-stem">At the end of Year 1, its first year of operations, Ruko Co. had $50,000 of future deductible temporary differences. The enacted tax rate is 21%. Based on available evidence, it is more likely than not that 40% of the deferred tax asset will not be realized. What amount of net deferred tax asset should Ruko report?</p>
+        <div class="choices">A. $4,200<br>B. $6,300<br>C. $10,500<br>D. $0</div>
+        <details><summary>和訳を見る</summary><div class="body">営業初年度の Year 1 末、Ruko社には将来減算一時差異 $50,000 がある。成立済みの税率は21%。入手できる証拠から、繰延税金資産の40%は実現しない可能性が高い。純額で表示する繰延税金資産はいくらか。<br>A. $4,200　B. $6,300　C. $10,500　D. $0</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$6,300）</b><br>DTA 50,000 × 21% ＝ 10,500、評価性引当金 10,500 × 40% ＝ 4,200<br>純額 10,500 − 4,200 ＝ <b>6,300</b>（論点3）<br>A：評価性引当金の額を答えている<br>C：評価性引当金を引いていない<br>D：一部が実現しないだけで、全額を消している</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="17">
+        <p class="mc-label">問題5｜TBS形式：Year 2 の税金費用</p>
+        <p class="text-[13px] leading-relaxed mb-2">1の例（Hira Co.）の Year 2 です。税引前利益 $600,000（永久差異なし）。減価償却の差のうち $30,000 が解消（会計の償却が税務より $30,000 多い）。Year 1 分の製品保証 $40,000 を支払い、Year 2 分として新たに $50,000 を見積計上（未払い）。税率25%。繰延税金費用が減る（便益）ときはマイナスで入力。空欄に金額を入れて「答え合わせ」を押してください（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>Year 2 の課税所得</td><td class="num"><input inputmode="numeric" data-ans="640000" aria-label="Year 2 の課税所得"></td></tr><tr><td>当期税金</td><td class="num"><input inputmode="numeric" data-ans="160000" aria-label="当期税金"></td></tr><tr><td>Year 2 期末の DTL</td><td class="num"><input inputmode="numeric" data-ans="7500" aria-label="Year 2 期末の DTL"></td></tr><tr><td>Year 2 期末の DTA</td><td class="num"><input inputmode="numeric" data-ans="12500" aria-label="Year 2 期末の DTA"></td></tr><tr><td>繰延税金費用（便益はマイナス）</td><td class="num"><input inputmode="numeric" data-ans="-10000" aria-label="繰延税金費用（便益はマイナス）"></td></tr><tr><th>税金費用の合計</th><td class="num"><input inputmode="numeric" data-ans="150000" aria-label="税金費用の合計"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">課税所得：600,000 ＋ 30,000（償却の解消）＋ 50,000（新しい見積計上）− 40,000（支払で損金）＝ <b>640,000</b><br>当期税金：640,000 × 25% ＝ <b>160,000</b><br>DTL：残る差異 30,000 × 25% ＝ <b>7,500</b>（期首 15,000 から 7,500 減少）<br>DTA：未払いの保証 50,000 × 25% ＝ <b>12,500</b>（期首 10,000 から 2,500 増加）<br>繰延税金費用：−7,500 − 2,500 ＝ <b>−10,000</b>（論点1：残高の差）<br>合計 160,000 − 10,000 ＝ <b>150,000</b>（＝ 600,000 × 25%）</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c18-1"><label for="c18-1">永久差異の例を3つ言え、DTA・DTL を作らない理由を言える</label></li><li><input type="checkbox" id="c18-2"><label for="c18-2">早見表の差異を DTA・DTL に分けられる（税務の条件を読んで）</label></li><li><input type="checkbox" id="c18-3"><label for="c18-3">税引前利益から課税所得を計算できる</label></li><li><input type="checkbox" id="c18-4"><label for="c18-4">繰延税金費用を期首・期末の残高の差で出せる</label></li><li><input type="checkbox" id="c18-5"><label for="c18-5">複数年に解消する差異に年ごとの成立済み税率を掛けられる</label></li><li><input type="checkbox" id="c18-6"><label for="c18-6">評価性引当金の判断基準と表示を説明できる</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

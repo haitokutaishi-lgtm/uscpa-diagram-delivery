@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】収益認識の5ステップ（ASC 606）—取引価格は独立販売価格の比率で配る</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; align-items: center; justify-content: center; }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Revenue Recognition — Five Steps（ASC 606）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">収益認識の5ステップ：取引価格は「独立販売価格の比率」で配り、配った額を支配が移った時に収益にする</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">この論点の復習用です。最初の図で5ステップと配分の計算を確認し、契約資産・契約負債の使い分けと差がつく論点を見たら、最後に問題で仕上げてください。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 判定</a><a href="#je">3 仕訳一覧</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：5ステップに1つの契約を流す</h2>
+      <p class="lead">どの問題も、この5段に当てはめれば解けます。差がつくのはステップ4（配分）と、ステップ5で「一時点か・一定期間か」を分けるところです。</p>
+      <div class="facts"><p class="font-bold mb-1">例：Delta Co. は Year 1 の10月1日に、顧客と次の契約を結んだ</p><ul><li>機械の販売・据付・2年間の保守をまとめて <b>$120,000</b>。代金は契約日に全額を現金で受け取った</li><li>単独で売るときの価格（独立販売価格）は、機械 $100,000・据付 $10,000・保守 $40,000（合計 $150,000）</li><li>据付は他社でもできる作業。機械の引渡しと据付は10月1日に終わり、保守は10月1日から2年間</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>ステップ1　契約の識別</b><p>双方が承認し、権利と支払条件が特定でき、商業的実質があり、代金の回収可能性が高い → 契約として扱う</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>ステップ2　履行義務の識別</b><p>機械・据付・保守の3つ。据付は他社でもできる（別個）ので、機械とは別の履行義務</p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>ステップ3　取引価格の決定</b><p>受け取ると見込む対価 <span class="en">$120,000</span>（第三者のために回収する税金などは除く）</p></div></div><div class="flow-step key"><span class="flow-no">4</span><div><b>ステップ4　取引価格の配分</b><p>独立販売価格の比率で配る。120,000 ÷ 150,000 ＝ 0.8 → 機械 <span class="en">80,000</span>・据付 <span class="en">8,000</span>・保守 <span class="en">32,000</span></p></div></div><div class="flow-step key"><span class="flow-no">5</span><div><b>ステップ5　履行義務の充足（収益の認識）</b><p>機械と据付は10月1日に一時点で収益（88,000）。保守は2年間にわたって収益（Year 1 は3か月分 32,000 × 3/24 ＝ 4,000）</p></div></div></div>
+      <div class="diagram-visual"><div class="split-wrap"><p class="split-title">取引価格 $120,000 の配分（値引き $30,000 は3つに比率で負担させる）</p><div class="split"><div class="s-navy" style="width:66.7%">機械 80,000</div><div class="s-sky" style="width:6.6%"></div><div class="s-teal" style="width:26.7%">保守 32,000</div></div><div class="split-legend"><span style="--c:#1e3a5f">機械 <b class="en">$80,000</b></span><span style="--c:#0284c7">据付 <b class="en">$8,000</b></span><span style="--c:#0f766e">保守 <b class="en">$32,000</b></span></div></div><div class="split-wrap"><p class="split-title">Year 1 の収益 $92,000 と、期末に残る契約負債 $28,000</p><div class="split"><div class="s-navy" style="width:73.3%">88,000</div><div class="s-teal" style="width:3.4%"></div><div class="s-gray" style="width:23.3%">28,000</div></div><div class="split-legend"><span style="--c:#1e3a5f">機械＋据付（一時点） <b class="en">$88,000</b></span><span style="--c:#0f766e">保守3か月分 <b class="en">$4,000</b></span><span style="--c:#94a3b8">契約負債（Year 2〜3 の保守） <b class="en">$28,000</b></span></div></div></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">覚える式は2本だけ</p><p class="en text-[13px]">各履行義務への配分額 ＝ 取引価格 × その独立販売価格 ÷ 独立販売価格の合計</p><p class="en text-[13px]">期末の契約負債 ＝ 受け取った額 − これまでに収益にした額</p></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>判定：別個の履行義務か／一時点か・一定期間か</h2>
+      
+      <div class="grid md:grid-cols-2 gap-3 mt-3 text-sm leading-relaxed"><div class="point mb-0"><p class="font-bold text-teal-800 mb-1">ステップ2：別個（distinct）の2条件</p><ul class="list-disc ml-5 text-[13px]"><li>顧客がそれ単独で（または容易に手に入る他の資源と組み合わせて）便益を得られる</li><li>契約の中で、他の約束と区別できる（大幅に組み合わせたり、改造したりしていない）</li><li>両方を満たせば別の履行義務。満たさなければ他の約束とまとめて1つにする</li></ul></div><div class="point mb-0"><p class="font-bold text-slate-800 mb-1">ステップ5：一定期間にわたる3条件（どれか1つ）</p><ul class="list-disc ml-5 text-[13px]"><li>顧客が、提供と同時に便益を受けて消費する（保守・清掃など）</li><li>作っている資産を、作っている途中から顧客が支配している</li><li>他に転用できない資産を作り、完了した分の支払を求める権利がある</li><li>どれも満たさなければ一時点。支配が移った時（支払請求権・法的所有権・物理的占有・リスクと便益・検収）に収益</li></ul></div></div>
+      <div class="rule">収益は「代金を受け取った時」でも「請求書を送った時」でもなく、<b>顧客に支配が移った時</b>に計上します。入金が先なら契約負債、収益が先で請求権が残るなら契約資産か債権です。</div>
+      
+    </section>
+
+    <section id="je" class="section-card">
+      <h2><span class="sec-no">3</span>仕訳一覧（1の例の数字）</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>場面</th><th>仕訳</th><th>ポイント</th></tr></thead><tbody><tr><td>10/1 代金を受け取る</td><td class="en">Dr. Cash 120,000<br>　Cr. Contract liability 120,000</td><td>まだ何も提供していないので、いったん全額が契約負債</td></tr><tr><td>10/1 機械の引渡しと据付</td><td class="en">Dr. Contract liability 88,000<br>　Cr. Revenue 88,000</td><td>配分した 80,000 ＋ 8,000 を収益に（定価の 110,000 ではない）</td></tr><tr><td>12/31 保守3か月分</td><td class="en">Dr. Contract liability 4,000<br>　Cr. Revenue 4,000</td><td>32,000 × 3/24。残り 28,000 は契約負債のまま</td></tr><tr><td>（別例）代金を後で受け取る契約で、引渡しが先</td><td class="en">Dr. Accounts receivable<br>　Cr. Revenue</td><td>支払が時の経過だけで決まるなら債権</td></tr><tr><td>（別例）他の義務を果たすまで請求できない</td><td class="en">Dr. Contract asset<br>　Cr. Revenue</td><td>条件が解けたら債権へ振り替える</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>差がつく論点</h2>
+      <p class="lead">5ステップの名前を覚えていても、配分と貸借対照表の科目で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>値引きは、原則としてすべての履行義務に比率で負担させる</div><div class="rule">まとめて売ったことによる値引きは、<b>独立販売価格の比率で全部の履行義務に配ります</b>。1の例では値引き $30,000 を機械・据付・保守が 100：10：40 で負担しています。</div><div class="calc">機械 120,000 × 100/150 ＝ 80,000　据付 120,000 × 10/150 ＝ 8,000　保守 120,000 × 40/150 ＝ 32,000</div><div class="miss"><b>こう間違える：</b>定価どおり機械 $100,000・据付 $10,000 を収益にして、残りの $10,000 を保守に回す（保守だけが値引きを全部負担した形になる）。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>値引きが特定の組み合わせのものと分かるときは、そこだけに配る</div><div class="rule">一部の商品をいつもセットで値引きして売っていて、値引きがその組み合わせのものだと<b>観察できる証拠がある</b>ときは、値引きをその組み合わせだけに配ります。</div><div class="calc">例：A（独立販売価格 $60,000）・B（$25,000）・C（$25,000）を $95,000 で販売。A はいつも単独で $60,000、B と C はいつもセットで $35,000<br>→ 値引き $15,000 は B・C だけに配る。A ＝ 60,000、B ＝ C ＝ 35,000 × 25/50 ＝ 17,500</div><div class="miss"><b>こう間違える：</b>3つ全部に比率で配って A ＝ 95,000 × 60/110 ＝ $51,818 にしてしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>独立販売価格が分からないときの見積り方</div><div class="rule">観察できなければ見積もります。①<b>調整した市場評価</b>（競合の価格などを調整）、②<b>予想コストにマージンを加える</b>方法、③<b>残余アプローチ</b>（取引価格 − 他の独立販売価格）。残余アプローチは、価格がばらばら・まだ価格を決めていないなど、見積りが非常に難しいときだけ使えます。</div><div class="calc">例：ソフトのライセンスと1年サポートを $50,000 で販売。サポートは単独で $12,000、ライセンスは顧客ごとに価格が大きく違う → ライセンス ＝ 50,000 − 12,000 ＝ 38,000</div><div class="miss"><b>こう間違える：</b>独立販売価格が分かっているのに、手軽な残余アプローチで計算してしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>契約資産・債権・契約負債の使い分け</div><div class="rule"><b>契約負債</b>：入金（または支払期限の到来）が提供より先。<b>債権</b>：提供済みで、支払が時の経過だけで決まる（無条件の権利）。<b>契約資産</b>：提供済みだが、他の義務を果たすまで請求できないなど、時の経過以外の条件が残っている。</div><div class="calc">例：X（$18,000）と Y（$12,000）を納める契約で、代金は両方を納めてから請求。X を納めた → Dr. Contract asset 18,000 ／ Cr. Revenue 18,000。Y を納めた → Dr. Receivable 30,000 ／ Cr. Contract asset 18,000・Revenue 12,000</div><div class="miss"><b>こう間違える：</b>X を納めた時点で売掛金 $18,000 を計上する（まだ請求できないので債権ではない）。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>そのほかの関連論点</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li><b>変動対価：</b>値引き・返金・ボーナスなどは期待値か最も可能性の高い金額で見積もり、大きな戻入れが起きない可能性が高い範囲だけ取引価格に入れます。</li><li><b>重要な金融要素：</b>支払と提供の時期が1年超ずれるときは、貨幣の時間価値を調整します（1年以内なら調整しない簡便法あり）。</li><li><b>追加購入の選択権：</b>契約しなければ得られない重要な権利（大きな割引クーポンなど）は、別の履行義務として取引価格を配ります。</li><li><b>本人か代理人か：</b>顧客に渡す前に商品を支配していれば本人（総額で収益）、していなければ代理人（手数料だけが収益）。</li><li><b>契約の変更：</b>別個の商品を独立販売価格で追加するなら別の契約として扱います。</li></ul></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>standalone selling prices</td><td>比率で配る。定価をそのまま収益にしない</td><td>独立販売価格の額をそのまま収益にする</td></tr><tr><td>could be performed by other entities / sold separately</td><td>別個の履行義務として分ける</td><td>機械とまとめて1つにする</td></tr><tr><td>regularly sells B and C together at a discount</td><td>値引きをその組み合わせだけに配る</td><td>全部の履行義務に比率で配る</td></tr><tr><td>highly variable / not yet established</td><td>残余アプローチを使える</td><td>分かっている価格があるのに残余アプローチを使う</td></tr><tr><td>payment is due only after both items are delivered</td><td>1つ目を納めた時は契約資産</td><td>売掛金を計上する</td></tr><tr><td>received in advance / prior to transfer</td><td>契約負債。提供した分だけ収益へ</td><td>入金額を全額収益にする</td></tr><tr><td>over the two-year service period</td><td>期間で按分（月割り）</td><td>引渡し時に全額を収益にする</td></tr><tr><td>sales taxes collected on behalf of</td><td>取引価格から除く</td><td>税込みの額を収益にする</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">6</span>確認問題（初見の数字）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 606 の考え方に沿って作っています。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜比率による配分</p>
+        <p class="en-stem">Kova Co. sold a machine together with a one-year service contract for a total price of $54,000. The standalone selling prices are $50,000 for the machine and $10,000 for the service contract. The machine was delivered on the contract date. What amount of revenue should Kova recognize upon delivery of the machine?</p>
+        <div class="choices">A. $44,000<br>B. $45,000<br>C. $50,000<br>D. $54,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Kova社は、機械と1年間のサービス契約を合計 $54,000 で販売した。独立販売価格は、機械 $50,000、サービス契約 $10,000。機械は契約日に引き渡した。機械の引渡し時に計上する収益はいくらか。<br>A. $44,000　B. $45,000　C. $50,000　D. $54,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$45,000）</b><br>54,000 × 50,000 ÷ 60,000 ＝ <b>45,000</b>（論点1）<br>A：サービスの独立販売価格を引いた残り（残余アプローチ）で計算している<br>C：機械の独立販売価格をそのまま収益にしている<br>D：全額を引渡し時の収益にしている</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜値引きを特定の組み合わせに配る</p>
+        <p class="en-stem">Lumo Co. sold products P, Q, and R to a customer for $90,000. The standalone selling prices are $50,000 for P, $30,000 for Q, and $30,000 for R. Lumo regularly sells P on its own for $50,000 and regularly sells Q and R together for $40,000. What amount of the transaction price should be allocated to product R?</p>
+        <div class="choices">A. $10,000<br>B. $20,000<br>C. $24,545<br>D. $30,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Lumo社は、顧客に製品P・Q・Rを $90,000 で販売した。独立販売価格は、P $50,000、Q $30,000、R $30,000。Lumo社はいつもPを単独で $50,000 で、QとRをセットで $40,000 で販売している。製品Rに配分する取引価格はいくらか。<br>A. $10,000　B. $20,000　C. $24,545　D. $30,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$20,000）</b><br>値引き 110,000 − 90,000 ＝ 20,000 は、いつもセットで値引きしている Q・R のもの（論点2）<br>Q・R に 40,000 を配る → R ＝ 40,000 × 30/60 ＝ <b>20,000</b><br>A：値引き 20,000 を R だけから引いている<br>C：3つ全部に比率で配っている（90,000 × 30/110）<br>D：独立販売価格のままにしている</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜貸借対照表の科目（概念）</p>
+        <p class="en-stem">Pira Co. agreed to deliver two products to a customer for a total of $40,000. Under the contract, Pira has no right to bill the customer until both products are delivered. At December 31, Pira had delivered the first product, to which $25,000 of the transaction price was allocated. What should Pira report in its December 31 balance sheet related to this contract?</p>
+        <div class="choices">A. Accounts receivable of $25,000<br>B. Contract asset of $25,000<br>C. Contract liability of $15,000<br>D. No asset or liability until both products are delivered</div>
+        <details><summary>和訳を見る</summary><div class="body">Pira社は、顧客に2つの製品を合計 $40,000 で納める契約を結んだ。契約上、両方を納めるまで請求する権利はない。12月31日までに、取引価格のうち $25,000 を配分した1つ目の製品を納めた。12月31日の貸借対照表に、この契約について何を計上するか。<br>A. 売掛金 $25,000　B. 契約資産 $25,000　C. 契約負債 $15,000　D. 両方を納めるまで資産も負債も計上しない</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>1つ目は納めたので収益 $25,000 を計上し、まだ請求できない（時の経過以外の条件が残る）ので<b>契約資産</b>（論点4）<br>A：無条件の請求権がないのに債権にしている<br>C：入金も請求もないので契約負債はない<br>D：1つ目の支配は顧客に移っているので、収益を待たない</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜配分と期間按分の複合</p>
+        <p class="en-stem">On July 1, Year 1, Ardo Co. sold equipment and a three-year maintenance agreement to a customer for $90,000, received in cash on that date. The standalone selling prices are $80,000 for the equipment and $40,000 for the maintenance. The equipment was delivered on July 1, and maintenance services are provided evenly over three years beginning July 1. What total revenue should Ardo recognize for the year ended December 31, Year 1?</p>
+        <div class="choices">A. $60,000<br>B. $65,000<br>C. $70,000<br>D. $90,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Year 1 の7月1日、Ardo社は設備と3年間の保守契約を $90,000 で販売し、同日に現金で受け取った。独立販売価格は、設備 $80,000、保守 $40,000。設備は7月1日に引き渡し、保守は7月1日から3年間、均等に提供する。12月31日に終わる Year 1 の収益の合計はいくらか。<br>A. $60,000　B. $65,000　C. $70,000　D. $90,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$65,000）</b><br>配分：設備 90,000 × 80/120 ＝ 60,000、保守 90,000 × 40/120 ＝ 30,000<br>保守の Year 1 分：30,000 ÷ 3年 × 6/12 ＝ 5,000<br>合計 60,000 ＋ 5,000 ＝ <b>65,000</b><br>A：保守の半年分を入れていない<br>C：保守を1年分（10,000）入れている<br>D：入金額を全額収益にしている</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="18">
+        <p class="mc-label">問題5｜TBS形式：契約負債の残高を追う</p>
+        <p class="text-[13px] leading-relaxed mb-2">1の例（Delta Co.）の続きです。保守は Year 1 の10月1日から2年間、毎月均等に提供します。空欄に金額を入れて「答え合わせ」を押してください（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>Year 1 期末の契約負債</td><td class="num">28,000</td></tr><tr><td>Year 2 の保守の収益</td><td class="num"><input inputmode="numeric" data-ans="16000" aria-label="Year 2 の保守の収益"></td></tr><tr><td>Year 2 期末の契約負債</td><td class="num"><input inputmode="numeric" data-ans="12000" aria-label="Year 2 期末の契約負債"></td></tr><tr><td>Year 3 の保守の収益</td><td class="num"><input inputmode="numeric" data-ans="12000" aria-label="Year 3 の保守の収益"></td></tr><tr><th>3年間の保守の収益の合計</th><td class="num"><input inputmode="numeric" data-ans="32000" aria-label="3年間の保守の収益の合計"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">保守に配った 32,000 を24か月で割ると、1か月 1,333.33…<br>Year 2：12か月分 32,000 × 12/24 ＝ <b>16,000</b><br>Year 2 期末：28,000 − 16,000 ＝ <b>12,000</b><br>Year 3：1月〜9月の9か月分 32,000 × 9/24 ＝ <b>12,000</b><br>合計 4,000 ＋ 16,000 ＋ 12,000 ＝ <b>32,000</b>（配った額と一致）</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c19-1"><label for="c19-1">5ステップを順番に言える</label></li><li><input type="checkbox" id="c19-2"><label for="c19-2">取引価格を独立販売価格の比率で配る式を書ける</label></li><li><input type="checkbox" id="c19-3"><label for="c19-3">値引きを特定の組み合わせだけに配る条件を説明できる</label></li><li><input type="checkbox" id="c19-4"><label for="c19-4">残余アプローチを使える場面を言える</label></li><li><input type="checkbox" id="c19-5"><label for="c19-5">契約資産・債権・契約負債を使い分けられる</label></li><li><input type="checkbox" id="c19-6"><label for="c19-6">一定期間にわたって収益にする3つの条件を言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

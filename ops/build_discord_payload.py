@@ -6,7 +6,6 @@ v2 の topic-spec に "post" があれば、問いかけ＋できること＋リ
 
 spec の "post":
   name      … 論点名（例：短期債務の借換え）
-  minutes   … 目安の所要時間（分）
   hook_q    … 開く前に考えてほしい問い（1〜2文）
   hook_where… 答えがページのどこにあるか（例：差がつく論点2と問題2）
   bullets   … このページでできること（3つ）
@@ -19,6 +18,7 @@ import sys
 from pathlib import Path
 
 REACTIONS = "解いたらリアクションで教えてください\n✅ 全問正解　🤔 間違えた問題があった　📌 あとで解く"
+SUBJECT_EMOJI = {"FAR": "📘", "AUD": "📗"}
 LEGACY_TAIL = "参考になった場合はいいね👍でリアクションください！"
 
 
@@ -29,9 +29,9 @@ def build(entry: dict, spec: dict | None) -> dict:
             "content": f"【図解配信】 {entry['title']}\n\n{LEGACY_TAIL}",
             "embeds": [{"title": entry["title"], "description": entry.get("description", ""), "url": entry["url"], "color": 3447003}],
         }
-    # テキストの章番号は受講生に関係ないので投稿に出さない
-    meta = f"約{post['minutes']}分" if post.get("minutes") else ""
-    head = f"📘 **FAR図解｜{post['name']}**" + (f"（{meta}）" if meta else "")
+    # テキストの章番号・所要時間は受講生に意味がないので投稿に出さない
+    subject = entry.get("subject") or "FAR"
+    head = f"{SUBJECT_EMOJI.get(subject, '📘')} **{subject}図解｜{post['name']}**"
     if entry.get("revised"):
         head += "　※改訂版"
     lines = [head, "", f"**Q.** {post['hook_q']}", f"→ 答えは図解の「{post['hook_where']}」で", "", "**このページでできること**"]

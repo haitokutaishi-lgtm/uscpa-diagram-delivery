@@ -1,4 +1,4 @@
-# 日・水・土 9:00 JST（Asia/Tokyo）: topic-spec 生成 → diagram-site 同期 → Discord 投稿
+# FAR＝日・水・土、AUD＝火・金（delivery-config.json の subjects）9:00 JST: topic-spec 生成 → diagram-site 同期 → Discord 投稿
 # GitHub cron は UTC 0時台で遅延しやすいため、schedule 時は 9:00 JST まで wait_jst_delivery_window.py で待機
 # posts.json は日付キーで管理。当日キーが無くても last_posted_date より後で今日以前の最古キーを1件投稿（取りこぼし防止）。
 # diagram-site/topics/… のときは Playwright で本文ブロックを最大4枚キャプチャし、
@@ -6,6 +6,7 @@
 #
 # シークレット:
 #   DISCORD_WEBHOOK_URL       … 必須（投稿用）
+#   DISCORD_WEBHOOK_URL_AUD   … 任意。AUD を別チャンネルに出すとき。無ければ DISCORD_WEBHOOK_URL に投稿
 #   DIAGRAM_SITE_DEPLOY_KEY   … diagram-site への自動デプロイに必須（write 権限つき Deploy Key の SSH 秘密鍵）
 
 name: 図解 自動生成→配信
@@ -15,8 +16,8 @@ env:
 
 on:
   schedule:
-    # 9:05 JST・日水土（:05 は正時混雑回避）。timezone は GitHub Actions の IANA 指定
-    - cron: "5 9 * * 0,3,6"
+    # 9:05 JST・FAR 日水土＋AUD 火金（:05 は正時混雑回避）。timezone は GitHub Actions の IANA 指定
+    - cron: "5 9 * * 0,2,3,5,6"
       timezone: Asia/Tokyo
   workflow_dispatch:
     inputs:
@@ -43,6 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       post_date: ${{ steps.resolve.outputs.post_date }}
+      subject: ${{ steps.resolve.outputs.subject }}
       slug: ${{ steps.resolve.outputs.slug }}
       source: ${{ steps.resolve.outputs.source }}
       run_generate: ${{ steps.resolve.outputs.run_generate }}
@@ -238,7 +240,7 @@ jobs:
 
       - name: Post today entry to Discord
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ needs.prepare.outputs.subject == 'AUD' && secrets.DISCORD_WEBHOOK_URL_AUD != '' && secrets.DISCORD_WEBHOOK_URL_AUD || secrets.DISCORD_WEBHOOK_URL }}
           TZ: Asia/Tokyo
           JOB_PUSHED: ${{ needs.sync-diagram-site.outputs.pushed }}
         run: |

@@ -1,317 +1,269 @@
 {
-  "_comment": "未スケジュール分のみ並べる（上から順に posts.json へ日・水・土の枠で自動追加）。id が posts の queue_id に無いものが対象。excluded_slugs は delivery-config.json 参照。",
+  "_comment": "FAR の配信順（knowledge/roadmap-far.md と同じ順）。上から順に posts.json へ日・水・土の枠で自動追加。v2 の topic-spec ができていないテーマで補充が止まる（旧型は配信しない）。id が posts の queue_id に無いものが対象。",
   "items": [
     {
-      "id": "subsequent-events-2026q3",
-      "slug": "subsequent-events-recognized",
-      "title": "【図解】後発事象—recognized と nonrecognized の切り分け",
-      "description": "ASC 855。決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型。"
+      "id": "revenue-five-step-v2",
+      "slug": "revenue-five-step",
+      "title": "【図解】収益認識—5ステップと取引価格の配分",
+      "description": ""
     },
     {
-      "id": "lease-finance-2026q3",
-      "slug": "lease-lessee-finance-initial",
-      "title": "【図解】リース（借手・finance）—ROU資産と lease liability の初期計上",
-      "description": "ASC 842。開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブ。"
+      "id": "lease-lessee-classification-v2",
+      "slug": "lease-lessee-classification",
+      "title": "【図解】リース（借手）—分類・開始時の計上・その後の費用",
+      "description": ""
     },
     {
-      "id": "bond-effective-2026q3",
+      "id": "deferred-taxes-temporary-differences-v2",
+      "slug": "deferred-taxes-temporary-differences",
+      "title": "【図解】税効果—一時差異からDTA・DTLを決める",
+      "description": ""
+    },
+    {
+      "id": "bond-effective-interest-v2",
       "slug": "bond-effective-interest",
-      "title": "【図解】社債（割引発行）—実効金利法の利息費用",
-      "description": "利息費用＝carrying×effective rate。現金利息（クーポン）との差額が割引償却。"
+      "title": "【図解】社債—実効金利法・発行価格・早期償還",
+      "description": ""
     },
     {
-      "id": "equity-method-2026q3",
-      "slug": "equity-method-basic",
-      "title": "【図解】持分法—被投資会社の利益・配当で投資勘定が動く",
-      "description": "ASC 323。利益シェアで投資↑、配当で投資↓（配当は収益にしない）。"
+      "id": "cash-flow-indirect-v2",
+      "slug": "cash-flow-indirect",
+      "title": "【図解】キャッシュ・フロー計算書—間接法の営業CF",
+      "description": ""
     },
     {
-      "id": "scf-classify-2026q3",
-      "slug": "cash-flow-classification",
-      "title": "【図解】キャッシュ・フロー計算書—営業・投資・財務の区分",
-      "description": "ASC 230。支払利息は原則営業、支払配当は財務、PPE購入は投資。"
+      "id": "business-combination-acquisition-v2",
+      "slug": "business-combination-acquisition",
+      "title": "【図解】企業結合—取得法・のれん・非支配持分",
+      "description": ""
     },
     {
-      "id": "loss-contingency-2026q3",
-      "slug": "loss-contingency-accrual",
-      "title": "【図解】偶発損失—probable / reasonably possible / remote と計上・注記の分岐",
-      "description": "ASC 450-20。発生可能性と見積り可否から計上／注記を分岐し、範囲で一点がないときは下限を計上する型。"
+      "id": "debt-securities-classification-v2",
+      "slug": "debt-securities-classification",
+      "title": "【図解】債務証券—HTM・AFS・トレーディングの評価と損益",
+      "description": ""
     },
     {
-      "id": "ppe-impairment-2026q2",
+      "id": "eps-diluted-v2",
+      "slug": "eps-diluted",
+      "title": "【図解】希薄化EPS—自己株式法と転換仮定法",
+      "description": ""
+    },
+    {
+      "id": "inventory-lcnrv-v2",
+      "slug": "inventory-lcnrv",
+      "title": "【図解】棚卸資産の評価—LCNRVとLCM（市場価格の上限・下限）",
+      "description": ""
+    },
+    {
+      "id": "nfp-contributions-net-assets-v2",
+      "slug": "nfp-contributions-net-assets",
+      "title": "【図解】非営利組織—寄付の認識と正味資産の区分",
+      "description": ""
+    },
+    {
+      "id": "government-funds-basis-v2",
+      "slug": "government-funds-basis",
+      "title": "【図解】政府会計—ファンドの区分と測定焦点・認識基準",
+      "description": ""
+    },
+    {
+      "id": "ppe-impairment-held-for-use-v2",
       "slug": "ppe-impairment-held-for-use",
-      "title": "【図解】固定資産の減損（held for use）—2段階テストと impairment loss",
-      "description": "recoverability test の比較相手と、認識する loss の切り方を一枚で整理（ASC 360-10）。"
+      "title": "【図解】固定資産の減損—held for use と held for sale",
+      "description": ""
     },
     {
-      "id": "warranty-review-2026q2",
-      "slug": "warranty-liability",
-      "title": "【図解・見直し】製品保証—expense と期末 liability の式",
-      "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。"
+      "id": "discontinued-operations-v2",
+      "slug": "discontinued-operations",
+      "title": "【図解】非継続事業—判定と表示",
+      "description": ""
     },
     {
-      "id": "asset-group-review-2026q2",
-      "slug": "asset-group-relative-sales-value",
-      "title": "【図解・見直し】一括購入の按分—appraised value の比率だけを使う",
-      "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。"
-    },
-    {
-      "id": "refinancing-review-2026q2",
-      "slug": "refinancing-current-liabilities",
-      "title": "【図解・見直し】借換え—intent・ability と financing 上限のチェックリスト",
-      "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。"
-    },
-    {
-      "id": "current-liabilities-review2-2026q2",
-      "slug": "current-liabilities-classification",
-      "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
-      "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。"
-    },
-    {
-      "id": "treasury-review2-2026q2",
-      "slug": "treasury-stock-par-value",
-      "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
-      "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。"
-    },
-    {
-      "id": "notes-review2-2026q2",
-      "slug": "notes-payable-accrued-interest",
-      "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
-      "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。"
-    },
-    {
-      "id": "involuntary-review2-2026q2",
-      "slug": "involuntary-conversion-gain",
-      "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
-      "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。"
-    },
-    {
-      "id": "dta-2026q3",
-      "slug": "deferred-tax-asset-dta",
-      "title": "【図解】Income Taxes — タイミング差異から deferred tax asset（DTA）を求める",
-      "description": "帳簿先行・支払時控除の一時差異から、差異のドル × enacted tax rate で DTA を求める型（ASC 740）。"
-    },
-    {
-      "id": "lcm-drill-2026q3",
-      "slug": "inventory-lcm-reading-drill",
-      "title": "【図解】在庫の低価法—LCM（LIFO）と LCNRV（FIFO）の読み分け",
-      "description": "LIFO は LCM、FIFO/平均/個別は LCNRV と覚える。天井・床・中央値の型を問題文から固定する。"
-    },
-    {
-      "id": "ppe-review-2026q3",
-      "slug": "ppe-impairment-held-for-use",
-      "title": "【図解・見直し】固定資産の減損—recoverability test と loss の切り方",
-      "description": "held for use の2段階テストと、認識する impairment loss の比較相手を再確認（ASC 360-10）。"
-    },
-    {
-      "id": "refinancing-review-2026q3",
-      "slug": "refinancing-current-liabilities",
-      "title": "【図解・見直し】借換え—intent・ability と financing 上限",
-      "description": "current に残る条件を、問題文のキーワード順で追い直す（ASC 470-10）。"
-    },
-    {
-      "id": "warranty-review-2026q3",
-      "slug": "warranty-liability",
-      "title": "【図解・見直し】製品保証—expense と期末 liability の式",
-      "description": "売上×率の認識と、期末残高＝期首＋認識−支出の型を再確認（ASC 460）。"
-    },
-    {
-      "id": "asset-group-review-2026q3",
-      "slug": "asset-group-relative-sales-value",
-      "title": "【図解・見直し】一括購入の按分—appraised value の比率だけ",
-      "description": "seller carrying amount や均等割りに引っ張られない按分の手順を再掲（ASC 360）。"
-    },
-    {
-      "id": "current-liabilities-review-2026q3",
-      "slug": "current-liabilities-classification",
-      "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
-      "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。"
-    },
-    {
-      "id": "treasury-review-2026q3",
-      "slug": "treasury-stock-par-value",
-      "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
-      "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。"
-    },
-    {
-      "id": "notes-review-2026q3",
-      "slug": "notes-payable-accrued-interest",
-      "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
-      "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。"
-    },
-    {
-      "id": "involuntary-review-2026q3",
-      "slug": "involuntary-conversion-gain",
-      "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
-      "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。"
-    },
-    {
-      "id": "dta-review-2026q3",
-      "slug": "deferred-tax-asset-dta",
-      "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
-      "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。"
-    },
-    {
-      "id": "lcm-review-2026q3",
-      "slug": "inventory-lcm-reading-drill",
-      "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
-      "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。"
-    },
-    {
-      "id": "bank-reconciliation-2026q4",
-      "slug": "bank-reconciliation",
-      "title": "【図解】銀行勘定調整—帳簿と銀行残高を同じ現金に合わせる",
-      "description": "未達預金・未取付小切手は銀行側、NSF・手数料・取立は帳簿側。調整後残高は一致する。"
-    },
-    {
-      "id": "allowance-aging-2026q4",
-      "slug": "allowance-aging-method",
-      "title": "【図解】貸倒引当—年齢表から期末 allowance を決める",
-      "description": "年齢表の合計が期末引当の必要額。費用はその必要額と調整前残高の差（ASC 326）。"
-    },
-    {
-      "id": "interest-cap-2026q4",
-      "slug": "interest-capitalization",
-      "title": "【図解】自己建設の利息資本化—avoidable と actual の小さい方",
-      "description": "加重平均支出に利率を掛けた avoidable interest と実際利息の小さい方を資産へ（ASC 835-20）。"
-    },
-    {
-      "id": "goodwill-impairment-2026q4",
-      "slug": "goodwill-impairment",
-      "title": "【図解】のれんの減損—報告単位の FV と carrying の1段階",
-      "description": "FV が carrying を下回ったら差額を減損。のれん残高が上限（ASC 350）。"
-    },
-    {
-      "id": "eps-basic-2026q4",
-      "slug": "eps-basic",
-      "title": "【図解】基本EPS—優先配当を引き、加重平均株式数で割る",
-      "description": "分子は NI−優先配当。現金増資は月数按分、株式配当・分割は遡及（ASC 260）。"
-    },
-    {
-      "id": "accounting-changes-2026q4",
-      "slug": "accounting-changes-error",
-      "title": "【図解】会計上の変更と誤謬—見積りは将来、原則は遡及、誤謬は再表示",
-      "description": "耐用年数の変更は残存簿価をこれから配分。原則変更は遡及、誤謬は修正再表示（ASC 250）。"
-    },
-    {
-      "id": "stock-div-split-2026q4",
-      "slug": "stock-dividend-vs-split",
-      "title": "【図解】株式配当と株式分割—小配当は時価、分割は額面メモ",
-      "description": "約20〜25%未満は時価で利益剰余金を振り替え。分割は総資本もREも動かない（ASC 505）。"
-    },
-    {
-      "id": "revenue-poc-2026q4",
+      "id": "revenue-over-time-poc-v2",
       "slug": "revenue-over-time-poc",
-      "title": "【図解】一定期間にわたる収益—原価進捗率で売上と利益を切り出す",
-      "description": "発生原価÷見積総原価が進捗率。請求額は収益ではない（ASC 606）。"
+      "title": "【図解】長期工事—進捗度による収益と損失契約",
+      "description": ""
     },
     {
-      "id": "rd-costs-2026q4",
-      "slug": "r-and-d-costs",
-      "title": "【図解】研究開発費—原則は発生時費用、転用できる設備だけ資産",
-      "description": "材料・人件・外注は費用。代替用途がある設備は償却だけが R&D（ASC 730）。"
-    },
-    {
-      "id": "ppe-hfs-2026q4",
-      "slug": "ppe-held-for-sale",
-      "title": "【図解】売却予定の固定資産—簿価と FV−売却費用の低い方、償却停止",
-      "description": "held for use の2段階は使わない。分類したら減価償却を止める（ASC 360-10）。"
-    },
-    {
-      "id": "loss-contingency-review-2026q3",
+      "id": "loss-contingency-accrual-v2",
       "slug": "loss-contingency-accrual",
-      "title": "【図解・見直し】偶発損失—probable / reasonably possible / remote",
-      "description": "発生可能性と見積り可否から計上／注記を分岐し、範囲なら下限を計上する型を再確認（ASC 450-20）。"
+      "title": "【図解】偶発損失—probable・reasonably possible・remote",
+      "description": ""
     },
     {
-      "id": "subsequent-events-review-2026q3",
-      "slug": "subsequent-events-recognized",
-      "title": "【図解・見直し】後発事象—recognized と nonrecognized",
-      "description": "決算日時点の条件確認なら帳簿修正、新規発生なら原則注記。貸倒の追加費用の型を再確認（ASC 855）。"
+      "id": "consolidation-intercompany-v2",
+      "slug": "consolidation-intercompany",
+      "title": "【図解】連結—内部取引（棚卸・固定資産・社債）の消去",
+      "description": ""
     },
     {
-      "id": "lease-finance-review-2026q3",
-      "slug": "lease-lessee-finance-initial",
-      "title": "【図解・見直し】リース（借手・finance）—初期の ROU と liability",
-      "description": "開始時は liability＝支払PV、ROU＝負債＋初期直接費用−インセンティブの型を再確認（ASC 842）。"
+      "id": "accounting-changes-error-v2",
+      "slug": "accounting-changes-error",
+      "title": "【図解】会計方針の変更・見積りの変更・誤謬の訂正",
+      "description": ""
     },
     {
-      "id": "bond-effective-review-2026q3",
-      "slug": "bond-effective-interest",
-      "title": "【図解・見直し】社債—実効金利法の利息費用",
-      "description": "利息費用＝carrying×effective rate。現金利息との差額が割引償却になる型を再確認。"
+      "id": "allowance-aging-method-v2",
+      "slug": "allowance-aging-method",
+      "title": "【図解】貸倒引当金—売上高比率法と残高比率法（エイジング）",
+      "description": ""
     },
     {
-      "id": "equity-method-review-2026q3",
-      "slug": "equity-method-basic",
-      "title": "【図解・見直し】持分法—利益シェアと配当で投資勘定が動く",
-      "description": "利益シェアで投資↑、配当で投資↓（配当は収益にしない）の型を再確認（ASC 323）。"
-    },
-    {
-      "id": "scf-classify-review-2026q3",
-      "slug": "cash-flow-classification",
-      "title": "【図解・見直し】キャッシュ・フロー—営業・投資・財務の区分",
-      "description": "支払利息は原則営業、支払配当は財務、PPE購入は投資。区分の型を再確認（ASC 230）。"
-    },
-    {
-      "id": "ppe-review-2026q4",
-      "slug": "ppe-impairment-held-for-use",
-      "title": "【図解・見直し】固定資産の減損—recoverability test と loss",
-      "description": "held for use の2段階テストと、認識する impairment loss の比較相手を再確認（ASC 360-10）。"
-    },
-    {
-      "id": "refinancing-review-2026q4",
-      "slug": "refinancing-current-liabilities",
-      "title": "【図解・改訂版】短期債務の借換え—固定負債にできる条件と金額（復習シート）",
-      "description": "B/S日から発行日までの時系列と、担保%の上限・先に現金で返済したケース・株式発行まで。初見の確認問題とTBS入力式つき（ASC 470-10／テキスト4-7）。"
-    },
-    {
-      "id": "warranty-review-2026q4",
-      "slug": "warranty-liability",
-      "title": "【図解・改訂版】製品保証—費用は売った年、支出は負債を減らすだけ（復習シート）",
-      "description": "負債の動きを1枚の図で。販売年＋翌年の見積率、アシュアランス型とサービス型の違いまで。初見の確認問題とTBS入力式つき（ASC 460・606／テキスト4-10）。"
-    },
-    {
-      "id": "asset-group-review-2026q4",
-      "slug": "asset-group-relative-sales-value",
-      "title": "【図解・改訂版】一括購入の按分—時価の比率で取得原価を配る（復習シート）",
-      "description": "按分の流れを1枚の図で。付随費用・撤去費の扱い、按分後の減価償却まで。初見の確認問題とTBS入力式つき（ASC 360／テキスト5-1・5-2）。"
-    },
-    {
-      "id": "current-liabilities-review-2026q4",
-      "slug": "current-liabilities-classification",
-      "title": "【図解・見直し】流動負債—試算表のどの行を足すか",
-      "description": "社債割引・配当・一年内満期の除外を、積み上げ表で再確認。"
-    },
-    {
-      "id": "treasury-review-2026q4",
+      "id": "treasury-stock-par-value-v2",
       "slug": "treasury-stock-par-value",
-      "title": "【図解・見直し】自己株式—取得価額と額面の差が APIC に行く理由",
-      "description": "額面法で treasury と APIC が動くタイミングを仕訳で追う。"
+      "title": "【図解】自己株式—原価法と額面法",
+      "description": ""
     },
     {
-      "id": "notes-review-2026q4",
+      "id": "nonmonetary-exchange-v2",
+      "slug": "nonmonetary-exchange",
+      "title": "【図解】非貨幣性資産の交換—商業的実質と現金授受",
+      "description": ""
+    },
+    {
+      "id": "asset-retirement-obligation-v2",
+      "slug": "asset-retirement-obligation",
+      "title": "【図解】資産除去債務—当初計上と利息費用",
+      "description": ""
+    },
+    {
+      "id": "revenue-variable-consideration-v2",
+      "slug": "revenue-variable-consideration",
+      "title": "【図解】収益認識—変動対価・返品権・委託販売",
+      "description": ""
+    },
+    {
+      "id": "foreign-currency-transactions-v2",
+      "slug": "foreign-currency-transactions",
+      "title": "【図解】外貨建取引—取引日・期末・決済日の換算差損益",
+      "description": ""
+    },
+    {
+      "id": "deferred-taxes-valuation-v2",
+      "slug": "deferred-taxes-valuation",
+      "title": "【図解】税効果—評価性引当金・税率変更・欠損金・不確実な税務ポジション",
+      "description": ""
+    },
+    {
+      "id": "eps-basic-v2",
+      "slug": "eps-basic",
+      "title": "【図解】基本EPS—加重平均株式数と優先配当",
+      "description": ""
+    },
+    {
+      "id": "stock-dividend-vs-split-v2",
+      "slug": "stock-dividend-vs-split",
+      "title": "【図解】株式配当と株式分割—小規模・大規模の処理",
+      "description": ""
+    },
+    {
+      "id": "convertible-bonds-warrants-v2",
+      "slug": "convertible-bonds-warrants",
+      "title": "【図解】転換社債・新株予約権付社債—発行時の配分と転換時",
+      "description": ""
+    },
+    {
+      "id": "troubled-debt-restructuring-v2",
+      "slug": "troubled-debt-restructuring",
+      "title": "【図解】問題債務の再構築—資産による決済と条件変更",
+      "description": ""
+    },
+    {
+      "id": "intangibles-goodwill-v2",
+      "slug": "intangibles-goodwill",
+      "title": "【図解】無形資産—耐用年数・のれんの減損・研究開発費・ソフトウェア",
+      "description": ""
+    },
+    {
+      "id": "subsequent-events-recognized-v2",
+      "slug": "subsequent-events-recognized",
+      "title": "【図解】後発事象—recognized と nonrecognized",
+      "description": ""
+    },
+    {
+      "id": "fair-value-hierarchy-v2",
+      "slug": "fair-value-hierarchy",
+      "title": "【図解】公正価値—レベル1〜3と評価技法",
+      "description": ""
+    },
+    {
+      "id": "bank-reconciliation-v2",
+      "slug": "bank-reconciliation",
+      "title": "【図解】銀行勘定調整—正しい残高への調整",
+      "description": ""
+    },
+    {
+      "id": "interest-capitalization-v2",
+      "slug": "interest-capitalization",
+      "title": "【図解】利子の資産計上—回避可能利子と加重平均支出",
+      "description": ""
+    },
+    {
+      "id": "depreciation-methods-v2",
+      "slug": "depreciation-methods",
+      "title": "【図解】減価償却—定額法・級数法・2倍定率法・生産高比例法・減耗償却",
+      "description": ""
+    },
+    {
+      "id": "inventory-retail-gross-profit-v2",
+      "slug": "inventory-retail-gross-profit",
+      "title": "【図解】売価還元法と総利益法",
+      "description": ""
+    },
+    {
+      "id": "inventory-cost-flow-v2",
+      "slug": "inventory-cost-flow",
+      "title": "【図解】棚卸資産の払出単価—FIFO・LIFO・加重平均・ドルバリューLIFO",
+      "description": ""
+    },
+    {
+      "id": "financial-ratios-v2",
+      "slug": "financial-ratios",
+      "title": "【図解】財務比率—流動性・回転率・収益性・デュポン分析",
+      "description": ""
+    },
+    {
+      "id": "cash-flow-classification-v2",
+      "slug": "cash-flow-classification",
+      "title": "【図解】キャッシュ・フロー計算書—営業・投資・財務の区分と非資金取引",
+      "description": ""
+    },
+    {
+      "id": "compensated-absences-v2",
+      "slug": "compensated-absences",
+      "title": "【図解】有給休暇と未払費用",
+      "description": ""
+    },
+    {
+      "id": "interim-reporting-v2",
+      "slug": "interim-reporting",
+      "title": "【図解】中間報告・セグメント・特別目的の枠組み",
+      "description": ""
+    },
+    {
+      "id": "nfp-health-university-v2",
+      "slug": "nfp-health-university",
+      "title": "【図解】非営利の大学・医療機関の収益と表示",
+      "description": ""
+    },
+    {
+      "id": "current-liabilities-classification-v2",
+      "slug": "current-liabilities-classification",
+      "title": "【図解】流動負債の範囲—試算表から集計",
+      "description": ""
+    },
+    {
+      "id": "notes-payable-accrued-interest-v2",
       "slug": "notes-payable-accrued-interest",
-      "title": "【図解・見直し】Notes Payable—最後の返済後の経過月数",
-      "description": "「いつの元本に何ヶ月分の利息か」をタイムラインで固定する。"
+      "title": "【図解】手形—割引発行と未払利息",
+      "description": ""
     },
     {
-      "id": "involuntary-review-2026q4",
+      "id": "involuntary-conversion-gain-v2",
       "slug": "involuntary-conversion-gain",
-      "title": "【図解・見直し】収用—補償金 − 帳簿価額だけが gain",
-      "description": "再取得・再投資の金額を gain 計算に混ぜない型を再確認。"
-    },
-    {
-      "id": "dta-review-2026q4",
-      "slug": "deferred-tax-asset-dta",
-      "title": "【図解・見直し】DTA—差異のドル × enacted tax rate",
-      "description": "帳簿先行・支払時控除の一時差異から DTA を求める型を再確認（ASC 740）。"
-    },
-    {
-      "id": "lcm-review-2026q4",
-      "slug": "inventory-lcm-reading-drill",
-      "title": "【図解・見直し】在庫の低価法—LCM と LCNRV の読み分け",
-      "description": "LIFO は LCM、FIFO/平均/個別は LCNRV。天井・床・中央値の型を固定する。"
+      "title": "【図解】強制転換—保険金と損益",
+      "description": ""
     }
   ]
 }

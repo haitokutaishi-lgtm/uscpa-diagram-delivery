@@ -17,7 +17,8 @@ description: >-
 | v2 生成 | `ops/generate_diagram_v2.py`（spec に `"version": 2` があれば `generate_diagram_from_spec.py` から自動で切替） |
 | v2 スタイル | `ops/diagram_v2_styles.css` |
 | 配信カレンダー | `schedule/posts.json`（**自動補充**あり） |
-| 配信バックログ | `schedule/delivery-queue.json` |
+| 配信バックログ | `schedule/delivery-queue.json`（FAR）・`schedule/delivery-queue-aud.json`（AUD） |
+| 配信ロードマップ | `knowledge/roadmap-far.md`・`knowledge/roadmap-aud.md`（この順で v2 を作る） |
 | 自動化設定 | `schedule/delivery-config.json` |
 | 配信状態 | `schedule/discord-post-state.json` |
 | slug 一覧 | `ops/diagram-publish-manifest.json` |
@@ -59,7 +60,6 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 | キー | 書くこと |
 |---|---|
 | `name` | 論点名（例：短期債務の借換え） |
-| `minutes` | 目安の所要時間（分） |
 | `hook_q` | 開く前に考えてほしい問い。基本ではなく「差がつく論点」から、二択・三択で答えが割れるものを選ぶ |
 | `hook_where` | 答えのある場所（例：差がつく論点2と問題2）。答えそのものは投稿に書かない |
 | `bullets` | このページでできること3つ。最後は「初見の英語MC◯問＋TBS（入力すると自動で答え合わせ）」 |
@@ -79,7 +79,11 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 | 6 | `mc` | 確認問題（初見の数字） | 英語MC 3〜4問（うち複合1問以上）＋TBS形式1問 | `mcq` `tbs` |
 | 7 | `check` | 見ないで言えるかチェック | 5項目前後 | `checklist` |
 
-論点によって 2 は省略してよい。1 の図が T勘定に向かない論点（分類・判定フローなど）は `html` block で SVG やフローを直接書く（`.diagram-visual` を付ける：Discord 画像の対象になる）。
+論点によって 2 は省略してよい。判定・分類の論点は `flow`（手順・判定の流れ。`steps: [{head, body_html, tone}]`）と `matrix`（2軸の判定表。`col_heads` `row_heads` `cells[行][列]={html, tone: ok|mid|ng}`）を使う。TBS を選択式にするときは行に `options` と `ans`（文字列）、ブロックに `"select": true` と `"value_head"`。
+
+**AUD**：spec の先頭に `"subject": "AUD"`、`knowledge.aud_text`、`meta.badge` は「AUD 復習シート｜…」。完成形は `aud-opinion-types`。作り方の違いは `knowledge/roadmap-aud.md` の末尾。
+
+1 の図が T勘定に向かない論点（分類・判定フローなど）は `html` block で SVG やフローを直接書く（`.diagram-visual` を付ける：Discord 画像の対象になる）。
 
 ### 書き方のルール
 
@@ -110,11 +114,12 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 
 1. `publish-html/` または `schedule/topic-specs/<slug>.json` を用意
 2. `ops/diagram-publish-manifest.json` に slug を追加
-3. `schedule/delivery-queue.json` の `items` 末尾に `{ id, slug, title, description }` を1行追加
+3. キューにはロードマップの全テーマが並んでいる。spec を作れば順番が来たときに自動で入る（v2 spec が無いテーマで補充が止まる＝旧型は配信しない）
 
 `posts.json` の日付キーは **書かなくてよい**（cron が補充）。除外テーマは `delivery-config.json` の `excluded_slugs`。
 
-- **cron**: 日・水・土 9:00 JST
+- **cron**: FAR 日・水・土／AUD 火・金 9:05 JST（科目・曜日は `delivery-config.json` の `subjects`。AUD は `enabled: true` で開始。AUD 用チャンネルは Secret `DISCORD_WEBHOOK_URL_AUD`、無ければ FAR と同じ Webhook）
+- **止めないために**：各科目、6本先まで v2 spec を作っておく
 - **手動**: `gh workflow run "図解 自動生成→配信" -f post_date=YYYY-MM-DD`
 
 ---

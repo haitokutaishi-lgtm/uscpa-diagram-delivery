@@ -1,0 +1,209 @@
+{
+  "_comment": "AUD の配信順（knowledge/roadmap-aud.md と同じ順）。delivery-config.json の subjects.AUD.enabled が true の間、火・金の枠で posts.json に自動追加。v2 の topic-spec ができていないテーマで補充が止まる。",
+  "items": [
+    {
+      "id": "aud-opinion-types-v2",
+      "slug": "aud-opinion-types",
+      "title": "【AUD図解】監査意見の種類—限定・不適正・意見差控えの判定",
+      "description": ""
+    },
+    {
+      "id": "aud-risk-model-v2",
+      "slug": "aud-risk-model",
+      "title": "【AUD図解】監査リスクモデル—固有・統制・発見リスクと実証手続の量",
+      "description": ""
+    },
+    {
+      "id": "aud-assertions-direction-v2",
+      "slug": "aud-assertions-direction",
+      "title": "【AUD図解】アサーションと手続の向き—実在性は帳簿から、網羅性は証憑から",
+      "description": ""
+    },
+    {
+      "id": "aud-attribute-sampling-v2",
+      "slug": "aud-attribute-sampling",
+      "title": "【AUD図解】属性サンプリング—逸脱率の上限とサンプル数を動かす要因",
+      "description": ""
+    },
+    {
+      "id": "aud-report-paragraphs-v2",
+      "slug": "aud-report-paragraphs",
+      "title": "【AUD図解】監査報告書の追加区分—強調事項・その他の事項・継続企業・KAM/CAM",
+      "description": ""
+    },
+    {
+      "id": "aud-control-deficiencies-v2",
+      "slug": "aud-control-deficiencies",
+      "title": "【AUD図解】内部統制の不備—不備・重要な不備・重大な欠陥と伝達先",
+      "description": ""
+    },
+    {
+      "id": "aud-ar-confirmation-v2",
+      "slug": "aud-ar-confirmation",
+      "title": "【AUD図解】売掛金の確認—積極・消極、未回答への対応、ラッピング",
+      "description": ""
+    },
+    {
+      "id": "aud-materiality-v2",
+      "slug": "aud-materiality",
+      "title": "【AUD図解】重要性—全体・手続実施上の重要性・明らかに僅少",
+      "description": ""
+    },
+    {
+      "id": "aud-icfr-integrated-v2",
+      "slug": "aud-icfr-integrated",
+      "title": "【AUD図解】内部統制監査—トップダウン・アプローチと重大な欠陥があるときの意見",
+      "description": ""
+    },
+    {
+      "id": "aud-review-compilation-v2",
+      "slug": "aud-review-compilation",
+      "title": "【AUD図解】レビュー・調製・作成業務の違い（保証水準と報告書）",
+      "description": ""
+    },
+    {
+      "id": "aud-pps-sampling-v2",
+      "slug": "aud-pps-sampling",
+      "title": "【AUD図解】金額単位サンプリング（PPS）—サンプル間隔と虚偽表示の推定",
+      "description": ""
+    },
+    {
+      "id": "aud-subsequent-events-v2",
+      "slug": "aud-subsequent-events",
+      "title": "【AUD図解】後発事象と監査手続—報告書の日付と二重日付",
+      "description": ""
+    },
+    {
+      "id": "aud-fraud-risk-v2",
+      "slug": "aud-fraud-risk",
+      "title": "【AUD図解】不正リスク—不正な財務報告と資産の横領、不正リスク要因",
+      "description": ""
+    },
+    {
+      "id": "aud-revenue-purchase-cycles-v2",
+      "slug": "aud-revenue-purchase-cycles",
+      "title": "【AUD図解】売上・購買サイクルの職務分掌と統制テスト",
+      "description": ""
+    },
+    {
+      "id": "aud-cash-kiting-v2",
+      "slug": "aud-cash-kiting",
+      "title": "【AUD図解】現金の実証手続—銀行間振替表・カイティング・銀行確認",
+      "description": ""
+    },
+    {
+      "id": "aud-attestation-types-v2",
+      "slug": "aud-attestation-types",
+      "title": "【AUD図解】証明業務—検証・レビュー・合意手続の比較",
+      "description": ""
+    },
+    {
+      "id": "aud-engagement-acceptance-v2",
+      "slug": "aud-engagement-acceptance",
+      "title": "【AUD図解】監査契約の締結—前任監査人とのコミュニケーションと契約書",
+      "description": ""
+    },
+    {
+      "id": "aud-independence-v2",
+      "slug": "aud-independence",
+      "title": "【AUD図解】独立性—直接・重要な間接的財務利害、近親者、貸付",
+      "description": ""
+    },
+    {
+      "id": "aud-inventory-observation-v2",
+      "slug": "aud-inventory-observation",
+      "title": "【AUD図解】棚卸資産の実証手続—実地棚卸の立会い",
+      "description": ""
+    },
+    {
+      "id": "aud-unrecorded-liabilities-v2",
+      "slug": "aud-unrecorded-liabilities",
+      "title": "【AUD図解】未記録負債の検索",
+      "description": ""
+    },
+    {
+      "id": "aud-representation-letter-v2",
+      "slug": "aud-representation-letter",
+      "title": "【AUD図解】経営者確認書とガバナンスに責任を負う者とのコミュニケーション",
+      "description": ""
+    },
+    {
+      "id": "aud-coso-components-v2",
+      "slug": "aud-coso-components",
+      "title": "【AUD図解】COSO の5つの構成要素と17原則",
+      "description": ""
+    },
+    {
+      "id": "aud-it-controls-caat-v2",
+      "slug": "aud-it-controls-caat",
+      "title": "【AUD図解】IT 全般統制・業務処理統制とコンピュータ利用監査技法",
+      "description": ""
+    },
+    {
+      "id": "aud-analytical-procedures-v2",
+      "slug": "aud-analytical-procedures",
+      "title": "【AUD図解】分析的手続—計画・実証・全体の3段階とデータ分析",
+      "description": ""
+    },
+    {
+      "id": "aud-group-audit-v2",
+      "slug": "aud-group-audit",
+      "title": "【AUD図解】グループ監査—構成単位の監査人に言及する／しない",
+      "description": ""
+    },
+    {
+      "id": "aud-specialists-lawyers-v2",
+      "slug": "aud-specialists-lawyers",
+      "title": "【AUD図解】専門家・内部監査の利用、弁護士への質問、SOC 報告書",
+      "description": ""
+    },
+    {
+      "id": "aud-audit-evidence-v2",
+      "slug": "aud-audit-evidence",
+      "title": "【AUD図解】監査証拠の十分性と適切性—証拠の信頼性の順番",
+      "description": ""
+    },
+    {
+      "id": "aud-special-frameworks-v2",
+      "slug": "aud-special-frameworks",
+      "title": "【AUD図解】特別目的の枠組み・単独の財務諸表・要約財務諸表の報告",
+      "description": ""
+    },
+    {
+      "id": "aud-gas-single-audit-v2",
+      "slug": "aud-gas-single-audit",
+      "title": "【AUD図解】政府監査基準（GAS）と単一監査",
+      "description": ""
+    },
+    {
+      "id": "aud-substantive-misstatements-v2",
+      "slug": "aud-substantive-misstatements",
+      "title": "【AUD図解】監査で見つけた虚偽表示の修正（棚卸・収益・偶発損失）",
+      "description": ""
+    },
+    {
+      "id": "aud-comparative-reports-v2",
+      "slug": "aud-comparative-reports",
+      "title": "【AUD図解】比較財務諸表の報告—前任監査人がいる場合",
+      "description": ""
+    },
+    {
+      "id": "aud-prospective-info-v2",
+      "slug": "aud-prospective-info",
+      "title": "【AUD図解】予測・見積財務情報の証明業務",
+      "description": ""
+    },
+    {
+      "id": "aud-omitted-procedures-v2",
+      "slug": "aud-omitted-procedures",
+      "title": "【AUD図解】報告書発行後に見つかった手続の欠落・事実",
+      "description": ""
+    },
+    {
+      "id": "aud-quality-management-v2",
+      "slug": "aud-quality-management",
+      "title": "【AUD図解】品質マネジメントと企業改革法・PCAOB・SEC の規制",
+      "description": ""
+    }
+  ]
+}
