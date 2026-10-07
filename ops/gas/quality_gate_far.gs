@@ -388,6 +388,7 @@ var QG_BAD_EXAMPLES = [
   "変動対価で期待値法か最頻値法かを書かずに、期待値の答えだけを正解にした（結果が3通りなら最頻値法も成り立つ）",
   "リースのフリーレントを「インセンティブ」と呼び、「無償期間の支払の現在価値だけ減らす」という不正確な選択肢を正解にした。別の選択肢も正しいと読めた",
   "転換社債の希薄化EPSで、税引後の支払利息を分子に足し戻さず、分母に株数を足すだけで正解を作った（利率・税率も書いていない）",
+  "正解がほぼ毎回 A に偏っていた（答えを見なくても A を選べば当たる）",
   "実在しない基準番号（ASC 835 資本支出、ASC 855 事業の廃止など）や旧基準（ASC 840）をトピックに書いた"
 ];
 
@@ -537,6 +538,7 @@ function QG_makeVerified(topic, index, prevVerdict) {
 // ─────────────────────────────────────────────
 function QG_generate(topic, index, feedback) {
   var type = topic.calc ? '計算問題' : '暗記問題';
+  var target = 'ABCD'.charAt(Math.floor(Math.random() * 4));   // 正解の位置を毎回ランダムにする（以前は A に偏っていた）
   var prompt =
     'あなたは USCPA 試験（' + QG.SUBJECT + '）の作問者です。次のテーマで、本番レベルの4択問題を1問だけ作ってください。\n\n' +
     '## テーマ\n' + topic.name + '（基準：' + topic.std + '）\n' +
@@ -550,7 +552,8 @@ function QG_generate(topic, index, feedback) {
     '5. 計算問題は、途中も答えも割り切れる数字にする。steps に全部の計算を書き、最後にもう一度検算する\n' +
     '6. 現行の基準で書く（ASC 842・ASC 326・ASC 606 など。ASC 840 などの旧基準は使わない）。基準番号に自信がなければ書かない\n' +
     '7. topic は「' + topic.name + '」をそのまま使う\n' +
-    '8. 問題文・選択肢は自然な英語。解説（explanation・richData）は日本語\n\n' +
+    '8. 問題文・選択肢は自然な英語。解説（explanation・richData）は日本語\n' +
+    '9. 正解は必ず選択肢 ' + target + ' に置く（correctAnswer は ' + target + '）\n\n' +
     '## やってはいけない例（実際に配信して不良だった問題）\n' + QG_BAD_EXAMPLES.map(function(b) { return '- ' + b; }).join('\n') + '\n' +
     (feedback ? '\n## 前回の問題は確認で不合格だった。理由を直して作り直すこと\n' + feedback + '\n' : '') +
     '\n## 出力（JSONのみ）\n' +
