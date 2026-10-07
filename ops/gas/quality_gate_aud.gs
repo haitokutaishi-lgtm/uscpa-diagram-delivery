@@ -365,6 +365,7 @@ function QG_run(finalForToday) {
 
     // 問題が無い日は3問を新しく作る
     if (rows.length === 0) {
+      if (d === 0 && !finalForToday) continue;   // 朝の配信が終わった後に今日の分を作ると、夕方に「答えだけ」が流れてしまう
       var topics = QG_pickTopics(sheet, dateStr, 3, diagrams);
       for (var i = 0; i < topics.length; i++) {
         if (Date.now() - started > QG.TIME_LIMIT_MS) { timedOut = true; break; }
@@ -523,7 +524,8 @@ function QG_verify(q) {
 
 function QG_noteOf(v) {
   if (!v) return '';
-  return v.pass ? '確認OK（別のAIの答えが一致）' : v.reasons.join(' / ').slice(0, 450);
+  var by = QG_ENGINE ? '[' + QG_ENGINE + '] ' : '';
+  return by + (v.pass ? '確認OK（別のAIの答えが一致）' : v.reasons.join(' / ').slice(0, 450));
 }
 
 // ─────────────────────────────────────────────
@@ -646,6 +648,7 @@ function QG_writeStatus(sheet, rowIndex, status, note) {
 // ─────────────────────────────────────────────
 // AI 呼び出し（Claude があれば Claude、無ければ Groq）
 // ─────────────────────────────────────────────
+var QG_ENGINE = '';   // 直近の呼び出しに使ったAI（記録用）
 function QG_llm(prompt, temperature, maxTokens) {
   var p = PropertiesService.getScriptProperties();
   var claudeKey = p.getProperty('ANTHROPIC_API_KEY') || p.getProperty('Claude_key');   // どちらの名前で登録しても使う
@@ -657,11 +660,13 @@ function QG_llm(prompt, temperature, maxTokens) {
       muteHttpExceptions: true,
     });
     var data = JSON.parse(res.getContentText());
+    if (data && data.content && data.content[0]) QG_ENGINE = 'Claude';
     if (data && data.content && data.content[0]) return data.content.map(function(c) { return c.text || ''; }).join('');
     QG_log('Claude API エラー（Groq に切り替え）：' + res.getContentText().slice(0, 200));
   }
   var key = p.getProperty('GROQ_API_KEY');
   if (!key) throw new Error('GROQ_API_KEY も ANTHROPIC_API_KEY も未設定');
+  QG_ENGINE = 'Groq';
   for (var attempt = 1; attempt <= 4; attempt++) {
     var r2 = UrlFetchApp.fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'post',
