@@ -685,8 +685,23 @@ function QG_recentDiagrams() {
   }
 }
 
+var QG_PUBLISHED = null;   // 配信済みの図解の slug（まだ公開していない図解にはリンクしない）
+function QG_publishedSlugs() {
+  if (QG_PUBLISHED) return QG_PUBLISHED;
+  QG_PUBLISHED = {};
+  try {
+    var posts = JSON.parse(UrlFetchApp.fetch(QG.POSTS_URL, { muteHttpExceptions: true }).getContentText());
+    var today = QG_dateStr(new Date());
+    Object.keys(posts).forEach(function(k) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(k) && k <= today && posts[k] && posts[k].slug) QG_PUBLISHED[posts[k].slug] = true;
+    });
+  } catch (e) {}
+  return QG_PUBLISHED;
+}
+
 function QG_attachDiagramLink(q, topic) {
   if (!topic || !topic.slug || !q.richData) return;
+  if (!QG_publishedSlugs()[topic.slug]) return;
   var link = '\n\n📘 図解で復習：' + QG.SITE_URL + topic.slug + '/';
   q.richData.memoryTip = String(q.richData.memoryTip || '').slice(0, 400 - link.length) + link;
 }
