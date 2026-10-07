@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】監査リスクモデル—発見リスクは逆算で決まり、実証手続の強さを決める</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Audit Risk Model（AU-C 200 / 315 / 330）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">監査リスクモデル：固有リスク × 統制リスクを評価し、残りの発見リスクを逆算して実証手続の強さを決める</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">この論点の復習用です。最初の図で発見リスクの逆算と実証手続の決め方を確認し、差がつく論点を見たら、最後に問題で仕上げてください。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 手続の強さ</a><a href="#points">3 差がつく論点</a><a href="#traps">4 引っかけ一覧</a><a href="#mc">5 確認問題</a><a href="#check">6 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：発見リスクは「逆算」で決まる</h2>
+      <p class="lead">監査人が評価するのは固有リスクと統制リスク、決めるのは監査リスクと発見リスクの許容水準です。RMM（重要な虚偽表示リスク）が高い所ほど、発見リスクを低く抑える＝実証手続を厳しくします。</p>
+      <div class="facts"><p class="font-bold mb-1">例：Nava Co. の監査で、監査人は監査リスクの許容水準を 4% に決めた</p><ul><li>棚卸資産の評価：製品の入れ替わりが速く陳腐化しやすい → 固有リスク 80%。統制は一部有効 → 統制リスク 50%</li><li>前払保険料の実在性：取引が単純 → 固有リスク 20%。統制は一部有効 → 統制リスク 40%</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>① 監査リスク（AR）の許容水準を決める</b><p>不適切な意見を出してしまうリスクの上限。低く設定する（例：4%）</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>② RMM ＝ 固有リスク（IR）× 統制リスク（CR）を評価する</b><p>棚卸資産の評価 80% × 50% ＝ <span class="en">40%</span>／前払保険料 20% × 40% ＝ <span class="en">8%</span></p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>③ 発見リスク（DR）＝ AR ÷ RMM を逆算する</b><p>棚卸資産の評価 4% ÷ 40% ＝ <span class="en">10%</span>（低い）／前払保険料 4% ÷ 8% ＝ <span class="en">50%</span>（高い）</p></div></div><div class="flow-step key"><span class="flow-no">4</span><div><b>④ 発見リスクに合わせて実証手続の性質・時期・範囲を決める</b><p>棚卸資産：期末日に実地棚卸に立ち会い、正味実現可能価額を詳しく検証／前払保険料：分析的手続中心で、詳細テストは軽く</p></div></div></div>
+      <div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat(3,minmax(0,1fr))"><div class="mx-corner">リスク</div><div class="mx-col">何が原因か</div><div class="mx-col">監査人がコントロール</div><div class="mx-col">監査人がすること</div><div class="mx-row">固有リスク<br><span class="en">IR</span></div><div class="mx-cell ">企業の性質・環境</div><div class="mx-cell ng"><b>できない</b></div><div class="mx-cell ">程度を評価</div><div class="mx-row">統制リスク<br><span class="en">CR</span></div><div class="mx-cell ">内部統制が防げない</div><div class="mx-cell ng"><b>できない</b></div><div class="mx-cell ">程度を評価（統制テスト）</div><div class="mx-row">発見リスク<br><span class="en">DR</span></div><div class="mx-cell ">監査人が見落とす</div><div class="mx-cell ok"><b>できる</b></div><div class="mx-cell ">許容水準を決めて実証手続で下げる</div></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">覚える式は2本</p><p class="en text-[13px]">Audit risk ＝ Inherent risk × Control risk × Detection risk（RMM ＝ IR × CR）</p><p class="en text-[13px]">Detection risk ＝ Audit risk ÷ RMM（RMM が高いほど DR は低く＝実証手続を厳しく）</p></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>発見リスクを下げる＝実証手続を厳しくする3つの方向</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th></th><th>発見リスクが高くてよい（RMM が低い）</th><th>発見リスクを低くする（RMM が高い）</th></tr></thead><tbody><tr><td>性質（<span class="en">nature</span>）</td><td>分析的手続・社内の書類の検証</td><td>確認・実査・立会いなど、証明力の強い外部の証拠</td></tr><tr><td>時期（<span class="en">timing</span>）</td><td>期中に実施して期末まで延ばす</td><td>期末日（または期末日に近い日）に実施</td></tr><tr><td>範囲（<span class="en">extent</span>）</td><td>サンプルを少なく</td><td>サンプルを多く・対象を広げる</td></tr></tbody></table></div>
+      <div class="rule">統制テストの結果、内部統制が有効でないと分かったら、統制リスクを引き上げます。すると発見リスクの許容水準が下がり、実証手続を厳しくします（例：期中の確認を期末日の確認に変え、確認先も増やす）。</div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">3</span>差がつく論点</h2>
+      <p class="lead">式は覚えていても、「何を評価し、何を決めるか」と「実証手続はゼロにできない」で点を落としやすいところです。</p>
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>RMM と発見リスクは逆の関係</div><div class="rule">監査リスクを一定に保つため、<b>RMM が高いほど発見リスクの許容水準は低く</b>なり、実証手続を厳しくします。RMM が低ければ発見リスクを高くでき、実証手続を軽くできます。</div><div class="calc">1の例：RMM 40% → DR 10%（厳しく）、RMM 8% → DR 50%（軽く）</div><div class="miss"><b>こう間違える：</b>「リスクが高いから発見リスクも高い」と同じ向きに動かしてしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>RMM が低くても、重要な勘定の実証手続はゼロにできない</div><div class="rule">固有リスクと統制リスクをどれだけ低く評価しても、<b>重要な取引・勘定・開示には必ず実証手続を行います</b>。リスク評価は判断で、内部統制にも限界があるからです。</div><div class="miss"><b>こう間違える：</b>統制が有効なので、重要な売掛金について実証手続を省略して統制テストだけで済ませる。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>統制リスクを下げるには統制テストが必要</div><div class="rule">統制リスクを最大より低く評価する（＝内部統制に依拠する）なら、その統制が<b>期間を通じて有効に運用されているかを統制テストで確かめます</b>。テストしないなら統制リスクは最大（100%）として扱い、発見リスクは AR ÷ IR になります。</div><div class="calc">例：AR 6%、IR 60%。統制に依拠して CR 50% → DR 20%。統制テストをしない → CR 100% → DR 10%</div><div class="miss"><b>こう間違える：</b>内部統制を理解した（整備されていることを確かめた）だけで、統制リスクを低く評価する。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>監査人は固有リスク・統制リスクを「下げられない」</div><div class="rule">固有リスクは企業の性質・環境、統制リスクは企業の内部統制で決まり、監査手続をいくら増やしても下がりません。監査人が手続で下げられるのは<b>発見リスクだけ</b>です。</div><div class="miss"><b>こう間違える：</b>「統制テストを増やせば統制リスクが下がる」と考える（テストは統制リスクを評価するためのもの）。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>そのほかの関連論点</div><ul class="list-disc ml-5 text-[13px] leading-relaxed space-y-1"><li><b>特別な検討を必要とするリスク（<span class="en">significant risk</span>）：</b>不正リスクや通常でない取引など。それに個別に対応した実証手続が必要で、実証手続だけで対応するなら詳細テストを含めます。</li><li><b>収益認識：</b>不正リスクがあると推定します（推定しないなら理由を文書化）。</li><li><b>経営者による内部統制の無視：</b>どの企業でもあるリスクとして、仕訳テストや見積りの偏りの検討を行います。</li><li><b>重要性との関係：</b>重要性の基準値を低くすると、同じ監査リスクを保つのに必要な証拠が増えます。</li></ul></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">4</span>引っかけ一覧：この言葉を見たら止まる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>acceptable level of detection risk decreases</td><td>実証手続を厳しく（期末日・強い証拠・件数増）</td><td>期中に移す・件数を減らす</td></tr><tr><td>assessed level of control risk increases</td><td>発見リスクは下がる</td><td>発見リスクも上がる</td></tr><tr><td>the auditor can control / reduce</td><td>発見リスクだけ</td><td>固有リスク・統制リスクを選ぶ</td></tr><tr><td>assess control risk below the maximum</td><td>統制テストで運用状況を確かめる</td><td>理解（ウォークスルー）だけで済ませる</td></tr><tr><td>omit substantive procedures</td><td>重要な勘定では省略できない</td><td>RMM が低いので省略できる</td></tr><tr><td>confirmations as of an interim date</td><td>RMM が低いときの選択肢</td><td>RMM が高いときに選ぶ</td></tr><tr><td>significant risk</td><td>個別に対応した実証手続（詳細テストを含む）</td><td>分析的手続だけで済ませる</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">5</span>確認問題（初見の数字）</h2>
+      <p class="lead">選択肢を自分で検討してから解説を開いてください。オリジナル問題で、AU-C 200・315・330 の考え方に沿って作っています。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜発見リスクの計算</p>
+        <p class="en-stem">An auditor set audit risk at 3% for the existence of accounts receivable. The auditor assessed inherent risk at 50% and, based on tests of controls, assessed control risk at 30%. What is the acceptable level of detection risk?</p>
+        <div class="choices">A. 0.45%<br>B. 6%<br>C. 10%<br>D. 20%</div>
+        <details><summary>和訳を見る</summary><div class="body">監査人は売掛金の実在性について監査リスクを3%に設定した。固有リスクを50%と評価し、統制テストに基づいて統制リスクを30%と評価した。発見リスクの許容水準はいくらか。<br>A. 0.45%　B. 6%　C. 10%　D. 20%</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：D（20%）</b><br>RMM 50% × 30% ＝ 15%、DR ＝ 3% ÷ 15% ＝ <b>20%</b><br>A：3つを掛けている<br>B：固有リスクだけで割っている（統制リスクを100%とした場合）<br>C：統制リスクだけで割っている</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜コントロールできるリスク（概念）</p>
+        <p class="en-stem">Which component of audit risk can the auditor directly control through the nature, timing, and extent of substantive procedures?</p>
+        <div class="choices">A. Inherent risk<br>B. Control risk<br>C. Detection risk<br>D. Risk of material misstatement</div>
+        <details><summary>和訳を見る</summary><div class="body">監査リスクの構成要素のうち、実証手続の性質・時期・範囲によって監査人が直接コントロールできるのはどれか。<br>A. 固有リスク　B. 統制リスク　C. 発見リスク　D. 重要な虚偽表示リスク</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>固有リスク・統制リスク（あわせて RMM）は企業側の要因で、監査人は評価するだけ（論点4）<br>A・B・D：手続を増やしても下がらない</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜発見リスクが下がったときの対応</p>
+        <p class="en-stem">After performing tests of controls, an auditor raised the assessed level of control risk for sales. As a result, the acceptable level of detection risk decreased. Which change to the planned substantive procedures is most appropriate?</p>
+        <div class="choices">A. Perform confirmations of receivables at an interim date rather than at year-end<br>B. Increase the number of customer balances confirmed<br>C. Replace confirmations with analytical procedures<br>D. Reduce the scope of tests of details</div>
+        <details><summary>和訳を見る</summary><div class="body">統制テストを行った結果、監査人は売上の統制リスクの評価を引き上げた。その結果、発見リスクの許容水準が下がった。予定していた実証手続の変更として最も適切なものはどれか。<br>A. 売掛金の確認を期末日ではなく期中に行う<br>B. 確認する顧客残高の件数を増やす<br>C. 確認を分析的手続に置き換える<br>D. 詳細テストの範囲を縮める</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>発見リスクを下げる＝実証手続を厳しくする。範囲（件数）を増やすのはその方向（手続の強さの表）<br>A：時期を期中に移すのは軽くする方向<br>C：証明力の弱い手続への置き換えは軽くする方向<br>D：範囲の縮小は軽くする方向</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題4｜正しい記述（複合）</p>
+        <p class="en-stem">Which of the following statements about the audit risk model is correct?</p>
+        <div class="choices">A. If inherent risk and control risk are both assessed as low, the auditor may omit substantive procedures for a material account balance.<br>B. The auditor may assess control risk below the maximum without testing the operating effectiveness of controls.<br>C. The acceptable level of detection risk is inversely related to the assessed risk of material misstatement.<br>D. The auditor can reduce inherent risk by performing additional substantive procedures.</div>
+        <details><summary>和訳を見る</summary><div class="body">監査リスクモデルについての記述のうち、正しいものはどれか。<br>A. 固有リスクと統制リスクがともに低ければ、重要な勘定残高の実証手続を省略できる<br>B. 統制の運用状況の有効性をテストしなくても、統制リスクを最大より低く評価できる<br>C. 発見リスクの許容水準は、評価した重要な虚偽表示リスクと逆の関係にある<br>D. 実証手続を追加すれば固有リスクを下げられる</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>RMM が高いほど DR は低い（論点1）<br>A：重要な勘定の実証手続は省略できない（論点2）<br>B：最大より低く評価するには統制テストが必要（論点3）<br>D：固有リスクは手続では下がらない（論点4）</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="17">
+        <p class="mc-label">問題5｜TBS形式：発見リスクの計算と手続の選択</p>
+        <p class="text-[13px] leading-relaxed mb-2">売上の発生について、監査リスク 6%、固有リスク 60%。数字は「%」を付けずに入力（20% なら 20）、手続は選んでください。入力・選択したら「答え合わせ」を押してください（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>① 統制テストで統制リスクを 50% と評価した場合の発見リスク（%）</td><td class="num"><input inputmode="numeric" data-ans="20" aria-label="① 統制テストで統制リスクを 50% と評価した場合の発見リスク（%）"></td></tr><tr><td>② 統制テストを行わない場合の発見リスク（%）</td><td class="num"><input inputmode="numeric" data-ans="10" aria-label="② 統制テストを行わない場合の発見リスク（%）"></td></tr><tr><td>③ ②のとき、売掛金の確認を行う時期</td><td class="num"><select data-ans="期末日" aria-label="③ ②のとき、売掛金の確認を行う時期"><option value="">選ぶ</option><option value="期中">期中</option><option value="期末日">期末日</option></select></td></tr><tr><td>④ ②のとき、①と比べた確認の件数</td><td class="num"><select data-ans="増やす" aria-label="④ ②のとき、①と比べた確認の件数"><option value="">選ぶ</option><option value="減らす">減らす</option><option value="増やす">増やす</option></select></td></tr><tr><td>⑤ RMM がどれだけ低くても、重要な売上の実証手続は</td><td class="num"><select data-ans="省略できない" aria-label="⑤ RMM がどれだけ低くても、重要な売上の実証手続は"><option value="">選ぶ</option><option value="省略できる">省略できる</option><option value="省略できない">省略できない</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">① RMM 60% × 50% ＝ 30%、DR ＝ 6% ÷ 30% ＝ <b>20%</b><br>② 統制テストをしない → CR 100%、DR ＝ 6% ÷ 60% ＝ <b>10%</b>（論点3）<br>③④ DR が下がるので、時期は<b>期末日</b>、件数は<b>増やす</b><br>⑤ 重要な勘定の実証手続は<b>省略できない</b>（論点2）</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">6</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c18-1"><label for="c18-1">監査リスクモデルの式と、発見リスクの逆算の式を書ける</label></li><li><input type="checkbox" id="c18-2"><label for="c18-2">評価するリスク（IR・CR）と、許容水準を決めるリスク（AR・DR）を言い分けられる</label></li><li><input type="checkbox" id="c18-3"><label for="c18-3">監査人がコントロールできるのは発見リスクだけと言える</label></li><li><input type="checkbox" id="c18-4"><label for="c18-4">発見リスクを下げるときの性質・時期・範囲の変え方を言える</label></li><li><input type="checkbox" id="c18-5"><label for="c18-5">統制テストをしないと統制リスクは最大になると言える</label></li><li><input type="checkbox" id="c18-6"><label for="c18-6">重要な勘定の実証手続は省略できないと言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

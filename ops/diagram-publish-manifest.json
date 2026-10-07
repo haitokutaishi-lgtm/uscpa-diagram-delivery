@@ -118,5 +118,9 @@
   {
     "slug": "aud-opinion-types",
     "source": "publish-html/aud-opinion-types.html"
+  },
+  {
+    "slug": "aud-risk-model",
+    "source": "publish-html/aud-risk-model.html"
   }
 ]

@@ -1,7 +1,7 @@
 <!-- 自動生成（ops/build_knowledge_index.py）。手で編集しない -->
 # 図解ナレッジ索引
 
-全 30 テーマ／v2（復習シート型）8 本。
+全 31 テーマ／v2（復習シート型）10 本。
 
 | slug | 科目 | 型 | タイトル | テキスト | 基準 | 更新日 | ノート |
 |---|---|---|---|---|---|---|---|
@@ -18,7 +18,7 @@
 | [loss-contingency-accrual](https://haitokutaishi-lgtm.github.io/diagram-site/topics/loss-contingency-accrual/) | FAR | v1 | loss-contingency-accrual |  |  |  | — |
 | [subsequent-events-recognized](https://haitokutaishi-lgtm.github.io/diagram-site/topics/subsequent-events-recognized/) | FAR | v1(spec) | 後発事象の分岐—recognized（条件確認）と nonrecognized（注記）を決算日で切る |  |  |  | — |
 | [lease-lessee-finance-initial](https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-finance-initial/) | FAR | v1(spec) | 借手の finance lease—開始時は lease liability を PV で測り、ROU asset に初期直接費用などを足す |  |  |  | — |
-| [bond-effective-interest](https://haitokutaishi-lgtm.github.io/diagram-site/topics/bond-effective-interest/) | FAR | v1(spec) | 割引発行の社債—利息費用は carrying amount × effective rate、現金利息は額面×クーポン |  |  |  | — |
+| [bond-effective-interest](https://haitokutaishi-lgtm.github.io/diagram-site/topics/bond-effective-interest/) | FAR | v2 | 社債：払う利息は「額面 × 表面利率」、費用は「期首の簿価 × 市場利率」。差額で簿価が額面に近づく | Ch8 8-2 利率の種類／8-3 発行価格／8-4〜8-7 実効金利法・プレミアム・ディスカウント／8-8・8-9 利払日間の発行／8-11・8-12 発行費／8-15 早期償還 | ASC 835-30 / ASC 470-50 | 2026-10-07 | [ノート](topics/bond-effective-interest.md) |
 | [equity-method-basic](https://haitokutaishi-lgtm.github.io/diagram-site/topics/equity-method-basic/) | FAR | v2 | 持分法：投資勘定を動かす5つの要素と、差がつく論点 | 未収録（Unit 13-10〜13-13。録画待ち） | ASC 323 | 2026-10-02 | [ノート](topics/equity-method-basic.md) |
 | [cash-flow-classification](https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-classification/) | FAR | v1(spec) | キャッシュ・フローの区分—設備の購入は投資、借入の返済は財務、利息の支払は原則営業 |  |  |  | — |
 | [bank-reconciliation](https://haitokutaishi-lgtm.github.io/diagram-site/topics/bank-reconciliation/) | FAR | v1(spec) | 銀行勘定調整—帳簿の現金と銀行残高を、同じ「本当の現金」に合わせる |  |  |  | — |
@@ -35,3 +35,4 @@
 | [lease-lessee-classification](https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-classification/) | FAR | v2 | リース（借手）：どちらの分類でも負債と使用権資産を計上し、違いは「費用の出し方」だけ | Ch9 9-2 分類の5条件／9-3 リース期間・短期リース／9-4 改良費／9-5 開始日の負債・使用権資産／9-6 オペレーティング／9-7 ファイナンス | ASC 842-20 | 2026-10-07 | [ノート](topics/lease-lessee-classification.md) |
 | [deferred-taxes-temporary-differences](https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-taxes-temporary-differences/) | FAR | v2 | 税効果：差異を「永久」と「一時」に分け、一時差異だけに解消年度の税率を掛ける | Ch15 15-2〜15-14 会計利益と課税所得・一時差異・DTA/DTL・適用税率・税金費用／15-15 表示／15-16 評価引当／15-19 永久差異 | ASC 740 | 2026-10-07 | [ノート](topics/deferred-taxes-temporary-differences.md) |
 | [aud-opinion-types](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-opinion-types/) | AUD | v2 | 監査意見の種類：原因（虚偽表示か・範囲の制限か）と、影響が広範かどうかの2つで決まる | Ch4 4-1 GAAPからの逸脱／4-2〜4-4 限定・不適正の文例／4-6 監査範囲の制限／4-7・4-8 限定・意見差控えの文例／4-10 意見差控えとなるその他の場合／Ch3 追記情報 | AU-C 705 / AU-C 706 / AU-C 570 | 2026-10-07 | [ノート](topics/aud-opinion-types.md) |
+| [aud-risk-model](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-risk-model/) | AUD | v2 | 監査リスクモデル：固有リスク × 統制リスクを評価し、残りの発見リスクを逆算して実証手続の強さを決める | Ch1 1-7 リスク・アプローチ／1-8 実証性テストの性質・範囲・時期／Ch2 2-7〜2-11 監査リスクと3要素・監査リスクモデル | AU-C 200 / AU-C 315 / AU-C 330 | 2026-10-07 | [ノート](topics/aud-risk-model.md) |

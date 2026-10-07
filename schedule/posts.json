@@ -444,6 +444,15 @@
     "_auto": true,
     "revised": true
   },
+  "2026-10-13": {
+    "title": "【AUD図解】監査リスクモデル—固有・統制・発見リスクと実証手続の量",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-risk-model/",
+    "slug": "aud-risk-model",
+    "queue_id": "aud-risk-model-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
   "2026-10-14": {
     "title": "【図解・改訂版】一括購入の按分—時価の比率で取得原価を配る（復習シート）",
     "description": "按分の流れを1枚の図で。付随費用・撤去費の扱い、按分後の減価償却まで。初見の確認問題とTBS入力式つき（ASC 360／テキスト5-1・5-2）。",

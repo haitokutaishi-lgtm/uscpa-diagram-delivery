@@ -1,0 +1,245 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch1 1-7 リスク・アプローチ／1-8 実証性テストの性質・範囲・時期／Ch2 2-7〜2-11 監査リスクと3要素・監査リスクモデル",
+    "asc": "AU-C 200 / AU-C 315 / AU-C 330",
+    "updated": "2026-10-07",
+    "sources": []
+  },
+  "post": {
+    "name": "監査リスクモデル",
+    "hook_q": "固有リスクも統制リスクも低いと評価した重要な勘定。実証手続を省略してよいですか？",
+    "hook_where": "差がつく論点2と問題4",
+    "bullets": [
+      "AR ＝ IR × CR × DR から発見リスクを逆算し、実証手続の強さを決める流れを1枚で確認",
+      "監査人がコントロールできるリスク・できないリスクと、統制テストをしないときの扱い",
+      "初見の英語MC4問＋TBS（入力・選択で自動答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】監査リスクモデル—発見リスクは逆算で決まり、実証手続の強さを決める",
+    "badge": "AUD 復習シート｜Audit Risk Model（AU-C 200 / 315 / 330）",
+    "h1_html": "監査リスクモデル：固有リスク × 統制リスクを評価し、残りの発見リスクを逆算して実証手続の強さを決める",
+    "lead_html": "この論点の復習用です。最初の図で発見リスクの逆算と実証手続の決め方を確認し、差がつく論点を見たら、最後に問題で仕上げてください。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：発見リスクは「逆算」で決まる",
+      "lead_html": "監査人が評価するのは固有リスクと統制リスク、決めるのは監査リスクと発見リスクの許容水準です。RMM（重要な虚偽表示リスク）が高い所ほど、発見リスクを低く抑える＝実証手続を厳しくします。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Nava Co. の監査で、監査人は監査リスクの許容水準を 4% に決めた",
+          "items": [
+            "棚卸資産の評価：製品の入れ替わりが速く陳腐化しやすい → 固有リスク 80%。統制は一部有効 → 統制リスク 50%",
+            "前払保険料の実在性：取引が単純 → 固有リスク 20%。統制は一部有効 → 統制リスク 40%"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "① 監査リスク（AR）の許容水準を決める",
+              "body_html": "不適切な意見を出してしまうリスクの上限。低く設定する（例：4%）"
+            },
+            {
+              "head": "② RMM ＝ 固有リスク（IR）× 統制リスク（CR）を評価する",
+              "body_html": "棚卸資産の評価 80% × 50% ＝ <span class=\"en\">40%</span>／前払保険料 20% × 40% ＝ <span class=\"en\">8%</span>"
+            },
+            {
+              "head": "③ 発見リスク（DR）＝ AR ÷ RMM を逆算する",
+              "body_html": "棚卸資産の評価 4% ÷ 40% ＝ <span class=\"en\">10%</span>（低い）／前払保険料 4% ÷ 8% ＝ <span class=\"en\">50%</span>（高い）",
+              "tone": "key"
+            },
+            {
+              "head": "④ 発見リスクに合わせて実証手続の性質・時期・範囲を決める",
+              "body_html": "棚卸資産：期末日に実地棚卸に立ち会い、正味実現可能価額を詳しく検証／前払保険料：分析的手続中心で、詳細テストは軽く",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "matrix",
+          "corner_html": "リスク",
+          "col_heads": ["何が原因か", "監査人がコントロール", "監査人がすること"],
+          "row_heads": ["固有リスク<br><span class=\"en\">IR</span>", "統制リスク<br><span class=\"en\">CR</span>", "発見リスク<br><span class=\"en\">DR</span>"],
+          "cells": [
+            [{"html": "企業の性質・環境"}, {"html": "<b>できない</b>", "tone": "ng"}, {"html": "程度を評価"}],
+            [{"html": "内部統制が防げない"}, {"html": "<b>できない</b>", "tone": "ng"}, {"html": "程度を評価（統制テスト）"}],
+            [{"html": "監査人が見落とす"}, {"html": "<b>できる</b>", "tone": "ok"}, {"html": "許容水準を決めて実証手続で下げる"}]
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式は2本",
+          "lines": [
+            "Audit risk ＝ Inherent risk × Control risk × Detection risk（RMM ＝ IR × CR）",
+            "Detection risk ＝ Audit risk ÷ RMM（RMM が高いほど DR は低く＝実証手続を厳しく）"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "手続の強さ",
+      "title_html": "発見リスクを下げる＝実証手続を厳しくする3つの方向",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["", "発見リスクが高くてよい（RMM が低い）", "発見リスクを低くする（RMM が高い）"],
+          "rows": [
+            ["性質（<span class=\"en\">nature</span>）", "分析的手続・社内の書類の検証", "確認・実査・立会いなど、証明力の強い外部の証拠"],
+            ["時期（<span class=\"en\">timing</span>）", "期中に実施して期末まで延ばす", "期末日（または期末日に近い日）に実施"],
+            ["範囲（<span class=\"en\">extent</span>）", "サンプルを少なく", "サンプルを多く・対象を広げる"]
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "統制テストの結果、内部統制が有効でないと分かったら、統制リスクを引き上げます。すると発見リスクの許容水準が下がり、実証手続を厳しくします（例：期中の確認を期末日の確認に変え、確認先も増やす）。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "式は覚えていても、「何を評価し、何を決めるか」と「実証手続はゼロにできない」で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "RMM と発見リスクは逆の関係",
+          "rule_html": "監査リスクを一定に保つため、<b>RMM が高いほど発見リスクの許容水準は低く</b>なり、実証手続を厳しくします。RMM が低ければ発見リスクを高くでき、実証手続を軽くできます。",
+          "calc_html": "1の例：RMM 40% → DR 10%（厳しく）、RMM 8% → DR 50%（軽く）",
+          "miss_html": "「リスクが高いから発見リスクも高い」と同じ向きに動かしてしまう。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "RMM が低くても、重要な勘定の実証手続はゼロにできない",
+          "rule_html": "固有リスクと統制リスクをどれだけ低く評価しても、<b>重要な取引・勘定・開示には必ず実証手続を行います</b>。リスク評価は判断で、内部統制にも限界があるからです。",
+          "miss_html": "統制が有効なので、重要な売掛金について実証手続を省略して統制テストだけで済ませる。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "統制リスクを下げるには統制テストが必要",
+          "rule_html": "統制リスクを最大より低く評価する（＝内部統制に依拠する）なら、その統制が<b>期間を通じて有効に運用されているかを統制テストで確かめます</b>。テストしないなら統制リスクは最大（100%）として扱い、発見リスクは AR ÷ IR になります。",
+          "calc_html": "例：AR 6%、IR 60%。統制に依拠して CR 50% → DR 20%。統制テストをしない → CR 100% → DR 10%",
+          "miss_html": "内部統制を理解した（整備されていることを確かめた）だけで、統制リスクを低く評価する。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "監査人は固有リスク・統制リスクを「下げられない」",
+          "rule_html": "固有リスクは企業の性質・環境、統制リスクは企業の内部統制で決まり、監査手続をいくら増やしても下がりません。監査人が手続で下げられるのは<b>発見リスクだけ</b>です。",
+          "miss_html": "「統制テストを増やせば統制リスクが下がる」と考える（テストは統制リスクを評価するためのもの）。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>特別な検討を必要とするリスク（<span class=\"en\">significant risk</span>）：</b>不正リスクや通常でない取引など。それに個別に対応した実証手続が必要で、実証手続だけで対応するなら詳細テストを含めます。",
+            "<b>収益認識：</b>不正リスクがあると推定します（推定しないなら理由を文書化）。",
+            "<b>経営者による内部統制の無視：</b>どの企業でもあるリスクとして、仕訳テストや見積りの偏りの検討を行います。",
+            "<b>重要性との関係：</b>重要性の基準値を低くすると、同じ監査リスクを保つのに必要な証拠が増えます。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            ["acceptable level of detection risk decreases", "実証手続を厳しく（期末日・強い証拠・件数増）", "期中に移す・件数を減らす"],
+            ["assessed level of control risk increases", "発見リスクは下がる", "発見リスクも上がる"],
+            ["the auditor can control / reduce", "発見リスクだけ", "固有リスク・統制リスクを選ぶ"],
+            ["assess control risk below the maximum", "統制テストで運用状況を確かめる", "理解（ウォークスルー）だけで済ませる"],
+            ["omit substantive procedures", "重要な勘定では省略できない", "RMM が低いので省略できる"],
+            ["confirmations as of an interim date", "RMM が低いときの選択肢", "RMM が高いときに選ぶ"],
+            ["significant risk", "個別に対応した実証手続（詳細テストを含む）", "分析的手続だけで済ませる"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、AU-C 200・315・330 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜発見リスクの計算",
+          "stem": "An auditor set audit risk at 3% for the existence of accounts receivable. The auditor assessed inherent risk at 50% and, based on tests of controls, assessed control risk at 30%. What is the acceptable level of detection risk?",
+          "choices": ["A. 0.45%", "B. 6%", "C. 10%", "D. 20%"],
+          "ja_html": "監査人は売掛金の実在性について監査リスクを3%に設定した。固有リスクを50%と評価し、統制テストに基づいて統制リスクを30%と評価した。発見リスクの許容水準はいくらか。<br>A. 0.45%　B. 6%　C. 10%　D. 20%",
+          "answer_html": "<b>正解：D（20%）</b><br>RMM 50% × 30% ＝ 15%、DR ＝ 3% ÷ 15% ＝ <b>20%</b><br>A：3つを掛けている<br>B：固有リスクだけで割っている（統制リスクを100%とした場合）<br>C：統制リスクだけで割っている"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜コントロールできるリスク（概念）",
+          "stem": "Which component of audit risk can the auditor directly control through the nature, timing, and extent of substantive procedures?",
+          "choices": ["A. Inherent risk", "B. Control risk", "C. Detection risk", "D. Risk of material misstatement"],
+          "ja_html": "監査リスクの構成要素のうち、実証手続の性質・時期・範囲によって監査人が直接コントロールできるのはどれか。<br>A. 固有リスク　B. 統制リスク　C. 発見リスク　D. 重要な虚偽表示リスク",
+          "answer_html": "<b>正解：C</b><br>固有リスク・統制リスク（あわせて RMM）は企業側の要因で、監査人は評価するだけ（論点4）<br>A・B・D：手続を増やしても下がらない"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜発見リスクが下がったときの対応",
+          "stem": "After performing tests of controls, an auditor raised the assessed level of control risk for sales. As a result, the acceptable level of detection risk decreased. Which change to the planned substantive procedures is most appropriate?",
+          "choices": ["A. Perform confirmations of receivables at an interim date rather than at year-end", "B. Increase the number of customer balances confirmed", "C. Replace confirmations with analytical procedures", "D. Reduce the scope of tests of details"],
+          "ja_html": "統制テストを行った結果、監査人は売上の統制リスクの評価を引き上げた。その結果、発見リスクの許容水準が下がった。予定していた実証手続の変更として最も適切なものはどれか。<br>A. 売掛金の確認を期末日ではなく期中に行う<br>B. 確認する顧客残高の件数を増やす<br>C. 確認を分析的手続に置き換える<br>D. 詳細テストの範囲を縮める",
+          "answer_html": "<b>正解：B</b><br>発見リスクを下げる＝実証手続を厳しくする。範囲（件数）を増やすのはその方向（手続の強さの表）<br>A：時期を期中に移すのは軽くする方向<br>C：証明力の弱い手続への置き換えは軽くする方向<br>D：範囲の縮小は軽くする方向"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜正しい記述（複合）",
+          "stem": "Which of the following statements about the audit risk model is correct?",
+          "choices": ["A. If inherent risk and control risk are both assessed as low, the auditor may omit substantive procedures for a material account balance.", "B. The auditor may assess control risk below the maximum without testing the operating effectiveness of controls.", "C. The acceptable level of detection risk is inversely related to the assessed risk of material misstatement.", "D. The auditor can reduce inherent risk by performing additional substantive procedures."],
+          "ja_html": "監査リスクモデルについての記述のうち、正しいものはどれか。<br>A. 固有リスクと統制リスクがともに低ければ、重要な勘定残高の実証手続を省略できる<br>B. 統制の運用状況の有効性をテストしなくても、統制リスクを最大より低く評価できる<br>C. 発見リスクの許容水準は、評価した重要な虚偽表示リスクと逆の関係にある<br>D. 実証手続を追加すれば固有リスクを下げられる",
+          "answer_html": "<b>正解：C</b><br>RMM が高いほど DR は低い（論点1）<br>A：重要な勘定の実証手続は省略できない（論点2）<br>B：最大より低く評価するには統制テストが必要（論点3）<br>D：固有リスクは手続では下がらない（論点4）"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：発見リスクの計算と手続の選択",
+          "intro_html": "売上の発生について、監査リスク 6%、固有リスク 60%。数字は「%」を付けずに入力（20% なら 20）、手続は選んでください。入力・選択したら「答え合わせ」を押してください",
+          "rows": [
+            {"label": "① 統制テストで統制リスクを 50% と評価した場合の発見リスク（%）", "ans": 20},
+            {"label": "② 統制テストを行わない場合の発見リスク（%）", "ans": 10},
+            {"label": "③ ②のとき、売掛金の確認を行う時期", "options": ["期中", "期末日"], "ans": "期末日"},
+            {"label": "④ ②のとき、①と比べた確認の件数", "options": ["減らす", "増やす"], "ans": "増やす"},
+            {"label": "⑤ RMM がどれだけ低くても、重要な売上の実証手続は", "options": ["省略できる", "省略できない"], "ans": "省略できない"}
+          ],
+          "explain_html": "① RMM 60% × 50% ＝ 30%、DR ＝ 6% ÷ 30% ＝ <b>20%</b><br>② 統制テストをしない → CR 100%、DR ＝ 6% ÷ 60% ＝ <b>10%</b>（論点3）<br>③④ DR が下がるので、時期は<b>期末日</b>、件数は<b>増やす</b><br>⑤ 重要な勘定の実証手続は<b>省略できない</b>（論点2）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "監査リスクモデルの式と、発見リスクの逆算の式を書ける",
+            "評価するリスク（IR・CR）と、許容水準を決めるリスク（AR・DR）を言い分けられる",
+            "監査人がコントロールできるのは発見リスクだけと言える",
+            "発見リスクを下げるときの性質・時期・範囲の変え方を言える",
+            "統制テストをしないと統制リスクは最大になると言える",
+            "重要な勘定の実証手続は省略できないと言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

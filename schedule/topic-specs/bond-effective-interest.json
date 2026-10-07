@@ -1,193 +1,274 @@
 {
+  "version": 2,
+  "knowledge": {
+    "far_text": "Ch8 8-2 利率の種類／8-3 発行価格／8-4〜8-7 実効金利法・プレミアム・ディスカウント／8-8・8-9 利払日間の発行／8-11・8-12 発行費／8-15 早期償還",
+    "asc": "ASC 835-30 / ASC 470-50",
+    "updated": "2026-10-07",
+    "sources": []
+  },
+  "post": {
+    "name": "社債（実効金利法）",
+    "hook_q": "額面 $500,000・表面利率8%・市場利率10% の社債を発行しました。1年目の利息費用は、払った利息と同じ $40,000 ですか？",
+    "hook_where": "全体図と差がつく論点1",
+    "bullets": [
+      "発行価格の計算と、5年間の簿価・利息費用の動きを1枚の表で確認",
+      "利払日の間の発行・発行費・早期償還の損益の出し方",
+      "初見の英語MC4問＋TBS（入力すると自動で答え合わせ）"
+    ]
+  },
   "meta": {
-    "page_title": "【図解】社債（割引発行）—実効金利法の利息費用",
-    "theme_line_html": "Bonds — <span class=\"font-bold normal-case\">effective interest で利息費用を求める</span>",
-    "subject_line": "USCPA FAR / Long-term Liabilities（ASC 470）",
-    "h1_html": "<strong>割引発行の社債</strong>—利息費用は <span class=\"term-en\">carrying amount × effective rate</span>、現金利息は額面×クーポン",
-    "lead_html": "試験では、現金で払う利息と損益計算書の利息費用を混同しがちです。実効金利法では、<strong>期首帳簿価額×実効金利</strong>が利息費用で、差額が割引の償却です。"
+    "page_title": "【復習シート】社債（実効金利法）—利息費用は「期首の簿価 × 市場利率」",
+    "badge": "FAR 復習シート｜Bonds Payable — Effective Interest Method（ASC 835-30）",
+    "h1_html": "社債：払う利息は「額面 × 表面利率」、費用は「期首の簿価 × 市場利率」。差額で簿価が額面に近づく",
+    "lead_html": "この論点の復習用です。最初の表で発行価格と簿価の動きを確認し、利払日の間の発行・発行費・早期償還の差がつく論点を見たら、最後に問題で仕上げてください。"
   },
-  "glossary": [
+  "sections": [
     {
-      "term_html": "<span class=\"term-en\">Effective rate</span>（実効金利・yield）",
-      "body_html": "市場が要求する「本当の利回り」。発行価格を決めた率で、<strong>利息費用の計算に使う</strong>のはこちら。"
-    },
-    {
-      "term_html": "<span class=\"term-en\">Coupon rate</span>（表面利率）",
-      "body_html": "券面に書いてある率。<strong>現金利息（face × coupon）の計算にしか使わない</strong>。費用計算に混ぜない。"
-    },
-    {
-      "term_html": "<span class=\"term-en\">Carrying amount</span>（帳簿価額）",
-      "body_html": "額面から未償却割引を引いた純額（プレミアムなら足した純額）。毎期、償却の分だけ<strong>額面に近づいていく</strong>。"
-    }
-  ],
-  "mc_preview": {
-    "stem_html": "On January 1, Year 1, Quill Corp. issued <strong>$500,000</strong> of 6% bonds at a price that yields <strong>8%</strong>. The bonds pay interest <strong>annually</strong> on December 31. The issue proceeds were <strong>$459,000</strong>. What amount of <strong>interest expense</strong> should Quill report for Year 1 under the <strong>effective interest method</strong>?",
-    "choices": [
-      "A. $27,540",
-      "B. $30,000",
-      "C. $36,720",
-      "D. $40,000"
-    ]
-  },
-  "misconceptions": [
-    {
-      "label": "誤解①　現金利息（クーポン）をそのまま利息費用にする",
-      "student_html": "$500,000 × 6% ＝ $30,000（B）が利息費用では？",
-      "coach_html": "それは<strong>現金で払う利息</strong>です。実効金利法の利息費用は、期首の社債帳簿価額 × 実効金利です。"
-    },
-    {
-      "label": "誤解②　額面 × 実効金利にする",
-      "student_html": "$500,000 × 8% ＝ $40,000（D）でしょうか？",
-      "coach_html": "実効金利を掛ける相手は<strong>額面ではなく carrying amount（発行時は発行収入）</strong>です。"
-    },
-    {
-      "label": "誤解③　帳簿価額にクーポンを掛ける",
-      "student_html": "$459,000 × 6% ＝ $27,540（A）のような組み合わせも見えてしまいます。",
-      "coach_html": "掛ける相手（carrying）は合っていますが、率が違います。費用計算に使うのは<strong>実効金利8%</strong>です。"
-    }
-  ],
-  "three_lead_html": "割引社債・実効金利法の地図です。",
-  "three": [
-    {
-      "title": "Interest expense ＝ carrying × effective rate",
-      "body_html": "期首の社債帳簿価額に市場実効金利を掛けます。"
-    },
-    {
-      "title": "Cash interest ＝ face × coupon rate",
-      "body_html": "実際に支払う利息。費用とは一致しません（割引・プレミアム時）。"
-    },
-    {
-      "title": "Amortization ＝ expense − cash interest",
-      "body_html": "差額だけ割引（またはプレミアム）を減らします。"
-    }
-  ],
-  "theory": {
-    "lead_html": "①の3つは、ここでの<strong>利息費用と割引償却</strong>に対応します。",
-    "timeline_html": "①発行時に現金と社債（純額）を計上 → ②期末に利息費用を測定 → ③現金支払との差額で割引を償却",
-    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Quill の Year 1 利息費用 $36,720 を求める手順です。",
-    "blocks": [
-      {
-        "icon": "help-circle",
-        "heading": "なぜこの処理か（会計の背景）",
-        "body_html": "社債を割引で発行すると、実質的な調達コストはクーポンより高い実効金利になります。毎期、帳簿価額に実効金利を掛けて利息費用を認識し、現金利息との差で割引を埋めます。",
-        "je_lines": []
-      },
-      {
-        "icon": "book-open",
-        "heading": "典型仕訳（Quill・Year 1 利息）",
-        "body_html": "利息費用 $36,720、現金 $30,000、割引償却 $6,720。",
-        "je_lines": [
-          "Dr. Interest expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 36,720",
-          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Discount on bonds payable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6,720",
-          "&nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 30,000"
-        ]
-      }
-    ]
-  },
-  "calc": {
-    "intro_html": "Year 1 利息費用の<strong>3ステップ</strong>です。",
-    "steps": [
-      "<strong>Step 1</strong> 期首 carrying amount を確認（発行時は発行収入 $459,000）。",
-      "<strong>Step 2</strong> Interest expense ＝ carrying × <strong>effective rate</strong>。",
-      "<strong>Step 3</strong> Cash interest ＝ face × coupon。差額が割引償却。"
-    ],
-    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額</th></tr></thead>\n        <tbody>\n          <tr><td>Carrying (1/1)</td><td class=\"num\">$459,000</td></tr>\n          <tr><td>× Effective rate 8%</td><td class=\"num\">→ <strong>$36,720</strong></td></tr>\n          <tr><td>Cash interest ($500,000×6%)</td><td class=\"num\">$30,000</td></tr>\n          <tr><td>Discount amortization</td><td class=\"num\">$6,720</td></tr>\n        </tbody>\n      </table>"
-  },
-  "process_persona_strip": {
-    "takuma": "現金利息と利息費用を取り違えやすいです。",
-    "aoi": "Year 1 の費用は <strong>$36,720</strong>。現金は $30,000 です。"
-  },
-  "process_dialogues": [
-    {
-      "student_html": "プレミアム発行のときはどうなりますか？",
-      "coach_html": "同じ型です。expense ＝ carrying × effective。現金利息の方が大きいので、差額でプレミアムを減らします。"
-    },
-    {
-      "student_html": "半年払いのときは利率をどうしますか？",
-      "coach_html": "期間に合わせて、<strong>半期の実効金利</strong>と<strong>半期クーポン</strong>で同じ手順を繰り返します。"
-    }
-  ],
-  "crossmap": {
-    "lead_html": "「利息＝帳簿価額×率」の回路は、社債だけの話ではありません。",
-    "items": [
-      {
-        "title_html": "リース負債の利息（ASC 842）",
-        "body_html": "借手の lease liability も<strong>期首負債残高 × 割引率</strong>で利息を計算します。社債の実効金利法とまったく同じ回路なので、片方を覚えればもう片方はタダです。"
-      },
-      {
-        "title_html": "プレミアム発行との対比",
-        "body_html": "式は同じで<strong>向きだけ逆</strong>。割引は carrying が毎期増えて額面へ上がり、プレミアムは現金利息＞費用となって carrying が毎期減り、額面へ下がります。満期にはどちらも額面に一致。"
-      },
-      {
-        "title_html": "現在価値（PV）・発行価格の計算",
-        "body_html": "発行収入 $459,000 自体が「クーポンと元本を実効金利8%で割り引いた PV」です。発行価格を自分で計算させる問題は、この論点の1つ手前のステップとして出ます。"
-      }
-    ]
-  },
-  "patterns": {
-    "lead_html": "MC は「どの率を、何に掛けるか」を試すために作られます。",
-    "mc_patterns": [
-      "<strong>Year 1（または Year 2）の interest expense</strong>：期首 carrying × effective rate。Year 2 なら償却表を1行進めてから",
-      "<strong>割引（プレミアム）の償却額</strong>：expense − cash interest の差額",
-      "<strong>期末の carrying amount</strong>：期首 carrying ＋ 割引償却（プレミアムなら −）"
-    ],
-    "solve": {
-      "title_html": "解く手順は毎回同じ4ステップ",
-      "steps": [
-        "期首 carrying amount を確認（発行直後は発行収入）",
-        "carrying × effective rate ＝ interest expense",
-        "face × coupon ＝ cash interest",
-        "差額を carrying に加減して翌期の期首残高を作る"
-      ]
-    }
-  },
-  "mc_intro_html": "オリジナル問題です。<strong>ASC 470（実効金利法）</strong>に沿って作成しています。",
-  "mc": [
-    {
-      "title": "問題 1（計算 — interest expense）",
-      "focus": [
-        "率が2つ出てくる（coupon 6% と yield 8%）——<strong>どちらを何に掛けるか</strong>",
-        "問われているのは「費用」か「現金支払額」か"
-      ],
-      "stem_html": "Quill issued <strong>$500,000</strong> 6% bonds for <strong>$459,000</strong> to yield <strong>8%</strong>. Annual interest. Year 1 interest expense under effective interest?",
-      "choices": [
-        "A. $27,540",
-        "B. $30,000",
-        "C. $36,720",
-        "D. $40,000"
-      ],
-      "explain_html": "<p>$459,000 × 8% ＝ <strong>$36,720</strong>。正解 <strong>C</strong>。</p>",
-      "distractors_html": [
-        "<strong>A（$27,540）</strong>＝ carrying × <em>coupon</em>（$459,000×6%）。掛ける相手は合っているが率を取り違えたパターン",
-        "<strong>B（$30,000）</strong>＝ face × coupon。現金利息をそのまま費用にしたパターン（誤解①）",
-        "<strong>D（$40,000）</strong>＝ face × effective。実効金利を額面に掛けたパターン（誤解②）"
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：割引発行の社債は、毎年この順で動く",
+      "lead_html": "現金で払う利息は毎年同じですが、利息費用は簿価に連動して毎年変わります。差額（償却額）だけ簿価が増え、満期に額面と一致します。",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Kato Co. は Year 1 の1月1日に社債を発行した",
+          "items": [
+            "額面 $500,000、期間5年、表面利率8%（毎年12月31日に $40,000 を支払）",
+            "発行時の市場利率は10%",
+            "現価係数（10%・5年）：1回だけの受取 0.62092、毎年の受取（期末）3.79079"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "発行価格＝元本の現在価値＋利息の現在価値（どちらも市場利率で割り引く）",
+              "body_html": "500,000 × 0.62092 ＝ 310,460　＋　40,000 × 3.79079 ＝ 151,632　→　<span class=\"en\">$462,092</span>（表面利率 8% ＜ 市場利率 10% なので額面より安い＝割引発行）"
+            },
+            {
+              "head": "毎年：利息費用 ＝ 期首の簿価 × 市場利率",
+              "body_html": "Year 1：462,092 × 10% ＝ <span class=\"en\">46,209</span>（払う利息は 500,000 × 8% ＝ 40,000）",
+              "tone": "key"
+            },
+            {
+              "head": "差額が割引額の償却 → 簿価が増える",
+              "body_html": "46,209 − 40,000 ＝ 6,209　→　Year 1 末の簿価 462,092 ＋ 6,209 ＝ <span class=\"en\">468,301</span>"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "head": ["年", "期首の簿価", "利息費用（×10%）", "支払利息（×8%）", "償却額", "期末の簿価"],
+          "rows": [
+            ["Year 1", "462,092", "46,209", "40,000", "6,209", "468,301"],
+            ["Year 2", "468,301", "46,830", "40,000", "6,830", "475,131"],
+            ["Year 3", "475,131", "？", "40,000", "？", "？（問題5）"],
+            ["…", "", "", "", "", "Year 5 末に 500,000"]
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "覚える式は3本",
+          "lines": [
+            "発行価格 ＝ 額面 × 現価係数 ＋ 額面 × 表面利率 × 年金現価係数（係数はどちらも市場利率）",
+            "利息費用 ＝ 期首の簿価 × 市場利率、支払利息 ＝ 額面 × 表面利率",
+            "期末の簿価 ＝ 期首の簿価 ＋ 償却額（割引発行）／ − 償却額（打歩発行）"
+          ]
+        }
       ]
     },
     {
-      "title": "問題 2（概念 — amortization）",
-      "focus": [
-        "償却額を<strong>式で</strong>言えるか（費用と現金の差額）"
-      ],
-      "stem_html": "Under the effective interest method for a bond issued at a discount, amortization of the discount equals:",
-      "choices": [
-        "A. Cash interest paid",
-        "B. Interest expense minus cash interest paid",
-        "C. Face amount times effective rate",
-        "D. Carrying amount times coupon rate"
-      ],
-      "explain_html": "<p>償却＝利息費用 − 現金利息。正解 <strong>B</strong>。</p>",
-      "distractors_html": [
-        "<strong>A</strong>＝現金利息そのもの。償却は「差額」なので現金支払とは別物",
-        "<strong>C・D</strong>＝「率×何か」の組み合わせを入れ替えただけの見せかけ。費用計算の式であって償却の定義ではない"
+      "id": "judge",
+      "nav": "割引と打歩",
+      "title_html": "割引発行と打歩発行（プレミアム）の違い",
+      "blocks": [
+        {
+          "type": "ruler",
+          "segments": [
+            {
+              "head": "割引発行（<span class=\"en\">discount</span>）",
+              "body_html": "表面利率 ＜ 市場利率<br>価格は額面より安い<br>利息費用 ＞ 支払利息<br>簿価は毎年<b>増える</b>",
+              "style": "r2"
+            },
+            {
+              "head": "額面発行",
+              "body_html": "表面利率 ＝ 市場利率<br>価格 ＝ 額面<br>利息費用 ＝ 支払利息",
+              "style": "r1"
+            },
+            {
+              "head": "打歩発行（<span class=\"en\">premium</span>）",
+              "body_html": "表面利率 ＞ 市場利率<br>価格は額面より高い<br>利息費用 ＜ 支払利息<br>簿価は毎年<b>減る</b>",
+              "style": "r3"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "どちらでも、償却が進むと簿価は額面に近づき、<b>満期には額面と一致</b>します。貸借対照表には「額面 − 未償却の割引額（＋未償却のプレミアム）− 未償却の発行費」の純額で表示します。"
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "仕訳一覧",
+      "title_html": "仕訳一覧（1の例の数字）",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["場面", "仕訳", "ポイント"],
+          "en_cols": [1],
+          "rows": [
+            ["Year 1 1/1 発行", "Dr. Cash 462,092<br>Dr. Discount on bonds payable 37,908<br>　Cr. Bonds payable 500,000", "割引額は社債から控除する評価勘定（費用ではない）"],
+            ["Year 1 12/31 利払い", "Dr. Interest expense 46,209<br>　Cr. Cash 40,000<br>　Cr. Discount on bonds payable 6,209", "費用と現金の差が割引額の償却"],
+            ["Year 2 12/31 利払い", "Dr. Interest expense 46,830<br>　Cr. Cash 40,000<br>　Cr. Discount on bonds payable 6,830", "償却後の簿価 468,301 × 10%"],
+            ["満期 償還", "Dr. Bonds payable 500,000<br>　Cr. Cash 500,000", "割引額はゼロになっている"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "実効金利法の計算はできても、利率の取り違えと「発行・償還の周辺」で点を落としやすいところです。",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "利息費用に使うのは「期首の簿価」と「市場利率」",
+          "rule_html": "利息費用は<b>その年の期首の簿価 × 発行時の市場利率</b>です。額面にも表面利率にも掛けません。発行後に市場利率が変わっても、使う利率は発行時のままです。",
+          "calc_html": "1の例 Year 1：462,092 × 10% ＝ 46,209（500,000 × 8% ＝ 40,000 は支払利息）。Year 2 は 468,301 × 10% ＝ 46,830",
+          "miss_html": "Year 2 も発行価格 462,092 に10%を掛けて 46,209 にする／額面 × 10% ＝ 50,000 にする。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "利払日の間に発行したら、経過利息を上乗せで受け取る",
+          "rule_html": "前回の利払日から発行日までの利息（経過利息）は、<b>買い手から本体価格とは別に受け取り</b>、次の利払日に1期間分を払います。経過利息は社債の価格でも利益でもありません。",
+          "calc_html": "例：額面 $300,000、年6%、利払日は1月1日と7月1日、4月1日に額面で発行 → 経過利息 300,000 × 6% × 3/12 ＝ 4,500、受け取る現金 304,500",
+          "miss_html": "受け取った現金 304,500 を社債の発行価格として、プレミアム 4,500 を計上する。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "発行費は資産にせず、社債の簿価から引く",
+          "rule_html": "印刷代・弁護士報酬・引受手数料などの発行費は、<b>社債の簿価から直接控除</b>し、利息費用として期間配分します（独立した資産にしない）。",
+          "calc_html": "例：額面 $1,000,000 を98で発行、発行費 $20,000 → 簿価 1,000,000 − 20,000（割引）− 20,000（発行費）＝ 960,000",
+          "miss_html": "発行費を繰延資産（deferred charge）として計上し、社債の簿価を 980,000 にする（以前の処理）。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "早期償還の損益は「払った額 − 償還時の簿価」",
+          "rule_html": "償還日までの償却を済ませた<b>簿価</b>（未償却の割引額・発行費を反映）と、払った額を比べます。簿価より多く払えば損失、少なければ利得で、通常の損益（継続事業）に入れます。",
+          "calc_html": "1の例を Year 4 の1月1日に102で全額償還：払う額 510,000 − 簿価 482,644 ＝ 損失 27,356",
+          "miss_html": "額面と比べて損失 10,000 にする（未償却の割引額 17,356 を落とす）／特別損益として表示する。"
+        },
+        {
+          "type": "point",
+          "no": "論点5",
+          "title_html": "そのほかの関連論点",
+          "list": [
+            "<b>半年払い：</b>期間利率は年率の半分、回数は年数の2倍で係数を選びます。",
+            "<b>定額法：</b>実効金利法との差が重要でないときだけ認められます。",
+            "<b>決算日と利払日がずれる：</b>決算日までの未払利息と償却を計上し、次の期は償却後の簿価から計算します。",
+            "<b>減債基金：</b>償還のために積み立てた資産は長期投資として表示し、社債は償還するまで残ります。",
+            "<b>公正価値オプション：</b>選んだ場合、自社の信用リスクの変動による部分は OCI に入れます。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：この言葉を見たら止まる",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            ["stated rate / coupon rate", "現金で払う利息だけに使う", "利息費用の計算に使う"],
+            ["market rate / effective rate / yield", "発行価格の割引と利息費用に使う", "支払利息の計算に使う"],
+            ["carrying amount at the beginning of the year", "毎年の簿価で費用を出す", "発行価格を毎年使う"],
+            ["interest payable semiannually", "利率は半分、回数は2倍", "年率・年数の係数をそのまま使う"],
+            ["plus accrued interest", "経過利息は本体価格とは別", "プレミアムとして処理する"],
+            ["bond issue costs", "簿価から控除し、利息費用として配分", "資産として計上する"],
+            ["retired at 102 / reacquired", "払った額と償還時の簿価を比べる", "額面と比べる"],
+            ["gain or loss on extinguishment", "通常の損益", "特別損益にする"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見の数字）",
+      "lead_html": "選択肢を自分で検討してから解説を開いてください。オリジナル問題で、ASC 835-30・ASC 470-50 の考え方に沿って作っています。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜打歩発行の利息費用",
+          "stem": "On January 1, Year 1, Rowe Co. issued $200,000 of five-year bonds with a stated interest rate of 10%, payable annually on December 31. The bonds were issued to yield 8% and were sold for $215,971. Rowe uses the effective interest method. What amount of interest expense should Rowe report for Year 1?",
+          "choices": ["A. $16,000", "B. $17,278", "C. $20,000", "D. $21,597"],
+          "ja_html": "Year 1 の1月1日、Rowe社は額面 $200,000、期間5年、表面利率10%（毎年12月31日払い）の社債を、利回り8%となるよう $215,971 で発行した。実効金利法を使う。Year 1 の利息費用はいくらか。<br>A. $16,000　B. $17,278　C. $20,000　D. $21,597",
+          "answer_html": "<b>正解：B（$17,278）</b><br>215,971 × 8% ＝ <b>17,278</b>（論点1）。支払利息 20,000 との差 2,722 だけプレミアムを償却し、簿価は 213,249 に減る<br>A：額面 × 市場利率<br>C：支払利息（額面 × 表面利率）<br>D：発行価格 × 表面利率"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜利払日の間の発行",
+          "stem": "On April 1, Year 1, Selo Co. issued $300,000 of 6% bonds at face value. Interest is payable semiannually on January 1 and July 1, and the bonds are dated January 1, Year 1. What total amount of cash did Selo receive on April 1?",
+          "choices": ["A. $295,500", "B. $300,000", "C. $304,500", "D. $309,000"],
+          "ja_html": "Year 1 の4月1日、Selo社は額面 $300,000、利率6%の社債を額面で発行した。利払いは1月1日と7月1日の年2回、社債の日付は Year 1 の1月1日。4月1日に受け取った現金の合計はいくらか。<br>A. $295,500　B. $300,000　C. $304,500　D. $309,000",
+          "answer_html": "<b>正解：C（$304,500）</b><br>経過利息：300,000 × 6% × 3/12 ＝ 4,500。本体 300,000 ＋ 4,500 ＝ <b>304,500</b>（論点2）<br>A：経過利息を引いている<br>B：経過利息を受け取っていない<br>D：6か月分（9,000）を足している"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜発行費の表示",
+          "stem": "Tamo Co. issued $1,000,000 of bonds at 98 and paid $20,000 of bond issue costs. Immediately after issuance, how should Tamo report these items in its balance sheet?",
+          "choices": ["A. Bonds payable, net of $1,000,000", "B. Bonds payable, net of $980,000 and a deferred charge (asset) of $20,000", "C. Bonds payable, net of $960,000", "D. Bonds payable, net of $1,020,000"],
+          "ja_html": "Tamo社は額面 $1,000,000 の社債を98で発行し、発行費 $20,000 を支払った。発行直後の貸借対照表で、どう表示するか。<br>A. 社債（純額）$1,000,000<br>B. 社債（純額）$980,000 と繰延資産 $20,000<br>C. 社債（純額）$960,000<br>D. 社債（純額）$1,020,000",
+          "answer_html": "<b>正解：C</b><br>1,000,000 − 割引額 20,000 − 発行費 20,000 ＝ <b>960,000</b>（論点3）<br>A：割引額も発行費も引いていない<br>B：発行費を資産にする以前の処理<br>D：発行費を足している"
+        },
+        {
+          "type": "mcq",
+          "label": "問題4｜早期償還の損益（複合）",
+          "stem": "On January 1, Year 4, Ulla Co. retired all of its $400,000 face value bonds at 102. On that date, after recording amortization through December 31, Year 3, the unamortized bond discount was $9,000 and unamortized bond issue costs were $3,000. What amount of gain or loss should Ulla report on the retirement?",
+          "choices": ["A. $8,000 loss", "B. $11,000 loss", "C. $17,000 loss", "D. $20,000 loss"],
+          "ja_html": "Year 4 の1月1日、Ulla社は額面 $400,000 の社債を102で全額償還した。Year 3 の12月31日までの償却を記録した後の、未償却の割引額は $9,000、未償却の発行費は $3,000 だった。償還の損益はいくらか。<br>A. 損失 $8,000　B. 損失 $11,000　C. 損失 $17,000　D. 損失 $20,000",
+          "answer_html": "<b>正解：D（損失 $20,000）</b><br>簿価：400,000 − 9,000 − 3,000 ＝ 388,000<br>払った額：400,000 × 102% ＝ 408,000<br>408,000 − 388,000 ＝ <b>損失 20,000</b>（論点4）<br>A：額面と比べている<br>B：割引額を引き忘れている（408,000 − 397,000）<br>C：発行費を引き忘れている（408,000 − 391,000）"
+        },
+        {
+          "type": "tbs",
+          "label": "問題5｜TBS形式：Year 3 と早期償還",
+          "intro_html": "1の例（Kato Co.）の続きです。全体図の表の Year 3 を埋め、Year 4 の1月1日に社債を102で全額償還したときの損益を答えてください（損失はマイナスで入力）。空欄に金額を入れて「答え合わせ」を押してください",
+          "rows": [
+            {"label": "Year 3 期首の簿価", "value": "475,131"},
+            {"label": "Year 3 の利息費用", "ans": 47513},
+            {"label": "Year 3 の割引額の償却", "ans": 7513},
+            {"label": "Year 3 期末の簿価", "ans": 482644},
+            {"label": "Year 4 1/1 に払う額（102）", "ans": 510000},
+            {"label": "償還の損益（損失はマイナス）", "ans": -27356, "head": true}
+          ],
+          "explain_html": "利息費用 475,131 × 10% ＝ <b>47,513</b><br>償却 47,513 − 40,000 ＝ <b>7,513</b><br>期末の簿価 475,131 ＋ 7,513 ＝ <b>482,644</b><br>払う額 500,000 × 102% ＝ <b>510,000</b><br>損益 482,644 − 510,000 ＝ <b>−27,356</b>（損失。額面と比べた 10,000 ではない）"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "発行価格を2つの現価係数で計算できる",
+            "利息費用と支払利息に使う金額・利率を言い分けられる",
+            "割引発行と打歩発行で簿価が増えるか減るかを言える",
+            "利払日の間の発行で受け取る現金を計算できる",
+            "発行費の表示（簿価から控除）を言える",
+            "早期償還の損益を償還時の簿価から計算できる"
+          ]
+        }
       ]
     }
-  ],
-  "one_minute_html": "割引発行の社債は、実質の調達コストがクーポンではなく<strong>実効金利</strong>。だから利息費用は<strong>期首帳簿価額×実効金利</strong>で測り、現金利息（<strong>額面×クーポン</strong>）との差額を割引の償却として帳簿価額に足す。毎期 carrying が額面に近づき、満期でちょうど一致する。",
-  "checklist": [
-    "「費用＝carrying×effective」「現金＝face×coupon」を見ずに言える",
-    "Quill の Year 1 費用 $36,720 を10秒で再現できる",
-    "償却額＝費用−現金利息、を式で書ける",
-    "Year 2 期首の carrying（$459,000＋$6,720＝$465,720）を自分で出せる",
-    "プレミアム発行では現金利息＞費用になる理由を説明できる"
   ]
 }
