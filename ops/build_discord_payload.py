@@ -6,7 +6,6 @@ v2 の topic-spec に "post" があれば、問いかけ＋できること＋リ
 
 spec の "post":
   name      … 論点名（例：短期債務の借換え）
-  text_ref  … テキストの章（例：テキスト4-7）。未収録なら省略
   minutes   … 目安の所要時間（分）
   hook_q    … 開く前に考えてほしい問い（1〜2文）
   hook_where… 答えがページのどこにあるか（例：差がつく論点2と問題2）
@@ -30,7 +29,8 @@ def build(entry: dict, spec: dict | None) -> dict:
             "content": f"【図解配信】 {entry['title']}\n\n{LEGACY_TAIL}",
             "embeds": [{"title": entry["title"], "description": entry.get("description", ""), "url": entry["url"], "color": 3447003}],
         }
-    meta = "・".join(x for x in [post.get("text_ref", ""), f"約{post['minutes']}分" if post.get("minutes") else ""] if x)
+    # テキストの章番号は受講生に関係ないので投稿に出さない
+    meta = f"約{post['minutes']}分" if post.get("minutes") else ""
     head = f"📘 **FAR図解｜{post['name']}**" + (f"（{meta}）" if meta else "")
     if entry.get("revised"):
         head += "　※改訂版"
