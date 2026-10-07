@@ -1,5 +1,5 @@
 {
-  "_comment": "日・水・土9:00 JSTに配信。枠が足りないときは delivery-queue.json から自動追記（maintain_posts_queue.py）。HTML無しは topic-spec で自動生成。手動追記も可。excluded_slugs は delivery-config.json。",
+  "_comment": "FAR 水・土／AUD 火・金 9:05 JSTに配信（科目は各エントリの subject）。枠が足りないときは delivery-queue.json から自動追記（maintain_posts_queue.py）。HTML無しは topic-spec で自動生成。手動追記も可。excluded_slugs は delivery-config.json。",
   "2026-05-14": {
     "title": "【図解】短期債務の借換えと financing agreement の上限（MC付き）",
     "description": "長期借換の intent・ability と、融資枠・担保比率などの数的上限が current／noncurrent にどう効くかを整理（ASC 470-10）。",

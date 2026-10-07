@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fill schedule/posts.json from each subject's queue (FAR: 日水土, AUD: 火金 など delivery-config.json の subjects)."""
+"""Fill schedule/posts.json from each subject's queue (FAR: 水土, AUD: 火金 など delivery-config.json の subjects)."""
 from __future__ import annotations
 
 import argparse
