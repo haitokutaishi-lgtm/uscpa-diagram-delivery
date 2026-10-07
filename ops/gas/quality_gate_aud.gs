@@ -13,7 +13,7 @@
 //
 // 設定（スクリプト プロパティ）
 //  GROQ_API_KEY        既存。作問・確認に使う（無料）
-//  ANTHROPIC_API_KEY   任意。あれば作問・確認に Claude を使う（精度が上がる。おすすめ）
+//  ANTHROPIC_API_KEY（または Claude_key）  任意。あれば作問・確認に Claude を使う（精度が上がる。おすすめ）
 //  COACH_WEBHOOK_URL   任意。不合格・作り直し失敗をコーチ用チャンネルに通知（無ければシステムログのみ）
 //
 // 問題バンクに2列追加して記録する：O列「品質チェック」（PASS / FAIL）・P列「チェック記録」
@@ -331,7 +331,7 @@ function QG_setupTriggers() {
 function QG_checkConfig() {
   var p = PropertiesService.getScriptProperties();
   var msg = 'GROQ_API_KEY：' + (p.getProperty('GROQ_API_KEY') ? '設定済み' : '未設定') + '\n' +
-    'ANTHROPIC_API_KEY：' + (p.getProperty('ANTHROPIC_API_KEY') ? '設定済み（Claude で作問・確認）' : '未設定（Groq で作問・確認）') + '\n' +
+    'Claude のキー：' + ((p.getProperty('ANTHROPIC_API_KEY') || p.getProperty('Claude_key')) ? '設定済み（Claude で作問・確認）' : '未設定（Groq で作問・確認）') + '\n' +
     'COACH_WEBHOOK_URL：' + (p.getProperty('COACH_WEBHOOK_URL') ? '設定済み' : '未設定（通知はシステムログのみ）') + '\n' +
     '出題テーマ：' + QG_TOPICS.length + '件';
   QG_alert(msg);
@@ -648,7 +648,7 @@ function QG_writeStatus(sheet, rowIndex, status, note) {
 // ─────────────────────────────────────────────
 function QG_llm(prompt, temperature, maxTokens) {
   var p = PropertiesService.getScriptProperties();
-  var claudeKey = p.getProperty('ANTHROPIC_API_KEY');
+  var claudeKey = p.getProperty('ANTHROPIC_API_KEY') || p.getProperty('Claude_key');   // どちらの名前で登録しても使う
   if (claudeKey) {
     var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
       method: 'post',
