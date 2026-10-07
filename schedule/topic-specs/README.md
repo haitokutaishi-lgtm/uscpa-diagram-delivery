@@ -29,7 +29,7 @@ spec の先頭に `"version": 2` を書くと `ops/generate_diagram_v2.py` で�
 2. `ops/diagram-publish-manifest.json` に `{ "slug", "source" }` を追加
 3. `schedule/delivery-queue.json` の `items` に `{ id, slug, title, description }` を追加  
    → **posts.json の日付は cron が自動追記**（`maintain_posts_queue.py`）
-4. 日・水・土 9:00 JST に **図解 自動生成→配信** が走る
+4. FAR 水・土／AUD 火・金 9:05 JST に **図解 自動生成→配信** が走る
 
 ## ローカルで生成テスト
 
