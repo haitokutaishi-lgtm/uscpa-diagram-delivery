@@ -20,6 +20,16 @@
 // 初回はメニュー「🛡 品質チェック」→「① 自動実行を設定」を1回だけ実行する
 // ============================================================
 
+// ─────────────────────────────────────────────
+// 初回はこれを実行するだけ（エディタの「実行」で最初に選ばれる関数）
+// 自動実行の設定 → 3日先までの確認・補充を1回まわす
+// ─────────────────────────────────────────────
+function QG_install() {
+  QG_setupTriggers();
+  var r = QG_run(false);
+  Logger.log('品質チェック：' + r.summary + (r.timedOut ? '（時間切れ。もう一度 QG_install か QG_runNow を実行すると続きから）' : ''));
+}
+
 var QG = {
   SUBJECT: 'AUD',
   BANK: '問題バンク',
@@ -294,6 +304,9 @@ var QG_BAD_EXAMPLES = [
 // メニュー（既存の onOpen とは別。スプレッドシートを開くと追加される）
 // ─────────────────────────────────────────────
 function QG_onOpenMenu() {
+  try { QG_buildMenu(); } catch (e) {}   // エディタから実行したときは UI が無いので何もしない
+}
+function QG_buildMenu() {
   SpreadsheetApp.getUi()
     .createMenu('🛡 品質チェック')
     .addItem('① 自動実行を設定（初回のみ）', 'QG_setupTriggers')
