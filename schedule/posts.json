@@ -426,6 +426,15 @@
     "_auto": true,
     "revised": true
   },
+  "2026-10-09": {
+    "title": "【AUD図解】監査意見の種類—限定・不適正・意見差控えの判定",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-opinion-types/",
+    "slug": "aud-opinion-types",
+    "queue_id": "aud-opinion-types-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
   "2026-10-10": {
     "title": "【図解・改訂版】製品保証—費用は売った年、支出は負債を減らすだけ（復習シート）",
     "description": "負債の動きを1枚の図で。販売年＋翌年の見積率、アシュアランス型とサービス型の違いまで。初見の確認問題とTBS入力式つき（ASC 460・606／テキスト4-10）。",
@@ -435,7 +444,7 @@
     "_auto": true,
     "revised": true
   },
-  "2026-10-11": {
+  "2026-10-14": {
     "title": "【図解・改訂版】一括購入の按分—時価の比率で取得原価を配る（復習シート）",
     "description": "按分の流れを1枚の図で。付随費用・撤去費の扱い、按分後の減価償却まで。初見の確認問題とTBS入力式つき（ASC 360／テキスト5-1・5-2）。",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/asset-group-relative-sales-value/",
@@ -444,7 +453,7 @@
     "_auto": true,
     "revised": true
   },
-  "2026-10-14": {
+  "2026-10-17": {
     "title": "【図解】収益認識—5ステップと取引価格の配分",
     "description": "",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/revenue-five-step/",
@@ -453,7 +462,7 @@
     "subject": "FAR",
     "_auto": true
   },
-  "2026-10-17": {
+  "2026-10-21": {
     "title": "【図解】リース（借手）—分類・開始時の計上・その後の費用",
     "description": "",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-classification/",
@@ -462,7 +471,7 @@
     "subject": "FAR",
     "_auto": true
   },
-  "2026-10-18": {
+  "2026-10-24": {
     "title": "【図解】税効果—一時差異からDTA・DTLを決める",
     "description": "",
     "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/deferred-taxes-temporary-differences/",

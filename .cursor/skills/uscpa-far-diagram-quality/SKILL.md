@@ -118,8 +118,8 @@ v2 はテキストで一度学んだ受講生の**復習ツール**として作�
 
 `posts.json` の日付キーは **書かなくてよい**（cron が補充）。除外テーマは `delivery-config.json` の `excluded_slugs`。
 
-- **cron**: FAR 日・水・土／AUD 火・金 9:05 JST（科目・曜日は `delivery-config.json` の `subjects`。AUD は `enabled: true` で開始。AUD 用チャンネルは Secret `DISCORD_WEBHOOK_URL_AUD`、無ければ FAR と同じ Webhook）
-- **止めないために**：各科目、6本先まで v2 spec を作っておく
+- **cron**: FAR 水・土／AUD 火・金（各週2本）9:05 JST（科目・曜日は `delivery-config.json` の `subjects`。AUD は `enabled: true` で開始。AUD 用チャンネルは Secret `DISCORD_WEBHOOK_URL_AUD`、無ければ FAR と同じ Webhook）
+- **止めないために**：各科目、4本先まで v2 spec を作っておく
 - **手動**: `gh workflow run "図解 自動生成→配信" -f post_date=YYYY-MM-DD`
 
 ---

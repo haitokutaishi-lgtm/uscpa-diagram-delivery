@@ -1,4 +1,4 @@
-# FAR＝日・水・土、AUD＝火・金（delivery-config.json の subjects）9:00 JST: topic-spec 生成 → diagram-site 同期 → Discord 投稿
+# FAR＝水・土、AUD＝火・金（各週2本）（delivery-config.json の subjects）9:00 JST: topic-spec 生成 → diagram-site 同期 → Discord 投稿
 # GitHub cron は UTC 0時台で遅延しやすいため、schedule 時は 9:00 JST まで wait_jst_delivery_window.py で待機
 # posts.json は日付キーで管理。当日キーが無くても last_posted_date より後で今日以前の最古キーを1件投稿（取りこぼし防止）。
 # diagram-site/topics/… のときは Playwright で本文ブロックを最大4枚キャプチャし、
@@ -16,8 +16,8 @@ env:
 
 on:
   schedule:
-    # 9:05 JST・FAR 日水土＋AUD 火金（:05 は正時混雑回避）。timezone は GitHub Actions の IANA 指定
-    - cron: "5 9 * * 0,2,3,5,6"
+    # 9:05 JST・FAR 水土＋AUD 火金（各週2本）（:05 は正時混雑回避）。timezone は GitHub Actions の IANA 指定
+    - cron: "5 9 * * 2,3,5,6"
       timezone: Asia/Tokyo
   workflow_dispatch:
     inputs:

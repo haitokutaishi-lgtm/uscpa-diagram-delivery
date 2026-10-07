@@ -8,7 +8,6 @@
     "FAR": {
       "enabled": true,
       "post_weekdays": [
-        6,
         2,
         5
       ],
@@ -16,10 +15,10 @@
       "label": "FAR図解",
       "require_v2": true,
       "emoji": "📘",
-      "lookahead_slots": 6
+      "lookahead_slots": 4
     },
     "AUD": {
-      "enabled": false,
+      "enabled": true,
       "post_weekdays": [
         1,
         4
@@ -27,7 +26,6 @@
       "queue": "schedule/delivery-queue-aud.json",
       "label": "AUD図解",
       "require_v2": true,
-      "webhook_secret": "DISCORD_WEBHOOK_URL_AUD",
       "emoji": "📗",
       "lookahead_slots": 4
     }

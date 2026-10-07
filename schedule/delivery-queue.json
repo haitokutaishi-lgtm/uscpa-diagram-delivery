@@ -1,5 +1,5 @@
 {
-  "_comment": "FAR の配信順（knowledge/roadmap-far.md と同じ順）。上から順に posts.json へ日・水・土の枠で自動追加。v2 の topic-spec ができていないテーマで補充が止まる（旧型は配信しない）。id が posts の queue_id に無いものが対象。",
+  "_comment": "FAR の配信順（knowledge/roadmap-far.md と同じ順）。上から順に posts.json へ水・土の枠で自動追加。v2 の topic-spec ができていないテーマで補充が止まる（旧型は配信しない）。id が posts の queue_id に無いものが対象。",
   "items": [
     {
       "id": "revenue-five-step-v2",
