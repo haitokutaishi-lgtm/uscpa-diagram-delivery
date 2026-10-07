@@ -368,7 +368,8 @@ function QG_run(finalForToday) {
       var topics = QG_pickTopics(sheet, dateStr, 3, diagrams);
       for (var i = 0; i < topics.length; i++) {
         if (Date.now() - started > QG.TIME_LIMIT_MS) { timedOut = true; break; }
-        var made = QG_makeVerified(topics[i], i, null);
+        var made;
+        try { made = QG_makeVerified(topics[i], i, null); } catch (e) { QG_log('作問でエラー（次回に回す）：' + e.message); continue; }
         QG_appendRow(sheet, dateStr, i + 1, made);
         stats.generated++;
         if (made.status !== 'PASS') stats.failed++;
@@ -386,7 +387,8 @@ function QG_run(finalForToday) {
 
       stats.checked++;
       var q = row.q;
-      var v = QG_verify(q);
+      var v;
+      try { v = QG_verify(q); } catch (e) { QG_log('確認でエラー（次回に回す）：' + dateStr + ' Q' + q.qNum + ' ' + e.message); stats.checked--; continue; }
       if (v.pass) {
         QG_writeStatus(sheet, row.rowIndex, 'PASS', QG_noteOf(v));
         stats.passed++;
@@ -394,7 +396,8 @@ function QG_run(finalForToday) {
       }
       // 不合格 → 同じテーマで作り直す
       var topic = QG_topicForRow(q.topic, diagrams);
-      var remade = QG_makeVerified(topic, j, v);
+      var remade;
+      try { remade = QG_makeVerified(topic, j, v); } catch (e) { QG_log('作り直しでエラー（次回に回す）：' + e.message); continue; }
       if (remade.status === 'PASS') {
         QG_overwriteRow(sheet, row.rowIndex, remade);
         stats.regenerated++;
@@ -429,7 +432,8 @@ function QG_makeVerified(topic, index, prevVerdict) {
       feedback = '前回は JSON が壊れていた：' + e.message;
       continue;
     }
-    var v = QG_verify(q);
+    var v;
+    try { v = QG_verify(q); } catch (e) { feedback = ''; continue; }
     last = { q: q, verdict: v };
     if (v.pass) {
       QG_attachDiagramLink(q, topic);
@@ -658,15 +662,18 @@ function QG_llm(prompt, temperature, maxTokens) {
   }
   var key = p.getProperty('GROQ_API_KEY');
   if (!key) throw new Error('GROQ_API_KEY も ANTHROPIC_API_KEY も未設定');
-  var r2 = UrlFetchApp.fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'post',
-    headers: { 'Authorization': 'Bearer ' + key, 'content-type': 'application/json' },
-    payload: JSON.stringify({ model: QG.GROQ_MODEL, messages: [{ role: 'user', content: prompt }], max_tokens: maxTokens, temperature: temperature }),
-    muteHttpExceptions: true,
-  });
-  var d2 = JSON.parse(r2.getContentText());
-  if (!d2.choices || !d2.choices[0]) throw new Error('Groq API エラー：' + r2.getContentText().slice(0, 200));
-  return d2.choices[0].message.content;
+  for (var attempt = 1; attempt <= 4; attempt++) {
+    var r2 = UrlFetchApp.fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'post',
+      headers: { 'Authorization': 'Bearer ' + key, 'content-type': 'application/json' },
+      payload: JSON.stringify({ model: QG.GROQ_MODEL, messages: [{ role: 'user', content: prompt }], max_tokens: maxTokens, temperature: temperature }),
+      muteHttpExceptions: true,
+    });
+    if (r2.getResponseCode() === 429 && attempt < 4) { Utilities.sleep(20000 * attempt); continue; }   // 無料枠の1分あたり上限。待って再試行
+    var d2 = JSON.parse(r2.getContentText());
+    if (!d2.choices || !d2.choices[0]) throw new Error('Groq API エラー：' + r2.getContentText().slice(0, 200));
+    return d2.choices[0].message.content;
+  }
 }
 
 function QG_parseJSON(raw) {
