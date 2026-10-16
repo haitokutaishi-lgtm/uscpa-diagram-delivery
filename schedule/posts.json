@@ -497,5 +497,14 @@
     "queue_id": "deferred-taxes-temporary-differences-v2",
     "subject": "FAR",
     "_auto": true
+  },
+  "2026-10-28": {
+    "title": "【図解】社債—実効金利法・発行価格・早期償還",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/bond-effective-interest/",
+    "slug": "bond-effective-interest",
+    "queue_id": "bond-effective-interest-v2",
+    "subject": "FAR",
+    "_auto": true
   }
 }
