@@ -506,5 +506,14 @@
     "queue_id": "bond-effective-interest-v2",
     "subject": "FAR",
     "_auto": true
+  },
+  "2026-10-31": {
+    "title": "【図解】キャッシュ・フロー計算書—間接法の営業CF",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-indirect/",
+    "slug": "cash-flow-indirect",
+    "queue_id": "cash-flow-indirect-v2",
+    "subject": "FAR",
+    "_auto": true
   }
 }
