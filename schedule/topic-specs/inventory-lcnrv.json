@@ -1,0 +1,278 @@
+{
+  "version": 2,
+  "knowledge": {
+    "far_text": "棚卸資産の期末評価（原価と正味実現可能価額、低価法）",
+    "asc": "ASC 330-10-35",
+    "updated": "2026-11-07",
+    "sources": [
+      "https://storage.fasb.org/ASU_2015-11.pdf"
+    ]
+  },
+  "post": {
+    "name": "棚卸資産の期末評価（LCNRVとLCM）",
+    "hook_q": "再調達原価が65ドル、正味実現可能価額が90ドル。LIFOの低価法で使う市場価額は、いつも65ドルでしょうか？",
+    "hook_where": "全体図と差がつく論点2",
+    "bullets": [
+      "原価計算の方法からLCNRVとLCMを選ぶ",
+      "LCMの上限・下限と、評価後の新しい原価を整理",
+      "初見の英語MC3問＋TBS（入力すると自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】棚卸資産の期末評価｜LCNRVとLCM",
+    "badge": "FAR 復習シート｜Inventory（ASC 330）",
+    "h1_html": "棚卸資産の期末評価は、原価と何を比べるかで分かれる",
+    "lead_html": "FIFO・平均法なら正味実現可能価額、LIFO・小売棚卸法なら上限と下限で調整した市場価額と原価を比べます。同じ数字を使って、どこで答えが分かれるか見ていきます。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図｜期末に使う比較相手を選ぶ",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例｜同じ商品の期末データ（1個あたり）",
+          "items": [
+            "原価 $100、通常の見込販売価格 $110、完成・販売処分・輸送にかかる見込費用の合計 $20。",
+            "再調達原価 $65（同じ在庫を現在買い直す金額）、通常の利益幅 $12。",
+            "方法による違いを見るため、いずれの方法でも原価が $100 と与えられた場合を比べます。"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "正味実現可能価額（NRV）を出す",
+              "body_html": "通常の見込販売価格 $110 − 完成・販売処分・輸送の見込費用 $20 ＝ <b>$90</b>。"
+            },
+            {
+              "head": "FIFO・平均法など → 原価とNRVの低い方（LCNRV）",
+              "body_html": "原価 $100 と NRV $90 を比較 → <b>評価額 $90、評価損 $10</b>。"
+            },
+            {
+              "head": "LIFO・小売棚卸法 → 原価と市場価額の低い方（LCM）",
+              "body_html": "市場価額は、再調達原価 $65 を下限 $78（$90 − $12）と上限 $90 の間に収めた <b>$78</b>。原価 $100 と比べる → <b>評価額 $78、評価損 $22</b>。",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "計算の順序",
+          "lines": [
+            "LCNRV：原価とNRVを比べます。",
+            "LCM：まず市場価額を決めます。市場価額は、再調達原価・上限・下限の真ん中の金額です。最後に原価と比べます。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "判定",
+      "title_html": "LCMの市場価額は、再調達原価がどこにあるかで決まる",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "再調達原価の位置",
+            "使う市場価額",
+            "上限 $90・下限 $78 の場合"
+          ],
+          "rows": [
+            [
+              "上限より高い",
+              "上限（NRV）",
+              "再調達原価 $95 → $90"
+            ],
+            [
+              "上限と下限の間",
+              "再調達原価",
+              "再調達原価 $84 → $84"
+            ],
+            [
+              "下限より低い",
+              "下限（NRV − 通常の利益幅）",
+              "再調達原価 $65 → $78"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "html": "どちらの方式も、比較の結果が原価より高ければ、期末評価額は原価のままです。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "NRVで引くのは、完成・販売処分・輸送にかかる費用",
+          "rule_html": "NRVは、通常の販売で見込む売価から、合理的に見積もった完成・販売処分・輸送の費用を引いた額です。通常の利益幅はLCMの下限を出す段階で使います。",
+          "calc_html": "$110 − $20 ＝ NRV $90。FIFOの期末評価額は $90 です。",
+          "miss_html": "$90 から利益幅 $12 まで引き、FIFOでも $78 にする。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "LCMは、市場価額を決めてから原価と比べる",
+          "rule_html": "再調達原価が上限を超えれば上限、下限を下回れば下限を使います。その市場価額と原価を比較します。",
+          "calc_html": "再調達原価 $65 は下限 $78 より低いため、市場価額は $78。評価損は $100 − $78 ＝ $22 です。",
+          "miss_html": "再調達原価 $65 をそのまま採用して、評価損を $35 にする。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "年末に切り下げた額が翌期の原価になる",
+          "rule_html": "米国基準の通常の年末処理では、切り下げ後の金額を翌期の新しい原価として扱います。同じ在庫の見込売価が後で回復したことだけを理由に、元の原価に戻しません。",
+          "calc_html": "FIFOで年末に $100 から $90 へ切り下げた後、翌年にNRVが $105 に回復しても、同じ商品の原価は $90 のままです。",
+          "miss_html": "翌年に $10 の戻入を計上して、原価を $100 に戻す。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ",
+      "title_html": "問題文の英語で見る場所",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "first-in, first-out / weighted-average",
+              "原価とNRVを比較",
+              "再調達原価を使う"
+            ],
+            [
+              "last-in, first-out / retail inventory method",
+              "上限・下限つきの市場価額を先に計算",
+              "原価とNRVだけを比べる"
+            ],
+            [
+              "estimated costs of completion, disposal, and transportation",
+              "見込売価から差し引く",
+              "見込売価をそのままNRVにする"
+            ],
+            [
+              "normal profit margin",
+              "LCMの下限を求めるときに使う",
+              "FIFOでも利益幅を引く"
+            ],
+            [
+              "current replacement cost",
+              "LCMで上限・下限との位置関係を確認",
+              "原価と直接比較"
+            ],
+            [
+              "recovered in the following year",
+              "前期末の切り下げで原価が更新されたか",
+              "元の原価に戻す"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題｜英語の設問から方式を選ぶ",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜FIFOとNRV",
+          "stem": "Rook uses FIFO. One unit has a cost of $76, an estimated selling price of $85, and estimated completion and transportation costs of $14 in total. Its replacement cost is $66 and its normal profit margin is $8. What amount should Rook report as inventory per unit?",
+          "choices": [
+            "A. $63",
+            "B. $66",
+            "C. $71",
+            "D. $76"
+          ],
+          "ja_html": "Rook社はFIFOを使用します。単位あたり原価は76ドル、見込売価は85ドル、完成・輸送の見込費用は合計14ドルです。再調達原価は66ドル、通常の利益幅は8ドルです。期末在庫の単位あたりの計上額はいくらですか？",
+          "answer_html": "<b>正解：C（$71）</b><br>NRVは $85 − $14 ＝ $71。原価 $76 と比べて $71 を採用します。<br>A：NRVから利益幅まで引いた。<br>B：再調達原価を使った。<br>D：評価損を認識していない。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜LIFOと市場価額の上限",
+          "stem": "Sage uses LIFO. An item costs $54. Its replacement cost is $49. The estimated selling price is $51, the estimated costs of completion and disposal are $5, and its normal profit margin is $7. What write-down per unit should Sage recognize?",
+          "choices": [
+            "A. $5",
+            "B. $8",
+            "C. $15",
+            "D. $0"
+          ],
+          "ja_html": "Sage社はLIFOを使用します。単位あたり原価54ドル、再調達原価49ドル、見込売価51ドル、完成・販売処分の見込費用5ドル、通常の利益幅7ドルです。単位あたりの評価損はいくらですか？",
+          "answer_html": "<b>正解：B（$8）</b><br>上限 $46、下限 $39。再調達原価 $49 は上限を超えるため、市場価額は $46。評価損は $54 − $46 ＝ $8 です。<br>A：再調達原価を直接使った。<br>C：下限を使った。<br>D：評価損を認識していない。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜翌年の値上がり",
+          "stem": "Fern uses weighted-average cost. At the end of Year 1, Fern wrote down an item from $135 to its net realizable value of $104. The same item remains unsold at the end of Year 2, when its net realizable value is $125. Under U.S. GAAP, what amount should Fern report for the item at the end of Year 2?",
+          "choices": [
+            "A. $104",
+            "B. $125",
+            "C. $135",
+            "D. $156"
+          ],
+          "ja_html": "Fern社は平均法を使用します。Year 1末に商品を原価135ドルからNRVの104ドルまで切り下げました。同じ商品はYear 2末に未販売で、NRVは125ドルです。米国基準でYear 2末の計上額はいくらですか？",
+          "answer_html": "<b>正解：A（$104）</b><br>Year 1末に切り下げた $104 が新しい原価です。NRV $125 はその原価を上回るため、$104 で計上します。<br>B：NRVの回復分を戻し入れている。<br>C：元の原価に戻した。<br>D：元の原価にNRVの回復分まで足した。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式：2つの評価表を埋める",
+          "intro_html": "原価 $140、見込売価 $156、完成・販売処分・輸送の費用は合計 $20、再調達原価 $103、通常の利益幅 $17 です。同じデータを使って、FIFOとLIFOそれぞれの期末評価を求めます。評価損は正の金額で入力してください。",
+          "rows": [
+            {
+              "label": "NRV（LCMの上限）",
+              "ans": 136
+            },
+            {
+              "label": "LCMの下限",
+              "ans": 119
+            },
+            {
+              "label": "LCMの市場価額",
+              "ans": 119
+            },
+            {
+              "label": "FIFOの評価額",
+              "ans": 136
+            },
+            {
+              "label": "FIFOの評価損",
+              "ans": 4
+            },
+            {
+              "label": "LIFOの評価額",
+              "ans": 119
+            },
+            {
+              "label": "LIFOの評価損",
+              "ans": 21
+            }
+          ],
+          "explain_html": "NRVは $156 − $20 ＝ $136。LCMの下限は $136 − $17 ＝ $119。再調達原価 $103 は下限より低いので市場価額は $119 です。FIFOでは $140 − $136 ＝ $4、LIFOでは $140 − $119 ＝ $21 を評価損にします。"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "見ないで確認",
+      "title_html": "見ないで言えるかチェック",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "FIFO・平均法とLIFO・小売棚卸法で比べる相手を言える",
+            "NRVから差し引く費用と、通常の利益幅を使う場面を区別できる",
+            "再調達原価が上限・下限から外れたときの市場価額を言える",
+            "年末に切り下げた在庫の翌期の原価を説明できる"
+          ]
+        }
+      ]
+    }
+  ]
+}

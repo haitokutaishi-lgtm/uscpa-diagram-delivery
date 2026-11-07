@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】債務証券の分類・評価｜HTM・AFS・トレーディング</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Debt Securities（ASC 320・326）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">同じ債券の値下がりを、HTM・AFS・トレーディングで比べる</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">まず利息を計算して償却原価を更新します。次に、保有区分に応じて、期末に載せる金額と値下がりを反映する場所を分けます。以下は、ヘッジ会計を適用せず、税効果を考慮しない例です。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 分類の判定</a><a href="#je">3 仕訳</a><a href="#points">4 差がつく論点</a><a href="#traps">5 引っかけ一覧</a><a href="#mc">6 確認問題</a><a href="#check">7 理解度チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>同じ債券、3つの期末評価</h2>
+      
+      <div class="facts"><p class="font-bold mb-1">例｜Nora Co. が期首に買った債券</p><ul><li>取得額 $96,000、額面 $100,000、年の現金利息 $4,000、実効利率 5%。取得時には信用損失を見込まず、引当金は $0。</li><li>期末公正価値は $93,600。HTM と AFS の信用損失見積額は、いずれも $1,200 とします。</li><li>各区分で保有した場合を別々に比較します。AFS について、売却する意思はなく、償却原価の回収前に売却を求められる可能性も 50% を超えません。</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>1　実効金利法で償却原価を更新</b><p>利息収益 $96,000 × 5% ＝ $4,800。現金利息 $4,000 との差 $800 を加え、期末償却原価は <b>$96,800</b>。</p></div></div><div class="flow-step key"><span class="flow-no">2</span><div><b>2　公正価値との差を確認</b><p>期末公正価値 $93,600 − 償却原価 $96,800 ＝ <b>−$3,200</b>。以下の表で、利息以外の影響を区分別に確認します。</p></div></div></div>
+      <div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat(3,minmax(0,1fr))"><div class="mx-corner"></div><div class="mx-col">HTM</div><div class="mx-col">AFS</div><div class="mx-col">トレーディング</div><div class="mx-row">期末の資産</div><div class="mx-cell "><b>$95,600</b><br>償却原価 − 引当金</div><div class="mx-cell "><b>$93,600</b><br>公正価値</div><div class="mx-cell "><b>$93,600</b><br>公正価値</div><div class="mx-row">損益<br>（利息以外）</div><div class="mx-cell mid">−$1,200<br>信用損失</div><div class="mx-cell mid">−$1,200<br>信用損失</div><div class="mx-cell ng">−$3,200<br>評価損</div><div class="mx-row">OCI</div><div class="mx-cell ">$0</div><div class="mx-cell ng">−$2,000<br>信用損失以外</div><div class="mx-cell ">$0</div></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">最初に分ける3つの金額</p><p class="en text-[13px]">償却原価＝取得額に割引・割増の償却などを反映した金額</p><p class="en text-[13px]">公正価値＝測定日に市場参加者間で売却すると受け取る価格</p><p class="en text-[13px]">OCI＝その他の包括利益。当期の OCI は、貸借対照表の純資産にある AOCI（累積 OCI）に反映します。</p></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>債券をどの区分に入れるか</h2>
+      
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>HTM（held-to-maturity）</b><p>満期まで保有する<strong>積極的な意思と能力</strong>が両方あれば、満期保有目的に分類します。満期が長いこと自体は分類の根拠になりません。</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>トレーディング（trading）</b><p>主に近い将来に売却して利益を得る目的で保有します。公正価値の変動は当期損益に入ります。</p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>AFS（available-for-sale）</b><p>HTM・トレーディングのいずれにも分類されない債務証券です。公正価値で表示し、信用損失を除く未実現保有損益は原則 OCI に入ります。</p></div></div></div>
+      <div class="rule">この3区分は債務証券の整理です。株式などの持分証券は、支配や重要な影響力の有無などを別に確認します。</div>
+      
+    </section>
+
+    <section id="je" class="section-card">
+      <h2><span class="sec-no">3</span>例の債券を期末に調整する</h2>
+      <p class="lead">勘定名は一例です。まず実効金利で利息収益を出し、区分ごとの期末調整を追加します。</p>
+      <div class="table-wrap"><table class="je"><thead><tr><th>場面</th><th>仕訳（ドル）</th><th>見る金額</th></tr></thead><tbody><tr><td>利息と割引償却<br>（この例では共通）</td><td class="en">Dr Cash 4,000<br>Dr Debt security 800<br>Cr Interest revenue 4,800</td><td>利息収益は期首償却原価 × 実効利率です。</td></tr><tr><td>HTM の期末</td><td class="en">Dr Credit loss expense 1,200<br>Cr Allowance for credit losses 1,200</td><td>時価だけを理由に $3,200 の評価減はしません。</td></tr><tr><td>AFS の期末</td><td class="en">Dr Credit loss expense 1,200<br>Cr Allowance for credit losses 1,200<br>Dr Unrealized holding loss—OCI 2,000<br>Cr Fair value adjustment 2,000</td><td>償却原価から引当金と評価調整を引くと、公正価値になります。</td></tr><tr><td>トレーディングの期末</td><td class="en">Dr Unrealized holding loss—earnings 3,200<br>Cr Fair value adjustment 3,200</td><td>この例の全評価差額を損益に入れます。別の信用損失引当金は計上しません。</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">4</span>OCI と損益を分ける判断</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>AFS の信用損失には上限がある</div><div class="rule">AFS を継続保有できる場合、損益に入れる信用損失引当金の上限は、償却原価が公正価値を上回る額です。信用損失以外の値下がりは OCI に入れます。</div><div class="calc">例の下落幅は $96,800 − $93,600 ＝ $3,200。信用損失 $1,200 は上限以内なので、損益に $1,200、OCI に残りの $2,000 を入れます。</div><div class="miss"><b>こう間違える：</b>$3,200 を丸ごと OCI に入れて、信用損失費用 $1,200 を落とす。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>AFS を売ると決めたら、値下がり全体を損益へ</div><div class="rule">売却の意思がある、または償却原価の回収前に売却を求められる可能性が 50% を超える場合は、償却原価を公正価値まで直接切り下げます。既存の信用損失引当金があれば解消します。</div><div class="calc">例で期末に売ると決め、まだ評価処理をしていなければ、$96,800 から $93,600 に切り下げ、$3,200 を損益に計上します。</div><div class="miss"><b>こう間違える：</b>売却を決めた後も $2,000 を OCI に残す。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>AFS を売却したら、過去の評価差額を残さない</div><div class="rule">売却時は債券を帳簿から外し、債券に対応する累積 OCI も取り崩します。信用損失を認識していないケースでは、最終的に売却代金と売却時の償却原価との差額が損益になります。</div><div class="calc">例の債券について信用損失が $0 で、利息・償却が追加で発生する前に $93,600 で売ったとすると、過去に OCI に入れた $3,200 を売却期の損益へ組み替えます。</div><div class="miss"><b>こう間違える：</b>売却代金 $93,600 と表示額 $93,600 が等しいため、売却期の損益も $0 とする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>保有目的の変更で過去の損益は戻さない</div><div class="rule">変更時は公正価値を基準に処理します。トレーディングへの振替ではその時点の未実現差額を損益に反映し、トレーディングからの振替では既に損益に入れた差額を戻しません。AFS から HTM への振替では、残っている累積 OCI を残存期間にわたって利回りの調整として償却し、既存の信用損失引当金は損益で戻し、振替先のルールで引当金を再評価します。</div><div class="calc">例の債券をトレーディングとして保有し、$3,200 の評価損を計上した直後に AFS に振り替えても、計上済みの評価損 $3,200 は戻しません。</div><div class="miss"><b>こう間違える：</b>$3,200 の評価損を損益から取り消して、全額を OCI に移す。</div></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">HTM から AFS への振替では、振替時の信用損失を AFS の基準で評価し、信用損失以外の評価差額を原則 OCI に反映します。HTM を満期前に売却・振替する場合は、他の HTM 銘柄の保有意思も確認します。満期直前で金利変動リスクが実質的に消えている場合など、例外もあります。</p>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">5</span>問題文の英語から、確認する条件を拾う</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>positive intent and ability to hold to maturity</td><td>意思と能力の両方を確かめる</td><td>満期日が書かれているだけで HTM にする</td></tr><tr><td>purchased principally for sale in the near term</td><td>トレーディングの公正価値変動は損益</td><td>未売却なので OCI にする</td></tr><tr><td>unrealized holding loss on an available-for-sale debt security</td><td>信用要因とそれ以外を分ける</td><td>値下がりを全額 OCI にする</td></tr><tr><td>fair value is below amortized cost</td><td>AFS の信用損失引当金の上限を出す</td><td>回収不足の見積額を上限なしで計上する</td></tr><tr><td>more likely than not required to sell before recovery</td><td>償却原価を公正価値まで直接切り下げる</td><td>信用損失以外を OCI に残す</td></tr><tr><td>sold the available-for-sale debt security</td><td>対応する AOCI を取り崩す</td><td>売却後も AOCI に残す</td></tr><tr><td>effective interest rate / stated interest rate</td><td>利息収益には実効利率、現金利息には表面利率</td><td>受取現金をそのまま利息収益にする</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">6</span>初見の数字で、期末評価と売却を確認する</h2>
+      <p class="lead">最初に保有区分を確認し、次に償却原価・公正価値・回収見込額を区別して解きます。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜トレーディングの値下がり</p>
+        <p class="en-stem">Dale Co. holds a debt security classified as trading. Its amortized cost and fair value at year-end were $76,000 and $74,000, respectively. There was no fair value adjustment at the beginning of the year. Excluding interest, what should Dale report for the current year?</p>
+        <div class="choices">A. A $2,000 loss in net income<br>B. A $2,000 loss in other comprehensive income<br>C. No loss until the security is sold<br>D. A $2,000 gain in net income</div>
+        <details><summary>和訳を見る</summary><div class="body">Dale 社の売買目的債務証券は、期末の償却原価が $76,000、公正価値が $74,000 です。期首の公正価値調整はありません。利息を除く当期の報告はどれですか。<br>A. 当期損益に $2,000 の損失　B. OCI に $2,000 の損失　C. 売却までは損失なし　D. 当期損益に $2,000 の利益</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解は A です。</b> $74,000 − $76,000 ＝ −$2,000。売買目的なので当期損益です。<br>B は AFS の信用損失以外の評価差額の処理です。<br>C は公正価値評価を省いています。<br>D は差額の符号が逆です。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜AFS の信用損失と OCI</p>
+        <p class="en-stem">On December 31, Pine Co.'s available-for-sale debt security had an amortized cost of $102,000, a fair value of $99,000, and a present value of expected collections of $100,700. There were no opening valuation adjustments. Pine does not intend to sell and is not more likely than not required to sell before recovery of amortized cost. What loss amounts should Pine recognize in earnings and OCI, respectively?</p>
+        <div class="choices">A. $0 and $3,000<br>B. $3,000 and $0<br>C. $1,300 and $1,700<br>D. $1,700 and $1,300</div>
+        <details><summary>和訳を見る</summary><div class="body">12月31日の AFS 債務証券の償却原価は $102,000、公正価値は $99,000、回収見込額の現在価値は $100,700 です。期首に評価調整はなく、売却する意思もなく、償却原価の回収前に売却を求められる可能性が 50% を超えることもありません。損益と OCI の損失はそれぞれいくらですか。<br>A. $0、$3,000　B. $3,000、$0　C. $1,300、$1,700　D. $1,700、$1,300</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解は C です。</b> 信用損失は $102,000 − $100,700 ＝ $1,300。値下がり全体 $3,000 のうち、残りの $1,700 は OCI です。<br>A は信用損失を無視しています。<br>B は値下がり全体を損益に入れています。<br>D は損益と OCI の振り分けが逆です。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜AFS の売却と累積 OCI</p>
+        <p class="en-stem">At the end of Year 1, Moss Co. reported an available-for-sale debt security at a fair value of $50,800. Its amortized cost was $49,000, with no credit loss allowance. On January 1, Year 2, Moss sold it for $51,500 with no intervening interest or amortization. What gain should Moss report in Year 2 net income?</p>
+        <div class="choices">A. $700<br>B. $1,800<br>C. $2,500<br>D. $4,300</div>
+        <details><summary>和訳を見る</summary><div class="body">Moss 社の AFS 債務証券は Year 1 末の公正価値が $50,800、償却原価は $49,000 で、信用損失引当金はありません。Year 2 の1月1日に $51,500 で売却し、その間の利息・償却はありません。Year 2 の当期損益に計上する売却益はいくらですか。<br>A. $700　B. $1,800　C. $2,500　D. $4,300</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解は C です。</b> $51,500 − $49,000 ＝ $2,500。過去の未実現益 $1,800 も累積 OCI から取り崩します。<br>A は前期末の公正価値からの増加額のみです。<br>B は前期末に計上した評価益のみです。<br>D は売却益 $2,500 に過去の評価益 $1,800 を再び足しています。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="17">
+        <p class="mc-label">問題4｜TBS形式　AFS の評価表</p>
+        <p class="text-[13px] leading-relaxed mb-2">期首に AFS の債券を $120,000 で取得し、1年分の現金利息 $6,000 を受け取りました。実効利率は 6%、期末公正価値は $117,000、回収見込額の現在価値は $116,400 です。期首の引当金は $0。売却の意思はなく、償却原価の回収前に売却を求められる可能性も 50% を超えません。金額は正の値で入力し、金額がない欄は 0 を入力してください。（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>利息収益</td><td class="num"><input inputmode="numeric" data-ans="7200" aria-label="利息収益"></td></tr><tr><td>期末償却原価</td><td class="num"><input inputmode="numeric" data-ans="121200" aria-label="期末償却原価"></td></tr><tr><td>信用損失の見積額（上限適用前）</td><td class="num"><input inputmode="numeric" data-ans="4800" aria-label="信用損失の見積額（上限適用前）"></td></tr><tr><td>期末の信用損失引当金</td><td class="num"><input inputmode="numeric" data-ans="4200" aria-label="期末の信用損失引当金"></td></tr><tr><td>OCI に計上する損失</td><td class="num"><input inputmode="numeric" data-ans="0" aria-label="OCI に計上する損失"></td></tr><tr><th>貸借対照表の債務証券の表示額</th><td class="num"><input inputmode="numeric" data-ans="117000" aria-label="貸借対照表の債務証券の表示額"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">利息収益は $120,000 × 6% ＝ $7,200。現金利息 $6,000 との差 $1,200 を足すと、償却原価は $121,200 です。<br>信用損失の見積額は $121,200 − $116,400 ＝ $4,800 です。引当金の上限は $121,200 − $117,000 ＝ $4,200 なので、$4,200 を損益へ計上し、OCI は $0 です。期末の表示額は公正価値の $117,000 です。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">7</span>見ないで説明できますか</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c18-1"><label for="c18-1">HTM に必要な意思と能力の両方を説明できる</label></li><li><input type="checkbox" id="c18-2"><label for="c18-2">3区分の期末評価額と、値動きを反映する場所を言える</label></li><li><input type="checkbox" id="c18-3"><label for="c18-3">AFS の信用損失引当金の上限を計算できる</label></li><li><input type="checkbox" id="c18-4"><label for="c18-4">売却を決めた場合に AFS の値下がりをどう処理するか説明できる</label></li><li><input type="checkbox" id="c18-5"><label for="c18-5">AFS を売却した期に累積 OCI をどう処理するか説明できる</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

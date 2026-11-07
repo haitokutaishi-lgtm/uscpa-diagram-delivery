@@ -1,0 +1,309 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch7 内部統制の不備と伝達",
+    "asc": "AU-C 265.07–.16 / PCAOB AS 2201.62–.70、.78–.82、.90、Appendix A",
+    "updated": "2026-11-07",
+    "sources": [
+      "https://us.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/au-c-00265.pdf",
+      "https://pcaobus.org/oversight/standards/auditing-standards/details/AS2201"
+    ]
+  },
+  "post": {
+    "name": "内部統制の不備",
+    "hook_q": "決算仕訳のレビューが機能していなかったものの、監査で誤りが1件も見つかりませんでした。それでも重大な欠陥になることはありますか？",
+    "hook_where": "全体図と差がつく論点1",
+    "bullets": [
+      "不備・重要な不備・重大な欠陥を判定する",
+      "財務諸表監査と内部統制の統合監査で、伝達先と時期を区別する",
+      "初見の英語MC3問＋TBS（選ぶと自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】内部統制の不備—重大さと伝達先の判定",
+    "badge": "AUD 復習シート｜Control Deficiencies（AU-C 265 / AS 2201）",
+    "h1_html": "内部統制の不備—重大さと伝達先の判定",
+    "lead_html": "統制が機能しなかったとき、実際の誤りがゼロでも重大な欠陥と判定されることがあります。まず潜在的な影響を考え、その後で伝達先を決めます。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図　どんな誤りを見逃し得るか",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "不備を見つける",
+              "body_html": "統制の設計や運用に問題があり、誤りを適時に防げない、または発見・訂正できない状態です。",
+              "tone": ""
+            },
+            {
+              "head": "重大な欠陥（material weakness）を判定",
+              "body_html": "<b>重要な虚偽表示</b>を適時に防げない、または発見・訂正できない<b>合理的な可能性</b>があれば、重大な欠陥です。実際の虚偽表示の発生は要件に含まれません。",
+              "tone": "warn"
+            },
+            {
+              "head": "重要な不備（significant deficiency）を判定",
+              "body_html": "重大な欠陥より程度は軽いものの、財務報告を監督する<b>統治責任者が注意を向けるべき</b>なら、重要な不備です。",
+              "tone": "key"
+            },
+            {
+              "head": "その他の不備",
+              "body_html": "上の二つに当たらない不備は、他の不備との組み合わせも考えたうえで、適用基準に沿って伝達を判断します。",
+              "tone": ""
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "例として、誰でも多額の決算仕訳を入力でき、独立したレビューもありません。監査で誤りが見つからなくても、重要な誤りを見逃す合理的な可能性があるなら、二つの不備を合わせて重大な欠陥と判断します。"
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "伝達先と時期",
+      "title_html": "伝達先と時期",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "matrix",
+          "corner_html": "判定",
+          "col_heads": [
+            "AU-C 265<br>財務諸表監査",
+            "AS 2201<br>内部統制の統合監査"
+          ],
+          "row_heads": [
+            "重大な欠陥",
+            "重要な不備",
+            "その他の不備"
+          ],
+          "cells": [
+            [
+              {
+                "html": "統治責任者と原則として経営者に<b>書面</b>",
+                "tone": "mid"
+              },
+              {
+                "html": "経営者と監査委員会に<b>書面</b>",
+                "tone": "mid"
+              }
+            ],
+            [
+              {
+                "html": "統治責任者と原則として経営者に<b>書面</b>",
+                "tone": "mid"
+              },
+              {
+                "html": "監査委員会に<b>書面</b>。経営者にも書面で伝えます。",
+                "tone": "mid"
+              }
+            ],
+            [
+              {
+                "html": "経営者の注意を要し、他者から未伝達なら経営者に書面または口頭。口頭なら記録します。"
+              },
+              {
+                "html": "識別した不備を経営者に<b>書面</b>で伝え、監査委員会には伝達済みと知らせます。"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "html": "AU-C 265では適時に、遅くとも報告書のリリース日から60日以内に伝えます。AS 2201では内部統制監査報告書の発行前に必要な伝達を行います。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "判定に使うのは潜在的な誤りの可能性と大きさ",
+          "rule_html": "虚偽表示が起きる可能性と潜在的な金額を評価します。関連する不備を合わせて評価し、別の統制で誤りを適時に防止・発見できる場合は、その統制が十分に細かく機能するか確認します。",
+          "calc_html": "全体図の決算仕訳の例で、決算仕訳のすべてを独立した担当者が十分な精度で検証していれば、そのレビューがリスクを抑えるかを確かめます。",
+          "miss_html": "誤りがゼロ件なので、不備は常に軽いと考える。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "同じ重大な欠陥でも、どの意見かで結論が変わる",
+          "rule_html": "AS 2201の統合監査で評価基準日に重大な欠陥が一つでもあれば、内部統制について不適正意見です。財務諸表の意見は、財務諸表の虚偽表示と入手した監査証拠を基に別途判定します。",
+          "calc_html": "不備が残っていても、決算仕訳の虚偽表示が修正され、財務諸表に対して十分かつ適切な証拠を得られた場合、財務諸表には無限定適正意見を出し得ます。",
+          "miss_html": "内部統制の意見が不適正なので、財務諸表の意見も必ず不適正と考える。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "監査中に改善されても、AU-Cの伝達対象に残る",
+          "rule_html": "AU-C 265では、監査で識別した重要な不備と重大な欠陥を、監査中に改善されていても統治責任者へ書面で伝えます。経営者にも原則として書面で伝えますが、直接伝えることが不適切な事情があれば例外です。",
+          "calc_html": "担当者が監査中にレビュー手続を導入しても、発見した重要な不備の伝達は必要です。",
+          "miss_html": "口頭で説明したので書面は不要と考える。口頭で先に知らせても、書面伝達の要件は残ります。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "問題文で拾う言葉",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "reasonable possibility of a material misstatement",
+              "重大な欠陥の判断基準",
+              "実際の誤りが必要と読む"
+            ],
+            [
+              "important enough to merit attention by those charged with governance",
+              "重大な欠陥より軽ければ重要な不備",
+              "経営者への口頭のみと読む"
+            ],
+            [
+              "individually or in combination",
+              "他の不備と合わせて判定",
+              "各不備を単独でしか見ない"
+            ],
+            [
+              "remediated during the audit",
+              "AU-Cの書面伝達対象に含まれる",
+              "修正済みなので省く"
+            ],
+            [
+              "as of the assessment date",
+              "統合監査の内部統制意見の基準日",
+              "報告書発行日に読み替える"
+            ],
+            [
+              "report release date",
+              "AU-Cの伝達期限の起点",
+              "期末日から60日と読む"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "英語MCとTBS",
+      "lead_html": "分類を聞かれているか、伝達を聞かれているかを確かめます。伝達なら、適用基準と伝達先を確認します。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜実際の虚偽表示がない場合",
+          "stem": "Controls over a material inventory balance create a reasonable possibility that a material misstatement would not be prevented, or detected and corrected, on a timely basis. The auditor did not identify a misstatement. How should the deficiency be classified?",
+          "choices": [
+            "A. A material weakness",
+            "B. A significant deficiency solely because no misstatement was detected",
+            "C. An ordinary deficiency solely because no misstatement was detected",
+            "D. No deficiency"
+          ],
+          "ja_html": "重要な棚卸資産残高の統制に、重要な虚偽表示を適時に防止または発見・訂正できない合理的な可能性があります。監査人は実際の虚偽表示を見つけていません。分類はどれですか。<br>A. 重大な欠陥　B. 発見がないため重要な不備　C. 発見がないためその他の不備　D. 不備なし",
+          "answer_html": "<b>正解：A</b><br>A：重要な虚偽表示を見逃す合理的な可能性があれば、重大な欠陥です。<br>B：虚偽表示が見つからないことを理由に、程度を引き下げています。<br>C：Bと同様に潜在的な影響を見落としています。<br>D：統制の不備は誤りの発見とは独立して判定します。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜監査中の改善と伝達（複合）",
+          "stem": "In a nonissuer financial statement audit, management remediates a significant deficiency before the report release date. Direct communication with management is appropriate. What should the auditor do under AU-C 265?",
+          "choices": [
+            "A. Omit the matter because it was remediated.",
+            "B. Communicate it orally to governance and management only.",
+            "C. Communicate it in writing to governance and management on a timely basis, no later than 60 days after the report release date.",
+            "D. Report it in the auditor’s opinion as a qualification."
+          ],
+          "ja_html": "非発行体の財務諸表監査で、重要な不備は報告書のリリース日前に改善されました。経営者への直接伝達は適切です。AU-C 265ではどうしますか。<br>A. 改善済みのため省略　B. 統治責任者・経営者に口頭のみ　C. 両者に適時に書面で伝達。最長はリリース日から60日　D. 監査意見を限定",
+          "answer_html": "<b>正解：C</b><br>C：監査中に改善された重要な不備も書面で伝えます。<br>A：改善を伝達の免除と取り違えています。<br>B：口頭伝達だけでは足りません。<br>D：重要な不備そのものは財務諸表の意見を限定する理由ではありません。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜統合監査の意見",
+          "stem": "In a PCAOB integrated audit, a material weakness exists as of the assessment date. The financial statements are fairly presented, and the auditor obtained sufficient appropriate evidence. What opinions are appropriate?",
+          "choices": [
+            "A. Unqualified on internal control and unqualified on the financial statements",
+            "B. Adverse on internal control and unqualified on the financial statements",
+            "C. Adverse on internal control and adverse on the financial statements",
+            "D. Qualified on internal control and unqualified on the financial statements"
+          ],
+          "ja_html": "PCAOBの統合監査で、評価基準日に重大な欠陥が残っています。財務諸表は適正で、十分かつ適切な監査証拠も得ています。意見の組み合わせはどれですか。<br>A. 両方無限定適正　B. 内部統制は不適正、財務諸表は無限定適正　C. 両方不適正　D. 内部統制は限定付適正、財務諸表は無限定適正",
+          "answer_html": "<b>正解：B</b><br>B：内部統制は重大な欠陥が残るため不適正です。財務諸表には無限定適正意見を出せます。<br>A：内部統制の欠陥を無視しています。<br>C：財務諸表の適正表示と証拠の条件を無視しています。<br>D：内部統制については限定付適正意見では足りません。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式　分類・伝達先を決める",
+          "select": true,
+          "value_head": "回答",
+          "intro_html": "互いに独立したケースです。分類か、必要な伝達先・方法を選んでください。経営者への直接伝達が不適切な事情はありません。",
+          "rows": [
+            {
+              "label": "分類：二つの関連する不備が重なると、重要な虚偽表示を適時に見逃す合理的な可能性があります。",
+              "options": [
+                "重大な欠陥",
+                "重要な不備",
+                "その他の不備"
+              ],
+              "ans": "重大な欠陥"
+            },
+            {
+              "label": "分類：重大な欠陥ほどの影響はありませんが、財務報告を監督する統治責任者の注意を要します。",
+              "options": [
+                "重大な欠陥",
+                "重要な不備",
+                "その他の不備"
+              ],
+              "ans": "重要な不備"
+            },
+            {
+              "label": "伝達：AU-C 265の監査で見つけた重要な不備です。",
+              "options": [
+                "統治責任者・経営者へ書面",
+                "統治責任者へ口頭のみ",
+                "経営者へ口頭のみ"
+              ],
+              "ans": "統治責任者・経営者へ書面"
+            },
+            {
+              "label": "伝達：AS 2201の監査で、重大な欠陥にも重要な不備にも当たらない不備を識別しました。",
+              "options": [
+                "経営者へ書面、監査委員会に伝達した旨を通知",
+                "経営者へ口頭のみ",
+                "誰にも伝達しない"
+              ],
+              "ans": "経営者へ書面、監査委員会に伝達した旨を通知"
+            }
+          ],
+          "explain_html": "①組み合わせた影響で重大な欠陥です。<br>②監督者の注意を要するため重要な不備です。<br>③AU-Cでは統治責任者・経営者へ書面で伝えます。<br>④AS 2201では経営者へ書面で伝え、監査委員会に伝達した旨を知らせます。"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "重大な欠陥の二つの判断軸を言える",
+            "重要な不備を誰が注意すべき事項かで説明できる",
+            "AU-Cで書面が必要な不備と期限を言える",
+            "AS 2201でその他の不備を誰にどう伝えるか言える",
+            "内部統制と財務諸表で意見が異なり得る理由を説明できる"
+          ]
+        }
+      ]
+    }
+  ]
+}

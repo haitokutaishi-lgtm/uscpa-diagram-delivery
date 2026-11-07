@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】内部統制の不備—重大さと伝達先の判定</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Control Deficiencies（AU-C 265 / AS 2201）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">内部統制の不備—重大さと伝達先の判定</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">統制が機能しなかったとき、実際の誤りがゼロでも重大な欠陥と判定されることがあります。まず潜在的な影響を考え、その後で伝達先を決めます。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 伝達先と時期</a><a href="#points">3 差がつく論点</a><a href="#traps">4 引っかけ一覧</a><a href="#mc">5 確認問題</a><a href="#check">6 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図　どんな誤りを見逃し得るか</h2>
+      
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>不備を見つける</b><p>統制の設計や運用に問題があり、誤りを適時に防げない、または発見・訂正できない状態です。</p></div></div><div class="flow-step warn"><span class="flow-no">2</span><div><b>重大な欠陥（material weakness）を判定</b><p><b>重要な虚偽表示</b>を適時に防げない、または発見・訂正できない<b>合理的な可能性</b>があれば、重大な欠陥です。実際の虚偽表示の発生は要件に含まれません。</p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>重要な不備（significant deficiency）を判定</b><p>重大な欠陥より程度は軽いものの、財務報告を監督する<b>統治責任者が注意を向けるべき</b>なら、重要な不備です。</p></div></div><div class="flow-step "><span class="flow-no">4</span><div><b>その他の不備</b><p>上の二つに当たらない不備は、他の不備との組み合わせも考えたうえで、適用基準に沿って伝達を判断します。</p></div></div></div>
+      <div class="rule">例として、誰でも多額の決算仕訳を入力でき、独立したレビューもありません。監査で誤りが見つからなくても、重要な誤りを見逃す合理的な可能性があるなら、二つの不備を合わせて重大な欠陥と判断します。</div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>伝達先と時期</h2>
+      
+      <div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat(2,minmax(0,1fr))"><div class="mx-corner">判定</div><div class="mx-col">AU-C 265<br>財務諸表監査</div><div class="mx-col">AS 2201<br>内部統制の統合監査</div><div class="mx-row">重大な欠陥</div><div class="mx-cell mid">統治責任者と原則として経営者に<b>書面</b></div><div class="mx-cell mid">経営者と監査委員会に<b>書面</b></div><div class="mx-row">重要な不備</div><div class="mx-cell mid">統治責任者と原則として経営者に<b>書面</b></div><div class="mx-cell mid">監査委員会に<b>書面</b>。経営者にも書面で伝えます。</div><div class="mx-row">その他の不備</div><div class="mx-cell ">経営者の注意を要し、他者から未伝達なら経営者に書面または口頭。口頭なら記録します。</div><div class="mx-cell ">識別した不備を経営者に<b>書面</b>で伝え、監査委員会には伝達済みと知らせます。</div></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">AU-C 265では適時に、遅くとも報告書のリリース日から60日以内に伝えます。AS 2201では内部統制監査報告書の発行前に必要な伝達を行います。</p>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">3</span>差がつく論点</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>判定に使うのは潜在的な誤りの可能性と大きさ</div><div class="rule">虚偽表示が起きる可能性と潜在的な金額を評価します。関連する不備を合わせて評価し、別の統制で誤りを適時に防止・発見できる場合は、その統制が十分に細かく機能するか確認します。</div><div class="calc">全体図の決算仕訳の例で、決算仕訳のすべてを独立した担当者が十分な精度で検証していれば、そのレビューがリスクを抑えるかを確かめます。</div><div class="miss"><b>こう間違える：</b>誤りがゼロ件なので、不備は常に軽いと考える。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>同じ重大な欠陥でも、どの意見かで結論が変わる</div><div class="rule">AS 2201の統合監査で評価基準日に重大な欠陥が一つでもあれば、内部統制について不適正意見です。財務諸表の意見は、財務諸表の虚偽表示と入手した監査証拠を基に別途判定します。</div><div class="calc">不備が残っていても、決算仕訳の虚偽表示が修正され、財務諸表に対して十分かつ適切な証拠を得られた場合、財務諸表には無限定適正意見を出し得ます。</div><div class="miss"><b>こう間違える：</b>内部統制の意見が不適正なので、財務諸表の意見も必ず不適正と考える。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>監査中に改善されても、AU-Cの伝達対象に残る</div><div class="rule">AU-C 265では、監査で識別した重要な不備と重大な欠陥を、監査中に改善されていても統治責任者へ書面で伝えます。経営者にも原則として書面で伝えますが、直接伝えることが不適切な事情があれば例外です。</div><div class="calc">担当者が監査中にレビュー手続を導入しても、発見した重要な不備の伝達は必要です。</div><div class="miss"><b>こう間違える：</b>口頭で説明したので書面は不要と考える。口頭で先に知らせても、書面伝達の要件は残ります。</div></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">4</span>問題文で拾う言葉</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>reasonable possibility of a material misstatement</td><td>重大な欠陥の判断基準</td><td>実際の誤りが必要と読む</td></tr><tr><td>important enough to merit attention by those charged with governance</td><td>重大な欠陥より軽ければ重要な不備</td><td>経営者への口頭のみと読む</td></tr><tr><td>individually or in combination</td><td>他の不備と合わせて判定</td><td>各不備を単独でしか見ない</td></tr><tr><td>remediated during the audit</td><td>AU-Cの書面伝達対象に含まれる</td><td>修正済みなので省く</td></tr><tr><td>as of the assessment date</td><td>統合監査の内部統制意見の基準日</td><td>報告書発行日に読み替える</td></tr><tr><td>report release date</td><td>AU-Cの伝達期限の起点</td><td>期末日から60日と読む</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">5</span>英語MCとTBS</h2>
+      <p class="lead">分類を聞かれているか、伝達を聞かれているかを確かめます。伝達なら、適用基準と伝達先を確認します。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜実際の虚偽表示がない場合</p>
+        <p class="en-stem">Controls over a material inventory balance create a reasonable possibility that a material misstatement would not be prevented, or detected and corrected, on a timely basis. The auditor did not identify a misstatement. How should the deficiency be classified?</p>
+        <div class="choices">A. A material weakness<br>B. A significant deficiency solely because no misstatement was detected<br>C. An ordinary deficiency solely because no misstatement was detected<br>D. No deficiency</div>
+        <details><summary>和訳を見る</summary><div class="body">重要な棚卸資産残高の統制に、重要な虚偽表示を適時に防止または発見・訂正できない合理的な可能性があります。監査人は実際の虚偽表示を見つけていません。分類はどれですか。<br>A. 重大な欠陥　B. 発見がないため重要な不備　C. 発見がないためその他の不備　D. 不備なし</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：A</b><br>A：重要な虚偽表示を見逃す合理的な可能性があれば、重大な欠陥です。<br>B：虚偽表示が見つからないことを理由に、程度を引き下げています。<br>C：Bと同様に潜在的な影響を見落としています。<br>D：統制の不備は誤りの発見とは独立して判定します。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜監査中の改善と伝達（複合）</p>
+        <p class="en-stem">In a nonissuer financial statement audit, management remediates a significant deficiency before the report release date. Direct communication with management is appropriate. What should the auditor do under AU-C 265?</p>
+        <div class="choices">A. Omit the matter because it was remediated.<br>B. Communicate it orally to governance and management only.<br>C. Communicate it in writing to governance and management on a timely basis, no later than 60 days after the report release date.<br>D. Report it in the auditor’s opinion as a qualification.</div>
+        <details><summary>和訳を見る</summary><div class="body">非発行体の財務諸表監査で、重要な不備は報告書のリリース日前に改善されました。経営者への直接伝達は適切です。AU-C 265ではどうしますか。<br>A. 改善済みのため省略　B. 統治責任者・経営者に口頭のみ　C. 両者に適時に書面で伝達。最長はリリース日から60日　D. 監査意見を限定</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>C：監査中に改善された重要な不備も書面で伝えます。<br>A：改善を伝達の免除と取り違えています。<br>B：口頭伝達だけでは足りません。<br>D：重要な不備そのものは財務諸表の意見を限定する理由ではありません。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜統合監査の意見</p>
+        <p class="en-stem">In a PCAOB integrated audit, a material weakness exists as of the assessment date. The financial statements are fairly presented, and the auditor obtained sufficient appropriate evidence. What opinions are appropriate?</p>
+        <div class="choices">A. Unqualified on internal control and unqualified on the financial statements<br>B. Adverse on internal control and unqualified on the financial statements<br>C. Adverse on internal control and adverse on the financial statements<br>D. Qualified on internal control and unqualified on the financial statements</div>
+        <details><summary>和訳を見る</summary><div class="body">PCAOBの統合監査で、評価基準日に重大な欠陥が残っています。財務諸表は適正で、十分かつ適切な監査証拠も得ています。意見の組み合わせはどれですか。<br>A. 両方無限定適正　B. 内部統制は不適正、財務諸表は無限定適正　C. 両方不適正　D. 内部統制は限定付適正、財務諸表は無限定適正</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>B：内部統制は重大な欠陥が残るため不適正です。財務諸表には無限定適正意見を出せます。<br>A：内部統制の欠陥を無視しています。<br>C：財務諸表の適正表示と証拠の条件を無視しています。<br>D：内部統制については限定付適正意見では足りません。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="12">
+        <p class="mc-label">問題4｜TBS形式　分類・伝達先を決める</p>
+        <p class="text-[13px] leading-relaxed mb-2">互いに独立したケースです。分類か、必要な伝達先・方法を選んでください。経営者への直接伝達が不適切な事情はありません。</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">回答</th></tr></thead><tbody><tr><td>分類：二つの関連する不備が重なると、重要な虚偽表示を適時に見逃す合理的な可能性があります。</td><td class="num"><select data-ans="重大な欠陥" aria-label="分類：二つの関連する不備が重なると、重要な虚偽表示を適時に見逃す合理的な可能性があります。"><option value="">選ぶ</option><option value="重大な欠陥">重大な欠陥</option><option value="重要な不備">重要な不備</option><option value="その他の不備">その他の不備</option></select></td></tr><tr><td>分類：重大な欠陥ほどの影響はありませんが、財務報告を監督する統治責任者の注意を要します。</td><td class="num"><select data-ans="重要な不備" aria-label="分類：重大な欠陥ほどの影響はありませんが、財務報告を監督する統治責任者の注意を要します。"><option value="">選ぶ</option><option value="重大な欠陥">重大な欠陥</option><option value="重要な不備">重要な不備</option><option value="その他の不備">その他の不備</option></select></td></tr><tr><td>伝達：AU-C 265の監査で見つけた重要な不備です。</td><td class="num"><select data-ans="統治責任者・経営者へ書面" aria-label="伝達：AU-C 265の監査で見つけた重要な不備です。"><option value="">選ぶ</option><option value="統治責任者・経営者へ書面">統治責任者・経営者へ書面</option><option value="統治責任者へ口頭のみ">統治責任者へ口頭のみ</option><option value="経営者へ口頭のみ">経営者へ口頭のみ</option></select></td></tr><tr><td>伝達：AS 2201の監査で、重大な欠陥にも重要な不備にも当たらない不備を識別しました。</td><td class="num"><select data-ans="経営者へ書面、監査委員会に伝達した旨を通知" aria-label="伝達：AS 2201の監査で、重大な欠陥にも重要な不備にも当たらない不備を識別しました。"><option value="">選ぶ</option><option value="経営者へ書面、監査委員会に伝達した旨を通知">経営者へ書面、監査委員会に伝達した旨を通知</option><option value="経営者へ口頭のみ">経営者へ口頭のみ</option><option value="誰にも伝達しない">誰にも伝達しない</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">①組み合わせた影響で重大な欠陥です。<br>②監督者の注意を要するため重要な不備です。<br>③AU-Cでは統治責任者・経営者へ書面で伝えます。<br>④AS 2201では経営者へ書面で伝え、監査委員会に伝達した旨を知らせます。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">6</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c13-1"><label for="c13-1">重大な欠陥の二つの判断軸を言える</label></li><li><input type="checkbox" id="c13-2"><label for="c13-2">重要な不備を誰が注意すべき事項かで説明できる</label></li><li><input type="checkbox" id="c13-3"><label for="c13-3">AU-Cで書面が必要な不備と期限を言える</label></li><li><input type="checkbox" id="c13-4"><label for="c13-4">AS 2201でその他の不備を誰にどう伝えるか言える</label></li><li><input type="checkbox" id="c13-5"><label for="c13-5">内部統制と財務諸表で意見が異なり得る理由を説明できる</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

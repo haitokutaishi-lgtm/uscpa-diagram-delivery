@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】企業結合｜取得法・のれん・非支配持分</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Business Combinations（連結の前提）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">企業結合の取得日：子会社を100%取り込んで、差額からのれんを出す</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">連結貸借対照表に残る資産・負債、のれん、非支配持分のつながりを確認します。FARでは連結での表示を確認します。取得法によるのれんや取得対価の計算は、BARの出題範囲として扱います。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 適用と表示</a><a href="#points">3 差がつく論点</a><a href="#traps">4 引っかけ</a><a href="#mc">5 確認問題</a><a href="#check">6 見ないで確認</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図｜支配を得た日の金額で、子会社の純資産とのれんを分ける</h2>
+      
+      <div class="facts"><p class="font-bold mb-1">例｜親会社が子会社の80%を取得（単位：千ドル）</p><ul><li>支配を得るために現金820を支払いました。残る20%の非支配持分（NCI）の公正価値は180です。</li><li>子会社の設備などの識別可能資産は公正価値1,100、引き受けた負債は200です。子会社の帳簿上の純資産は760です。</li><li>弁護士への報酬12は別途支払いました。既保有持分はなく、税効果は考慮しません。</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>子会社を100%取り込む</b><p>識別可能純資産 = 資産1,100 − 負債200 = <b>900</b>。識別可能とは、のれんと分けて認識できるという意味です。</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>株主側の公正価値を合計する</b><p>今回の取得対価820 ＋ 残った非支配持分180 = <b>1,000</b>。NCIは親会社以外の株主の持分です。</p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>差額をのれんにする</b><p>株主側1,000 − 識別可能純資産900 = <b>のれん100</b>。弁護士報酬12は発生時の費用です。</p></div></div></div>
+      <div class="mt-4 text-sm leading-relaxed bg-slate-50 border border-slate-200 rounded-lg p-3"><p class="font-bold mb-1">取得日の計算</p><p class="en text-[13px]">のれん ＝ 取得対価 ＋ NCIの公正価値 ＋ 既保有持分の取得日公正価値 − 識別可能純資産の取得日測定額</p><p class="en text-[13px]">上の例：820 ＋ 180 ＋ 0 −（1,100 − 200）＝ 100</p></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>支配を得た日と、連結で残る項目を押さえる</h2>
+      
+      <div class="rule">取得法は事業の支配を得る企業結合に使います。取得日は支配を得た日で、通常は取引の完了日です。資産の取得に該当する取引は別の処理になります。以下では通常の企業結合を扱います。</div>
+      <div class="table-wrap"><table class="je"><thead><tr><th>連結で見る項目</th><th>例の金額（千ドル）</th><th>判断</th></tr></thead><tbody><tr><td>識別可能資産・引受負債</td><td>資産1,100／負債200</td><td>原則として取得日の公正価値。項目により測定の例外があります。</td></tr><tr><td>のれん</td><td>100</td><td>識別可能純資産を超える差額。</td></tr><tr><td>非支配持分</td><td>180</td><td>連結貸借対照表の資本の部に親会社持分と区分して表示します。</td></tr><tr><td>親会社の子会社株式・子会社の取得前資本</td><td>連結上で消去</td><td>子会社の株式と、その中身である資産・負債の二重計上を防ぎます。</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">3</span>差がつく論点</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>80%取得でも、連結で取り込む資産・負債は100%</div><div class="rule">支配を得た子会社の資産・負債を全額取り込み、他の株主の持分はNCIとして資本に示します。</div><div class="calc">1,100 − 200 = 900。NCIには問題で与えられた公正価値180を使います。</div><div class="miss"><b>こう間違える：</b>純資産を900 × 80% = 720とする。対価820から単純に逆算してNCIを205とする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>弁護士報酬と、旧株主に渡す対価を分ける</div><div class="rule">取得のための助言料・法務費用は通常、サービスを受けた期間の費用です。債務・株式の発行費用には別の基準を適用します。旧株主に払う条件付対価は、取得日に公正価値で測定して対価に含めます。</div><div class="calc">本例の取得対価は820です。別払いの弁護士報酬12は当期費用です。</div><div class="miss"><b>こう間違える：</b>取得対価を832と置いて、のれんを112にする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>段階取得では、先に保有していた持分も取得日で測る</div><div class="rule">追加取得で初めて支配を得た場合、既保有持分を取得日公正価値に測り直します。通常、簿価との差額は当期損益に認識します。</div><div class="calc">設例では既保有持分がないため0。段階取得ならこの欄に公正価値を足します。</div><div class="miss"><b>こう間違える：</b>今回支払った金額だけでのれんを計算する。既保有持分の取得時原価をそのまま使う。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>差がマイナスなら、まず測定を再点検する</div><div class="rule">純資産の測定額が株主側の合計を上回れば、認識漏れや測定を見直します。見直しても残る差額は割安購入益として当期損益に認識します。</div><div class="calc">本例では1,000が900を上回るため、100はのれんです。</div><div class="miss"><b>こう間違える：</b>割安購入益をマイナスののれんとして資産の部に残す。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点5</span>取得日が後から分かった事実の基準点になる</div><div class="rule">測定期間中に、取得日に存在した事実に関する情報を得たときは暫定額を修正します。測定期間は必要な情報を得た時点などで終了し、取得日から最長1年です。</div><div class="calc">例えば取得日現在の設備評価が暫定なら、その日付の追加資料で暫定額を検討します。</div><div class="miss"><b>こう間違える：</b>取得後に新たに起きた損傷まで、取得日から存在したものとしてのれんに付け替える。</div></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">4</span>問題文の英語で、拾う数字を見分ける</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>obtained control</td><td>いつ初めて支配を得たか</td><td>契約を署名した日で自動判定</td></tr><tr><td>carrying amount of net assets</td><td>帳簿価額と取得日測定額の区別</td><td>帳簿上の純資産760を引く</td></tr><tr><td>acquisition-date fair value of the NCI</td><td>与えられたNCIの公正価値</td><td>親会社が払った単価をそのまま当てはめる</td></tr><tr><td>acquisition-related legal fees</td><td>弁護士報酬を対価から分ける</td><td>のれんに含める</td></tr><tr><td>previously held equity interest</td><td>支配を得た日の公正価値</td><td>簿価で足す</td></tr><tr><td>after reassessing the measurements</td><td>差が負なら再点検後に割安購入益</td><td>負ののれんを計上</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">5</span>確認問題｜初見の数字で連結の入口を確認する</h2>
+      
+      <div class="mc-card">
+        <p class="mc-label">問題1｜非支配持分と弁護士報酬</p>
+        <p class="en-stem">Lark paid $540,000 for 75% of Cove. The acquisition-date fair value of the noncontrolling interest was $155,000. Identifiable assets and assumed liabilities were measured at $800,000 and $180,000, respectively. Lark separately incurred $20,000 of legal fees for the acquisition. What goodwill should Lark recognize?</p>
+        <div class="choices">A. $55,000<br>B. $75,000<br>C. $95,000<br>D. $230,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Lark社はCove社の75%を540,000ドルで取得しました。取得日のNCIの公正価値は155,000ドル、識別可能資産は800,000ドル、引受負債は180,000ドルです。取得に関する法務費用20,000ドルが別途発生しました。のれんはいくらですか？</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B（$75,000）</b><br>540,000 ＋ 155,000 −（800,000 − 180,000）＝75,000。法務費用は別に費用計上します。<br>A：法務費用を差し引いた額。<br>C：法務費用を足した額。<br>D：純資産を75%に縮めながらNCIも足した額。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜段階取得</p>
+        <p class="en-stem">Pike held 30% of Reed with a carrying amount of $210,000 and an acquisition-date fair value of $260,000. Pike then paid $570,000 for the remaining 70% and obtained control. Reed's identifiable net assets were measured at $750,000. What goodwill and remeasurement gain should Pike recognize, respectively?</p>
+        <div class="choices">A. $30,000 and $0<br>B. $80,000 and $0<br>C. $80,000 and $50,000<br>D. $130,000 and $50,000</div>
+        <details><summary>和訳を見る</summary><div class="body">Pike社はReed社の30%を保有し、その簿価は210,000ドル、取得日の公正価値は260,000ドルでした。残り70%を570,000ドルで取得して支配を得ました。識別可能純資産は750,000ドルです。のれんと既保有持分の再測定益はいくらですか？</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C（$80,000／$50,000）</b><br>のれんは570,000 ＋ 260,000 − 750,000、再測定益は260,000 − 210,000です。<br>A：既保有持分に簿価を使った。<br>B：再測定益を計上していない。<br>D：再測定益をのれんに二重に足した。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜割安購入</p>
+        <p class="en-stem">Wren paid $430,000 to acquire all of Finch. After reassessment, identifiable assets and assumed liabilities were measured at $620,000 and $150,000, respectively. What should Wren recognize for the difference?</p>
+        <div class="choices">A. A $40,000 bargain purchase gain in earnings<br>B. A $40,000 reduction of the recognized assets<br>C. A $40,000 credit directly to equity<br>D. A $40,000 gain in other comprehensive income</div>
+        <details><summary>和訳を見る</summary><div class="body">Wren社はFinch社を430,000ドルで全株取得しました。再点検後の識別可能資産は620,000ドル、引受負債は150,000ドルです。差額をどう処理しますか？</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：A</b><br>純資産470,000 − 対価430,000＝40,000を割安購入益として当期損益に認識します。<br>B：再点検後の資産額を理由なく減らす。<br>C：直接資本に計上する。<br>D：その他の包括利益に計上する。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="15">
+        <p class="mc-label">問題4｜TBS形式：取得日メモを完成させる</p>
+        <p class="text-[13px] leading-relaxed mb-2">North社はSouth社の85%を取得し、現金960千ドルを支払いました。旧株主への条件付対価の取得日公正価値は40千ドル、NCIの公正価値は145千ドルです。識別可能資産1,370千ドル、引受負債310千ドル。外部の取得助言料25千ドルが当期に発生しました。税効果は考慮しません。千ドル単位で入力してください。（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>取得対価</td><td class="num"><input inputmode="numeric" data-ans="1000" aria-label="取得対価"></td></tr><tr><td>識別可能純資産</td><td class="num"><input inputmode="numeric" data-ans="1060" aria-label="識別可能純資産"></td></tr><tr><td>非支配持分</td><td class="num"><input inputmode="numeric" data-ans="145" aria-label="非支配持分"></td></tr><tr><th>のれん</th><td class="num"><input inputmode="numeric" data-ans="85" aria-label="のれん"></td></tr><tr><td>当期費用（取得助言料）</td><td class="num"><input inputmode="numeric" data-ans="25" aria-label="当期費用（取得助言料）"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">対価は960 ＋ 40＝1,000。識別可能純資産は1,370 − 310＝1,060。のれんは1,000 ＋ 145 − 1,060＝85。助言料25は当期費用です。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">6</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c16-1"><label for="c16-1">支配を得た日と、資産・負債を連結に取り込む割合を言える</label></li><li><input type="checkbox" id="c16-2"><label for="c16-2">のれんの計算にNCIの公正価値を足す理由を説明できる</label></li><li><input type="checkbox" id="c16-3"><label for="c16-3">条件付対価と取得助言料を分けられる</label></li><li><input type="checkbox" id="c16-4"><label for="c16-4">段階取得で既保有持分に使う数字を言える</label></li><li><input type="checkbox" id="c16-5"><label for="c16-5">割安購入の差額を、再点検後にどこへ計上するか言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

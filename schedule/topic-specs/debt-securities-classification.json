@@ -1,0 +1,379 @@
+{
+  "version": 2,
+  "knowledge": {
+    "far_text": "FAR Ch13 13-1〜13-4（分類・評価・売却）、信用損失・保有目的の変更",
+    "asc": "ASC 320 / ASC 326-20 / ASC 326-30",
+    "updated": "2026-11-07",
+    "sources": [
+      "https://storage.fasb.org/ASU%202016-13.pdf",
+      "https://storage.fasb.org/ASU%202019-04.pdf",
+      "https://xbrl.fasb.org/ix/?doc=..%2Fimpdocs%2FDS2_TIG%2Fdebtsecurities.htm"
+    ]
+  },
+  "post": {
+    "name": "債務証券の分類と評価",
+    "hook_q": "売却可能（AFS）の債券が $3,200 値下がりし、うち $1,200 は回収できない見込みです。$3,200 は全額 OCI に入りますか、それとも損益にも入りますか？",
+    "hook_where": "差がつく論点1と問題2",
+    "bullets": [
+      "同じ債券を HTM・AFS・トレーディングに分類したときの貸借対照表と損益を比較",
+      "AFS の値下がりを、信用損失とそれ以外に分ける計算を整理",
+      "初見の英語MC3問＋TBS（入力すると自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】債務証券の分類・評価｜HTM・AFS・トレーディング",
+    "badge": "FAR 復習シート｜Debt Securities（ASC 320・326）",
+    "h1_html": "同じ債券の値下がりを、HTM・AFS・トレーディングで比べる",
+    "lead_html": "まず利息を計算して償却原価を更新します。次に、保有区分に応じて、期末に載せる金額と値下がりを反映する場所を分けます。以下は、ヘッジ会計を適用せず、税効果を考慮しない例です。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "同じ債券、3つの期末評価",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例｜Nora Co. が期首に買った債券",
+          "items": [
+            "取得額 $96,000、額面 $100,000、年の現金利息 $4,000、実効利率 5%。取得時には信用損失を見込まず、引当金は $0。",
+            "期末公正価値は $93,600。HTM と AFS の信用損失見積額は、いずれも $1,200 とします。",
+            "各区分で保有した場合を別々に比較します。AFS について、売却する意思はなく、償却原価の回収前に売却を求められる可能性も 50% を超えません。"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "1　実効金利法で償却原価を更新",
+              "body_html": "利息収益 $96,000 × 5% ＝ $4,800。現金利息 $4,000 との差 $800 を加え、期末償却原価は <b>$96,800</b>。"
+            },
+            {
+              "head": "2　公正価値との差を確認",
+              "body_html": "期末公正価値 $93,600 − 償却原価 $96,800 ＝ <b>−$3,200</b>。以下の表で、利息以外の影響を区分別に確認します。",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "matrix",
+          "col_heads": [
+            "HTM",
+            "AFS",
+            "トレーディング"
+          ],
+          "row_heads": [
+            "期末の資産",
+            "損益<br>（利息以外）",
+            "OCI"
+          ],
+          "cells": [
+            [
+              {
+                "html": "<b>$95,600</b><br>償却原価 − 引当金"
+              },
+              {
+                "html": "<b>$93,600</b><br>公正価値"
+              },
+              {
+                "html": "<b>$93,600</b><br>公正価値"
+              }
+            ],
+            [
+              {
+                "html": "−$1,200<br>信用損失",
+                "tone": "mid"
+              },
+              {
+                "html": "−$1,200<br>信用損失",
+                "tone": "mid"
+              },
+              {
+                "html": "−$3,200<br>評価損",
+                "tone": "ng"
+              }
+            ],
+            [
+              {
+                "html": "$0"
+              },
+              {
+                "html": "−$2,000<br>信用損失以外",
+                "tone": "ng"
+              },
+              {
+                "html": "$0"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "formulas",
+          "title": "最初に分ける3つの金額",
+          "lines": [
+            "償却原価＝取得額に割引・割増の償却などを反映した金額",
+            "公正価値＝測定日に市場参加者間で売却すると受け取る価格",
+            "OCI＝その他の包括利益。当期の OCI は、貸借対照表の純資産にある AOCI（累積 OCI）に反映します。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "分類の判定",
+      "title_html": "債券をどの区分に入れるか",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "HTM（held-to-maturity）",
+              "body_html": "満期まで保有する<strong>積極的な意思と能力</strong>が両方あれば、満期保有目的に分類します。満期が長いこと自体は分類の根拠になりません。"
+            },
+            {
+              "head": "トレーディング（trading）",
+              "body_html": "主に近い将来に売却して利益を得る目的で保有します。公正価値の変動は当期損益に入ります。"
+            },
+            {
+              "head": "AFS（available-for-sale）",
+              "body_html": "HTM・トレーディングのいずれにも分類されない債務証券です。公正価値で表示し、信用損失を除く未実現保有損益は原則 OCI に入ります。",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "この3区分は債務証券の整理です。株式などの持分証券は、支配や重要な影響力の有無などを別に確認します。"
+        }
+      ]
+    },
+    {
+      "id": "je",
+      "nav": "仕訳",
+      "title_html": "例の債券を期末に調整する",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "場面",
+            "仕訳（ドル）",
+            "見る金額"
+          ],
+          "en_cols": [
+            1
+          ],
+          "rows": [
+            [
+              "利息と割引償却<br>（この例では共通）",
+              "Dr Cash 4,000<br>Dr Debt security 800<br>Cr Interest revenue 4,800",
+              "利息収益は期首償却原価 × 実効利率です。"
+            ],
+            [
+              "HTM の期末",
+              "Dr Credit loss expense 1,200<br>Cr Allowance for credit losses 1,200",
+              "時価だけを理由に $3,200 の評価減はしません。"
+            ],
+            [
+              "AFS の期末",
+              "Dr Credit loss expense 1,200<br>Cr Allowance for credit losses 1,200<br>Dr Unrealized holding loss—OCI 2,000<br>Cr Fair value adjustment 2,000",
+              "償却原価から引当金と評価調整を引くと、公正価値になります。"
+            ],
+            [
+              "トレーディングの期末",
+              "Dr Unrealized holding loss—earnings 3,200<br>Cr Fair value adjustment 3,200",
+              "この例の全評価差額を損益に入れます。別の信用損失引当金は計上しません。"
+            ]
+          ]
+        }
+      ],
+      "lead_html": "勘定名は一例です。まず実効金利で利息収益を出し、区分ごとの期末調整を追加します。"
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "OCI と損益を分ける判断",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "AFS の信用損失には上限がある",
+          "rule_html": "AFS を継続保有できる場合、損益に入れる信用損失引当金の上限は、償却原価が公正価値を上回る額です。信用損失以外の値下がりは OCI に入れます。",
+          "calc_html": "例の下落幅は $96,800 − $93,600 ＝ $3,200。信用損失 $1,200 は上限以内なので、損益に $1,200、OCI に残りの $2,000 を入れます。",
+          "miss_html": "$3,200 を丸ごと OCI に入れて、信用損失費用 $1,200 を落とす。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "AFS を売ると決めたら、値下がり全体を損益へ",
+          "rule_html": "売却の意思がある、または償却原価の回収前に売却を求められる可能性が 50% を超える場合は、償却原価を公正価値まで直接切り下げます。既存の信用損失引当金があれば解消します。",
+          "calc_html": "例で期末に売ると決め、まだ評価処理をしていなければ、$96,800 から $93,600 に切り下げ、$3,200 を損益に計上します。",
+          "miss_html": "売却を決めた後も $2,000 を OCI に残す。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "AFS を売却したら、過去の評価差額を残さない",
+          "rule_html": "売却時は債券を帳簿から外し、債券に対応する累積 OCI も取り崩します。信用損失を認識していないケースでは、最終的に売却代金と売却時の償却原価との差額が損益になります。",
+          "calc_html": "例の債券について信用損失が $0 で、利息・償却が追加で発生する前に $93,600 で売ったとすると、過去に OCI に入れた $3,200 を売却期の損益へ組み替えます。",
+          "miss_html": "売却代金 $93,600 と表示額 $93,600 が等しいため、売却期の損益も $0 とする。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "保有目的の変更で過去の損益は戻さない",
+          "rule_html": "変更時は公正価値を基準に処理します。トレーディングへの振替ではその時点の未実現差額を損益に反映し、トレーディングからの振替では既に損益に入れた差額を戻しません。AFS から HTM への振替では、残っている累積 OCI を残存期間にわたって利回りの調整として償却し、既存の信用損失引当金は損益で戻し、振替先のルールで引当金を再評価します。",
+          "calc_html": "例の債券をトレーディングとして保有し、$3,200 の評価損を計上した直後に AFS に振り替えても、計上済みの評価損 $3,200 は戻しません。",
+          "miss_html": "$3,200 の評価損を損益から取り消して、全額を OCI に移す。"
+        },
+        {
+          "type": "note",
+          "html": "HTM から AFS への振替では、振替時の信用損失を AFS の基準で評価し、信用損失以外の評価差額を原則 OCI に反映します。HTM を満期前に売却・振替する場合は、他の HTM 銘柄の保有意思も確認します。満期直前で金利変動リスクが実質的に消えている場合など、例外もあります。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "問題文の英語から、確認する条件を拾う",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "positive intent and ability to hold to maturity",
+              "意思と能力の両方を確かめる",
+              "満期日が書かれているだけで HTM にする"
+            ],
+            [
+              "purchased principally for sale in the near term",
+              "トレーディングの公正価値変動は損益",
+              "未売却なので OCI にする"
+            ],
+            [
+              "unrealized holding loss on an available-for-sale debt security",
+              "信用要因とそれ以外を分ける",
+              "値下がりを全額 OCI にする"
+            ],
+            [
+              "fair value is below amortized cost",
+              "AFS の信用損失引当金の上限を出す",
+              "回収不足の見積額を上限なしで計上する"
+            ],
+            [
+              "more likely than not required to sell before recovery",
+              "償却原価を公正価値まで直接切り下げる",
+              "信用損失以外を OCI に残す"
+            ],
+            [
+              "sold the available-for-sale debt security",
+              "対応する AOCI を取り崩す",
+              "売却後も AOCI に残す"
+            ],
+            [
+              "effective interest rate / stated interest rate",
+              "利息収益には実効利率、現金利息には表面利率",
+              "受取現金をそのまま利息収益にする"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "初見の数字で、期末評価と売却を確認する",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜トレーディングの値下がり",
+          "stem": "Dale Co. holds a debt security classified as trading. Its amortized cost and fair value at year-end were $76,000 and $74,000, respectively. There was no fair value adjustment at the beginning of the year. Excluding interest, what should Dale report for the current year?",
+          "choices": [
+            "A. A $2,000 loss in net income",
+            "B. A $2,000 loss in other comprehensive income",
+            "C. No loss until the security is sold",
+            "D. A $2,000 gain in net income"
+          ],
+          "ja_html": "Dale 社の売買目的債務証券は、期末の償却原価が $76,000、公正価値が $74,000 です。期首の公正価値調整はありません。利息を除く当期の報告はどれですか。<br>A. 当期損益に $2,000 の損失　B. OCI に $2,000 の損失　C. 売却までは損失なし　D. 当期損益に $2,000 の利益",
+          "answer_html": "<b>正解は A です。</b> $74,000 − $76,000 ＝ −$2,000。売買目的なので当期損益です。<br>B は AFS の信用損失以外の評価差額の処理です。<br>C は公正価値評価を省いています。<br>D は差額の符号が逆です。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜AFS の信用損失と OCI",
+          "stem": "On December 31, Pine Co.'s available-for-sale debt security had an amortized cost of $102,000, a fair value of $99,000, and a present value of expected collections of $100,700. There were no opening valuation adjustments. Pine does not intend to sell and is not more likely than not required to sell before recovery of amortized cost. What loss amounts should Pine recognize in earnings and OCI, respectively?",
+          "choices": [
+            "A. $0 and $3,000",
+            "B. $3,000 and $0",
+            "C. $1,300 and $1,700",
+            "D. $1,700 and $1,300"
+          ],
+          "ja_html": "12月31日の AFS 債務証券の償却原価は $102,000、公正価値は $99,000、回収見込額の現在価値は $100,700 です。期首に評価調整はなく、売却する意思もなく、償却原価の回収前に売却を求められる可能性が 50% を超えることもありません。損益と OCI の損失はそれぞれいくらですか。<br>A. $0、$3,000　B. $3,000、$0　C. $1,300、$1,700　D. $1,700、$1,300",
+          "answer_html": "<b>正解は C です。</b> 信用損失は $102,000 − $100,700 ＝ $1,300。値下がり全体 $3,000 のうち、残りの $1,700 は OCI です。<br>A は信用損失を無視しています。<br>B は値下がり全体を損益に入れています。<br>D は損益と OCI の振り分けが逆です。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜AFS の売却と累積 OCI",
+          "stem": "At the end of Year 1, Moss Co. reported an available-for-sale debt security at a fair value of $50,800. Its amortized cost was $49,000, with no credit loss allowance. On January 1, Year 2, Moss sold it for $51,500 with no intervening interest or amortization. What gain should Moss report in Year 2 net income?",
+          "choices": [
+            "A. $700",
+            "B. $1,800",
+            "C. $2,500",
+            "D. $4,300"
+          ],
+          "ja_html": "Moss 社の AFS 債務証券は Year 1 末の公正価値が $50,800、償却原価は $49,000 で、信用損失引当金はありません。Year 2 の1月1日に $51,500 で売却し、その間の利息・償却はありません。Year 2 の当期損益に計上する売却益はいくらですか。<br>A. $700　B. $1,800　C. $2,500　D. $4,300",
+          "answer_html": "<b>正解は C です。</b> $51,500 − $49,000 ＝ $2,500。過去の未実現益 $1,800 も累積 OCI から取り崩します。<br>A は前期末の公正価値からの増加額のみです。<br>B は前期末に計上した評価益のみです。<br>D は売却益 $2,500 に過去の評価益 $1,800 を再び足しています。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式　AFS の評価表",
+          "intro_html": "期首に AFS の債券を $120,000 で取得し、1年分の現金利息 $6,000 を受け取りました。実効利率は 6%、期末公正価値は $117,000、回収見込額の現在価値は $116,400 です。期首の引当金は $0。売却の意思はなく、償却原価の回収前に売却を求められる可能性も 50% を超えません。金額は正の値で入力し、金額がない欄は 0 を入力してください。",
+          "rows": [
+            {
+              "label": "利息収益",
+              "ans": 7200
+            },
+            {
+              "label": "期末償却原価",
+              "ans": 121200
+            },
+            {
+              "label": "信用損失の見積額（上限適用前）",
+              "ans": 4800
+            },
+            {
+              "label": "期末の信用損失引当金",
+              "ans": 4200
+            },
+            {
+              "label": "OCI に計上する損失",
+              "ans": 0
+            },
+            {
+              "label": "貸借対照表の債務証券の表示額",
+              "ans": 117000,
+              "head": true
+            }
+          ],
+          "explain_html": "利息収益は $120,000 × 6% ＝ $7,200。現金利息 $6,000 との差 $1,200 を足すと、償却原価は $121,200 です。<br>信用損失の見積額は $121,200 − $116,400 ＝ $4,800 です。引当金の上限は $121,200 − $117,000 ＝ $4,200 なので、$4,200 を損益へ計上し、OCI は $0 です。期末の表示額は公正価値の $117,000 です。"
+        }
+      ],
+      "lead_html": "最初に保有区分を確認し、次に償却原価・公正価値・回収見込額を区別して解きます。"
+    },
+    {
+      "id": "check",
+      "nav": "理解度チェック",
+      "title_html": "見ないで説明できますか",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "HTM に必要な意思と能力の両方を説明できる",
+            "3区分の期末評価額と、値動きを反映する場所を言える",
+            "AFS の信用損失引当金の上限を計算できる",
+            "売却を決めた場合に AFS の値下がりをどう処理するか説明できる",
+            "AFS を売却した期に累積 OCI をどう処理するか説明できる"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】売掛金の確認｜無回答・差異・ラッピング</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Accounts Receivable Confirmations</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">売掛金の確認｜返事が来ないとき、何を調べる？</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">売掛金の実在性とは、帳簿に載る請求が期末に実際に残っていることです。顧客に直接尋ねる手続から、返事が来ないときの次の一手まで追います。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 基準の違い</a><a href="#points">3 差がつく論点</a><a href="#traps">4 引っかけ</a><a href="#mc">5 確認問題</a><a href="#check">6 見ないで確認</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図｜返事の種類で、次の手続を決める</h2>
+      
+      <div class="facts"><p class="font-bold mb-1">例｜12月31日の売掛金を確認する</p><ul><li>受講生「顧客から返事が来なければ、帳簿の金額に同意したと考えていいですか？」</li><li>コーチ「まず、全員に返信を求めたのか、金額が違うときだけ返信を求めたのかを確認しましょう。」</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step mid"><span class="flow-no">1</span><div><b>① 監査人が選ぶ・送る・受け取る</b><p>帳簿にある顧客・請求から対象を選び、監査人から顧客に送り、顧客から監査人に直接返信してもらいます。</p></div></div><div class="flow-step mid"><span class="flow-no">2</span><div><b>② 積極か消極かを確認</b><p><b>積極的確認</b>は一致・不一致のどちらでも返信を求めます。<b>消極的確認</b>は不一致のときに限り返信を求めます。</p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>③ 返事の内容で分ける</b><p>積極確認で無回答なら、フォロー後も得られないときは原則として代替手続へ。差異のある回答なら、入金日・出荷日・取引資料で原因を調べます。</p></div></div></div>
+      <div class="rule">覚える3つは、①依頼と回答を監査人が管理する、②積極確認の無回答には追加の証拠を取る、③差異は原因を調べてから誤りか判定する、です。</div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>消極的確認だけで証拠を取れるか</h2>
+      <p class="lead">受講生「少額の顧客がたくさんいれば、消極的確認だけで十分ですか？」 コーチ「問題文の監査基準を先に見ましょう。単独で使える条件が異なります。」</p>
+      <div class="table-wrap"><table class="je"><thead><tr><th>適用基準</th><th>消極的確認</th><th>売掛金の確認を省ける場面</th></tr></thead><tbody><tr><td>PCAOB AS 2310（2025年6月15日以降に終了する年度の監査）</td><td>単独では証拠が足りません。他の実証手続と組み合わせる場合があります。</td><td>原則として確認、または外部の情報源が管理する情報に監査人が直接アクセス。売掛金でいずれも実行できないと判断した場合は、外部由来の情報を他の実証手続で間接的に取得し、判断を文書化します。</td></tr><tr><td>AICPA AU-C 505・330（SAS 150適用前）</td><td>①リスクが低く統制の運用有効性に証拠がある、②少額・同質の項目が多数、③差異の発生見込みが極めて低い、④受取人が依頼を無視する事情を把握していない。4条件すべてで、該当するアサーションに対する実証手続として単独使用を検討できます。</td><td>原則として外部確認。残高全体に重要性がない、確認が有効でない、または対象のリスクが低く他の実証手続で対応できる、のいずれかで例外。</td></tr></tbody></table></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">AICPAの改訂基準SAS 150は、2028年12月15日以降に終了する期間の財務諸表監査から適用されます。早期適用も認められます。このシートのAICPA欄と演習はSAS 150適用前です。</p>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">3</span>入金・差異・ラッピングを見分ける</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>翌月の入金を、期末に残っていた請求書にひも付ける</div><div class="rule">無回答の代替手続では、期末後の入金を調べ、振込人や送金明細で対象顧客と請求書に結び付けます。必要に応じて、出荷書類、注文書、契約書も調べます。AU-C 505で積極確認の直接の書面回答が不可欠と判断した場合は、代替手続で補えないため監査と意見への影響を評価します。</div><div class="calc">顧客Aの12月請求8,000ドルに対し、1月にAからの入金8,000ドルがあり、送金明細にも12月の請求書番号がある。対象債権への入金として結び付きます。</div><div class="miss"><b>こう間違える：</b>同額の入金が見つかっただけで、顧客と請求書を照合せずに確認済みにする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>回答差異は、取引の時期や記録を調べる入口</div><div class="rule">取引先の回答と会社帳簿が違ったら、差額を生んだ資料を突き合わせます。相手が未着の商品を計上していない場合は、出荷書類と契約上の引渡条件で、会社が期末までに売上を計上できたかを確かめます。</div><div class="calc">会社は12月30日出荷、顧客は1月3日受領。金額差は、引渡条件次第で適切な記録時期の差にも、会社側の期間帰属の誤りにもなります。</div><div class="miss"><b>こう間違える：</b>差異をすべて虚偽表示にする。反対に、「時期のずれ」と言われただけで調査を終える。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>ラッピングは別顧客の入金で帳簿上の穴を埋める</div><div class="rule">ラッピング（lapping）は、ある顧客の入金を着服し、後で受け取った別の顧客の入金を最初の顧客の債権に充当して隠す手口です。振込元・送金明細と売掛金補助元帳（顧客別の明細帳）を突き合わせます。</div><div class="calc">Aからの1,200ドルを着服し、後日Bが払った1,200ドルをAの入金として記帳。銀行入金額と帳簿の合計は一致しても、銀行側の振込元Bと帳簿の顧客Aは一致しません。</div><div class="miss"><b>こう間違える：</b>入金合計だけを確認する。ラッピングと、銀行間振替の時間差を利用するカイティングを混同する。</div></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">4</span>問題文の言葉を、次に調べる資料へつなげる</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>respond whether or not the amount agrees</td><td>積極確認。無回答なら未解決</td><td>無回答を一致とみなす</td></tr><tr><td>respond only if you disagree</td><td>消極確認。単独使用できるかは基準を確認</td><td>PCAOBでも4条件なら単独で十分とする</td></tr><tr><td>response sent to the client</td><td>PCAOBでは顧客に監査人宛ての直接再送を求める</td><td>会社からの転送で確認を完了する</td></tr><tr><td>subsequent receipt</td><td>期末後入金。振込人と対象請求書まで照合</td><td>入金日と金額だけを見る</td></tr><tr><td>confirmation exception</td><td>回答差異。調べて誤りかを判定</td><td>即座に全額を虚偽表示と扱う</td></tr><tr><td>posted to a different customer</td><td>入金の付け替えの兆候。送金者と顧客別元帳を照合</td><td>銀行入金合計と帳簿合計の一致で済ませる</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">5</span>英語MCとTBS</h2>
+      <p class="lead">「どの基準か」「返事がないか、金額が違うか」「どの顧客のどの請求か」を先に拾います。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜無回答と代替手続</p>
+        <p class="en-stem">In an audit under PCAOB standards, a customer does not respond to a positive confirmation or the follow-up. Which procedure best addresses the existence of the selected year-end receivable?</p>
+        <div class="choices">A. Compare total January deposits with total January collections in the ledger.<br>B. Trace the customer’s subsequent payment to the specific invoice outstanding at year-end.<br>C. Inspect the client’s aged receivables report for the same balance.<br>D. Replace the customer with another one that replied.</div>
+        <details><summary>和訳を見る</summary><div class="body">PCAOB基準で、積極確認とフォローの両方に返事がありません。対象の期末売掛金の実在性を確認するのに最も適切な手続はどれですか？</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解はB。</b> 顧客の期末後入金を、期末未決済だった特定の請求書に結び付けます。<br>Aは合計にとどまり、Cは会社自身の帳簿の再確認です。Dでは選んだ売掛金の証拠が残りません。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜消極的確認と適用基準</p>
+        <p class="en-stem">The auditor assesses the relevant risk as low and has evidence that relevant controls operated effectively. The population contains many small, similar balances, very few exceptions are expected, and the auditor knows of no reason recipients would disregard the requests. Which statement is correct?</p>
+        <div class="choices">A. Under both standards, negative confirmation requests alone provide sufficient evidence.<br>B. Under neither standard may negative confirmation requests be used in any circumstances.<br>C. Under AU-C 505 before SAS No. 150 applies, negative confirmations may be the sole substantive procedure for the assertion. Under PCAOB AS 2310 they may not.<br>D. Under PCAOB AS 2310 only, negative confirmation requests alone may be sufficient.</div>
+        <details><summary>和訳を見る</summary><div class="body">リスクは低く、関連する統制は有効に運用されています。母集団は少額・同質の項目が多数で、差異の見込みは極めて低く、依頼を無視する事情も把握していません。正しい記述はどれですか？</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解はC。</b> SAS 150適用前のAU-C 505は4条件をすべて満たす場合に単独使用を検討できます。PCAOBでは消極的確認だけでは足りないため、AとDは誤り。Bも、PCAOBで他の実証手続と組み合わせられるため誤りです。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜ラッピングの兆候</p>
+        <p class="en-stem">A January bank record identifies Customer N as the sender of a payment, but the remittance advice and the posting in the receivables ledger disagree. The ledger credits Customer M. Which action best addresses possible lapping?</p>
+        <div class="choices">A. Compare total January receipts to total deposits and stop if they agree.<br>B. Confirm only whether Customer M will pay next month.<br>C. Compare the payer and invoice on each remittance to the corresponding customer and invoice credited in the ledger.<br>D. Recalculate the aging categories based on invoice dates.</div>
+        <details><summary>和訳を見る</summary><div class="body">銀行記録ではN社からの入金で、送金明細と売掛金元帳が一致しません。元帳ではM社に充当されています。ラッピングの可能性を調べるのに最も適切な手続はどれですか？</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解はC。</b> 振込人と請求書を、元帳で消し込んだ顧客・請求書と1件ずつ照合します。<br>Aは合計だけ、Bは将来の支払予定だけ、Dは滞留期間の計算だけを見ています。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="13">
+        <p class="mc-label">問題4｜TBS形式：3件の確認結果を処理する</p>
+        <p class="text-[13px] leading-relaxed mb-2">PCAOB基準の監査で、監査人は期末売掛金に積極的確認を送りました。次の各状況で、監査人が行う手続を選んでください。</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">対応</th></tr></thead><tbody><tr><td>A社｜会社の経理担当者が回答を転送</td><td class="num"><select data-ans="A社に監査人宛ての直接再送を求める" aria-label="A社｜会社の経理担当者が回答を転送"><option value="">選ぶ</option><option value="転送回答で完了する">転送回答で完了する</option><option value="A社に監査人宛ての直接再送を求める">A社に監査人宛ての直接再送を求める</option></select></td></tr><tr><td>B社｜フォロー後も無回答。期末後に同額の入金あり</td><td class="num"><select data-ans="振込人と対象請求書を照合する" aria-label="B社｜フォロー後も無回答。期末後に同額の入金あり"><option value="">選ぶ</option><option value="金額が一致するため完了する">金額が一致するため完了する</option><option value="振込人と対象請求書を照合する">振込人と対象請求書を照合する</option></select></td></tr><tr><td>C社｜会社は年末出荷を計上し、C社は翌年受領として回答</td><td class="num"><select data-ans="出荷・引渡条件を調べ、記録時期を評価する" aria-label="C社｜会社は年末出荷を計上し、C社は翌年受領として回答"><option value="">選ぶ</option><option value="出荷・引渡条件を調べ、記録時期を評価する">出荷・引渡条件を調べ、記録時期を評価する</option><option value="差異全額を直ちに虚偽表示とする">差異全額を直ちに虚偽表示とする</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">A社は確認先からの直接回答を確保します。B社は別の債権への入金ではないかを確かめます。C社は時期の差を生んだ出荷・引渡の事実を検証します。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">6</span>見ないで説明できるか</h2>
+      
+      <div class="facts"><p class="font-bold mb-1">最後にひとこと</p><ul><li>受講生「結局、同額の入金を見つけたら何を見るんでしたっけ？」</li><li>コーチ「誰が、どの請求書を払ったか。その2つが期末の売掛金と一致するかを見ます。」</li></ul></div>
+      <ul class="check"><li><input type="checkbox" id="c15-1"><label for="c15-1">積極的確認と消極的確認で、誰が返事をするか説明できる</label></li><li><input type="checkbox" id="c15-2"><label for="c15-2">PCAOBとSAS 150適用前のAICPAで、消極的確認単独の扱いを区別できる</label></li><li><input type="checkbox" id="c15-3"><label for="c15-3">無回答と回答差異で、取るべき手続を分けられる</label></li><li><input type="checkbox" id="c15-4"><label for="c15-4">別顧客への入金の付け替えを見つける資料を言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

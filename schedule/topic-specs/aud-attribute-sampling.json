@@ -1,0 +1,289 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch18 監査サンプリング・属性サンプリング",
+    "asc": "AU-C 530 / PCAOB AS 2315.31–.43",
+    "updated": "2026-11-07",
+    "sources": [
+      "https://us.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/au-c-00530.pdf",
+      "https://pcaobus.org/oversight/standards/auditing-standards/details/AS2315"
+    ]
+  },
+  "post": {
+    "name": "属性サンプリング",
+    "hook_q": "許容逸脱率が5%、サンプルで見つけた逸脱が2%なら、予定どおり統制に依拠できますか？",
+    "hook_where": "全体図と問題1",
+    "bullets": [
+      "許容逸脱率・観察した逸脱率・上限を区別する",
+      "サンプル数の増減と、統制に依拠できない場合の対応を整理する",
+      "初見の英語MC3問＋TBS（自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】属性サンプリング—逸脱率の上限とサンプル数",
+    "badge": "AUD 復習シート｜Attribute Sampling（AU-C 530 / AS 2315）",
+    "h1_html": "属性サンプリング—逸脱率の上限とサンプル数",
+    "lead_html": "属性は、承認の有無のように各取引で「ある／ない」を判定できる特徴です。統制に依拠するとは、その統制が働いていることを前提に監査計画を立てることです。統制テストで、承認漏れが何件なら予定どおり統制に依拠できるでしょうか。観察した割合から判定までを、同じ例でつなげます。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図　計画 → 観察 → 上限で判定",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "計画",
+              "body_html": "支払承認の証跡を調べます。予定どおり依拠するための許容逸脱率は<b>5%</b>です。",
+              "tone": "mid"
+            },
+            {
+              "head": "観察",
+              "body_html": "無作為に選んだ100件のうち、承認漏れは2件。サンプル逸脱率は<b>2 ÷ 100 = 2%</b>です。",
+              "tone": "mid"
+            },
+            {
+              "head": "上限を求める",
+              "body_html": "統計表で求めた逸脱率の上限は約<b>6.2%</b>です（片側95%の例）。",
+              "tone": "key"
+            },
+            {
+              "head": "判定",
+              "body_html": "<b>上限6.2% ＞ 許容5%</b>。今回のサンプル結果は予定した依拠水準を支持しません。",
+              "tone": "warn"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "①計画時の許容値を押さえる → ②逸脱件数を調べる → ③サンプルのばらつきを含む上限で比較します。"
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "サンプル数",
+      "title_html": "サンプル数を変える3つの条件",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "他の条件は同じ",
+            "サンプル数",
+            "理由"
+          ],
+          "rows": [
+            [
+              "許容逸脱率を下げる",
+              "増える",
+              "許せる逸脱の幅が狭くなります。"
+            ],
+            [
+              "予想逸脱率を上げる",
+              "増える",
+              "予想する逸脱が許容値に近づきます。"
+            ],
+            [
+              "統制リスクを低く見積もる許容リスクを下げる",
+              "増える",
+              "統制を過信する確率をより小さく抑える必要があります。"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "html": "大きな母集団どうしでは、件数だけが増えても必要なサンプル数は通常ほとんど増えません。予想逸脱率が許容逸脱率以上なら、予定した依拠の前提から見直します。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "サンプルが少ないほど、観察結果から母集団を判断しにくい",
+          "rule_html": "サンプル逸脱率は母集団の逸脱率の推定値です。上限逸脱率には、抽出した項目がたまたま良好だった可能性を織り込みます。",
+          "calc_html": "全体図では、2%にサンプリングリスクの余裕分（約4.2ポイント）が加わり、上限は約6.2%になります。",
+          "miss_html": "2% ＜ 5%だけで依拠できると判断する。上限は許容値を超えています。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "証跡が見つからない項目も判定に入れる",
+          "rule_html": "選んだ項目に所定の手続も適切な代替手続も実施できなければ、統制テスト上は逸脱として扱います。取引が適切に取り消され、その統制がそもそも適用されないと確認できた場合は、適切な代替項目を選びます。",
+          "calc_html": "100件中、承認漏れが1件、証跡がなく代替手続もできない項目が1件なら、逸脱は2件です。",
+          "miss_html": "証跡がない1件を無条件で除外し、1 ÷ 99とする。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "統制を過信した場合は、実証手続が不足し得る",
+          "rule_html": "統制リスクを実際より低く見積もると、必要な実証手続が不足し、監査の有効性に影響します。反対に、高く見積もると、余計な手続が増えて主に効率性に影響します。",
+          "calc_html": "上限6.2%で予定の依拠を支持できなければ、逸脱の原因を調べ、統制リスクの評価や実証手続の種類・時期・範囲を見直します。",
+          "miss_html": "逸脱は金額の虚偽表示と同じだと考え、その場で財務諸表の監査意見を決める。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "問題文で拾う言葉",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "tolerable rate of deviation",
+              "計画上、受け入れられる逸脱率",
+              "標本で観察した率と読む"
+            ],
+            [
+              "expected population deviation rate",
+              "計画時の予想値",
+              "試査後の観察値と読む"
+            ],
+            [
+              "sample deviation rate",
+              "逸脱件数 ÷ サンプル数",
+              "母集団の件数で割る"
+            ],
+            [
+              "upper deviation rate",
+              "サンプリングリスク込みの上限",
+              "観察値だけで判定する"
+            ],
+            [
+              "risk of assessing control risk too low",
+              "統制を過信し、実証手続が不足するリスク",
+              "効率性の問題と読む"
+            ],
+            [
+              "no appropriate alternative procedure",
+              "選んだ項目を逸脱として扱う",
+              "サンプルから削除する"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "英語MCとTBS",
+      "lead_html": "まず許容値・サンプル逸脱率・上限のどれを聞かれているか確かめます。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜計算と判定（複合）",
+          "stem": "An auditor finds 3 deviations in 150 items. The computed upper deviation rate is 5.1%, and the tolerable deviation rate is 4%. What are the sample deviation rate and the appropriate conclusion?",
+          "choices": [
+            "A. 2%; the sample supports planned reliance.",
+            "B. 2%; the sample does not support planned reliance.",
+            "C. 5.1%; the sample supports planned reliance.",
+            "D. 5.1%; the sample does not support planned reliance."
+          ],
+          "ja_html": "150件中3件が逸脱。上限5.1%、許容4%のとき、サンプル逸脱率と予定した依拠の判定はどれですか。<br>A. 2%・支持する　B. 2%・支持しない　C. 5.1%・支持する　D. 5.1%・支持しない",
+          "answer_html": "<b>正解：B</b><br>3 ÷ 150 = 2%。上限5.1%は許容4%を超えます。<br>A：サンプル逸脱率だけで判定しています。<br>C：上限とサンプル逸脱率を混同し、判定も逆です。<br>D：判定は合っていますが、5.1%は上限です。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜サンプル数",
+          "stem": "Holding all other factors constant, which change ordinarily increases the sample size for a test of controls?",
+          "choices": [
+            "A. Increasing the tolerable deviation rate",
+            "B. Reducing the expected population deviation rate",
+            "C. Reducing the allowable risk of assessing control risk too low",
+            "D. Increasing the allowable risk of assessing control risk too low"
+          ],
+          "ja_html": "他の条件が同じとき、統制テストの必要サンプル数を通常増やす変更はどれですか。<br>A. 許容逸脱率を上げる　B. 予想逸脱率を下げる　C. 統制を過信する許容リスクを下げる　D. 同リスクを上げる",
+          "answer_html": "<b>正解：C</b><br>C：許容リスクを下げると、より多くの証拠が必要です。<br>A：許容幅が広がります。<br>B：予想逸脱率と許容逸脱率の差が広がります。<br>D：受け入れるリスクが高まり、必要な件数は通常減ります。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜サンプリングリスク",
+          "stem": "Based on a sample, the auditor mistakenly concludes that an ineffective control supports planned reliance. Which risk has materialized?",
+          "choices": [
+            "A. Risk of assessing control risk too high",
+            "B. Risk of incorrect rejection in a substantive test",
+            "C. Risk of incorrect acceptance in a substantive test",
+            "D. Risk of assessing control risk too low"
+          ],
+          "ja_html": "実際には有効でない統制について、サンプルを基に予定どおり依拠できると誤って結論づけました。どのリスクが現実になりましたか。<br>A. 統制リスクの過大評価　B. 実証手続での誤った棄却　C. 実証手続での誤った受入れ　D. 統制リスクの過小評価",
+          "answer_html": "<b>正解：D</b><br>統制を過信したので、統制リスクの過小評価です。<br>A：統制を過小評価する逆の誤りです。<br>B：実証手続で、重要な虚偽表示があると誤って判断するリスクです。<br>C：実証手続で、重要な虚偽表示を見落とす側のリスクです。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式　承認統制の判定",
+          "select": true,
+          "value_head": "回答",
+          "intro_html": "承認統制を80件調べたところ、承認漏れは4件でした。所定の方法で得た上限は11.1%、計画時の許容逸脱率は8%です。他の統制テストの証拠はありません。",
+          "rows": [
+            {
+              "label": "観察した逸脱率",
+              "options": [
+                "4%",
+                "5%",
+                "8%",
+                "11.1%"
+              ],
+              "ans": "5%"
+            },
+            {
+              "label": "許容逸脱率と比べる値",
+              "options": [
+                "5%",
+                "11.1%"
+              ],
+              "ans": "11.1%"
+            },
+            {
+              "label": "サンプル結果による判定",
+              "options": [
+                "予定した依拠を支持する",
+                "予定した依拠を支持しない"
+              ],
+              "ans": "予定した依拠を支持しない"
+            },
+            {
+              "label": "判定を受けた対応",
+              "options": [
+                "統制リスクと実証手続を見直す",
+                "直ちに不適正意見を出す"
+              ],
+              "ans": "統制リスクと実証手続を見直す"
+            }
+          ],
+          "explain_html": "4 ÷ 80 = 5%。上限11.1%が許容8%を超えるため、予定した依拠を支持しません。逸脱の原因も確認し、統制リスクと実証手続を見直します。"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "サンプル逸脱率と上限逸脱率の違いを言える",
+            "上限を何と比較するか説明できる",
+            "サンプル数を増やす3つの変化を言える",
+            "証跡がなく代替手続もできない項目を扱える",
+            "統制リスクの過小評価が監査の有効性に影響する理由を言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

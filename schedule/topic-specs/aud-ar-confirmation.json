@@ -1,0 +1,286 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "売掛金の確認・ラッピング",
+    "asc": "AU-C 330.20 / AU-C 505.07–.16 / PCAOB AS 2310.12–.28, Appendix C",
+    "updated": "2026-11-07",
+    "sources": [
+      "https://pcaobus.org/oversight/standards/auditing-standards/details/AS2310",
+      "https://us.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/au-c-00505.pdf",
+      "https://us.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/au-c-00330.pdf",
+      "https://www.aicpa-cima.com/resources/download/aicpa-statement-on-auditing-standards-no-150"
+    ]
+  },
+  "post": {
+    "name": "売掛金の確認（積極・消極、未回答、ラッピング）",
+    "hook_q": "積極的確認に返事がなく、翌月に同額の入金を見つけたら、期末の売掛金は確認できたと言えますか？",
+    "hook_where": "全体図と差がつく論点1",
+    "bullets": [
+      "積極・消極の選択と、PCAOB・AICPAで異なるルールを整理",
+      "無回答・差異・ラッピングを見分け、必要な証拠にたどり着く",
+      "初見の英語MC3問と選択式TBSで腕試し"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】売掛金の確認｜無回答・差異・ラッピング",
+    "badge": "AUD 復習シート｜Accounts Receivable Confirmations",
+    "h1_html": "売掛金の確認｜返事が来ないとき、何を調べる？",
+    "lead_html": "売掛金の実在性とは、帳簿に載る請求が期末に実際に残っていることです。顧客に直接尋ねる手続から、返事が来ないときの次の一手まで追います。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図｜返事の種類で、次の手続を決める",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例｜12月31日の売掛金を確認する",
+          "items": [
+            "受講生「顧客から返事が来なければ、帳簿の金額に同意したと考えていいですか？」",
+            "コーチ「まず、全員に返信を求めたのか、金額が違うときだけ返信を求めたのかを確認しましょう。」"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "① 監査人が選ぶ・送る・受け取る",
+              "body_html": "帳簿にある顧客・請求から対象を選び、監査人から顧客に送り、顧客から監査人に直接返信してもらいます。",
+              "tone": "mid"
+            },
+            {
+              "head": "② 積極か消極かを確認",
+              "body_html": "<b>積極的確認</b>は一致・不一致のどちらでも返信を求めます。<b>消極的確認</b>は不一致のときに限り返信を求めます。",
+              "tone": "mid"
+            },
+            {
+              "head": "③ 返事の内容で分ける",
+              "body_html": "積極確認で無回答なら、フォロー後も得られないときは原則として代替手続へ。差異のある回答なら、入金日・出荷日・取引資料で原因を調べます。",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "覚える3つは、①依頼と回答を監査人が管理する、②積極確認の無回答には追加の証拠を取る、③差異は原因を調べてから誤りか判定する、です。"
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "基準の違い",
+      "title_html": "消極的確認だけで証拠を取れるか",
+      "lead_html": "受講生「少額の顧客がたくさんいれば、消極的確認だけで十分ですか？」 コーチ「問題文の監査基準を先に見ましょう。単独で使える条件が異なります。」",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "適用基準",
+            "消極的確認",
+            "売掛金の確認を省ける場面"
+          ],
+          "rows": [
+            [
+              "PCAOB AS 2310（2025年6月15日以降に終了する年度の監査）",
+              "単独では証拠が足りません。他の実証手続と組み合わせる場合があります。",
+              "原則として確認、または外部の情報源が管理する情報に監査人が直接アクセス。売掛金でいずれも実行できないと判断した場合は、外部由来の情報を他の実証手続で間接的に取得し、判断を文書化します。"
+            ],
+            [
+              "AICPA AU-C 505・330（SAS 150適用前）",
+              "①リスクが低く統制の運用有効性に証拠がある、②少額・同質の項目が多数、③差異の発生見込みが極めて低い、④受取人が依頼を無視する事情を把握していない。4条件すべてで、該当するアサーションに対する実証手続として単独使用を検討できます。",
+              "原則として外部確認。残高全体に重要性がない、確認が有効でない、または対象のリスクが低く他の実証手続で対応できる、のいずれかで例外。"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "html": "AICPAの改訂基準SAS 150は、2028年12月15日以降に終了する期間の財務諸表監査から適用されます。早期適用も認められます。このシートのAICPA欄と演習はSAS 150適用前です。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "入金・差異・ラッピングを見分ける",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "翌月の入金を、期末に残っていた請求書にひも付ける",
+          "rule_html": "無回答の代替手続では、期末後の入金を調べ、振込人や送金明細で対象顧客と請求書に結び付けます。必要に応じて、出荷書類、注文書、契約書も調べます。AU-C 505で積極確認の直接の書面回答が不可欠と判断した場合は、代替手続で補えないため監査と意見への影響を評価します。",
+          "calc_html": "顧客Aの12月請求8,000ドルに対し、1月にAからの入金8,000ドルがあり、送金明細にも12月の請求書番号がある。対象債権への入金として結び付きます。",
+          "miss_html": "同額の入金が見つかっただけで、顧客と請求書を照合せずに確認済みにする。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "回答差異は、取引の時期や記録を調べる入口",
+          "rule_html": "取引先の回答と会社帳簿が違ったら、差額を生んだ資料を突き合わせます。相手が未着の商品を計上していない場合は、出荷書類と契約上の引渡条件で、会社が期末までに売上を計上できたかを確かめます。",
+          "calc_html": "会社は12月30日出荷、顧客は1月3日受領。金額差は、引渡条件次第で適切な記録時期の差にも、会社側の期間帰属の誤りにもなります。",
+          "miss_html": "差異をすべて虚偽表示にする。反対に、「時期のずれ」と言われただけで調査を終える。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "ラッピングは別顧客の入金で帳簿上の穴を埋める",
+          "rule_html": "ラッピング（lapping）は、ある顧客の入金を着服し、後で受け取った別の顧客の入金を最初の顧客の債権に充当して隠す手口です。振込元・送金明細と売掛金補助元帳（顧客別の明細帳）を突き合わせます。",
+          "calc_html": "Aからの1,200ドルを着服し、後日Bが払った1,200ドルをAの入金として記帳。銀行入金額と帳簿の合計は一致しても、銀行側の振込元Bと帳簿の顧客Aは一致しません。",
+          "miss_html": "入金合計だけを確認する。ラッピングと、銀行間振替の時間差を利用するカイティングを混同する。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ",
+      "title_html": "問題文の言葉を、次に調べる資料へつなげる",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "respond whether or not the amount agrees",
+              "積極確認。無回答なら未解決",
+              "無回答を一致とみなす"
+            ],
+            [
+              "respond only if you disagree",
+              "消極確認。単独使用できるかは基準を確認",
+              "PCAOBでも4条件なら単独で十分とする"
+            ],
+            [
+              "response sent to the client",
+              "PCAOBでは顧客に監査人宛ての直接再送を求める",
+              "会社からの転送で確認を完了する"
+            ],
+            [
+              "subsequent receipt",
+              "期末後入金。振込人と対象請求書まで照合",
+              "入金日と金額だけを見る"
+            ],
+            [
+              "confirmation exception",
+              "回答差異。調べて誤りかを判定",
+              "即座に全額を虚偽表示と扱う"
+            ],
+            [
+              "posted to a different customer",
+              "入金の付け替えの兆候。送金者と顧客別元帳を照合",
+              "銀行入金合計と帳簿合計の一致で済ませる"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "英語MCとTBS",
+      "lead_html": "「どの基準か」「返事がないか、金額が違うか」「どの顧客のどの請求か」を先に拾います。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜無回答と代替手続",
+          "stem": "In an audit under PCAOB standards, a customer does not respond to a positive confirmation or the follow-up. Which procedure best addresses the existence of the selected year-end receivable?",
+          "choices": [
+            "A. Compare total January deposits with total January collections in the ledger.",
+            "B. Trace the customer’s subsequent payment to the specific invoice outstanding at year-end.",
+            "C. Inspect the client’s aged receivables report for the same balance.",
+            "D. Replace the customer with another one that replied."
+          ],
+          "ja_html": "PCAOB基準で、積極確認とフォローの両方に返事がありません。対象の期末売掛金の実在性を確認するのに最も適切な手続はどれですか？",
+          "answer_html": "<b>正解はB。</b> 顧客の期末後入金を、期末未決済だった特定の請求書に結び付けます。<br>Aは合計にとどまり、Cは会社自身の帳簿の再確認です。Dでは選んだ売掛金の証拠が残りません。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜消極的確認と適用基準",
+          "stem": "The auditor assesses the relevant risk as low and has evidence that relevant controls operated effectively. The population contains many small, similar balances, very few exceptions are expected, and the auditor knows of no reason recipients would disregard the requests. Which statement is correct?",
+          "choices": [
+            "A. Under both standards, negative confirmation requests alone provide sufficient evidence.",
+            "B. Under neither standard may negative confirmation requests be used in any circumstances.",
+            "C. Under AU-C 505 before SAS No. 150 applies, negative confirmations may be the sole substantive procedure for the assertion. Under PCAOB AS 2310 they may not.",
+            "D. Under PCAOB AS 2310 only, negative confirmation requests alone may be sufficient."
+          ],
+          "ja_html": "リスクは低く、関連する統制は有効に運用されています。母集団は少額・同質の項目が多数で、差異の見込みは極めて低く、依頼を無視する事情も把握していません。正しい記述はどれですか？",
+          "answer_html": "<b>正解はC。</b> SAS 150適用前のAU-C 505は4条件をすべて満たす場合に単独使用を検討できます。PCAOBでは消極的確認だけでは足りないため、AとDは誤り。Bも、PCAOBで他の実証手続と組み合わせられるため誤りです。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜ラッピングの兆候",
+          "stem": "A January bank record identifies Customer N as the sender of a payment, but the remittance advice and the posting in the receivables ledger disagree. The ledger credits Customer M. Which action best addresses possible lapping?",
+          "choices": [
+            "A. Compare total January receipts to total deposits and stop if they agree.",
+            "B. Confirm only whether Customer M will pay next month.",
+            "C. Compare the payer and invoice on each remittance to the corresponding customer and invoice credited in the ledger.",
+            "D. Recalculate the aging categories based on invoice dates."
+          ],
+          "ja_html": "銀行記録ではN社からの入金で、送金明細と売掛金元帳が一致しません。元帳ではM社に充当されています。ラッピングの可能性を調べるのに最も適切な手続はどれですか？",
+          "answer_html": "<b>正解はC。</b> 振込人と請求書を、元帳で消し込んだ顧客・請求書と1件ずつ照合します。<br>Aは合計だけ、Bは将来の支払予定だけ、Dは滞留期間の計算だけを見ています。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式：3件の確認結果を処理する",
+          "select": true,
+          "value_head": "対応",
+          "intro_html": "PCAOB基準の監査で、監査人は期末売掛金に積極的確認を送りました。次の各状況で、監査人が行う手続を選んでください。",
+          "rows": [
+            {
+              "label": "A社｜会社の経理担当者が回答を転送",
+              "options": [
+                "転送回答で完了する",
+                "A社に監査人宛ての直接再送を求める"
+              ],
+              "ans": "A社に監査人宛ての直接再送を求める"
+            },
+            {
+              "label": "B社｜フォロー後も無回答。期末後に同額の入金あり",
+              "options": [
+                "金額が一致するため完了する",
+                "振込人と対象請求書を照合する"
+              ],
+              "ans": "振込人と対象請求書を照合する"
+            },
+            {
+              "label": "C社｜会社は年末出荷を計上し、C社は翌年受領として回答",
+              "options": [
+                "出荷・引渡条件を調べ、記録時期を評価する",
+                "差異全額を直ちに虚偽表示とする"
+              ],
+              "ans": "出荷・引渡条件を調べ、記録時期を評価する"
+            }
+          ],
+          "explain_html": "A社は確認先からの直接回答を確保します。B社は別の債権への入金ではないかを確かめます。C社は時期の差を生んだ出荷・引渡の事実を検証します。"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "見ないで確認",
+      "title_html": "見ないで説明できるか",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "最後にひとこと",
+          "items": [
+            "受講生「結局、同額の入金を見つけたら何を見るんでしたっけ？」",
+            "コーチ「誰が、どの請求書を払ったか。その2つが期末の売掛金と一致するかを見ます。」"
+          ]
+        },
+        {
+          "type": "checklist",
+          "items": [
+            "積極的確認と消極的確認で、誰が返事をするか説明できる",
+            "PCAOBとSAS 150適用前のAICPAで、消極的確認単独の扱いを区別できる",
+            "無回答と回答差異で、取るべき手続を分けられる",
+            "別顧客への入金の付け替えを見つける資料を言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】監査報告書の追加区分—強調事項・継続企業・KAMとCAM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Additional Reporting（AU-C 701 / 706 / 570・PCAOB）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">監査報告書の追加区分—強調事項・継続企業・KAMとCAM</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">監査報告書に区分が増える理由は一つではありません。意見に影響する問題を先に判定し、次に監査基準と伝える目的を確認します。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#points">2 差がつく論点</a><a href="#traps">3 引っかけ一覧</a><a href="#mc">4 確認問題</a><a href="#check">5 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図　意見 → 基準 → 伝える目的</h2>
+      
+      <div class="flow diagram-visual"><div class="flow-step warn"><span class="flow-no">1</span><div><b>意見を決める</b><p>重要な虚偽表示や十分な監査証拠が得られない問題は、まず意見への影響を判定します。</p></div></div><div class="flow-step mid"><span class="flow-no">2</span><div><b>適用する基準を確認する</b><p>非発行体の監査で使う<b>AU-C</b>と、発行体の監査で使う<b>PCAOB基準</b>を区別します。</p></div></div><div class="flow-step key"><span class="flow-no">3</span><div><b>区分を選ぶ</b><p>財務諸表の理解、監査や報告書の理解、継続企業の重大な疑義、監査上の重要な事項。それぞれ伝える目的を確認します。</p></div></div></div>
+      <div class="matrix diagram-visual" style="grid-template-columns:minmax(4.2rem,.7fr) repeat(2,minmax(0,1fr))"><div class="mx-corner">伝えること</div><div class="mx-col">非発行体（AU-C）</div><div class="mx-col">発行体（PCAOB）</div><div class="mx-row">注記済みの事項に注意を向ける</div><div class="mx-cell ok"><b>強調事項</b><br>Emphasis of Matter</div><div class="mx-cell ">財務諸表の事項の強調を選択可</div><div class="mx-row">監査や報告書の理解を助ける</div><div class="mx-cell ok"><b>その他の事項</b><br>Other Matter</div><div class="mx-cell ">該当するPCAOB基準の報告要件を確認</div><div class="mx-row">継続企業の重大な疑義が残る</div><div class="mx-cell mid"><b>継続企業の専用区分</b></div><div class="mx-cell mid"><b>説明段落</b><br>Explanatory paragraph</div><div class="mx-row">監査上の重要な事項</div><div class="mx-cell ok"><b>KAM</b><br>伝達を依頼された場合</div><div class="mx-cell ok"><b>CAM</b><br>適用対象の監査</div></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">2</span>差がつく論点</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>注記の内容か、監査の事情か</div><div class="rule">財務諸表に適切に表示・開示済みで、その理解に不可欠な事項に注意を向けるのが強調事項です。監査・監査人の責任・監査報告書を理解するための情報はその他の事項です。</div><div class="calc">例として、重要な後発事象として適切に注記された火災なら強調事項の候補です。前期を前任監査人が監査したという報告書上の事情は、その他の事項の例です。</div><div class="miss"><b>こう間違える：</b>必要な財務諸表注記が欠けているので、監査人が強調事項にその内容を書いて済ませる。重要な開示不足なら意見への影響を評価します。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>継続企業の重大な疑義が残っても、注記が適切なら無修正意見になり得る</div><div class="rule">継続企業を前提に作成することが適切で、経営者の計画を評価しても重大な疑義が残り、関連開示が適切な場合、AU-Cでは専用の継続企業区分、PCAOBでは説明段落を用います。ほかに修正理由がなければ、意見は変わりません。</div><div class="calc">資金調達策を評価しても資金繰りの重大な疑義が残り、会社が適切に注記しているなら、非発行体では無修正意見と継続企業の専用区分を組み合わせます。</div><div class="miss"><b>こう間違える：</b>継続企業の疑義があるだけで限定意見にする。開示不足の場合は重要性と広範性を評価し、限定付適正意見または不適正意見を検討します。継続企業を前提とすること自体が不適切なら不適正意見です。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>KAMとCAMは、選ぶ条件が違う</div><div class="rule">KAMは、統治責任者に伝えた事項から、監査で特に注意を要したものを絞り、その中で最も重要な事項を選びます。AU-CではKAMの伝達を依頼された場合に適用します。</div><div class="calc">CAMは、当期の監査に関して監査委員会に伝えたか伝えるべき事項のうち、重要な勘定・開示に関連し、特に難しい、主観的、または複雑な監査判断を伴った事項です。例えば、重要なのれんの減損で、将来予測の評価が特に難しかった場合です。</div><div class="miss"><b>こう間違える：</b>重要な勘定なら必ずCAMとする。重要な勘定・開示との関連に加えて、監査判断の難しさなども確認します。KAM・CAMは当該事項に個別の意見を出す区分ではありません。</div></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">同じ事項をAU-C 701に従ってKAMとして伝達するなら、強調事項・その他の事項の区分で重ねて扱いません。継続企業や意見修正の根拠はそれぞれの基準で要求される区分に記載します。</p>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">3</span>問題文で拾う言葉</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>appropriately disclosed; fundamental to understanding the financial statements</td><td>強調事項の候補</td><td>その他の事項と答える</td></tr><tr><td>relevant to understanding the auditor’s responsibilities</td><td>その他の事項の候補</td><td>注記への注意喚起と読む</td></tr><tr><td>substantial doubt remains; adequate disclosure</td><td>継続企業の追加区分を検討</td><td>疑義だけで意見を修正する</td></tr><tr><td>material omission of a required disclosure</td><td>意見への影響を評価</td><td>追加区分だけで済ませる</td></tr><tr><td>engaged to communicate key audit matters</td><td>非発行体のKAMの手がかり</td><td>すべての非発行体で必須と読む</td></tr><tr><td>especially challenging, subjective, or complex auditor judgment</td><td>CAMの判定条件の一つ</td><td>この条件だけで決める</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">4</span>英語MCとTBS</h2>
+      <p class="lead">各ケースで適用基準を押さえ、意見を修正する理由があるかを先に確認します。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜財務諸表を読むうえで不可欠な注記</p>
+        <p class="en-stem">In an audit of a nonissuer, a significant subsequent event is adequately disclosed and is fundamental to users’ understanding of the financial statements. The auditor considers it necessary to draw attention to the note. The auditor is not engaged to communicate KAMs, and the matter does not require a modified opinion. Which reporting treatment is appropriate?</p>
+        <div class="choices">A. An other-matter paragraph<br>B. A qualified opinion<br>C. An emphasis-of-matter paragraph<br>D. A going-concern section</div>
+        <details><summary>和訳を見る</summary><div class="body">非発行体の監査。財務諸表の理解に不可欠な後発事象が適切に注記されています。監査人は注記への注意喚起が必要と判断し、KAMの伝達は依頼されていません。この事項は修正意見を要しません。どの扱いが適切ですか。<br>A. その他の事項　B. 限定付適正意見　C. 強調事項　D. 継続企業区分</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>適切な注記に注意を向けるため、強調事項です。<br>A：監査や監査報告書の理解を助ける事項に使います。<br>B：設問には意見修正の理由がありません。<br>D：後発事象についての問題で、継続企業の重大な疑義は示されていません。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜継続企業と意見（複合）</p>
+        <p class="en-stem">A nonissuer appropriately uses the going-concern basis of accounting. Substantial doubt remains after management’s plans are evaluated, and the financial statements adequately disclose the matter. There is no other reason to modify the opinion. What should the auditor issue?</p>
+        <div class="choices">A. An unmodified opinion with a separate going-concern section<br>B. A qualified opinion because substantial doubt remains<br>C. An adverse opinion because substantial doubt remains<br>D. An unmodified opinion with no going-concern reporting</div>
+        <details><summary>和訳を見る</summary><div class="body">非発行体で継続企業の前提は適切です。経営者の計画を評価後も重大な疑義が残り、会社の開示は適切です。他に意見修正理由はありません。どの報告が適切ですか。<br>A. 無修正＋継続企業の専用区分　B. 限定付適正　C. 不適正　D. 無修正で継続企業への言及なし</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：A</b><br>AU-C 570により、無修正意見に継続企業の専用区分を加えます。<br>B：疑義が残ること自体は限定付適正意見の理由になりません。<br>C：継続企業の前提も開示も適切です。<br>D：重大な疑義が残るので専用区分が必要です。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜CAMの要件</p>
+        <p class="en-stem">An issuer audit is subject to PCAOB CAM reporting. Which current-period matter meets the definition of a CAM?</p>
+        <div class="choices">A. A material inventory account with routine procedures, discussed with the audit committee<br>B. An immaterial disclosure involving difficult judgment, discussed with the audit committee and unrelated to any material account or disclosure<br>C. A material account with especially complex judgment that was neither communicated nor required to be communicated to the audit committee<br>D. A material warranty liability requiring especially complex auditor judgment that the auditor was required to communicate to the audit committee</div>
+        <details><summary>和訳を見る</summary><div class="body">発行体の当期監査にPCAOBのCAM報告が適用されます。どの事項がCAMに該当しますか。<br>A. 委員会に伝えた重要な棚卸資産だが手続は定型的　B. 委員会に伝えた判断が難しい開示だが重要な勘定・開示に無関係　C. 重要で判断は複雑だが委員会への伝達も義務もなし　D. 重要な製品保証債務で監査判断が特に複雑、委員会への伝達義務あり</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：D</b><br>Dは委員会への伝達要件、重要な勘定との関連、特に複雑な監査判断の3つがそろっています。<br>A：特に難しい、主観的、または複雑な判断の条件が不足します。<br>B：重要な勘定・開示との関連がありません。<br>C：委員会への伝達または伝達義務の条件を満たしません。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="11">
+        <p class="mc-label">問題4｜TBS形式　報告書の対応を選ぶ</p>
+        <p class="text-[13px] leading-relaxed mb-2">互いに独立した監査です。各ケースに対応する区分または対応を選んでください。</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">報告上の対応</th></tr></thead><tbody><tr><td>非発行体。前期は前任監査人が担当し、その報告書は再発行しません。当期の監査人が前期監査の情報を報告書で述べます。</td><td class="num"><select data-ans="その他の事項" aria-label="非発行体。前期は前任監査人が担当し、その報告書は再発行しません。当期の監査人が前期監査の情報を報告書で述べます。"><option value="">選ぶ</option><option value="強調事項">強調事項</option><option value="その他の事項">その他の事項</option><option value="CAM">CAM</option></select></td></tr><tr><td>非発行体。KAMの伝達を依頼され、統治責任者と協議した事項のうち、監査で特に注意を要し、最も重要な事項として選ばれました。</td><td class="num"><select data-ans="KAM" aria-label="非発行体。KAMの伝達を依頼され、統治責任者と協議した事項のうち、監査で特に注意を要し、最も重要な事項として選ばれました。"><option value="">選ぶ</option><option value="KAM">KAM</option><option value="CAM">CAM</option><option value="強調事項">強調事項</option></select></td></tr><tr><td>発行体。経営者の計画を評価後も重大な疑義が残ります。継続企業の前提・関連開示は適切で、ほかに意見修正理由はありません。</td><td class="num"><select data-ans="説明段落を追加" aria-label="発行体。経営者の計画を評価後も重大な疑義が残ります。継続企業の前提・関連開示は適切で、ほかに意見修正理由はありません。"><option value="">選ぶ</option><option value="説明段落を追加">説明段落を追加</option><option value="限定付適正意見に修正">限定付適正意見に修正</option><option value="継続企業への言及なし">継続企業への言及なし</option></select></td></tr><tr><td>非発行体。適用基準が要求する重要な開示を会社が行わず、監査人は影響が広範でないと判断しました。</td><td class="num"><select data-ans="限定付適正意見" aria-label="非発行体。適用基準が要求する重要な開示を会社が行わず、監査人は影響が広範でないと判断しました。"><option value="">選ぶ</option><option value="強調事項だけを追加">強調事項だけを追加</option><option value="限定付適正意見">限定付適正意見</option><option value="意見差控え">意見差控え</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">①前期監査の事情はその他の事項です。<br>②AU-C 701の条件に当てはまるためKAMです。<br>③PCAOBでは重大な疑義が残る場合に説明段落を追加します。<br>④重要だが広範でない会計基準からの逸脱なので限定付適正意見です。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">5</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c12-1"><label for="c12-1">強調事項とその他の事項の違いを説明できる</label></li><li><input type="checkbox" id="c12-2"><label for="c12-2">継続企業の疑義が残り開示が適切な場合の報告を選べる</label></li><li><input type="checkbox" id="c12-3"><label for="c12-3">必要な開示が不足する場合に意見への影響を検討できる</label></li><li><input type="checkbox" id="c12-4"><label for="c12-4">非発行体でKAMを伝える前提を言える</label></li><li><input type="checkbox" id="c12-5"><label for="c12-5">CAMの3つの条件を言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

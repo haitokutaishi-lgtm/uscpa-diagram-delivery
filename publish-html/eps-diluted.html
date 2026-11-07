@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】希薄化EPS｜自己株式法と転換仮定法</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート｜Diluted Earnings per Share（ASC 260）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">希薄化EPSは、証券を1つ加えるたびに比べ直す</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">普通株に変わる可能性のある証券を持つ会社の例です。最初に基本EPSを求め、次に証券ごとに利益と株数の増分を出します。組み込んだ直後のEPSを、次の判定に使います。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 方法の選択</a><a href="#points">3 差がつく論点</a><a href="#traps">4 引っかけ一覧</a><a href="#mc">5 確認問題</a><a href="#check">6 理解度チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>基本EPS $2.80 から、何を入れて $2.59 になるか</h2>
+      
+      <div class="facts"><p class="font-bold mb-1">例｜Orchard Co. の1年間</p><ul><li>純利益 $600,000、加重平均流通普通株式数 200,000株。転換優先株の当期累積配当 $40,000。非継続事業はありません。</li><li>普通株30,000株分のオプション。行使価格 $12、期中平均株価 $20。オプションの仮定受取額は行使代金のみです。</li><li>転換優先株は普通株20,000株に転換できます。転換社債は当期利息費用 $36,000、税率25%、全額を普通株10,000株に転換できます。各証券は期首から期末まで存在します。</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>出発点　基本EPS $2.80</b><p>分子は $600,000 − $40,000 ＝ $560,000。分母は 200,000株。</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>1　オプションを入れる → 約 $2.64</b><p>仮定の買戻しは 30,000株 × $12 ÷ $20 ＝ 18,000株。純増は <b>12,000株</b>。$560,000 ÷ 212,000株。</p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>2　転換優先株を入れる → 約 $2.59</b><p>追加1株あたり $40,000 ÷ 20,000株 ＝ <b>$2.00</b>。直前の約 $2.64 より低いため組み込み、$600,000 ÷ 232,000株になります。</p></div></div><div class="flow-step key"><span class="flow-no">4</span><div><b>3　転換社債は除外 → 約 $2.59 のまま</b><p>追加1株あたり $36,000 × 75% ÷ 10,000株 ＝ <b>$2.70</b>。直前の約 $2.59 より高く、組み込むと EPS が上がるため除外します。</p></div></div></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>証券ごとに分子・分母の増分を出す</h2>
+      <p class="lead">これらはEPSを計算するための仮定です。計算上の行使や転換を仕訳に記録することはありません。</p>
+      <div class="table-wrap"><table class="je"><thead><tr><th>証券と方法</th><th>分子の増分</th><th>分母の増分</th></tr></thead><tbody><tr><td>オプション・ワラント<br>自己株式法（treasury stock method）</td><td>この例では $0</td><td>行使を仮定した発行株数 − 仮定受取額で平均株価により買い戻せる株数</td></tr><tr><td>転換優先株<br>転換仮定法（if-converted method）</td><td>基本EPSで差し引いた優先配当を戻す</td><td>転換で発行する普通株式数</td></tr><tr><td>全額が株式に転換される転換社債<br>転換仮定法</td><td>回避できる利息費用を税引後で戻す</td><td>転換で発行する普通株式数</td></tr></tbody></table></div>
+      <div class="rule">基本EPSの分母は<strong>加重平均流通普通株式数</strong>です。分子の優先配当は、累積型なら当期分、非累積型なら当期に宣言された分を引きます。</div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">3</span>平均株価・組み込む順番・判定の基準</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>オプションは発行株数から買戻し株数を引く</div><div class="rule">単純なオプションでは行使代金で普通株を買い戻すと仮定します。使うのは<strong>期中平均株価</strong>です。行使価格が平均株価以上なら、株数を加えません。</div><div class="calc">例の30,000株では、$360,000 ÷ $20 ＝ 18,000株を買い戻せるので、分母に足すのは12,000株です。</div><div class="miss"><b>こう間違える：</b>買戻しを忘れて30,000株すべてを足し、オプション反映後を $560,000 ÷ 230,000株 ＝ 約 $2.43 とする。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>比較する相手は直前のEPS</div><div class="rule">1株増えるごとに利益がいくら増えるか（分子の増分 ÷ 分母の増分）が小さい証券から検討します。直前のEPSを下げる証券を入れて、EPSを計算し直します。判定では丸め前の値を使います。</div><div class="calc">例の転換社債の $2.70 は、基本EPS $2.80 を下回ります。しかし、オプション・優先株を入れた後の $600,000 ÷ 232,000株を上回ります。</div><div class="miss"><b>こう間違える：</b>すべてを基本EPS $2.80 とだけ比較して転換社債を加える。例では $627,000 ÷ 242,000株 ≈ $2.5909 となり、組み込む前の約 $2.5862 より高くなります。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>社債の利息は税引後、優先配当はそのまま</div><div class="rule">社債が株式に転換されていれば、利息費用とその節税効果の両方がなくなります。優先配当を戻すときに税率は掛けません。元本が必ず現金決済となる商品では、その部分の利息を戻さないなど、決済条件も確認します。</div><div class="calc">例の社債は $36,000 × (1 − 25%) ＝ $27,000、優先株は $40,000 を戻す計算で判定します。</div><div class="miss"><b>こう間違える：</b>社債の $36,000 を全額戻す、または優先配当 $40,000 を税引後の $30,000 にしてしまう。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点4</span>期中に発行した証券は発行日から数える</div><div class="rule">期首に存在した証券は原則として期首から、期中発行なら発行日から行使や転換を仮定します。実際に行使・転換した後の普通株式は、実際に流通した期間に応じて基本EPSの分母に入ります。</div><div class="calc">例のオプションが年のちょうど半分だけ存在した場合、年間の分母に加える株数は12,000株 × 6/12 ＝ 6,000株です。その期間の平均株価も $20 と仮定します。</div><div class="miss"><b>こう間違える：</b>期中発行なのに、年間の分母に12,000株をそのまま加える。</div></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">非継続事業があるときは、優先配当などを調整した<strong>継続事業利益</strong>で希薄化を判定し、その判定を純利益などのEPSにも使います。継続事業からの普通株帰属損失がある場合、通常のオプション・全額株式転換型の証券は1株損失を小さくするため除外します。</p>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">4</span>問題文の英語を見て、使う数字を選ぶ</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>weighted-average common shares outstanding</td><td>基本EPSの分母は期間加重平均</td><td>期末普通株式数で割る</td></tr><tr><td>average market price / year-end market price</td><td>自己株式法では期間の平均株価を使う</td><td>期末株価で買い戻す</td></tr><tr><td>proceeds from assumed exercise</td><td>仮定受取額を買戻し株数へ変換</td><td>行使株数を全て分母に足す</td></tr><tr><td>convertible preferred stock</td><td>基本EPSで控除した配当を戻す</td><td>配当を税引後に直す</td></tr><tr><td>interest expense on convertible bonds</td><td>利息を税引後で戻す</td><td>税引前の利息をそのまま足す</td></tr><tr><td>issued on July 1</td><td>発行日からの期間を反映する</td><td>期首からあったものとして扱う</td></tr><tr><td>income from continuing operations</td><td>非継続事業がある場合の希薄化の判定基準</td><td>純利益で希薄化を判定する</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">5</span>初見の数字で、増分と希薄化を判定する</h2>
+      <p class="lead">問題ごとに、分子の増分・分母の増分・比較するEPSを書き分けてください。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜期中発行のオプション</p>
+        <p class="en-stem">On July 1, Lark Co. issued options to buy 24,000 common shares at $15 per share. The options remained outstanding until year-end. The average market price from July 1 through December 31 was $25, and the year-end market price was $30. There were no other assumed proceeds. How many weighted-average incremental shares should Lark include in its annual diluted EPS?</p>
+        <div class="choices">A. 4,800<br>B. 6,000<br>C. 9,600<br>D. 12,000</div>
+        <details><summary>和訳を見る</summary><div class="body">7月1日に、普通株24,000株を1株 $15 で取得できるオプションを発行しました。オプションは年末まで存在します。7〜12月の平均株価は $25、年末株価は $30。他の仮定受取額はありません。年間の希薄化EPSの分母に加える加重平均株数はいくつですか。<br>A. 4,800　B. 6,000　C. 9,600　D. 12,000</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解は A です。</b> 買戻しは 24,000 × $15 ÷ $25 ＝ 14,400株。差の9,600株に 6/12 を掛けて4,800株。<br>B は年末株価 $30 を使っています。<br>C は期間を掛けていません。<br>D は買戻し株数を引いていません。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜転換社債の希薄化</p>
+        <p class="en-stem">Vale Co. had $200,000 of net income, all from continuing operations, and 100,000 weighted-average common shares. Its only potential common shares relate to bonds outstanding all year and convertible entirely into 12,000 common shares. The bonds generated $24,000 of annual interest expense, and the income tax rate was 25%. What is diluted EPS, rounded to the nearest cent?</p>
+        <div class="choices">A. $1.79<br>B. $1.95<br>C. $2.00<br>D. $2.24</div>
+        <details><summary>和訳を見る</summary><div class="body">純利益 $200,000 はすべて継続事業によるもので、加重平均流通普通株式数は100,000株です。唯一の潜在普通株式は、通年存在し、普通株12,000株へ全額転換できる社債に関するものです。年間利息費用は $24,000、税率は25%です。セント単位で四捨五入した希薄化EPSはいくらですか。<br>A. $1.79　B. $1.95　C. $2.00　D. $2.24</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解は B です。</b> 分子に $24,000 × 75% ＝ $18,000 を戻し、分母に12,000株を加えます。$218,000 ÷ 112,000株 ≈ $1.95。<br>A は利息を戻していません。<br>C は税引前利息を戻した結果が基本EPSと同じになるため、税効果を入れると希薄化する点を見落としています。<br>D は税引前利息を戻し、株数を増やしていません。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜継続事業の損失と純利益</p>
+        <p class="en-stem">Brook Co. reported a loss from continuing operations of $50,000 and income from discontinued operations of $250,000, both after tax. It had no preferred shares and 100,000 weighted-average common shares. Warrants would add 10,000 shares under the treasury stock method. What diluted EPS should Brook report for net income, rounded to the nearest cent?</p>
+        <div class="choices">A. $1.82<br>B. $2.00<br>C. $2.50<br>D. $0.50</div>
+        <details><summary>和訳を見る</summary><div class="body">継続事業の税引後損失が $50,000、非継続事業の税引後利益が $250,000 です。優先株はなく、加重平均流通普通株式数は100,000株。ワラントの自己株式法による増分は10,000株です。純利益に対する希薄化EPSはいくらですか。<br>A. $1.82　B. $2.00　C. $2.50　D. $0.50</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解は B です。</b> 継続事業の1株損失が −$0.50 から約 −$0.45 になるため逆希薄化です。純利益に対しても100,000株を使い、$200,000 ÷ 100,000株 ＝ $2.00。<br>A は純利益を基準に判定しワラントを含めています。<br>C は非継続事業の利益だけを分子にしています。<br>D は継続事業の損失額だけを分子にし、符号も逆です。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="14">
+        <p class="mc-label">問題4｜TBS形式　組み込む証券を順番に判定する</p>
+        <p class="text-[13px] leading-relaxed mb-2">Sable Co. の継続事業からの純利益は $350,000、加重平均流通普通株式数は100,000株です。転換優先株の累積当期配当は $20,000 で、普通株10,000株に転換可能です。オプション15,000株分の行使価格は $12、平均株価は $20 です。他の仮定受取額はありません。全額が普通株4,000株に転換される社債の利息費用は $16,800、税率は25%です。各証券は通年で存在します。EPSは小数第2位に丸めて入力してください。（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>基本EPS</td><td class="num"><input inputmode="numeric" data-ans="3.3" aria-label="基本EPS"></td></tr><tr><td>オプションの分母増分（株）</td><td class="num"><input inputmode="numeric" data-ans="6000" aria-label="オプションの分母増分（株）"></td></tr><tr><td>優先株の分子増分（ドル）</td><td class="num"><input inputmode="numeric" data-ans="20000" aria-label="優先株の分子増分（ドル）"></td></tr><tr><td>社債の分子増分（除外判定前、ドル）</td><td class="num"><input inputmode="numeric" data-ans="12600" aria-label="社債の分子増分（除外判定前、ドル）"></td></tr><tr><td>最終的な希薄化EPSの分母（株）</td><td class="num"><input inputmode="numeric" data-ans="116000" aria-label="最終的な希薄化EPSの分母（株）"></td></tr><tr><th>希薄化EPS</th><td class="num"><input inputmode="numeric" data-ans="3.02" aria-label="希薄化EPS"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">基本EPSは ($350,000 − $20,000) ÷ 100,000株 ＝ $3.30。オプションの純増は 15,000 − 15,000 × $12 ÷ $20 ＝ 6,000株です。<br>次に優先株（$20,000 ÷ 10,000株 ＝ $2.00）を組み込むと $350,000 ÷ 116,000株になります。社債の増分は $16,800 × 75% ÷ 4,000株 ＝ $3.15 で、直前のEPSを上回るため除外します。希薄化EPSは $350,000 ÷ 116,000株 ≈ <b>$3.02</b> です。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">6</span>見ないで説明できますか</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c15-1"><label for="c15-1">基本EPSの分子と分母を説明できる</label></li><li><input type="checkbox" id="c15-2"><label for="c15-2">自己株式法で平均株価を使う理由と純増株数を説明できる</label></li><li><input type="checkbox" id="c15-3"><label for="c15-3">転換優先株と転換社債で分子に何を戻すか言える</label></li><li><input type="checkbox" id="c15-4"><label for="c15-4">基本EPSを下回る増分でも、途中で逆希薄化になる理由を説明できる</label></li><li><input type="checkbox" id="c15-5"><label for="c15-5">非継続事業があるとき、何を基準に希薄化を判定するか言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

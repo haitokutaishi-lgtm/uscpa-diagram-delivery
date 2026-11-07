@@ -130,5 +130,37 @@
   {
     "slug": "aud-assertions-direction",
     "source": "publish-html/aud-assertions-direction.html"
+  },
+  {
+    "slug": "business-combination-acquisition",
+    "source": "publish-html/business-combination-acquisition.html"
+  },
+  {
+    "slug": "debt-securities-classification",
+    "source": "publish-html/debt-securities-classification.html"
+  },
+  {
+    "slug": "aud-attribute-sampling",
+    "source": "publish-html/aud-attribute-sampling.html"
+  },
+  {
+    "slug": "aud-report-paragraphs",
+    "source": "publish-html/aud-report-paragraphs.html"
+  },
+  {
+    "slug": "aud-control-deficiencies",
+    "source": "publish-html/aud-control-deficiencies.html"
+  },
+  {
+    "slug": "eps-diluted",
+    "source": "publish-html/eps-diluted.html"
+  },
+  {
+    "slug": "aud-ar-confirmation",
+    "source": "publish-html/aud-ar-confirmation.html"
+  },
+  {
+    "slug": "inventory-lcnrv",
+    "source": "publish-html/inventory-lcnrv.html"
   }
 ]

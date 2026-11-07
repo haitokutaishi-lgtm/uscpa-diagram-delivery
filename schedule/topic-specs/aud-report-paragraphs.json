@@ -1,0 +1,306 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch3 監査報告書の追加区分",
+    "asc": "AU-C 570 / 701 / 705 / 706・PCAOB AS 3101 / AS 2415",
+    "updated": "2026-11-07",
+    "sources": [
+      "https://www.aicpa-cima.com/resources/download/aicpa-statements-on-auditing-standards-currently-effective",
+      "https://us.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/au-c-00706.pdf",
+      "https://us.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/au-c-00570.pdf",
+      "https://pcaobus.org/oversight/standards/auditing-standards/details/AS3101",
+      "https://pcaobus.org/oversight/standards/auditing-standards/details/AS2415"
+    ]
+  },
+  "post": {
+    "name": "監査報告書の追加区分",
+    "hook_q": "継続企業に重大な疑義が残っていても、会社が適切に注記していれば、監査意見は変わりますか？",
+    "hook_where": "全体図と差がつく論点2",
+    "bullets": [
+      "非発行体の強調事項・その他の事項・継続企業の区分を整理する",
+      "KAMとCAMを選ぶ基準の違いを確認する",
+      "初見の英語MC3問＋TBS（選ぶと自動で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】監査報告書の追加区分—強調事項・継続企業・KAMとCAM",
+    "badge": "AUD 復習シート｜Additional Reporting（AU-C 701 / 706 / 570・PCAOB）",
+    "h1_html": "監査報告書の追加区分—強調事項・継続企業・KAMとCAM",
+    "lead_html": "監査報告書に区分が増える理由は一つではありません。意見に影響する問題を先に判定し、次に監査基準と伝える目的を確認します。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図　意見 → 基準 → 伝える目的",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "意見を決める",
+              "body_html": "重要な虚偽表示や十分な監査証拠が得られない問題は、まず意見への影響を判定します。",
+              "tone": "warn"
+            },
+            {
+              "head": "適用する基準を確認する",
+              "body_html": "非発行体の監査で使う<b>AU-C</b>と、発行体の監査で使う<b>PCAOB基準</b>を区別します。",
+              "tone": "mid"
+            },
+            {
+              "head": "区分を選ぶ",
+              "body_html": "財務諸表の理解、監査や報告書の理解、継続企業の重大な疑義、監査上の重要な事項。それぞれ伝える目的を確認します。",
+              "tone": "key"
+            }
+          ]
+        },
+        {
+          "type": "matrix",
+          "corner_html": "伝えること",
+          "col_heads": [
+            "非発行体（AU-C）",
+            "発行体（PCAOB）"
+          ],
+          "row_heads": [
+            "注記済みの事項に注意を向ける",
+            "監査や報告書の理解を助ける",
+            "継続企業の重大な疑義が残る",
+            "監査上の重要な事項"
+          ],
+          "cells": [
+            [
+              {
+                "html": "<b>強調事項</b><br>Emphasis of Matter",
+                "tone": "ok"
+              },
+              {
+                "html": "財務諸表の事項の強調を選択可"
+              }
+            ],
+            [
+              {
+                "html": "<b>その他の事項</b><br>Other Matter",
+                "tone": "ok"
+              },
+              {
+                "html": "該当するPCAOB基準の報告要件を確認"
+              }
+            ],
+            [
+              {
+                "html": "<b>継続企業の専用区分</b>",
+                "tone": "mid"
+              },
+              {
+                "html": "<b>説明段落</b><br>Explanatory paragraph",
+                "tone": "mid"
+              }
+            ],
+            [
+              {
+                "html": "<b>KAM</b><br>伝達を依頼された場合",
+                "tone": "ok"
+              },
+              {
+                "html": "<b>CAM</b><br>適用対象の監査",
+                "tone": "ok"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "注記の内容か、監査の事情か",
+          "rule_html": "財務諸表に適切に表示・開示済みで、その理解に不可欠な事項に注意を向けるのが強調事項です。監査・監査人の責任・監査報告書を理解するための情報はその他の事項です。",
+          "calc_html": "例として、重要な後発事象として適切に注記された火災なら強調事項の候補です。前期を前任監査人が監査したという報告書上の事情は、その他の事項の例です。",
+          "miss_html": "必要な財務諸表注記が欠けているので、監査人が強調事項にその内容を書いて済ませる。重要な開示不足なら意見への影響を評価します。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "継続企業の重大な疑義が残っても、注記が適切なら無修正意見になり得る",
+          "rule_html": "継続企業を前提に作成することが適切で、経営者の計画を評価しても重大な疑義が残り、関連開示が適切な場合、AU-Cでは専用の継続企業区分、PCAOBでは説明段落を用います。ほかに修正理由がなければ、意見は変わりません。",
+          "calc_html": "資金調達策を評価しても資金繰りの重大な疑義が残り、会社が適切に注記しているなら、非発行体では無修正意見と継続企業の専用区分を組み合わせます。",
+          "miss_html": "継続企業の疑義があるだけで限定意見にする。開示不足の場合は重要性と広範性を評価し、限定付適正意見または不適正意見を検討します。継続企業を前提とすること自体が不適切なら不適正意見です。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "KAMとCAMは、選ぶ条件が違う",
+          "rule_html": "KAMは、統治責任者に伝えた事項から、監査で特に注意を要したものを絞り、その中で最も重要な事項を選びます。AU-CではKAMの伝達を依頼された場合に適用します。",
+          "calc_html": "CAMは、当期の監査に関して監査委員会に伝えたか伝えるべき事項のうち、重要な勘定・開示に関連し、特に難しい、主観的、または複雑な監査判断を伴った事項です。例えば、重要なのれんの減損で、将来予測の評価が特に難しかった場合です。",
+          "miss_html": "重要な勘定なら必ずCAMとする。重要な勘定・開示との関連に加えて、監査判断の難しさなども確認します。KAM・CAMは当該事項に個別の意見を出す区分ではありません。"
+        },
+        {
+          "type": "note",
+          "html": "同じ事項をAU-C 701に従ってKAMとして伝達するなら、強調事項・その他の事項の区分で重ねて扱いません。継続企業や意見修正の根拠はそれぞれの基準で要求される区分に記載します。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "問題文で拾う言葉",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "appropriately disclosed; fundamental to understanding the financial statements",
+              "強調事項の候補",
+              "その他の事項と答える"
+            ],
+            [
+              "relevant to understanding the auditor’s responsibilities",
+              "その他の事項の候補",
+              "注記への注意喚起と読む"
+            ],
+            [
+              "substantial doubt remains; adequate disclosure",
+              "継続企業の追加区分を検討",
+              "疑義だけで意見を修正する"
+            ],
+            [
+              "material omission of a required disclosure",
+              "意見への影響を評価",
+              "追加区分だけで済ませる"
+            ],
+            [
+              "engaged to communicate key audit matters",
+              "非発行体のKAMの手がかり",
+              "すべての非発行体で必須と読む"
+            ],
+            [
+              "especially challenging, subjective, or complex auditor judgment",
+              "CAMの判定条件の一つ",
+              "この条件だけで決める"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "英語MCとTBS",
+      "lead_html": "各ケースで適用基準を押さえ、意見を修正する理由があるかを先に確認します。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜財務諸表を読むうえで不可欠な注記",
+          "stem": "In an audit of a nonissuer, a significant subsequent event is adequately disclosed and is fundamental to users’ understanding of the financial statements. The auditor considers it necessary to draw attention to the note. The auditor is not engaged to communicate KAMs, and the matter does not require a modified opinion. Which reporting treatment is appropriate?",
+          "choices": [
+            "A. An other-matter paragraph",
+            "B. A qualified opinion",
+            "C. An emphasis-of-matter paragraph",
+            "D. A going-concern section"
+          ],
+          "ja_html": "非発行体の監査。財務諸表の理解に不可欠な後発事象が適切に注記されています。監査人は注記への注意喚起が必要と判断し、KAMの伝達は依頼されていません。この事項は修正意見を要しません。どの扱いが適切ですか。<br>A. その他の事項　B. 限定付適正意見　C. 強調事項　D. 継続企業区分",
+          "answer_html": "<b>正解：C</b><br>適切な注記に注意を向けるため、強調事項です。<br>A：監査や監査報告書の理解を助ける事項に使います。<br>B：設問には意見修正の理由がありません。<br>D：後発事象についての問題で、継続企業の重大な疑義は示されていません。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜継続企業と意見（複合）",
+          "stem": "A nonissuer appropriately uses the going-concern basis of accounting. Substantial doubt remains after management’s plans are evaluated, and the financial statements adequately disclose the matter. There is no other reason to modify the opinion. What should the auditor issue?",
+          "choices": [
+            "A. An unmodified opinion with a separate going-concern section",
+            "B. A qualified opinion because substantial doubt remains",
+            "C. An adverse opinion because substantial doubt remains",
+            "D. An unmodified opinion with no going-concern reporting"
+          ],
+          "ja_html": "非発行体で継続企業の前提は適切です。経営者の計画を評価後も重大な疑義が残り、会社の開示は適切です。他に意見修正理由はありません。どの報告が適切ですか。<br>A. 無修正＋継続企業の専用区分　B. 限定付適正　C. 不適正　D. 無修正で継続企業への言及なし",
+          "answer_html": "<b>正解：A</b><br>AU-C 570により、無修正意見に継続企業の専用区分を加えます。<br>B：疑義が残ること自体は限定付適正意見の理由になりません。<br>C：継続企業の前提も開示も適切です。<br>D：重大な疑義が残るので専用区分が必要です。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜CAMの要件",
+          "stem": "An issuer audit is subject to PCAOB CAM reporting. Which current-period matter meets the definition of a CAM?",
+          "choices": [
+            "A. A material inventory account with routine procedures, discussed with the audit committee",
+            "B. An immaterial disclosure involving difficult judgment, discussed with the audit committee and unrelated to any material account or disclosure",
+            "C. A material account with especially complex judgment that was neither communicated nor required to be communicated to the audit committee",
+            "D. A material warranty liability requiring especially complex auditor judgment that the auditor was required to communicate to the audit committee"
+          ],
+          "ja_html": "発行体の当期監査にPCAOBのCAM報告が適用されます。どの事項がCAMに該当しますか。<br>A. 委員会に伝えた重要な棚卸資産だが手続は定型的　B. 委員会に伝えた判断が難しい開示だが重要な勘定・開示に無関係　C. 重要で判断は複雑だが委員会への伝達も義務もなし　D. 重要な製品保証債務で監査判断が特に複雑、委員会への伝達義務あり",
+          "answer_html": "<b>正解：D</b><br>Dは委員会への伝達要件、重要な勘定との関連、特に複雑な監査判断の3つがそろっています。<br>A：特に難しい、主観的、または複雑な判断の条件が不足します。<br>B：重要な勘定・開示との関連がありません。<br>C：委員会への伝達または伝達義務の条件を満たしません。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式　報告書の対応を選ぶ",
+          "select": true,
+          "value_head": "報告上の対応",
+          "intro_html": "互いに独立した監査です。各ケースに対応する区分または対応を選んでください。",
+          "rows": [
+            {
+              "label": "非発行体。前期は前任監査人が担当し、その報告書は再発行しません。当期の監査人が前期監査の情報を報告書で述べます。",
+              "options": [
+                "強調事項",
+                "その他の事項",
+                "CAM"
+              ],
+              "ans": "その他の事項"
+            },
+            {
+              "label": "非発行体。KAMの伝達を依頼され、統治責任者と協議した事項のうち、監査で特に注意を要し、最も重要な事項として選ばれました。",
+              "options": [
+                "KAM",
+                "CAM",
+                "強調事項"
+              ],
+              "ans": "KAM"
+            },
+            {
+              "label": "発行体。経営者の計画を評価後も重大な疑義が残ります。継続企業の前提・関連開示は適切で、ほかに意見修正理由はありません。",
+              "options": [
+                "説明段落を追加",
+                "限定付適正意見に修正",
+                "継続企業への言及なし"
+              ],
+              "ans": "説明段落を追加"
+            },
+            {
+              "label": "非発行体。適用基準が要求する重要な開示を会社が行わず、監査人は影響が広範でないと判断しました。",
+              "options": [
+                "強調事項だけを追加",
+                "限定付適正意見",
+                "意見差控え"
+              ],
+              "ans": "限定付適正意見"
+            }
+          ],
+          "explain_html": "①前期監査の事情はその他の事項です。<br>②AU-C 701の条件に当てはまるためKAMです。<br>③PCAOBでは重大な疑義が残る場合に説明段落を追加します。<br>④重要だが広範でない会計基準からの逸脱なので限定付適正意見です。"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "強調事項とその他の事項の違いを説明できる",
+            "継続企業の疑義が残り開示が適切な場合の報告を選べる",
+            "必要な開示が不足する場合に意見への影響を検討できる",
+            "非発行体でKAMを伝える前提を言える",
+            "CAMの3つの条件を言える"
+          ]
+        }
+      ]
+    }
+  ]
+}
