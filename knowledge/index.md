@@ -1,7 +1,7 @@
 <!-- 自動生成（ops/build_knowledge_index.py）。手で編集しない -->
 # 図解ナレッジ索引
 
-全 33 テーマ／v2（復習シート型）12 本。
+全 41 テーマ／v2（復習シート型）20 本。
 
 | slug | 科目 | 型 | タイトル | テキスト | 基準 | 更新日 | ノート |
 |---|---|---|---|---|---|---|---|
@@ -38,3 +38,11 @@
 | [aud-risk-model](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-risk-model/) | AUD | v2 | 監査リスクモデル：固有リスク × 統制リスクを評価し、残りの発見リスクを逆算して実証手続の強さを決める | Ch1 1-7 リスク・アプローチ／1-8 実証性テストの性質・範囲・時期／Ch2 2-7〜2-11 監査リスクと3要素・監査リスクモデル | AU-C 200 / AU-C 315 / AU-C 330 | 2026-10-07 | [ノート](topics/aud-risk-model.md) |
 | [cash-flow-indirect](https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-indirect/) | FAR | v2 | 間接法の営業CF：純利益に「現金が動かない損益」「投資・財務の損益」「営業の資産・負債の増減」を足し引きする | Ch16 16-1〜16-7 区分／16-9 間接法：資産増減／16-10 負債増減／16-11 利益と現金収支の調整／16-12 二重計上の防止 | ASC 230 | 2026-10-07 | [ノート](topics/cash-flow-indirect.md) |
 | [aud-assertions-direction](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-assertions-direction/) | AUD | v2 | アサーションと手続の向き：過大計上（実在性・発生）は帳簿から証憑へ、過小計上（網羅性）は証憑から帳簿へ | Ch2 2-1〜2-3 アサーション／Ch7 7-6 内部統制プロセスと監査テスト／7-7 網羅性のテスト／7-8 実在性・発生のテスト／Ch9 売掛金・棚卸資産・未払金の実証性テスト | AU-C 315 / AU-C 500 | 2026-10-07 | [ノート](topics/aud-assertions-direction.md) |
+| [business-combination-acquisition](https://haitokutaishi-lgtm.github.io/diagram-site/topics/business-combination-acquisition/) | FAR | v2 | 企業結合の取得日：子会社を100%取り込んで、差額からのれんを出す | 連結財務諸表（取得日における投資と資本の消去、非支配持分） | ASC 805-10／805-20／805-30、ASC 810 | 2026-11-07 | [ノート](topics/business-combination-acquisition.md) |
+| [debt-securities-classification](https://haitokutaishi-lgtm.github.io/diagram-site/topics/debt-securities-classification/) | FAR | v2 | 同じ債券の値下がりを、HTM・AFS・トレーディングで比べる | FAR Ch13 13-1〜13-4（分類・評価・売却）、信用損失・保有目的の変更 | ASC 320 / ASC 326-20 / ASC 326-30 | 2026-11-07 | [ノート](topics/debt-securities-classification.md) |
+| [aud-attribute-sampling](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-attribute-sampling/) | AUD | v2 | 属性サンプリング—逸脱率の上限とサンプル数 | Ch18 監査サンプリング・属性サンプリング | AU-C 530 / PCAOB AS 2315.31–.43 | 2026-11-07 | [ノート](topics/aud-attribute-sampling.md) |
+| [aud-report-paragraphs](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-report-paragraphs/) | AUD | v2 | 監査報告書の追加区分—強調事項・継続企業・KAMとCAM | Ch3 監査報告書の追加区分 | AU-C 570 / 701 / 705 / 706・PCAOB AS 3101 / AS 2415 | 2026-11-07 | [ノート](topics/aud-report-paragraphs.md) |
+| [aud-control-deficiencies](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-control-deficiencies/) | AUD | v2 | 内部統制の不備—重大さと伝達先の判定 | Ch7 内部統制の不備と伝達 | AU-C 265.07–.16 / PCAOB AS 2201.62–.70、.78–.82、.90、Appendix A | 2026-11-07 | [ノート](topics/aud-control-deficiencies.md) |
+| [eps-diluted](https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-diluted/) | FAR | v2 | 希薄化EPSは、証券を1つ加えるたびに比べ直す | FAR Ch12 12-25〜12-31（基本EPS・自己株式法・転換仮定法・表示） | ASC 260-10-45 / ASC 260-10-50 | 2026-11-07 | [ノート](topics/eps-diluted.md) |
+| [aud-ar-confirmation](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-ar-confirmation/) | AUD | v2 | 売掛金の確認｜返事が来ないとき、何を調べる？ | 売掛金の確認・ラッピング | AU-C 330.20 / AU-C 505.07–.16 / PCAOB AS 2310.12–.28, Appendix C | 2026-11-07 | [ノート](topics/aud-ar-confirmation.md) |
+| [inventory-lcnrv](https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcnrv/) | FAR | v2 | 棚卸資産の期末評価は、原価と何を比べるかで分かれる | 棚卸資産の期末評価（原価と正味実現可能価額、低価法） | ASC 330-10-35 | 2026-11-07 | [ノート](topics/inventory-lcnrv.md) |

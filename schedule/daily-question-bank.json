@@ -1,8 +1,8 @@
 {
  "_comment": "自動生成（ops/build_daily_bank.py）。手で直さない。追加の問題は daily-extra-questions.json へ。",
  "counts": {
-  "FAR": 36,
-  "AUD": 12
+  "FAR": 48,
+  "AUD": 24
  },
  "questions": [
   {
@@ -90,6 +90,69 @@
    }
   },
   {
+   "id": "aud-ar-confirmation#1",
+   "subject": "AUD",
+   "slug": "aud-ar-confirmation",
+   "topic": "売掛金の確認（積極・消極、未回答、ラッピング）｜無回答と代替手続",
+   "text": "In an audit under PCAOB standards, a customer does not respond to a positive confirmation or the follow-up. Which procedure best addresses the existence of the selected year-end receivable?",
+   "choiceA": "Inspect the client’s aged receivables report for the same balance.",
+   "choiceB": "Replace the customer with another one that replied.",
+   "choiceC": "Compare total January deposits with total January collections in the ledger.",
+   "choiceD": "Trace the customer’s subsequent payment to the specific invoice outstanding at year-end.",
+   "correctAnswer": "D",
+   "explanation": "正解：D",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "売掛金の確認（積極・消極、未回答、ラッピング）｜無回答と代替手続",
+    "conceptBody": "【和訳】\nPCAOB基準で、積極確認とフォローの両方に返事がありません。対象の期末売掛金の実在性を確認するのに最も適切な手続はどれですか？",
+    "steps": "顧客の期末後入金を、期末未決済だった特定の請求書に結び付けます。\nA：会社自身の帳簿を再確認しています。\nB：選んだ売掛金についての監査証拠が残りません。\nC：合計の確認にとどまります。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-ar-confirmation/"
+   }
+  },
+  {
+   "id": "aud-ar-confirmation#2",
+   "subject": "AUD",
+   "slug": "aud-ar-confirmation",
+   "topic": "売掛金の確認（積極・消極、未回答、ラッピング）｜消極的確認と適用基準",
+   "text": "The auditor assesses the relevant risk as low and has evidence that relevant controls operated effectively. The population contains many small, similar balances, very few exceptions are expected, and the auditor knows of no reason recipients would disregard the requests. Which statement is correct?",
+   "choiceA": "Under neither standard may negative confirmation requests be used in any circumstances.",
+   "choiceB": "Under AU-C 505 before SAS No. 150 applies, negative confirmations may be the sole substantive procedure for the assertion. Under PCAOB AS 2310 they may not.",
+   "choiceC": "Under both standards, negative confirmation requests alone provide sufficient evidence.",
+   "choiceD": "Under PCAOB AS 2310 only, negative confirmation requests alone may be sufficient.",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "売掛金の確認（積極・消極、未回答、ラッピング）｜消極的確認と適用基準",
+    "conceptBody": "【和訳】\nリスクは低く、関連する統制は有効に運用されています。母集団は少額・同質の項目が多数で、差異の見込みは極めて低く、依頼を無視する事情も把握していません。正しい記述はどれですか？",
+    "steps": "SAS 150適用前のAU-B 505は4条件をすべて満たす場合に単独使用を検討できます。\nA：PCAOBで他の実証手続と組み合わせることは可能です。\nC：PCAOBでは消極的確認だけでは足りません。\nD：PCAOBでも単独で使えるとしています。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-ar-confirmation/"
+   }
+  },
+  {
+   "id": "aud-ar-confirmation#3",
+   "subject": "AUD",
+   "slug": "aud-ar-confirmation",
+   "topic": "売掛金の確認（積極・消極、未回答、ラッピング）｜ラッピングの兆候",
+   "text": "A January bank record identifies Customer N as the sender of a payment, but the remittance advice and the posting in the receivables ledger disagree. The ledger credits Customer M. Which action best addresses possible lapping?",
+   "choiceA": "Compare total January receipts to total deposits and stop if they agree.",
+   "choiceB": "Recalculate the aging categories based on invoice dates.",
+   "choiceC": "Confirm only whether Customer M will pay next month.",
+   "choiceD": "Compare the payer and invoice on each remittance to the corresponding customer and invoice credited in the ledger.",
+   "correctAnswer": "D",
+   "explanation": "正解：D",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "売掛金の確認（積極・消極、未回答、ラッピング）｜ラッピングの兆候",
+    "conceptBody": "【和訳】\n銀行記録ではN社からの入金で、送金明細と売掛金元帳が一致しません。元帳ではM社に充当されています。ラッピングの可能性を調べるのに最も適切な手続はどれですか？",
+    "steps": "振込人と請求書を、元帳で消し込んだ顧客・請求書と1件ずつ照合します。\nA：入金額の合計しか見ていません。\nB：滞留期間の計算しか見ていません。\nC：将来の支払予定しか見ていません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-ar-confirmation/"
+   }
+  },
+  {
    "id": "aud-assertions-direction#1",
    "subject": "AUD",
    "slug": "aud-assertions-direction",
@@ -174,6 +237,132 @@
    }
   },
   {
+   "id": "aud-attribute-sampling#1",
+   "subject": "AUD",
+   "slug": "aud-attribute-sampling",
+   "topic": "属性サンプリング｜計算と判定（複合）",
+   "text": "An auditor finds 3 deviations in 150 items. The computed upper deviation rate is 5.1%, and the tolerable deviation rate is 4%. What are the sample deviation rate and the appropriate conclusion?",
+   "choiceA": "2%; the sample supports planned reliance.",
+   "choiceB": "5.1%; the sample does not support planned reliance.",
+   "choiceC": "2%; the sample does not support planned reliance.",
+   "choiceD": "5.1%; the sample supports planned reliance.",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "属性サンプリング｜計算と判定（複合）",
+    "conceptBody": "【和訳】\n150件中3件が逸脱。上限5.1%、許容4%のとき、サンプル逸脱率と予定した依拠の判定はどれですか。",
+    "steps": "3 ÷ 150 = 2%。上限5.1%は許容4%を超えます。\nA：サンプル逸脱率だけで判定しています。\nB：判定は合っていますが、5.1%は上限です。\nD：上限とサンプル逸脱率を混同し、判定も逆です。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-attribute-sampling/"
+   }
+  },
+  {
+   "id": "aud-attribute-sampling#2",
+   "subject": "AUD",
+   "slug": "aud-attribute-sampling",
+   "topic": "属性サンプリング｜サンプル数",
+   "text": "Holding all other factors constant, which change ordinarily increases the sample size for a test of controls?",
+   "choiceA": "Increasing the tolerable deviation rate",
+   "choiceB": "Reducing the expected population deviation rate",
+   "choiceC": "Reducing the allowable risk of assessing control risk too low",
+   "choiceD": "Increasing the allowable risk of assessing control risk too low",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "属性サンプリング｜サンプル数",
+    "conceptBody": "【和訳】\n他の条件が同じとき、統制テストの必要サンプル数を通常増やす変更はどれですか。",
+    "steps": "A：許容幅が広がります。\nB：予想逸脱率と許容逸脱率の差が広がります。\nC：許容リスクを下げると、より多くの証拠が必要です。\nD：受け入れるリスクが高まり、必要な件数は通常減ります。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-attribute-sampling/"
+   }
+  },
+  {
+   "id": "aud-attribute-sampling#3",
+   "subject": "AUD",
+   "slug": "aud-attribute-sampling",
+   "topic": "属性サンプリング｜サンプリングリスク",
+   "text": "Based on a sample, the auditor mistakenly concludes that an ineffective control supports planned reliance. Which risk has materialized?",
+   "choiceA": "Risk of incorrect rejection in a substantive test",
+   "choiceB": "Risk of assessing control risk too high",
+   "choiceC": "Risk of assessing control risk too low",
+   "choiceD": "Risk of incorrect acceptance in a substantive test",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "属性サンプリング｜サンプリングリスク",
+    "conceptBody": "【和訳】\n実際には有効でない統制について、サンプルを基に予定どおり依拠できると誤って結論づけました。どのリスクが現実になりましたか。",
+    "steps": "統制を過信したので、統制リスクの過小評価です。\nA：実証手続で、重要な虚偽表示があると誤って判断するリスクです。\nB：統制を過小評価する逆の誤りです。\nD：実証手続で、重要な虚偽表示を見落とす側のリスクです。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-attribute-sampling/"
+   }
+  },
+  {
+   "id": "aud-control-deficiencies#1",
+   "subject": "AUD",
+   "slug": "aud-control-deficiencies",
+   "topic": "内部統制の不備｜実際の虚偽表示がない場合",
+   "text": "Controls over a material inventory balance create a reasonable possibility that a material misstatement would not be prevented, or detected and corrected, on a timely basis. The auditor did not identify a misstatement. How should the deficiency be classified?",
+   "choiceA": "An ordinary deficiency solely because no misstatement was detected",
+   "choiceB": "No deficiency",
+   "choiceC": "A material weakness",
+   "choiceD": "A significant deficiency solely because no misstatement was detected",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "内部統制の不備｜実際の虚偽表示がない場合",
+    "conceptBody": "【和訳】\n重要な棚卸資産残高の統制に、重要な虚偽表示を適時に防止または発見・訂正できない合理的な可能性があります。監査人は実際の虚偽表示を見つけていません。分類はどれですか。",
+    "steps": "A：潜在的な影響を見落としています。\nB：統制の不備は誤りの発見とは独立して判定します。\nC：重要な虚偽表示を見逃す合理的な可能性があれば、重大な欠陥です。\nD：虚偽表示が見つからないことを理由に、程度を引き下げています。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-control-deficiencies/"
+   }
+  },
+  {
+   "id": "aud-control-deficiencies#2",
+   "subject": "AUD",
+   "slug": "aud-control-deficiencies",
+   "topic": "内部統制の不備｜監査中の改善と伝達（複合）",
+   "text": "In a nonissuer financial statement audit, management remediates a significant deficiency before the report release date. Direct communication with management is appropriate. What should the auditor do under AU-C 265?",
+   "choiceA": "Communicate it in writing to governance and management on a timely basis, no later than 60 days after the report release date.",
+   "choiceB": "Communicate it orally to governance and management only.",
+   "choiceC": "Omit the matter because it was remediated.",
+   "choiceD": "Report it in the auditor’s opinion as a qualification.",
+   "correctAnswer": "A",
+   "explanation": "正解：A",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "内部統制の不備｜監査中の改善と伝達（複合）",
+    "conceptBody": "【和訳】\n非発行体の財務諸表監査で、重要な不備は報告書のリリース日前に改善されました。経営者への直接伝達は適切です。AU-C 265ではどうしますか。",
+    "steps": "A：監査中に改善された重要な不備も書面で伝えます。\nB：口頭伝達だけでは足りません。\nC：改善を伝達の免除と取り違えています。\nD：重要な不備そのものは財務諸表の意見を限定する理由ではありません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-control-deficiencies/"
+   }
+  },
+  {
+   "id": "aud-control-deficiencies#3",
+   "subject": "AUD",
+   "slug": "aud-control-deficiencies",
+   "topic": "内部統制の不備｜統合監査の意見",
+   "text": "In a PCAOB integrated audit, a material weakness exists as of the assessment date. The financial statements are fairly presented, and the auditor obtained sufficient appropriate evidence. What opinions are appropriate?",
+   "choiceA": "Qualified on internal control and unqualified on the financial statements",
+   "choiceB": "Adverse on internal control and unqualified on the financial statements",
+   "choiceC": "Unqualified on internal control and unqualified on the financial statements",
+   "choiceD": "Adverse on internal control and adverse on the financial statements",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "内部統制の不備｜統合監査の意見",
+    "conceptBody": "【和訳】\nPCAOBの統合監査で、評価基準日に重大な欠陥が残っています。財務諸表は適正で、十分かつ適切な監査証拠も得ています。意見の組み合わせはどれですか。",
+    "steps": "A：内部統制については限定付適正意見では足りません。\nB：内部統制は重大な欠陥が残るため不適正です。財務諸表には無限定適正意見を出せます。\nC：内部統制の欠陥を無視しています。\nD：財務諸表の適正表示と証拠の条件を無視しています。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-control-deficiencies/"
+   }
+  },
+  {
    "id": "aud-opinion-types#1",
    "subject": "AUD",
    "slug": "aud-opinion-types",
@@ -255,6 +444,69 @@
     "steps": "重要な疑義があっても開示が適切なら意見は修正せず、継続企業の区分を追加する。会計方針の変更も適切に処理・開示されていれば虚偽表示ではない（論点3）\nA・C：疑義そのものや適切な方針変更は修正の理由にならない\nA：不確実性は範囲の制限ではない",
     "wrongAnswers": "",
     "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-opinion-types/"
+   }
+  },
+  {
+   "id": "aud-report-paragraphs#1",
+   "subject": "AUD",
+   "slug": "aud-report-paragraphs",
+   "topic": "監査報告書の追加区分｜財務諸表を読むうえで不可欠な注記",
+   "text": "In an audit of a nonissuer, a significant subsequent event is adequately disclosed and is fundamental to users’ understanding of the financial statements. The auditor considers it necessary to draw attention to the note. The auditor is not engaged to communicate KAMs, and the matter does not require a modified opinion. Which reporting treatment is appropriate?",
+   "choiceA": "A qualified opinion",
+   "choiceB": "An emphasis-of-matter paragraph",
+   "choiceC": "An other-matter paragraph",
+   "choiceD": "A going-concern section",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "監査報告書の追加区分｜財務諸表を読むうえで不可欠な注記",
+    "conceptBody": "【和訳】\n非発行体の監査。財務諸表の理解に不可欠な後発事象が適切に注記されています。監査人は注記への注意喚起が必要と判断し、KAMの伝達は依頼されていません。この事項は修正意見を要しません。どの扱いが適切ですか。",
+    "steps": "適切な注記に注意を向けるため、強調事項です。\nA：設問には意見修正の理由がありません。\nC：監査や監査報告書の理解を助ける事項に使います。\nD：後発事象についての問題で、継続企業の重大な疑義は示されていません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-report-paragraphs/"
+   }
+  },
+  {
+   "id": "aud-report-paragraphs#2",
+   "subject": "AUD",
+   "slug": "aud-report-paragraphs",
+   "topic": "監査報告書の追加区分｜継続企業と意見（複合）",
+   "text": "A nonissuer appropriately uses the going-concern basis of accounting. Substantial doubt remains after management’s plans are evaluated, and the financial statements adequately disclose the matter. There is no other reason to modify the opinion. What should the auditor issue?",
+   "choiceA": "An unmodified opinion with a separate going-concern section",
+   "choiceB": "An unmodified opinion with no going-concern reporting",
+   "choiceC": "A qualified opinion because substantial doubt remains",
+   "choiceD": "An adverse opinion because substantial doubt remains",
+   "correctAnswer": "A",
+   "explanation": "正解：A",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "監査報告書の追加区分｜継続企業と意見（複合）",
+    "conceptBody": "【和訳】\n非発行体で継続企業の前提は適切です。経営者の計画を評価後も重大な疑義が残り、会社の開示は適切です。他に意見修正理由はありません。どの報告が適切ですか。",
+    "steps": "AU-D 570により、無修正意見に継続企業の専用区分を加えます。\nB：重大な疑義が残るので専用区分が必要です。\nC：疑義が残ること自体は限定付適正意見の理由になりません。\nD：継続企業の前提も開示も適切です。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-report-paragraphs/"
+   }
+  },
+  {
+   "id": "aud-report-paragraphs#3",
+   "subject": "AUD",
+   "slug": "aud-report-paragraphs",
+   "topic": "監査報告書の追加区分｜CAMの要件",
+   "text": "An issuer audit is subject to PCAOB CAM reporting. Which current-period matter meets the definition of a CAM?",
+   "choiceA": "A material inventory account with routine procedures, discussed with the audit committee",
+   "choiceB": "A material account with especially complex judgment that was neither communicated nor required to be communicated to the audit committee",
+   "choiceC": "An immaterial disclosure involving difficult judgment, discussed with the audit committee and unrelated to any material account or disclosure",
+   "choiceD": "A material warranty liability requiring especially complex auditor judgment that the auditor was required to communicate to the audit committee",
+   "correctAnswer": "D",
+   "explanation": "正解：D",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "監査報告書の追加区分｜CAMの要件",
+    "conceptBody": "【和訳】\n発行体の当期監査にPCAOBのCAM報告が適用されます。どの事項がCAMに該当しますか。",
+    "steps": "A：特に難しい、主観的、または複雑な判断の条件が不足します。\nB：委員会への伝達または伝達義務の条件を満たしません。\nC：重要な勘定・開示との関連がありません。\nD：委員会への伝達要件、重要な勘定との関連、特に複雑な監査判断の3つがそろっています。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-report-paragraphs/"
    }
   },
   {
@@ -426,6 +678,69 @@
    }
   },
   {
+   "id": "business-combination-acquisition#1",
+   "subject": "FAR",
+   "slug": "business-combination-acquisition",
+   "topic": "企業結合（取得法・のれん・非支配持分）｜非支配持分と弁護士報酬",
+   "text": "Lark paid $540,000 for 75% of Cove. The acquisition-date fair value of the noncontrolling interest was $155,000. Identifiable assets and assumed liabilities were measured at $800,000 and $180,000, respectively. Lark separately incurred $20,000 of legal fees for the acquisition. What goodwill should Lark recognize?",
+   "choiceA": "$75,000",
+   "choiceB": "$55,000",
+   "choiceC": "$95,000",
+   "choiceD": "$230,000",
+   "correctAnswer": "A",
+   "explanation": "正解：A（$75,000）",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "企業結合（取得法・のれん・非支配持分）｜非支配持分と弁護士報酬",
+    "conceptBody": "【和訳】\nLark社はCove社の75%を540,000ドルで取得しました。取得日のNCIの公正価値は155,000ドル、識別可能資産は800,000ドル、引受負債は180,000ドルです。取得に関する法務費用20,000ドルが別途発生しました。のれんはいくらですか？",
+    "steps": "540,000 ＋ 155,000 −（800,000 − 180,000）＝75,000。法務費用は別に費用計上します。\nB：法務費用を差し引いた額。\nC：法務費用を足した額。\nD：純資産を75%に縮めながらNCIも足した額。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/business-combination-acquisition/"
+   }
+  },
+  {
+   "id": "business-combination-acquisition#2",
+   "subject": "FAR",
+   "slug": "business-combination-acquisition",
+   "topic": "企業結合（取得法・のれん・非支配持分）｜段階取得",
+   "text": "Pike held 30% of Reed with a carrying amount of $210,000 and an acquisition-date fair value of $260,000. Pike then paid $570,000 for the remaining 70% and obtained control. Reed's identifiable net assets were measured at $750,000. What goodwill and remeasurement gain should Pike recognize, respectively?",
+   "choiceA": "$80,000 and $50,000",
+   "choiceB": "$30,000 and $0",
+   "choiceC": "$130,000 and $50,000",
+   "choiceD": "$80,000 and $0",
+   "correctAnswer": "A",
+   "explanation": "正解：A（$80,000／$50,000）",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "企業結合（取得法・のれん・非支配持分）｜段階取得",
+    "conceptBody": "【和訳】\nPike社はReed社の30%を保有し、その簿価は210,000ドル、取得日の公正価値は260,000ドルでした。残り70%を570,000ドルで取得して支配を得ました。識別可能純資産は750,000ドルです。のれんと既保有持分の再測定益はいくらですか？",
+    "steps": "のれんは570,000 ＋ 260,000 − 750,000、再測定益は260,000 − 210,000です。\nB：既保有持分に簿価を使った。\nC：再測定益をのれんに二重に足した。\nD：再測定益を計上していない。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/business-combination-acquisition/"
+   }
+  },
+  {
+   "id": "business-combination-acquisition#3",
+   "subject": "FAR",
+   "slug": "business-combination-acquisition",
+   "topic": "企業結合（取得法・のれん・非支配持分）｜割安購入",
+   "text": "Wren paid $430,000 to acquire all of Finch. After reassessment, identifiable assets and assumed liabilities were measured at $620,000 and $150,000, respectively. What should Wren recognize for the difference?",
+   "choiceA": "A $40,000 credit directly to equity",
+   "choiceB": "A $40,000 gain in other comprehensive income",
+   "choiceC": "A $40,000 bargain purchase gain in earnings",
+   "choiceD": "A $40,000 reduction of the recognized assets",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "企業結合（取得法・のれん・非支配持分）｜割安購入",
+    "conceptBody": "【和訳】\nWren社はFinch社を430,000ドルで全株取得しました。再点検後の識別可能資産は620,000ドル、引受負債は150,000ドルです。差額をどう処理しますか？",
+    "steps": "純資産470,000 − 対価430,000＝40,000を割安購入益として当期損益に認識します。\nA：直接資本に計上する。\nB：その他の包括利益に計上する。\nD：再点検後の資産額を理由なく減らす。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/business-combination-acquisition/"
+   }
+  },
+  {
    "id": "cash-flow-indirect#1",
    "subject": "FAR",
    "slug": "cash-flow-indirect",
@@ -507,6 +822,69 @@
     "steps": "100,000 ＋ 20,000 − 2,000 − 9,000 ＋ 3,000 ＝ 112,000（論点3）\nA：プレミアムと持分法を調整していない\nC：受け取った配当を足していない\nD：プレミアムの償却を足している",
     "wrongAnswers": "",
     "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/cash-flow-indirect/"
+   }
+  },
+  {
+   "id": "debt-securities-classification#1",
+   "subject": "FAR",
+   "slug": "debt-securities-classification",
+   "topic": "債務証券の分類と評価｜トレーディングの値下がり",
+   "text": "Dale Co. holds a debt security classified as trading. Its amortized cost and fair value at year-end were $76,000 and $74,000, respectively. There was no fair value adjustment at the beginning of the year. Excluding interest, what should Dale report for the current year?",
+   "choiceA": "A $2,000 loss in net income",
+   "choiceB": "A $2,000 gain in net income",
+   "choiceC": "No loss until the security is sold",
+   "choiceD": "A $2,000 loss in other comprehensive income",
+   "correctAnswer": "A",
+   "explanation": "正解：A",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "債務証券の分類と評価｜トレーディングの値下がり",
+    "conceptBody": "【和訳】\nDale 社の売買目的債務証券は、期末の償却原価が $76,000、公正価値が $74,000 です。期首の公正価値調整はありません。利息を除く当期の報告はどれですか。",
+    "steps": "$74,000 − $76,000 ＝ −$2,000。売買目的なので当期損益です。\nB：差額の符号が逆です。\nC：公正価値評価を省いています。\nD：AFS の信用損失以外の評価差額の処理です。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/debt-securities-classification/"
+   }
+  },
+  {
+   "id": "debt-securities-classification#2",
+   "subject": "FAR",
+   "slug": "debt-securities-classification",
+   "topic": "債務証券の分類と評価｜AFS の信用損失と OCI",
+   "text": "On December 31, Pine Co.'s available-for-sale debt security had an amortized cost of $102,000, a fair value of $99,000, and a present value of expected collections of $100,700. There were no opening valuation adjustments. Pine does not intend to sell and is not more likely than not required to sell before recovery of amortized cost. What loss amounts should Pine recognize in earnings and OCI, respectively?",
+   "choiceA": "$0 and $3,000",
+   "choiceB": "$1,300 and $1,700",
+   "choiceC": "$3,000 and $0",
+   "choiceD": "$1,700 and $1,300",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "債務証券の分類と評価｜AFS の信用損失と OCI",
+    "conceptBody": "【和訳】\n12月31日の AFS 債務証券の償却原価は $102,000、公正価値は $99,000、回収見込額の現在価値は $100,700 です。期首に評価調整はなく、売却する意思もなく、償却原価の回収前に売却を求められる可能性が 50% を超えることもありません。損益と OCI の損失はそれぞれいくらですか。",
+    "steps": "信用損失は $102,000 − $100,700 ＝ $1,300。値下がり全体 $3,000 のうち、残りの $1,700 は OCI です。\nA：信用損失を無視しています。\nC：値下がり全体を損益に入れています。\nD：損益と OCI の振り分けが逆です。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/debt-securities-classification/"
+   }
+  },
+  {
+   "id": "debt-securities-classification#3",
+   "subject": "FAR",
+   "slug": "debt-securities-classification",
+   "topic": "債務証券の分類と評価｜AFS の売却と累積 OCI",
+   "text": "At the end of Year 1, Moss Co. reported an available-for-sale debt security at a fair value of $50,800. Its amortized cost was $49,000, with no credit loss allowance. On January 1, Year 2, Moss sold it for $51,500 with no intervening interest or amortization. What gain should Moss report in Year 2 net income?",
+   "choiceA": "$4,300",
+   "choiceB": "$1,800",
+   "choiceC": "$2,500",
+   "choiceD": "$700",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "債務証券の分類と評価｜AFS の売却と累積 OCI",
+    "conceptBody": "【和訳】\nMoss 社の AFS 債務証券は Year 1 末の公正価値が $50,800、償却原価は $49,000 で、信用損失引当金はありません。Year 2 の1月1日に $51,500 で売却し、その間の利息・償却はありません。Year 2 の当期損益に計上する売却益はいくらですか。",
+    "steps": "$51,500 − $49,000 ＝ $2,500。過去の未実現益 $1,800 も累積 OCI から取り崩します。\nA：売却益 $2,500 に過去の評価益 $1,800 を再び足しています。\nB：前期末に計上した評価益のみです。\nD：前期末の公正価値からの増加額のみです。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/debt-securities-classification/"
    }
   },
   {
@@ -594,6 +972,69 @@
    }
   },
   {
+   "id": "eps-diluted#1",
+   "subject": "FAR",
+   "slug": "eps-diluted",
+   "topic": "希薄化EPS｜期中発行のオプション",
+   "text": "On July 1, Lark Co. issued options to buy 24,000 common shares at $15 per share. The options remained outstanding until year-end. The average market price from July 1 through December 31 was $25, and the year-end market price was $30. There were no other assumed proceeds. How many weighted-average incremental shares should Lark include in its annual diluted EPS?",
+   "choiceA": "6,000",
+   "choiceB": "4,800",
+   "choiceC": "12,000",
+   "choiceD": "9,600",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "希薄化EPS｜期中発行のオプション",
+    "conceptBody": "【和訳】\n7月1日に、普通株24,000株を1株 $15 で取得できるオプションを発行しました。オプションは年末まで存在します。7〜12月の平均株価は $25、年末株価は $30。他の仮定受取額はありません。年間の希薄化EPSの分母に加える加重平均株数はいくつですか。",
+    "steps": "買戻しは 24,000 × $15 ÷ $25 ＝ 14,400株。差の9,600株に 6/12 を掛けて4,800株。\nA：年末株価 $30 を使っています。\nC：買戻し株数を引いていません。\nD：期間を掛けていません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-diluted/"
+   }
+  },
+  {
+   "id": "eps-diluted#2",
+   "subject": "FAR",
+   "slug": "eps-diluted",
+   "topic": "希薄化EPS｜転換社債の希薄化",
+   "text": "Vale Co. had $200,000 of net income, all from continuing operations, and 100,000 weighted-average common shares. Its only potential common shares relate to bonds outstanding all year and convertible entirely into 12,000 common shares. The bonds generated $24,000 of annual interest expense, and the income tax rate was 25%. What is diluted EPS, rounded to the nearest cent?",
+   "choiceA": "$2.00",
+   "choiceB": "$2.24",
+   "choiceC": "$1.79",
+   "choiceD": "$1.95",
+   "correctAnswer": "D",
+   "explanation": "正解：D",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "希薄化EPS｜転換社債の希薄化",
+    "conceptBody": "【和訳】\n純利益 $200,000 はすべて継続事業によるもので、加重平均流通普通株式数は100,000株です。唯一の潜在普通株式は、通年存在し、普通株12,000株へ全額転換できる社債に関するものです。年間利息費用は $24,000、税率は25%です。セント単位で四捨五入した希薄化EPSはいくらですか。",
+    "steps": "分子に $24,000 × 75% ＝ $18,000 を戻し、分母に12,000株を加えます。$218,000 ÷ 112,000株 ≈ $1.95。\nA：税引前利息を戻した結果が基本EPSと同じになるため、税効果を入れると希薄化する点を見落としています。\nB：税引前利息を戻し、株数を増やしていません。\nC：利息を戻していません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-diluted/"
+   }
+  },
+  {
+   "id": "eps-diluted#3",
+   "subject": "FAR",
+   "slug": "eps-diluted",
+   "topic": "希薄化EPS｜継続事業の損失と純利益",
+   "text": "Brook Co. reported a loss from continuing operations of $50,000 and income from discontinued operations of $250,000, both after tax. It had no preferred shares and 100,000 weighted-average common shares. Warrants would add 10,000 shares under the treasury stock method. What diluted EPS should Brook report for net income, rounded to the nearest cent?",
+   "choiceA": "$2.00",
+   "choiceB": "$0.50",
+   "choiceC": "$2.50",
+   "choiceD": "$1.82",
+   "correctAnswer": "A",
+   "explanation": "正解：A",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "希薄化EPS｜継続事業の損失と純利益",
+    "conceptBody": "【和訳】\n継続事業の税引後損失が $50,000、非継続事業の税引後利益が $250,000 です。優先株はなく、加重平均流通普通株式数は100,000株。ワラントの自己株式法による増分は10,000株です。純利益に対する希薄化EPSはいくらですか。",
+    "steps": "継続事業の1株損失が −$0.50 から約 −$0.45 になるため逆希薄化です。純利益に対しても100,000株を使い、$200,000 ÷ 100,000株 ＝ $2.00。\nB：継続事業の損失額だけを分子にし、符号も逆です。\nC：非継続事業の利益だけを分子にしています。\nD：純利益を基準に判定しワラントを含めています。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-diluted/"
+   }
+  },
+  {
    "id": "equity-method-basic#1",
    "subject": "FAR",
    "slug": "equity-method-basic",
@@ -675,6 +1116,69 @@
     "steps": "ASU 2016-07 以降、持分法への切替は将来に向かって行い、過去はさかのぼりません（論点5）。\nA：基準改正前の処理\nB：持分法は保有する25%全体に適用します\nD：重要な影響力を得たので持分法に切り替えます",
     "wrongAnswers": "",
     "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/equity-method-basic/"
+   }
+  },
+  {
+   "id": "inventory-lcnrv#1",
+   "subject": "FAR",
+   "slug": "inventory-lcnrv",
+   "topic": "棚卸資産の期末評価（LCNRVとLCM）｜FIFOとNRV",
+   "text": "Rook uses FIFO. One unit has a cost of $76, an estimated selling price of $85, and estimated completion and transportation costs of $14 in total. Its replacement cost is $66 and its normal profit margin is $8. What amount should Rook report as inventory per unit?",
+   "choiceA": "$71",
+   "choiceB": "$76",
+   "choiceC": "$66",
+   "choiceD": "$63",
+   "correctAnswer": "A",
+   "explanation": "正解：A（$71）",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "棚卸資産の期末評価（LCNRVとLCM）｜FIFOとNRV",
+    "conceptBody": "【和訳】\nRook社はFIFOを使用します。単位あたり原価は76ドル、見込売価は85ドル、完成・輸送の見込費用は合計14ドルです。再調達原価は66ドル、通常の利益幅は8ドルです。期末在庫の単位あたりの計上額はいくらですか？",
+    "steps": "NRVは $85 − $14 ＝ $71。原価 $76 と比べて $71 を採用します。\nB：評価損を認識していない。\nC：再調達原価を使った。\nD：NRVから利益幅まで引いた。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcnrv/"
+   }
+  },
+  {
+   "id": "inventory-lcnrv#2",
+   "subject": "FAR",
+   "slug": "inventory-lcnrv",
+   "topic": "棚卸資産の期末評価（LCNRVとLCM）｜LIFOと市場価額の上限",
+   "text": "Sage uses LIFO. An item costs $54. Its replacement cost is $49. The estimated selling price is $51, the estimated costs of completion and disposal are $5, and its normal profit margin is $7. What write-down per unit should Sage recognize?",
+   "choiceA": "$15",
+   "choiceB": "$8",
+   "choiceC": "$0",
+   "choiceD": "$5",
+   "correctAnswer": "B",
+   "explanation": "正解：B（$8）",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "棚卸資産の期末評価（LCNRVとLCM）｜LIFOと市場価額の上限",
+    "conceptBody": "【和訳】\nSage社はLIFOを使用します。単位あたり原価54ドル、再調達原価49ドル、見込売価51ドル、完成・販売処分の見込費用5ドル、通常の利益幅7ドルです。単位あたりの評価損はいくらですか？",
+    "steps": "上限 $46、下限 $39。再調達原価 $49 は上限を超えるため、市場価額は $46。評価損は $54 − $46 ＝ $8 です。\nA：下限を使った。\nC：評価損を認識していない。\nD：再調達原価を直接使った。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcnrv/"
+   }
+  },
+  {
+   "id": "inventory-lcnrv#3",
+   "subject": "FAR",
+   "slug": "inventory-lcnrv",
+   "topic": "棚卸資産の期末評価（LCNRVとLCM）｜翌年の値上がり",
+   "text": "Fern uses weighted-average cost. At the end of Year 1, Fern wrote down an item from $135 to its net realizable value of $104. The same item remains unsold at the end of Year 2, when its net realizable value is $125. Under U.S. GAAP, what amount should Fern report for the item at the end of Year 2?",
+   "choiceA": "$156",
+   "choiceB": "$125",
+   "choiceC": "$104",
+   "choiceD": "$135",
+   "correctAnswer": "C",
+   "explanation": "正解：C（$104）",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "棚卸資産の期末評価（LCNRVとLCM）｜翌年の値上がり",
+    "conceptBody": "【和訳】\nFern社は平均法を使用します。Year 1末に商品を原価135ドルからNRVの104ドルまで切り下げました。同じ商品はYear 2末に未販売で、NRVは125ドルです。米国基準でYear 2末の計上額はいくらですか？",
+    "steps": "Year 1末に切り下げた $104 が新しい原価です。NRV $125 はその原価を上回るため、$104 で計上します。\nA：元の原価にNRVの回復分まで足した。\nB：NRVの回復分を戻し入れている。\nD：元の原価に戻した。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcnrv/"
    }
   },
   {
