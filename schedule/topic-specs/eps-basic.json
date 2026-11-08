@@ -22,7 +22,7 @@
   ],
   "mc_preview": {
     "stem_html": "Cedar Co. reported net income of <strong>$480,000</strong>. Preferred dividends were <strong>$20,000</strong>. Common shares outstanding were <strong>100,000</strong> on January 1. On July 1, Cedar issued <strong>40,000</strong> additional shares for cash. What is <strong>basic EPS</strong>?",
-    "choices": ["A. $3.43", "B. $4.00", "C. $4.60", "D. $4.80"]
+    "choices": ["A. $3.29", "B. $3.83", "C. $4.60", "D. $4.80"]
   },
   "misconceptions": [
     {
@@ -59,7 +59,7 @@
   "theory": {
     "lead_html": "①の3つは、ここでの<strong>1株当たりの割り算</strong>に対応します。仕訳は発行時の現金・資本の仕訳で、EPS 自体は注記・表示の計算です。",
     "timeline_html": "①当期純利益を確認 → ②優先配当を引く → ③普通株式を月数で加重（配当・分割は遡及） → ④割る",
-    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Cedar の基本EPS $4.00 を求める手順です。",
+    "bridge_to_calc_html": "次の<strong>計算の型</strong>は、Cedar の基本EPS $3.83 を求める手順です。",
     "blocks": [
       {
         "icon": "help-circle",
@@ -84,9 +84,9 @@
     "steps": [
       "<strong>Step 1</strong> 分子：$480,000 − $20,000 ＝ <strong>$460,000</strong>。",
       "<strong>Step 2</strong> 分母：100,000 ＋ 40,000×6/12 ＝ <strong>120,000</strong>。",
-      "<strong>Step 3</strong> 基本EPS ＝ $460,000 ÷ 120,000 ＝ <strong>$4.00</strong>。"
+      "<strong>Step 3</strong> 基本EPS ＝ $460,000 ÷ 120,000 ≈ <strong>$3.83</strong>。"
     ],
-    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額／株数</th></tr></thead>\n        <tbody>\n          <tr><td>Net income</td><td class=\"num\">$480,000</td></tr>\n          <tr><td>− Preferred dividends</td><td class=\"num\">$20,000</td></tr>\n          <tr><td>分子</td><td class=\"num\"><strong>$460,000</strong></td></tr>\n          <tr><td>1/1 shares</td><td class=\"num\">100,000</td></tr>\n          <tr><td>7/1 issue × 6/12</td><td class=\"num\">20,000</td></tr>\n          <tr><td>加重平均</td><td class=\"num\"><strong>120,000</strong></td></tr>\n          <tr><td>Basic EPS</td><td class=\"num\"><strong>$4.00</strong></td></tr>\n        </tbody>\n      </table>"
+    "extra_html": "\n      <table class=\"calc\">\n        <thead><tr><th>項目</th><th class=\"num\">金額／株数</th></tr></thead>\n        <tbody>\n          <tr><td>Net income</td><td class=\"num\">$480,000</td></tr>\n          <tr><td>− Preferred dividends</td><td class=\"num\">$20,000</td></tr>\n          <tr><td>分子</td><td class=\"num\"><strong>$460,000</strong></td></tr>\n          <tr><td>1/1 shares</td><td class=\"num\">100,000</td></tr>\n          <tr><td>7/1 issue × 6/12</td><td class=\"num\">20,000</td></tr>\n          <tr><td>加重平均</td><td class=\"num\"><strong>120,000</strong></td></tr>\n          <tr><td>Basic EPS</td><td class=\"num\"><strong>$3.83</strong></td></tr>\n        </tbody>\n      </table>"
   },
   "process_persona_strip": {
     "takuma": "分母を期末株数にしてしまいそうです。",
@@ -141,10 +141,10 @@
         "7月発行は 6/12 だけ分母に入れる"
       ],
       "stem_html": "Cedar reported NI <strong>$480,000</strong>, preferred dividends <strong>$20,000</strong>. Shares: 100,000 on January 1, plus 40,000 issued for cash on July 1. Basic EPS?",
-      "choices": ["A. $3.43", "B. $4.00", "C. $4.60", "D. $4.80"],
-      "explain_html": "<p>（$480,000−$20,000）÷（100,000＋20,000）＝$460,000÷120,000＝<strong>$4.00</strong>。正解 <strong>B</strong>。</p>",
+      "choices": ["A. $3.29", "B. $3.83", "C. $4.60", "D. $4.80"],
+      "explain_html": "<p>（$480,000−$20,000）÷（100,000＋20,000）＝$460,000÷120,000≈<strong>$3.83</strong>。正解 <strong>B</strong>。</p>",
       "distractors_html": [
-        "<strong>A（$3.43）</strong>＝分子は正しいが、分母を期末 140,000 にした",
+        "<strong>A（$3.29）</strong>＝分子は正しいが、分母を期末 140,000 にした",
         "<strong>C（$4.60）</strong>＝分子は正しいが、分母を期首の 100,000 株だけにした（$460,000÷100,000）",
         "<strong>D（$4.80）</strong>＝優先配当を引かず期首株だけで割った（$480,000÷100,000）"
       ]
@@ -171,7 +171,7 @@
   "one_minute_html": "基本EPSは、当期純利益から優先配当を引いた額を、加重平均した普通株式数で割る。現金で増えた株は月数按分、株式配当と分割は期首に遡って掛け直す。期末株数で割らない。",
   "checklist": [
     "分子＝NI−優先配当、を見ずに言える",
-    "Cedar の $4.00 を10秒で再現できる",
+    "Cedar の $3.83 を10秒で再現できる",
     "現金増資と株式配当で分母の扱いが違う理由を説明できる",
     "累積優先株は宣言なしでも当年分を引く、を言える"
   ]
