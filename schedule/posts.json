@@ -515,5 +515,77 @@
     "queue_id": "cash-flow-indirect-v2",
     "subject": "FAR",
     "_auto": true
+  },
+  "2026-11-10": {
+    "title": "【AUD図解】属性サンプリング—逸脱率の上限とサンプル数を動かす要因",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-attribute-sampling/",
+    "slug": "aud-attribute-sampling",
+    "queue_id": "aud-attribute-sampling-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
+  "2026-11-11": {
+    "title": "【図解】企業結合—取得法・のれん・非支配持分",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/business-combination-acquisition/",
+    "slug": "business-combination-acquisition",
+    "queue_id": "business-combination-acquisition-v2",
+    "subject": "FAR",
+    "_auto": true
+  },
+  "2026-11-13": {
+    "title": "【AUD図解】監査報告書の追加区分—強調事項・その他の事項・継続企業・KAM/CAM",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-report-paragraphs/",
+    "slug": "aud-report-paragraphs",
+    "queue_id": "aud-report-paragraphs-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
+  "2026-11-14": {
+    "title": "【図解】債務証券—HTM・AFS・トレーディングの評価と損益",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/debt-securities-classification/",
+    "slug": "debt-securities-classification",
+    "queue_id": "debt-securities-classification-v2",
+    "subject": "FAR",
+    "_auto": true
+  },
+  "2026-11-17": {
+    "title": "【AUD図解】内部統制の不備—不備・重要な不備・重大な欠陥と伝達先",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-control-deficiencies/",
+    "slug": "aud-control-deficiencies",
+    "queue_id": "aud-control-deficiencies-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
+  "2026-11-18": {
+    "title": "【図解】希薄化EPS—自己株式法と転換仮定法",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-diluted/",
+    "slug": "eps-diluted",
+    "queue_id": "eps-diluted-v2",
+    "subject": "FAR",
+    "_auto": true
+  },
+  "2026-11-20": {
+    "title": "【AUD図解】売掛金の確認—積極・消極、未回答への対応、ラッピング",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-ar-confirmation/",
+    "slug": "aud-ar-confirmation",
+    "queue_id": "aud-ar-confirmation-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
+  "2026-11-21": {
+    "title": "【図解】棚卸資産の評価—LCNRVとLCM（市場価格の上限・下限）",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcnrv/",
+    "slug": "inventory-lcnrv",
+    "queue_id": "inventory-lcnrv-v2",
+    "subject": "FAR",
+    "_auto": true
   }
 }
