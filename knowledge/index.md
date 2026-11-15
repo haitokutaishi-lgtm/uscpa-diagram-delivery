@@ -1,7 +1,7 @@
 <!-- 自動生成（ops/build_knowledge_index.py）。手で編集しない -->
 # 図解ナレッジ索引
 
-全 41 テーマ／v2（復習シート型）20 本。
+全 45 テーマ／v2（復習シート型）24 本。
 
 | slug | 科目 | 型 | タイトル | テキスト | 基準 | 更新日 | ノート |
 |---|---|---|---|---|---|---|---|
@@ -46,3 +46,7 @@
 | [eps-diluted](https://haitokutaishi-lgtm.github.io/diagram-site/topics/eps-diluted/) | FAR | v2 | 希薄化EPSは、証券を1つ加えるたびに比べ直す | FAR Ch12 12-25〜12-31（基本EPS・自己株式法・転換仮定法・表示） | ASC 260-10-45 / ASC 260-10-50 | 2026-11-07 | [ノート](topics/eps-diluted.md) |
 | [aud-ar-confirmation](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-ar-confirmation/) | AUD | v2 | 売掛金の確認｜返事が来ないとき、何を調べる？ | 売掛金の確認・ラッピング | AU-C 330.20 / AU-C 505.07–.16 / PCAOB AS 2310.12–.28, Appendix C | 2026-11-07 | [ノート](topics/aud-ar-confirmation.md) |
 | [inventory-lcnrv](https://haitokutaishi-lgtm.github.io/diagram-site/topics/inventory-lcnrv/) | FAR | v2 | 棚卸資産の期末評価は、原価と何を比べるかで分かれる | 棚卸資産の期末評価（原価と正味実現可能価額、低価法） | ASC 330-10-35 | 2026-11-07 | [ノート](topics/inventory-lcnrv.md) |
+| [aud-materiality](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-materiality/) | AUD | v2 | 重要性　3つの金額を使う場面で覚える | Ch2 重要性 | AU-C 320 / 450 | 2026-11-15 | [ノート](topics/aud-materiality.md) |
+| [aud-icfr-integrated](https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-icfr-integrated/) | AUD | v2 | 内部統制監査　テストする統制を絞り、2つの意見を別々に判断する | Ch10 内部統制監査 | PCAOB AS 2201 | 2026-11-15 | [ノート](topics/aud-icfr-integrated.md) |
+| [nfp-contributions-net-assets](https://haitokutaishi-lgtm.github.io/diagram-site/topics/nfp-contributions-net-assets/) | FAR | v2 | 非営利組織の寄付と正味資産 | FARロードマップ Ch20 | ASC 958-605-25、958-605-45、958-205-45 | 2026-11-15 | [ノート](topics/nfp-contributions-net-assets.md) |
+| [government-funds-basis](https://haitokutaishi-lgtm.github.io/diagram-site/topics/government-funds-basis/) | FAR | v2 | 政府会計のファンド区分と認識基準 | FARロードマップ Ch21 | GASB Statement No. 34（政府全体・ファンド財務諸表）、No. 54（政府系ファンド）、No. 84（受託活動） | 2026-11-15 | [ノート](topics/government-funds-basis.md) |
