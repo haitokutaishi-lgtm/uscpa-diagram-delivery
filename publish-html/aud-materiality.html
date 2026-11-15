@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】重要性—3つの金額を使う場面で覚える</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">AUD 復習シート｜Materiality（AU-C 320 / 450）</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">重要性　3つの金額を使う場面で覚える</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">手続の設計、見つけた誤りの集計、期末の評価。どの段階の判断かを先に読むと、似た用語を見分けやすくなります。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#points">2 差がつく論点</a><a href="#traps">3 引っかけ一覧</a><a href="#mc">4 確認問題</a><a href="#check">5 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>全体図：同じ監査で使う3つの金額</h2>
+      
+      <div class="facts"><p class="font-bold mb-1">例：Harbor Tools の財務諸表監査</p><ul><li>監査チームは全体の重要性を $120,000、手続実施上の重要性を $80,000、明らかに僅少の目安を $5,000 と設定しました。</li><li>監査中に、通常の過大計上 $2,000 と $50,000、契約条項の順守に影響し得る過大計上 $4,000 を見つけました。</li></ul></div>
+      <div class="flow diagram-visual"><div class="flow-step key"><span class="flow-no">1</span><div><b>計画・最終評価｜全体の重要性 $120,000</b><p><b>Overall materiality</b>。利用者の判断に影響し得る大きさを財務諸表全体で考えます。期末には誤りの金額・性質・状況を踏まえて個別と合計を評価します。</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>手続設計｜手続実施上の重要性 $80,000</b><p><b>Performance materiality</b>。見つかっていない誤りも積み重なることを見込み、全体の重要性より低く設定して手続を設計します。</p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>監査中｜明らかに僅少の目安 $5,000</b><p><b>Clearly trivial</b>。$2,000 は状況も踏まえて明らかに僅少なら集計から除けます。$4,000 は契約への影響があるため $50,000 とともに集計し、内容を判断します。</p></div></div></div>
+      <div class="rule">3つの金額は例です。基準が共通の割合を指定しているわけではありません。合理的な利用者の判断に、全体の重要性より小さい誤りでも影響する可能性が相当に高い個別の取引種類・勘定残高・開示がある場合、より低い個別の重要性を設定します。</div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">2</span>差がつく論点</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">論点1</span>手続実施上の重要性は、手続の範囲を決める</div><div class="rule">未修正の誤りと未発見の誤りの合計が、全体の重要性を超える可能性を十分に低くするための金額です。</div><div class="calc">$80,000 を基に手続を設計し、完了時には未修正の誤りを個別・合計で評価します。</div><div class="miss"><b>こう間違える：</b>見つけた $50,000 が $80,000 未満という理由で集計を外します。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点2</span>明らかに僅少かは、誤りの性質や状況も見て決める</div><div class="rule">金額が小さくても、契約条項や法令への影響など、利用者の判断に関係し得る誤りを考慮します。明らかに僅少か判断がつかないときは集計します。</div><div class="calc">$4,000 は $5,000 未満でも、契約への影響があるので集計します。</div><div class="miss"><b>こう間違える：</b>$5,000 未満の誤りをすべて機械的に除きます。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">論点3</span>期末は、個別・合計を金額と性質の両方で評価する</div><div class="rule">経営者に訂正を求め、未修正分について金額・性質・発生状況から重要性を判断します。実績が計画時の見積りから大きく変わったら、重要性の見直しが必要かを検討します。</div><div class="calc">$50,000 ＋ $4,000 ＝ $54,000。$120,000 未満でも、契約条項への影響を確認します。</div><div class="miss"><b>こう間違える：</b>$54,000 が $120,000 未満なので、契約に与える影響を検討しません。</div></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">3</span>引っかけ一覧：英語で問われる判断</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>taken as a whole</td><td>財務諸表全体の重要性</td><td>手続実施上の重要性を選ぶ</td></tr><tr><td>reduce aggregation risk</td><td>手続実施上の重要性を低めに設定</td><td>全体の重要性と同じ金額にする</td></tr><tr><td>accumulate identified misstatements</td><td>明らかに僅少なものを除いて集計</td><td>全体の重要性未満をすべて除く</td></tr><tr><td>affects compliance with a debt covenant</td><td>契約順守への影響も見る</td><td>金額だけで判断する</td></tr><tr><td>actual results differ substantially from expectations</td><td>重要性・手続への影響を見直す</td><td>計画時の判断を維持する</td></tr><tr><td>particular classes of transactions, account balances, or disclosures</td><td>必要に応じて個別の重要性を設定</td><td>全体の重要性を一律に当てはめる</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">4</span>確認問題</h2>
+      <p class="lead">問題文から「手続の設計」「集計」「最終評価」のどれを聞かれているかを拾ってください。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜手続設計</p>
+        <p class="en-stem">An auditor sets overall materiality at $240,000 and performance materiality at $150,000. What is the primary purpose of setting the lower amount?</p>
+        <div class="choices">A. To determine which detected misstatements must be accumulated<br>B. To reduce the risk that uncorrected and undetected misstatements in aggregate exceed overall materiality<br>C. To establish a fixed threshold for modifying the audit opinion<br>D. To determine the maximum misstatement that management may leave uncorrected</div>
+        <details><summary>和訳を見る</summary><div class="body">全体の重要性が $240,000、手続実施上の重要性が $150,000 です。より低い金額を設定する主な目的は何ですか。<br>A. 見つけた誤りのうちどれを集計するか決める<br>B. 未修正・未発見の誤りの合計が全体の重要性を超えるリスクを抑える<br>C. 監査意見を修正する固定の基準を設定する<br>D. 経営者が修正しなくてよい誤りの上限を決める</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b><br>未修正・未発見の誤りの積み重なりを考慮して、手続の性質・時期・範囲を決めます。<br>A：集計から外せるかは明らかに僅少かで判断します。<br>C：意見の判断には金額のほか性質や状況も関わります。<br>D：個々の誤りについて修正不要となる上限額ではありません。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜金額と性質（複合）</p>
+        <p class="en-stem">Overall materiality is $300,000 and the clearly trivial threshold is $6,000. The auditor identifies a $4,500 overstatement that changes whether the entity meets a debt covenant and a $90,000 routine overstatement. Both remain uncorrected. What should the auditor do?</p>
+        <div class="choices">A. Exclude the $4,500 error and evaluate only the $90,000 overstatement.<br>B. Conclude both errors are immaterial because their sum is below $300,000.<br>C. Accumulate both errors and evaluate their amount, nature, and circumstances.<br>D. Treat both errors as material solely because one affects covenant compliance.</div>
+        <details><summary>和訳を見る</summary><div class="body">全体の重要性は $300,000、明らかに僅少の目安は $6,000 です。契約順守の結論が変わる $4,500 の過大計上と通常の $90,000 の過大計上が未修正です。監査人はどうしますか。<br>A. $4,500 を除き $90,000 だけ評価<br>B. 合計が $300,000 未満なので両方とも重要性なしと結論<br>C. 両方を集計し、金額・性質・状況を評価<br>D. 一方に契約への影響があるので両方を直ちに重要と判定</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b><br>$4,500 の性質は利用者の判断に関係し得ます。合計 $94,500 と個々の誤りを評価します。<br>A：金額の小ささだけで契約に関わる誤りを除けません。<br>B：金額の比較だけでは評価が完了しません。<br>D：両方を一律に重要と結論づけず、それぞれと合計を評価します。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜期中の見直し</p>
+        <p class="en-stem">An auditor based preliminary materiality on expected pretax profit. Final pretax profit is substantially lower. Had the auditor known the final amount at planning, the auditor would have set lower overall materiality. What is the appropriate response?</p>
+        <div class="choices">A. Revise overall materiality and determine whether performance materiality and planned procedures also need revision.<br>B. Keep overall materiality and increase the clearly trivial threshold.<br>C. Revise only the clearly trivial threshold.<br>D. Keep all thresholds fixed because any change after planning would invalidate the audit.</div>
+        <details><summary>和訳を見る</summary><div class="body">計画時の重要性は税引前利益の見込み額で設定しました。実績が大幅に下がり、計画時に知っていれば全体の重要性を低くしていました。適切な対応はどれですか。<br>A. 全体の重要性を改定し、手続実施上の重要性と予定した手続の見直しが必要か判断<br>B. 全体の重要性を据え置き、明らかに僅少の目安を引き上げ<br>C. 明らかに僅少の目安だけ改定<br>D. 計画後の変更は監査を無効にするので全て据え置き</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：A</b><br>新情報を反映して全体の重要性を修正し、手続設計への影響も確認します。<br>B：見直しが必要な全体の重要性を据え置いています。<br>C：集計の目安だけ変えても計画時の判断のずれが残ります。<br>D：監査の途中で新情報を反映します。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="11">
+        <p class="mc-label">問題4｜TBS形式：誤りの集計と評価</p>
+        <p class="text-[13px] leading-relaxed mb-2">別の会社の全体の重要性は $200,000、手続実施上は $130,000、明らかに僅少の目安は $7,000 です。通常の誤り $3,000 は性質・状況を含め明らかに僅少です。融資契約の判定に影響する過大表示 $5,000 と同じ勘定の通常の過大表示 $78,000 は未修正です。</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">解答</th></tr></thead><tbody><tr><td>$3,000 の通常の誤り</td><td class="num"><select data-ans="集計しない" aria-label="$3,000 の通常の誤り"><option value="">選ぶ</option><option value="集計する">集計する</option><option value="集計しない">集計しない</option></select></td></tr><tr><td>$5,000 の契約に関わる誤り</td><td class="num"><select data-ans="集計する" aria-label="$5,000 の契約に関わる誤り"><option value="">選ぶ</option><option value="集計する">集計する</option><option value="集計しない">集計しない</option></select></td></tr><tr><td>集計する過大表示の合計（ドル）</td><td class="num"><input inputmode="numeric" data-ans="83000" aria-label="集計する過大表示の合計（ドル）"></td></tr><tr><td>合計を全体の重要性と比較した後の対応</td><td class="num"><select data-ans="契約への影響も評価" aria-label="合計を全体の重要性と比較した後の対応"><option value="">選ぶ</option><option value="契約への影響も評価">契約への影響も評価</option><option value="金額のみで重要性なしと結論">金額のみで重要性なしと結論</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">$3,000 は明らかに僅少なので集計から除きます。$5,000 と $78,000 はともに集計し、過大表示は $83,000 です。契約への影響も踏まえ、個別・合計で評価します。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">5</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c12-1"><label for="c12-1">3つの金額をそれぞれ使う場面を説明できる</label></li><li><input type="checkbox" id="c12-2"><label for="c12-2">手続実施上の重要性を低くする理由を説明できる</label></li><li><input type="checkbox" id="c12-3"><label for="c12-3">小額でも集計する事例を1つ挙げられる</label></li><li><input type="checkbox" id="c12-4"><label for="c12-4">評価では金額・性質・状況を使うと説明できる</label></li><li><input type="checkbox" id="c12-5"><label for="c12-5">実績が大きく変わったとき、何を見直すか言える</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

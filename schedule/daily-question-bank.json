@@ -1,8 +1,8 @@
 {
  "_comment": "自動生成（ops/build_daily_bank.py）。手で直さない。追加の問題は daily-extra-questions.json へ。",
  "counts": {
-  "FAR": 48,
-  "AUD": 24
+  "FAR": 54,
+  "AUD": 30
  },
  "questions": [
   {
@@ -360,6 +360,132 @@
     "steps": "A：内部統制については限定付適正意見では足りません。\nB：内部統制は重大な欠陥が残るため不適正です。財務諸表には無限定適正意見を出せます。\nC：内部統制の欠陥を無視しています。\nD：財務諸表の適正表示と証拠の条件を無視しています。",
     "wrongAnswers": "",
     "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-control-deficiencies/"
+   }
+  },
+  {
+   "id": "aud-icfr-integrated#1",
+   "subject": "AUD",
+   "slug": "aud-icfr-integrated",
+   "topic": "内部統制監査｜トップダウンの順序",
+   "text": "In an integrated audit of an issuer, which sequence best describes the PCAOB top-down approach to selecting controls to test?",
+   "choiceA": "Begin with financial statement-level risks, consider entity-level controls, and identify significant accounts, disclosures, and relevant assertions before selecting controls to test.",
+   "choiceB": "Test all controls over significant accounts before considering relevant assertions.",
+   "choiceC": "Select controls at every location, test them, then identify financial statement risks.",
+   "choiceD": "Choose controls based only on the number of transactions processed.",
+   "correctAnswer": "A",
+   "explanation": "正解：A",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "内部統制監査｜トップダウンの順序",
+    "conceptBody": "【和訳】\n上場会社の統合監査で、テストする統制を選ぶトップダウン・アプローチの順序はどれですか。",
+    "steps": "財務諸表全体に影響するリスクから出発し、誤りが生じ得る箇所と、その誤りに対応する統制を絞ります。\nB：関連アサーションを把握してから統制を絞ります。\nC：リスク評価を後回しにしています。\nD：件数だけでは誤りの大きさ・可能性を判断できません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-icfr-integrated/"
+   }
+  },
+  {
+   "id": "aud-icfr-integrated#2",
+   "subject": "AUD",
+   "slug": "aud-icfr-integrated",
+   "topic": "内部統制監査｜訂正と2つの意見（複合）",
+   "text": "An issuer corrected all identified material misstatements before issuing its financial statements. The auditor obtained sufficient appropriate evidence that the statements are fairly presented. A material weakness in ICFR remained at year-end, and the auditor faced no scope limitation. Which opinions are appropriate?",
+   "choiceA": "Adverse on both the financial statements and ICFR.",
+   "choiceB": "Unqualified on the financial statements and adverse on ICFR.",
+   "choiceC": "Qualified on the financial statements and a disclaimer on ICFR.",
+   "choiceD": "Unqualified on both the financial statements and ICFR.",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "内部統制監査｜訂正と2つの意見（複合）",
+    "conceptBody": "【和訳】\n上場会社が、財務諸表の発行前に把握した重要な誤りを全て訂正しました。財務諸表が適正とする十分かつ適切な証拠はありますが、ICFRに重大な欠陥が期末時点で残っています。範囲制約はありません。適切な意見はどれですか。",
+    "steps": "財務諸表は適正なので無限定です。ICFRには期末時点で重大な欠陥が残っているため否定的意見です。\nA：適正な財務諸表に否定的意見を出す根拠はありません。\nC：財務諸表は適正で、ICFRの意見に必要な証拠も得ています。\nD：誤りの訂正で重大な欠陥が解消したことにはなりません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-icfr-integrated/"
+   }
+  },
+  {
+   "id": "aud-icfr-integrated#3",
+   "subject": "AUD",
+   "slug": "aud-icfr-integrated",
+   "topic": "内部統制監査｜範囲制約",
+   "text": "Management denies the auditor access to evidence necessary to evaluate an issuer's ICFR. Alternative procedures cannot provide sufficient evidence, and the resulting scope limitation prevents the auditor from forming an ICFR opinion. Which response is appropriate under PCAOB standards?",
+   "choiceA": "Issue an adverse opinion on ICFR because effectiveness has not been demonstrated.",
+   "choiceB": "Issue a qualified opinion on ICFR limited to the inaccessible controls.",
+   "choiceC": "Disclaim an opinion on ICFR or withdraw from the engagement.",
+   "choiceD": "Issue an unqualified opinion on ICFR if substantive testing reveals no financial statement misstatements.",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "内部統制監査｜範囲制約",
+    "conceptBody": "【和訳】\n経営者がICFRの評価に必要な証拠へのアクセスを拒みました。代替手続でも十分な証拠が得られず、この範囲制約によりICFRの意見を形成できません。PCAOB基準で適切な対応はどれですか。",
+    "steps": "意見に必要な監査範囲を確保できないので、ICFRについて意見不表明または辞退です。\nA：証拠不足だけでは重大な欠陥を認定できません。\nB：AS 2201はこの場合に意見不表明または辞退を求めます。\nD：財務諸表の実証手続の結果だけで統制の有効性は判断できません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-icfr-integrated/"
+   }
+  },
+  {
+   "id": "aud-materiality#1",
+   "subject": "AUD",
+   "slug": "aud-materiality",
+   "topic": "重要性｜手続設計",
+   "text": "An auditor sets overall materiality at $240,000 and performance materiality at $150,000. What is the primary purpose of setting the lower amount?",
+   "choiceA": "To determine which detected misstatements must be accumulated",
+   "choiceB": "To determine the maximum misstatement that management may leave uncorrected",
+   "choiceC": "To reduce the risk that uncorrected and undetected misstatements in aggregate exceed overall materiality",
+   "choiceD": "To establish a fixed threshold for modifying the audit opinion",
+   "correctAnswer": "C",
+   "explanation": "正解：C",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "重要性｜手続設計",
+    "conceptBody": "【和訳】\n全体の重要性が $240,000、手続実施上の重要性が $150,000 です。より低い金額を設定する主な目的は何ですか。",
+    "steps": "未修正・未発見の誤りの積み重なりを考慮して、手続の性質・時期・範囲を決めます。\nA：集計から外せるかは明らかに僅少かで判断します。\nB：個々の誤りについて修正不要となる上限額ではありません。\nD：意見の判断には金額のほか性質や状況も関わります。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-materiality/"
+   }
+  },
+  {
+   "id": "aud-materiality#2",
+   "subject": "AUD",
+   "slug": "aud-materiality",
+   "topic": "重要性｜金額と性質（複合）",
+   "text": "Overall materiality is $300,000 and the clearly trivial threshold is $6,000. The auditor identifies a $4,500 overstatement that changes whether the entity meets a debt covenant and a $90,000 routine overstatement. Both remain uncorrected. What should the auditor do?",
+   "choiceA": "Treat both errors as material solely because one affects covenant compliance.",
+   "choiceB": "Accumulate both errors and evaluate their amount, nature, and circumstances.",
+   "choiceC": "Conclude both errors are immaterial because their sum is below $300,000.",
+   "choiceD": "Exclude the $4,500 error and evaluate only the $90,000 overstatement.",
+   "correctAnswer": "B",
+   "explanation": "正解：B",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "重要性｜金額と性質（複合）",
+    "conceptBody": "【和訳】\n全体の重要性は $300,000、明らかに僅少の目安は $6,000 です。契約順守の結論が変わる $4,500 の過大計上と通常の $90,000 の過大計上が未修正です。監査人はどうしますか。",
+    "steps": "$4,500 の性質は利用者の判断に関係し得ます。合計 $94,500 と個々の誤りを評価します。\nA：両方を一律に重要と結論づけず、それぞれと合計を評価します。\nC：金額の比較だけでは評価が完了しません。\nD：金額の小ささだけで契約に関わる誤りを除けません。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-materiality/"
+   }
+  },
+  {
+   "id": "aud-materiality#3",
+   "subject": "AUD",
+   "slug": "aud-materiality",
+   "topic": "重要性｜期中の見直し",
+   "text": "An auditor based preliminary materiality on expected pretax profit. Final pretax profit is substantially lower. Had the auditor known the final amount at planning, the auditor would have set lower overall materiality. What is the appropriate response?",
+   "choiceA": "Keep all thresholds fixed because any change after planning would invalidate the audit.",
+   "choiceB": "Keep overall materiality and increase the clearly trivial threshold.",
+   "choiceC": "Revise only the clearly trivial threshold.",
+   "choiceD": "Revise overall materiality and determine whether performance materiality and planned procedures also need revision.",
+   "correctAnswer": "D",
+   "explanation": "正解：D",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "重要性｜期中の見直し",
+    "conceptBody": "【和訳】\n計画時の重要性は税引前利益の見込み額で設定しました。実績が大幅に下がり、計画時に知っていれば全体の重要性を低くしていました。適切な対応はどれですか。",
+    "steps": "新情報を反映して全体の重要性を修正し、手続設計への影響も確認します。\nA：監査の途中で新情報を反映します。\nB：見直しが必要な全体の重要性を据え置いています。\nC：集計の目安だけ変えても計画時の判断のずれが残ります。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-materiality/"
    }
   },
   {
@@ -1119,6 +1245,69 @@
    }
   },
   {
+   "id": "government-funds-basis#1",
+   "subject": "FAR",
+   "slug": "government-funds-basis",
+   "topic": "政府会計のファンド区分と認識基準｜購入時の表示を比較",
+   "text": "A city pays $370,000 from its general fund for a street sweeper that will be used for several years. Disregard depreciation. How is the acquisition reported in the general fund statement and in the government-wide statements, respectively?",
+   "choiceA": "Expenditure; capital asset",
+   "choiceB": "Capital asset; capital asset",
+   "choiceC": "Expenditure; expense",
+   "choiceD": "Capital asset; expenditure",
+   "correctAnswer": "A",
+   "explanation": "正解：A General Fund では当期の財務資源を使ったため支出、市全体では長期に使用するため資産です。",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "政府会計のファンド区分と認識基準｜購入時の表示を比較",
+    "conceptBody": "【和訳】\n市が General Fund から $370,000 を支払い、数年間使用する道路清掃車を買いました。減価償却を考慮しない場合、General Fund と市全体の財務諸表ではそれぞれどう報告しますか。",
+    "steps": "B：市全体の扱いを General Fund に適用。\nC：市全体でも購入時の費用と誤認。\nD：二つの報告単位を逆に判定。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/government-funds-basis/"
+   }
+  },
+  {
+   "id": "government-funds-basis#2",
+   "subject": "FAR",
+   "slug": "government-funds-basis",
+   "topic": "政府会計のファンド区分と認識基準｜利用可能な税収",
+   "text": "A town levied $96,000 in property taxes for the current year. It collected $72,000 by year-end and $16,000 within its applicable availability period after year-end. The remainder was collectible but not available for current-year liabilities. How much property tax revenue is recognized in the general fund for the current year?",
+   "choiceA": "$88,000",
+   "choiceB": "$80,000",
+   "choiceC": "$96,000",
+   "choiceD": "$72,000",
+   "correctAnswer": "A",
+   "explanation": "正解：A（$88,000） $72,000 ＋ $16,000。期末後でも適用回収期間内の金額を含めます。",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "政府会計のファンド区分と認識基準｜利用可能な税収",
+    "conceptBody": "【和訳】\n町は当年度の固定資産税 $96,000 を賦課しました。期末までに $72,000、翌期の適用回収期間内に $16,000 を受領しました。残りは回収可能ですが当期の負債の支払いには間に合いません。当年度 General Fund の固定資産税収益はいくらですか。",
+    "steps": "B：期間後の $8,000 を加え、期間内の $16,000 を除外。\nC：利用可能性を無視。\nD：期末までの現金受領に限定。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/government-funds-basis/"
+   }
+  },
+  {
+   "id": "government-funds-basis#3",
+   "subject": "FAR",
+   "slug": "government-funds-basis",
+   "topic": "政府会計のファンド区分と認識基準｜事業型ファンドの区分",
+   "text": "A city operates a fleet repair shop that serves only city departments and charges them at cost. Which fund should report the shop, and which accounting basis applies?",
+   "choiceA": "General fund; modified accrual",
+   "choiceB": "Enterprise fund; accrual",
+   "choiceC": "Internal service fund; accrual",
+   "choiceD": "Internal service fund; modified accrual",
+   "correctAnswer": "C",
+   "explanation": "正解：C 庁内部門向けの原価回収は internal service fund の用途で、認識基準は発生主義です。",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "政府会計のファンド区分と認識基準｜事業型ファンドの区分",
+    "conceptBody": "【和訳】\n市に庁内部門専用の車両修理部門があり、原価を庁内部門に請求します。どのファンドで報告し、どの認識基準を用いますか。",
+    "steps": "A：ファンドを料金で運営するという事実を反映しない。\nB：庁内利用者を外部利用者と同じに扱う。\nD：区分は正しいものの、政府系ファンドの認識基準を使う。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/government-funds-basis/"
+   }
+  },
+  {
    "id": "inventory-lcnrv#1",
    "subject": "FAR",
    "slug": "inventory-lcnrv",
@@ -1263,6 +1452,69 @@
     "steps": "所有権が移転するので耐用年数10年で償却：80,000 ÷ 10 ＝ 8,000（論点4）\nA：4年で割った償却費に利息を足している\nB：償却費に利息 80,000 × 6% ＝ 4,800 を足している（聞かれているのは償却費だけ）\nD：リース期間4年で割っている",
     "wrongAnswers": "",
     "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/lease-lessee-classification/"
+   }
+  },
+  {
+   "id": "nfp-contributions-net-assets#1",
+   "subject": "FAR",
+   "slug": "nfp-contributions-net-assets",
+   "topic": "非営利組織の寄付と正味資産｜条件と制限を一緒に判定",
+   "text": "A nonprofit received $42,000 on December 1. It must return the money unless it completes 500 screenings by next June. It had completed 200 at year-end. It separately received an unconditional gift of $19,000 restricted to next year's outreach. What contribution revenue and refundable advance should it report for these receipts at year-end?",
+   "choiceA": "Revenue $19,000; advance $42,000",
+   "choiceB": "Revenue $61,000; advance $0",
+   "choiceC": "Revenue $0; advance $61,000",
+   "choiceD": "Revenue $42,000; advance $19,000",
+   "correctAnswer": "A",
+   "explanation": "正解：A $42,000 は実質的な条件が未達で負債です。$19,000 は無条件なので制限ありの寄付収益です。",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "非営利組織の寄付と正味資産｜条件と制限を一緒に判定",
+    "conceptBody": "【和訳】\n非営利組織は12月1日に $42,000 を受領しました。翌年6月までに検査を500件完了しなければ返金し、期末時点では200件でした。別に、翌年の啓発事業に使途が限定された無条件の寄付 $19,000 を受領しました。この2件の期末の寄付収益と返金可能な前受金はいくらですか。",
+    "steps": "B：現金受領だけで両方を認識。\nC：使途・時期の指定も認識条件と誤読。\nD：条件と制限の扱いが逆。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/nfp-contributions-net-assets/"
+   }
+  },
+  {
+   "id": "nfp-contributions-net-assets#2",
+   "subject": "FAR",
+   "slug": "nfp-contributions-net-assets",
+   "topic": "非営利組織の寄付と正味資産｜出資者への価値",
+   "text": "A city pays a nonprofit to provide free literacy classes to residents. The residents have no separate obligation to pay for the classes. The city receives no goods or services of commensurate value in return and benefits only from advancing its public policy goals. What is the nature of the transfer?",
+   "choiceA": "An exchange because the city is the resource provider",
+   "choiceB": "A contribution because the city does not receive commensurate value",
+   "choiceC": "An exchange because residents receive classes",
+   "choiceD": "A contribution only if the nonprofit offers refunds to residents",
+   "correctAnswer": "B",
+   "explanation": "正解：B 直接の対価を受けるのが資源提供者かを確認します。",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "非営利組織の寄付と正味資産｜出資者への価値",
+    "conceptBody": "【和訳】\n市が非営利組織に支払い、住民向けの無料識字講座を開きます。住民自身に受講料の支払義務はありません。市は同等の価値を持つ財・サービスを受け取らず、政策目標が満たされるだけです。この移転はどのような取引ですか。",
+    "steps": "A：提供者が自治体という属性だけで交換と判断。\nC：住民の便益を市への対価と同一視。\nD：住民への返金を取引分類の条件と誤認。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/nfp-contributions-net-assets/"
+   }
+  },
+  {
+   "id": "nfp-contributions-net-assets#3",
+   "subject": "FAR",
+   "slug": "nfp-contributions-net-assets",
+   "topic": "非営利組織の寄付と正味資産｜期をまたぐ制限解除",
+   "text": "A museum began the year with $34,000 of net assets with donor restrictions, all restricted to conservation. It spent $9,000 on qualifying conservation costs and received a new $6,000 unrestricted gift. No other transactions occurred. What are ending net assets with donor restrictions?",
+   "choiceA": "$19,000",
+   "choiceB": "$31,000",
+   "choiceC": "$25,000",
+   "choiceD": "$34,000",
+   "correctAnswer": "C",
+   "explanation": "正解：C（$25,000） $34,000 − $9,000。新規の無制限寄付は制限なし側です。",
+   "richData": {
+    "questionType": "図解の確認問題",
+    "conceptTitle": "非営利組織の寄付と正味資産｜期をまたぐ制限解除",
+    "conceptBody": "【和訳】\n博物館は保存活動に限定された制限あり正味資産 $34,000 で期首を迎えました。適格な保存費 $9,000 を支出し、無制限の新規寄付 $6,000 を受け取りました。他の取引がない場合、期末の制限あり正味資産はいくらですか。",
+    "steps": "A：新規寄付も制限あり側から差し引く。\nB：新規寄付を制限あり側へ加える。\nD：制限解除を反映しない。",
+    "wrongAnswers": "",
+    "memoryTip": "📘 図解で復習：https://haitokutaishi-lgtm.github.io/diagram-site/topics/nfp-contributions-net-assets/"
    }
   },
   {

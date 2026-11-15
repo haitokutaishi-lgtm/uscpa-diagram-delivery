@@ -1,0 +1,276 @@
+{
+  "version": 2,
+  "subject": "FAR",
+  "knowledge": {
+    "far_text": "FARロードマップ Ch21",
+    "asc": "GASB Statement No. 34（政府全体・ファンド財務諸表）、No. 54（政府系ファンド）、No. 84（受託活動）",
+    "updated": "2026-11-15",
+    "sources": [
+      "https://gasb.org/standards-and-guidance/pronouncements/summary-statement-no-34",
+      "https://gasb.org/standards-and-guidance/pronouncements/summary-statement-no-54",
+      "https://gasb.org/standards-and-guidance/pronouncements/summary-statement-no-84"
+    ]
+  },
+  "post": {
+    "name": "政府会計のファンド区分と認識基準",
+    "hook_q": "市が一般財源で $240,000 の消防車を買いました。市全体の財務諸表と General Fund の両方で、消防車を固定資産に計上しますか？",
+    "hook_where": "全体図と、差がつく論点1",
+    "bullets": [
+      "一般行政・料金サービス・受託の例からファンドを分類",
+      "測定の対象と認識のタイミングを、ファンドと市全体で比較",
+      "初見の英語MC3問＋TBS（その場で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】政府会計のファンド区分と認識基準",
+    "badge": "FAR 復習シート",
+    "h1_html": "政府会計のファンド区分と認識基準",
+    "lead_html": "最初に見るのは、問題文がどの報告単位を聞いているかです。同じ市の取引でも、General Fund と市全体の財務諸表で扱いが変わります。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "どの報告単位か → 何を測るか → いつ認識するか",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "一般行政のファンド（governmental）",
+              "body_html": "市の General Fund・道路建設など。<b>当期の財務資源</b>（current financial resources）を測り、<b>修正発生主義</b>（modified accrual）を使います。一般財源で買った $240,000 の消防車は General Fund で支出です。"
+            },
+            {
+              "head": "事業型・受託のファンド（proprietary / fiduciary）",
+              "body_html": "利用料金で独立採算を目指す市営水道や、信託で管理する職員年金など。<b>経済的資源</b>（economic resources）を測り、<b>発生主義</b>（accrual）を使います。"
+            },
+            {
+              "head": "市全体の財務諸表（government-wide）",
+              "body_html": "行政活動・事業型活動を<b>経済的資源＋発生主義</b>で示します。消防車 $240,000 は資産に計上し、使用期間にわたって減価償却します。受託活動は市全体の財務諸表に含めません。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "nav": "区分",
+      "title_html": "目的からファンドを選ぶ",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "ファンドの区分",
+            "代表的な目的"
+          ],
+          "rows": [
+            [
+              "Governmental<br>政府系",
+              "一般財源（general）、特定目的に制限・指定された収入（special revenue）、資本的支出（capital projects）、元利返済（debt service）、元本維持のある公的目的資金（permanent）"
+            ],
+            [
+              "Proprietary<br>事業型",
+              "主に外部利用者への有料サービス（enterprise）、主に政府内部の部門・機関に原価回収ベースで提供する共有サービス（internal service）"
+            ],
+            [
+              "Fiduciary<br>受託",
+              "年金などの信託や、市の事業に使えない第三者のための受託資源（custodial など）"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "html": "測定焦点（measurement focus）は「何を測るか」、認識基準（basis of accounting）は「いつ認識するか」を表します。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "取引が同じでも報告単位で処理が変わる",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": 1,
+          "title_html": "消防車を買うと、General Fund と市全体で処理が違う",
+          "rule_html": "当期に使える財務資源を測る政府系ファンドでは、資本財を買った額を支出にします。市全体では長く使う資産も測定対象です。",
+          "calc_html": "取得額 $240,000 は General Fund で資本的支出、市全体で消防車の資産計上です。供用開始後の減価償却は市全体で反映します。",
+          "miss_html": "購入額 $240,000 を General Fund の固定資産にします。"
+        },
+        {
+          "type": "point",
+          "no": 2,
+          "title_html": "修正発生主義の収益は、測定可能で利用可能かを見る",
+          "rule_html": "利用可能（available）とは、当期または当期の負債の支払いに間に合う時期に回収できることです。現金をまだ受け取っていなくても、使える時期に回収できるなら認識できます。固定資産税では、期末から利用可能とみなす期間は最長60日です。",
+          "calc_html": "当年度に課した固定資産税 $80,000 が測定可能で、うち $65,000 が期末までに、残り $15,000 も自治体の適用する回収期間内に入金される場合、政府系ファンドの当年度収益は $80,000 です。",
+          "miss_html": "現金を受け取った $65,000 だけを認識します。"
+        },
+        {
+          "type": "point",
+          "no": 3,
+          "title_html": "料金を払う相手は市民か、庁内の部門か",
+          "rule_html": "市民等の外部利用者が主なら enterprise fund、政府内部の部門・機関向けの原価回収が主なら internal service fund を検討します。両者とも事業型です。",
+          "calc_html": "市営水道が主に住民に請求する利用料と、市の車両整備部門が主に他の庁内部門に請求する整備料では、請求先が違います。",
+          "miss_html": "料金を取っていることだけを見て、庁内整備も enterprise fund と判定します。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ",
+      "title_html": "英文で見る引っかけ",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "general fund",
+              "政府系ファンドの報告か",
+              "発生主義で長期保有資産を計上します。"
+            ],
+            [
+              "available",
+              "当期負債に充てられる回収時期か",
+              "収益を期末までの現金受領額に限ります。"
+            ],
+            [
+              "capital outlay",
+              "政府系ファンドでは支出か",
+              "政府系ファンドで減価償却します。"
+            ],
+            [
+              "fees charged to external customers",
+              "外部への有料事業か",
+              "料金を一般財源の税収として扱います。"
+            ],
+            [
+              "services to other departments at cost",
+              "庁内向けの原価回収か",
+              "外部向けの enterprise fund にします。"
+            ],
+            [
+              "held in trust for pension beneficiaries",
+              "市の活動に使える資源か",
+              "市全体の財務諸表に受託ファンドを足します。"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見のケース）",
+      "lead_html": "ファンド名と政府全体のどちらが指定されているかに印をつけてから、取引の処理に進みます。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜購入時の表示を比較",
+          "stem": "A city pays $370,000 from its general fund for a street sweeper that will be used for several years. Disregard depreciation. How is the acquisition reported in the general fund statement and in the government-wide statements, respectively?",
+          "choices": [
+            "A. Expenditure; capital asset",
+            "B. Capital asset; expenditure",
+            "C. Expenditure; expense",
+            "D. Capital asset; capital asset"
+          ],
+          "ja_html": "市が General Fund から $370,000 を支払い、数年間使用する道路清掃車を買いました。減価償却を考慮しない場合、General Fund と市全体の財務諸表ではそれぞれどう報告しますか。",
+          "answer_html": "<b>正解：A</b> General Fund では当期の財務資源を使ったため支出、市全体では長期に使用するため資産です。<br>B：二つの報告単位を逆に判定。<br>C：市全体でも購入時の費用と誤認。<br>D：市全体の扱いを General Fund に適用。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜利用可能な税収",
+          "stem": "A town levied $96,000 in property taxes for the current year. It collected $72,000 by year-end and $16,000 within its applicable availability period after year-end. The remainder was collectible but not available for current-year liabilities. How much property tax revenue is recognized in the general fund for the current year?",
+          "choices": [
+            "A. $72,000",
+            "B. $80,000",
+            "C. $88,000",
+            "D. $96,000"
+          ],
+          "ja_html": "町は当年度の固定資産税 $96,000 を賦課しました。期末までに $72,000、翌期の適用回収期間内に $16,000 を受領しました。残りは回収可能ですが当期の負債の支払いには間に合いません。当年度 General Fund の固定資産税収益はいくらですか。",
+          "answer_html": "<b>正解：C（$88,000）</b> $72,000 ＋ $16,000。期末後でも適用回収期間内の金額を含めます。<br>A：期末までの現金受領に限定。<br>B：期間後の $8,000 を加え、期間内の $16,000 を除外。<br>D：利用可能性を無視。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜事業型ファンドの区分",
+          "stem": "A city operates a fleet repair shop that serves only city departments and charges them at cost. Which fund should report the shop, and which accounting basis applies?",
+          "choices": [
+            "A. Enterprise fund; accrual",
+            "B. Internal service fund; modified accrual",
+            "C. General fund; modified accrual",
+            "D. Internal service fund; accrual"
+          ],
+          "ja_html": "市に庁内部門専用の車両修理部門があり、原価を庁内部門に請求します。どのファンドで報告し、どの認識基準を用いますか。",
+          "answer_html": "<b>正解：D</b> 庁内部門向けの原価回収は internal service fund の用途で、認識基準は発生主義です。<br>A：庁内利用者を外部利用者と同じに扱う。<br>B：区分は正しいものの、政府系ファンドの認識基準を使う。<br>C：ファンドを料金で運営するという事実を反映しない。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS：測定焦点と認識基準",
+          "intro_html": "一般財源で運営する市の本体業務、市民に料金を請求する水道事業、職員のため信託で管理する年金を考えます。各行の報告単位に適用する組み合わせを選んでください。",
+          "explain_html": "General Fund だけが当期の財務資源＋修正発生主義です。enterprise fund、年金信託、政府全体は経済的資源＋発生主義です。年金信託は政府全体には含めません。",
+          "select": true,
+          "value_head": "組み合わせ",
+          "rows": [
+            {
+              "label": "本体業務：General Fund",
+              "ans": "当期の財務資源／修正発生主義",
+              "options": [
+                "当期の財務資源／修正発生主義",
+                "経済的資源／発生主義",
+                "当期の財務資源／現金主義"
+              ]
+            },
+            {
+              "label": "水道事業：Enterprise Fund",
+              "ans": "経済的資源／発生主義",
+              "options": [
+                "当期の財務資源／修正発生主義",
+                "経済的資源／発生主義",
+                "当期の財務資源／現金主義"
+              ]
+            },
+            {
+              "label": "職員年金：Pension Trust Fund",
+              "ans": "経済的資源／発生主義",
+              "options": [
+                "当期の財務資源／修正発生主義",
+                "経済的資源／発生主義",
+                "当期の財務資源／現金主義"
+              ]
+            },
+            {
+              "label": "政府全体：行政活動の欄",
+              "ans": "経済的資源／発生主義",
+              "options": [
+                "当期の財務資源／修正発生主義",
+                "経済的資源／発生主義",
+                "当期の財務資源／現金主義"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "政府系・事業型・受託を、資源の目的から分けられますか？",
+            "測定焦点と認識基準の違いを説明できますか？",
+            "政府系ファンドと政府全体で固定資産購入の処理を区別できますか？",
+            "税収の「利用可能」を、現金受領済みと区別できますか？",
+            "職員年金の受託活動を市全体の財務諸表に含めるか判断できますか？"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "version": 2,
+  "subject": "FAR",
+  "knowledge": {
+    "far_text": "FARロードマップ Ch20",
+    "asc": "ASC 958-605-25、958-605-45、958-205-45",
+    "updated": "2026-11-15",
+    "sources": [
+      "https://storage.fasb.org/ASU_2018-08.pdf",
+      "https://storage.fasb.org/ASU%202016-14.pdf"
+    ]
+  },
+  "post": {
+    "name": "非営利組織の寄付と正味資産",
+    "hook_q": "「100人に講座を提供できなければ返金」と「講座にだけ使える」。現金が同じ日に入ったら、両方とも寄付収益ですか？",
+    "hook_where": "全体図と、差がつく論点1・2",
+    "bullets": [
+      "返金条件と使途制限を、認識時期と表示区分に分けて判定",
+      "制限解除が正味資産の2区分をどう動かすか、金額で確認",
+      "初見の英語MC3問＋TBS（その場で答え合わせ）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】非営利組織の寄付と正味資産",
+    "badge": "FAR 復習シート",
+    "h1_html": "非営利組織の寄付と正味資産",
+    "lead_html": "同じ「講座に使う寄付」でも、お金を受け取った日に収益になるものと、条件を達成するまで負債になるものがあります。契約の文言を読む順番から確認します。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "寄付の判定は、対価 → 条件 → 制限",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "対価を返す取引ですか？",
+              "body_html": "寄付者自身が同等の価値を受け取るなら交換取引を検討します。市民が無料講座を受け、寄付者自身には同等の価値が返らないなら、寄付として次へ進みます。"
+            },
+            {
+              "head": "達成すべき条件と返金・支払免除の権利がありますか？",
+              "body_html": "講座を100人に提供するまでは受取権がなく、未達なら返金する契約で、先に $12,000 を受領。達成までは <b>返金可能な前受金（負債）$12,000</b> です。"
+            },
+            {
+              "head": "収益にできるなら、寄付者の使途・時期の指定はありますか？",
+              "body_html": "別の寄付者から、教材費だけに使える $5,000 を無条件で受領。受領時に <b>寄付者の制限あり $5,000</b>。翌期に教材費 $2,000 を支払うと、$2,000 分の制限が解除され、制限ありの残りは $3,000 です。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "条件を満たす日と制限が解除される日",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": 1,
+          "title_html": "条件達成前に受け取った寄付は前受金",
+          "rule_html": "寄付者が定めた実質的なハードルと、未達時に返金を求める権利または支払義務を免れる権利が両方あるかを確認します。条件を実質的に満たした時点で寄付収益を認識します。",
+          "calc_html": "$12,000 を先に受領した日：現金 $12,000／返金可能な前受金 $12,000。翌期に100人の条件を満たした日：前受金 $12,000 を取り崩して寄付収益を計上します。残る寄付者制限の有無をその時点で確認します。",
+          "miss_html": "現金を受け取った時点で $12,000 を制限ありの寄付収益にします。"
+        },
+        {
+          "type": "point",
+          "no": 2,
+          "title_html": "使途の指定だけなら、使う前から寄付収益",
+          "rule_html": "教材費だけに使う指定は、認識済みの資源の使い道を決めます。翌期に指定どおり使うと、その分を制限ありから制限なしへ振り替えます。",
+          "calc_html": "認識時の制限ありは $5,000。翌期に $2,000 を振り替えた後は $3,000 です。教材費 $2,000 は制限なし側の費用で、振替そのものは正味資産の合計を増やしません。",
+          "miss_html": "翌期に $2,000 をもう一度寄付収益に足します。"
+        },
+        {
+          "type": "point",
+          "no": 3,
+          "title_html": "使途を決めたのが誰かを確認する",
+          "rule_html": "理事会が内部で予算を指定しても、寄付者から制限を付されていなければ、正味資産は制限なしです。期間・目的・恒久的な元本維持などの寄付者制限は、制限ありに含めます。",
+          "calc_html": "全体図の $5,000 は寄付者が教材費に指定したので制限ありです。同額の自由な寄付を後から理事会が教材費に回すケースでは、制限なしです。",
+          "miss_html": "内部で用途が決まった時点で、寄付者の制限ありへ振り替えます。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ",
+      "title_html": "英文で見る引っかけ",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "right of return",
+              "実質的なハードルもあるか",
+              "『返金』の一語だけで判定します。"
+            ],
+            [
+              "restricted to the purchase of materials",
+              "単なる使途指定か",
+              "使う日まで収益を繰り延べます。"
+            ],
+            [
+              "board-designated",
+              "指定したのは理事会か寄付者か",
+              "すべて制限ありにします。"
+            ],
+            [
+              "restriction was satisfied",
+              "認識済み収益の区分が動くか",
+              "同じ寄付を再び収益に足します。"
+            ],
+            [
+              "pledge subject to matching funds",
+              "必要額を集めなければ支払義務がなくなるか",
+              "達成前に無条件の未収寄付金として計上します。"
+            ],
+            [
+              "maintain the principal in perpetuity",
+              "寄付者による元本維持の指定か",
+              "期間の指定がないから制限なしにします。"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題（初見のケース）",
+      "lead_html": "まず、誰が対価を受けるか、受取権が確定したか、使途は限定されているかを順番に確認します。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜条件と制限を一緒に判定",
+          "stem": "A nonprofit received $42,000 on December 1. It must return the money unless it completes 500 screenings by next June. It had completed 200 at year-end. It separately received an unconditional gift of $19,000 restricted to next year's outreach. What contribution revenue and refundable advance should it report for these receipts at year-end?",
+          "choices": [
+            "A. Revenue $61,000; advance $0",
+            "B. Revenue $42,000; advance $19,000",
+            "C. Revenue $19,000; advance $42,000",
+            "D. Revenue $0; advance $61,000"
+          ],
+          "ja_html": "非営利組織は12月1日に $42,000 を受領しました。翌年6月までに検査を500件完了しなければ返金し、期末時点では200件でした。別に、翌年の啓発事業に使途が限定された無条件の寄付 $19,000 を受領しました。この2件の期末の寄付収益と返金可能な前受金はいくらですか。",
+          "answer_html": "<b>正解：C</b> $42,000 は実質的な条件が未達で負債です。$19,000 は無条件なので制限ありの寄付収益です。<br>A：現金受領だけで両方を認識。<br>B：条件と制限の扱いが逆。<br>D：使途・時期の指定も認識条件と誤読。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜出資者への価値",
+          "stem": "A city pays a nonprofit to provide free literacy classes to residents. The residents have no separate obligation to pay for the classes. The city receives no goods or services of commensurate value in return and benefits only from advancing its public policy goals. What is the nature of the transfer?",
+          "choices": [
+            "A. An exchange because the city is the resource provider",
+            "B. A contribution because the city does not receive commensurate value",
+            "C. An exchange because residents receive classes",
+            "D. A contribution only if the nonprofit offers refunds to residents"
+          ],
+          "ja_html": "市が非営利組織に支払い、住民向けの無料識字講座を開きます。住民自身に受講料の支払義務はありません。市は同等の価値を持つ財・サービスを受け取らず、政策目標が満たされるだけです。この移転はどのような取引ですか。",
+          "answer_html": "<b>正解：B</b> 直接の対価を受けるのが資源提供者かを確認します。<br>A：提供者が自治体という属性だけで交換と判断。<br>C：住民の便益を市への対価と同一視。<br>D：住民への返金を取引分類の条件と誤認。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜期をまたぐ制限解除",
+          "stem": "A museum began the year with $34,000 of net assets with donor restrictions, all restricted to conservation. It spent $9,000 on qualifying conservation costs and received a new $6,000 unrestricted gift. No other transactions occurred. What are ending net assets with donor restrictions?",
+          "choices": [
+            "A. $19,000",
+            "B. $34,000",
+            "C. $31,000",
+            "D. $25,000"
+          ],
+          "ja_html": "博物館は保存活動に限定された制限あり正味資産 $34,000 で期首を迎えました。適格な保存費 $9,000 を支出し、無制限の新規寄付 $6,000 を受け取りました。他の取引がない場合、期末の制限あり正味資産はいくらですか。",
+          "answer_html": "<b>正解：D（$25,000）</b> $34,000 − $9,000。新規の無制限寄付は制限なし側です。<br>A：新規寄付も制限あり側から差し引く。<br>C：新規寄付を制限あり側へ加える。<br>B：制限解除を反映しない。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS：寄付収益と負債を分ける",
+          "intro_html": "期首残高はゼロ。①無条件で使用自由の寄付 $13,000、②翌期以降の相談会に使途が限定された無条件の寄付 $21,000、③別の事業で開催数の目標を達成しなければ返す $36,000 を受け取りました。③の目標は期末時点で未達で、当期中の②の適格支出はありません。",
+          "explain_html": "① $13,000 は制限なし、② $21,000 は制限ありの寄付収益です。③ $36,000 は返金可能な前受金。寄付収益合計は $34,000 です。",
+          "rows": [
+            {
+              "label": "制限なしの寄付収益",
+              "ans": 13000
+            },
+            {
+              "label": "制限ありの寄付収益",
+              "ans": 21000
+            },
+            {
+              "label": "返金可能な前受金",
+              "ans": 36000
+            },
+            {
+              "label": "寄付収益の合計",
+              "ans": 34000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "公共への便益と資源提供者への同等の対価を区別できますか？",
+            "条件の判定に必要な二要素を挙げられますか？",
+            "条件達成前に受け取った現金を負債にできますか？",
+            "寄付者の指定と理事会の指定を区別できますか？",
+            "翌期の制限解除で正味資産の2区分がどう動くか説明できますか？"
+          ]
+        }
+      ]
+    }
+  ]
+}

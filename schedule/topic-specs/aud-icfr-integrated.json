@@ -1,0 +1,268 @@
+{
+  "version": 2,
+  "subject": "AUD",
+  "knowledge": {
+    "aud_text": "Ch10 内部統制監査",
+    "asc": "PCAOB AS 2201",
+    "updated": "2026-11-15",
+    "sources": [
+      "https://pcaobus.org/oversight/standards/auditing-standards/details/AS2201"
+    ]
+  },
+  "post": {
+    "name": "内部統制監査",
+    "hook_q": "決算の誤りをすべて修正した会社で、期末時点の統制に重大な欠陥が残っています。財務諸表と内部統制への意見は同じになりますか？",
+    "hook_where": "差がつく論点2と問題2",
+    "bullets": [
+      "財務諸表レベルからテストする統制まで、トップダウンの流れを確認",
+      "重大な欠陥と範囲制約が、内部統制への意見にどう影響するかを整理",
+      "初見の英語MC3問＋TBS（自動答え合わせ付き）"
+    ]
+  },
+  "meta": {
+    "page_title": "【復習シート】内部統制監査—テストする統制を絞り、2つの意見を別々に判断する",
+    "badge": "AUD 復習シート｜Integrated Audit（PCAOB AS 2201）",
+    "h1_html": "内部統制監査　テストする統制を絞り、2つの意見を別々に判断する",
+    "lead_html": "上場会社の財務報告に係る内部統制（ICFR）を、財務諸表監査と一体で監査する場合を扱います。"
+  },
+  "sections": [
+    {
+      "id": "map",
+      "nav": "全体図",
+      "title_html": "全体図：会社全体のリスクから、どの統制をテストするかまで",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "facts",
+          "title_html": "例：Linden Supply の売上",
+          "items": [
+            "年末の出荷は多く、早すぎる売上計上が財務諸表に重要な影響を与えるおそれがあります。",
+            "会社は全社的な監視に加え、出荷日と売上計上日を出荷記録で照合する統制を設けています。"
+          ]
+        },
+        {
+          "type": "flow",
+          "steps": [
+            {
+              "head": "① 財務諸表レベルのリスクを見て、全社的な統制を評価する",
+              "body_html": "決算全体に影響するリスクと、経営者・監査委員会による監視などの <b>entity-level controls</b> がどこまで効くかを確認します。",
+              "tone": "key"
+            },
+            {
+              "head": "② 重要な勘定・開示と関連するアサーションを特定する",
+              "body_html": "この例は売上と期間帰属（<b>cutoff</b>）。「どこで、どんな誤りが起き得るか」を出荷から記帳まで追います。",
+              "tone": ""
+            },
+            {
+              "head": "③ リスクに対応する統制を選び、整備と運用をテストする",
+              "body_html": "出荷日と売上計上日の照合が、誤りを防ぐか、見つけて直すように設計されているかを確認します。実施された記録などから実際の運用も検証します。",
+              "tone": ""
+            },
+            {
+              "head": "④ 財務諸表とICFRの意見をそれぞれ判断する",
+              "body_html": "監査の証拠は両方の監査で活用できます。財務諸表は表示の適正性、ICFRは基準日時点の統制の有効性を判断します。",
+              "tone": ""
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "html": "ウォークスルー（<b>walkthrough</b>）では取引を起点から記帳までたどり、処理と統制を把握します。運用の有効性を判断する証拠には、質問に加えて観察・記録の閲覧・再実施などを組み合わせます。"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "nav": "差がつく論点",
+      "title_html": "差がつく論点",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "point",
+          "no": "論点1",
+          "title_html": "全社的な統制があるときも、誤りを捉える細かさを確認する",
+          "rule_html": "評価したリスクに十分対応できる統制をテスト対象に選びます。全社的な統制が該当リスクを十分な精度で防止・発見できれば、同じリスクをカバーする追加の統制テストが不要な場合もあります。",
+          "calc_html": "総売上を大まかに月次比較するだけでは、年末前後の出荷ごとの計上ずれを捉えられない可能性があります。照合統制がどのずれを拾えるかを確かめます。",
+          "miss_html": "月次会議で売上を見ているという理由だけで、出荷日との照合をテスト対象から外します。"
+        },
+        {
+          "type": "point",
+          "no": "論点2",
+          "title_html": "重大な欠陥が1つでもあれば、ICFRは否定的意見",
+          "rule_html": "<b>Material weakness</b> は、重要な虚偽表示が適時に防止または発見されない合理的な可能性がある不備です。1つでも基準日時点で存在し、監査範囲の制約なく判断できる場合、ICFRへの意見は <b>adverse</b> です。",
+          "calc_html": "照合が期末まで機能せず重大な欠陥が残っていても、会社が誤りを訂正し、十分な証拠に基づき財務諸表が適正なら、財務諸表への意見は無限定となり得ます。",
+          "miss_html": "誤りがすべて訂正されたので、統制も有効と判断します。"
+        },
+        {
+          "type": "point",
+          "no": "論点3",
+          "title_html": "重大な範囲制約では、意見を表明できるかを判断する",
+          "rule_html": "ICFR意見に必要な手続を実施できず、ほかの手続でも必要な証拠を得られない範囲制約では、ICFRの意見不表明または契約からの辞退が必要です。",
+          "calc_html": "照合記録へのアクセスが制限され、代替手続でも必要な証拠が得られない場合は、ICFRについて意見不表明または辞退となります。限られた手続で重大な欠陥が判明した場合、意見不表明の報告書にもその内容を記載します。",
+          "miss_html": "必要な証拠を得られないことだけを理由に、統制が無効と断定します。"
+        },
+        {
+          "type": "point",
+          "no": "論点4",
+          "title_html": "重要な不備は組み合わせも評価し、書面で伝える",
+          "rule_html": "不備の重大さは、実際に誤りが起きたかだけでは決まりません。起き得る誤りの大きさと可能性を、関連する不備の組み合わせも含めて判断します。",
+          "calc_html": "売上の照合と例外の調査がともに弱い場合、両方を合わせた影響を評価します。重大な欠陥は経営者と監査委員会に書面で伝えます。重要な不備（<b>significant deficiency</b>）は監査委員会に書面で伝えます。",
+          "miss_html": "単独で評価したときは軽いので、関連する不備をまとめて評価しません。"
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "nav": "引っかけ一覧",
+      "title_html": "引っかけ一覧：英語で問われる判断",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "traps",
+          "rows": [
+            [
+              "top-down approach",
+              "財務諸表レベルのリスクから勘定・統制へ",
+              "個々の取引の統制から順に全部テストする"
+            ],
+            [
+              "relevant assertions",
+              "どの種類の誤りが起こり得るか",
+              "すべてのアサーションを同じ深さでテスト"
+            ],
+            [
+              "inquiry alone",
+              "運用の有効性には質問以外の証拠も必要",
+              "担当者の回答だけで有効と判断"
+            ],
+            [
+              "one or more material weaknesses",
+              "範囲制約がなければICFRは否定的意見",
+              "限定付意見を選ぶ"
+            ],
+            [
+              "misstatements were corrected",
+              "財務諸表の訂正とICFRの評価は別",
+              "訂正により統制の欠陥も解消と判断"
+            ],
+            [
+              "unable to obtain sufficient evidence",
+              "範囲制約。ICFRは意見不表明または辞退",
+              "証拠がないだけで否定的意見を表明"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nav": "確認問題",
+      "title_html": "確認問題",
+      "lead_html": "問題文で意見の対象が財務諸表かICFRかを確認してから、欠陥の有無と証拠の十分性を見てください。",
+      "blocks": [
+        {
+          "type": "mcq",
+          "label": "問題1｜トップダウンの順序",
+          "stem": "In an integrated audit of an issuer, which sequence best describes the PCAOB top-down approach to selecting controls to test?",
+          "choices": [
+            "A. Select controls at every location, test them, then identify financial statement risks.",
+            "B. Begin with financial statement-level risks, consider entity-level controls, and identify significant accounts, disclosures, and relevant assertions before selecting controls to test.",
+            "C. Test all controls over significant accounts before considering relevant assertions.",
+            "D. Choose controls based only on the number of transactions processed."
+          ],
+          "ja_html": "上場会社の統合監査で、テストする統制を選ぶトップダウン・アプローチの順序はどれですか。<br>A. 全拠点の統制をテストした後、財務諸表レベルのリスクを特定<br>B. 財務諸表レベルのリスクから、全社的な統制、重要な勘定・開示と関連アサーションを検討し、対象の統制を選ぶ<br>C. 関連アサーションを検討する前に、重要な勘定の統制をすべてテスト<br>D. 取引件数だけを基に統制を選ぶ",
+          "answer_html": "<b>正解：B</b><br>財務諸表全体に影響するリスクから出発し、誤りが生じ得る箇所と、その誤りに対応する統制を絞ります。<br>A：リスク評価を後回しにしています。<br>C：関連アサーションを把握してから統制を絞ります。<br>D：件数だけでは誤りの大きさ・可能性を判断できません。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題2｜訂正と2つの意見（複合）",
+          "stem": "An issuer corrected all identified material misstatements before issuing its financial statements. The auditor obtained sufficient appropriate evidence that the statements are fairly presented. A material weakness in ICFR remained at year-end, and the auditor faced no scope limitation. Which opinions are appropriate?",
+          "choices": [
+            "A. Unqualified on the financial statements and adverse on ICFR.",
+            "B. Adverse on both the financial statements and ICFR.",
+            "C. Unqualified on both the financial statements and ICFR.",
+            "D. Qualified on the financial statements and a disclaimer on ICFR."
+          ],
+          "ja_html": "上場会社が、財務諸表の発行前に把握した重要な誤りを全て訂正しました。財務諸表が適正とする十分かつ適切な証拠はありますが、ICFRに重大な欠陥が期末時点で残っています。範囲制約はありません。適切な意見はどれですか。<br>A. 財務諸表は無限定、ICFRは否定的<br>B. 財務諸表・ICFRとも否定的<br>C. 財務諸表・ICFRとも無限定<br>D. 財務諸表は限定付、ICFRは意見不表明",
+          "answer_html": "<b>正解：A</b><br>財務諸表は適正なので無限定です。ICFRには期末時点で重大な欠陥が残っているため否定的意見です。<br>B：適正な財務諸表に否定的意見を出す根拠はありません。<br>C：誤りの訂正で重大な欠陥が解消したことにはなりません。<br>D：財務諸表は適正で、ICFRの意見に必要な証拠も得ています。"
+        },
+        {
+          "type": "mcq",
+          "label": "問題3｜範囲制約",
+          "stem": "Management denies the auditor access to evidence necessary to evaluate an issuer's ICFR. Alternative procedures cannot provide sufficient evidence, and the resulting scope limitation prevents the auditor from forming an ICFR opinion. Which response is appropriate under PCAOB standards?",
+          "choices": [
+            "A. Issue an adverse opinion on ICFR because effectiveness has not been demonstrated.",
+            "B. Issue an unqualified opinion on ICFR if substantive testing reveals no financial statement misstatements.",
+            "C. Issue a qualified opinion on ICFR limited to the inaccessible controls.",
+            "D. Disclaim an opinion on ICFR or withdraw from the engagement."
+          ],
+          "ja_html": "経営者がICFRの評価に必要な証拠へのアクセスを拒みました。代替手続でも十分な証拠が得られず、この範囲制約によりICFRの意見を形成できません。PCAOB基準で適切な対応はどれですか。<br>A. 統制の有効性を立証できないのでICFRに否定的意見<br>B. 実証手続で財務諸表の誤りがなければICFRに無限定意見<br>C. 確認できなかった統制だけを除いてICFRに限定付意見<br>D. ICFRの意見不表明、または契約から辞退",
+          "answer_html": "<b>正解：D</b><br>意見に必要な監査範囲を確保できないので、ICFRについて意見不表明または辞退です。<br>A：証拠不足だけでは重大な欠陥を認定できません。<br>B：財務諸表の実証手続の結果だけで統制の有効性は判断できません。<br>C：AS 2201はこの場合に意見不表明または辞退を求めます。"
+        },
+        {
+          "type": "tbs",
+          "label": "問題4｜TBS形式：リスクから統制と意見を選ぶ",
+          "intro_html": "別の上場会社で、紛失した棚卸資産が帳簿から取り除かれず、残高が過大になるリスクがあります。監査人は在庫記録と実地棚卸の差異を調査する統制を検討します。各項目に当てはまる答えを選んでください。",
+          "select": true,
+          "value_head": "解答",
+          "rows": [
+            {
+              "label": "記録上の棚卸資産が実際に存在するか",
+              "ans": "実在性",
+              "options": [
+                "実在性",
+                "網羅性",
+                "期間帰属"
+              ]
+            },
+            {
+              "label": "差異調査の運用を確かめる手続",
+              "ans": "調査記録を閲覧する",
+              "options": [
+                "担当者への質問だけ",
+                "調査記録を閲覧する"
+              ]
+            },
+            {
+              "label": "十分な証拠があり、期末に重大な欠陥があると判断した場合のICFR意見",
+              "ans": "否定的",
+              "options": [
+                "無限定",
+                "否定的",
+                "意見不表明"
+              ]
+            },
+            {
+              "label": "重大な欠陥があっても、財務諸表が適正で十分な証拠がある場合の財務諸表意見",
+              "ans": "無限定",
+              "options": [
+                "無限定",
+                "否定的",
+                "意見不表明"
+              ]
+            }
+          ],
+          "explain_html": "記録済み資産の存在に関わる誤りなので実在性です。運用は、差異をどう調べたか記録も確かめます。期末に重大な欠陥があればICFR意見は否定的で、財務諸表の適正性と証拠が十分なら財務諸表意見は無限定です。"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "nav": "チェック",
+      "title_html": "見ないで言えるかチェック",
+      "lead_html": "",
+      "blocks": [
+        {
+          "type": "checklist",
+          "items": [
+            "トップダウンで統制を選ぶ順を説明できる",
+            "整備と運用の有効性を区別できる",
+            "重大な欠陥が1つある場合のICFRの意見を選べる",
+            "財務諸表とICFRで別の意見になる例を説明できる",
+            "範囲制約がある場合の対応を言える"
+          ]
+        }
+      ]
+    }
+  ]
+}

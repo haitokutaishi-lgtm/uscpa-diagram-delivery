@@ -162,5 +162,21 @@
   {
     "slug": "inventory-lcnrv",
     "source": "publish-html/inventory-lcnrv.html"
+  },
+  {
+    "slug": "aud-materiality",
+    "source": "publish-html/aud-materiality.html"
+  },
+  {
+    "slug": "aud-icfr-integrated",
+    "source": "publish-html/aud-icfr-integrated.html"
+  },
+  {
+    "slug": "nfp-contributions-net-assets",
+    "source": "publish-html/nfp-contributions-net-assets.html"
+  },
+  {
+    "slug": "government-funds-basis",
+    "source": "publish-html/government-funds-basis.html"
   }
 ]

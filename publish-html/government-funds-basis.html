@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】政府会計のファンド区分と認識基準</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">政府会計のファンド区分と認識基準</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">最初に見るのは、問題文がどの報告単位を聞いているかです。同じ市の取引でも、General Fund と市全体の財務諸表で扱いが変わります。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#judge">2 区分</a><a href="#points">3 差がつく論点</a><a href="#traps">4 引っかけ</a><a href="#mc">5 確認問題</a><a href="#check">6 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>どの報告単位か → 何を測るか → いつ認識するか</h2>
+      
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>一般行政のファンド（governmental）</b><p>市の General Fund・道路建設など。<b>当期の財務資源</b>（current financial resources）を測り、<b>修正発生主義</b>（modified accrual）を使います。一般財源で買った $240,000 の消防車は General Fund で支出です。</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>事業型・受託のファンド（proprietary / fiduciary）</b><p>利用料金で独立採算を目指す市営水道や、信託で管理する職員年金など。<b>経済的資源</b>（economic resources）を測り、<b>発生主義</b>（accrual）を使います。</p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>市全体の財務諸表（government-wide）</b><p>行政活動・事業型活動を<b>経済的資源＋発生主義</b>で示します。消防車 $240,000 は資産に計上し、使用期間にわたって減価償却します。受託活動は市全体の財務諸表に含めません。</p></div></div></div>
+      
+    </section>
+
+    <section id="judge" class="section-card">
+      <h2><span class="sec-no">2</span>目的からファンドを選ぶ</h2>
+      
+      <div class="table-wrap"><table class="je"><thead><tr><th>ファンドの区分</th><th>代表的な目的</th></tr></thead><tbody><tr><td>Governmental<br>政府系</td><td>一般財源（general）、特定目的に制限・指定された収入（special revenue）、資本的支出（capital projects）、元利返済（debt service）、元本維持のある公的目的資金（permanent）</td></tr><tr><td>Proprietary<br>事業型</td><td>主に外部利用者への有料サービス（enterprise）、主に政府内部の部門・機関に原価回収ベースで提供する共有サービス（internal service）</td></tr><tr><td>Fiduciary<br>受託</td><td>年金などの信託や、市の事業に使えない第三者のための受託資源（custodial など）</td></tr></tbody></table></div>
+      <p class="text-[13px] text-slate-600 mt-3 leading-relaxed">測定焦点（measurement focus）は「何を測るか」、認識基準（basis of accounting）は「いつ認識するか」を表します。</p>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">3</span>取引が同じでも報告単位で処理が変わる</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">1</span>消防車を買うと、General Fund と市全体で処理が違う</div><div class="rule">当期に使える財務資源を測る政府系ファンドでは、資本財を買った額を支出にします。市全体では長く使う資産も測定対象です。</div><div class="calc">取得額 $240,000 は General Fund で資本的支出、市全体で消防車の資産計上です。供用開始後の減価償却は市全体で反映します。</div><div class="miss"><b>こう間違える：</b>購入額 $240,000 を General Fund の固定資産にします。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">2</span>修正発生主義の収益は、測定可能で利用可能かを見る</div><div class="rule">利用可能（available）とは、当期または当期の負債の支払いに間に合う時期に回収できることです。現金をまだ受け取っていなくても、使える時期に回収できるなら認識できます。固定資産税では、期末から利用可能とみなす期間は最長60日です。</div><div class="calc">当年度に課した固定資産税 $80,000 が測定可能で、うち $65,000 が期末までに、残り $15,000 も自治体の適用する回収期間内に入金される場合、政府系ファンドの当年度収益は $80,000 です。</div><div class="miss"><b>こう間違える：</b>現金を受け取った $65,000 だけを認識します。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">3</span>料金を払う相手は市民か、庁内の部門か</div><div class="rule">市民等の外部利用者が主なら enterprise fund、政府内部の部門・機関向けの原価回収が主なら internal service fund を検討します。両者とも事業型です。</div><div class="calc">市営水道が主に住民に請求する利用料と、市の車両整備部門が主に他の庁内部門に請求する整備料では、請求先が違います。</div><div class="miss"><b>こう間違える：</b>料金を取っていることだけを見て、庁内整備も enterprise fund と判定します。</div></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">4</span>英文で見る引っかけ</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>general fund</td><td>政府系ファンドの報告か</td><td>発生主義で長期保有資産を計上します。</td></tr><tr><td>available</td><td>当期負債に充てられる回収時期か</td><td>収益を期末までの現金受領額に限ります。</td></tr><tr><td>capital outlay</td><td>政府系ファンドでは支出か</td><td>政府系ファンドで減価償却します。</td></tr><tr><td>fees charged to external customers</td><td>外部への有料事業か</td><td>料金を一般財源の税収として扱います。</td></tr><tr><td>services to other departments at cost</td><td>庁内向けの原価回収か</td><td>外部向けの enterprise fund にします。</td></tr><tr><td>held in trust for pension beneficiaries</td><td>市の活動に使える資源か</td><td>市全体の財務諸表に受託ファンドを足します。</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">5</span>確認問題（初見のケース）</h2>
+      <p class="lead">ファンド名と政府全体のどちらが指定されているかに印をつけてから、取引の処理に進みます。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜購入時の表示を比較</p>
+        <p class="en-stem">A city pays $370,000 from its general fund for a street sweeper that will be used for several years. Disregard depreciation. How is the acquisition reported in the general fund statement and in the government-wide statements, respectively?</p>
+        <div class="choices">A. Expenditure; capital asset<br>B. Capital asset; expenditure<br>C. Expenditure; expense<br>D. Capital asset; capital asset</div>
+        <details><summary>和訳を見る</summary><div class="body">市が General Fund から $370,000 を支払い、数年間使用する道路清掃車を買いました。減価償却を考慮しない場合、General Fund と市全体の財務諸表ではそれぞれどう報告しますか。</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：A</b> General Fund では当期の財務資源を使ったため支出、市全体では長期に使用するため資産です。<br>B：二つの報告単位を逆に判定。<br>C：市全体でも購入時の費用と誤認。<br>D：市全体の扱いを General Fund に適用。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜利用可能な税収</p>
+        <p class="en-stem">A town levied $96,000 in property taxes for the current year. It collected $72,000 by year-end and $16,000 within its applicable availability period after year-end. The remainder was collectible but not available for current-year liabilities. How much property tax revenue is recognized in the general fund for the current year?</p>
+        <div class="choices">A. $72,000<br>B. $80,000<br>C. $88,000<br>D. $96,000</div>
+        <details><summary>和訳を見る</summary><div class="body">町は当年度の固定資産税 $96,000 を賦課しました。期末までに $72,000、翌期の適用回収期間内に $16,000 を受領しました。残りは回収可能ですが当期の負債の支払いには間に合いません。当年度 General Fund の固定資産税収益はいくらですか。</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C（$88,000）</b> $72,000 ＋ $16,000。期末後でも適用回収期間内の金額を含めます。<br>A：期末までの現金受領に限定。<br>B：期間後の $8,000 を加え、期間内の $16,000 を除外。<br>D：利用可能性を無視。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜事業型ファンドの区分</p>
+        <p class="en-stem">A city operates a fleet repair shop that serves only city departments and charges them at cost. Which fund should report the shop, and which accounting basis applies?</p>
+        <div class="choices">A. Enterprise fund; accrual<br>B. Internal service fund; modified accrual<br>C. General fund; modified accrual<br>D. Internal service fund; accrual</div>
+        <details><summary>和訳を見る</summary><div class="body">市に庁内部門専用の車両修理部門があり、原価を庁内部門に請求します。どのファンドで報告し、どの認識基準を用いますか。</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：D</b> 庁内部門向けの原価回収は internal service fund の用途で、認識基準は発生主義です。<br>A：庁内利用者を外部利用者と同じに扱う。<br>B：区分は正しいものの、政府系ファンドの認識基準を使う。<br>C：ファンドを料金で運営するという事実を反映しない。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="11">
+        <p class="mc-label">問題4｜TBS：測定焦点と認識基準</p>
+        <p class="text-[13px] leading-relaxed mb-2">一般財源で運営する市の本体業務、市民に料金を請求する水道事業、職員のため信託で管理する年金を考えます。各行の報告単位に適用する組み合わせを選んでください。</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">組み合わせ</th></tr></thead><tbody><tr><td>本体業務：General Fund</td><td class="num"><select data-ans="当期の財務資源／修正発生主義" aria-label="本体業務：General Fund"><option value="">選ぶ</option><option value="当期の財務資源／修正発生主義">当期の財務資源／修正発生主義</option><option value="経済的資源／発生主義">経済的資源／発生主義</option><option value="当期の財務資源／現金主義">当期の財務資源／現金主義</option></select></td></tr><tr><td>水道事業：Enterprise Fund</td><td class="num"><select data-ans="経済的資源／発生主義" aria-label="水道事業：Enterprise Fund"><option value="">選ぶ</option><option value="当期の財務資源／修正発生主義">当期の財務資源／修正発生主義</option><option value="経済的資源／発生主義">経済的資源／発生主義</option><option value="当期の財務資源／現金主義">当期の財務資源／現金主義</option></select></td></tr><tr><td>職員年金：Pension Trust Fund</td><td class="num"><select data-ans="経済的資源／発生主義" aria-label="職員年金：Pension Trust Fund"><option value="">選ぶ</option><option value="当期の財務資源／修正発生主義">当期の財務資源／修正発生主義</option><option value="経済的資源／発生主義">経済的資源／発生主義</option><option value="当期の財務資源／現金主義">当期の財務資源／現金主義</option></select></td></tr><tr><td>政府全体：行政活動の欄</td><td class="num"><select data-ans="経済的資源／発生主義" aria-label="政府全体：行政活動の欄"><option value="">選ぶ</option><option value="当期の財務資源／修正発生主義">当期の財務資源／修正発生主義</option><option value="経済的資源／発生主義">経済的資源／発生主義</option><option value="当期の財務資源／現金主義">当期の財務資源／現金主義</option></select></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">General Fund だけが当期の財務資源＋修正発生主義です。enterprise fund、年金信託、政府全体は経済的資源＋発生主義です。年金信託は政府全体には含めません。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">6</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c12-1"><label for="c12-1">政府系・事業型・受託を、資源の目的から分けられますか？</label></li><li><input type="checkbox" id="c12-2"><label for="c12-2">測定焦点と認識基準の違いを説明できますか？</label></li><li><input type="checkbox" id="c12-3"><label for="c12-3">政府系ファンドと政府全体で固定資産購入の処理を区別できますか？</label></li><li><input type="checkbox" id="c12-4"><label for="c12-4">税収の「利用可能」を、現金受領済みと区別できますか？</label></li><li><input type="checkbox" id="c12-5"><label for="c12-5">職員年金の受託活動を市全体の財務諸表に含めるか判断できますか？</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>

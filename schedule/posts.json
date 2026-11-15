@@ -587,5 +587,41 @@
     "queue_id": "inventory-lcnrv-v2",
     "subject": "FAR",
     "_auto": true
+  },
+  "2026-11-24": {
+    "title": "【AUD図解】重要性—全体・手続実施上の重要性・明らかに僅少",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-materiality/",
+    "slug": "aud-materiality",
+    "queue_id": "aud-materiality-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
+  "2026-11-25": {
+    "title": "【図解】非営利組織—寄付の認識と正味資産の区分",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/nfp-contributions-net-assets/",
+    "slug": "nfp-contributions-net-assets",
+    "queue_id": "nfp-contributions-net-assets-v2",
+    "subject": "FAR",
+    "_auto": true
+  },
+  "2026-11-27": {
+    "title": "【AUD図解】内部統制監査—トップダウン・アプローチと重大な欠陥があるときの意見",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/aud-icfr-integrated/",
+    "slug": "aud-icfr-integrated",
+    "queue_id": "aud-icfr-integrated-v2",
+    "subject": "AUD",
+    "_auto": true
+  },
+  "2026-11-28": {
+    "title": "【図解】政府会計—ファンドの区分と測定焦点・認識基準",
+    "description": "",
+    "url": "https://haitokutaishi-lgtm.github.io/diagram-site/topics/government-funds-basis/",
+    "slug": "government-funds-basis",
+    "queue_id": "government-funds-basis-v2",
+    "subject": "FAR",
+    "_auto": true
   }
 }

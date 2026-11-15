@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【復習シート】非営利組織の寄付と正味資産</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+/* 復習シート型（v2）図解の共通スタイル。ops/generate_diagram_v2.py がインラインで埋め込む */
+body { font-family: 'Noto Sans JP', sans-serif; background: #f1f5f9; color: #0f172a; }
+.header-gradient { background: linear-gradient(90deg, hsl(200, 70%, 38%), hsl(168, 55%, 38%)); }
+.section-card { background: #fff; border-radius: 1rem; box-shadow: 0 1px 3px rgba(15,23,42,.08); border: 1px solid #e2e8f0; padding: 1.5rem 1.25rem; }
+@media (min-width: 768px) { .section-card { padding: 1.75rem 2rem; } }
+.section-card h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sec-no { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #0f766e; color: #fff; font-size: .85rem; font-weight: 700; }
+.lead { font-size: .875rem; color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+.term-en { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: #1e3a5f; }
+.en { font-family: ui-sans-serif, system-ui, sans-serif; }
+
+/* 全体図 */
+.map-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .map-grid { grid-template-columns: 1.25fr 1fr; align-items: stretch; } }
+.taccount { border: 2px solid #0f172a; border-radius: .75rem; overflow: hidden; background: #fff; }
+.taccount-title { background: #0f172a; color: #fff; text-align: center; font-weight: 700; font-size: .9rem; padding: .5rem; }
+.taccount-body { display: grid; grid-template-columns: 1fr 1fr; }
+.t-side { padding: .5rem .6rem .75rem; }
+.t-side + .t-side { border-left: 2px solid #0f172a; }
+.t-head { font-size: .7rem; font-weight: 700; color: #64748b; text-align: center; margin-bottom: .4rem; }
+.t-row { border-radius: .5rem; padding: .45rem .5rem; margin-bottom: .4rem; font-size: .78rem; line-height: 1.45; }
+.t-row .amt { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.t-row .tag { display: inline-block; font-size: .65rem; font-weight: 700; border-radius: .25rem; padding: 0 .3rem; margin-top: .2rem; }
+.row-base { background: #f1f5f9; border: 1px solid #cbd5e1; }
+.row-up { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.row-down { background: #fef2f2; border: 1px solid #fca5a5; }
+.row-cash { background: #fffbeb; border: 1px dashed #f59e0b; }
+.tag-pl { background: #0f766e; color: #fff; }
+.tag-nopl { background: #b45309; color: #fff; }
+.t-balance { border-top: 2px solid #0f172a; display: flex; justify-content: space-between; align-items: center; padding: .55rem .75rem; background: #f8fafc; font-weight: 700; font-size: .9rem; }
+.t-balance .amt { font-family: ui-sans-serif, system-ui; font-size: 1.1rem; color: #0f766e; font-variant-numeric: tabular-nums; }
+.pl-box { border: 2px solid #0f766e; border-radius: .75rem; background: #f0fdfa; padding: .9rem 1rem; }
+.pl-box h3, .cash-box h3 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.pl-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .2rem 0; font-variant-numeric: tabular-nums; }
+.pl-line.total { border-top: 1px solid #0f766e; margin-top: .3rem; padding-top: .45rem; font-weight: 700; }
+.cash-box { border: 2px dashed #f59e0b; border-radius: .75rem; background: #fffbeb; padding: .9rem 1rem; margin-top: .75rem; }
+.facts { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .85rem 1rem; font-size: .8rem; line-height: 1.7; margin-bottom: 1rem; }
+.facts li { margin-left: 1.1rem; list-style: disc; }
+
+/* 影響力のものさし */
+.ruler { display: grid; grid-template-columns: 1fr 1.4fr 1fr; border-radius: .75rem; overflow: hidden; font-size: .78rem; text-align: center; }
+.ruler > div { padding: .7rem .4rem; line-height: 1.5; }
+.ruler .r1 { background: #e2e8f0; }
+.ruler .r2 { background: #0f766e; color: #fff; }
+.ruler .r3 { background: #1e3a5f; color: #fff; }
+.ruler b { display: block; font-size: .85rem; }
+
+/* 表 */
+table.je { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.je th, table.je td { border: 1px solid #e2e8f0; padding: .5rem .6rem; vertical-align: top; text-align: left; }
+table.je th { background: #f1f5f9; font-size: .75rem; }
+table.je td.en { white-space: nowrap; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 差がつく論点 */
+.point { border: 1px solid #e2e8f0; border-radius: .9rem; padding: 1rem 1.1rem; margin-bottom: 1rem; background: #fff; }
+.point-head { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .98rem; margin-bottom: .6rem; }
+.point-no { background: #1e3a5f; color: #fff; border-radius: .4rem; font-size: .75rem; padding: .1rem .45rem; }
+.rule { background: #f0fdfa; border-left: 4px solid #0f766e; padding: .6rem .8rem; font-size: .85rem; line-height: 1.75; border-radius: 0 .5rem .5rem 0; }
+.calc { font-size: .82rem; line-height: 1.8; margin-top: .6rem; }
+.calc .en { font-variant-numeric: tabular-nums; }
+.miss { background: #fef2f2; border-left: 4px solid #dc2626; padding: .6rem .8rem; font-size: .82rem; line-height: 1.75; margin-top: .6rem; border-radius: 0 .5rem .5rem 0; }
+.miss b { color: #b91c1c; }
+
+/* 引っかけ表 */
+table.traps { width: 100%; border-collapse: collapse; font-size: .8rem; }
+table.traps th, table.traps td { border: 1px solid #e2e8f0; padding: .55rem .6rem; vertical-align: top; text-align: left; line-height: 1.6; }
+table.traps th { background: #1e3a5f; color: #fff; font-size: .75rem; }
+table.traps td:first-child { font-family: ui-sans-serif, system-ui; font-weight: 600; color: #1e3a5f; }
+
+/* MC */
+.mc-card { border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.1rem; margin-bottom: 1.1rem; background: #fafafa; }
+.mc-label { font-size: .75rem; font-weight: 700; color: #0f766e; margin-bottom: .4rem; }
+.en-stem { font-family: ui-sans-serif, system-ui, sans-serif; border-left: 3px solid #64748b; padding-left: .9rem; margin: .5rem 0 .75rem; color: #1e293b; font-size: .875rem; line-height: 1.7; }
+.choices { font-family: ui-sans-serif, system-ui; font-size: .875rem; line-height: 1.9; margin-left: .25rem; }
+details { margin-top: .5rem; }
+details summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: #1d4ed8; }
+details .body { font-size: .82rem; line-height: 1.8; padding: .6rem .8rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; margin-top: .4rem; }
+
+/* TBS */
+table.tbs { width: 100%; border-collapse: collapse; font-size: .82rem; }
+table.tbs th, table.tbs td { border: 1px solid #cbd5e1; padding: .45rem .6rem; }
+table.tbs th { background: #f1f5f9; text-align: left; }
+table.tbs td.num { text-align: right; font-family: ui-sans-serif, system-ui; font-variant-numeric: tabular-nums; }
+table.tbs input { width: 7.5rem; text-align: right; border: 1px solid #94a3b8; border-radius: .35rem; padding: .2rem .4rem; font-family: ui-sans-serif, system-ui; }
+table.tbs input.ok { border-color: #16a34a; background: #f0fdf4; }
+table.tbs input.ng { border-color: #dc2626; background: #fef2f2; }
+.btn { display: inline-flex; align-items: center; gap: .35rem; background: #0f766e; color: #fff; font-weight: 700; font-size: .82rem; border-radius: .5rem; padding: .5rem .9rem; }
+
+.check li { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; line-height: 1.7; margin-bottom: .35rem; }
+.check input { margin-top: .4rem; width: 1rem; height: 1rem; accent-color: #0f766e; flex-shrink: 0; }
+nav.toc a { display: inline-block; font-size: .78rem; background: #fff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: .25rem .7rem; margin: 0 .3rem .4rem 0; color: #334155; }
+nav.toc a:hover { background: #f0fdfa; border-color: #0f766e; }
+
+/* 時系列（timeline block） */
+.tl { display: flex; flex-direction: column; gap: .5rem; }
+@media (min-width: 768px) { .tl { flex-direction: row; } .tl-item { flex: 1; } }
+.tl-item { border: 1px solid #cbd5e1; border-top: 4px solid #94a3b8; border-radius: .6rem; padding: .55rem .65rem; background: #fff; font-size: .78rem; line-height: 1.55; }
+.tl-item .tl-date { display: block; font-family: ui-sans-serif, system-ui; font-weight: 700; font-size: .85rem; color: #0f172a; }
+.tl-item.key { border-top-color: #0f766e; background: #f0fdfa; }
+.tl-item.warn { border-top-color: #dc2626; background: #fef2f2; }
+.tl-item.muted { opacity: .75; }
+.tl-window { margin-top: .5rem; background: #0f766e; color: #fff; font-size: .78rem; font-weight: 700; border-radius: .5rem; padding: .4rem .7rem; text-align: center; }
+
+/* 内訳バー（splitbar block） */
+.split-wrap { margin: .6rem 0; }
+.split-title { font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.split { display: flex; height: 2.6rem; border-radius: .5rem; overflow: hidden; border: 1px solid #cbd5e1; }
+.split > div { display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; padding: 0 .25rem; }
+.split .s-teal { background: #0f766e; } .split .s-navy { background: #1e3a5f; } .split .s-sky { background: #0284c7; }
+.split .s-amber { background: #d97706; } .split .s-red { background: #dc2626; } .split .s-gray { background: #94a3b8; }
+.split-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; margin-top: .35rem; }
+.split-legend span::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: .15rem; margin-right: .3rem; vertical-align: middle; background: var(--c); }
+
+/* flow：手順・判定の流れ */
+.flow { display: flex; flex-direction: column; gap: .9rem; margin-bottom: .8rem; }
+.flow-step { position: relative; display: flex; gap: .7rem; align-items: flex-start; border: 1px solid #cbd5e1; border-left: 5px solid #1e3a5f; border-radius: .6rem; padding: .6rem .8rem; background: #fff; }
+.flow-step + .flow-step::before { content: "▼"; position: absolute; top: -1rem; left: 1.1rem; font-size: .6rem; color: #94a3b8; }
+.flow-step.key { border-left-color: #0f766e; background: #f0fdfa; }
+.flow-step.warn { border-left-color: #dc2626; background: #fef2f2; }
+.flow-no { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: #1e3a5f; color: #fff; font-size: .8rem; font-weight: 700; }
+.flow-step.key .flow-no { background: #0f766e; }
+.flow-step b { font-size: .88rem; }
+.flow-step p { font-size: .8rem; line-height: 1.65; color: #334155; margin-top: .15rem; }
+/* matrix：2軸の判定表 */
+.matrix { display: grid; gap: 3px; background: #0f172a; border: 2px solid #0f172a; border-radius: .7rem; overflow: hidden; margin-bottom: .8rem; font-size: .8rem; }
+.matrix > div { background: #fff; padding: .55rem .5rem; line-height: 1.5; }
+.matrix .mx-corner { background: #f1f5f9; font-size: .7rem; color: #475569; }
+.matrix .mx-col, .matrix .mx-row { background: #1e3a5f; color: #fff; font-weight: 700; text-align: center; }
+.matrix .mx-row { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.matrix > div { overflow-wrap: anywhere; min-width: 0; }
+.matrix .en { display: block; font-size: .68rem; font-weight: 500; opacity: .85; }
+@media (max-width: 480px) { .matrix { font-size: .72rem; } .matrix > div { padding: .45rem .3rem; } .matrix .mx-cell b { font-size: .8rem; } }
+.matrix .mx-cell { text-align: center; }
+.matrix .mx-cell.ok { background: #ecfdf5; }
+.matrix .mx-cell.mid { background: #fffbeb; }
+.matrix .mx-cell.ng { background: #fef2f2; }
+.matrix .mx-cell b { display: block; font-size: .92rem; }
+table.tbs select { border: 1px solid #94a3b8; border-radius: .35rem; padding: .25rem .3rem; font-size: .8rem; max-width: 100%; }
+table.tbs select.ok { border-color: #059669; background: #ecfdf5; }
+table.tbs select.ng { border-color: #dc2626; background: #fef2f2; }
+
+.ruler > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .ruler { font-size: .72rem; } .ruler b { font-size: .78rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="header-gradient text-white">
+    <div class="max-w-4xl mx-auto px-4 py-7">
+      <p class="text-xs font-bold bg-white/20 inline-block rounded px-2 py-1 mb-3">FAR 復習シート</p>
+      <h1 class="text-xl md:text-2xl font-bold leading-snug">非営利組織の寄付と正味資産</h1>
+      <p class="text-sm mt-3 leading-relaxed text-white/90">同じ「講座に使う寄付」でも、お金を受け取った日に収益になるものと、条件を達成するまで負債になるものがあります。契約の文言を読む順番から確認します。</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <nav class="toc" aria-label="目次"><a href="#map">1 全体図</a><a href="#points">2 差がつく論点</a><a href="#traps">3 引っかけ</a><a href="#mc">4 確認問題</a><a href="#check">5 チェック</a></nav>
+
+    <section id="map" class="section-card">
+      <h2><span class="sec-no">1</span>寄付の判定は、対価 → 条件 → 制限</h2>
+      
+      <div class="flow diagram-visual"><div class="flow-step "><span class="flow-no">1</span><div><b>対価を返す取引ですか？</b><p>寄付者自身が同等の価値を受け取るなら交換取引を検討します。市民が無料講座を受け、寄付者自身には同等の価値が返らないなら、寄付として次へ進みます。</p></div></div><div class="flow-step "><span class="flow-no">2</span><div><b>達成すべき条件と返金・支払免除の権利がありますか？</b><p>講座を100人に提供するまでは受取権がなく、未達なら返金する契約で、先に $12,000 を受領。達成までは <b>返金可能な前受金（負債）$12,000</b> です。</p></div></div><div class="flow-step "><span class="flow-no">3</span><div><b>収益にできるなら、寄付者の使途・時期の指定はありますか？</b><p>別の寄付者から、教材費だけに使える $5,000 を無条件で受領。受領時に <b>寄付者の制限あり $5,000</b>。翌期に教材費 $2,000 を支払うと、$2,000 分の制限が解除され、制限ありの残りは $3,000 です。</p></div></div></div>
+      
+    </section>
+
+    <section id="points" class="section-card">
+      <h2><span class="sec-no">2</span>条件を満たす日と制限が解除される日</h2>
+      
+      <div class="point"><div class="point-head"><span class="point-no">1</span>条件達成前に受け取った寄付は前受金</div><div class="rule">寄付者が定めた実質的なハードルと、未達時に返金を求める権利または支払義務を免れる権利が両方あるかを確認します。条件を実質的に満たした時点で寄付収益を認識します。</div><div class="calc">$12,000 を先に受領した日：現金 $12,000／返金可能な前受金 $12,000。翌期に100人の条件を満たした日：前受金 $12,000 を取り崩して寄付収益を計上します。残る寄付者制限の有無をその時点で確認します。</div><div class="miss"><b>こう間違える：</b>現金を受け取った時点で $12,000 を制限ありの寄付収益にします。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">2</span>使途の指定だけなら、使う前から寄付収益</div><div class="rule">教材費だけに使う指定は、認識済みの資源の使い道を決めます。翌期に指定どおり使うと、その分を制限ありから制限なしへ振り替えます。</div><div class="calc">認識時の制限ありは $5,000。翌期に $2,000 を振り替えた後は $3,000 です。教材費 $2,000 は制限なし側の費用で、振替そのものは正味資産の合計を増やしません。</div><div class="miss"><b>こう間違える：</b>翌期に $2,000 をもう一度寄付収益に足します。</div></div>
+      <div class="point"><div class="point-head"><span class="point-no">3</span>使途を決めたのが誰かを確認する</div><div class="rule">理事会が内部で予算を指定しても、寄付者から制限を付されていなければ、正味資産は制限なしです。期間・目的・恒久的な元本維持などの寄付者制限は、制限ありに含めます。</div><div class="calc">全体図の $5,000 は寄付者が教材費に指定したので制限ありです。同額の自由な寄付を後から理事会が教材費に回すケースでは、制限なしです。</div><div class="miss"><b>こう間違える：</b>内部で用途が決まった時点で、寄付者の制限ありへ振り替えます。</div></div>
+      
+    </section>
+
+    <section id="traps" class="section-card">
+      <h2><span class="sec-no">3</span>英文で見る引っかけ</h2>
+      
+      <div class="table-wrap"><table class="traps"><thead><tr><th>問題文の言葉</th><th>確認すること</th><th>よくある誤答</th></tr></thead><tbody><tr><td>right of return</td><td>実質的なハードルもあるか</td><td>『返金』の一語だけで判定します。</td></tr><tr><td>restricted to the purchase of materials</td><td>単なる使途指定か</td><td>使う日まで収益を繰り延べます。</td></tr><tr><td>board-designated</td><td>指定したのは理事会か寄付者か</td><td>すべて制限ありにします。</td></tr><tr><td>restriction was satisfied</td><td>認識済み収益の区分が動くか</td><td>同じ寄付を再び収益に足します。</td></tr><tr><td>pledge subject to matching funds</td><td>必要額を集めなければ支払義務がなくなるか</td><td>達成前に無条件の未収寄付金として計上します。</td></tr><tr><td>maintain the principal in perpetuity</td><td>寄付者による元本維持の指定か</td><td>期間の指定がないから制限なしにします。</td></tr></tbody></table></div>
+      
+    </section>
+
+    <section id="mc" class="section-card">
+      <h2><span class="sec-no">4</span>確認問題（初見のケース）</h2>
+      <p class="lead">まず、誰が対価を受けるか、受取権が確定したか、使途は限定されているかを順番に確認します。</p>
+      <div class="mc-card">
+        <p class="mc-label">問題1｜条件と制限を一緒に判定</p>
+        <p class="en-stem">A nonprofit received $42,000 on December 1. It must return the money unless it completes 500 screenings by next June. It had completed 200 at year-end. It separately received an unconditional gift of $19,000 restricted to next year's outreach. What contribution revenue and refundable advance should it report for these receipts at year-end?</p>
+        <div class="choices">A. Revenue $61,000; advance $0<br>B. Revenue $42,000; advance $19,000<br>C. Revenue $19,000; advance $42,000<br>D. Revenue $0; advance $61,000</div>
+        <details><summary>和訳を見る</summary><div class="body">非営利組織は12月1日に $42,000 を受領しました。翌年6月までに検査を500件完了しなければ返金し、期末時点では200件でした。別に、翌年の啓発事業に使途が限定された無条件の寄付 $19,000 を受領しました。この2件の期末の寄付収益と返金可能な前受金はいくらですか。</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：C</b> $42,000 は実質的な条件が未達で負債です。$19,000 は無条件なので制限ありの寄付収益です。<br>A：現金受領だけで両方を認識。<br>B：条件と制限の扱いが逆。<br>D：使途・時期の指定も認識条件と誤読。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題2｜出資者への価値</p>
+        <p class="en-stem">A city pays a nonprofit to provide free literacy classes to residents. The residents have no separate obligation to pay for the classes. The city receives no goods or services of commensurate value in return and benefits only from advancing its public policy goals. What is the nature of the transfer?</p>
+        <div class="choices">A. An exchange because the city is the resource provider<br>B. A contribution because the city does not receive commensurate value<br>C. An exchange because residents receive classes<br>D. A contribution only if the nonprofit offers refunds to residents</div>
+        <details><summary>和訳を見る</summary><div class="body">市が非営利組織に支払い、住民向けの無料識字講座を開きます。住民自身に受講料の支払義務はありません。市は同等の価値を持つ財・サービスを受け取らず、政策目標が満たされるだけです。この移転はどのような取引ですか。</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：B</b> 直接の対価を受けるのが資源提供者かを確認します。<br>A：提供者が自治体という属性だけで交換と判断。<br>C：住民の便益を市への対価と同一視。<br>D：住民への返金を取引分類の条件と誤認。</div></details>
+      </div>
+      <div class="mc-card">
+        <p class="mc-label">問題3｜期をまたぐ制限解除</p>
+        <p class="en-stem">A museum began the year with $34,000 of net assets with donor restrictions, all restricted to conservation. It spent $9,000 on qualifying conservation costs and received a new $6,000 unrestricted gift. No other transactions occurred. What are ending net assets with donor restrictions?</p>
+        <div class="choices">A. $19,000<br>B. $34,000<br>C. $31,000<br>D. $25,000</div>
+        <details><summary>和訳を見る</summary><div class="body">博物館は保存活動に限定された制限あり正味資産 $34,000 で期首を迎えました。適格な保存費 $9,000 を支出し、無制限の新規寄付 $6,000 を受け取りました。他の取引がない場合、期末の制限あり正味資産はいくらですか。</div></details>
+        <details><summary>正解と解説を見る</summary><div class="body"><b>正解：D（$25,000）</b> $34,000 − $9,000。新規の無制限寄付は制限なし側です。<br>A：新規寄付も制限あり側から差し引く。<br>C：新規寄付を制限あり側へ加える。<br>B：制限解除を反映しない。</div></details>
+      </div>
+      <div class="mc-card tbs-block" data-tbs="9">
+        <p class="mc-label">問題4｜TBS：寄付収益と負債を分ける</p>
+        <p class="text-[13px] leading-relaxed mb-2">期首残高はゼロ。①無条件で使用自由の寄付 $13,000、②翌期以降の相談会に使途が限定された無条件の寄付 $21,000、③別の事業で開催数の目標を達成しなければ返す $36,000 を受け取りました。③の目標は期末時点で未達で、当期中の②の適格支出はありません。（マイナスは「-」を付けて入力）</p>
+        <div class="table-wrap"><table class="tbs"><thead><tr><th>項目</th><th class="text-right">金額</th></tr></thead><tbody><tr><td>制限なしの寄付収益</td><td class="num"><input inputmode="numeric" data-ans="13000" aria-label="制限なしの寄付収益"></td></tr><tr><td>制限ありの寄付収益</td><td class="num"><input inputmode="numeric" data-ans="21000" aria-label="制限ありの寄付収益"></td></tr><tr><td>返金可能な前受金</td><td class="num"><input inputmode="numeric" data-ans="36000" aria-label="返金可能な前受金"></td></tr><tr><td>寄付収益の合計</td><td class="num"><input inputmode="numeric" data-ans="34000" aria-label="寄付収益の合計"></td></tr></tbody></table></div>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn tbs-check"><i data-lucide="check-circle" class="w-4 h-4"></i>答え合わせ</button>
+          <span class="tbs-result text-sm font-bold"></span>
+        </div>
+        <details><summary>解説を見る</summary><div class="body">① $13,000 は制限なし、② $21,000 は制限ありの寄付収益です。③ $36,000 は返金可能な前受金。寄付収益合計は $34,000 です。</div></details>
+      </div>
+      
+    </section>
+
+    <section id="check" class="section-card">
+      <h2><span class="sec-no">5</span>見ないで言えるかチェック</h2>
+      
+      <ul class="check"><li><input type="checkbox" id="c10-1"><label for="c10-1">公共への便益と資源提供者への同等の対価を区別できますか？</label></li><li><input type="checkbox" id="c10-2"><label for="c10-2">条件の判定に必要な二要素を挙げられますか？</label></li><li><input type="checkbox" id="c10-3"><label for="c10-3">条件達成前に受け取った現金を負債にできますか？</label></li><li><input type="checkbox" id="c10-4"><label for="c10-4">寄付者の指定と理事会の指定を区別できますか？</label></li><li><input type="checkbox" id="c10-5"><label for="c10-5">翌期の制限解除で正味資産の2区分がどう動くか説明できますか？</label></li></ul>
+      <p class="text-xs text-slate-500 mt-4">オリジナル教材。第三者問題・商用テキストの転載なし。</p>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.tbs-block').forEach((box) => {
+      box.querySelector('.tbs-check').addEventListener('click', () => {
+        const inputs = box.querySelectorAll('table.tbs input, table.tbs select');
+        let ok = 0;
+        inputs.forEach((el) => {
+          if (el.tagName === 'SELECT') {
+            const hitSel = el.value !== '' && el.value === el.dataset.ans;
+            el.classList.toggle('ok', hitSel);
+            el.classList.toggle('ng', !hitSel);
+            if (hitSel) ok++;
+            return;
+          }
+          const v = Number(String(el.value).replace(/[,\s$＄]/g, '').replace(/[−ー–]/g, '-').replace(/^\((.*)\)$/, '-$1'));
+          const hit = el.value.trim() !== '' && v === Number(el.dataset.ans);
+          el.classList.toggle('ok', hit);
+          el.classList.toggle('ng', !hit);
+          if (hit) ok++;
+        });
+        box.querySelector('.tbs-result').textContent = `${inputs.length}問中 ${ok}問正解`;
+      });
+    });
+  </script>
+</body>
+</html>
